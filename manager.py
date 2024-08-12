@@ -25,6 +25,11 @@ def save_info():
     json.dump(info, file,indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
 
 
+print('---------------------------------')
+print('MANAGER PAGE')
+print('---------------------------------')
+
+
 # create a function for manager
 def manager():
     load_data_from_file()
@@ -45,6 +50,24 @@ def manager():
                 'e. customer feedback'
             )
             choice = input('Select a choice (a, b, c, d, e): ')
+            if choice in ['a', 'b', 'c', 'd', 'e']:
+                if choice == 'a':
+                    print('enter again.')
+
+                elif choice == 'b':
+                    print('enter again.')
+
+                elif choice == 'c':
+                    print('enter again.')
+
+                elif choice == 'd':
+                    print('enter again.')
+
+                elif choice == 'e':
+                    print('enter again.')
+
+            else:
+                print('enter again.')
         else:
             print('Username or password invalid, please enter again or try another account.')  # prompt user to input again if it does't match
             manager()
@@ -70,16 +93,14 @@ def manager():
                     print('Please enter a valid age.')
 
             while True:
-                gender = input('Gender(m=male, f=female, x=prefer not to say): ')
-                if gender not in ['f', 'm', 'x']:
+                gender = input('Gender(m=male, f=female): ')
+                if gender not in ['f', 'm']:
                     print('Invalid input. Please enter again.')
                 else:
                     if gender == 'f':
                         gender = 'female'
-                    elif gender == 'm':
-                        gender = 'male'
                     else:
-                        gender = 'prefer not to say'
+                        gender = 'male'
                     break  # Exit the loop if age is valid
 
             while True:
@@ -116,7 +137,7 @@ def manager():
             print('--------------------------------------------------')
             print('Thank you for completing the personal information.')
             print('--------------------------------------------------')
-            print('For security purpose, please log in again to access the system.')
+            print('For security purpose, please log in again to access the system.\n')
             manager()  # prompt user to login again after filled out their information
 
 
