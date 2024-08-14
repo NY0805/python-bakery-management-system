@@ -5,5 +5,12 @@
         "gender": "female",
         "contact_no": "345-7869504",
         "email": "ee@cc.cc"
+    },
+    "bbb": {
+        "manager_password": "12345678",
+        "age": 67,
+        "gender": "male",
+        "contact_no": "234-5674829",
+        "email": "ee@dc.vv"
     }
 }

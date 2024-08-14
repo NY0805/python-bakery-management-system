@@ -1,5 +1,6 @@
-import manager
+import manager, customer, cashier, baker
 
+# illustrate a bakery store
 bakery = '''
    __________________________________________________
   |                                                  |
@@ -28,6 +29,7 @@ print('1. Manager')
 print('2. Customer')
 print('3. Cashier')
 print('4. Baker')
+print('5. Exit the program')
 
 while True:
     try:
@@ -45,6 +47,9 @@ while True:
             break
         elif role == 4:
             print('\nBAKER is selected.\n---------------------------------------------------')
+            break
+        elif role == 5:
+            print('--------------------YOU ARE EXIT--------------------')
             break
         else:
             print('Invalid input.\n')

@@ -50,7 +50,10 @@ def manager():
             choice = input('Select a choice (a, b, c, d, e): ')
             if choice in ['a', 'b', 'c', 'd', 'e']:
                 if choice == 'a':
-                    print('enter again.')
+                    file = open('manager.txt', 'r')
+                    for line in file:
+                        print(line, end='')  # end='' enable it to print without enter a new line
+
 
                 elif choice == 'b':
                     print('enter again.')
@@ -140,3 +143,4 @@ def manager():
 
 
 # Run the manager function
+manager()
