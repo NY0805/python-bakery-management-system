@@ -1,3 +1,5 @@
+import manager
+
 bakery = '''
    __________________________________________________
   |                                                  |
@@ -18,14 +20,36 @@ bakery = '''
 
 print(bakery)
 
-print('**********************************')
-print('WELCOME TO 《MORNING GLORY BAKERY》')
-print('**********************************')
+print('***************************************************')
+print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
+print('***************************************************')
 print('Role: ')
 print('1. Manager')
 print('2. Customer')
 print('3. Cashier')
 print('4. Baker')
-role = int(input('Please select a role (1, 2, 3, 4): '))
+
+while True:
+    try:
+        role = int(input('Please select a role (1, 2, 3, 4): '))
+
+        if role == 1:
+            print('\nMANAGER is selected.\n---------------------------------------------------')
+            manager.manager()
+            break
+        elif role == 2:
+            print('\nCUSTOMER is selected.\n---------------------------------------------------')
+            break
+        elif role == 3:
+            print('\nCASHIER is selected.\n---------------------------------------------------')
+            break
+        elif role == 4:
+            print('\nBAKER is selected.\n---------------------------------------------------')
+            break
+        else:
+            print('Invalid input.\n')
+    except ValueError:
+        print('invalid input.\n')
+
 
 

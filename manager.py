@@ -27,11 +27,6 @@ def save_info(info):
     file.close()  # close the file after writing
 
 
-print('---------------------------------')
-print('MANAGER PAGE')
-print('---------------------------------')
-
-
 # create a function for manager
 def manager():
 
@@ -72,11 +67,11 @@ def manager():
             else:
                 print('enter again.')
         else:
-            print('Username or password invalid, please enter again or try another account.')  # prompt user to input again if it does't match with data in file
+            print('Username or password invalid, please enter again or try another account.\n')  # prompt user to input again if it does't match with data in file
             manager()
     else:
         if len(manager_password) < 8 or len(manager_password) > 12:  # to ensure the password entered is between 8 to 12 digits
-            print('Invalid password. Please make sure it is between 8 to 12 digits!')
+            print('Invalid password. Please make sure it is between 8 to 12 digits!\n')
             manager()  # if fail to meet the criteria, ask user to enter again
 
         # automatically considered as first time login if the data entered not found in file
@@ -145,4 +140,3 @@ def manager():
 
 
 # Run the manager function
-manager()
