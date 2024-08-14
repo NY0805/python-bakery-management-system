@@ -1,0 +1,9 @@
+{
+    "aaa": {
+        "manager_password": "12345678",
+        "age": 23,
+        "gender": "female",
+        "contact_no": "345-7869504",
+        "email": "ee@cc.cc"
+    }
+}
