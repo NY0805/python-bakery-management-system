@@ -143,4 +143,3 @@ def manager():
 
 
 # Run the manager function
-manager()
