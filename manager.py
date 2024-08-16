@@ -85,8 +85,8 @@ def manager():
             while True:
                 try:
                     age = int(input('Age: '))
-                    if age < 18:
-                        print('You are under the age. Required age is 18 and above.')
+                    if age < 18 or age > 60:
+                        print('The required age is between 18 and 60.')
                         print('Please enter a valid age.')
                     else:
                         break  # Exit the loop if age is valid
@@ -143,3 +143,4 @@ def manager():
 
 
 # Run the manager function
+manager()

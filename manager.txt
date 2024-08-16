@@ -12,19 +12,5 @@
         "gender": "male",
         "contact_no": "234-5674829",
         "email": "ee@dc.vv"
-    },
-    "Xunhlumr39402": {
-        "manager_password": "sihru40924",
-        "age": 66,
-        "gender": "female",
-        "contact_no": "013-4567895",
-        "email": "xuandh@jaij.com"
-    },
-    "u": {
-        "manager_password": "xunhlum08",
-        "age": 19,
-        "gender": "female",
-        "contact_no": "016-5687904",
-        "email": "xung@hgi.com"
     }
 }
