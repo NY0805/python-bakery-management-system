@@ -27,23 +27,27 @@ def create_account():
 
     # Try to access and read the accounts.txt file
     try:
-        with open('accounts.txt', 'r') as file:
+        with open("accounts.txt", "r") as file:
             accounts = file.readlines()
-            # Check to see whether the username is already in use
-            for account in accounts:
-                stored_username = account.split(',')[0]
-                if stored_username == username:
-                    print("Username already exists, please try another.")
-                    return
+            flag = False
+            for line in accounts:
+                stored_username = line.split(',')[0]
+                if username == stored_username:
+                    flag = True
+                    print("That Username already exists, Please try another")
+                    break
+            if flag:
+                return  # Stop the function if the username already exists
+
     except FileNotFoundError:
-        # If the file doesn't exist, treat it as an empty file
-        accounts = []
+        accounts = []  # Treat accounts as an empty list if the file doesn't exist
 
-    # If the username is new, add the new account information
-    with open('accounts.txt', 'a') as file:
-        file.write(f"{username},{password},{personal_info['age']},{personal_info['gender']},{personal_info['contact_no']},{personal_info['email']}\n")
+    # If the username is new, add the new account information to the file
+    with open("accounts.txt", "a") as file:
+        file.write(f"{username},{password},{age},{gender},{contact_no},{email}\n")
+    print(f"Okay, {username} is your username")
+    print("Welcome, your account has been created successfully!")
 
-    print("Welcome,your account has been created successfully!")
 
 def login():
     username = input("Enter your username: ")
@@ -60,7 +64,6 @@ def login():
         if customer["username"] == username and customer["password"] == password:
             print("Login successful!")
             return
-
     print("Invalid username or password.")
     def customer():
         while True:
