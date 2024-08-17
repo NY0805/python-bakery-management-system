@@ -45,8 +45,47 @@ def create_account():
 
     print("Welcome,your account has been created successfully!")
 
-# Run the function to create an account
-create_account()
+def login():
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
 
-print("hi")
-abcj
+    try:
+        with open("customers.json", "r") as file:
+            customers = json.load(file)
+    except FileNotFoundError:
+        print("No accounts found. Please create an account first.")
+        return
+
+    for customer in customers:
+        if customer["username"] == username and customer["password"] == password:
+            print("Login successful!")
+            return
+
+    print("Invalid username or password.")
+    def customer():
+        while True:
+            print("\nWelcome to the Bakery Management System!")
+            print("1. Sign Up")
+            print("2. Login")
+            print("3. Browse Products")
+            print("4. View Cart")
+            print("5. Exit")
+
+            option = input("Please select an option (1/2/3/4/5): ")
+
+            if option == "1":
+                create_account()
+            elif option == "2":
+                login()
+            elif option == "3":
+                browse_products()
+            elif option == "4":
+                view_cart()
+            elif option == "5":
+                print("Thank you for using the system. Goodbye!")
+                break
+            else:
+                print("Invalid option, please try again.")
+
+    # Run the customer function to start the program
+    customer()
