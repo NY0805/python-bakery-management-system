@@ -5,8 +5,13 @@ def create_account():
     username = input("Enter username: ")
     password = input("Enter password: ")
     age = input("Enter your age: ")
-    gender = input("Select your gender (M for male, F for female): ")
-    if
+    gender = input("Select your gender (M = male, F = female): ")
+    if gender == "M":
+        print("Gender selected: Male")
+    elif gender == "F":
+        print("Gender selected: Female")
+    else:
+        print("Invalid input, please select M or F.")
     contact_no = input("Enter your contact number: ")
     email = input("Enter your email: ")
 
@@ -20,15 +25,15 @@ def create_account():
         "email": email
     }
 
-    # Try to open and read the accounts.txt file
+    # Try to access and read the accounts.txt file
     try:
         with open('accounts.txt', 'r') as file:
             accounts = file.readlines()
-            # Check if the username already exists
+            # Check to see whether the username is already in use
             for account in accounts:
                 stored_username = account.split(',')[0]
                 if stored_username == username:
-                    print("Username already exists.")
+                    print("Username already exists, please try another.")
                     return
     except FileNotFoundError:
         # If the file doesn't exist, treat it as an empty file
@@ -43,5 +48,5 @@ def create_account():
 # Run the function to create an account
 create_account()
 
-
-print('hi')
+print("hi")
+abcj
