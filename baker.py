@@ -41,7 +41,7 @@ def baker_account_management():
                        '>>> '))
     if status == 1:
         baker_username = input('Please enter your username: ')
-        baker_password = input('Please enter your password: \n')
+        baker_password = input('Please enter your password: ')
         print('------------------------------------------------------------------')
         print('This is your first time login, kindly complete your personal info.')
         print('------------------------------------------------------------------')
@@ -137,14 +137,16 @@ def baker_account_management():
                     print('enter again.')
             else:
                 print('Username or password invalid, please enter again or try another account.\n')  # prompt user to input again if it does't match with data in file
-                baker_username()
+                print(baker_username)
+                print(baker_password)
         else:
             if len(baker_password) < 8 or len(baker_password) > 12:  # to ensure the password entered is between 8 to 12 digits
                 print('Invalid password. Please make sure it is between 8 to 12 digits!\n')
-                baker_password()  # if fail to meet the criteria, ask user to enter again
+                print(baker_password)  # if fail to meet the criteria, ask user to enter again
 
             # automatically considered as first time login if the data entered not found in file
-            else:
 
 
-baker_account_management() shfhaif
+
+baker_account_management()
+
