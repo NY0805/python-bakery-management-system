@@ -1,5 +1,6 @@
 import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
+import system_administration
 
 
 # Define the function that loads data from the file
@@ -41,21 +42,20 @@ def manager():
                 if info[manager_username]['manager_password'] == manager_password:
                     print('\nLogin successfully!')
                     print('Welcome, ', manager_username, '!')
-                    print('\nServices:')
-                    print(
-                        'a. system administration\n'
-                        'b. order management\n'
-                        'c. financial management\n'
-                        'd. inventory control\n'
-                        'e. customer feedback\n'
-                        'f. Exit')
-                    choice = input('Select a choice (a, b, c, d, e, f): \n>>> ')
-                    for choice in ['a', 'b', 'c', 'd', 'e']:
+                    while True:
+                        print(
+                            '\n-----------------------------------------------\n'
+                            '\t\t\t', '', '', 'MANAGER PRIVILEGE\n'
+                            '-----------------------------------------------\n'
+                            'a. system administration\n'
+                            'b. order management\n'
+                            'c. financial management\n'
+                            'd. inventory control\n'
+                            'e. customer feedback\n'
+                            'f. Exit')
+                        choice = input('Select a choice (a, b, c, d, e, f): \n>>> ')
                         if choice == 'a':
-                            file = open('manager.txt', 'r')
-                            for line in file:
-                                print(line, end='')  # end='' enable it to print without enter a new line
-                            break
+                            system_administration.system_administration()
 
                         elif choice == 'b':
                             print('enter again.')
@@ -68,7 +68,12 @@ def manager():
 
                         elif choice == 'e':
                             print('enter again.')
-                    break
+
+                        elif choice == 'f':
+                            print('enter again.')
+
+                        else:
+                            print('invalid input. Please enter again.')
 
                 else:
                     print('\nInvalid password. Please try again.')
@@ -136,5 +141,3 @@ def manager():
             print('\nInvalid password length. Please make sure it is between 8 to 12 digits!')
 
 
-# Run the manager function
-manager()

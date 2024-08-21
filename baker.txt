@@ -1,9 +1,0 @@
-{
-    "hanxun": {
-        "baker_password": "hanxun8888",
-        "age": 18,
-        "gender": "female",
-        "contact_no": "019-0987654",
-        "email": "hxu@gmail.com"
-    }
-}

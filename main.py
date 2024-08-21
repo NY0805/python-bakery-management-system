@@ -33,26 +33,32 @@ print('5. Exit the program')
 
 while True:
     try:
-        role = int(input('Please select a role (1, 2, 3, 4): '))
+        role = int(input('What is your role (1, 2, 3, 4): '))
 
         if role == 1:
             print('\nMANAGER is selected.\n---------------------------------------------------')
             manager.manager()
             break
+
         elif role == 2:
             print('\nCUSTOMER is selected.\n---------------------------------------------------')
             break
+
         elif role == 3:
             print('\nCASHIER is selected.\n---------------------------------------------------')
             break
+
         elif role == 4:
             print('\nBAKER is selected.\n---------------------------------------------------')
             break
+
         elif role == 5:
             print('--------------------YOU ARE EXIT--------------------')
-            break
+            exit()
+
         else:
             print('Invalid input.\n')
+
     except ValueError:
         print('invalid input.\n')
 
