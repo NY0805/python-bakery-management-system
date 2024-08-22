@@ -41,7 +41,7 @@ def manager():
 
                 if info[manager_username]['manager_password'] == manager_password:
                     print('\nLogin successfully!')
-                    print('Welcome, ', manager_username, '!')
+                    print('Welcome, manager ', manager_username, '!')
                     while True:
                         print(
                             '\n-----------------------------------------------\n'

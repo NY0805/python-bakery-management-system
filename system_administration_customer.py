@@ -2,9 +2,9 @@ import json
 import system_administration
 
 
-def load_data_from_baker():
+def load_data_from_customer():
     try:
-        file = open('baker.txt', 'r')  # open the file and read
+        file = open('customer.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -19,34 +19,34 @@ def load_data_from_baker():
 
 
 # Define the function that saves information to the file
-def save_info(baker):
-    file = open('baker.txt', 'w')  # open the file to write
-    json.dump(baker, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+def save_info(customer):
+    file = open('cashier.txt', 'w')  # open the file to write
+    json.dump(customer, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()
 
 
-def system_administration_baker():
-    baker = load_data_from_baker()
+def system_administration_customer():
+    customer = load_data_from_customer()
 
     print('\n-----------------------------------------------')
     print('\t\t\t\t', '', 'SERVICES')
     print('-----------------------------------------------')
-    print('1. add baker(s)\n2. remove baker(s)\n3. exit')
-    manage_baker = input('Please choose a service:\n>>> ')
-    if manage_baker == '1':
+    print('1. add cashier(s)\n2. remove cashier(s)\n3. exit')
+    manage_customer = input('Please choose a service:\n>>> ')
+    if manage_customer == '1':
         while True:
-            baker_username = input('\nUsername: ')
-            if baker_username in baker:
+            customer_username = input('\nUsername: ')
+            if customer_username in customer:
                 print('Account exists. Please enter another username.')
 
             else:
-                baker_password = input('Password: ')
-                baker[baker_username] = {
-                    'baker_username': baker_username,
-                    'baker_password': baker_password
+                customer_password = input('Password: ')
+                customer[customer_username] = {
+                    'cashier_username': customer_username,
+                    'cashier_password': customer_password
                 }
                 print('information saved.\n')
-                save_info(baker)
+                save_info(customer)
 
                 while True:
                     add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
@@ -60,21 +60,21 @@ def system_administration_baker():
                     print('Stop adding. Exiting to the service page......')
                     break
 
-    elif manage_baker == '2':
+    elif manage_customer == '2':
         while True:
             print('\n-----------------------------------------------')
-            print('\t\t\t\t', '', 'Baker list')
+            print('\t\t\t\t', '', 'Customer list')
             print('-----------------------------------------------')
-            for index, key in enumerate(baker, start=1):
+            for index, key in enumerate(customer, start=1):
                 print(f'{index}. {key}')
 
             while True:
                 try:
-                    index_of_baker_to_remove = int(input('Which baker do you want to remove? \n>>> '))
-                    if 1 <= index_of_baker_to_remove <= len(baker):
-                        key_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
-                        del baker[key_to_remove]
-                        save_info(baker)
+                    index_of_customer_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
+                    if 1 <= index_of_customer_to_remove <= len(customer):
+                        key_to_remove = list(customer.keys())[index_of_customer_to_remove - 1]
+                        del customer[key_to_remove]
+                        save_info(customer)
 
                         print(f'{key_to_remove} removed.\n')
                         while True:
@@ -100,11 +100,10 @@ def system_administration_baker():
             if remove_more == 'n':
                 break
 
-    elif manage_baker == '3':
+    elif manage_customer == '3':
         print('Exiting to role selection......')
         system_administration.system_administration()
 
     else:
         print('invalid input.')
-
 

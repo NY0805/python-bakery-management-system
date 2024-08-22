@@ -38,7 +38,6 @@ while True:
         if role == 1:
             print('\nMANAGER is selected.\n---------------------------------------------------')
             manager.manager()
-            break
 
         elif role == 2:
             print('\nCUSTOMER is selected.\n---------------------------------------------------')
