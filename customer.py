@@ -1,6 +1,26 @@
 import json
 
-def create_account():
+# Define the function that loads data from the file
+def load_data_from_customer():
+    try:
+        file = open('customers.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
+
+def save_data_to_customer(customers):
+    with open('customers.txt', 'w') as file:
+        json.dump(customers, file)  # Save the customer data back to the file
+
+def create_customer_account():
     # Getting user input
     username = input("Enter username: ")
     password = input("Enter password: ")
@@ -48,24 +68,19 @@ def create_account():
     print(f"Okay, {username} is your username")
     print("Welcome, your account has been created successfully!")
 
-
 def login():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
 
-    try:
-        with open("customers.json", "r") as file:
-            customers = json.load(file)
-    except FileNotFoundError:
-        print("No accounts found. Please create an account first.")
-        return
+    customers = load_data_from_customer()  # Use the loaded customer data
 
     for customer in customers:
         if customer["username"] == username and customer["password"] == password:
-            print("Login successful!")
+            print("Welcome back!")
             return
+
     print("Invalid username or password.")
-    def customer():
+    def customer_menu():
         while True:
             print("\nWelcome to the Bakery Management System!")
             print("1. Sign Up")
@@ -90,5 +105,49 @@ def login():
             else:
                 print("Invalid option, please try again.")
 
+    def manage_account(customer):
+        print("\n--- Manage Account ---")
+        print(f"Username: {customer['username']}")
+        print(f"Age: {customer['age']}")
+        print(f"Gender: {customer['gender']}")
+        print(f"Contact Number: {customer['contact_no']}")
+        print(f"Email: {customer['email']}")
+        print("\nIf you want to update your information, please select the 'Update Information' option.")
+
+    def update_information(customer):
+        print("\n--- Update Personal Information ---")
+        print("1. Update Password")
+        print("2. Update Contact Number")
+        print("3. Update Email")
+        print("4. Go Back")
+
+        option = input("Select an option (1/2/3/4): ")
+
+        if option == "1":
+            new_password = input("Enter new password: ")
+            customer["password"] = new_password
+            print("Password updated successfully!")
+        elif option == "2":
+            new_contact_no = input("Enter new contact number: ")
+            customer["contact_no"] = new_contact_no
+            print("Contact number updated successfully!")
+        elif option == "3":
+            new_email = input("Enter new email: ")
+            customer["email"] = new_email
+            print("Email updated successfully!")
+        elif option == "4":
+            return
+        else:
+            print("Invalid option, please try again.")
+
+        # Save the updated information
+        customers = load_data_from_customer()
+        for i, c in enumerate(customers):
+            if c["username"] == customer["username"]:
+                customers[i] = customer
+                break
+        save_data_to_customer(customers)
+        print("Your information has been updated!")
+
     # Run the customer function to start the program
-    customer()
+    customer_menu()
