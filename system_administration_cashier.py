@@ -9,7 +9,8 @@ def load_data_from_cashier():
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -21,7 +22,8 @@ def load_data_from_cashier():
 # Define the function that saves information to the file
 def save_info(cashier):
     file = open('cashier.txt', 'w')  # open the file to write
-    json.dump(cashier, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    json.dump(cashier, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()
 
 
@@ -62,43 +64,54 @@ def system_administration_cashier():
 
     elif manage_cashier == '2':
         while True:
-            print('\n-----------------------------------------------')
-            print('\t\t\t\t', '', 'Cashier list')
-            print('-----------------------------------------------')
-            for index, key in enumerate(cashier, start=1):
-                print(f'{index}. {key}')
+            if len(cashier) == 0:
+                print('Nothing to remove. Please add something.')
+                break
 
-            while True:
-                try:
-                    index_of_cashier_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
-                    if 1 <= index_of_cashier_to_remove <= len(cashier):
-                        key_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
-                        del cashier[key_to_remove]
-                        save_info(cashier)
+            elif len(cashier) == 1:
+                print('To ensure the daily normal operation, you cannot remove the last cashier in the list. ')
+                break
 
-                        print(f'{key_to_remove} removed.\n')
-                        while True:
-                            remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
+            else:
+                print('\n-----------------------------------------------')
+                print('\t\t\t\t', '', 'Cashier list')
+                print('-----------------------------------------------')
+                for index, key in enumerate(cashier, start=1):
+                    print(f'{index}. {key}')
+
+                while True:
+                    try:
+                        index_of_cashier_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
+                        if 1 <= index_of_cashier_to_remove <= len(cashier):
+                            key_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
+                            del cashier[key_to_remove]
+                            save_info(cashier)
+
+                            print(f'{key_to_remove} removed.\n')
+                            while True:
+                                remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
+                                if remove_more == 'y':
+                                    break
+
+                                elif remove_more == 'n':
+                                    break
+
+                                else:
+                                    print('\ninvalid input. Enter again.')
+
                             if remove_more == 'y':
                                 break
                             elif remove_more == 'n':
+                                print('Stop removing. Exiting to the service page......')
                                 break
-                            else:
-                                print('\ninvalid input. Enter again.')
-                                break
-                        if remove_more == 'y':
-                            break
-                        elif remove_more == 'n':
-                            print('Stop removing. Exiting to the service page......')
-                            break
-                    else:
-                        print('Invalid input.\n')
+                        else:
+                            print('Invalid input.\n')
 
-                except ValueError:
-                    print('Invalid input. Please enter a number.\n')
+                    except ValueError:
+                        print('Invalid input. Please enter a number.\n')
 
-            if remove_more == 'n':
-                break
+                if remove_more == 'n':
+                    break
 
     elif manage_cashier == '3':
         print('Exiting to role selection......')
@@ -106,4 +119,5 @@ def system_administration_cashier():
 
     else:
         print('invalid input.')
+
 

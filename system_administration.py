@@ -13,7 +13,7 @@ def system_administration():
 
         role = input('Which role do you want to manage(1, 2, 3, 4): ')
         if role not in [1, 2, 3, 4]:
-            print('invalid input.')
+            print('Invalid input.')
 
         while role == '1':
             system_administration_baker.system_administration_baker()
@@ -25,8 +25,9 @@ def system_administration():
             system_administration_customer.system_administration_customer()
 
         while role == '4':
-            print('still in progress ...')
+            print('Exiting to manager privilege......')
             break
+        break
 
 
 

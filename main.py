@@ -24,14 +24,14 @@ print(bakery)
 print('***************************************************')
 print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
 print('***************************************************')
-print('Role: ')
-print('1. Manager')
-print('2. Customer')
-print('3. Cashier')
-print('4. Baker')
-print('5. Exit the program')
 
 while True:
+    print('Role: ')
+    print('1. Manager')
+    print('2. Customer')
+    print('3. Cashier')
+    print('4. Baker')
+    print('5. Exit the program')
     try:
         role = int(input('What is your role (1, 2, 3, 4): '))
 
