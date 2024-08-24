@@ -1,0 +1,6 @@
+{
+    "baker3": {
+        "baker_username": "baker3",
+        "baker_password": "bbb"
+    }
+}

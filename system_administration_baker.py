@@ -28,95 +28,95 @@ def save_info(baker):
 def system_administration_baker():
     baker = load_data_from_baker()
 
-    print('\n-----------------------------------------------')
-    print('\t\t\t\t', '', 'SERVICES')
-    print('-----------------------------------------------')
-    print('1. add baker(s)\n2. remove baker(s)\n3. exit')
-    manage_baker = input('Please choose a service:\n>>> ')
-    if manage_baker == '1':
-        while True:
-            baker_username = input('\nUsername: ')
-            if baker_username in baker:
-                print('Account exists. Please enter another username.')
+    while True:
+        print('\n-----------------------------------------------')
+        print('\t\t\t\t', '', 'SERVICES')
+        print('-----------------------------------------------')
+        print('1. add baker(s)\n2. remove baker(s)\n3. exit')
 
-            else:
-                baker_password = input('Password: ')
-                baker[baker_username] = {
-                    'baker_username': baker_username,
-                    'baker_password': baker_password
-                }
-                print('information saved.\n')
-                save_info(baker)
+        manage_baker = input('Please choose a service:\n>>> ')
 
-                while True:
-                    add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
-                    if add_more == 'y':
+        if manage_baker == '1':
+            while True:
+                baker_username = input('\nUsername: ')
+                if baker_username in baker:
+                    print('Account exists. Please enter another username.')
+
+                else:
+                    baker_password = input('Password: ')
+                    baker[baker_username] = {
+                        'baker_username': baker_username,
+                        'baker_password': baker_password
+                    }
+                    print('information saved.\n')
+                    save_info(baker)
+
+                    while True:
+                        add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
+                        if add_more == 'y':
+                            break
+                        elif add_more == 'n':
+                            break
+                        else:
+                            print('\ninvalid input. Enter again.')
+                    if add_more == 'n':
+                        print('Stop adding. Exiting to the service page......')
                         break
-                    elif add_more == 'n':
-                        break
-                    else:
-                        print('\ninvalid input. Enter again.')
-                if add_more == 'n':
-                    print('Stop adding. Exiting to the service page......')
+
+        elif manage_baker == '2':
+            while True:
+                if len(baker) == 1:
+                    print('To ensure the daily normal operation, you cannot remove the last baker in the list. ')
                     break
 
-    elif manage_baker == '2':
-        while True:
-            if len(baker) == 0:
-                print('Nothing to remove. Please add something.')
-                break
+                else:
+                    print('\n-----------------------------------------------')
+                    print('\t\t\t\t', '', 'Baker list')
+                    print('-----------------------------------------------')
+                    for index, key in enumerate(baker, start=1):
+                        print(f'{index}. {key}')
 
-            elif len(baker) == 1:
-                print('To ensure the daily normal operation, you cannot remove the last cashier in the list. ')
-                break
+                    while True:
+                        try:
+                            index_of_baker_to_remove = int(input('Which baker do you want to remove? \n>>> '))
+                            if 1 <= index_of_baker_to_remove <= len(baker):
+                                key_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
+                                del baker[key_to_remove]
+                                save_info(baker)
 
-            else:
-                print('\n-----------------------------------------------')
-                print('\t\t\t\t', '', 'Baker list')
-                print('-----------------------------------------------')
-                for index, key in enumerate(baker, start=1):
-                    print(f'{index}. {key}')
+                                print(f'{key_to_remove} removed.\n')
+                                while True:
+                                    remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
+                                    if remove_more == 'y':
+                                        break
 
-                while True:
-                    try:
-                        index_of_baker_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
-                        if 1 <= index_of_baker_to_remove <= len(baker):
-                            key_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
-                            del baker[key_to_remove]
-                            save_info(baker)
+                                    elif remove_more == 'n':
+                                        break
 
-                            print(f'{key_to_remove} removed.\n')
-                            while True:
-                                remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
+                                    else:
+                                        print('\ninvalid input. Enter again.')
+
                                 if remove_more == 'y':
                                     break
-
                                 elif remove_more == 'n':
+                                    print('Stop removing. Exiting to the service page......')
                                     break
 
-                                else:
-                                    print('\ninvalid input. Enter again.')
+                            else:
+                                print('Invalid input.\n')
 
-                            if remove_more == 'y':
-                                break
-                            elif remove_more == 'n':
-                                print('Stop removing. Exiting to the service page......')
-                                break
-                        else:
-                            print('Invalid input.\n')
+                        except ValueError:
+                            print('Invalid input. Please enter a number.\n')
 
-                    except ValueError:
-                        print('Invalid input. Please enter a number.\n')
+                    if remove_more == 'n':
+                        break
 
-                if remove_more == 'n':
-                    break
+        elif manage_baker == '3':
+            print('Exiting to role selection......')
+            system_administration.system_administration()
+            break
 
-    elif manage_baker == '3':
-        print('Exiting to role selection......')
-        system_administration.system_administration()
-
-    else:
-        print('invalid input.')
-
+        else:
+            print('invalid input.')
 
 

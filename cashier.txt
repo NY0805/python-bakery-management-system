@@ -1,6 +1,6 @@
 {
-    "cashier2": {
-        "cashier_username": "cashier2",
+    "cashier5": {
+        "cashier_username": "cashier5",
         "cashier_password": "ccc"
     }
 }

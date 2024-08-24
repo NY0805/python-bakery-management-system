@@ -15,6 +15,7 @@ def system_administration():
 
         if (role != '1') and (role != '2') and (role != '3') and (role != '4'):
             print('invalid input.')
+            continue
 
         elif role == '1':
             system_administration_baker.system_administration_baker()
@@ -29,6 +30,7 @@ def system_administration():
             print('Exiting to manager privilege......')
             break
         break
+
 
 
 
