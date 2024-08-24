@@ -148,6 +148,125 @@ def login():
                 break
         save_data_to_customer(customers)
         print("Your information has been updated!")
+    def browse_products():
+        try:
+            # Load the products from the JSON file
+            with open("products.json", "r") as file:
+                products = json.load(file)
+
+            # Display the products to the customer
+            print("\nAvailable Products:")
+            for product in products:
+                print(f"Name: {product['name']}")
+                print(f"Price: ${product['price']}")
+                print(f"Description: {product['description']}\n")
+
+        except FileNotFoundError:
+            print("Product data not found.")
+
+    import json
+
+    # Load products from the bakery section (your teammate's data)
+    def load_products():
+        try:
+            with open("bakery_products.json", "r") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            print("Product data not found.")
+            return []
+
+    # Add items to cart
+    def add_to_cart(cart, products):
+        product_name = input("Enter the name of the product to add: ")
+        quantity = int(input(f"Enter quantity for {product_name}: "))
+
+        for product in products:
+            if product['name'] == product_name:
+                cart.append({
+                    'name': product_name,
+                    'quantity': quantity,
+                    'price': product['price']
+                })
+                print(f"{product_name} added to your cart.")
+                return
+
+        print(f"Product {product_name} not found.")
+
+    # Remove items from cart
+    def remove_from_cart(cart):
+        product_name = input("Enter the name of the product to remove: ")
+
+        for item in cart:
+            if item['name'] == product_name:
+                cart.remove(item)
+                print(f"{product_name} removed from your cart.")
+                return
+
+        print(f"Product {product_name} not found in your cart.")
+
+    # Modify items in cart
+    def modify_cart(cart):
+        product_name = input("Enter the name of the product to modify: ")
+
+        for item in cart:
+            if item['name'] == product_name:
+                new_quantity = int(input(f"Enter new quantity for {product_name}: "))
+                item['quantity'] = new_quantity
+                print(f"Quantity for {product_name} updated to {new_quantity}.")
+                return
+
+        print(f"Product {product_name} not found in your cart.")
+
+    # Main function to manage the cart
+    def cart_management():
+        cart = []
+        products = load_products()
+
+        while True:
+            print("\nCart Management:")
+            print("1. Add to Cart")
+            print("2. Remove from Cart")
+            print("3. Modify Cart")
+            print("4. View Cart")
+            print("5. Exit")
+
+            option = input("Please select an option (1/2/3/4/5): ")
+
+            if option == "1":
+                add_to_cart(cart, products)
+            elif option == "2":
+                remove_from_cart(cart)
+            elif option == "3":
+                modify_cart(cart)
+            elif option == "4":
+                print("\nYour Cart:")
+                for item in cart:
+                    print(
+                        f"Product: {item['name']}, Quantity: {item['quantity']}, Price: ${item['price'] * item['quantity']}")
+            elif option == "5":
+                print("Exiting cart management.")
+                break
+            else:
+                print("Invalid option, please try again.")
+    def track_order():
+        order_id = input("Enter your Order ID: ")
+
+        try:
+            with open("orders.json", "r") as file:
+                orders = json.load(file)
+
+            for order in orders:
+                if order["order_id"] == order_id:
+                    print(f"\nOrder ID: {order['order_id']}")
+                    print(f"Status: {order['status']}")
+                    print(f"Items: {order['items']}")
+                    print(f"Total Price: ${order['total_price']}")
+                    return
+
+            print("Order not found. Please check your Order ID.")
+
+        except FileNotFoundError:
+            print("No orders found.")
 
     # Run the customer function to start the program
     customer_menu()
