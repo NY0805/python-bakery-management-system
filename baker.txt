@@ -1,6 +1,10 @@
 {
-    "baker3": {
-        "baker_username": "baker3",
-        "baker_password": "bbb"
+    "baker1": {
+        "baker_username": "baker1",
+        "baker_password": "bbb",
+        "age": 34,
+        "gender": "female",
+        "contact_no": "456-5674321",
+        "email": "vv@ccc.cc"
     }
 }

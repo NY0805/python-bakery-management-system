@@ -1,4 +1,7 @@
-import manager, customer, cashier, baker
+import manager
+import customer
+import cashier
+import baker
 
 # illustrate a bakery store
 bakery = '''

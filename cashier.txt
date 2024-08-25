@@ -1,6 +1,10 @@
 {
-    "cashier5": {
-        "cashier_username": "cashier5",
-        "cashier_password": "ccc"
+    "cashier3": {
+        "cashier_username": "cashier3",
+        "cashier_password": "ccc",
+        "age": 56,
+        "gender": "male",
+        "contact_no": "234-4563722",
+        "email": "ff@dd.cc"
     }
 }

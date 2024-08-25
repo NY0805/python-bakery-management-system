@@ -1,4 +1,5 @@
 import json
+import re
 import system_administration
 
 
@@ -25,6 +26,77 @@ def save_info(baker):
     file.close()
 
 
+def baker_accounts():
+    baker = load_data_from_baker()
+
+    while True:
+        baker_username = input('Username: ')
+        if baker_username in baker:
+            print('Account exists. Please enter another username.\n')
+
+        else:
+            while True:
+                baker_password = input('Password: ')
+                if baker_password == 'bbb':
+                    while True:
+                        try:
+                            age = int(input('Age: '))
+                            if age < 18 or age > 60:
+                                print('The required age is between 18 and 60.')
+                                print('Please enter a valid age.')
+                            else:
+                                break  # Exit the loop if age is valid
+                        except ValueError:
+                            print('Please enter a valid age.')
+
+                    while True:
+                        gender = input('Gender(m=male, f=female): ')
+                        if gender not in ['f', 'm']:
+                            print('\nInvalid input. Please enter again.')
+                        elif gender == 'f':
+                            gender = 'female'
+                            break
+                        else:
+                            gender = 'male'
+                            break  # Exit the loop if age is valid
+
+                    while True:
+                        contact_no = input('Contact number(xxx-xxx xxxx): ')
+                        pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
+                        if not re.fullmatch(pattern, contact_no):
+                            print('Invalid contact number. Please enter again.')
+                        else:
+                            break  # Exit the loop if age is valid
+
+                    while True:
+                        email = input('Email: ')
+                        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
+                        if not re.fullmatch(pattern, email):
+                            print('Invalid email. Please enter again.')
+                        else:
+                            break
+
+                # update the dictionary with user input
+                    baker[baker_username] = {
+                        'baker_username': baker_username,
+                        'baker_password': baker_password,
+                        'age': age,
+                        'gender': gender,
+                        'contact_no': contact_no,
+                        'email': email
+                    }
+                    save_info(baker)
+
+                    print('Information saved.\n')  # let user know their information are saved
+                    print('--------------------------------------------------')
+                    print('Thank you for completing the personal information.')
+                    print('--------------------------------------------------')
+                    return
+
+                else:
+                    print('\nIncorrect password. Please enter again.')
+
+
 def system_administration_baker():
     baker = load_data_from_baker()
 
@@ -38,34 +110,24 @@ def system_administration_baker():
 
         if manage_baker == '1':
             while True:
-                baker_username = input('\nUsername: ')
-                if baker_username in baker:
-                    print('Account exists. Please enter another username.')
+                baker_accounts()
+                baker = load_data_from_baker()
 
-                else:
-                    baker_password = input('Password: ')
-                    baker[baker_username] = {
-                        'baker_username': baker_username,
-                        'baker_password': baker_password
-                    }
-                    print('information saved.\n')
-                    save_info(baker)
-
-                    while True:
-                        add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
-                        if add_more == 'y':
-                            break
-                        elif add_more == 'n':
-                            break
-                        else:
-                            print('\ninvalid input. Enter again.')
-                    if add_more == 'n':
-                        print('Stop adding. Exiting to the service page......')
+                while True:
+                    add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
+                    if add_more == 'y':
                         break
+                    elif add_more == 'n':
+                        break
+                    else:
+                        print('\ninvalid input. Enter again.')
+                if add_more == 'n':
+                    print('Stop adding. Exiting to the service page......')
+                    break
 
         elif manage_baker == '2':
             while True:
-                if len(baker) == 1:
+                if len(baker) <= 1:
                     print('To ensure the daily normal operation, you cannot remove the last baker in the list. ')
                     break
 
