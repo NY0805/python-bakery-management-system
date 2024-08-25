@@ -12,5 +12,21 @@
         "gender": "male",
         "contact_no": "234-5674829",
         "email": "ee@dc.vv"
+    },
+    "lum": {
+        "manager_username": "lum",
+        "manager_password": "098429jf",
+        "age": 18,
+        "gender": "female",
+        "contact_no": "014-3453873",
+        "email": "xun@hsk.com"
+    },
+    "han": {
+        "manager_username": "han",
+        "manager_password": "sjdbu934",
+        "age": 18,
+        "gender": "female",
+        "contact_no": "018-5678345",
+        "email": "dud@ed.com"
     }
 }

@@ -1,4 +1,10 @@
 {
+    "udhf": {
+        "baker_username": "udhf",
+        "baker_password": "203jid"
+    }
+}
+{
     "baker1": {
         "baker_username": "baker1",
         "baker_password": "bbb",
