@@ -78,7 +78,7 @@ def inventory_services():
                                                  '\n>>> '))
 
                     if ingredient_main_type == 1:
-                        print()
+                        print()kk
 
 
 
