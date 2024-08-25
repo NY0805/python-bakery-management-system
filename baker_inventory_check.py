@@ -26,10 +26,12 @@ def save_info(info):
     json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
+
 option = int(input('choose service:\n'
                    '1. inventory management\n'
                    '2. etctectetc\n'
                    '>>> '))
+
 
 def inventory_services():
 
@@ -74,13 +76,19 @@ def inventory_services():
                 print('7. Fruits and Vegetables')
                 print('8. Preservatives and Stabilizers')
                 print('9. Others')
-                ingredient_main_type = int(input('Please input the main type of bakery ingredients:'
+                ingredient_main_type = int(input('\nPlease input the main type of bakery ingredients:'
                                                  '\n>>> '))
 
-                    if ingredient_main_type == 1:
-                        print()kk
-
+                if ingredient_main_type == 1:
+                    ingredient_details()
 
 
 if option == 1:
     inventory_services()
+
+
+def ingredient_details():
+    print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
+    ingredient_name = input('1. Ingredient Name: ')
+    ingredient_unit_measurement = input('2. Unit Measurement: ')
+
