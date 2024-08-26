@@ -272,5 +272,6 @@ def login():
         except FileNotFoundError:
             print("No orders found.")
 
-    # Run the customer function to start the program
-    customer_menu()
+# Run the customer function to start the program
+create_customer_account()
+customer_menu()

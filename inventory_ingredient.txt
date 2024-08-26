@@ -1,0 +1,6 @@
+{
+    "ingredient_name": "wheat flour",
+    "type_number": "9847",
+    "ingredient_unit_measurement": "g",
+    "batch_number": "94dh3"
+}

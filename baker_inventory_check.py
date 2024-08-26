@@ -20,10 +20,10 @@ def load_data_from_inventory_ingredient():
 
 
 # Define the function that saves information to the file
-def save_info(info):
+def save_info(ingredient_info):
 
     file = open('inventory_ingredient.txt', 'w')  # open the file to write
-    json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    json.dump(ingredient_info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 
@@ -32,7 +32,7 @@ option = int(input('choose service:\n'
                    '2. etctectetc\n'
                    '>>> '))
 
-
+'''
 def ingredient_details(type_number, solid):
     print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
     if type_number:
@@ -40,7 +40,63 @@ def ingredient_details(type_number, solid):
     if solid:
         solidity = input('3. Solidity:')
     ingredient_name = input('1. Ingredient Name: ')
-    ingredient_unit_measurement = input('2. Unit Measurement: ')
+    ingredient_unit_measurement = input('2. Unit Measurement: ')'''
+
+
+def ingredient_details(ingredient_main_type):
+    print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
+
+    # Initialize an empty dictionary to store the ingredient details
+    ingredient_info = {}
+
+    # List to hold the input prompts based on ingredient type
+    prompts = [
+        ('ingredient_name', 'Ingredient Name'),
+        ('ingredient_unit_measurement', 'Unit Measurement'),
+        ('batch_number', 'Batch Number')
+    ]
+
+    # Add conditional prompts based on ingredient_main_type
+    if ingredient_main_type == 1:
+        prompts.insert(1, ('type_number', 'Type Number'))  # Insert Type Number after Ingredient Name
+    elif ingredient_main_type == 2:
+        prompts.append(('solidity', 'Solidity'))  # Append Solidity at the end
+
+    # Calculate the maximum length of prompt text for alignment
+    max_prompt_length = max(len(prompt_text) for _, prompt_text in prompts)
+
+    # Loop through the prompts list and ask for input with alignment
+    for i, (key, prompt_text) in enumerate(prompts, start=1):
+        # Format the prompt text to align the input fields
+        formatted_prompt = f'{i}. {prompt_text.ljust(max_prompt_length + 2)}: '
+        ingredient_info[key] = input(formatted_prompt)
+
+    return ingredient_info
+
+
+def ingredient_main_type_menu():
+    print('\nHere are the main types of bakery ingredients:')
+    print('\n1. Flours and Grains')
+    print('2. Sweeteners')
+    print('3. Fats and Oils')
+    print('4. Dairy and Non-Dairy Products')
+    print('5. Leavening Agents')
+    print('6. Spices and Flavouring')
+    print('6. Fillings and Toppings')
+    print('7. Fruits and Vegetables')
+    print('8. Preservatives and Stabilizers')
+    print('9. Others')
+    ingredient_main_type = int(input('\nPlease input the main type of bakery ingredients:'
+                                     '\n>>> '))
+
+
+def continue_adding():
+    add_more = input('\nInformation saved. Continue adding? (y=yes, n=no)'
+                     '\n>>> ')
+    if add_more == 'y':
+        ingredient_main_type_menu()
+    elif add_more == 'n':
+        print('Stop adding... Existing to the Ingredient Management page.')
 
 
 def inventory_services():
@@ -75,24 +131,11 @@ def inventory_services():
                                                             '\n>>> '))
 
             if ingredient_management_services_type == 1:
-                print('\nHere are the main types of bakery ingredients:')
-                print('\n1. Flours and Grains')
-                print('2. Sweeteners')
-                print('3. Fats and Oils')
-                print('4. Dairy and Non-Dairy Products')
-                print('5. Leavening Agents')
-                print('6. Spices and Flavouring')
-                print('6. Fillings and Toppings')
-                print('7. Fruits and Vegetables')
-                print('8. Preservatives and Stabilizers')
-                print('9. Others')
-                ingredient_main_type = int(input('\nPlease input the main type of bakery ingredients:'
-                                                 '\n>>> '))
+                ingredient_main_type_menu()
+                ingredient_info = ingredient_details(ingredient_main_type)
+                save_info(ingredient_info)
+            continue_adding()
 
-                if ingredient_main_type == 1:
-                    ingredient_details(True, False)
-                elif ingredient_main_type == 2:
-                    ingredient_details(False, True)
 
 
 if option == 1:
