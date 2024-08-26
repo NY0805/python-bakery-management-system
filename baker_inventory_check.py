@@ -88,6 +88,7 @@ def ingredient_main_type_menu():
     print('9. Others')
     ingredient_main_type = int(input('\nPlease input the main type of bakery ingredients:'
                                      '\n>>> '))
+    return ingredient_main_type
 
 
 def continue_adding():
@@ -131,8 +132,8 @@ def inventory_services():
                                                             '\n>>> '))
 
             if ingredient_management_services_type == 1:
-                ingredient_main_type_menu()
-                ingredient_details(ingredient_management_services_type)
+                ingredient_main_type = ingredient_main_type_menu()  # Capture the returned value
+                ingredient_info = ingredient_details(ingredient_main_type)  # Use the captured value
                 save_info(ingredient_info)
             continue_adding()
 
