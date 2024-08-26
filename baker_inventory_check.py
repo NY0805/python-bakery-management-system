@@ -33,6 +33,16 @@ option = int(input('choose service:\n'
                    '>>> '))
 
 
+def ingredient_details(type_number, solid):
+    print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
+    if type_number:
+        type_number = input('3. Type Number: ')
+    if solid:
+        solidity = input('3. Solidity:')
+    ingredient_name = input('1. Ingredient Name: ')
+    ingredient_unit_measurement = input('2. Unit Measurement: ')
+
+
 def inventory_services():
 
     print('\nEasily manage your bakery\'s inventory with our system!')
@@ -80,15 +90,15 @@ def inventory_services():
                                                  '\n>>> '))
 
                 if ingredient_main_type == 1:
-                    ingredient_details()
+                    ingredient_details(True, False)
+                elif ingredient_main_type == 2:
+                    ingredient_details(False, True)
 
 
 if option == 1:
     inventory_services()
 
 
-def ingredient_details():
-    print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
-    ingredient_name = input('1. Ingredient Name: ')
-    ingredient_unit_measurement = input('2. Unit Measurement: ')
+
+
 
