@@ -100,7 +100,7 @@ def continue_adding():
 
 
 def inventory_services():
-
+    ingredient_info = load_data_from_inventory_ingredient()
     print('\nEasily manage your bakery\'s inventory with our system!')
     print('With our system, you can effortlessly:\n'
           '\t- Add new ingredients and product\n'
@@ -132,11 +132,11 @@ def inventory_services():
 
             if ingredient_management_services_type == 1:
                 ingredient_main_type_menu()
-                ingredient_info = ingredient_details(ingredient_main_type)
+                ingredient_details(ingredient_management_services_type)
                 save_info(ingredient_info)
             continue_adding()
 
-fffhhhhh
+
 
 if option == 1:
     inventory_services()
