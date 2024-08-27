@@ -28,8 +28,10 @@ print('***************************************************')
 print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
 print('***************************************************')
 
+
+
 while True:
-    print('Role: ')
+    print('\nRole: ')
     print('1. Manager')
     print('2. Customer')
     print('3. Cashier')
@@ -55,7 +57,7 @@ while True:
             break
 
         elif role == 5:
-            print('--------------------YOU ARE EXIT--------------------')
+            print('\n--------------------YOU ARE EXIT--------------------')
             exit()
 
         else:
@@ -63,6 +65,5 @@ while True:
 
     except ValueError:
         print('invalid input.\n')
-
 
 

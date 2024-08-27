@@ -1,16 +1,26 @@
 {
-    "udhf": {
-        "baker_username": "udhf",
-        "baker_password": "203jid"
-    }
-}
-{
+    "baker2": {
+        "baker_username": "baker2",
+        "baker_password": "bbb",
+        "age": 34,
+        "gender": "male",
+        "contact_no": "345-5674832",
+        "email": "ff@dd.dd"
+    },
     "baker1": {
         "baker_username": "baker1",
         "baker_password": "bbb",
-        "age": 34,
+        "age": 45,
+        "gender": "male",
+        "contact_no": "123-3456382",
+        "email": "f@ss.ss"
+    },
+    "baker3": {
+        "baker_username": "baker3",
+        "baker_password": "bbb",
+        "age": 23,
         "gender": "female",
-        "contact_no": "456-5674321",
-        "email": "vv@ccc.cc"
+        "contact_no": "123-3476532",
+        "email": "ff@ff.ff"
     }
 }

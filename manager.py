@@ -3,6 +3,7 @@ import json  # import json text file to record data
 import system_administration
 
 
+
 # Define the function that loads data from the file
 def load_data_from_manager():
     try:
@@ -70,7 +71,8 @@ def manager():
                             print('enter again.')
 
                         elif choice == 'f':
-                            print('enter again.')
+                            print('Exiting to main page......')
+                            return
 
                         else:
                             print('invalid input. Please enter again.')
@@ -86,7 +88,7 @@ def manager():
                     try:
                         age = int(input('Age: '))
                         if age < 18 or age > 60:
-                            print('The required age is between 18 and 60.')
+                            print('\nThe required age is between 18 and 60.')
                             print('Please enter a valid age.')
                         else:
                             break  # Exit the loop if age is valid
@@ -108,7 +110,7 @@ def manager():
                     contact_no = input('Contact number(xxx-xxx xxxx): ')
                     pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
                     if not re.fullmatch(pattern, contact_no):
-                        print('Invalid contact number. Please enter again.')
+                        print('\nInvalid contact number. Please enter again.')
                     else:
                         break  # Exit the loop if age is valid
 
@@ -116,7 +118,7 @@ def manager():
                     email = input('Email: ')
                     pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
                     if not re.fullmatch(pattern, email):
-                        print('Invalid email. Please enter again.')
+                        print('\nInvalid email. Please enter again.')
                     else:
                         break  # Exit the loop if age is valid
 

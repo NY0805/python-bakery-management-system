@@ -30,9 +30,9 @@ def baker_accounts():
     baker = load_data_from_baker()
 
     while True:
-        baker_username = input('Username: ')
+        baker_username = input('\nUsername: ')
         if baker_username in baker:
-            print('Account exists. Please enter another username.\n')
+            print('Account exists. Please enter another username.')
 
         else:
             while True:
@@ -42,12 +42,12 @@ def baker_accounts():
                         try:
                             age = int(input('Age: '))
                             if age < 18 or age > 60:
-                                print('The required age is between 18 and 60.')
+                                print('\nThe required age is between 18 and 60.')
                                 print('Please enter a valid age.')
                             else:
                                 break  # Exit the loop if age is valid
                         except ValueError:
-                            print('Please enter a valid age.')
+                            print('\nPlease enter a valid age.')
 
                     while True:
                         gender = input('Gender(m=male, f=female): ')
@@ -64,7 +64,7 @@ def baker_accounts():
                         contact_no = input('Contact number(xxx-xxx xxxx): ')
                         pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
                         if not re.fullmatch(pattern, contact_no):
-                            print('Invalid contact number. Please enter again.')
+                            print('\nInvalid contact number. Please enter again.')
                         else:
                             break  # Exit the loop if age is valid
 
@@ -72,7 +72,7 @@ def baker_accounts():
                         email = input('Email: ')
                         pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
                         if not re.fullmatch(pattern, email):
-                            print('Invalid email. Please enter again.')
+                            print('\nInvalid email. Please enter again.')
                         else:
                             break
 
@@ -87,7 +87,7 @@ def baker_accounts():
                     }
                     save_info(baker)
 
-                    print('Information saved.\n')  # let user know their information are saved
+                    print('\n', baker_username, 'is added.\n')  # let user know their information are saved
                     print('--------------------------------------------------')
                     print('Thank you for completing the personal information.')
                     print('--------------------------------------------------')
