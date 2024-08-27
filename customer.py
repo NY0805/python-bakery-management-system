@@ -3,7 +3,7 @@ import json
 # Define the function that loads data from the file
 def load_data_from_customer():
     try:
-        file = open('customers.txt', 'r')  # open the file and read
+        file = open('customer.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -18,16 +18,31 @@ def load_data_from_customer():
 
 def save_info(info):
 
-    file = open('manager.txt', 'w')  # open the file to write
+    file = open('customer.txt', 'w')  # open the file to write
     json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 def create_customer_account():
     info = load_data_from_customer()  # initialize 'info' as the name of dictionary that store data loaded from file
 
+def is_valid_password(password):
+        # Check password requirements: at least 6 characters, one uppercase letter, and one digit
+        if len(password) < 6:
+            return False
+        if not re.search(r'[A-Z]', password):
+            return False
+        if not re.search(r'[0-9]', password):
+            return False
+        return True
+
     # Getting user input
     username = input("Enter username: ")
-    password = input("Enter password: ")
+    while True:
+        password = input("Enter password: ")
+        if is_valid_password(password):
+            break
+        else:
+            print("Password must include at least one uppercase letter, one number, and be at least six characters long.")
     age = input("Enter your age: ")
     gender = input("Select your gender (M = male, F = female): ")
     if gender == "M":
@@ -69,8 +84,7 @@ def create_customer_account():
     # If the username is new, add the new account information to the file
     with open("accounts.txt", "a") as file:
         file.write(f"{username},{password},{age},{gender},{contact_no},{email}\n")
-    print(f"Okay, {username} is your username")
-    print("Welcome, your account has been created successfully!")
+    print(f"Welcome, {username}! Your account has been created successfully!")
 
 def login():
     username = input("Enter your username: ")
