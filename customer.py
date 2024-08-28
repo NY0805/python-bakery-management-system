@@ -1,4 +1,5 @@
 import json
+import re
 
 # Define the function that loads data from the file
 def load_data_from_customer():
@@ -26,7 +27,7 @@ def create_customer_account():
     info = load_data_from_customer()  # initialize 'info' as the name of dictionary that store data loaded from file
 
 def is_valid_password(password):
-        # Check password requirements: at least 6 characters, one uppercase letter, and one digit
+        # Verify the minimum password requirements, which are at least six characters, one capital letter and one number.
         if len(password) < 6:
             return False
         if not re.search(r'[A-Z]', password):
@@ -130,7 +131,7 @@ def login():
         print(f"Gender: {customer['gender']}")
         print(f"Contact Number: {customer['contact_no']}")
         print(f"Email: {customer['email']}")
-        print("\nIf you want to update your information, please select the 'Update Information' option.")
+        print("\nPlease select the 'Update Information' option if you would like to update your information.")
 
     def update_information(customer):
         print("\n--- Update Personal Information ---")
