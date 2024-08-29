@@ -63,7 +63,7 @@ def create_customer_account():
                 stored_username = line.split(',')[0]
                 if username == stored_username:
                     flag = True
-                    print("That Username already exists, Please try another")
+                    print("This Username already exists, Please try another")
                     return  # Stop the function if the username already exists
 
     except FileNotFoundError:
@@ -100,7 +100,7 @@ def login():
 def browse_products():
     try:
         # Load the products from the JSON file
-        with open("products.json", "r") as file:
+        with open("products.txt", "r") as file:
             products = json.load(file)
 
         # Display the products to the customer
@@ -118,7 +118,7 @@ def load_orders():
     Load the order data from a file (orders.json).
     """
     try:
-        with open("orders.json", "r") as file:
+        with open("orders.txt", "r") as file:
             orders = json.load(file)
         return orders
     except FileNotFoundError:
@@ -154,7 +154,7 @@ def load_reviews():
     Load existing reviews from a file (reviews.json).
     """
     try:
-        with open("reviews.json", "r") as file:
+        with open("reviews.txt", "r") as file:
             reviews = json.load(file)
         return reviews
     except FileNotFoundError:
@@ -168,7 +168,7 @@ def save_reviews(reviews):
     """
     Save the updated reviews to a file (reviews.json).
     """
-    with open("reviews.json", "w") as file:
+    with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
 def submit_review():
@@ -201,7 +201,7 @@ def submit_review():
     # Save updated reviews
     save_reviews(reviews)
 
-    print("Thank you for your feedback! Your review has been submitted.")
+    print("Thank you for submitting your feedback! We have received your review.")
 
 import json
 
@@ -210,7 +210,7 @@ def load_reviews():
     Load existing reviews from a file (reviews.json).
     """
     try:
-        with open("reviews.json", "r") as file:
+        with open("reviews.txt", "r") as file:
             reviews = json.load(file)
         return reviews
     except FileNotFoundError:
@@ -224,7 +224,7 @@ def save_reviews(reviews):
     """
     Save the updated reviews to a file (reviews.json).
     """
-    with open("reviews.json", "w") as file:
+    with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
 def submit_review():
