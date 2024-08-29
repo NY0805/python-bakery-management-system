@@ -97,31 +97,6 @@ def login():
 
     print("Invalid username or password.")
 
-def customer_menu():
-    while True:
-        print("\nWelcome to the Bakery Management System!")
-        print("1. Sign Up")
-        print("2. Login")
-        print("3. Browse Products")
-        print("4. View Cart")
-        print("5. Exit")
-
-        option = input("Please select an option (1/2/3/4/5): ")
-
-        if option == "1":
-            create_customer_account()
-        elif option == "2":
-            login()
-        elif option == "3":
-            browse_products()
-        elif option == "4":
-            cart_management()
-        elif option == "5":
-            print("Thank you for using the system. Goodbye!")
-            break
-        else:
-            print("Invalid option, please try again.")
-
 def browse_products():
     try:
         # Load the products from the JSON file
@@ -138,7 +113,183 @@ def browse_products():
     except FileNotFoundError:
         print("Product data not found.")
 
-# Other functions (manage_account, update_information, cart_management, etc.) go here...
+def load_orders():
+    """
+    Load the order data from a file (orders.json).
+    """
+    try:
+        with open("orders.json", "r") as file:
+            orders = json.load(file)
+        return orders
+    except FileNotFoundError:
+        print("Order data not found. Please make sure the file exists.")
+        return []
+    except json.JSONDecodeError:
+        print("Error loading order data. The file format might be incorrect.")
+        return []
+
+def track_order():
+    """
+    Allow the customer to check the status of their placed order.
+    """
+    order_id = input("Enter your Order ID: ")
+
+    # Load orders data
+    orders = load_orders()
+
+    # Search for the order by order_id
+    for order in orders:
+        if order["order_id"] == order_id:
+            print(f"\nOrder ID: {order['order_id']}")
+            print(f"Status: {order['status']}")
+            print(f"Items: {order['items']}")
+            print(f"Total Price: ${order['total_price']:.2f}")
+            return
+
+    # If the order is not found
+    print("Order not found. Please check your Order ID.")
+
+def load_reviews():
+    """
+    Load existing reviews from a file (reviews.json).
+    """
+    try:
+        with open("reviews.json", "r") as file:
+            reviews = json.load(file)
+        return reviews
+    except FileNotFoundError:
+        # If file doesn't exist, return an empty list
+        return []
+    except json.JSONDecodeError:
+        print("Error loading review data. The file format might be incorrect.")
+        return []
+
+def save_reviews(reviews):
+    """
+    Save the updated reviews to a file (reviews.json).
+    """
+    with open("reviews.json", "w") as file:
+        json.dump(reviews, file, indent=4)
+
+def submit_review():
+    """
+    Allow the customer to submit a review for a purchased product.
+    """
+    # Get user input
+    product_name = input("Enter the name of the product you want to review: ")
+    review_text = input("Enter your review: ")
+    rating = input("Enter your rating (1-5): ")
+
+    # Validate rating input
+    if not rating.isdigit() or int(rating) not in range(1, 6):
+        print("Invalid rating. Please enter a number between 1 and 5.")
+        return
+
+    # Create a review entry
+    review = {
+        "product_name": product_name,
+        "review_text": review_text,
+        "rating": int(rating)
+    }
+
+    # Load existing reviews
+    reviews = load_reviews()
+
+    # Add new review to the list
+    reviews.append(review)
+
+    # Save updated reviews
+    save_reviews(reviews)
+
+    print("Thank you for your feedback! Your review has been submitted.")
+
+import json
+
+def load_reviews():
+    """
+    Load existing reviews from a file (reviews.json).
+    """
+    try:
+        with open("reviews.json", "r") as file:
+            reviews = json.load(file)
+        return reviews
+    except FileNotFoundError:
+        # If file doesn't exist, return an empty list
+        return []
+    except json.JSONDecodeError:
+        print("Error loading review data. The file format might be incorrect.")
+        return []
+
+def save_reviews(reviews):
+    """
+    Save the updated reviews to a file (reviews.json).
+    """
+    with open("reviews.json", "w") as file:
+        json.dump(reviews, file, indent=4)
+
+def submit_review():
+    """
+    Allow the customer to submit a review for a purchased product.
+    """
+    # Get user input
+    product_name = input("Enter the name of the product you want to review: ")
+    review_text = input("Enter your review: ")
+    rating = input("Enter your rating (1-5): ")
+
+    # Validate rating input
+    if not rating.isdigit() or int(rating) not in range(1, 6):
+        print("Invalid rating. Please enter a number between 1 and 5.")
+        return
+
+    # Create a review entry
+    review = {
+        "product_name": product_name,
+        "review_text": review_text,
+        "rating": int(rating)
+    }
+
+    # Load existing reviews
+    reviews = load_reviews()
+
+    # Add new review to the list
+    reviews.append(review)
+
+    # Save updated reviews
+    save_reviews(reviews)
+
+    print("Thank you for your feedback! Your review has been submitted.")
+
+def customer_menu():
+    while True:
+        print("\nWelcome to the Bakery Management System!")
+        print("1. Sign Up")
+        print("2. Login")
+        print("3. Browse Products")
+        print("4. View Cart")
+        print("5. Track Order")
+        print("6. Submit Review")  # Add Submit Review to menu
+        print("7. Exit")
+
+        option = input("Please select an option (1/2/3/4/5/6/7): ")
+
+        if option == "1":
+            create_customer_account()
+        elif option == "2":
+            login()
+        elif option == "3":
+            browse_products()
+        elif option == "4":
+            cart_management()
+        elif option == "5":
+            track_order()
+        elif option == "6":
+            submit_review()  # Call the submit_review function
+        elif option == "7":
+            print("Thank you for using the system. Goodbye!")
+            break
+        else:
+            print("Invalid option, please try again.")
+
 
 # Run the customer function to start the program
 customer_menu()
