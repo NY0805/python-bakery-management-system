@@ -63,7 +63,7 @@ def create_customer_account():
                 stored_username = line.split(',')[0]
                 if username == stored_username:
                     flag = True
-                    print("This Username already exists, Please try another")
+                    print("This Username already exists. Please try another")
                     return  # Stop the function if the username already exists
 
     except FileNotFoundError:
@@ -128,7 +128,7 @@ def load_orders():
         print("Error loading order data. The file format might be incorrect.")
         return []
 
-def track_order():
+def order_tracking():
     """
     Allow the customer to check the status of their placed order.
     """
@@ -266,8 +266,8 @@ def customer_menu():
         print("2. Login")
         print("3. Browse Products")
         print("4. View Cart")
-        print("5. Track Order")
-        print("6. Submit Review")  # Add Submit Review to menu
+        print("5. Order Tracking")  # Changed for consistency
+        print("6. Submit Review")  # Option for submitting a review
         print("7. Exit")
 
         option = input("Please select an option (1/2/3/4/5/6/7): ")
@@ -279,16 +279,17 @@ def customer_menu():
         elif option == "3":
             browse_products()
         elif option == "4":
-            cart_management()
+             load_orders()
         elif option == "5":
-            track_order()
+            order_tracking()  # Calls the order tracking function
         elif option == "6":
-            submit_review()  # Call the submit_review function
+            submit_review()  # Calls the submit review function
         elif option == "7":
             print("Thank you for using the system. Goodbye!")
             break
         else:
             print("Invalid option, please try again.")
+
 
 
 # Run the customer function to start the program
