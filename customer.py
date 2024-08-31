@@ -29,10 +29,10 @@ def create_customer_account():
     username = input("Enter username: ")
     while True:
         password = input("Enter password: ")
-        if is_valid_password(password):
+        if is_valid_password(password):# Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
             break
         else:
-            print("Password must include at least one uppercase letter, one number, and be at least six characters long.")
+            print("Password must include at least one uppercase letter, one number, and be at least six characters long.") # If not, then the `password` is invalid
     age = input("Enter your age: ")
     gender = input("Select your gender (M = male, F = female): ")
     if gender == "M":
@@ -75,7 +75,7 @@ def create_customer_account():
     print(f"Welcome, {username}! Your account has been created successfully!")
 
 def is_valid_password(password):
-    # Verify the minimum password requirements, which are at least six characters, one capital letter and one number.
+    # Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
     if len(password) < 6:
         return False
     if not re.search(r'[A-Z]', password):
