@@ -31,8 +31,8 @@ def create_customer_account():
         password = input("Enter password: ")
         if is_valid_password(password):# Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
             break
-        else:
-            print("Password must include at least one uppercase letter, one number, and be at least six characters long.") # If not, then the `password` is invalid
+        else: # If not, then the `password` is invalid
+            print("Password must include at least one uppercase letter, one number, and be at least six characters long.")
     age = input("Enter your age: ")
     gender = input("Select your gender (M = male, F = female): ")
     if gender == "M":
@@ -222,10 +222,7 @@ def save_reviews(reviews):
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
-def submit_review():
-    """
-    Allow the customer to submit a review for a purchased product.
-    """
+def submit_review(): #Allow customer to submit review for purchased product
     # Get user input
     product_name = input("Enter the name of the product you want to review: ")
     review_text = input("Enter your review: ")
