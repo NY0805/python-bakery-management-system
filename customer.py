@@ -29,7 +29,7 @@ def create_customer_account():
     username = input("Enter username: ")
     while True:
         password = input("Enter password: ")
-        if is_valid_password(password):# Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
+        if is_valid_password(password):# Check if the entered password meets the defined requirement (at least one uppercase letter, one number, and six characters long)
             break
         else: # If not, then the `password` is invalid
             print("Password must include at least one uppercase letter, one number, and be at least six characters long.")
