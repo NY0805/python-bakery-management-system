@@ -44,7 +44,7 @@ def create_customer_account():
     contact_no = input("Enter your contact number: ")
     email = input("Enter your email: ")
 
-    # Manage customers' personal information in the dictionary
+    # Manage customers' information in the dictionary
     personal_info = {
         "username": username,
         "password": password,
@@ -149,10 +149,7 @@ def order_tracking():
     # If the order is not found
     print("Order not found. Please check your Order ID.")
 
-def load_reviews():
-    """
-    Load existing reviews from a file (reviews.json).
-    """
+def load_reviews(): #Load existing reviews from a file (reviews.json).
     try:
         with open("reviews.txt", "r") as file:
             reviews = json.load(file)
@@ -233,7 +230,7 @@ def submit_review(): #Allow customer to submit review for purchased product
         print("Invalid rating. Please enter a number between 1 and 5.")
         return
 
-    # Create a review entry
+    # Manage customers' review in the dictionary
     review = {
         "product_name": product_name,
         "review_text": review_text,
