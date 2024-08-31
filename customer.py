@@ -171,14 +171,11 @@ def save_reviews(reviews):
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
-def submit_review():
-    """
-    Allow the customer to submit a review for a purchased product.
-    """
+def submit_review():# Allow the customer to submit a review for a purchased product
     # Get user input
     product_name = input("Enter the name of the product you want to review: ")
     review_text = input("Enter your review: ")
-    rating = input("Enter your rating (1-5): ")
+    rating = input("Rate your product (1-5): ")
 
     # Validate rating input
     if not rating.isdigit() or int(rating) not in range(1, 6):
@@ -202,8 +199,6 @@ def submit_review():
     save_reviews(reviews)
 
     print("Thank you for submitting your feedback! We have received your review.")
-
-import json
 
 def load_reviews():
     """
