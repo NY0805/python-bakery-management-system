@@ -92,11 +92,12 @@ def login():
     customers = load_data_from_customer()  # Use the loaded customer data
 
     for customer in customers:
+        # Confirm that the username and password match the provided login details
         if customer["username"] == username and customer["password"] == password:
             print("Welcome back!")
             return
 
-    print("Invalid username or password.")
+    print("Invalid username or password.") # If none of the records match,print an error message
 
 def browse_products():
     try:
@@ -114,10 +115,7 @@ def browse_products():
     except FileNotFoundError:
         print("Product data not found.")
 
-def load_orders():
-    """
-    Load the order data from a file (orders.json).
-    """
+def load_orders(): #Load the order data from a file
     try:
         with open("orders.txt", "r") as file:
             orders = json.load(file)
@@ -130,25 +128,34 @@ def load_orders():
         return []
 
 def order_tracking():
-    """
-    Allow the customer to check the status of their placed order.
-    """
+    # Prompt the user to enter their Order ID
     order_id = input("Enter your Order ID: ")
 
     # Load orders data
     orders = load_orders()
 
-    # Search for the order by order_id
+    # Check if the order_id exists in the loaded orders data
+    order_exists = False  # Initialize a flag to track if the order is found
+
+    # Iterate over each order to find the matching order ID
     for order in orders:
         if order["order_id"] == order_id:
-            print(f"\nOrder ID: {order['order_id']}")
-            print(f"Status: {order['status']}")
-            print(f"Items: {order['items']}")
-            print(f"Total Price: ${order['total_price']:.2f}")
-            return
+            order_exists = True
+            order_status = order["status"]
+            order_details = order["items"]
 
-    # If the order is not found
-    print("Order not found. Please check your Order ID.")
+            # Display order information
+            print(f"Order ID: {order_id}")
+            print(f"Status: {order_status}")
+            print(f"Details: {order_details}")
+            break
+
+    # If the order ID was not found, display an error message
+    if not order_exists:
+        print("Order ID not found. Please check and try again.")
+
+# Example call to the function
+order_tracking()
 
 def load_reviews(): #Load existing reviews from a file (reviews.json).
     try:
