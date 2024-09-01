@@ -150,9 +150,9 @@ def order_tracking():
             print(f"Details: {order_details}")
             break
 
-    # If the order ID was not found, display an error message
+    # If the order ID was not found, show an error message
     if not order_exists:
-        print("Order ID not found. Please check and try again.")
+        print("Order ID cannot be found. Please check and try again.")
 
 # Example call to the function
 order_tracking()
@@ -169,10 +169,7 @@ def load_reviews(): #Load existing reviews from a file (reviews.json).
         print("Error loading review data. The file format might be incorrect.")
         return []
 
-def save_reviews(reviews):
-    """
-    Save the updated reviews to a file (reviews.json).
-    """
+def save_reviews(reviews): #Save the updated reviews to a file
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
@@ -205,10 +202,7 @@ def submit_review():# Allow the customer to submit a review for a purchased prod
 
     print("Thank you for submitting your feedback! We have received your review.")
 
-def load_reviews():
-    """
-    Load existing reviews from a file (reviews.json).
-    """
+def load_reviews(): #Load existing reviews from a file (reviews.json)
     try:
         with open("reviews.txt", "r") as file:
             reviews = json.load(file)
@@ -220,10 +214,7 @@ def load_reviews():
         print("Error loading review data. The file format might be incorrect.")
         return []
 
-def save_reviews(reviews):
-    """
-    Save the updated reviews to a file (reviews.json).
-    """
+def save_reviews(reviews): #Save the updated reviews to a file
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
