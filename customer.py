@@ -76,6 +76,7 @@ def create_customer_account():
 
 def is_valid_password(password):
     # Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
+    length = len(password) # Calculate the length of the password
     if len(password) < 6:
         return False
     if not re.search(r'[A-Z]', password):
