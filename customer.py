@@ -247,6 +247,55 @@ def submit_review(): #Allow customer to submit review for purchased product
 
     print("Thank you for your feedback! Your review has been submitted.")
 
+
+import json
+
+
+# Function to load customer data
+def load_customer_data():
+    try:
+        with open("customers.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+
+
+# Function to save customer data
+def save_customer_data(data):
+    with open("customers.json", "w") as file:
+        json.dump(data, file)
+
+
+# Function to update purchase history
+def update_purchase_history(username, purchase_amount):
+    customers = load_customer_data()
+
+    if username in customers:
+        customer = customers[username]
+        customer['total_spent'] += purchase_amount
+        customer['purchase_count'] += 1
+    else:
+        customer = {
+            'total_spent': purchase_amount,
+            'purchase_count': 1
+        }
+
+    # Apply reward if eligible
+    if customer['purchase_count'] % 5 == 0:
+        print("Congratulations! You've earned a 10% discount.")
+
+    if customer['total_spent'] >= 100:
+        print("Congratulations! You've earned a free item.")
+
+    customers[username] = customer
+    save_customer_data(customers)
+
+
+# Example usage
+def checkout(username, total_amount):
+    update_purchase_history(username, total_amount)
+    print(f"Order placed successfully! Your total amount is ${total_amount:.2f}.")
+
 def customer_menu():
     while True:
         print("\nWelcome to the Bakery Management System!")
@@ -254,11 +303,12 @@ def customer_menu():
         print("2. Login")
         print("3. Browse Products")
         print("4. View Cart")
-        print("5. Order Tracking")  # Changed for consistency
-        print("6. Submit Review")  # Option for submitting a review
-        print("7. Exit")
+        print("5. Order Tracking")
+        print("6. Submit Review")
+        print("7. View Loyalty Rewards")  # Added option for viewing loyalty rewards
+        print("8. Exit")
 
-        option = input("Please select an option (1/2/3/4/5/6/7): ")
+        option = input("Please select an option (1/2/3/4/5/6/7/8): ")
 
         if option == "1":
             create_customer_account()
@@ -267,19 +317,29 @@ def customer_menu():
         elif option == "3":
             browse_products()
         elif option == "4":
-             load_orders()
+            # Placeholder for view cart function
+            print("View Cart functionality is not yet implemented.")
         elif option == "5":
-            order_tracking()  # Calls the order tracking function
+            order_tracking()
         elif option == "6":
-            submit_review()  # Calls the submit review function
+            submit_review()
         elif option == "7":
+            view_loyalty_rewards()  # Calls the function to view loyalty rewards
+        elif option == "8":
             print("Thank you for using the system. Goodbye!")
             break
         else:
             print("Invalid option, please try again.")
 
-
+# Function to view loyalty rewards
+def view_loyalty_rewards():
+    username = input("Enter your username: ")
+    # Placeholder: Load loyalty rewards for the username
+    # Implement the logic to check loyalty rewards based on purchase history
+    print(f"Checking loyalty rewards for {username}...")
+    # Example: Assuming we have a function to check rewards
+    # rewards = check_loyalty_rewards(username)
+    # print(f"Rewards for {username}: {rewards}")
 
 # Run the customer function to start the program
 customer_menu()
-
