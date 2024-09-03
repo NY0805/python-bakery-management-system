@@ -291,7 +291,7 @@ def checkout(username, total_amount):
 
 def customer_menu():
     while True:
-        print("\nWelcome to the Bakery Management System!")
+        print("\nWELCOME TO MORNING GLORY BAKERY!")
         print("1. Sign Up")
         print("2. Login")
         print("3. Browse Products")
