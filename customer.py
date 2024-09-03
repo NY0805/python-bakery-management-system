@@ -41,10 +41,18 @@ def create_customer_account():
         elif not any(char.isdigit() for char in password):  # Correct way to check for a number
             print("Your password must contain at least one number.")
         else:
-            print("Password has been created successfully.")
             break  # Exit the loop if all conditions are met
+    while True:
+        # Get user input for age
+        age = input("Enter your age: ")
 
-    age = input("Enter your age: ")
+        # Check if the input is a digit
+        if age.isdigit():
+            print("Valid age")
+            break  # Exit the loop if the input is a valid number
+        else:
+            print("Invalid age. Please enter numbers only.")
+
     gender = input("Select your gender (M = male, F = female): ")
     if gender == "M":
         print("Gender selected: Male")
@@ -52,8 +60,26 @@ def create_customer_account():
         print("Gender selected: Female")
     else:
         print("Invalid input, please select M or F.")
-    contact_no = input("Enter your contact number: ")
-    email = input("Enter your email: ")
+    while True:
+        contact_no = input("Enter your contact number: ")
+        if contact_no.isdigit():  # Check if the input contains only digits
+            break
+        else:
+            print("Invalid format. Please enter digits only.")
+
+    # Regular expression for validating an Email
+    regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$'
+
+    while True:
+        # Get user input for email
+        email = input("Enter your email: ")
+
+        # Check if the email matches the regex
+        if re.fullmatch(regex, email):
+            print("Valid Email")
+            break  # Exit the loop if the email is valid
+        else:
+            print("Invalid Email. Please try again.")
 
     # Manage customers' information in the dictionary
     personal_info = {
