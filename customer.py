@@ -154,9 +154,6 @@ def order_tracking():
     if not order_exists:
         print("Order ID cannot be found. Please check and try again.")
 
-# Example call to the function
-order_tracking()
-
 def load_reviews(): #Load existing reviews from a file (reviews.json).
     try:
         with open("reviews.txt", "r") as file:
