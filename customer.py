@@ -48,7 +48,6 @@ def create_customer_account():
 
         # Check if the input is a digit
         if age.isdigit():
-            print("Valid age")
             break  # Exit the loop if the input is a valid number
         else:
             print("Invalid age. Please enter numbers only.")
