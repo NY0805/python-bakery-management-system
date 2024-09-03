@@ -29,10 +29,21 @@ def create_customer_account():
     username = input("Enter username: ")
     while True:
         password = input("Enter password: ")
-        if is_valid_password(password):# Check if the entered password meets the defined requirement (at least one uppercase letter, one number, and six characters long)
-            break
-        else: # If not, then the `password` is invalid
-            print("Password must include at least one uppercase letter, one number, and be at least six characters long.")
+
+        # Check if the password meets the criteria (at least one uppercase letter, one lowercase letter, one number, and six characters long)
+        length = len(password)  # Calculate the length of the password
+        if len(password) < 6:
+            print("Your password must be at least six characters long.")
+        elif password.islower():
+            print("Your password must contain at least one uppercase letter.")
+        elif password.isupper():
+            print("Your password must contain at least one lowercase letter.")
+        elif not any(char.isdigit() for char in password):  # Correct way to check for a number
+            print("Your password must contain at least one number.")
+        else:
+            print("Password is valid.")
+            break  # Exit the loop if all conditions are met
+
     age = input("Enter your age: ")
     gender = input("Select your gender (M = male, F = female): ")
     if gender == "M":
@@ -73,17 +84,6 @@ def create_customer_account():
     with open("accounts.txt", "a") as file:
         file.write(f"{username},{password},{age},{gender},{contact_no},{email}\n")
     print(f"Welcome, {username}! Your account has been created successfully!")
-
-def is_valid_password(password):
-    # Check if the entered password meets the defined criteria (at least one uppercase letter, one number, and six characters long)
-    length = len(password) # Calculate the length of the password
-    if len(password) < 6:
-        return False
-    if not re.search(r'[A-Z]', password):
-        return False
-    if not re.search(r'[0-9]', password):
-        return False
-    return True
 
 def login():
     username = input("Enter your username: ")
