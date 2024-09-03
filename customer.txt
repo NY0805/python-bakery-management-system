@@ -1,0 +1,10 @@
+[
+    {
+        "username": "abc",
+        "password": "XHHeng8",
+        "age": "18",
+        "gender": "F",
+        "contact_no": "102393",
+        "email": "xinshsh@gmail.com"
+    }
+]

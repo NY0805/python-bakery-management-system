@@ -1,86 +1,68 @@
 import json
 import re
 
-# Define the function that loads data from the file
 def load_data_from_customer():
     try:
-        file = open('customer.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
-        else:
-            return {}  # return empty dictionary if the file is empty
+        with open('customer.txt', 'r') as file:
+            content = file.read().strip()
+            if content:
+                try:
+                    return json.loads(content)
+                except json.JSONDecodeError:
+                    return []
+            else:
+                return []
     except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+        return []
 
 def save_info(info):
-    file = open('customer.txt', 'w')  # open the file to write
-    json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
-    file.close()  # close the file after writing
+    with open('customer.txt', 'w') as file:
+        json.dump(info, file, indent=4)
 
 def create_customer_account():
-    info = load_data_from_customer()  # initialize 'info' as the name of dictionary that store data loaded from file
+    info = load_data_from_customer()
 
-    # Getting user input
     username = input("Enter username: ")
     while True:
         password = input("Enter password: ")
-
-        # Check if the password meets the criteria (at least one uppercase letter, one lowercase letter, one number, and six characters long)
-        length = len(password)  # Calculate the length of the password
         if len(password) < 6:
             print("Your password must be at least six characters long.")
         elif password.islower():
             print("Your password must contain at least one uppercase letter.")
         elif password.isupper():
             print("Your password must contain at least one lowercase letter.")
-        elif not any(char.isdigit() for char in password):  # Correct way to check for a number
+        elif not any(char.isdigit() for char in password):
             print("Your password must contain at least one number.")
         else:
-            break  # Exit the loop if all conditions are met
-    while True:
-        # Get user input for age
-        age = input("Enter your age: ")
+            break
 
-        # Check if the input is a digit
+    while True:
+        age = input("Enter your age: ")
         if age.isdigit():
-            break  # Exit the loop if the input is a valid number
+            break
         else:
             print("Invalid age. Please enter numbers only.")
 
     gender = input("Select your gender (M = male, F = female): ")
-    if gender == "M":
-        print("Gender selected: Male")
-    elif gender == "F":
-        print("Gender selected: Female")
-    else:
+    if gender not in ["M", "F"]:
         print("Invalid input, please select M or F.")
+        return
+
     while True:
         contact_no = input("Enter your contact number: ")
-        if contact_no.isdigit():  # Check if the input contains only digits
+        if contact_no.isdigit():
             break
         else:
             print("Invalid format. Please enter digits only.")
 
-    # Regular expression for validating an Email
     regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$'
-
     while True:
-        # Get user input for email
         email = input("Enter your email: ")
-
-        # Check if the email matches the regex
         if re.fullmatch(regex, email):
-            print("Valid Email")
-            break  # Exit the loop if the email is valid
+            break
         else:
             print("Invalid Email. Please try again.")
 
-    # Manage customers' information in the dictionary
     personal_info = {
         "username": username,
         "password": password,
@@ -90,39 +72,28 @@ def create_customer_account():
         "email": email
     }
 
-    # Try to access and read the accounts.txt file
-    try:
-        with open("accounts.txt", "r") as file:
-            accounts = file.readlines()
-            flag = False
-            for line in accounts:
-                stored_username = line.split(',')[0]
-                if username == stored_username:
-                    flag = True
-                    print("This Username already exists. Please try another")
-                    return  # Stop the function if the username already exists
+    existing_users = load_data_from_customer()
+    if any(user["username"] == username for user in existing_users):
+        print("This Username already exists. Please try another")
+        return
 
-    except FileNotFoundError:
-        accounts = []  # Treat accounts as an empty list if the file doesn't exist
-
-    # If the username is new, add the new account information to the file
-    with open("accounts.txt", "a") as file:
-        file.write(f"{username},{password},{age},{gender},{contact_no},{email}\n")
+    existing_users.append(personal_info)
+    save_info(existing_users)
     print(f"Welcome, {username}! Your account has been created successfully!")
 
 def login():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
 
-    customers = load_data_from_customer()  # Use the loaded customer data
+    customers = load_data_from_customer()
 
-    for customer in customers:
-        # Confirm that the username and password match the provided login details
-        if customer["username"] == username and customer["password"] == password:
-            print("Welcome back!")
-            return
+    if isinstance(customers, list):
+        for customer in customers:
+            if customer["username"] == username and customer["password"] == password:
+                print("Welcome back!")
+                return
 
-    print("Invalid username or password.") # If none of the records match,print an error message
+    print("Invalid username or password.")
 
 def browse_products():
     try:
