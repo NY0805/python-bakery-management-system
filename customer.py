@@ -41,7 +41,7 @@ def create_customer_account():
         elif not any(char.isdigit() for char in password):  # Correct way to check for a number
             print("Your password must contain at least one number.")
         else:
-            print("Password is valid.")
+            print("Password has been created successfully.")
             break  # Exit the loop if all conditions are met
 
     age = input("Enter your age: ")
