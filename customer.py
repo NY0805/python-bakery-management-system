@@ -247,10 +247,6 @@ def submit_review(): #Allow customer to submit review for purchased product
 
     print("Thank you for your feedback! Your review has been submitted.")
 
-
-import json
-
-
 # Function to load customer data
 def load_customer_data():
     try:
