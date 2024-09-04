@@ -28,5 +28,13 @@
         "gender": "female",
         "contact_no": "018-5678345",
         "email": "dud@ed.com"
+    },
+    "ccc": {
+        "manager_username": "ccc",
+        "manager_password": "12345678",
+        "age": 56,
+        "gender": "female",
+        "contact_no": "345-5647382",
+        "email": "ee@ee.ee"
     }
 }

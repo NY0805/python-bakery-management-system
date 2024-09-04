@@ -9,9 +9,9 @@ def system_administration():
         print('\n-----------------------------------------------')
         print('\t\t\t\tROLE OPTIONS')
         print('-----------------------------------------------')
-        print('1. Baker\n2. Cashier\n3. Customer\n4. Exit')
+        print('1. Baker🧑‍🍳🍞\n2. Cashier🖥️💰\n3. Customer👦👧\n4. Exit⛔🔙')
 
-        role = input('Which role do you want to manage(1, 2, 3, 4): ')
+        role = input('\nWhich role do you want to manage(1, 2, 3, 4): ')
 
         if (role != '1') and (role != '2') and (role != '3') and (role != '4'):
             print('invalid input.')

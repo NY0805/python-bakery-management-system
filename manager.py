@@ -31,7 +31,6 @@ def save_info(info):
 
 # create a function for manager
 def manager():
-
     info = load_data_from_manager()  # initialize 'info' as the name of dictionary that store data loaded from file
 
     manager_username = input('Please enter your username: ')
@@ -54,7 +53,7 @@ def manager():
                             'd. inventory control\n'
                             'e. customer feedback\n'
                             'f. Exit')
-                        choice = input('Select a choice (a, b, c, d, e, f): \n>>> ')
+                        choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
                         if choice == 'a':
                             system_administration.system_administration()
 
@@ -78,7 +77,9 @@ def manager():
                             print('invalid input. Please enter again.')
 
                 else:
-                    print('\nInvalid password. Please try again.')
+                    print('\n+---------------------------------------+')
+                    print('|⚠️ Invalid password. Please try again. |')
+                    print('+---------------------------------------+\n')
             else:
                 print('------------------------------------------------------------------')
                 print('', '', 'REMEMBER your username and password, they will be used later.')
@@ -140,6 +141,9 @@ def manager():
                 manager()
 
         else:
-            print('\nInvalid password length. Please make sure it is between 8 to 12 digits!')
+            print('\n+---------------------------------------------------------------------------+')
+            print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
+            print('+---------------------------------------------------------------------------+\n')
 
 
+manager()
