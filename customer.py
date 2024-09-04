@@ -71,7 +71,7 @@ def create_customer_account():
         "age": age,
         "gender": gender,
         "contact_no": contact_no,
-        "email": email
+        "email": email,
         "address": address
     }
 
@@ -118,6 +118,7 @@ def update_personal_information():
             print("3. Gender")
             print("4. Contact Number")
             print("5. Email")
+            print("6. Address")  # Added option to update address
             choice = input("Choose the field number to update: ")
 
             if choice == "1":
@@ -163,6 +164,9 @@ def update_personal_information():
                         break
                     else:
                         print("Invalid Email. Please try again.")
+            elif choice == "6":  # Added case for updating address
+                new_address = input("Enter new address: ")
+                customer["address"] = new_address
             else:
                 print("Invalid choice.")
 
@@ -372,10 +376,11 @@ def customer_menu():
         print("4. View Cart")
         print("5. Order Tracking")
         print("6. Submit Review")
-        print("7. View Loyalty Rewards")  # Added option for viewing loyalty rewards
-        print("8. Exit")
+        print("7. View Loyalty Rewards")
+        print("8. Update Personal Information")  # Added option for updating personal information
+        print("9. Exit")
 
-        option = input("Please select an option (1/2/3/4/5/6/7/8): ")
+        option = input("Please select an option (1/2/3/4/5/6/7/8/9): ")
 
         if option == "1":
             create_customer_account()
@@ -384,18 +389,22 @@ def customer_menu():
         elif option == "3":
             browse_products()
         elif option == "4":
-            update_personal_information()
+            # Placeholder for view cart function
+            print("View Cart functionality is not yet implemented.")
         elif option == "5":
             order_tracking()
         elif option == "6":
             submit_review()
         elif option == "7":
-            view_loyalty_rewards()  # Calls the function to view loyalty rewards
+            view_loyalty_rewards()
         elif option == "8":
-            print("Thank you for using the system. Goodbye!")
+            update_personal_information()  # Calls the function to update personal information
+        elif option == "9":
+            print("Thank you for visiting our system. Goodbye!")
             break
         else:
             print("Invalid option, please try again.")
+
 
 # Function to view loyalty rewards
 def view_loyalty_rewards():
