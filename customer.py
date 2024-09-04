@@ -1,23 +1,27 @@
 import json
 import re
 
+# Define the function that loads data from the file
 def load_data_from_customer():
     try:
-        with open('customer.txt', 'r') as file:
-            content = file.read().strip()
-            if content:
-                try:
-                    return json.loads(content)
-                except json.JSONDecodeError:
-                    return []
-            else:
-                return []
+        file = open('customer.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return []
-
+        return {}  # return empty dictionary if the file does not exist
 def save_info(info):
-    with open('customer.txt', 'w') as file:
-        json.dump(info, file, indent=4)
+
+    file = open('manager.txt', 'w')  # open the file to write
+    json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file.close()  # close the file after writing
 
 def create_customer_account():
     info = load_data_from_customer()
