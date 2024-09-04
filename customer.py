@@ -63,6 +63,8 @@ def create_customer_account():
         else:
             print("Invalid Email. Please try again.")
 
+    address = input("Enter your address: ")
+
     personal_info = {
         "username": username,
         "password": password,
@@ -70,6 +72,7 @@ def create_customer_account():
         "gender": gender,
         "contact_no": contact_no,
         "email": email
+        "address": address
     }
 
     existing_users = load_data_from_customer()
