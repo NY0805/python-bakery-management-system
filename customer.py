@@ -377,10 +377,11 @@ def customer_menu():
         print("5. Order Tracking")
         print("6. Submit Review")
         print("7. View Loyalty Rewards")
-        print("8. Update Personal Information")  # Added option for updating personal information
-        print("9. Exit")
+        print("8. Update Personal Information")
+        print("9. Manage Accounts")  # Added 'Manage Accounts' option
+        print("0. Exit")
 
-        option = input("Please select an option (1/2/3/4/5/6/7/8/9): ")
+        option = input("Please select an option (0-9): ")
 
         if option == "1":
             create_customer_account()
@@ -389,8 +390,7 @@ def customer_menu():
         elif option == "3":
             browse_products()
         elif option == "4":
-            # Placeholder for view cart function
-            print("View Cart functionality is not yet implemented.")
+            print("View Cart functionality is not yet implemented.")  # Placeholder for view cart function
         elif option == "5":
             order_tracking()
         elif option == "6":
@@ -398,13 +398,14 @@ def customer_menu():
         elif option == "7":
             view_loyalty_rewards()
         elif option == "8":
-            update_personal_information()  # Calls the function to update personal information
+            update_personal_information()
         elif option == "9":
-            print("Thank you for visiting our system. Goodbye!")
+            manage_accounts()  # Call the function to manage accounts
+        elif option == "0":
+            print("Thank you for visiting our system. We look forward to your next visit. Goodbye!")
             break
         else:
             print("Invalid option, please try again.")
-
 
 # Function to view loyalty rewards
 def view_loyalty_rewards():
