@@ -95,6 +95,81 @@ def login():
 
     print("Invalid username or password.")
 
+
+# Function to update customer information
+def update_personal_information():
+    customers = load_data_from_customer()
+    if not customers:
+        print("No customer data available.")
+        return
+
+    username = input("Enter your username: ")
+    found = False
+
+    for customer in customers:
+        if customer["username"] == username:
+            found = True
+            print("What do you want to update?")
+            print("1. Password")
+            print("2. Age")
+            print("3. Gender")
+            print("4. Contact Number")
+            print("5. Email")
+            choice = input("Choose the field number to update: ")
+
+            if choice == "1":
+                while True:
+                    new_password = input("Enter new password: ")
+                    if len(new_password) < 6:
+                        print("Your password must be at least six characters long.")
+                    elif new_password.islower():
+                        print("Your password must contain at least one uppercase letter.")
+                    elif new_password.isupper():
+                        print("Your password must contain at least one lowercase letter.")
+                    elif not any(char.isdigit() for char in new_password):
+                        print("Your password must contain at least one number.")
+                    else:
+                        customer["password"] = new_password
+                        break
+            elif choice == "2":
+                new_age = input("Enter new age: ")
+                if new_age.isdigit():
+                    customer["age"] = new_age
+                else:
+                    print("Invalid age. Please enter numbers only.")
+            elif choice == "3":
+                new_gender = input("Select your gender (M = male, F = female): ")
+                if new_gender in ["M", "F"]:
+                    customer["gender"] = new_gender
+                else:
+                    print("Invalid input, please select M or F.")
+            elif choice == "4":
+                while True:
+                    new_contact_no = input("Enter new contact number: ")
+                    if new_contact_no.isdigit():
+                        customer["contact_no"] = new_contact_no
+                        break
+                    else:
+                        print("Invalid format. Please enter digits only.")
+            elif choice == "5":
+                regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$'
+                while True:
+                    new_email = input("Enter new email: ")
+                    if re.fullmatch(regex, new_email):
+                        customer["email"] = new_email
+                        break
+                    else:
+                        print("Invalid Email. Please try again.")
+            else:
+                print("Invalid choice.")
+
+            save_info(customers)
+            print("Your information has been updated.")
+            break
+
+    if not found:
+        print("Customer not found.")
+
 def browse_products():
     try:
         # Load the products from the JSON file
@@ -306,8 +381,7 @@ def customer_menu():
         elif option == "3":
             browse_products()
         elif option == "4":
-            # Placeholder for view cart function
-            print("View Cart functionality is not yet implemented.")
+            update_personal_information()
         elif option == "5":
             order_tracking()
         elif option == "6":
