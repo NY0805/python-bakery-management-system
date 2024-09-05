@@ -6,13 +6,5 @@
         "gender": "female",
         "contact_no": "345-5674832",
         "email": "gg@ff.ff"
-    },
-    "alice": {
-        "baker_username": "baker2",
-        "baker_password": "bbb",
-        "age": 34,
-        "gender": "female",
-        "contact_no": "567-4567382",
-        "email": "ff@ss.ss"
     }
 }

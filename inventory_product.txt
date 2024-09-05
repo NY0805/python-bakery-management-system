@@ -1,0 +1,14 @@
+{
+    "33": {
+        "product_name": "muffins",
+        "product_code": "33",
+        "batch_number": "33",
+        "date_of_production": "33",
+        "shelf_life": "33",
+        "expiry_date": "33",
+        "recipe": "33",
+        "quantity_produced": "33",
+        "baker_name": "33",
+        "allergens": "33"
+    }
+}

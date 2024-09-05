@@ -1,6 +1,6 @@
 {
-    "ingredient_name": "1",
-    "type_number": "1",
-    "ingredient_unit_measurement": "1",
-    "batch_number": "1"
+    "ingredient_name": "hh",
+    "type_number": "hh",
+    "ingredient_unit_measurement": "hh",
+    "batch_number": "hh"
 }
