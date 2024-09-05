@@ -26,34 +26,40 @@ print(bakery)
 
 print('***************************************************')
 print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
-print('***************************************************')
-
-
+print('***************************************************\n')
 
 while True:
-    print('\nRole: ')
-    print('1. Manager')
-    print('2. Customer')
-    print('3. Cashier')
-    print('4. Baker')
-    print('5. Exit the program')
+    print('Role: ')
+    print('1. Manager👨‍💼👩‍💼')
+    print('2. Customer👦👧')
+    print('3. Cashier🖥️💰')
+    print('4. Baker🧑‍🍳🍞')
+    print('5. Exit the program⛔🔙')
     try:
-        role = int(input('What is your role (1, 2, 3, 4): '))
+        role = int(input('\nWho are you? (1, 2, 3, 4):\n>>> '))
 
         if role == 1:
-            print('\nMANAGER is selected.\n---------------------------------------------------')
+            print('\n---------------------------------------------------\n'
+                  '\t\t\t\tMANAGER is selected.\n'
+                  '---------------------------------------------------')
             manager.manager()
 
         elif role == 2:
-            print('\nCUSTOMER is selected.\n---------------------------------------------------')
+            print('\n---------------------------------------------------\n'
+                  '\t\t\t\tCUSTOMER is selected.\n'
+                  '---------------------------------------------------')
             break
 
         elif role == 3:
-            print('\nCASHIER is selected.\n---------------------------------------------------')
+            print('\n---------------------------------------------------\n'
+                  '\t\t\t\tCASHIER is selected.\n'
+                  '---------------------------------------------------')
             break
 
         elif role == 4:
-            print('\nBAKER is selected.\n---------------------------------------------------')
+            print('\n---------------------------------------------------\n'
+                  '\t\t\t\tBAKER is selected.\n'
+                  '---------------------------------------------------')
             break
 
         elif role == 5:
@@ -61,9 +67,13 @@ while True:
             exit()
 
         else:
-            print('Invalid input.\n')
+            print('\n+------------------+')
+            print('|⚠️ Invalid input. |')
+            print('+------------------+\n')
 
     except ValueError:
-        print('invalid input.\n')
+        print('\n+------------------+')
+        print('|⚠️ Invalid input. |')
+        print('+------------------+\n')
 
 

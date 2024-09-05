@@ -30,7 +30,7 @@ def save_info(baker):
 def baker_accounts():
     baker = load_data_from_baker()
 
-    baker_name = input('\nName: ')
+    baker_name = input('Name: ')
     while baker_name in baker:
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
@@ -39,27 +39,34 @@ def baker_accounts():
 
     baker_username = input('Username: ')
     while baker_username in (baker[baker_name]['baker_username'] for baker_name in baker):
-        print('Username has been used. Please enter another username.')
+        print('\n+----------------------------------------------------------+')
+        print('|⚠️ Username has been used. Please enter another username. |')
+        print('+----------------------------------------------------------+')
         baker_username = input('\nUsername: ')
 
     while True:
         baker_password = input('Password: ')
-        if baker_password == 'b@ker2024!':
+        if baker_password == 'b@k3rm4st3r!':
             while True:
                 try:
                     age = int(input('Age: '))
                     if age < 18 or age > 60:
-                        print('\nThe required age is between 18 and 60.')
-                        print('Please enter a valid age.')
+                        print('\n+--------------------------------------------------------------------+')
+                        print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
+                        print('+--------------------------------------------------------------------+\n')
                     else:
                         break  # Exit the loop if age is valid
                 except ValueError:
-                    print('\nPlease enter a valid age.')
+                    print('\n+-----------------------------+')
+                    print('|⚠️ Please enter a valid age. |')
+                    print('+-----------------------------+\n')
 
             while True:
                 gender = input('Gender(m=male, f=female): ')
                 if gender not in ['f', 'm']:
-                    print('\nInvalid input. Please enter again.')
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('+--------------------------------------+\n')
                 elif gender == 'f':
                     gender = 'female'
                     break
@@ -71,7 +78,9 @@ def baker_accounts():
                 contact_no = input('Contact number(xxx-xxx xxxx): ')
                 pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
                 if not re.fullmatch(pattern, contact_no):
-                    print('\nInvalid contact number. Please enter again.')
+                    print('\n+-----------------------------------------------+')
+                    print('|⚠️ Invalid contact number. Please enter again. |')
+                    print('+-----------------------------------------------+\n')
                 else:
                     break  # Exit the loop if age is valid
 
@@ -79,7 +88,9 @@ def baker_accounts():
                 email = input('Email: ')
                 pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
                 if not re.fullmatch(pattern, email):
-                    print('\nInvalid email. Please enter again.')
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid email. Please enter again. |')
+                    print('+--------------------------------------+\n')
                 else:
                     break
 
@@ -95,9 +106,6 @@ def baker_accounts():
             save_info(baker)
 
             print(f'\n{baker_username} is added.\n')  # let user know their information are saved
-            print('--------------------------------------------------')
-            print('Thank you for completing the personal information.')
-            print('--------------------------------------------------')
             return False
 
         else:
@@ -119,6 +127,9 @@ def system_administration_baker():
 
         if manage_baker == '1':
             while True:
+                print('\n-----------------------------------------------')
+                print('\t\t\tNew Baker Entry Form')
+                print('-----------------------------------------------')
                 baker_accounts()
                 baker = load_data_from_baker()  # if don't put, the data will not save into dictionary
 
@@ -129,15 +140,19 @@ def system_administration_baker():
                     elif add_more == 'n':
                         break
                     else:
-                        print('\ninvalid input. Enter again.')
+                        print('\n+--------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter again. |')
+                        print('+--------------------------------------+\n')
                 if add_more == 'n':
-                    print('Stop adding. Exiting to the service page......')
+                    print('\nStop adding. Exiting to the service page......')
                     break
 
         elif manage_baker == '2':
             while True:
                 if len(baker) <= 1:
-                    print('To ensure the daily normal operation, you cannot remove the last baker in the list. ')
+                    print('\n+---------------------------------------------------------------------------------------+')
+                    print('|💡 To ensure the daily normal operation, you cannot remove the last baker in the list. |')
+                    print('+---------------------------------------------------------------------------------------+\n')
                     break
 
                 else:
@@ -150,16 +165,16 @@ def system_administration_baker():
 
                     try:
                         index_of_baker_to_remove = int(
-                            input(f'Which baker do you want to remove? (or enter {len(baker) + 1} to cancel)\n>>> '))
+                            input(f'\nWhich baker do you want to remove? (or enter {len(baker) + 1} to cancel)\n>>> '))
                         if index_of_baker_to_remove == len(baker) + 1:
-                            print('Cancelling. Exiting to the service page......')
+                            print('\nCancelling. Exiting to the service page......')
                             break
 
                         elif 1 <= index_of_baker_to_remove <= len(baker):
                             baker_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
                             del baker[baker_to_remove]
                             save_info(baker)
-                            print(f'{baker_to_remove} removed.\n')
+                            print(f'\n{baker_to_remove} removed.\n')
 
                             while True:
                                 remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
@@ -170,17 +185,23 @@ def system_administration_baker():
                                     break
 
                                 else:
-                                    print('\ninvalid input. Enter again.')
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+\n')
 
                             if remove_more == 'n':
-                                print('Stop removing. Exiting to the service page......')
+                                print('\nStop removing. Exiting to the service page......')
                                 break
 
                         else:
-                            print('Invalid input.\n')
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+\n')
 
                     except ValueError:
-                        print('Invalid input. Please enter a number.\n')
+                        print('\n+-----------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter a number. |')
+                        print('+-----------------------------------------+\n')
 
         elif manage_baker == '3':
             while True:
@@ -195,7 +216,7 @@ def system_administration_baker():
                     index_of_baker_to_edit = int(
                         input(f'\nWhich baker do you want to edit? (or enter {len(baker) + 1} to cancel)\n>>> '))
                     if index_of_baker_to_edit == len(baker) + 1:
-                        print('Cancelling. Exiting to the service page......')
+                        print('\nCancelling. Exiting to the service page......')
                         break
 
                     elif 1 <= index_of_baker_to_edit <= len(baker):
@@ -217,23 +238,30 @@ def system_administration_baker():
 
                                         if attribute_of_baker_data == 'baker_username':
                                             if new_value in (baker[baker_name]['baker_username'] for baker_name in baker):
-                                                print('Username has been used. Please enter another username.')
+                                                print('\n+----------------------------------------------------------+')
+                                                print('|⚠️ Username has been used. Please enter another username. |')
+                                                print('+----------------------------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'baker_password':
-                                            if new_value != 'b@ker2024!':
-                                                print('Password incorrect. Please try again.')
+                                            if new_value != 'b@k3rm4st3r!':
+                                                print('\n+-----------------------------------------+')
+                                                print('|⚠️ Password incorrect. Please try again. |')
+                                                print('+-----------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'age':
                                             if int(new_value) < 18 or int(new_value) > 60:
-                                                print('\nThe required age is between 18 and 60.')
-                                                print('Please enter a valid age.')
+                                                print('\n+--------------------------------------------------------------------+')
+                                                print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
+                                                print('+--------------------------------------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'gender':
                                             if new_value not in ['f', 'm']:
-                                                print('\nInvalid input. Please enter again.')
+                                                print('\n+--------------------------------------+')
+                                                print('|⚠️ Invalid input. Please enter again. |')
+                                                print('+--------------------------------------+')
                                                 continue
                                             elif new_value == 'f':
                                                 new_value = 'female'
@@ -243,12 +271,16 @@ def system_administration_baker():
 
                                         elif attribute_of_baker_data == 'contact_no':
                                             if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):
-                                                print('\nInvalid contact number. Please enter again.')
+                                                print('\n+-----------------------------------------------+')
+                                                print('|⚠️ Invalid contact number. Please enter again. |')
+                                                print('+-----------------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'email':  # define the format of email
                                             if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):
-                                                print('\nInvalid email. Please enter again.')
+                                                print('\n+--------------------------------------+')
+                                                print('|⚠️ Invalid email. Please enter again. |')
+                                                print('+--------------------------------------+')
                                                 continue
 
                                         baker[selected_baker][attribute_of_baker_data] = new_value
@@ -257,10 +289,12 @@ def system_administration_baker():
                                         break
 
                                     except ValueError:
-                                        print('\nPlease enter a valid age.')
+                                        print('\n+-----------------------------+')
+                                        print('|⚠️ Please enter a valid age. |')
+                                        print('+-----------------------------+')
 
                             elif attribute_of_baker_data == 'cancel':
-                                print('Cancelling. Exiting to the baker list......')
+                                print('\nCancelling. Exiting to the baker list......')
                                 break
 
                             else:
@@ -270,12 +304,17 @@ def system_administration_baker():
                         print('\nBaker not found.')
 
                 except ValueError:
-                    print('\nInvalid input. Please enter a number.')
+                    print('\n+-----------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter a number. |')
+                    print('+-----------------------------------------+')
 
         elif manage_baker == '4':
-            print('Exiting to role selection......')
+            print('\nExiting to role selection......')
             system_administration.system_administration()
             break
 
         else:
-            print('invalid input.')
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
+

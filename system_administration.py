@@ -11,10 +11,12 @@ def system_administration():
         print('-----------------------------------------------')
         print('1. Baker🧑‍🍳🍞\n2. Cashier🖥️💰\n3. Customer👦👧\n4. Exit⛔🔙')
 
-        role = input('\nWhich role do you want to manage(1, 2, 3, 4): ')
+        role = input('\nWhich role do you want to manage(1, 2, 3, 4):\n>>> ')
 
         if (role != '1') and (role != '2') and (role != '3') and (role != '4'):
-            print('invalid input.')
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
             continue
 
         elif role == '1':
@@ -27,7 +29,7 @@ def system_administration():
             system_administration_customer.system_administration_customer()
 
         elif role == '4':
-            print('Exiting to manager privilege......')
+            print('\nExiting to manager privilege......')
             break
         break
 

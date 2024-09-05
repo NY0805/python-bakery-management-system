@@ -1,10 +1,18 @@
 {
-    "bob": {
+    "yoyo": {
         "baker_username": "baker1",
-        "baker_password": "bbb",
-        "age": "56",
+        "baker_password": "b@k3rm4st3r!",
+        "age": "34",
         "gender": "female",
-        "contact_no": "345-5674832",
-        "email": "gg@ff.ff"
+        "contact_no": "345-5647832",
+        "email": "ee@ee.ee"
+    },
+    "wen": {
+        "baker_username": "baker2",
+        "baker_password": "b@k3rm4st3r!",
+        "age": 46,
+        "gender": "male",
+        "contact_no": "456-6758432",
+        "email": "ff@ff.ff"
     }
 }

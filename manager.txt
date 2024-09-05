@@ -1,18 +1,10 @@
 {
-    "alex": {
+    "tsuki": {
         "manager_username": "manager1",
-        "manager_password": "12345678",
+        "manager_password": "d0ugh8o5s",
         "age": 23,
-        "gender": "female",
-        "contact_no": "123-3475632",
-        "email": "ee@Ee.ee"
-    },
-    "ss": {
-        "manager_username": "manager2",
-        "manager_password": "12345678",
-        "age": 21,
         "gender": "male",
-        "contact_no": "456-6758943",
-        "email": "ff@ff.ff"
+        "contact_no": "123-3456372",
+        "email": "ee@ee.ee"
     }
 }

@@ -1,5 +1,4 @@
-import \
-    re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
+import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 import system_administration
 
@@ -12,8 +11,7 @@ def load_data_from_manager():
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -29,94 +27,93 @@ def save_info(manager_info):
     file.close()  # close the file after writing
 
 
-'''
-print('\n+--------------------------------------------------+')
-        print('|⚠️ Warning: One person can only have one account! |')
-        print('+--------------------------------------------------+')
-'''
-
-
 def manager_accounts():
     manager_info = load_data_from_manager()  # initialize 'info' as the name of dictionary that store data loaded from file
 
-    print('+--------------------------------------------------------------------+')
-    print('| ⚠️ This is your FIRST TIME login, kindly complete your personal info. |')
-    print('+--------------------------------------------------------------------+')
+    print('\n+-----------------------------------------------------------------+')
+    print('| ⚠️ This is your FIRST TIME login, kindly complete your profile. |')
+    print('+-----------------------------------------------------------------+\n')
 
-    manager_username = input('Please enter your username: ')
+    manager_name = input('Name: ')
+    while manager_name in manager_info:
+        print('\n+--------------------------------------------------+')
+        print('|⚠️ Warning: One person can only have one account! |')
+        print('+--------------------------------------------------+\n')
+        manager_name = input('Name: ')
+
+    manager_username = input('Username: ')
     while manager_username in (manager_info[manager_name]['manager_username'] for manager_name in manager_info):
-        print('Username has been used. Please enter another username.')
-        manager_username = input('\nUsername: ')
+        print('\n+----------------------------------------------------------+')
+        print('|⚠️ Username has been used. Please enter another username. |')
+        print('+----------------------------------------------------------+\n')
+        manager_username = input('Username: ')
+
+    manager_password = 'd0ugh8o5s'
+    print('Password: ', manager_password)
+    print('\n+-------------------------------------------------------------------------------+')
+    print('|💡 This is the unique password for manager. Keep confidential and REMEMBER it! |')
+    print('+-------------------------------------------------------------------------------+\n')
+
+    ''' while len(manager_password) < 8 or len(manager_password) > 12:
+        print('\n+---------------------------------------------------------------------------+')
+        print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
+        print('+---------------------------------------------------------------------------+\n')
+        manager_password = input('Password: ') '''
 
     while True:
-        manager_password = input('Please enter your password: ')
-        if 7 < len(manager_password) < 13:
-            print('+--------------------------------------------------------------------+')
-            print('| ⚠️ This is your FIRST TIME login, kindly complete your personal info. |')
-            print('+--------------------------------------------------------------------+')
+        try:
+            age = int(input('Age: '))
+            if age < 18 or age > 60:
+                print('\n+------------------------------------------+')
+                print('|⚠️ The required age is between 18 and 60. |')
+                print('+------------------------------------------+\n')
+            else:
+                break
+        except ValueError:
+            print('\n+-----------------------------+')
+            print('|⚠️ Please enter a valid age. |')
+            print('+-----------------------------+\n')
 
-            while True:
-                try:
-                    age = int(input('\nAge: '))
-                    if age < 18 or age > 60:
-                        print('\nThe required age is between 18 and 60.')
-                        print('Please enter a valid age.')
-                    else:
-                        break  # Exit the loop if age is valid
-                except ValueError:
-                    print('\nPlease enter a valid age.')
-
-            while True:
-                gender = input('Gender(m=male, f=female): ')
-                if gender not in ['f', 'm']:
-                    print('\nInvalid input. Please enter again.')
-                elif gender == 'f':
-                    gender = 'female'
-                    break
-                else:
-                    gender = 'male'
-                    break  # Exit the loop if age is valid
-
-            while True:
-                contact_no = input('Contact number(xxx-xxx xxxx): ')
-                pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
-                if not re.fullmatch(pattern, contact_no):
-                    print('\nInvalid contact number. Please enter again.')
-                else:
-                    break  # Exit the loop if age is valid
-
-            while True:
-                email = input('Email: ')
-                pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
-                if not re.fullmatch(pattern, email):
-                    print('\nInvalid email. Please enter again.')
-                else:
-                    break  # Exit the loop if age is valid
-
-            # update the dictionary with user input
-            manager_info[manager_name] = {
-                'manager_username': manager_username,
-                'manager_password': manager_password,
-                'age': age,
-                'gender': gender,
-                'contact_no': contact_no,
-                'email': email
-            }
-
-            save_info(manager_info)
-            print('\nInformation saved.\n')  # let user know their information are saved
-            print('--------------------------------------------------')
-            print('Thank you for completing the personal information.')
-            print('--------------------------------------------------')
-            break
-
+    while True:
+        gender = input('Gender(m=male, f=female): ')
+        if gender not in ['f', 'm']:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+\n')
         else:
-            print('\n+---------------------------------------------------------------------------+')
-            print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
-            print('+---------------------------------------------------------------------------+\n')
+            if gender == 'f':
+                gender = 'female'
+                break
+            else:
+                gender = 'male'
+                break
 
+    contact_no = input('Contact number(xxx-xxxxxxx): ')
+    while not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):
+        print('\n+-----------------------------------------------+')
+        print('|⚠️ Invalid contact number. Please enter again. |')
+        print('+-----------------------------------------------+\n')
+        contact_no = input('Contact number(xxx-xxxxxxx): ')
 
+    email = input('Email: ')
+    while not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+        print('\n+--------------------------------------+')
+        print('|⚠️ Invalid email. Please enter again. |')
+        print('+--------------------------------------+\n')
+        email = input('Email: ')
 
+    # update the dictionary with user input
+    manager_info[manager_name] = {
+        'manager_username': manager_username,
+        'manager_password': manager_password,
+        'age': age,
+        'gender': gender,
+        'contact_no': contact_no,
+        'email': email
+    }
+
+    save_info(manager_info)
+    print('\nInformation saved.')  # let user know their information are saved
 
 
 # create a function for manager
@@ -126,33 +123,36 @@ def manager():
     manager_name = input('\nName: ')
     if manager_name in manager_info:
 
-        manager_username = input('Please enter your username: ')
+        manager_username = input('Username: ')
         while manager_username != (manager_info[manager_name]['manager_username']):
-            print('\nUsername doesn\'t match. Please enter again.')
-            manager_username = input('\nUsername: ')
+            print('\n+-----------------------------------------------+')
+            print('|⚠️ Username doesn\'t match. Please enter again. |')
+            print('+-----------------------------------------------+\n')
+            manager_username = input('Username: ')
 
-        manager_password = input('Please enter your password: ')
-        while manager_password != (manager_info[manager_name]['manager_password']):
-            print('\nIncorrect password. Please enter again.')
-            manager_password = input('\nPassword: ')
+        manager_password = input('Password: ')
+        while manager_password != 'd0ugh8o5s':
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Incorrect password. Please enter again. |')
+            print('+-------------------------------------------+\n')
+            manager_password = input('Password: ')
 
     else:
         manager_accounts()
 
-
     print('\nLogin successfully!')
-    print('Welcome, manager ', manager_name, '!')
+    print('Welcome, manager', manager_name, '!')
     while True:
-        print(
-            '\n-----------------------------------------------\n'
-            '\t\t\t', '', '', 'MANAGER PRIVILEGE\n'
-              '-----------------------------------------------\n'
-              'a. System administration\n'
+        print('\n-----------------------------------------------')
+        print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
+        print('-----------------------------------------------\n')
+        print('a. System administration\n'
               'b. Order management\n'
               'c. Financial management\n'
               'd. Inventory control\n'
               'e. Customer feedback\n'
               'f. Exit')
+
         choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
         if choice == 'a':
             system_administration.system_administration()
@@ -174,8 +174,8 @@ def manager():
             return False
 
         else:
-            print('Invalid input. Please enter again.')
-
-
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
 
 
