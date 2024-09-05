@@ -1,26 +1,18 @@
 {
-    "baker1": {
-        "baker_username": "baker7",
+    "bob": {
+        "baker_username": "baker1",
         "baker_password": "bbb",
-        "age": "32",
-        "gender": "male",
+        "age": "56",
+        "gender": "female",
         "contact_no": "345-5674832",
-        "email": "ee@ww.ww"
+        "email": "gg@ff.ff"
     },
-    "baker2": {
+    "alice": {
         "baker_username": "baker2",
         "baker_password": "bbb",
-        "age": "60",
-        "gender": "f",
-        "contact_no": "456-9087342",
-        "email": "rr@ww.ww"
-    },
-    "baker3": {
-        "baker_username": "baker3",
-        "baker_password": "bbb",
-        "age": 45,
+        "age": 34,
         "gender": "female",
-        "contact_no": "345-3672821",
+        "contact_no": "567-4567382",
         "email": "ff@ss.ss"
     }
 }

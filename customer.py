@@ -422,4 +422,4 @@ def view_loyalty_rewards():
     # print(f"Rewards for {username}: {rewards}")
 
 # Run the customer function to start the program
-customer_menu()
+

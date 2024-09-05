@@ -23,79 +23,88 @@ def load_data_from_cashier():
 # Define the function that saves information to the file
 def save_info(cashier):
     file = open('cashier.txt', 'w')  # open the file to write
-    json.dump(cashier, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    json.dump(cashier, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()
 
 
 def cashier_accounts():
     cashier = load_data_from_cashier()
 
-    while True:
+    cashier_name = input('\nName: ')
+    while cashier_name in cashier:
+        print('\n+--------------------------------------------------+')
+        print('|⚠️ Warning: One person can only have one account! |')
+        print('+--------------------------------------------------+')
+        cashier_name = input('\nName: ')
+
+    cashier_username = input('Username: ')
+    while cashier_username in (cashier[cashier_name]['cashier_username'] for cashier_name in cashier):
+        print('Username has been used. Please enter another username.')
         cashier_username = input('\nUsername: ')
-        if cashier_username in cashier:
-            print('Account exists. Please enter another username.')
+
+    while True:
+        cashier_password = input('Password: ')
+        if cashier_password == 'ccc':
+            while True:
+                try:
+                    age = int(input('Age: '))
+                    if age < 18 or age > 60:
+                        print('\nThe required age is between 18 and 60.')
+                        print('Please enter a valid age.')
+                    else:
+                        break  # Exit the loop if age is valid
+                except ValueError:
+                    print('\nPlease enter a valid age.')
+
+            while True:
+                gender = input('Gender(m=male, f=female): ')
+                if gender not in ['f', 'm']:
+                    print('\nInvalid input. Please enter again.')
+                elif gender == 'f':
+                    gender = 'female'
+                    break
+                else:
+                    gender = 'male'
+                    break  # Exit the loop if age is valid
+
+            while True:
+                contact_no = input('Contact number(xxx-xxx xxxx): ')
+                pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
+                if not re.fullmatch(pattern, contact_no):
+                    print('\nInvalid contact number. Please enter again.')
+                else:
+                    break  # Exit the loop if age is valid
+
+            while True:
+                email = input('Email: ')
+                pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
+                if not re.fullmatch(pattern, email):
+                    print('\nInvalid email. Please enter again.')
+                else:
+                    break
+
+            # update the dictionary with user input
+            cashier[cashier_name] = {
+                'cashier_username': cashier_username,
+                'cashier_password': cashier_password,
+                'age': age,
+                'gender': gender,
+                'contact_no': contact_no,
+                'email': email
+            }
+            save_info(cashier)
+
+            print(f'\n{cashier_username} is added.\n')  # let user know their information are saved
+            print('--------------------------------------------------')
+            print('Thank you for completing the personal information.')
+            print('--------------------------------------------------')
+            return False
 
         else:
-            while True:
-                cashier_password = input('Password: ')
-                if cashier_password == 'ccc':
-                    while True:
-                        try:
-                            age = int(input('Age: '))
-                            if age < 18 or age > 60:
-                                print('\nThe required age is between 18 and 60.')
-                                print('Please enter a valid age.')
-                            else:
-                                break  # Exit the loop if age is valid
-                        except ValueError:
-                            print('\nPlease enter a valid age.')
-
-                    while True:
-                        gender = input('Gender(m=male, f=female): ')
-                        if gender not in ['f', 'm']:
-                            print('\nInvalid input. Please enter again.')
-                        elif gender == 'f':
-                            gender = 'female'
-                            break
-                        else:
-                            gender = 'male'
-                            break  # Exit the loop if age is valid
-
-                    while True:
-                        contact_no = input('Contact number(xxx-xxx xxxx): ')
-                        pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
-                        if not re.fullmatch(pattern, contact_no):
-                            print('\nInvalid contact number. Please enter again.')
-                        else:
-                            break  # Exit the loop if age is valid
-
-                    while True:
-                        email = input('Email: ')
-                        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
-                        if not re.fullmatch(pattern, email):
-                            print('\nInvalid email. Please enter again.')
-                        else:
-                            break
-
-                # update the dictionary with user input
-                    cashier[cashier_username] = {
-                        'cashier_username': cashier_username,
-                        'cashier_password': cashier_password,
-                        'age': age,
-                        'gender': gender,
-                        'contact_no': contact_no,
-                        'email': email
-                    }
-                    save_info(cashier)
-
-                    print('\n', cashier_username, 'is added.\n')  # let user know their information are saved
-                    print('--------------------------------------------------')
-                    print('Thank you for completing the personal information.')
-                    print('--------------------------------------------------')
-                    return
-
-                else:
-                    print('\nIncorrect password. Please enter again.')
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Incorrect password. Please enter again. |')
+            print('+-------------------------------------------+\n')
 
 
 def system_administration_cashier():
@@ -105,9 +114,9 @@ def system_administration_cashier():
         print('\n-----------------------------------------------')
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
-        print('1. add cashier(s)\n2. remove cashier(s)\n3. exit')
+        print('1. add cashier(s)\n2. remove cashier(s)\n3. edit cashier(s)\n4. exit')
 
-        manage_cashier = input('Please choose a service:\n>>> ')
+        manage_cashier = input('\nPlease choose a service:\n>>> ')
 
         if manage_cashier == '1':
             while True:
@@ -128,7 +137,7 @@ def system_administration_cashier():
 
         elif manage_cashier == '2':
             while True:
-                if len(cashier) == 1:
+                if len(cashier) <= 1:
                     print('To ensure the daily normal operation, you cannot remove the last cashier in the list. ')
                     break
 
@@ -143,11 +152,11 @@ def system_administration_cashier():
                         try:
                             index_of_cashier_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
                             if 1 <= index_of_cashier_to_remove <= len(cashier):
-                                key_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
-                                del cashier[key_to_remove]
+                                cashier_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
+                                del cashier[cashier_to_remove]
                                 save_info(cashier)
 
-                                print(f'{key_to_remove} removed.\n')
+                                print(f'{cashier_to_remove} removed.\n')
                                 while True:
                                     remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
                                     if remove_more == 'y':
@@ -175,6 +184,48 @@ def system_administration_cashier():
                         break
 
         elif manage_cashier == '3':
+            while True:
+                print('\n-----------------------------------------------')
+                print('\t\t\t\t', '', 'Cashier list')
+                print('-----------------------------------------------')
+                for cashier_list_index, cashier_list_key in enumerate(cashier, start=1):
+                    print(f'{cashier_list_index}. {cashier_list_key}')
+                print(f'{len(cashier) + 1}. cancel')
+
+                try:
+                    index_of_cashier_to_edit = int(input('\nWhich cashier do you want to edit? (or enter \"cancel\")\n>>> '))
+                    if index_of_cashier_to_edit == len(cashier) + 1:
+                        break
+                    elif 1 <= index_of_cashier_to_edit <= len(cashier):
+                        selected_cashier = list(cashier.keys())[index_of_cashier_to_edit - 1]
+                        while True:
+                            print('\n-----------------------------------------------')
+                            print(f'\t\t\t\t {selected_cashier}\'s data')
+                            print('-----------------------------------------------')
+
+                            for cashier_data_key, cashier_data_value in (cashier[selected_cashier].items()):
+                                print(f'{cashier_data_key}: {cashier_data_value}')
+
+                            attribute_of_cashier_data = input('\nWhich information do you want to modify? (or enter \"cancel\")\n>>> ')
+                            if attribute_of_cashier_data in cashier[selected_cashier]:
+                                new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
+                                cashier[selected_cashier][attribute_of_cashier_data] = new_value
+                                print(f'\n{attribute_of_cashier_data} of {selected_cashier} is updated.')
+                                save_info(cashier)
+
+                            elif attribute_of_cashier_data == 'cancel':
+                                break
+
+                            else:
+                                print('\nData not found.')
+
+                    else:
+                        print('\nCashier not found.')
+
+                except ValueError:
+                    print('\nInvalid input. Please enter a number.')
+
+        elif manage_cashier == '4':
             print('Exiting to role selection......')
             system_administration.system_administration()
             break
