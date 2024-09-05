@@ -1,40 +1,18 @@
 {
-    "aaa": {
+    "alex": {
+        "manager_username": "manager1",
         "manager_password": "12345678",
         "age": 23,
         "gender": "female",
-        "contact_no": "345-7869504",
-        "email": "ee@cc.cc"
+        "contact_no": "123-3475632",
+        "email": "ee@Ee.ee"
     },
-    "bbb": {
+    "ss": {
+        "manager_username": "manager2",
         "manager_password": "12345678",
-        "age": 67,
+        "age": 21,
         "gender": "male",
-        "contact_no": "234-5674829",
-        "email": "ee@dc.vv"
-    },
-    "lum": {
-        "manager_username": "lum",
-        "manager_password": "098429jf",
-        "age": 18,
-        "gender": "female",
-        "contact_no": "014-3453873",
-        "email": "xun@hsk.com"
-    },
-    "han": {
-        "manager_username": "han",
-        "manager_password": "sjdbu934",
-        "age": 18,
-        "gender": "female",
-        "contact_no": "018-5678345",
-        "email": "dud@ed.com"
-    },
-    "ccc": {
-        "manager_username": "ccc",
-        "manager_password": "12345678",
-        "age": 56,
-        "gender": "female",
-        "contact_no": "345-5647382",
-        "email": "ee@ee.ee"
+        "contact_no": "456-6758943",
+        "email": "ff@ff.ff"
     }
 }

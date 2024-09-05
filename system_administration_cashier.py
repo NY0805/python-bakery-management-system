@@ -45,7 +45,7 @@ def cashier_accounts():
 
     while True:
         cashier_password = input('Password: ')
-        if cashier_password == 'ccc':
+        if cashier_password == 'securec@sh123':
             while True:
                 try:
                     age = int(input('Age: '))
@@ -147,41 +147,41 @@ def system_administration_cashier():
                     print('-----------------------------------------------')
                     for index, key in enumerate(cashier, start=1):
                         print(f'{index}. {key}')
+                    print(f'{len(cashier) + 1}. cancel')
 
-                    while True:
-                        try:
-                            index_of_cashier_to_remove = int(input('Which cashier do you want to remove? \n>>> '))
-                            if 1 <= index_of_cashier_to_remove <= len(cashier):
-                                cashier_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
-                                del cashier[cashier_to_remove]
-                                save_info(cashier)
+                    try:
+                        index_of_cashier_to_remove = int(
+                            input(f'Which baker do you want to remove? (or enter {len(cashier) + 1} to cancel)\n>>> '))
+                        if index_of_cashier_to_remove == len(cashier) + 1:
+                            print('Cancelling. Exiting to the service page......')
+                            break
 
-                                print(f'{cashier_to_remove} removed.\n')
-                                while True:
-                                    remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
-                                    if remove_more == 'y':
-                                        break
+                        elif 1 <= index_of_cashier_to_remove <= len(cashier):
+                            cashier_to_remove = list(cashier.keys())[index_of_cashier_to_remove - 1]
+                            del cashier[cashier_to_remove]
+                            save_info(cashier)
+                            print(f'{cashier_to_remove} removed.\n')
 
-                                    elif remove_more == 'n':
-                                        break
-
-                                    else:
-                                        print('\ninvalid input. Enter again.')
-
+                            while True:
+                                remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
                                 if remove_more == 'y':
                                     break
+
                                 elif remove_more == 'n':
-                                    print('Stop removing. Exiting to the service page......')
                                     break
 
-                            else:
-                                print('Invalid input.\n')
+                                else:
+                                    print('\ninvalid input. Enter again.')
 
-                        except ValueError:
-                            print('Invalid input. Please enter a number.\n')
+                            if remove_more == 'n':
+                                print('Stop removing. Exiting to the service page......')
+                                break
 
-                    if remove_more == 'n':
-                        break
+                        else:
+                            print('Invalid input.\n')
+
+                    except ValueError:
+                        print('Invalid input. Please enter a number.\n')
 
         elif manage_cashier == '3':
             while True:
@@ -195,7 +195,9 @@ def system_administration_cashier():
                 try:
                     index_of_cashier_to_edit = int(input('\nWhich cashier do you want to edit? (or enter \"cancel\")\n>>> '))
                     if index_of_cashier_to_edit == len(cashier) + 1:
+                        print('Cancelling. Exiting to the service page......')
                         break
+
                     elif 1 <= index_of_cashier_to_edit <= len(cashier):
                         selected_cashier = list(cashier.keys())[index_of_cashier_to_edit - 1]
                         while True:
@@ -208,12 +210,58 @@ def system_administration_cashier():
 
                             attribute_of_cashier_data = input('\nWhich information do you want to modify? (or enter \"cancel\")\n>>> ')
                             if attribute_of_cashier_data in cashier[selected_cashier]:
-                                new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
-                                cashier[selected_cashier][attribute_of_cashier_data] = new_value
-                                print(f'\n{attribute_of_cashier_data} of {selected_cashier} is updated.')
-                                save_info(cashier)
+
+                                while True:
+                                    try:
+                                        new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
+
+                                        if attribute_of_cashier_data == 'cashier_username':
+                                            if new_value in (cashier[baker_name]['baker_username'] for baker_name in cashier):
+                                                print('Username has been used. Please enter another username.')
+                                                continue
+
+                                        elif attribute_of_cashier_data == 'cashier_password':
+                                            if new_value != 'securec@sh123':
+                                                print('Password incorrect. Please try again.')
+                                                continue
+
+                                        elif attribute_of_cashier_data == 'age':
+                                            if int(new_value) < 18 or int(new_value) > 60:
+                                                print('\nThe required age is between 18 and 60.')
+                                                print('Please enter a valid age.')
+                                                continue
+
+                                        elif attribute_of_cashier_data == 'gender':
+                                            if new_value not in ['f', 'm']:
+                                                print('\nInvalid input. Please enter again.')
+                                                continue
+                                            elif new_value == 'f':
+                                                new_value = 'female'
+
+                                            else:
+                                                new_value = 'male'
+
+                                        elif attribute_of_cashier_data == 'contact_no':
+                                            if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):
+                                                print('\nInvalid contact number. Please enter again.')
+                                                continue
+
+                                        elif attribute_of_cashier_data == 'email':  # define the format of email
+                                            if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+                                                                new_value):
+                                                print('\nInvalid email. Please enter again.')
+                                                continue
+
+                                        cashier[selected_cashier][attribute_of_cashier_data] = new_value
+                                        print(f'\n{attribute_of_cashier_data} of {selected_cashier} is updated.')
+                                        save_info(cashier)
+                                        break
+
+                                    except ValueError:
+                                        print('\nPlease enter a valid age.')
 
                             elif attribute_of_cashier_data == 'cancel':
+                                print('Cancelling. Exiting to the cashier list......')
                                 break
 
                             else:
