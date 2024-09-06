@@ -298,6 +298,7 @@ def continue_adding():
         except ValueError:
             print('Invalid input. Please enter again.')
 
+print('hi')
 
 def update_product():
     product = load_data_from_inventory_product()
