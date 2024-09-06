@@ -48,7 +48,8 @@ def product_management():
             print('Please enter a valid number.')
         else:
             if option_product_management == '1':
-                product_categories()
+                product_details()
+                break
             elif option_product_management == '2':
                 pass
             elif option_product_management == '3':
@@ -68,8 +69,6 @@ def product_categories():
     print('6. Others')
     print('7. Back to Previous Page')
 
-    category = None
-
     while True:
         option_product_categories = input('\nPlease input the category:'
                                           '\n>>> ')
@@ -80,35 +79,34 @@ def product_categories():
             if option_product_categories == '7':
                 print('Going back to the previous page.')
                 product_management()
-            product_details()
-            continue_adding()
-        break
-
-
-'''if option_product_categories == '1':
-    category = 'Breads'
-elif option_product_categories == '2':
-    category = 'Cakes'
-elif option_product_categories == '3':
-    category = 'Pastries'
-elif option_product_categories == '4':
-    category = 'Biscuits'
-elif option_product_categories == '5':
-    category = 'Muffins'
-elif option_product_categories == '6':
-    while True:
-        category = input(f'\nCategory: ')
-        if validation_empty_entries(category):
-            if not validation_alphabet_only(category):
-                print('Please enter a valid category name. (Cannot contain any special characters.)\n.')
-            else:
                 break
-elif option_product_categories == '7':
-    print('Going back to the previous page.')
-    product_management()
+            elif option_product_categories == '6':
+                while True:
+                    category = input(f'\nCategory: ')
+                    if validation_empty_entries(category):
+                        if not validation_alphabet_only(category):
+                            print('Please enter a valid category name. (Cannot contain any special characters.)\n.')
+                        else:
+                            return category
+                    break
+                break
+            elif option_product_categories == '1':
+                category = 'Breads'
+                break
+            elif option_product_categories == '2':
+                category = 'Cakes'
+                break
+            elif option_product_categories == '3':
+                category = 'Pastries'
+                break
+            elif option_product_categories == '4':
+                category = 'Biscuits'
+                break
+            elif option_product_categories == '5':
+                category = 'Muffins'
+                break
 
-break
-return category'''
+    return category
 
 
 def validation_empty_entries(info):
@@ -164,6 +162,9 @@ def validation_date(info, date_format='%d-%m-%Y'):
 
 
 def product_details():
+
+    category = product_categories()
+
     product_data = load_data_from_inventory_product()
 
     product_info = ['Product Name', 'Product Code', 'Batch Number', 'Date of Production', 'Shelf Life',
@@ -262,6 +263,7 @@ def product_details():
                 break
 
     product_data[batch_number] = {
+        'category': category,
         'product_name': product_name,
         'product_code': product_codes,
         'quantity_produced': quantity_produced,
@@ -276,6 +278,8 @@ def product_details():
 
     save_info(product_data)
 
+    continue_adding()
+
 
 def continue_adding():
     while True:
@@ -283,7 +287,7 @@ def continue_adding():
             add_more = input('\nInformation saved. Continue adding? (y=yes, n=no)'
                              '\n>>> ')
             if add_more == 'y':
-                product_categories()
+                product_details()
                 break
             elif add_more == 'n':
                 print('Stop adding... Existing to Product Management page.')

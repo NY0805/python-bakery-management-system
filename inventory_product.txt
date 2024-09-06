@@ -53,19 +53,158 @@
         ]
     },
     "g": {
-        "product_name": "g",
+        "category": "Breads",
+        "product_name": "smart",
         "product_code": [
-            "code1"
+            "c"
         ],
         "quantity_produced": "1",
         "batch_number": "g",
-        "date_of_production": "05-06-2004",
-        "shelf_life": "4",
-        "expiry_date": "05-06-2004",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "c",
+        "expiry_date": "07-09-2004",
+        "recipe": "c",
+        "baker_name": "c",
+        "allergens": [
+            "c"
+        ]
+    },
+    "batch8": {
+        "product_name": "blueberry donut",
+        "product_code": [
+            "donut1",
+            "donut2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "batch8",
+        "date_of_production": "08-07-2004",
+        "shelf_life": "3 days",
+        "expiry_date": "08-07-2004",
         "recipe": "r",
         "baker_name": "r",
         "allergens": [
             "r"
+        ]
+    },
+    "batch4": {
+        "category": "bun",
+        "product_name": "die bun",
+        "product_code": [
+            "bun1",
+            "bun2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "batch4",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "2 days",
+        "expiry_date": "07-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "r"
+        ]
+    },
+    "batch9": {
+        "category": "Cakes",
+        "product_name": "red velvet",
+        "product_code": [
+            "cake1",
+            "cake2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "batch9",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "2 weeks",
+        "expiry_date": "07-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "r"
+        ]
+    },
+    "t": {
+        "category": "Cakes",
+        "product_name": "bread",
+        "product_code": [
+            "d"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "t",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "t",
+        "expiry_date": "07-09-2004",
+        "recipe": "d",
+        "baker_name": "d",
+        "allergens": [
+            "d"
+        ]
+    },
+    "smart": {
+        "category": "Breads",
+        "product_name": "smart",
+        "product_code": [
+            "c"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "smart",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "c",
+        "expiry_date": "07-09-2004",
+        "recipe": "c",
+        "baker_name": "c",
+        "allergens": [
+            "c"
+        ]
+    },
+    "hi": {
+        "category": "hi",
+        "product_name": "hi",
+        "product_code": [
+            "c"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "hi",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "c",
+        "expiry_date": "07-09-2004",
+        "recipe": "c",
+        "baker_name": "c",
+        "allergens": [
+            "c"
+        ]
+    },
+    "niubi": {
+        "category": "Breads",
+        "product_name": "niubi",
+        "product_code": [
+            "c"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "niubi",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "c",
+        "expiry_date": "07-09-2004",
+        "recipe": "c",
+        "baker_name": "c",
+        "allergens": [
+            "c"
+        ]
+    },
+    "bailan": {
+        "category": "bailan",
+        "product_name": "c",
+        "product_code": [
+            "c"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "bailan",
+        "date_of_production": "07-09-2004",
+        "shelf_life": "c",
+        "expiry_date": "07-09-2004",
+        "recipe": "c",
+        "baker_name": "c",
+        "allergens": [
+            "c"
         ]
     }
 }
