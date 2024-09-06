@@ -2,6 +2,8 @@ import json  # import json text file to record data
 import re
 from datetime import datetime
 
+import inventory_management
+
 
 # Define the function that loads data from the file
 def load_data_from_inventory_product():
@@ -198,7 +200,7 @@ def product_details():
         recipe = input(f'7. {product_info[6].ljust(max_length + 2)}: ')
         if validation_empty_entries(recipe):
             if not validation_alphabet_only(recipe):
-                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n.')
+                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n')
             else:
                 break
 
@@ -267,4 +269,5 @@ def update_product():
     print('------------------------------------------------')
     for index, key in enumerate(product, start=1):
         print(f'{index}. {key}')
+
 

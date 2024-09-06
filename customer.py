@@ -17,14 +17,14 @@ def load_data_from_customer():
             return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
-def save_info(info):
+def save_info(customer_info):
 
-    file = open('manager.txt', 'w')  # open the file to write
-    json.dump(info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file = open('customer.txt', 'w')  # open the file to write
+    json.dump(customer_info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 def create_customer_account():
-    info = load_data_from_customer()
+    customer_info = load_data_from_customer()
 
     username = input("Enter username: ")
     while True:
