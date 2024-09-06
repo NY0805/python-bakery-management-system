@@ -1,26 +1,71 @@
 {
-    "s": {
-        "product_name": "s",
-        "product_code": "s",
-        "batch_number": "s",
-        "date_of_production": "s",
-        "shelf_life": "s",
-        "expiry_date": "s",
-        "recipe": "s",
-        "quantity_produced": "s",
-        "baker_name": "s",
-        "allergens": "s"
+    "batch3": {
+        "product_name": "muffins",
+        "product_code": [
+            "muffin1",
+            "muffin2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "batch3",
+        "date_of_production": "07-06-2004",
+        "shelf_life": "7days",
+        "expiry_date": "09-04-2004",
+        "recipe": "r",
+        "baker_name": "lum",
+        "allergens": [
+            "dairy",
+            "product"
+        ]
     },
-    "f": {
-        "product_name": "f",
-        "product_code": "f",
-        "batch_number": "f",
-        "date_of_production": "f",
-        "shelf_life": "f",
-        "expiry_date": "f",
-        "recipe": "f",
-        "quantity_produced": "ff",
-        "baker_name": "f",
-        "allergens": "f"
+    "4": {
+        "product_name": "bread",
+        "product_code": [
+            "bread1",
+            "cread2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "4",
+        "date_of_production": "05-07-2004",
+        "shelf_life": "3",
+        "expiry_date": "05-07-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "r"
+        ]
+    },
+    "batch6": {
+        "product_name": "muffin",
+        "product_code": [
+            "muffin1",
+            "nuffin2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "batch6",
+        "date_of_production": "05-07-2004",
+        "shelf_life": "2 weeks",
+        "expiry_date": "05-07-2004",
+        "recipe": "r",
+        "baker_name": "lum",
+        "allergens": [
+            "nuts",
+            "banana"
+        ]
+    },
+    "g": {
+        "product_name": "g",
+        "product_code": [
+            "code1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "g",
+        "date_of_production": "05-06-2004",
+        "shelf_life": "4",
+        "expiry_date": "05-06-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "r"
+        ]
     }
 }
