@@ -30,9 +30,9 @@ def save_info(manager_info):
 def manager_accounts():
     manager_info = load_data_from_manager()  # initialize 'info' as the name of dictionary that store data loaded from file
 
-    print('\n+-----------------------------------------------------------------+')
-    print('| ⚠️ This is your FIRST TIME login, kindly complete your profile. |')
-    print('+-----------------------------------------------------------------+\n')
+    print('\n+----------------------------------------------------------------+')
+    print('|⚠️ This is your FIRST TIME login, kindly complete your profile. |')
+    print('+----------------------------------------------------------------+\n')
 
     manager_name = input('Name: ')
     while manager_name in manager_info:
@@ -170,7 +170,7 @@ def manager():
             print('enter again.')
 
         elif choice == 'f':
-            print('Exiting to main page......')
+            print('\nExiting to main page......\n')
             return False
 
         else:

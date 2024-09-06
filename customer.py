@@ -604,4 +604,4 @@ def customer_menu():
         else:
             print("Invalid option, please try again.")
 
-customer_menu()
+# customer_menu()

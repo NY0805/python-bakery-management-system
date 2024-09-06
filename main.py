@@ -60,7 +60,7 @@ while True:
             print('\n---------------------------------------------------\n'
                   '\t\t\t\tBAKER is selected.\n'
                   '---------------------------------------------------')
-            break
+            baker.baker_accounts()
 
         elif role == 5:
             print('\n--------------------YOU ARE EXIT--------------------')
