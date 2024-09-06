@@ -4,7 +4,6 @@
 # Production Record-keeping: Record production quantities, batch numbers, and expiration dates.
 # Equipment Management: Report equipment malfunctions or maintenance
 
-import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 
 # Define the function that loads data from the file
@@ -62,7 +61,7 @@ def baker_accounts():
         while True:
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'BAKER PRIVILEGE')
-            print('-----------------------------------------------\n')
+            print('-----------------------------------------------')
             print('a. Recipe management\n'
                   'b. Inventory check\n'
                   'c. Product record-keeping\n'

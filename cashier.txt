@@ -1,0 +1,10 @@
+{
+    "meimei": {
+        "cashier_username": "cashier1",
+        "cashier_password": "securec@sh$",
+        "age": "56",
+        "gender": "female",
+        "contact_no": "345-5674832",
+        "email": "ff@vv.vv"
+    }
+}

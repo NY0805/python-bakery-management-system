@@ -145,7 +145,7 @@ def manager():
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
-        print('-----------------------------------------------\n')
+        print('-----------------------------------------------')
         print('a. System administration\n'
               'b. Order management\n'
               'c. Financial management\n'
