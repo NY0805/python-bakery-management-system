@@ -27,29 +27,6 @@ def save_info(customer_info):
     file.close()  # close the file after writing
 
 
-def customer():
-    customer_info = load_data_from_customer()
-
-    print('\n+-------------------------------------------------------+')
-    print('|💡 Please sign up if you\'re logging in the first time. |')
-    print('|   Please log in if you already have an account.       |')
-    print('+-------------------------------------------------------+\n')
-
-    while True:
-        choice = input('1. Sign up\n'
-                       '2. Log in\n'
-                       'Enter your choice(1, 2):\n>>> ')
-
-        if choice == '1':
-            sign_up()
-        elif choice == '2':
-            login()
-        else:
-            print('\n+--------------------------------------+')
-            print('|⚠️ Invalid input. Please enter again. |')
-            print('+--------------------------------------+\n')
-
-
 def sign_up():
     customer_info = load_data_from_customer()
 
@@ -57,9 +34,9 @@ def sign_up():
     if customer_name in customer_info:
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
-        print('+--------------------------------------------------+\n')
+        print('+--------------------------------------------------+')
         print('You already have an account.')
-        print('Directing to login page......')
+        print('Directing to login page......\n')
         login()
 
     else:
@@ -68,7 +45,7 @@ def sign_up():
             print('\n+----------------------------------------------------------+')
             print('|⚠️ Username has been used. Please enter another username. |')
             print('+----------------------------------------------------------+\n')
-            manager_username = input('Username: ')
+            customer_username = input('Username: ')
 
         customer_password = input("Password: ")
         while len(customer_password) < 8 or len(customer_password) > 12:
@@ -76,14 +53,6 @@ def sign_up():
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
             print('+---------------------------------------------------------------------------+\n')
             customer_password = input('Password: ')
-            '''if customer_password.islower():
-                print("Your password must contain at least one uppercase letter.")
-            elif customer_password.isupper():
-                print("Your password must contain at least one lowercase letter.")
-            elif not any(char.isdigit() for char in customer_password):
-                print("Your password must contain at least one number.")
-            else:
-                break'''
 
         while True:
             try:
@@ -130,62 +99,89 @@ def sign_up():
             print('+--------------------------------------+\n')
             email = input('Email: ')
 
-        address = input("Address: ")
+        address = input('Address: ')
 
         customer_info[customer_name] = {
-            "customer_username": customer_username,
-            "customer_password": customer_password,
-            "age": age,
-            "gender": gender,
-            "contact_no": contact_no,
-            "email": email,
+            'customer_username': customer_username,
+            'customer_password': customer_password,
+            'age': age,
+            'gender': gender,
+            'contact_no': contact_no,
+            'email': email,
             "address": address
         }
 
         save_info(customer_info)
         print('\nInformation saved.')
-        print(f"Welcome, {customer_name}! Your account has been created successfully!")
+        print(f'Welcome, {customer_name}! Your account has been created successfully!')
 
 
 def login():
     customer_info = load_data_from_customer()
+
     customer_name = input('Name: ')
-    customer_username = input("Username: ")
-    while True:
-        if customer_username not in (customer_info[customer_name]['customer_username'] for customer_name in customer_info):
-            print('\n+------------------------------------------------------------+')
-            print('|⚠️ This is your FIRST TIME login, please create an account. |')
-            print('+------------------------------------------------------------+\n')
-            print('Directing to sign up page......')
-            sign_up()
-        elif customer_username != customer_info[customer_name]['customer_username']:
+    if customer_name in customer_info:
+        customer_username = input("Username: ")
+        while customer_username != customer_info[customer_name]['customer_username']:
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
+            customer_username = input("Username: ")
+
+        customer_password = input("Password: ")
+        while customer_password != customer_info[customer_name]['customer_password']:
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Incorrect password. Please enter again. |')
+            print('+-------------------------------------------+\n')
+            customer_password = input("Password: ")
+
+        print(f'\nWelcome back, {customer_name}!\n')
+
+    else:
+        print('\n+------------------------------------------------------------+')
+        print('|⚠️ This is your FIRST TIME login, please create an account. |')
+        print('+------------------------------------------------------------+\n')
+        print('Directing to sign up page......\n')
+        sign_up()
+
+
+def customer():
+    customer_info = load_data_from_customer()
+
+    print('\n+-------------------------------------------------------+')
+    print('|💡 Please sign up if you\'re logging in the first time. |')
+    print('|   Please log in if you already have an account.       |')
+    print('+-------------------------------------------------------+\n')
+
+    while True:
+        choice = input('1. Sign up\n'
+                       '2. Log in\n'
+                       'Enter your choice(1, 2):\n>>> ')
+
+        if choice == '1':
+            sign_up()
+
+        elif choice == '2':
+            login()
 
         else:
-            customer_password = input("Password: ")
-            while customer_password != customer_info[customer_username]['customer_password']:
-                print('\n+-------------------------------------------+')
-                print('|⚠️ Incorrect password. Please enter again. |')
-                print('+-------------------------------------------+\n')
-                customer_password = input("Password: ")
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+\n')
 
-            print(f'\nWelcome back, {customer_name}!')
 
-customer()
 # Function to update customer information
 def update_personal_information():
-    customers = load_data_from_customer()
-    if not customers:
+    customer_info = load_data_from_customer()
+    if not customer_info:
         print("No customer data available.")
         return
 
-    username = input("Enter your username: ")
+    customer_username = input("Enter your username: ")
     found = False
 
-    for customer in customers:
-        if customer["username"] == username:
+    for customers in customer_info:
+        if customers["customer_username"] == customer_username:
             found = True
             print("What do you want to update?")
             print("1. Password")
@@ -199,53 +195,72 @@ def update_personal_information():
             if choice == "1":
                 while True:
                     new_password = input("Enter new password: ")
-                    if len(new_password) < 6:
-                        print("Your password must be at least six characters long.")
-                    elif new_password.islower():
-                        print("Your password must contain at least one uppercase letter.")
-                    elif new_password.isupper():
-                        print("Your password must contain at least one lowercase letter.")
-                    elif not any(char.isdigit() for char in new_password):
-                        print("Your password must contain at least one number.")
+                    if len(new_password) < 8 or len(new_password) > 12:
+                        print('\n+---------------------------------------------------------------------------+')
+                        print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
+                        print('+---------------------------------------------------------------------------+\n')
+
                     else:
-                        customer["password"] = new_password
+                        customer_info["customer_password"] = new_password
                         break
+
             elif choice == "2":
-                new_age = input("Enter new age: ")
-                if new_age.isdigit():
-                    customer["age"] = new_age
-                else:
-                    print("Invalid age. Please enter numbers only.")
+                try:
+                    new_age = int(input("Enter new age: "))
+                    if new_age >= 12:
+                        customer_info["age"] = new_age
+                    else:
+                        print('\n+----------------------+')
+                        print('|⚠️ You are under age. |')
+                        print('+----------------------+\n')
+                except ValueError:
+                    print('\n+-------------------------------------------+')
+                    print('|⚠️ Invalid age. Please enter numbers only. |')
+                    print('+-------------------------------------------+\n')
+
             elif choice == "3":
-                new_gender = input("Select your gender (M = male, F = female): ")
-                if new_gender in ["M", "F"]:
-                    customer["gender"] = new_gender
+                new_gender = input("Select your gender(m=male, f=female, x=prefer not to say): ")
+                if new_gender in ['f', 'm', 'x']:
+                    if new_gender == 'f':
+                        customer_info["gender"] = 'female'
+                    elif new_gender == 'm':
+                        customer_info['gender'] = 'male'
+                    else:
+                        customer_info['gender'] = 'prefer not to say'
                 else:
-                    print("Invalid input, please select M or F.")
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('+--------------------------------------+\n')
+
             elif choice == "4":
                 while True:
                     new_contact_no = input("Enter new contact number: ")
-                    if new_contact_no.isdigit():
-                        customer["contact_no"] = new_contact_no
+                    if re.fullmatch(r'^\d{3}-\d{7}$', new_contact_no):
+                        customer_info["contact_no"] = new_contact_no
                         break
                     else:
-                        print("Invalid format. Please enter digits only.")
+                        print('\n+-----------------------------------------------+')
+                        print('|⚠️ Invalid contact number. Please enter again. |')
+                        print('+-----------------------------------------------+\n')
+
             elif choice == "5":
-                regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$'
                 while True:
                     new_email = input("Enter new email: ")
-                    if re.fullmatch(regex, new_email):
-                        customer["email"] = new_email
+                    if re.fullmatch(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$', new_email):
+                        customer_info["email"] = new_email
                         break
                     else:
-                        print("Invalid Email. Please try again.")
+                        print('\n+--------------------------------------+')
+                        print('|⚠️ Invalid email. Please enter again. |')
+                        print('+--------------------------------------+\n')
+
             elif choice == "6":  # Added case for updating address
                 new_address = input("Enter new address: ")
-                customer["address"] = new_address
+                customer_info["address"] = new_address
             else:
                 print("Invalid choice.")
 
-            save_info(customers)
+            save_info(customer_info)
             print("Your information has been updated.")
             break
 
@@ -354,6 +369,7 @@ def load_orders(): #Load the order data from a file
         print("Error loading order data. The file format might be incorrect.")
         return []
 
+
 orders = [
     {"order_id": 1001, "username": "Mark0825", "items_ordered": ["Bread x1", "Cake x1"], "total_price": 15.00, "status": "Delivered"},
     {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x2", "Cake x1"], "total_price": 12.50, "status": "Shipped"},
@@ -371,7 +387,6 @@ orders = [
     {"order_id": 1014, "username": "_orson_", "items_ordered": ["Biscuit x1", "Cake x1"], "total_price": 5.00, "status": "Shipped"},
     {"order_id": 1015, "username": "yubin00", "items_ordered": ["Bread x2", "Muffin x1"], "total_price": 6.50, "status": "Processing"}
 ]
-
 
 
 def order_tracking():
@@ -401,6 +416,7 @@ def order_tracking():
     if not order_exists:
         print("Order ID cannot be found. Please check and try again.")
 
+
 def load_reviews(): #Load existing reviews from a file (reviews.json).
     try:
         with open("reviews.txt", "r") as file:
@@ -413,9 +429,11 @@ def load_reviews(): #Load existing reviews from a file (reviews.json).
         print("Error loading review data. The file format might be incorrect.")
         return []
 
+
 def save_reviews(reviews): #Save the updated reviews to a file
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
+
 
 def submit_review():# Allow the customer to submit a review for a purchased product
     # Get user input
@@ -446,6 +464,7 @@ def submit_review():# Allow the customer to submit a review for a purchased prod
 
     print("Thank you for submitting your feedback! We have received your review.")
 
+
 def load_reviews(): #Load existing reviews from a file (reviews.json)
     try:
         with open("reviews.txt", "r") as file:
@@ -458,9 +477,11 @@ def load_reviews(): #Load existing reviews from a file (reviews.json)
         print("Error loading review data. The file format might be incorrect.")
         return []
 
+
 def save_reviews(reviews): #Save the updated reviews to a file
     with open("reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
+
 
 def submit_review(): #Allow customer to submit review for purchased product
     # Get user input
@@ -490,6 +511,7 @@ def submit_review(): #Allow customer to submit review for purchased product
     save_reviews(reviews)
 
     print("Thank you for your feedback! Your review has been submitted.")
+
 
 # Function to load customer data
 def load_customer_data():
@@ -536,6 +558,7 @@ def checkout(username, total_amount):
     update_purchase_history(username, total_amount)
     print(f"Order placed successfully! Your total amount is ${total_amount:.2f}.")
 
+
 # Function to view loyalty rewards
 def view_loyalty_rewards():
     username = input("Enter your username: ")
@@ -545,6 +568,7 @@ def view_loyalty_rewards():
     # Example: Assuming we have a function to check rewards
     # rewards = check_loyalty_rewards(username)
     # print(f"Rewards for {username}: {rewards}")
+
 
 def customer_menu():
     while True:
@@ -563,7 +587,7 @@ def customer_menu():
         option = input("Please select an option (0-9): ")
 
         if option == "1":
-            create_customer_account()
+            sign_up()
         elif option == "2":
             login()
         elif option == "3":

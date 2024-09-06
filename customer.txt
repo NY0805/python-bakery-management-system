@@ -1,10 +1,20 @@
-[
-    {
-        "username": "abc",
-        "password": "XHHeng8",
-        "age": "18",
-        "gender": "F",
-        "contact_no": "102393",
-        "email": "xinshsh@gmail.com"
+{
+    "aaa": {
+        "customer_username": "customer1",
+        "customer_password": "12345678",
+        "age": 23,
+        "gender": "female",
+        "contact_no": "123-3456732",
+        "email": "dd@dd.dd",
+        "address": "f"
+    },
+    "bbb": {
+        "customer_username": "customer2",
+        "customer_password": "12345678",
+        "age": 23,
+        "gender": "male",
+        "contact_no": "123-3456732",
+        "email": "dd@dd.dd",
+        "address": "v"
     }
-]
+}
