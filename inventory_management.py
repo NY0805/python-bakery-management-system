@@ -33,4 +33,5 @@ def inventory_services():
         except ValueError:
             print('Please enter a valid number.\n')
 
+
 inventory_services()

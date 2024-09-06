@@ -97,16 +97,3 @@ def continue_adding():
 
 
 
-    inventory_choice = inventory_services()
-    while inventory_choice == 1:
-        ingredient_choice = ingredient_management()
-        while ingredient_choice == 1:
-            ingredient_main_type_choice = ingredient_main_type_menu()
-            while ingredient_main_type_choice == 1:
-                ingredient_details()
-                continue_adding()
-                break
-            while ingredient_main_type_choice == 2:
-                ingredient_details()
-                continue_adding()
-                break

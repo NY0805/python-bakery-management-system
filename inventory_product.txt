@@ -1,14 +1,26 @@
 {
-    "33": {
-        "product_name": "muffins",
-        "product_code": "33",
-        "batch_number": "33",
-        "date_of_production": "33",
-        "shelf_life": "33",
-        "expiry_date": "33",
-        "recipe": "33",
-        "quantity_produced": "33",
-        "baker_name": "33",
-        "allergens": "33"
+    "s": {
+        "product_name": "s",
+        "product_code": "s",
+        "batch_number": "s",
+        "date_of_production": "s",
+        "shelf_life": "s",
+        "expiry_date": "s",
+        "recipe": "s",
+        "quantity_produced": "s",
+        "baker_name": "s",
+        "allergens": "s"
+    },
+    "f": {
+        "product_name": "f",
+        "product_code": "f",
+        "batch_number": "f",
+        "date_of_production": "f",
+        "shelf_life": "f",
+        "expiry_date": "f",
+        "recipe": "f",
+        "quantity_produced": "ff",
+        "baker_name": "f",
+        "allergens": "f"
     }
 }
