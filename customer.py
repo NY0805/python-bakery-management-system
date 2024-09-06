@@ -354,24 +354,24 @@ def load_orders(): #Load the order data from a file
         print("Error loading order data. The file format might be incorrect.")
         return []
 
-# Fictional list of 15 customer orders
 orders = [
-    {"order_id": 1001, "username": "Mark0825", "items_ordered": ["Bread x1", "Cookie x2", "Cake x1"], "total_price": 19.00, "status": "Delivered"},
-    {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x1", "Cake x2"], "total_price": 18.00, "status": "Shipped"},
-    {"order_id": 1003, "username": "_eddie", "items_ordered": ["Bread x1", "Cookie x1"], "total_price": 4.00, "status": "Processing"},
-    {"order_id": 1004, "username": "anna328_", "items_ordered": ["Croissant x1", "Bagel x1"], "total_price": 5.50, "status": "Delivered"},
-    {"order_id": 1005, "username": "andrew_520", "items_ordered": ["Donut x1", "Brownie x2", "Muffin x1"], "total_price": 10.75, "status": "Shipped"},
-    {"order_id": 1006, "username": "chen0lee", "items_ordered": ["Cupcake x1", "Scone x2"], "total_price": 6.00, "status": "Cancelled"},
-    {"order_id": 1007, "username": "anna_", "items_ordered": ["Pie x1", "Cookie x3"], "total_price": 8.25, "status": "Processing"},
-    {"order_id": 1008, "username": "boa20prim", "items_ordered": ["Cake x1", "Muffin x2"], "total_price": 15.00, "status": "Delivered"},
-    {"order_id": 1009, "username": "october.06", "items_ordered": ["Bread x1", "Croissant x1"], "total_price": 5.50, "status": "Delivered"},
-    {"order_id": 1010, "username": "ethan_wood", "items_ordered": ["Bagel x2", "Donut x1"], "total_price": 4.50, "status": "Shipped"},
-    {"order_id": 1011, "username": "im.david", "items_ordered": ["Cookie x1", "Scone x1", "Brownie x2"], "total_price": 9.25, "status": "Processing"},
-    {"order_id": 1012, "username": "noah_lee", "items_ordered": ["Muffin x1", "Cupcake x1"], "total_price": 6.50, "status": "Cancelled"},
-    {"order_id": 1013, "username": "scott_lee02", "items_ordered": ["Cake x1", "Brownie x1"], "total_price": 11.00, "status": "Delivered"},
-    {"order_id": 1014, "username": "_orson_", "items_ordered": ["Bagel x1", "Muffin x1", "Cookie x1"], "total_price": 7.75, "status": "Shipped"},
-    {"order_id": 1015, "username": "yubin00", "items_ordered": ["Donut x1", "Croissant x1", "Cake x1"], "total_price": 12.50, "status": "Processing"}
+    {"order_id": 1001, "username": "Mark0825", "items_ordered": ["Bread x1", "Cake x1"], "total_price": 15.00, "status": "Delivered"},
+    {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x2", "Cake x1"], "total_price": 12.50, "status": "Shipped"},
+    {"order_id": 1003, "username": "_eddie", "items_ordered": ["Bread x1", "Pastry x2"], "total_price": 8.00, "status": "Processing"},
+    {"order_id": 1004, "username": "anna328_", "items_ordered": ["Biscuit x3"], "total_price": 3.75, "status": "Delivered"},
+    {"order_id": 1005, "username": "andrew_520", "items_ordered": ["Muffin x1", "Cake x2"], "total_price": 10.00, "status": "Shipped"},
+    {"order_id": 1006, "username": "chen0lee", "items_ordered": ["Pastry x1", "Bread x2"], "total_price": 7.00, "status": "Cancelled"},
+    {"order_id": 1007, "username": "anna_", "items_ordered": ["Cake x2", "Muffin x1"], "total_price": 14.00, "status": "Processing"},
+    {"order_id": 1008, "username": "boa20prim", "items_ordered": ["Bread x1", "Biscuit x2"], "total_price": 5.50, "status": "Delivered"},
+    {"order_id": 1009, "username": "october.06", "items_ordered": ["Cake x1", "Pastry x1"], "total_price": 10.00, "status": "Delivered"},
+    {"order_id": 1010, "username": "ethan_wood", "items_ordered": ["Muffin x1", "Biscuit x1"], "total_price": 4.00, "status": "Shipped"},
+    {"order_id": 1011, "username": "im.david", "items_ordered": ["Pastry x2", "Bread x1"], "total_price": 9.00, "status": "Processing"},
+    {"order_id": 1012, "username": "noah_lee", "items_ordered": ["Muffin x1", "Cake x1"], "total_price": 7.50, "status": "Cancelled"},
+    {"order_id": 1013, "username": "scott_lee02", "items_ordered": ["Pastry x1", "Bread x2"], "total_price": 8.00, "status": "Delivered"},
+    {"order_id": 1014, "username": "_orson_", "items_ordered": ["Biscuit x1", "Cake x1"], "total_price": 5.00, "status": "Shipped"},
+    {"order_id": 1015, "username": "yubin00", "items_ordered": ["Bread x2", "Muffin x1"], "total_price": 6.50, "status": "Processing"}
 ]
+
 
 
 def order_tracking():
