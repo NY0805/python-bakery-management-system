@@ -28,5 +28,14 @@
         "email": "ff@fff.ff",
         "address": "ttt",
         "account_status": "inactive"
+    },
+    "penguin": {
+        "customer_username": "customer1",
+        "customer_password": "qwertyui",
+        "age": 21,
+        "gender": "female",
+        "contact_no": "345-5678432",
+        "email": "ff@ff.ff",
+        "address": "r"
     }
 }

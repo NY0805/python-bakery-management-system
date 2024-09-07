@@ -26,10 +26,16 @@ def save_info(cashier_info):
     file.close()  # close the file after writing
 
 
-def cashier_accounts():
-    cashier_info = load_data_from_file()  # initialize 'info' as the name of dictionary that store data loaded from file
+cashier_info = load_data_from_file()
 
-    cashier_name = input('\nName: ')
+
+def cashier_accounts():
+    # initialize 'info' as the name of dictionary that store data loaded from file
+
+    print('\n----------------------------------------------------')
+    print('\t\t\t\t\t', '', 'CASHIER')
+    print('----------------------------------------------------')
+    cashier_name = input('Name: ')
     if cashier_name in cashier_info:
         cashier_username = input('Username: ')
         while cashier_username != (cashier_info[cashier_name]['cashier_username']):
@@ -78,7 +84,7 @@ def cashier_accounts():
                 print('in progress d')
 
             elif choice == 'e':
-                print('Exiting to main page......')
+                print('\nExiting to main page......')
                 return False
 
             else:

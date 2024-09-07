@@ -14,5 +14,13 @@
         "gender": "male",
         "contact_no": "456-6758432",
         "email": "ff@ff.ff"
+    },
+    "bean": {
+        "baker_username": "baker3",
+        "baker_password": "b@k3rm4st3r!",
+        "age": 23,
+        "gender": "male",
+        "contact_no": "123-3456732",
+        "email": "gg@gg.gg"
     }
 }

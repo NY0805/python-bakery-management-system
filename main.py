@@ -53,9 +53,6 @@ while True:
             cashier.cashier_accounts()
 
         elif role == 4:
-            print('\n---------------------------------------------------\n'
-                  '\t\t\t\tCUSTOMER is selected.\n'
-                  '---------------------------------------------------')
             customer.customer()
 
         elif role == 5:

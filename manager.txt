@@ -2,9 +2,9 @@
     "tsuki": {
         "manager_username": "manager1",
         "manager_password": "d0ugh8o5s",
-        "age": 23,
+        "age": 21,
         "gender": "male",
-        "contact_no": "123-3456372",
-        "email": "ee@ee.ee"
+        "contact_no": "123-3456732",
+        "email": "dd@dd.dd"
     }
 }

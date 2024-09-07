@@ -31,10 +31,16 @@ def save_info(baker_info):
     file.close()  # close the file after writing
 
 
-def baker_accounts():
-    baker_info = load_data_from_file()  # initialize 'info' as the name of dictionary that store data loaded from file
+baker_info = load_data_from_file()
 
-    baker_name = input('\nName: ')
+
+def baker_accounts():
+    # initialize 'info' as the name of dictionary that store data loaded from file
+
+    print('\n----------------------------------------------------')
+    print('\t\t\t\t\t', '', 'BAKER')
+    print('----------------------------------------------------')
+    baker_name = input('Name: ')
     if baker_name in baker_info:
         baker_username = input('Username: ')
         while baker_username != (baker_info[baker_name]['baker_username']):
@@ -83,7 +89,7 @@ def baker_accounts():
                 print('in progress d')
 
             elif choice == 'e':
-                print('Exiting to main page......')
+                print('\nExiting to main page......')
                 return False
 
             else:

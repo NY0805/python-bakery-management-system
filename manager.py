@@ -1,8 +1,9 @@
 import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 
-import order_management
 import system_administration
+import manager_order_management
+import manager_inventory_control
 
 
 # Define the function that loads data from the file
@@ -29,8 +30,11 @@ def save_info(manager_info):
     file.close()  # close the file after writing
 
 
+manager_info = load_data_from_manager()
+
+
 def manager_accounts():
-    manager_info = load_data_from_manager()  # initialize 'info' as the name of dictionary that store data loaded from file
+    # initialize 'info' as the name of dictionary that store data loaded from file
 
     print('\n+----------------------------------------------------------------+')
     print('|⚠️ This is your FIRST TIME login, kindly complete your profile. |')
@@ -114,9 +118,12 @@ def manager_accounts():
 
 # create a function for manager
 def manager():
-    manager_info = load_data_from_manager()  # initialize 'info' as the name of dictionary that store data loaded from file
+    # initialize 'info' as the name of dictionary that store data loaded from file
 
-    manager_name = input('\nName: ')
+    print('\n----------------------------------------------------')
+    print('\t\t\t\t\t', '', 'MANAGER')
+    print('----------------------------------------------------')
+    manager_name = input('Name: ')
     if manager_name in manager_info:
 
         manager_username = input('Username: ')
@@ -133,44 +140,6 @@ def manager():
             print('+-------------------------------------------+\n')
             manager_password = input('Password: ')
 
-        print('\nLogin successfully!')
-        print('Welcome, manager', manager_name, '!')
-        while True:
-            print('\n-----------------------------------------------')
-            print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
-            print('-----------------------------------------------')
-            print('a. System administration\n'
-                  'b. Order management\n'
-                  'c. Financial management\n'
-                  'd. Inventory control\n'
-                  'e. Customer feedback\n'
-                  'f. Exit')
-
-            choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
-            if choice == 'a':
-                system_administration.system_administration()
-
-            elif choice == 'b':
-                order_management.order_management()
-
-            elif choice == 'c':
-                print('enter again.')
-
-            elif choice == 'd':
-                print('enter again.')
-
-            elif choice == 'e':
-                print('enter again.')
-
-            elif choice == 'f':
-                print('\nExiting to main page......')
-                return False
-
-            else:
-                print('\n+--------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+')
-
     else:
         print('\n+--------------------------------------------------------------+')
         print('|⚠️ You are not a manager, cannot access to manager privilege. |')
@@ -184,12 +153,55 @@ def manager():
                     break
                 else:
                     manager_accounts()
+                    break
+
             elif become_manager == 'n':
-                break
+                print('\nExiting to role management......')
+                return False
             else:
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+\n')
+
+    print('\nLogin successfully!')
+    print('Welcome, manager', manager_name, '!')
+    while True:
+        print('\n-----------------------------------------------')
+        print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
+        print('-----------------------------------------------')
+        print('a. System administration\n'
+              'b. Order management\n'
+              'c. Financial management\n'
+              'd. Inventory control\n'
+              'e. Customer feedback\n'
+              'f. Exit')
+
+        choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
+        if choice == 'a':
+            system_administration.system_administration()
+
+        elif choice == 'b':
+            manager_order_management.order_management()
+
+        elif choice == 'c':
+            print('enter again.')
+
+        elif choice == 'd':
+            manager_inventory_control.main_control()
+
+        elif choice == 'e':
+            print('enter again.')
+
+        elif choice == 'f':
+            print('\nExiting to main page......')
+            return False
+
+        else:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
+
+
 
 
 

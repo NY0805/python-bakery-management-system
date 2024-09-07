@@ -27,8 +27,10 @@ def save_info(customer_info):
     file.close()  # close the file after writing
 
 
+customer_info = load_data_from_customer()
+
+
 def sign_up():
-    customer_info = load_data_from_customer()
 
     customer_name = input('\nName: ')
     if customer_name in customer_info:
@@ -36,7 +38,7 @@ def sign_up():
         print('|⚠️ Warning: One person can only have one account! |')
         print('+--------------------------------------------------+')
         print('You already have an account.')
-        print('Directing to the login page......\n')
+        print('Directing to the login page......')
         login()
 
     else:
@@ -117,7 +119,6 @@ def sign_up():
 
 
 def login():
-    customer_info = load_data_from_customer()
 
     customer_name = input('\nName: ')
     if customer_name in customer_info:
@@ -140,14 +141,17 @@ def login():
     else:
         print('\n+------------------------------------------------------------+')
         print('|⚠️ This is your FIRST TIME login, please create an account. |')
-        print('+------------------------------------------------------------+\n')
+        print('+------------------------------------------------------------+')
         print('Directing to sign up page......\n')
         sign_up()
 
 
 def customer():
-    customer_info = load_data_from_customer()
+    #customer_info = load_data_from_customer()
 
+    print('\n----------------------------------------------------')
+    print('\t\t\t\t\t', '', 'CUSTOMER')
+    print('----------------------------------------------------')
     print('\n+---------------------------------------------------------+')
     print('|💡 Please "sign up" if you\'re logging in the first time. |')
     print('|   Please "log in" if you already have an account.       |')
@@ -176,7 +180,7 @@ def customer():
 
 # Function to update customer information
 def update_personal_information():
-    customer_info = load_data_from_customer()
+
     if not customer_info:
         print("No customer data available.")
         return

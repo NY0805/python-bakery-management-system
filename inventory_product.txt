@@ -16,5 +16,41 @@
             "tree_nuts",
             "banana"
         ]
+    },
+    "e": {
+        "category": "Pastries",
+        "product_name": "e",
+        "product_code": [
+            "r"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "e",
+        "date_of_production": "23-04-1111",
+        "shelf_life": "03days",
+        "expiry_date": "28-04-1111",
+        "recipe": "d",
+        "baker_name": "e",
+        "allergens": [
+            "f",
+            "f"
+        ]
+    },
+    "12": {
+        "category": "xxx",
+        "product_name": "e",
+        "product_code": [
+            "1",
+            "2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "12",
+        "date_of_production": "12-12-1212",
+        "shelf_life": "5 days",
+        "expiry_date": "12-12-1212",
+        "recipe": "a",
+        "baker_name": "4",
+        "allergens": [
+            "a"
+        ]
     }
 }

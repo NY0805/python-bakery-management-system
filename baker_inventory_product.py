@@ -258,7 +258,7 @@ def product_details():
                 else:
                     print('The expired date does not fall within the allowable period.')
                     print('The allowable period must between the date of production and date of production + shelf life + 3 days.')
-                    print(f'* Allowable period: {date_of_production} to {max_expiry.strftime('%d-%m-%Y')}.\n')
+                    print(f'* Allowable period: {date_of_production} to {max_expiry.strftime("%d-%m-%Y")}.\n')
             else:
                 print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
 
