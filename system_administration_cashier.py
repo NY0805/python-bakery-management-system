@@ -77,8 +77,7 @@ def cashier_accounts():
 
             while True:
                 contact_no = input('Contact number(xxx-xxx xxxx): ')
-                pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
-                if not re.fullmatch(pattern, contact_no):
+                if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):
                     print('\n+-----------------------------------------------+')
                     print('|⚠️ Invalid contact number. Please enter again. |')
                     print('+-----------------------------------------------+\n')
@@ -87,8 +86,7 @@ def cashier_accounts():
 
             while True:
                 email = input('Email: ')
-                pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
-                if not re.fullmatch(pattern, email):
+                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
                     print('\n+--------------------------------------+')
                     print('|⚠️ Invalid email. Please enter again. |')
                     print('+--------------------------------------+\n')
@@ -310,7 +308,7 @@ def system_administration_cashier():
                     print('+-----------------------------------------+')
 
         elif manage_cashier == '4':
-            print('\nExiting to role selection......')
+            print('\nExiting to role management......')
             system_administration.system_administration()
             break
 

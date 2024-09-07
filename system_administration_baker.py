@@ -76,8 +76,7 @@ def baker_accounts():
 
             while True:
                 contact_no = input('Contact number(xxx-xxx xxxx): ')
-                pattern = r'^\d{3}-\d{7}$'  # define the format of contact number
-                if not re.fullmatch(pattern, contact_no):
+                if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):
                     print('\n+-----------------------------------------------+')
                     print('|⚠️ Invalid contact number. Please enter again. |')
                     print('+-----------------------------------------------+\n')
@@ -85,9 +84,8 @@ def baker_accounts():
                     break  # Exit the loop if age is valid
 
             while True:
-                email = input('Email: ')
-                pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # define the format of email
-                if not re.fullmatch(pattern, email):
+                email = input('Email: ') # define the format of email
+                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
                     print('\n+--------------------------------------+')
                     print('|⚠️ Invalid email. Please enter again. |')
                     print('+--------------------------------------+\n')
@@ -177,21 +175,20 @@ def system_administration_baker():
                             print(f'\n{baker_to_remove} removed.\n')
 
                             while True:
-                                remove_more = input('Continue remove? (y=yes, n=no)\n>>> ')
-                                if remove_more == 'y':
-                                    break
-
-                                elif remove_more == 'n':
-                                    break
-
-                                else:
+                                remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')
+                                if remove_more not in ['y', 'n']:
                                     print('\n+--------------------------------------+')
                                     print('|⚠️ Invalid input. Please enter again. |')
                                     print('+--------------------------------------+\n')
 
-                            if remove_more == 'n':
-                                print('\nStop removing. Exiting to the service page......')
-                                break
+                                else:
+                                    if remove_more == 'y':
+                                        break
+
+                                    else:
+                                        print('\nStop removing. Exiting to the service page......')
+                                        break
+                            break
 
                         else:
                             print('\n+--------------------------------------+')
@@ -309,7 +306,7 @@ def system_administration_baker():
                     print('+-----------------------------------------+')
 
         elif manage_baker == '4':
-            print('\nExiting to role selection......')
+            print('\nExiting to role management......')
             system_administration.system_administration()
             break
 

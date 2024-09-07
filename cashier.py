@@ -57,10 +57,10 @@ def cashier_accounts():
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'BAKER PRIVILEGE')
             print('-----------------------------------------------')
-            print('a. Recipe management\n'
-                  'b. Inventory check\n'
-                  'c. Product record-keeping\n'
-                  'd. Equipment management\n'
+            print('a. Product display\n'
+                  'b. Manage discount\n'
+                  'c. Transaction completion\n'
+                  'd. Reporting\n'
                   'e. Exit')
 
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')

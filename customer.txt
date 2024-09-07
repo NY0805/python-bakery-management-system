@@ -1,24 +1,4 @@
 {
-    "alice": {
-        "customer_username": "customer1",
-        "customer_password": "12345678",
-        "age": 23,
-        "gender": "female",
-        "contact_no": "345-5674832",
-        "email": "ee@ee.ee",
-        "address": "d",
-        "account_status": "active"
-    },
-    "penguin": {
-        "customer_username": "customer2",
-        "customer_password": "12345678",
-        "age": 34,
-        "gender": "male",
-        "contact_no": "345-4567382",
-        "email": "ff@ff.ff",
-        "address": "gg",
-        "account_status": "inactive"
-    },
     "dora": {
         "customer_username": "customer3",
         "customer_password": "12345678",
@@ -36,7 +16,8 @@
         "gender": "prefer not to say",
         "contact_no": "456-6758432",
         "email": "ff@ff.ff",
-        "address": "gg"
+        "address": "gg",
+        "account_status": "inactive"
     },
     "spongebob": {
         "customer_username": "customer5",
@@ -45,15 +26,7 @@
         "gender": "female",
         "contact_no": "123-4567821",
         "email": "ff@fff.ff",
-        "address": "ttt"
-    },
-    "pinkpanther": {
-        "customer_username": "customer6",
-        "customer_password": "12345678",
-        "age": 33,
-        "gender": "male",
-        "contact_no": "123-4567382",
-        "email": "fv@vv.vv",
-        "address": "yyy"
+        "address": "ttt",
+        "account_status": "inactive"
     }
 }

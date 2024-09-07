@@ -34,7 +34,7 @@ print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
 print('***************************************************')
 
 while True:
-    print('\nRole: ')
+    print('\nRole Options: ')
     print('1. Manager👨‍💼👩‍💼')
     print('2. Baker🧑‍🍳🍞')
     print('3. Cashier🖥️💰')
