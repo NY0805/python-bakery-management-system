@@ -1,20 +1,32 @@
 {
-    "aaa": {
+    "alice": {
         "customer_username": "customer1",
         "customer_password": "12345678",
         "age": 23,
         "gender": "female",
-        "contact_no": "123-3456732",
-        "email": "dd@dd.dd",
-        "address": "f"
+        "contact_no": "345-5674832",
+        "email": "ee@ee.ee",
+        "address": "d",
+        "account_status": "active"
     },
-    "bbb": {
+    "penguin": {
         "customer_username": "customer2",
         "customer_password": "12345678",
-        "age": 23,
+        "age": 34,
         "gender": "male",
-        "contact_no": "123-3456732",
-        "email": "dd@dd.dd",
-        "address": "v"
+        "contact_no": "345-4567382",
+        "email": "ff@ff.ff",
+        "address": "gg",
+        "account_status": "inactive"
+    },
+    "dora": {
+        "customer_username": "customer3",
+        "customer_password": "12345678",
+        "age": 34,
+        "gender": "prefer not to say",
+        "contact_no": "345-4567382",
+        "email": "ff@ff.ff",
+        "address": "gg",
+        "account_status": "inactive"
     }
 }

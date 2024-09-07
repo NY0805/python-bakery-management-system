@@ -21,7 +21,7 @@ bakery = '''
       |__________________________________________|
       
 '''
-
+name = 'aaa'
 print(bakery)
 
 print('***************************************************')
@@ -39,10 +39,18 @@ while True:
         role = int(input('\nWho are you? (1, 2, 3, 4):\n>>> '))
 
         if role == 1:
-            print('\n---------------------------------------------------\n'
-                  '\t\t\t\tMANAGER is selected.\n'
-                  '---------------------------------------------------')
-            manager.manager()
+            with open('manager.txt', 'r') as manager_file:
+                manager_file_content = manager_file.read().strip()
+                if name not in manager_file_content:
+                    print('\n+----------------------------------------------------------------------------------+')
+                    print('|⚠️ You are not a manager, cannot access to manager privilege. Please select again.|')
+                    print('+----------------------------------------------------------------------------------+\n')
+
+                else:
+                    print('\n---------------------------------------------------\n'
+                          '\t\t\t\tMANAGER is selected.\n'
+                          '---------------------------------------------------')
+                    manager.manager()
 
         elif role == 2:
             print('\n---------------------------------------------------\n'

@@ -206,5 +206,42 @@
         "allergens": [
             "c"
         ]
+    },
+    "3": {
+        "category": "Breads",
+        "product_name": "d",
+        "product_code": [
+            "d",
+            "d",
+            "d"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "3",
+        "date_of_production": "23-07-2004",
+        "shelf_life": "3",
+        "expiry_date": "23-07-2004",
+        "recipe": "d",
+        "baker_name": "d",
+        "allergens": [
+            "d"
+        ]
+    },
+    "12": {
+        "category": "xxxxx",
+        "product_name": "d",
+        "product_code": [
+            "44",
+            "34"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "12",
+        "date_of_production": "11-11-2024",
+        "shelf_life": "4",
+        "expiry_date": "11-11-2024",
+        "recipe": "e",
+        "baker_name": "r",
+        "allergens": [
+            "f"
+        ]
     }
 }
