@@ -380,7 +380,7 @@ def load_orders(): #Load the order data from a file
 
 orders = [
     {"order_id": 1001, "username": "Mark0825", "items_ordered": ["Bread x1", "Cake x1"], "total_price": 15.00, "status": "Pending Payment"},
-    {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x2", "Cake x1"], "total_price": 12.50, "status": "Pending"},
+    {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x2", "Cake x1"], "total_price": 12.50, "status": "Cancelled"},
     {"order_id": 1003, "username": "_eddie", "items_ordered": ["Bread x1", "Pastry x2"], "total_price": 8.00, "status": "Processing"},
     {"order_id": 1004, "username": "anna328_", "items_ordered": ["Biscuit x3"], "total_price": 3.75, "status": "Delivered"},
     {"order_id": 1005, "username": "andrew_520", "items_ordered": ["Muffin x1", "Cake x2"], "total_price": 10.00, "status": "Pending Payment"},
