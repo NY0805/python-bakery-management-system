@@ -1,3 +1,5 @@
+import json
+
 import manager
 import customer
 import cashier
@@ -21,54 +23,40 @@ bakery = '''
       |__________________________________________|
       
 '''
-name = 'aaa'
+
+
+#  print(baker_file_content.keys())
+
 print(bakery)
 
 print('***************************************************')
 print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
-print('***************************************************\n')
+print('***************************************************')
 
 while True:
-    print('Role: ')
+    print('\nRole: ')
     print('1. Manager👨‍💼👩‍💼')
-    print('2. Customer👦👧')
+    print('2. Baker🧑‍🍳🍞')
     print('3. Cashier🖥️💰')
-    print('4. Baker🧑‍🍳🍞')
+    print('4. Customer👦👧')
     print('5. Exit the program⛔🔙')
     try:
         role = int(input('\nWho are you? (1, 2, 3, 4):\n>>> '))
 
         if role == 1:
-            with open('manager.txt', 'r') as manager_file:
-                manager_file_content = manager_file.read().strip()
-                if name not in manager_file_content:
-                    print('\n+----------------------------------------------------------------------------------+')
-                    print('|⚠️ You are not a manager, cannot access to manager privilege. Please select again.|')
-                    print('+----------------------------------------------------------------------------------+\n')
-
-                else:
-                    print('\n---------------------------------------------------\n'
-                          '\t\t\t\tMANAGER is selected.\n'
-                          '---------------------------------------------------')
-                    manager.manager()
+            manager.manager()
 
         elif role == 2:
-            print('\n---------------------------------------------------\n'
-                  '\t\t\t\tCUSTOMER is selected.\n'
-                  '---------------------------------------------------')
-            customer.customer()
+            baker.baker_accounts()
 
         elif role == 3:
-            print('\n---------------------------------------------------\n'
-                  '\t\t\t\tCASHIER is selected.\n'
-                  '---------------------------------------------------')
             cashier.cashier_accounts()
 
         elif role == 4:
             print('\n---------------------------------------------------\n'
-                  '\t\t\t\tBAKER is selected.\n'
+                  '\t\t\t\tCUSTOMER is selected.\n'
                   '---------------------------------------------------')
-            baker.baker_accounts()
+            customer.customer()
 
         elif role == 5:
             print('\n--------------------YOU ARE EXIT--------------------')
@@ -77,11 +65,11 @@ while True:
         else:
             print('\n+------------------+')
             print('|⚠️ Invalid input. |')
-            print('+------------------+\n')
+            print('+------------------+')
 
     except ValueError:
         print('\n+------------------+')
         print('|⚠️ Invalid input. |')
-        print('+------------------+\n')
+        print('+------------------+')
 
 

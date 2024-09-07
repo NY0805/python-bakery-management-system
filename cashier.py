@@ -29,7 +29,7 @@ def save_info(cashier_info):
 def cashier_accounts():
     cashier_info = load_data_from_file()  # initialize 'info' as the name of dictionary that store data loaded from file
 
-    cashier_name = input('Name: ')
+    cashier_name = input('\nName: ')
     if cashier_name in cashier_info:
         cashier_username = input('Username: ')
         while cashier_username != (cashier_info[cashier_name]['cashier_username']):
@@ -55,12 +55,12 @@ def cashier_accounts():
         print('Welcome, cashier', cashier_name, '!')
         while True:
             print('\n-----------------------------------------------')
-            print('\t\t\t', '', '', 'CASHIER PRIVILEGE')
+            print('\t\t\t', '', '', 'BAKER PRIVILEGE')
             print('-----------------------------------------------')
-            print('a. Product display\n'
-                  'b. Manage discount\n'
-                  'c. Transaction completion\n'
-                  'd. Reporting\n'
+            print('a. Recipe management\n'
+                  'b. Inventory check\n'
+                  'c. Product record-keeping\n'
+                  'd. Equipment management\n'
                   'e. Exit')
 
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
@@ -78,7 +78,7 @@ def cashier_accounts():
                 print('in progress d')
 
             elif choice == 'e':
-                print('\nExiting to main page......\n')
+                print('Exiting to main page......')
                 return False
 
             else:
@@ -87,8 +87,18 @@ def cashier_accounts():
                 print('+--------------------------------------+')
 
     else:
-        print('\n+----------------------------------------------------------------------+')
-        print('|⚠️ You are unable to access the system because you are not our cashier. |')
-        print('|   If you are keen to join our team, kindly contact the manager.        |')
-        print('+----------------------------------------------------------------------+\n')
-        print('Exiting to main page......\n')
+        print('\n+--------------------------------------------------------------+')
+        print('|⚠️ You are not a cashier, cannot access to cashier privilege. |')
+        print('+--------------------------------------------------------------+\n')
+        while True:
+            become_cashier = input('Do you want to be a cashier (y=yes, n=no)?\n>>> ')
+            if become_cashier == 'y':
+                print('\nPlease contact manager to register as a cashier. Upon approval, you can log in again.')
+                print('Exiting to main page......')
+                break
+            elif become_cashier == 'n':
+                break
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+\n')

@@ -34,7 +34,7 @@ def save_info(baker_info):
 def baker_accounts():
     baker_info = load_data_from_file()  # initialize 'info' as the name of dictionary that store data loaded from file
 
-    baker_name = input('Name: ')
+    baker_name = input('\nName: ')
     if baker_name in baker_info:
         baker_username = input('Username: ')
         while baker_username != (baker_info[baker_name]['baker_username']):
@@ -92,11 +92,21 @@ def baker_accounts():
                 print('+--------------------------------------+')
 
     else:
-        print('\n+----------------------------------------------------------------------+')
-        print('|⚠️ You are unable to access the system because you are not our baker. |')
-        print('|   If you are keen to join our team, kindly contact the manager.      |')
-        print('+----------------------------------------------------------------------+\n')
-        print('Exiting to main page......\n')
+        print('\n+----------------------------------------------------------+')
+        print('|⚠️ You are not a baker, cannot access to baker privilege. |')
+        print('+----------------------------------------------------------+\n')
+        while True:
+            become_baker = input('Do you want to be a baker (y=yes, n=no)?\n>>> ')
+            if become_baker == 'y':
+                print('\nPlease contact manager to register as a baker. Upon approval, you can log in again.')
+                print('Exiting to main page......')
+                break
+            elif become_baker == 'n':
+                break
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+\n')
 
 
 

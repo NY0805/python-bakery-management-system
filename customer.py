@@ -30,13 +30,13 @@ def save_info(customer_info):
 def sign_up():
     customer_info = load_data_from_customer()
 
-    customer_name = input('Name: ')
+    customer_name = input('\nName: ')
     if customer_name in customer_info:
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
         print('+--------------------------------------------------+')
         print('You already have an account.')
-        print('Directing to login page......\n')
+        print('Directing to the login page......\n')
         login()
 
     else:
@@ -113,13 +113,13 @@ def sign_up():
 
         save_info(customer_info)
         print('\nInformation saved.')
-        print(f'Welcome, {customer_name}! Your account has been created successfully!')
+        print(f'Welcome, {customer_name}! Your account has been created successfully!\n')
 
 
 def login():
     customer_info = load_data_from_customer()
 
-    customer_name = input('Name: ')
+    customer_name = input('\nName: ')
     if customer_name in customer_info:
         customer_username = input("Username: ")
         while customer_username != customer_info[customer_name]['customer_username']:
@@ -148,26 +148,30 @@ def login():
 def customer():
     customer_info = load_data_from_customer()
 
-    print('\n+-------------------------------------------------------+')
-    print('|💡 Please sign up if you\'re logging in the first time. |')
-    print('|   Please log in if you already have an account.       |')
-    print('+-------------------------------------------------------+\n')
+    print('\n+---------------------------------------------------------+')
+    print('|💡 Please "sign up" if you\'re logging in the first time. |')
+    print('|   Please "log in" if you already have an account.       |')
+    print('+---------------------------------------------------------+\n')
 
-    while True:
+    choice = input('1. Sign up\n'
+                   '2. Log in\n'
+                   'Enter your choice(1, 2):\n>>> ')
+
+    while choice not in ['1', '2']:
+        print('\n+--------------------------------------+')
+        print('|⚠️ Invalid input. Please enter again. |')
+        print('+--------------------------------------+\n')
         choice = input('1. Sign up\n'
                        '2. Log in\n'
                        'Enter your choice(1, 2):\n>>> ')
 
-        if choice == '1':
-            sign_up()
+    if choice == '1':
+        sign_up()
+        customer_menu()
 
-        elif choice == '2':
-            login()
-
-        else:
-            print('\n+--------------------------------------+')
-            print('|⚠️ Invalid input. Please enter again. |')
-            print('+--------------------------------------+\n')
+    else:
+        login()
+        customer_menu()
 
 
 # Function to update customer information
@@ -572,7 +576,7 @@ def view_loyalty_rewards():
 
 def customer_menu():
     while True:
-        print("\nWELCOME TO MORNING GLORY BAKERY!")
+        print("WELCOME TO MORNING GLORY BAKERY!")
         print("1. Sign Up")
         print("2. Login")
         print("3. Browse Products")
@@ -605,7 +609,7 @@ def customer_menu():
         elif option == "9":
             manage_accounts()  # Call the function to manage accounts
         elif option == "0":
-            print("Thank you for visiting our system. Goodbye!")
+            print("Thank you for visiting our bakery. Goodbye!")
             break
         else:
             print("Invalid option, please try again.")

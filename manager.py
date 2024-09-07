@@ -56,12 +56,6 @@ def manager_accounts():
     print('|💡 This is the unique password for manager. Keep confidential and REMEMBER it! |')
     print('+-------------------------------------------------------------------------------+\n')
 
-    ''' while len(manager_password) < 8 or len(manager_password) > 12:
-        print('\n+---------------------------------------------------------------------------+')
-        print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
-        print('+---------------------------------------------------------------------------+\n')
-        manager_password = input('Password: ') '''
-
     while True:
         try:
             age = int(input('Age: '))
@@ -139,45 +133,63 @@ def manager():
             print('+-------------------------------------------+\n')
             manager_password = input('Password: ')
 
+        print('\nLogin successfully!')
+        print('Welcome, manager', manager_name, '!')
+        while True:
+            print('\n-----------------------------------------------')
+            print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
+            print('-----------------------------------------------')
+            print('a. System administration\n'
+                  'b. Order management\n'
+                  'c. Financial management\n'
+                  'd. Inventory control\n'
+                  'e. Customer feedback\n'
+                  'f. Exit')
+
+            choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
+            if choice == 'a':
+                system_administration.system_administration()
+
+            elif choice == 'b':
+                order_management.order_management()
+
+            elif choice == 'c':
+                print('enter again.')
+
+            elif choice == 'd':
+                print('enter again.')
+
+            elif choice == 'e':
+                print('enter again.')
+
+            elif choice == 'f':
+                print('\nExiting to main page......')
+                return False
+
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+')
+
     else:
-        manager_accounts()
+        print('\n+--------------------------------------------------------------+')
+        print('|⚠️ You are not a manager, cannot access to manager privilege. |')
+        print('+--------------------------------------------------------------+\n')
+        while True:
+            become_manager = input('Do you want to be a manager (y=yes, n=no)?\n>>> ')
+            if become_manager == 'y':
+                if len(manager_info) == 1:
+                    print('\nSorry, the manager position is not vacant.')
+                    print('Exiting to main page......')
+                    break
+                else:
+                    manager_accounts()
+            elif become_manager == 'n':
+                break
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+\n')
 
-    print('\nLogin successfully!')
-    print('Welcome, manager', manager_name, '!')
-    while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
-        print('-----------------------------------------------')
-        print('a. System administration\n'
-              'b. Order management\n'
-              'c. Financial management\n'
-              'd. Inventory control\n'
-              'e. Customer feedback\n'
-              'f. Exit')
-
-        choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
-        if choice == 'a':
-            system_administration.system_administration()
-
-        elif choice == 'b':
-            order_management.order_management()
-
-        elif choice == 'c':
-            print('enter again.')
-
-        elif choice == 'd':
-            print('enter again.')
-
-        elif choice == 'e':
-            print('enter again.')
-
-        elif choice == 'f':
-            print('\nExiting to main page......\n')
-            return False
-
-        else:
-            print('\n+--------------------------------------+')
-            print('|⚠️ Invalid input. Please enter again. |')
-            print('+--------------------------------------+')
 
 
