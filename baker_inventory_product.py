@@ -1,6 +1,6 @@
 import json  # import json text file to record data
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # Define the function that loads data from the file
@@ -124,8 +124,8 @@ def validation_alphanum_only(info):
         return False
 
 
-def validation_alphanum_space_only(info):
-    if re.fullmatch(r'[A-Za-z0-9 ]+', info):
+def validation_shelf_life(info):
+    if re.match(r'^\d+\s*days$', info.strip()):
         return True
     else:
         return False
@@ -140,10 +140,10 @@ def validation_alphabet_only(info):
 
 def validation_list_alphabet_only(info):
     for item in info:
-        if not item.isalpha():
-            return False
-        else:
+        if re.search(r'[A-Za-z ]+', item):
             return True
+        else:
+            return False
 
 
 def validation_digit_only(info):
@@ -167,8 +167,8 @@ def product_details():
 
     product_data = load_data_from_inventory_product()
 
-    product_info = ['Product Name', 'Product Code', 'Batch Number', 'Date of Production', 'Shelf Life',
-                    'Expiry Date', 'Recipe', 'Quantity Produced', 'Baker\'s Name', 'Allergens']
+    product_info = ['Product Name', 'Product Code', 'Batch Number', 'Date of Production', 'Shelf Life (__ days)',
+                    'Expiry Date (DD-MM-YYYY)', 'Recipe', 'Quantity Produced', 'Baker\'s Name', 'Allergens']
 
     max_length = 0
     for item in product_info:
@@ -180,73 +180,111 @@ def product_details():
     while True:
         quantity_produced = input(f'1. {product_info[7].ljust(max_length + 2)}: ')
         if validation_empty_entries(quantity_produced):
-            if not validation_digit_only(quantity_produced):
-                print('Please enter a valid quantity produced. (Cannot contain any special characters.)\n.')
-            else:
+            if validation_digit_only(quantity_produced):
                 quantity = int(quantity_produced)
                 break
+            else:
+                print('Please enter a valid quantity produced. (Cannot contain any alphabet and special characters.)\n')
 
     while True:
-        product_name = input(f'1. {product_info[0].ljust(max_length + 2)}: ')
+        product_name = input(f'2. {product_info[0].ljust(max_length + 2)}: ')
         if validation_empty_entries(product_name):
-            if not validation_alphabet_only(product_name):
-                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n.')
-            else:
+            if validation_alphabet_only(product_name):
                 break
+            else:
+                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
 
     while True:
         batch_number = input(f'3. {product_info[2].ljust(max_length + 2)}: ')
         if validation_empty_entries(batch_number):
-            if not validation_alphanum_only(batch_number):
-                print('Please enter a valid batch number. (Cannot contain any special characters.)\n.')
+            if validation_alphanum_only(batch_number):
+                if batch_number in product_data:
+                    print('Duplicate batch number detected. Please input the correct batch number.\n')
+                else:
+                    break
             else:
-                break
+                print('Please enter a valid batch number. (Cannot contain any special characters.)\n')
 
     while True:
         date_of_production = input(f'4. {product_info[3].ljust(max_length + 2)}: ')
         if validation_empty_entries(date_of_production):
-            if not validation_date(date_of_production):
-                print("Please enter a date of production. (With format of 'day-month-year', 'xx-xx-xxxx'.)\n")
-            else:
+            if validation_date(date_of_production):
                 break
+            else:
+                print("Please enter a date of production. (With format of 'day-month-year', 'xx-xx-xxxx'.)\n")
 
     while True:
         shelf_life = input(f'5. {product_info[4].ljust(max_length + 2)}: ')
         if validation_empty_entries(shelf_life):
-            if not validation_alphanum_space_only(shelf_life):
-                print('Please enter a valid shelf life. (Cannot contain any special characters.)\n.')
+            match = re.match(r'^(\d+)\s*days$', shelf_life.strip())
+            if match:
+                number = int(match.group(1))
+                if category in ['Breads', 'Muffins']:
+                    if number <= 5:
+                        break
+                    else:
+                        print('Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
+                elif category in ['Cakes', 'Pastries']:
+                    if number <= 7:
+                        break
+                    else:
+                        print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
+                elif category == 'Biscuits':
+                    if number <= 14:
+                        break
+                    else:
+                        print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
+                else:
+                    if number <= 14:
+                        break
+                    else:
+                        print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
             else:
-                break
+                print("Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
 
     while True:
-        expiry_date = input(f'6. {product_info[5].ljust(max_length + 2)}: ')
-        if validation_empty_entries(expiry_date):
-            if not validation_date(expiry_date):
-                print("Please enter a expiry date. (With format of 'day-month-year', 'xx-xx-xxxx'.)\n")
+        expiry_date_str = input(f'6. {product_info[5].ljust(max_length + 2)}: ')
+        if validation_empty_entries(expiry_date_str):
+            if validation_date(expiry_date_str):
+                # convert expiry_date_str from string to datetime format
+                expiry_date = datetime.strptime(expiry_date_str, '%d-%m-%Y')
+                # convert date_of _production from string to datetime format
+                date_of_production_new = datetime.strptime(date_of_production, '%d-%m-%Y')
+
+                max_expiry = date_of_production_new + timedelta(days=number + 3)
+
+                if max_expiry >= expiry_date >= date_of_production_new:
+                    break
+                else:
+                    print('The expired date does not fall within the allowable period.')
+                    print('The allowable period must between the date of production and date of production + shelf life + 3 days.')
+                    print(f'* Allowable period: {date_of_production} to {max_expiry.strftime('%d-%m-%Y')}.\n')
             else:
-                break
+                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
 
     while True:
         recipe = input(f'7. {product_info[6].ljust(max_length + 2)}: ')
         if validation_empty_entries(recipe):
             if not validation_alphabet_only(recipe):
-                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n.')
+                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n')
             else:
                 break
 
     while True:
-        baker_name = input(f'9. {product_info[8].ljust(max_length + 2)}: ')
+        baker_name = input(f'8. {product_info[8].ljust(max_length + 2)}: ')
         if validation_empty_entries(baker_name):
             if not validation_alphanum_only(baker_name):
-                print('Please enter a valid baker name. (Cannot contain any special characters.)\n.')
+                print('Please enter a valid baker name. (Cannot contain any special characters.)\n')
             else:
                 break
 
     while True:
-        allergens = input(f'10. {product_info[9].ljust(max_length + 2)}: ').split()
+        print('* If there is more than one data item, separate them with a space.')
+        print('* If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts.')
+        allergens = input(f'9. {product_info[9].ljust(max_length + 2)}: ').split()
         if validation_empty_entries(allergens):
             if not validation_list_alphabet_only(allergens):
-                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n.')
+                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
             else:
                 break
 
@@ -254,7 +292,7 @@ def product_details():
 
     for i in range(quantity):
         while True:
-            product_code = input(f'2. Enter product code for item {i + 1}: ')
+            product_code = input(f'Enter product code for item {i + 1}: ')
             if validation_empty_entries(product_code):
                 if not validation_alphanum_only(product_code):
                     print('Please enter a valid product code. (Cannot contain any special characters.)\n.')
@@ -270,7 +308,7 @@ def product_details():
         'batch_number': batch_number,
         'date_of_production': date_of_production,
         'shelf_life': shelf_life,
-        'expiry_date': expiry_date,
+        'expiry_date': expiry_date_str,
         'recipe': recipe,
         'baker_name': baker_name,
         'allergens': allergens
