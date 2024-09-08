@@ -377,26 +377,6 @@ def load_orders(): #Load the order data from a file
         print("Error loading order data. The file format might be incorrect.")
         return []
 
-
-orders = [
-    {"order_id": 1001, "username": "Mark0825", "items_ordered": ["Bread x1", "Cake x1"], "total_price": 15.00, "status": "Pending Payment"},
-    {"order_id": 1002, "username": "03jane_", "items_ordered": ["Muffin x2", "Cake x1"], "total_price": 12.50, "status": "Cancelled"},
-    {"order_id": 1003, "username": "_eddie", "items_ordered": ["Bread x1", "Pastry x2"], "total_price": 8.00, "status": "Processing"},
-    {"order_id": 1004, "username": "anna328_", "items_ordered": ["Biscuit x3"], "total_price": 3.75, "status": "Delivered"},
-    {"order_id": 1005, "username": "andrew_520", "items_ordered": ["Muffin x1", "Cake x2"], "total_price": 10.00, "status": "Pending Payment"},
-    {"order_id": 1006, "username": "chen0lee", "items_ordered": ["Pastry x1", "Bread x2"], "total_price": 7.00, "status": "Cancelled"},
-    {"order_id": 1007, "username": "anna_", "items_ordered": ["Cake x2", "Muffin x1"], "total_price": 14.00, "status": "Processing"},
-    {"order_id": 1008, "username": "boa20prim", "items_ordered": ["Bread x1", "Biscuit x2"], "total_price": 5.50, "status": "On the way"},
-    {"order_id": 1009, "username": "october.06", "items_ordered": ["Cake x1", "Pastry x1"], "total_price": 10.00, "status": "Delivered"},
-    {"order_id": 1010, "username": "ethan_wood", "items_ordered": ["Muffin x1", "Biscuit x1"], "total_price": 4.00, "status": "Pending"},
-    {"order_id": 1011, "username": "im.david", "items_ordered": ["Pastry x2", "Bread x1"], "total_price": 9.00, "status": "Processing"},
-    {"order_id": 1012, "username": "noah_lee", "items_ordered": ["Muffin x1", "Cake x1"], "total_price": 7.50, "status": "Cancelled"},
-    {"order_id": 1013, "username": "scott_lee02", "items_ordered": ["Pastry x1", "Bread x2"], "total_price": 8.00, "status": "Delivered"},
-    {"order_id": 1014, "username": "_orson_", "items_ordered": ["Biscuit x1", "Cake x1"], "total_price": 5.00, "status": "On the way"},
-    {"order_id": 1015, "username": "yubin00", "items_ordered": ["Bread x2", "Muffin x1"], "total_price": 6.50, "status": "Processing"}
-]
-
-
 def order_tracking():
     # Prompt the user to enter their Order ID
     order_id = input("Enter your Order ID: ")
