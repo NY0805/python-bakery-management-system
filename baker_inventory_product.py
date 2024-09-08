@@ -162,7 +162,6 @@ def validation_date(info, date_format='%d-%m-%Y'):
 
 
 def product_details():
-
     category = product_categories()
 
     product_data = load_data_from_inventory_product()
@@ -257,7 +256,8 @@ def product_details():
                     break
                 else:
                     print('The expired date does not fall within the allowable period.')
-                    print('The allowable period must between the date of production and date of production + shelf life + 3 days.')
+                    print(
+                        'The allowable period must between the date of production and date of production + shelf life + 3 days.')
                     print(f'* Allowable period: {date_of_production} to {max_expiry.strftime("%d-%m-%Y")}.\n')
             else:
                 print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
@@ -265,28 +265,28 @@ def product_details():
     while True:
         recipe = input(f'7. {product_info[6].ljust(max_length + 2)}: ')
         if validation_empty_entries(recipe):
-            if not validation_alphabet_only(recipe):
-                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n')
-            else:
+            if validation_alphabet_only(recipe):
                 break
+            else:
+                print('Please enter a valid recipe. (Cannot contain any digits and special characters.)\n')
 
     while True:
         baker_name = input(f'8. {product_info[8].ljust(max_length + 2)}: ')
         if validation_empty_entries(baker_name):
-            if not validation_alphanum_only(baker_name):
-                print('Please enter a valid baker name. (Cannot contain any special characters.)\n')
-            else:
+            if validation_alphanum_only(baker_name):
                 break
+            else:
+                print('Please enter a valid baker name. (Cannot contain any special characters.)\n')
 
     while True:
         print('* If there is more than one data item, separate them with a space.')
         print('* If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts.')
         allergens = input(f'9. {product_info[9].ljust(max_length + 2)}: ').split()
         if validation_empty_entries(allergens):
-            if not validation_list_alphabet_only(allergens):
-                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
-            else:
+            if validation_list_alphabet_only(allergens):
                 break
+            else:
+                print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
 
     product_codes = []
 
@@ -335,7 +335,6 @@ def continue_adding():
                 print("Invalid input. Please enter 'y' or 'n'.")
         except ValueError:
             print('Invalid input. Please enter again.')
-
 
 
 def update_product():
