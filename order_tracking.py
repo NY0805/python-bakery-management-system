@@ -20,22 +20,19 @@ def load_data_from_tracking():
         return {}  # return empty dictionary if the file does not exist
 
 def order_tracking():
-    # Prompt the user to enter their Order ID
-    order_id = input('Enter your Order ID: ')
-    # Load orders data
     orders = load_data_from_tracking()
-    # Check if the order_id exists in the loaded orders data
-    # Iterate over each order to find the matching order ID
+
+    order_id = int(input('enter id: '))
 
     for order in orders.values():
-        if order.keys() == order_id:
+        if order['order_id'] == order_id:
 
             # Display order information
-            print(f'Order ID: {'order_id'}')
-            print(f'Username: {'username'}')
-            print(f'Items ordered: {'items_ordered'}')
-            print(f'Total Price: {'total_price'}')
-            print(f'Status: {'status'}')
+            print(f'Order ID: {order['order_id']}')
+            print(f'Username: {order['username']}')
+            print(f'Items ordered: {order['items_ordered']}')
+            print(f'Total Price: {order['total_price']}')
+            print(f'Status: {order['status']}')
             break
         else:
             print('Order ID cannot be found. Please check and try again.')

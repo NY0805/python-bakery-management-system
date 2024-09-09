@@ -153,6 +153,32 @@ def validation_date(info, date_format='%d-%m-%Y'):
         return False
 
 
+def validation_shelf_life(info, category):
+    match = re.match(r'^(\d+)\s*days$', info.strip())
+    if match:
+        number = int(match.group(1))
+        if category in ['Breads', 'Muffins']:
+            if 5 >= number > 0:
+                return True
+            else:
+                print('Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
+                return False
+        elif category in ['Cakes', 'Pastries']:
+            if 7 >= number > 0:
+                return True
+            else:
+                print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
+                return False
+        elif category in ['Biscuits', 'Others']:
+            if 14 >= number > 0:
+                return True
+            else:
+                print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
+                return False
+    else:
+        print("Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
+
+
 def product_details():
     category = product_categories()
 

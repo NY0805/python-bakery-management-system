@@ -37,5 +37,14 @@
         "contact_no": "345-5678432",
         "email": "ff@ff.ff",
         "address": "r"
+    },
+    "lum": {
+        "customer_username": "lum",
+        "customer_password": "00000000",
+        "age": 13,
+        "gender": "prefer not to say",
+        "contact_no": "014-2949302",
+        "email": "gg@gg.com",
+        "address": "12,ifog"
     }
 }

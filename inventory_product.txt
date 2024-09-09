@@ -1,73 +1,53 @@
 {
     "001": {
         "category": "Breads",
-        "product_name": "Banana bread",
+        "product_name": "banana bread",
         "product_code": [
-            "bread1",
-            "bread2",
-            "bread3"
+            "bread1"
         ],
-        "quantity_produced": "3",
+        "quantity_produced": "1",
         "batch_number": "001",
-        "date_of_production": "05-04-2004",
+        "date_of_production": "09-08-2004",
         "shelf_life": "5 days",
-        "expiry_date": "13-04-2004",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "banana"
-        ]
-    },
-    "002": {
-        "category": "Others",
-        "product_name": "Spaghetti",
-        "product_code": [
-            "spaghetti1"
-        ],
-        "quantity_produced": "1",
-        "batch_number": "002",
-        "date_of_production": "09-08-2004",
-        "shelf_life": "7 days",
-        "expiry_date": "19-08-2004",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "rosemary"
-        ]
-    },
-    "oo3": {
-        "category": "Pastries",
-        "product_name": "Apple pie",
-        "product_code": [
-            "pie1",
-            "pie2"
-        ],
-        "quantity_produced": "2",
-        "batch_number": "oo3",
-        "date_of_production": "08-11-2004",
-        "shelf_life": "6 days",
-        "expiry_date": "17-11-2004",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "apple"
-        ]
-    },
-    "004": {
-        "category": "Breads",
-        "product_name": "Bun",
-        "product_code": [
-            "bun1"
-        ],
-        "quantity_produced": "1",
-        "batch_number": "004",
-        "date_of_production": "09-08-2004",
-        "shelf_life": "5days",
         "expiry_date": "17-08-2004",
         "recipe": "r",
         "baker_name": "r",
         "allergens": [
-            "no"
+            "r"
+        ]
+    },
+    "002": {
+        "category": "Cakes",
+        "product_name": "red velvet",
+        "product_code": [
+            "cake1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "002",
+        "date_of_production": "09-09-2004",
+        "shelf_life": "7 days",
+        "expiry_date": "18-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "dairy_product"
+        ]
+    },
+    "003": {
+        "category": "Pastries",
+        "product_name": "apple pie",
+        "product_code": [
+            "pie1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "003",
+        "date_of_production": "27-08-2004",
+        "shelf_life": "7 days",
+        "expiry_date": "06-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "apple"
         ]
     }
 }
