@@ -3,9 +3,9 @@ import re
 
 
 # Define the function that loads data from the file
-def load_data_from_customer():
+def load_data_from_products():
     try:
-        file = open('product_browsing.txt', 'r')  # open the file and read
+        file = open('inventory_product.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -19,22 +19,24 @@ def load_data_from_customer():
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
 
+
+products = load_data_from_products()
+
+
 def browse_products():
-    products = load_data_from_customer()
     try:
         # Load the products from the JSON file
-        with open('product_browsing.txt', 'r') as file:
-            products = json.load(file)
 
         # Display the products to the customer
         print('\nAvailable Products:')
-        for product in products:
-            print(f'Product Name: {product['name']}')
-            print(f'Product Code: {product['code']}')
-            print(f'Price: ${product['price']}')
-            print(f'Allergen: {product['allergen']}')
-            print(f'Description: {product['description']}')
+        for product in products.values():
+            print(f'Product Name: {product['product_name']}')
+            print(f'Product Code: {product['product_code']}')
+            print(f'Allergen: {product['allergens']}')
             print(f'Expiry Date: {product['expiry_date']}\n')
 
     except FileNotFoundError:
         print('Product data cannot be found.')
+
+
+browse_products()

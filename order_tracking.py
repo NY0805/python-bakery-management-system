@@ -3,7 +3,7 @@ import re
 
 
 # Define the function that loads data from the file
-def load_data_from_customer():
+def load_data_from_tracking():
     try:
         file = open('order_tracking.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
