@@ -22,5 +22,21 @@
         "gender": "male",
         "contact_no": "123-3456732",
         "email": "gg@gg.gg"
+    },
+    "elsa": {
+        "baker_username": "baker4",
+        "baker_password": "b@k3rm4st3r!",
+        "age": 45,
+        "gender": "female",
+        "contact_no": "456-5748321",
+        "email": "ee@ee.ee"
+    },
+    "connie": {
+        "baker_username": "baker5",
+        "baker_password": "b@k3rm4st3r!",
+        "age": 34,
+        "gender": "female",
+        "contact_no": "123-4567382",
+        "email": "ff@ff.ff"
     }
 }

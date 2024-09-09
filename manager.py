@@ -140,6 +140,8 @@ def manager():
             print('+-------------------------------------------+\n')
             manager_password = input('Password: ')
 
+
+
     else:
         print('\n+--------------------------------------------------------------+')
         print('|⚠️ You are not a manager, cannot access to manager privilege. |')
@@ -150,13 +152,13 @@ def manager():
                 if len(manager_info) == 1:
                     print('\nSorry, the manager position is not vacant.')
                     print('Exiting to main page......')
-                    break
+                    return False
                 else:
                     manager_accounts()
                     break
 
             elif become_manager == 'n':
-                print('\nExiting to role management......')
+                print('\nExiting to main page......')
                 return False
             else:
                 print('\n+--------------------------------------+')

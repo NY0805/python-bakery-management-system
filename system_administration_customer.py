@@ -152,10 +152,9 @@ def edit_customer():
 
                     for customer_data_key, customer_data_value in (customer[selected_customer].items()):
                         if customer_data_key != 'account_status':
-                            print(f'{customer_data_key}: {customer_data_value}')
+                            print(f'{customer_data_key.replace("_", " ").title()}: {customer_data_value}')
 
-                    attribute_of_customer_data = input(
-                        '\nWhich information do you want to modify? (or enter \"cancel\")\n>>> ')
+                    attribute_of_customer_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                     if attribute_of_customer_data in customer[selected_customer]:
                         if attribute_of_customer_data != 'account_status':
 
@@ -238,6 +237,31 @@ def edit_customer():
             print('\n+-----------------------------------------+')
             print('|⚠️ Invalid input. Please enter a number. |')
             print('+-----------------------------------------+')
+
+
+'''def recovery_customer():
+    while True:
+        print('\n-----------------------------------------------')
+        print('\t\t\t\tTerminated customer')
+        print('-----------------------------------------------')
+        for index, key in enumerate(customer, start=1):
+            print(f'{index}. {key}')
+        print(f'{len(customer) + 1}. cancel')
+        
+        try:
+            index_of_customer_to_recover = int(input(f'\nWhich customer do you want to terminate? (or enter {len(customer) + 1} to cancel)\n>>> '))
+            if index_of_customer_to_recover == len(customer) + 1:
+                print('\nCancelling. Exiting to the service page......')
+                break
+            
+            elif 1 <= index_of_customer_to_recover <= len(customer):
+                if customer.keys() not in customer.txt:
+                    
+                
+        except ValueError:
+            print('\n+-----------------------------------------+')
+            print('|⚠️ Invalid input. Please enter a number. |')
+            print('+-----------------------------------------+\n')'''
 
 
 def terminate_customer():

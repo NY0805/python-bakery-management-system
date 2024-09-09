@@ -226,9 +226,9 @@ def system_administration_cashier():
                             print('-----------------------------------------------')
 
                             for cashier_data_key, cashier_data_value in (cashier[selected_cashier].items()):
-                                print(f'{cashier_data_key}: {cashier_data_value}')
+                                print(f'{cashier_data_key.replace("_", " ").title()}: {cashier_data_value}')
 
-                            attribute_of_cashier_data = input('\nWhich information do you want to modify? (or enter \"cancel\")\n>>> ')
+                            attribute_of_cashier_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                             if attribute_of_cashier_data in cashier[selected_cashier]:
 
                                 while True:
