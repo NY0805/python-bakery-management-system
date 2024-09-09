@@ -1,19 +1,26 @@
-def load_cart_from_file():
+import json
+import re
+
+
+# Define the function that loads data from the file
+def load_data_from_customer():
     try:
-        with open('cart.txt', 'r') as file:
-            content = file.read().strip()
-            if content:
-                try:
-                    return json.loads(content)
-                except json.JSONDecodeError:
-                    return []
-            else:
-                return []
+        file = open('cart_management.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return []
+        return {}  # return empty dictionary if the file does not exist
 
 def save_cart_to_file(cart):
-    with open('cart.txt', 'w') as file:
+    with open('cart_management.txt', 'w') as file:
         json.dump(cart, file, indent=4)
 
 def add_item_to_cart():
@@ -73,7 +80,7 @@ def view_cart():
 
 def load_orders(): #Load the order data from a file
     try:
-        with open("orders.txt", "r") as file:
+        with open("customer_order_list.txt", "r") as file:
             orders = json.load(file)
         return orders
     except FileNotFoundError:
