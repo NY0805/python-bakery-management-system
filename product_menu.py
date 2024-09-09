@@ -27,7 +27,7 @@ product_data = load_data_from_inventory_product()
 def format_product_data(product):
     return (
         f"Product Name: {product['product_name'].title()}\n"
-        f"Product Code: {product['product_code'[0]]}\n"
+        f"Product Code: {product['product_code'][0]}\n"
         f"Expiry Date: {product['expiry_date']}\n"
         f"Allergen: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
         f"Description: hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"

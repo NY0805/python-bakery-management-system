@@ -52,5 +52,22 @@
         "allergens": [
             "apple"
         ]
+    },
+    "004": {
+        "category": "Breads",
+        "product_name": "Bun",
+        "product_code": [
+            "bun1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "004",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "5days",
+        "expiry_date": "17-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "no"
+        ]
     }
 }
