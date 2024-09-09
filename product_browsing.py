@@ -25,9 +25,7 @@ products = load_data_from_products()
 
 def browse_products():
     try:
-        # Load the products from the JSON file
-
-        # Display the products to the customer
+        # Display the products to customers
         print('\nAvailable Products:')
         for product in products.values():
             print(f'Product Name: {product['product_name']}')
