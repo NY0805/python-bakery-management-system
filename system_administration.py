@@ -13,11 +13,10 @@ def system_administration():
 
         role = input('\nWhich role do you want to manage(1, 2, 3, 4):\n>>> ')
 
-        if (role != '1') and (role != '2') and (role != '3') and (role != '4'):
+        if role not in ['1', '2', '3', '4']:
             print('\n+--------------------------------------+')
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
-            continue
 
         elif role == '1':
             system_administration_baker.system_administration_baker()
@@ -32,6 +31,8 @@ def system_administration():
             print('\nExiting to manager privilege......')
             break
         break
+
+
 
 
 

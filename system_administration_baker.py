@@ -172,7 +172,7 @@ def system_administration_baker():
                             baker_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
                             del baker[baker_to_remove]
                             save_info(baker)
-                            print(f'\n{baker_to_remove} removed.\n')
+                            print(f'\n{baker_to_remove} is removed.\n')
 
                             while True:
                                 remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')
@@ -210,8 +210,7 @@ def system_administration_baker():
                 print(f'{len(baker) + 1}. cancel')
 
                 try:
-                    index_of_baker_to_edit = int(
-                        input(f'\nWhich baker do you want to edit? (or enter {len(baker) + 1} to cancel)\n>>> '))
+                    index_of_baker_to_edit = int(input(f'\nWhich baker do you want to edit? (or enter {len(baker) + 1} to cancel)\n>>> '))
                     if index_of_baker_to_edit == len(baker) + 1:
                         print('\nCancelling. Exiting to the service page......')
                         break
@@ -224,9 +223,9 @@ def system_administration_baker():
                             print('-----------------------------------------------')
 
                             for baker_data_key, baker_data_value in (baker[selected_baker].items()):
-                                print(f'{baker_data_key}: {baker_data_value}')
+                                print(f'{baker_data_key.replace("_", " ").title()}: {baker_data_value}')
 
-                            attribute_of_baker_data = input('\nWhich information do you want to modify? (or enter \"cancel\")\n>>> ')
+                            attribute_of_baker_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                             if attribute_of_baker_data in baker[selected_baker]:
 
                                 while True:

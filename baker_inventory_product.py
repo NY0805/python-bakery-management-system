@@ -29,7 +29,49 @@ def save_info(product_data):
     file.close()  # close the file after writing
 
 
-product_data = {}
+def validation_empty_entries(info):
+    if info:
+        return True
+    else:
+        print('Please enter something...\n')
+        return False
+
+
+def validation_alphanum_only(info):
+    if info.isalnum():
+        return True
+    else:
+        return False
+
+
+def validation_alphabet_only(info):
+    if re.search(r'[A-Za-z ]+', info):
+        return True
+    else:
+        return False
+
+
+def validation_list_alphabet_only(info):
+    for item in info:
+        if re.search(r'[A-Za-z ]+', item):
+            return True
+        else:
+            return False
+
+
+def validation_digit_only(info):
+    if info.isdigit():
+        return True
+    else:
+        return False
+
+
+def validation_date(info, date_format='%d-%m-%Y'):
+    try:
+        datetime.strptime(info, date_format)
+        return True
+    except ValueError:
+        return False
 
 
 def product_management():
@@ -99,84 +141,6 @@ def product_categories():
                 category = 'Others'
                 break
     return category
-
-
-def validation_empty_entries(info):
-    if info:
-        return True
-    else:
-        print('Please enter something...\n')
-        return False
-
-
-def validation_alphanum_only(info):
-    if info.isalnum():
-        return True
-    else:
-        return False
-
-
-def validation_shelf_life(info):
-    if re.match(r'^\d+\s*days$', info.strip()):
-        return True
-    else:
-        return False
-
-
-def validation_alphabet_only(info):
-    if re.search(r'[A-Za-z ]+', info):
-        return True
-    else:
-        return False
-
-
-def validation_list_alphabet_only(info):
-    for item in info:
-        if re.search(r'[A-Za-z ]+', item):
-            return True
-        else:
-            return False
-
-
-def validation_digit_only(info):
-    if info.isdigit():
-        return True
-    else:
-        return False
-
-
-def validation_date(info, date_format='%d-%m-%Y'):
-    try:
-        datetime.strptime(info, date_format)
-        return True
-    except ValueError:
-        return False
-
-
-def validation_shelf_life(info, category):
-    match = re.match(r'^(\d+)\s*days$', info.strip())
-    if match:
-        number = int(match.group(1))
-        if category in ['Breads', 'Muffins']:
-            if 5 >= number > 0:
-                return True
-            else:
-                print('Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
-                return False
-        elif category in ['Cakes', 'Pastries']:
-            if 7 >= number > 0:
-                return True
-            else:
-                print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
-                return False
-        elif category in ['Biscuits', 'Others']:
-            if 14 >= number > 0:
-                return True
-            else:
-                print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
-                return False
-    else:
-        print("Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
 
 
 def product_details():
@@ -291,7 +255,7 @@ def product_details():
     while True:
         baker_name = input(f'8. {product_info[8].ljust(max_length + 2)}: ')
         if validation_empty_entries(baker_name):
-            if validation_alphanum_only(baker_name):
+            if validation_alphabet_only(baker_name):
                 break
             else:
                 print('Please enter a valid baker name. (Cannot contain any special characters.)\n')
@@ -356,10 +320,124 @@ def continue_adding():
 
 
 def update_product():
-    product = load_data_from_inventory_product()
+    product_data = load_data_from_inventory_product()
 
-    print('\n------------------------------------------------')
-    print('\t\t\t\t', 'PRODUCT LIST')
-    print('------------------------------------------------')
-    for index, key in enumerate(product, start=1):
-        print(f'{index}. {key}')
+    while True:
+        print('\n------------------------------------------------')
+        print('\t\t\t\t', 'PRODUCT LIST')
+        print('------------------------------------------------')
+        for index, key in enumerate(product_data, start=1):
+            print(f'{index}. {key}')
+        print(f'{len(product_data) + 1}. cancel')
+
+        try:
+            index_of_product_to_edit = int(input(f'\nWhich product do you want to update? (or enter {len(product_data) + 1} to cancel)\n>>> '))
+            if index_of_product_to_edit == len(product_data) + 1:
+                print('\nCancelling. Exiting to the service page......')
+                break
+
+            elif 1 <= index_of_product_to_edit <= len(product_data):
+                selected_product = list(product_data.keys())[index_of_product_to_edit - 1]
+                while True:
+                    print('\n-----------------------------------------------')
+                    print(f'\t\t\t\t {selected_product}\'s data')
+                    print('-----------------------------------------------')
+
+                    for product_data_key, product_data_value in (product_data[selected_product].items()):
+                        print(f'{product_data_key.replace("_", " ").title()}: {product_data_value}')
+
+                    attribute_of_product_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                    if attribute_of_product_data in product_data[selected_product]:
+                        while True:
+                            new_value = input(f'\nEnter new {attribute_of_product_data}: ')
+                            if attribute_of_product_data == 'category':
+                                if new_value not in ['breads', 'cakes', 'pastries', 'biscuits', 'muffins', 'others']:
+                                    print('\n+-------------------------------------------------------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter breads, cakes, pastries, biscuits, muffins or others. |')
+                                    print('+-------------------------------------------------------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'product name':
+                                if not validation_alphabet_only(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'product code':
+                                if new_value in (product_data[batch_number]['product_code'] for batch_number in product_data):
+                                    print('\n+----------------------------------------------------+')
+                                    print('|⚠️ Duplication of product code. Please enter again. |')
+                                    print('+----------------------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'quantity produced':
+                                if not validation_digit_only(new_value):
+                                    print('\n+---------------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter numbers only. |')
+                                    print('+---------------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'batch number':
+                                if not validation_alphanum_only(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'date of production':
+                                if not validation_date(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'shelf life':
+                                if not re.match(r'^(\d+)\s*days$', new_value.strip()):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'expiry date':
+                                if not validation_date(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'baker name':
+                                if not validation_alphabet_only(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            elif attribute_of_product_data == 'allergens':
+                                if not validation_list_alphabet_only(new_value):
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid input. Please enter again. |')
+                                    print('+--------------------------------------+')
+                                    continue
+
+                            product_data[selected_product][attribute_of_product_data] = new_value
+                            print(f'\n{attribute_of_product_data} of {selected_product} is updated.')
+                            #save_info(product_data)
+                            break
+
+                    elif attribute_of_product_data == 'cancel':
+                        print('\nCancelling. Exiting to the product list......')
+                        break
+
+                    else:
+                        print('\nData not found.')
+            else:
+                print('\nProduct not found.')
+
+        except ValueError:
+            print('\n+-----------------------------------------+')
+            print('|⚠️ Invalid input. Please enter a number. |')
+            print('+-----------------------------------------+')
+
+
+update_product()
