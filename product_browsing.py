@@ -23,15 +23,18 @@ def browse_products():
     products = load_data_from_customer()
     try:
         # Load the products from the JSON file
-        with open("product_browsing.txt", "r") as file:
+        with open('product_browsing.txt', 'r') as file:
             products = json.load(file)
 
         # Display the products to the customer
-        print("\nAvailable Products:")
+        print('\nAvailable Products:')
         for product in products:
-            print(f"Name: {product['name']}")
-            print(f"Price: ${product['price']}")
-            print(f"Description: {product['description']}\n")
+            print(f'Product Name: {product['name']}')
+            print(f'Product Code: {product['code']}')
+            print(f'Price: ${product['price']}')
+            print(f'Allergen: {product['allergen']}')
+            print(f'Description: {product['description']}')
+            print(f'Expiry Date: {product['expiry_date']}\n')
 
     except FileNotFoundError:
-        print("Product data cannot be found.")
+        print('Product data cannot be found.')

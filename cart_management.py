@@ -19,6 +19,13 @@ def load_data_from_customer():
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
 
+def load_cart():
+    try:
+        with open("cart.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
 def save_cart_to_file(cart):
     with open('cart_management.txt', 'w') as file:
         json.dump(cart, file, indent=4)
