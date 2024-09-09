@@ -1,56 +1,73 @@
 {
-    "d": {
+    "001": {
         "category": "Breads",
-        "product_name": "d",
+        "product_name": "Banana bread",
         "product_code": [
-            "d1"
+            "bread1",
+            "bread2",
+            "bread3"
         ],
-        "quantity_produced": "1",
-        "batch_number": "d",
-        "date_of_production": "08-09-2004",
-        "shelf_life": "3 days",
-        "expiry_date": "14-09-2004",
+        "quantity_produced": "3",
+        "batch_number": "001",
+        "date_of_production": "05-04-2004",
+        "shelf_life": "5 days",
+        "expiry_date": "13-04-2004",
         "recipe": "r",
         "baker_name": "r",
         "allergens": [
-            "tree_nuts",
             "banana"
         ]
     },
-    "e": {
-        "category": "Pastries",
-        "product_name": "e",
+    "002": {
+        "category": "Others",
+        "product_name": "Spaghetti",
         "product_code": [
-            "r"
+            "spaghetti1"
         ],
         "quantity_produced": "1",
-        "batch_number": "e",
-        "date_of_production": "23-04-1111",
-        "shelf_life": "03days",
-        "expiry_date": "28-04-1111",
-        "recipe": "d",
-        "baker_name": "e",
+        "batch_number": "002",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "7 days",
+        "expiry_date": "19-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
         "allergens": [
-            "f",
-            "f"
+            "rosemary"
         ]
     },
-    "12": {
-        "category": "xxx",
-        "product_name": "e",
+    "oo3": {
+        "category": "Pastries",
+        "product_name": "Apple pie",
         "product_code": [
-            "1",
-            "2"
+            "pie1",
+            "pie2"
         ],
         "quantity_produced": "2",
-        "batch_number": "12",
-        "date_of_production": "12-12-1212",
-        "shelf_life": "5 days",
-        "expiry_date": "12-12-1212",
-        "recipe": "a",
-        "baker_name": "4",
+        "batch_number": "oo3",
+        "date_of_production": "08-11-2004",
+        "shelf_life": "6 days",
+        "expiry_date": "17-11-2004",
+        "recipe": "r",
+        "baker_name": "r",
         "allergens": [
-            "a"
+            "apple"
+        ]
+    },
+    "004": {
+        "category": "Breads",
+        "product_name": "Bun",
+        "product_code": [
+            "bun1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "004",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "5days",
+        "expiry_date": "17-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "no"
         ]
     }
 }
