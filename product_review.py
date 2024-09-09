@@ -37,7 +37,10 @@ def save_reviews(reviews): #Save the updated reviews to a file
         json.dump(reviews, file, indent=4)
 
 
-def submit_review():# Allow the customer to submit a review for a purchased product
+def submit_review():  # Allow the customer to submit a review for a purchased product
+    # Get username
+    username = input("Enter your username: ")
+
     # Get user input
     product_name = input("Enter the name of the product you want to review: ")
     review_text = input("Enter your review: ")
@@ -47,6 +50,14 @@ def submit_review():# Allow the customer to submit a review for a purchased prod
     if not rating.isdigit() or int(rating) not in range(1, 6):
         print("Invalid rating. Please enter a number between 1 and 5.")
         return
+
+    # Process the review (this part would include saving the review, updating records, etc.)
+    print(f"Review submitted by {username} for {product_name}:")
+    print(f"Rating: {rating}")
+    print(f"Review: {review_text}")
+
+    # Example of saving the review (this would depend on your actual data storage mechanism)
+    # save_review(username, product_name, review_text, rating)
 
     # Create a review entry
     review = {
