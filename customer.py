@@ -1,5 +1,6 @@
 import json
 import re
+import product_menu,order_tracking,product_review,cart_management
 
 
 # Define the function that loads data from the file
@@ -352,7 +353,7 @@ def customer_menu():
         elif option == "2":
             login()
         elif option == "3":
-            browse_products()
+            product_menu.menu()
         elif option == "4":
             view_cart()  # Calls the function to view cart
         elif option == "5":
@@ -372,3 +373,4 @@ def customer_menu():
             print("Invalid option, please try again.")
 
 
+customer_menu()

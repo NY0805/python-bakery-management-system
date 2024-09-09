@@ -37,4 +37,3 @@ def browse_products():
         print('Product data cannot be found.')
 
 
-browse_products()

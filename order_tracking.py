@@ -37,4 +37,3 @@ def order_tracking():
         else:
             print('Order ID cannot be found. Please check and try again.')
 
-order_tracking()

@@ -31,7 +31,7 @@ def save_cart_to_file(cart):
         json.dump(cart, file, indent=4)
 
 def add_item_to_cart():
-    cart = load_cart_from_file()
+    cart = load_data_from_cart()
     product_id = input("Enter the product ID to add to cart: ")
     quantity = int(input("Enter the quantity: "))
 
@@ -84,15 +84,3 @@ def view_cart():
     print("Your Cart:")
     for item in cart:
         print(f"Product ID: {item['product_id']}, Quantity: {item['quantity']}")
-
-def load_orders(): #Load the order data from a file
-    try:
-        with open("customer_order_list.txt", "r") as file:
-            orders = json.load(file)
-        return orders
-    except FileNotFoundError:
-        print("Order data not found. Please make sure the file exists.")
-        return []
-    except json.JSONDecodeError:
-        print("Error loading order data. The file format might be incorrect.")
-        return []
