@@ -316,11 +316,6 @@ def update_purchase_history(username, purchase_amount):
     customers[username] = customer
     save_customer_data(customers)
 
-
-def checkout(username, total_amount):
-    update_purchase_history(username, total_amount)
-    print(f"Order placed successfully! Your total amount is ${total_amount:.2f}.")
-
 # Function to view loyalty rewards
 def view_loyalty_rewards():
     username = input("Enter your username: ")
@@ -355,15 +350,15 @@ def customer_menu():
         elif option == "3":
             product_menu.menu()
         elif option == "4":
-            view_cart()  # Calls the function to view cart
+            cart_management.view_cart()  # Calls the function to view cart
         elif option == "5":
-            order_tracking()
+            order_tracking.order_tracking()
         elif option == "6":
-            submit_review()
+            product_review.submit_review()
         elif option == "7":
             view_loyalty_rewards()
         elif option == "8":
-            update_personal_information()
+           update_personal_information()
         elif option == "9":
             manage_accounts()  # Call the function to manage accounts
         elif option == "0":
