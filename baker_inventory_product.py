@@ -80,16 +80,6 @@ def product_categories():
                 print('Going back to the previous page.')
                 product_management()
                 break
-            elif option_product_categories == '6':
-                while True:
-                    category = input(f'\nCategory: ')
-                    if validation_empty_entries(category):
-                        if not validation_alphabet_only(category):
-                            print('Please enter a valid category name. (Cannot contain any special characters.)\n.')
-                        else:
-                            return category
-                    break
-                break
             elif option_product_categories == '1':
                 category = 'Breads'
                 break
@@ -105,7 +95,9 @@ def product_categories():
             elif option_product_categories == '5':
                 category = 'Muffins'
                 break
-
+            elif option_product_categories == '6':
+                category = 'Others'
+                break
     return category
 
 

@@ -26,18 +26,19 @@ product_data = load_data_from_inventory_product()
 # Format the data retrieve from inventory product.txt
 def format_product_data(product):
     return (
-        f"Product Name: {product['product_name']}\n"
+        f"Product Name: {product['product_name'].title()}\n"
+        f"Product Code: {product['product_code'[0]]}\n"
         f"Expiry Date: {product['expiry_date']}\n"
         f"Allergen: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-        f"Description: hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+        f"Description: hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
     )
 
 
 # Wrap the formatted data if it exceeds the space of 60 characters
 def wrap_data(formatted_product_data, width=60):
     wrapped_lines = []
-    for line in formatted_product_data:
-        wrapped_lines.extend(textwrap.wrap(line, width=width))
+    for data in formatted_product_data:
+        wrapped_lines.extend(textwrap.wrap(data, width=width))
     return wrapped_lines
 
 
