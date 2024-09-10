@@ -67,8 +67,5 @@ def view_loyalty_rewards():
     else:
         print("Customer not found.")
 
-# Example usage
-username = "customer123"
-purchase_amount = 100  # Example purchase amount
-update_purchase_history(username, purchase_amount)
-view_loyalty_rewards()
+
+
