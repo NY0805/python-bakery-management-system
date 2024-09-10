@@ -40,23 +40,18 @@ def add_item_to_cart():
     inventory = load_inventory()
     username = input("Enter your username: ")
 
-    # Check if user's cart exists
-    if username in cart:
-        user_cart = cart[username]
-    else:
+    if username not in cart:
         cart[username] = []
-        user_cart = cart[username]
 
+    user_cart = cart[username]
     product_id = input("Enter the product ID to add to cart: ")
     quantity = int(input("Enter the quantity: "))
 
-    # Check if product exists in inventory
     product_price = get_product_price(product_id, inventory)
     if not product_price:
         print("Product not found in inventory.")
         return
 
-    # Check if product already exists in user's cart
     for item in user_cart:
         if item['product_id'] == product_id:
             item['quantity'] += quantity
@@ -64,7 +59,6 @@ def add_item_to_cart():
             print("Item quantity updated.")
             return
 
-    # If product not in cart, add new item
     user_cart.append({"product_id": product_id, "quantity": quantity})
     save_cart_to_file(cart)
     print("Item added to cart.")
@@ -81,7 +75,6 @@ def remove_item_from_cart():
     user_cart = cart[username]
     product_id = input("Enter the product ID to remove from cart: ")
 
-    # Filter out the item to remove
     new_cart = [item for item in user_cart if item['product_id'] != product_id]
 
     if len(new_cart) == len(user_cart):
@@ -145,48 +138,73 @@ def view_cart():
 
     print(f"Total Price: ${total_price:.2f}")
 
-# Dictionary to store each customer's cart ID and cart data
-carts = {
-    "cart1": [
-        {"item": "Croissant", "quantity": 2, "price": 3.50},
-        {"item": "Bagel", "quantity": 3, "price": 2.00}
-    ],
-    "cart2": [
-        {"item": "Muffin", "quantity": 1, "price": 4.00},
-        {"item": "Coffee", "quantity": 2, "price": 2.50}
-    ]
-}
 
 def create_new_cart():
     """Create a new cart ID and add it to the dictionary."""
-    # Generate a new cart ID by counting the current number of carts
-    new_cart_id = "cart" + str(len(carts) + 1)
-    carts[new_cart_id] = []  # Add a new, empty cart for the user
+    cart = load_data_from_cart()
+    new_cart_id = "cart" + str(len(cart) + 1)
+    cart[new_cart_id] = []  # Add a new, empty cart for the user
+    save_cart_to_file(cart)
     print(f"New cart created with ID: {new_cart_id}")
     return new_cart_id
 
+
 def make_payment(cart_id):
     """Process payment based on the cart ID."""
-    # Check if the cart ID exists
-    if cart_id not in carts:
+    cart = load_data_from_cart()
+
+    if cart_id not in cart:
         print("Cart cannot be found.")
         return
 
-    # Get the cart associated with the ID
-    cart = carts[cart_id]
+    cart_items = cart[cart_id]
+    inventory = load_inventory()
+    total_price = 0
 
-    # Calculate the total price
-    total_price = sum(item['quantity'] * item['price'] for item in cart)
+    for item in cart_items:
+        product_id = item['product_id']
+        quantity = item['quantity']
+        product_price = get_product_price(product_id, inventory)
+        if product_price is not None:
+            total_price += product_price * quantity
+
     print(f"Total price for cart {cart_id}: ${total_price:.2f}")
 
-    # Prompt the user for payment confirmation
     confirmation = input("Do you want to confirm the payment? (yes/no): ").lower()
 
     if confirmation == 'yes':
+        order_id = len(cart) + 1
+        order = {
+            "order_id": order_id,
+            "username": cart_id,  # Use cart ID as username for simplicity
+            "items_ordered": [f"Product ID: {item['product_id']} x{item['quantity']}" for item in cart_items],
+            "total_price": total_price,
+            "status": "Paid"
+        }
+        with open('customer_order_list.txt', 'r') as file:
+            all_orders = json.load(file)
+        all_orders[str(order_id)] = order
+        with open('customer_order_list.txt', 'w') as file:
+            json.dump(all_orders, file, indent=4)
         print("Payment successful! Thank you for your purchase.")
-        carts[cart_id] = []  # Clear the cart after payment
+        cart[cart_id] = []  # Clear the cart after payment
+        save_cart_to_file(cart)
     else:
+        order_id = len(cart) + 1
+        order = {
+            "order_id": order_id,
+            "username": cart_id,  # Use cart ID as username for simplicity
+            "items_ordered": [f"Product ID: {item['product_id']} x{item['quantity']}" for item in cart_items],
+            "total_price": total_price,
+            "status": "Cancelled"
+        }
+        with open('customer_order_list.txt', 'r') as file:
+            all_orders = json.load(file)
+        all_orders[str(order_id)] = order
+        with open('customer_order_list.txt', 'w') as file:
+            json.dump(all_orders, file, indent=4)
         print("Your payment has been cancelled.")
+
 
 # Example usage
 new_cart_id = create_new_cart()  # Create a new cart for a new customer

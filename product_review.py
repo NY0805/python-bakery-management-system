@@ -1,48 +1,34 @@
 import json
-import re
 
 
-# Define the function that loads data from the file
-def load_data_from_review():
+def load_reviews():
     try:
-        file = open('customer_reviews.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
+        # Open the file and read the content
+        with open('customer_reviews.txt', 'r') as file:
+            content = file.read().strip()
+
+        if content:  # Check if the file is not empty
             try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(content)  # Parse the content as JSON
             except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
+                print("Error loading review data. The file format might be incorrect.")
+                return []  # Return an empty list if parsing fails
         else:
-            return {}  # return empty dictionary if the file is empty
+            return []  # Return an empty list if the file is empty
+
     except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+        return []  # Return an empty list if the file does not exist
 
-def load_reviews(): #Load existing reviews from a file (reviews.json).
-    try:
-        with open("customer_reviews.txt", "r") as file:
-            reviews = json.load(file)
-        return reviews
-    except FileNotFoundError:
-        # If file doesn't exist, return an empty list
-        return []
-    except json.JSONDecodeError:
-        print("Error loading review data. The file format might be incorrect.")
-        return []
-
-
-def save_reviews(reviews): #Save the updated reviews to a file
+# Save the updated reviews to a file
+def save_reviews(reviews):
     with open("customer_reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
-
-def submit_review():  # Allow the customer to submit a review for a purchased product
-    # Get username
+# Allow the customer to submit a review for a purchased product
+def submit_review():
+    # Get username and review details
     username = input("Enter your username: ")
-
-    # Get user input
-    product_name = input("Enter the name of the product you want to review: ")
+    product_name = input("Enter the product name: ")
     review_text = input("Enter your review: ")
     rating = input("Rate your product (1-5): ")
 
@@ -51,16 +37,9 @@ def submit_review():  # Allow the customer to submit a review for a purchased pr
         print("Invalid rating. Please enter a number between 1 and 5.")
         return
 
-    # Process the review (this part would include saving the review, updating records, etc.)
-    print(f"Review submitted by {username} for {product_name}:")
-    print(f"Rating: {rating}")
-    print(f"Review: {review_text}")
-
-    # Example of saving the review (this would depend on your actual data storage mechanism)
-    # save_review(username, product_name, review_text, rating)
-
     # Create a review entry
     review = {
+        "username": username,
         "product_name": product_name,
         "review_text": review_text,
         "rating": int(rating)
@@ -77,3 +56,4 @@ def submit_review():  # Allow the customer to submit a review for a purchased pr
 
     print("Thank you for submitting your feedback! We have received your review.")
 
+submit_review()
