@@ -210,12 +210,7 @@ def product_details():
                         break
                     else:
                         print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
-                elif category == 'Biscuits':
-                    if number <= 14:
-                        break
-                    else:
-                        print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
-                else:
+                elif category in ['Biscuits', 'Others']:
                     if number <= 14:
                         break
                     else:

@@ -49,5 +49,24 @@
         "allergens": [
             "apple"
         ]
+    },
+    "006": {
+        "category": "Biscuits",
+        "product_name": "Gingerbread",
+        "product_code": [
+            "biscuit1",
+            "biscuit2",
+            "biscuit3"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "006",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "14 days",
+        "expiry_date": "26-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "ginger"
+        ]
     }
 }
