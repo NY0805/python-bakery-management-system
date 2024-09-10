@@ -291,31 +291,6 @@ def save_customer_data(data):
     with open("customers.json", "w") as file:
         json.dump(data, file)
 
-
-# Function to update purchase history
-def update_purchase_history(username, purchase_amount):
-    customers = load_customer_data()
-
-    if username in customers:
-        customer = customers[username]
-        customer['total_spent'] += purchase_amount
-        customer['purchase_count'] += 1
-    else:
-        customer = {
-            'total_spent': purchase_amount,
-            'purchase_count': 1
-        }
-
-    # Apply reward if eligible
-    if customer['purchase_count'] % 5 == 0:
-        print("Congratulations! You've earned a 10% discount.")
-
-    if customer['total_spent'] >= 100:
-        print("Congratulations! You've earned a free item.")
-
-    customers[username] = customer
-    save_customer_data(customers)
-
 def customer_menu():
     while True:
         print("WELCOME TO MORNING GLORY BAKERY!")

@@ -144,3 +144,54 @@ def view_cart():
             print(f"Product ID: {product_id} not found in inventory.")
 
     print(f"Total Price: ${total_price:.2f}")
+
+# Dictionary to store each customer's cart ID and cart data
+carts = {
+    "cart1": [
+        {"item": "Croissant", "quantity": 2, "price": 3.50},
+        {"item": "Bagel", "quantity": 3, "price": 2.00}
+    ],
+    "cart2": [
+        {"item": "Muffin", "quantity": 1, "price": 4.00},
+        {"item": "Coffee", "quantity": 2, "price": 2.50}
+    ]
+}
+
+def create_new_cart():
+    """Create a new cart ID and add it to the dictionary."""
+    # Generate a new cart ID by counting the current number of carts
+    new_cart_id = "cart" + str(len(carts) + 1)
+    carts[new_cart_id] = []  # Add a new, empty cart for the user
+    print(f"New cart created with ID: {new_cart_id}")
+    return new_cart_id
+
+def make_payment(cart_id):
+    """Process payment based on the cart ID."""
+    # Check if the cart ID exists
+    if cart_id not in carts:
+        print("Cart cannot be found.")
+        return
+
+    # Get the cart associated with the ID
+    cart = carts[cart_id]
+
+    # Calculate the total price
+    total_price = sum(item['quantity'] * item['price'] for item in cart)
+    print(f"Total price for cart {cart_id}: ${total_price:.2f}")
+
+    # Prompt the user for payment confirmation
+    confirmation = input("Do you want to confirm the payment? (yes/no): ").lower()
+
+    if confirmation == 'yes':
+        print("Payment successful! Thank you for your purchase.")
+        carts[cart_id] = []  # Clear the cart after payment
+    else:
+        print("Your payment has been cancelled.")
+
+# Example usage
+new_cart_id = create_new_cart()  # Create a new cart for a new customer
+
+# Let the user make a payment using their new cart ID
+cart_id_input = input("Please enter your cart ID to make a payment: ")
+make_payment(cart_id_input)
+
