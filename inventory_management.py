@@ -27,7 +27,6 @@ def inventory_services():
                     baker_inventory_ingredient.ingredient_management()
                 elif inventory_services_type == '2':
                     baker_inventory_product.product_management()
-                    break
                 elif inventory_services_type == '3':
                     print('Exiting to baker privilege...')
                     break

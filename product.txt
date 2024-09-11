@@ -1,0 +1,72 @@
+{
+    "001": {
+        "category": "Breads",
+        "product_name": "banana bread",
+        "product_code": [
+            "bread1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "001",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "5 days",
+        "expiry_date": "17-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "r"
+        ]
+    },
+    "002": {
+        "category": "Cakes",
+        "product_name": "red velvet",
+        "product_code": [
+            "cake1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "002",
+        "date_of_production": "09-09-2004",
+        "shelf_life": "7 days",
+        "expiry_date": "18-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "dairy_product"
+        ]
+    },
+    "003": {
+        "category": "Pastries",
+        "product_name": "apple pie",
+        "product_code": [
+            "pie1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "003",
+        "date_of_production": "27-08-2004",
+        "shelf_life": "7 days",
+        "expiry_date": "06-09-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "apple"
+        ]
+    },
+    "006": {
+        "category": "Biscuits",
+        "product_name": "Gingerbread",
+        "product_code": [
+            "biscuit1",
+            "biscuit2",
+            "biscuit3"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "006",
+        "date_of_production": "09-08-2004",
+        "shelf_life": "14 days",
+        "expiry_date": "26-08-2004",
+        "recipe": "r",
+        "baker_name": "r",
+        "allergens": [
+            "ginger"
+        ]
+    }
+}
