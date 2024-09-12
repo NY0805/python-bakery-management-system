@@ -282,10 +282,10 @@ def product_details():
 
     for i in range(quantity):
         while True:
-            serial_number = input(f'Enter product code for item {i + 1}: ')
+            serial_number = input(f'Enter serial number for item {i + 1}: ')
             if validation_empty_entries(serial_number):
                 if not validation_alphanum_only(serial_number):
-                    print('Please enter a valid product code. (Cannot contain any special characters.)\n.')
+                    print('Please enter a valid serial number. (Cannot contain any special characters and spacings.)\n.')
                 else:
                     serial_numbers.append(serial_number)
                 break
