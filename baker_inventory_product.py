@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # Define the function that loads data from the file
 def load_data_from_inventory_product():
     try:
-        file = open('product.txt', 'r')  # open the file and read
+        file = open('baker_product_keeping.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -23,7 +23,7 @@ def load_data_from_inventory_product():
 
 # Define the function that saves information to the file
 def save_info(product_data):
-    file = open('product.txt', 'w')  # open the file to write
+    file = open('baker_product_keeping.txt', 'w')  # open the file to write
     json.dump(product_data, file,
               indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
@@ -166,7 +166,7 @@ def product_details():
                 quantity = int(quantity_produced)
                 break
             else:
-                print('Please enter a valid quantity produced. (Cannot contain any alphabet and special characters.)\n')
+                print('Please enter a valid quantity produced. (Cannot contain any alphabets and special characters.)\n')
 
     while True:
         product_name = input(f'2. {product_info[0].ljust(max_length + 2)}: ')

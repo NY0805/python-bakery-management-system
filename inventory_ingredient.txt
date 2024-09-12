@@ -1,6 +1,6 @@
 {
-    "ingredient_name": "hh",
-    "type_number": "hh",
-    "ingredient_unit_measurement": "hh",
-    "batch_number": "hh"
+    "001": {
+        "category": "Flours and Grains",
+        "product_name": "wheat flour"
+    }
 }

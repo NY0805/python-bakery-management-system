@@ -27,9 +27,6 @@ def save_info(ingredient_info):
     file.close()  # close the file after writing
 
 
-ingredient_data = {}
-
-
 def ingredient_management():
     print('\n-------------------------------------------------------')
     print('\t\t\t\t', '', 'INGREDIENT MANAGEMENT')
@@ -112,10 +109,42 @@ def validation_empty_entries(info):
 
 
 def ingredient_details():
+    ingredient_data = load_data_from_inventory_ingredient()
+
+    category = ingredient_categories()
+
     print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
 
+    ingredient_name = input('enter name: ')
+    batch_number = input('enter batch number: ')
 
-    # List to hold the input prompts based on ingredient type
+    ingredient_data[batch_number] = {
+        'category': category,
+        'product_name': ingredient_name,
+    }
+
+    save_info(ingredient_data)
+
+
+def continue_adding():
+    while True:
+        try:
+            add_more = input('\nInformation saved. Continue adding? (y=yes, n=no)'
+                             '\n>>> ')
+            if add_more == 'y':
+                ingredient_details()
+                break
+            elif add_more == 'n':
+                print('Stop adding... Existing to Product Management page.')
+                ingredient_management()
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+        except ValueError:
+            print('Invalid input. Please enter again.')
+
+
+'''    # List to hold the input prompts based on ingredient type
     prompts = [
         ('ingredient_name', 'Ingredient Name'),
         ('ingredient_unit_measurement', 'Unit Measurement'),
@@ -135,22 +164,6 @@ def ingredient_details():
     for i, (key, prompt_text) in enumerate(prompts, start=1):
         # Format the prompt text to align the input fields
         formatted_prompt = f'{i}. {prompt_text.ljust(max_prompt_length + 2)}: '
-        ingredient_info[key] = input(formatted_prompt)
+        ingredient_info[key] = input(formatted_prompt)'''
 
 
-def continue_adding():
-    while True:
-        try:
-            add_more = input('\nInformation saved. Continue adding? (y=yes, n=no)'
-                             '\n>>> ')
-            if add_more == 'y':
-                ingredient_details()
-                break
-            elif add_more == 'n':
-                print('Stop adding... Existing to Product Management page.')
-                ingredient_management()
-                break
-            else:
-                print("Invalid input. Please enter 'y' or 'n'.")
-        except ValueError:
-            print('Invalid input. Please enter again.')
