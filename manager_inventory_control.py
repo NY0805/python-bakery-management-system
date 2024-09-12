@@ -1,49 +1,46 @@
 import json
 
 
-def inventory_control_product():
-    print('\n-----------------------------------------------')
-    print('\t\t\t', '','PRODUCT MANAGEMENT')
-    print('-----------------------------------------------')
-    print('1. add products\n2. remove products\n3. update products\n4. exit⛔🔙\n')
-    product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
-    if product_control == '1':
-        print('\nHere are the products produced by bakers.')
-        print('\n-----------------------------------------------')
-        print('\t\t\t\tProduct list')
-        print('-----------------------------------------------')
-
-        with open('inventory_product.txt', 'r') as product:
-            content = json.load(product)
-
-            length = 0
-            for key, value in content.items():
-                if len(value["product_name"]) > length:
-                    length = len(value["product_name"])
-
-            for key, value in content.items():
-                product_name = value["product_name"]
-                product_code = value["product_code"]
-
-                print(f'Product name: {product_name.ljust(length+4)} quantity: {len(product_code)}')
-
-        chosen_product = input('\nWhich product do you want to increase stock?\n>>> ')
-        for key, value in content.items():
-            if chosen_product in value["product_name"]:
-                try:
-                    add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
-                    if add_stock != 0:
-                        print('hi')
-                        break
-                except ValueError:
-                    print('Please enter a number.')
-                    break
+def load_data_from_product():
+    try:
+        file = open('product.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
         else:
-            print('invalid input')
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
 
+def load_data_from_manager_product_inventory():
+    try:
+        file = open('manager_product_inventory.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
-inventory_control_product()
+
+def save_info(inventory):
+    file = open('manager_product_inventory.txt', 'w')  # open the file to write
+    json.dump(inventory, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file.close()  # close the file after writing
+
+
+product = load_data_from_product()
+product_inventory = load_data_from_manager_product_inventory()
 
 def inventory_control_ingredient():
     while True:
@@ -72,14 +69,77 @@ def inventory_control_ingredient():
             print('+--------------------------------------+')
 
 
+def inventory_control_product():
+    if len(product_inventory) == 0:
+        print('\nThe product inventory is empty. Please restock in time.')
+
+    while True:
+        print('\n-----------------------------------------------')
+        print('\t\t\t', '','PRODUCT MANAGEMENT')
+        print('-----------------------------------------------')
+        print('1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
+        product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
+
+        while True:
+            if product_control == '1':
+                print('\nHere are the products produced by bakers.')
+                print('\n-----------------------------------------------')
+                print('\t\t\tCurrent product list')
+                print('-----------------------------------------------')
+
+                length = 0
+                for key, value in product.items():
+                    if len(value["product_name"]) > length:
+                        length = len(value["product_name"])
+
+                for key, value in product.items():
+                    product_name = value["product_name"]
+                    product_code = value["product_code"]
+
+                    print(f'Product name: {product_name.ljust(length+4)} quantity: {len(product_code)}')
+
+                chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
+                if chosen_product == 'cancel':
+                    print('\nCancelling. Exiting to product management page......')
+                    break
+
+                for batch_number, value in product.items():
+                    if chosen_product == value['product_name']:
+                        try:
+                            add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
+                            if 0 < add_stock <= len(value['product_code']):
+                                print(f'\n{len(value["product_code"])} {chosen_product}(s) is(are) added.')
+
+                            else:
+                                print(f'\nNot enough. The current number of {chosen_product} is {len(value["product_code"])}. ')
+                                still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                                while still_add not in ['y', 'n']:
+                                    print('\ninvalid, enter again.')
+                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+
+                                if still_add == 'y':
+                                    print(f'\n{len(value["product_code"])} {chosen_product}(s) is(are) added.')
+
+                        except ValueError:
+                            print('\nPlease enter a number.')
+                    else:
+                        print('\nenter again')
+                        break
+
+            else:
+                print('\ninvalid input')
+                break
+
+
+
 def main_control():
     while True:
         print('\n-----------------------------------------------')
-        print('\t\t\t\tMAIN INVENTORY MANAGEMENT')
+        print('\t\t', ' ', 'MAIN INVENTORY MANAGEMENT')
         print('-----------------------------------------------')
-        print('1. ingredient management\n2. product management\n3. Exit⛔🔙')
+        print('1. ingredient inventory\n2. product inventory\n3. Exit⛔🔙')
 
-        control = input('\nSelect the item that you want to manage(1, 2, 3, 4):\n>>> ')
+        control = input('\nSelect the inventory that you want to manage(1, 2, 3, 4):\n>>> ')
         if control == '1':
             inventory_control_ingredient()
 
@@ -95,4 +155,4 @@ def main_control():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#main_control()
+main_control()

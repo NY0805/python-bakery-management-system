@@ -17,7 +17,7 @@ def load_data_from_cart():
 
 def load_inventory():
     try:
-        with open('inventory_product.txt', 'r') as file:
+        with open('manager_product_inventory.txt', 'r') as file:
             return json.load(file)
     except FileNotFoundError:
         return []

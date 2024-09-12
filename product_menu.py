@@ -5,7 +5,7 @@ from collections import defaultdict
 
 def load_data_from_inventory_product():
     try:
-        file = open('inventory_product.txt', 'r')  # open the file and read
+        file = open('manager_product_inventory.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty

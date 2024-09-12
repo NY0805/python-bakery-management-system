@@ -52,7 +52,7 @@
     },
     "006": {
         "category": "Biscuits",
-        "product_name": "Gingerbread",
+        "product_name": "gingerbread",
         "product_code": [
             "biscuit1",
             "biscuit2",
