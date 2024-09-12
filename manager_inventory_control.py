@@ -35,9 +35,16 @@ def load_data_from_manager_product_inventory():
         return {}  # return empty dictionary if the file does not exist
 
 
-def save_info(inventory):
+def save_info_product_inventory(product_inventory):
     file = open('manager_product_inventory.txt', 'w')  # open the file to write
-    json.dump(inventory, file,
+    json.dump(product_inventory, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file.close()  # close the file after writing
+
+
+def save_info_product(product):
+    file = open('baker_product_keeping.txt', 'w')  # open the file to write
+    json.dump(product, file,
               indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
@@ -97,9 +104,9 @@ def inventory_control_product():
                         length = len(value["product_name"])
 
                     product_name = value["product_name"]
-                    product_code = value["product_code"]
+                    serial_number = value["serial_number"]
 
-                    print(f'Product name: {product_name.ljust(length + 4)} quantity: {len(product_code)}')
+                    print(f'Product name: {product_name.ljust(length + 4)} quantity: {len(serial_number)}')
 
                 chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
 
@@ -117,28 +124,53 @@ def inventory_control_product():
                             else:
                                 for batch_number, value in product.items():
                                     if value['product_name'] == chosen_product:
-                                        product_code = value['product_code']
+                                        if len(value['serial_number']) == 0:
+                                            serial_number = value['serial_number']
 
-                                        if 0 < add_stock <= len(product_code):
-                                            print(f'\n{len(product_code)} {chosen_product}(s) is(are) added.')
+                                            if 0 < add_stock <= len(serial_number):
+                                                product_inventory[batch_number] = {
+                                                    'product_name': chosen_product,
+                                                    'stock': add_stock
+                                                }
 
+                                            else:
+                                                print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
+                                                still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                                                while still_add not in ['y', 'n']:
+                                                    print('\ninvalid, enter again.')
+                                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+
+                                                if still_add == 'y':
+                                                    break
+
+                                                    '''product_inventory[batch_number] = {
+                                                        'product_name': chosen_product,
+                                                        'stock': len(serial_number)
+                                                    }
+                                                    print(
+                                                        f'\n{len(serial_number)} {chosen_product}(s) is(are) added to the inventory.')
+                                                    number_of_product = len(serial_number)
+
+                                                    del serial_number[0]
+                                                    print(
+                                                        f'\n{number_of_product} {chosen_product} from baker\'s record keeping has(have) been deleted.')
+                                                    if len(serial_number) < 1:
+                                                        del product[batch_number]'''
+                                        else:
                                             product_inventory[batch_number] = {
                                                 'product_name': chosen_product,
-                                                'stock': add_stock
+                                                'stock': value['stock'] + add_stock
                                             }
-                                            save_info(product_inventory)
-                                            break
+                                        print(f'\n{add_stock} {chosen_product}(s) is(are) added to the inventory.')
 
-                                        else:
-                                            print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(product_code)}. ')
-                                            still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
-                                            while still_add not in ['y', 'n']:
-                                                print('\ninvalid, enter again.')
-                                                still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                                        del serial_number[0: add_stock]
+                                        print(f'\n{add_stock} {chosen_product} from baker\'s record keeping has(have) been deleted.')
+                                        if len(serial_number) < 1:
+                                            del product[batch_number]
 
-                                            if still_add == 'y':
-                                                print(f'\n{len(product_code)} {chosen_product}(s) is(are) added.')
-                                                break
+                                        save_info_product_inventory(product_inventory)
+                                        save_info_product(product)
+                                        break
                                 break
 
                         except ValueError:
