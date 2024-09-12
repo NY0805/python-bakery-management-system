@@ -3,12 +3,13 @@ import json
 
 def load_data_from_product():
     try:
-        file = open('baker_product_keeping.txt.txt', 'r')  # open the file and read
+        file = open('baker_product_keeping.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -24,7 +25,8 @@ def load_data_from_manager_product_inventory():
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -35,7 +37,8 @@ def load_data_from_manager_product_inventory():
 
 def save_info(inventory):
     file = open('manager_product_inventory.txt', 'w')  # open the file to write
-    json.dump(inventory, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    json.dump(inventory, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 
@@ -76,9 +79,10 @@ def inventory_control_product():
 
     while True:
         print('\n-----------------------------------------------')
-        print('\t\t\t', '','PRODUCT MANAGEMENT')
+        print('\t\t\t', '', 'PRODUCT MANAGEMENT')
         print('-----------------------------------------------')
-        print('1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
+        print(
+            '1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
         product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
 
         while True:
@@ -97,22 +101,25 @@ def inventory_control_product():
                     product_name = value["product_name"]
                     product_code = value["product_code"]
 
-                    print(f'Product name: {product_name.ljust(length+4)} quantity: {len(product_code)}')
+                    print(f'Product name: {product_name.ljust(length + 4)} quantity: {len(product_code)}')
 
                 chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
-                if chosen_product == 'cancel':
-                    print('\nCancelling. Exiting to product management page......')
-                    break
 
-                for batch_number, value in product.items():
-                    if chosen_product == value['product_name']:
+                for key, value in product.items():
+                    print(value)
+                    if chosen_product == 'cancel':
+                        print('\nCancelling. Exiting to product management page......')
+                        break
+                    elif chosen_product == value['product_name']:
+                        print('hi')
                         try:
                             add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
                             if 0 < add_stock <= len(value['product_code']):
                                 print(f'\n{len(value["product_code"])} {chosen_product}(s) is(are) added.')
 
                             else:
-                                print(f'\nNot enough. The current number of {chosen_product} is {len(value["product_code"])}. ')
+                                print(
+                                    f'\nNot enough. The current number of {chosen_product} is {len(value["product_code"])}. ')
                                 still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
                                 while still_add not in ['y', 'n']:
                                     print('\ninvalid, enter again.')
@@ -130,7 +137,6 @@ def inventory_control_product():
             else:
                 print('\ninvalid input')
                 break
-
 
 
 def main_control():
@@ -155,5 +161,6 @@ def main_control():
             print('\n+--------------------------------------+')
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
+
 
 main_control()

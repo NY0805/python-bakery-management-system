@@ -166,7 +166,8 @@ def product_details():
                 quantity = int(quantity_produced)
                 break
             else:
-                print('Please enter a valid quantity produced. (Cannot contain any alphabets and special characters.)\n')
+                print(
+                    'Please enter a valid quantity produced. (Cannot contain any alphabets and special characters.)\n')
 
     while True:
         product_name = input(f'2. {product_info[0].ljust(max_length + 2)}: ')
@@ -175,6 +176,17 @@ def product_details():
                 break
             else:
                 print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
+
+    while True:
+        product_code = input(f'3. {product_info[1].ljust(max_length + 2)}: ')
+        if validation_empty_entries(product_code):
+            if validation_alphanum_only(product_code):
+                if product_code in product_data:
+                    print('Duplicate product code detected. Please input the correct product code.\n')
+                else:
+                    break
+            else:
+                print('Please enter a valid product code. (Cannot contain any special characters and spacings.)\n')
 
     while True:
         batch_number = input(f'3. {product_info[2].ljust(max_length + 2)}: ')
@@ -266,22 +278,23 @@ def product_details():
             else:
                 print('Please enter a valid product name. (Cannot contain any digits and special characters.)\n')
 
-    product_codes = []
+    serial_numbers = []
 
     for i in range(quantity):
         while True:
-            product_code = input(f'Enter product code for item {i + 1}: ')
-            if validation_empty_entries(product_code):
-                if not validation_alphanum_only(product_code):
+            serial_number = input(f'Enter product code for item {i + 1}: ')
+            if validation_empty_entries(serial_number):
+                if not validation_alphanum_only(serial_number):
                     print('Please enter a valid product code. (Cannot contain any special characters.)\n.')
                 else:
-                    product_codes.append(product_code)
+                    serial_numbers.append(serial_number)
                 break
 
     product_data[batch_number] = {
         'category': category,
         'product_name': product_name,
-        'product_code': product_codes,
+        'product_code': product_code,
+        'serial_number': serial_numbers,
         'quantity_produced': quantity_produced,
         'batch_number': batch_number,
         'date_of_production': date_of_production,
@@ -327,7 +340,8 @@ def update_product():
         print(f'{len(product_data) + 1}. cancel')
 
         try:
-            index_of_product_to_edit = int(input(f'\nWhich product do you want to update? (or enter {len(product_data) + 1} to cancel)\n>>> '))
+            index_of_product_to_edit = int(
+                input(f'\nWhich product do you want to update? (or enter {len(product_data) + 1} to cancel)\n>>> '))
             if index_of_product_to_edit == len(product_data) + 1:
                 print('\nCancelling. Exiting to the product management page......')
                 product_management()
@@ -343,8 +357,8 @@ def update_product():
                     for product_data_key, product_data_value in (product_data[selected_product].items()):
                         print(f'{product_data_key}: {product_data_value}')
 
-
-                    attribute_of_product_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                    attribute_of_product_data = input(
+                        '\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                     if attribute_of_product_data in product_data[selected_product]:
                         while True:
                             new_value = input(f'\nEnter new {attribute_of_product_data}: ')
@@ -352,9 +366,12 @@ def update_product():
                                 if not validation_empty_entries(new_value):
                                     continue
                                 if new_value not in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins', 'Others']:
-                                    print('\n+-------------------------------------------------------------------------------------+')
-                                    print('|⚠️ Invalid input. Please enter Breads, Cakes, Pastries, Biscuits, Muffins or Others. |')
-                                    print('+-------------------------------------------------------------------------------------+')
+                                    print(
+                                        '\n+-------------------------------------------------------------------------------------+')
+                                    print(
+                                        '|⚠️ Invalid input. Please enter Breads, Cakes, Pastries, Biscuits, Muffins or Others. |')
+                                    print(
+                                        '+-------------------------------------------------------------------------------------+')
                                     continue
 
                             elif attribute_of_product_data == 'product_name':
@@ -370,7 +387,8 @@ def update_product():
                                 if not validation_empty_entries(new_value):
                                     continue
 
-                                if new_value in (product_data[batch_number]['product_code'] for batch_number in product_data):
+                                if new_value in (product_data[batch_number]['product_code'] for batch_number in
+                                                 product_data):
                                     print('\n+----------------------------------------------------+')
                                     print('|⚠️ Duplication of product code. Please enter again. |')
                                     print('+----------------------------------------------------+')
@@ -457,5 +475,6 @@ def update_product():
             print('\n+-----------------------------------------+')
             print('|⚠️ Invalid input. Please enter a number. |')
             print('+-----------------------------------------+')
+
 
 product_management()
