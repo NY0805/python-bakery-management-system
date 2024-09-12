@@ -125,12 +125,11 @@ def recipe():
                 print("Please enter a valid category. (Cannot contain any spacing, digits and special characters.)\n")
 
     while True:
-        print('')
+        print('Here are the ingredient list: ')
         for category, item in ingredient_category_groups.items():
-            print(f'* Category: {category}*')
-
-            for i in range(0, len(item)):
-                print(i)
+            print(f'* Category: {category} *')
+            for i in item:
+                print(format_ingredient_data(i))
 
         ingredient_per_unit = []
         ingredient_per_unit = input(f'3. {recipe_info[2].ljust(max_length + 2)}: ')
