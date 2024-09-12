@@ -3,7 +3,7 @@ import json
 
 def load_data_from_product():
     try:
-        file = open('product.txt', 'r')  # open the file and read
+        file = open('baker_product_keeping.txt.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -41,6 +41,7 @@ def save_info(inventory):
 
 product = load_data_from_product()
 product_inventory = load_data_from_manager_product_inventory()
+
 
 def inventory_control_ingredient():
     while True:
