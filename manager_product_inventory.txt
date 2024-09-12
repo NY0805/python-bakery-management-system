@@ -2,5 +2,9 @@
     "002": {
         "product_name": "red velvet",
         "stock": 1
+    },
+    "003": {
+        "product_name": "apple pie",
+        "stock": 1
     }
 }
