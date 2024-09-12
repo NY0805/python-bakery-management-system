@@ -68,5 +68,25 @@
         "allergens": [
             "ginger"
         ]
+    },
+    "004": {
+        "category": "Breads",
+        "product_name": "cheezy bun",
+        "product_code": "CH123",
+        "serial_number": [
+            "12345",
+            "87654"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "004",
+        "date_of_production": "23-09-2024",
+        "shelf_life": "3days",
+        "expiry_date": "27-09-2024",
+        "recipe": "r",
+        "baker_name": "baker4",
+        "allergens": [
+            "cheese",
+            "milk"
+        ]
     }
 }

@@ -1,0 +1,6 @@
+{
+    "002": {
+        "product_name": "red velvet",
+        "stock": 1
+    }
+}
