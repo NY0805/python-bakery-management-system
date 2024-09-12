@@ -74,15 +74,14 @@ def inventory_control_ingredient():
 
 
 def inventory_control_product():
-    if len(product_inventory) == 0:
-        print('\nThe product inventory is empty. Please restock in time.')
-
     while True:
+        if len(product_inventory) == 0:
+            print('\nThe product inventory is empty. Please restock in time.')
+
         print('\n-----------------------------------------------')
         print('\t\t\t', '', 'PRODUCT MANAGEMENT')
         print('-----------------------------------------------')
-        print(
-            '1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
+        print('1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
         product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
 
         while True:
@@ -97,7 +96,6 @@ def inventory_control_product():
                     if len(value["product_name"]) > length:
                         length = len(value["product_name"])
 
-                for key, value in product.items():
                     product_name = value["product_name"]
                     product_code = value["product_code"]
 
@@ -105,34 +103,43 @@ def inventory_control_product():
 
                 chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
 
-                for key, value in product.items():
-                    print(value)
-                    if chosen_product == 'cancel':
-                        print('\nCancelling. Exiting to product management page......')
-                        break
-                    elif chosen_product == value['product_name']:
-                        print('hi')
+                if chosen_product == 'cancel':
+                    print('\nCancelling. Exiting to product management page......')
+                    break
+
+                elif chosen_product in (product[batch_number]['product_name'] for batch_number in product):
+                    while True:
                         try:
                             add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
-                            if 0 < add_stock <= len(value['product_code']):
-                                print(f'\n{len(value["product_code"])} {chosen_product}(s) is(are) added.')
 
-                            else:
-                                print(
-                                    f'\nNot enough. The current number of {chosen_product} is {len(value["product_code"])}. ')
-                                still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
-                                while still_add not in ['y', 'n']:
-                                    print('\ninvalid, enter again.')
-                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                            for batch_number, value in product.items():
+                                if value['product_name'] == chosen_product:
+                                    product_code = value['product_code']
 
-                                if still_add == 'y':
-                                    print(f'\n{len(value["product_code"])} {chosen_product}(s) is(are) added.')
+                                    if 0 < add_stock <= len(product_code):
+                                        print(f'\n{len(product_code)} {chosen_product}(s) is(are) added.')
+                                        break
+
+                                    elif add_stock == 0:
+                                        print('invalid')
+
+                                    else:
+                                        print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(product_code)}. ')
+                                        still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                                        while still_add not in ['y', 'n']:
+                                            print('\ninvalid, enter again.')
+                                            still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+
+                                        if still_add == 'y':
+                                            print(f'\n{len(product_code)} {chosen_product}(s) is(are) added.')
+                                            break
+                            break
 
                         except ValueError:
-                            print('\nPlease enter a number.')
-                    else:
-                        print('\nenter again')
-                        break
+                            print('Please enter a number.')
+
+                else:
+                    print('\nenter again.')
 
             else:
                 print('\ninvalid input')
