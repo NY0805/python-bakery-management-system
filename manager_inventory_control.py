@@ -88,10 +88,12 @@ def inventory_control_product():
         print('\n-----------------------------------------------')
         print('\t\t\t', '', 'PRODUCT MANAGEMENT')
         print('-----------------------------------------------')
-        print('1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
+        print(
+            '1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
         product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
 
         while True:
+
             if product_control == '1':
                 print('\nHere are the products produced by bakers.')
                 print('\n-----------------------------------------------')
@@ -115,63 +117,50 @@ def inventory_control_product():
                     break
 
                 elif chosen_product in (product[batch_number]['product_name'] for batch_number in product):
+                    for batch_number, value in product.items():
+                        if value['product_name'] == chosen_product:
+                            serial_number = value['serial_number']
+
                     while True:
                         try:
                             add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
-                            if add_stock == 0:
-                                print('invalid')
 
-                            else:
-                                for batch_number, value in product.items():
-                                    if value['product_name'] == chosen_product:
-                                        if len(value['serial_number']) == 0:
-                                            serial_number = value['serial_number']
+                            if chosen_product in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
+                                available_stock = len(value['stock']) + add_stock
 
-                                            if 0 < add_stock <= len(serial_number):
-                                                product_inventory[batch_number] = {
-                                                    'product_name': chosen_product,
-                                                    'stock': add_stock
-                                                }
 
-                                            else:
-                                                print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
-                                                still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
-                                                while still_add not in ['y', 'n']:
-                                                    print('\ninvalid, enter again.')
-                                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                            if add_stock > len(serial_number):
+                                print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
 
-                                                if still_add == 'y':
-                                                    break
-
-                                                    '''product_inventory[batch_number] = {
-                                                        'product_name': chosen_product,
-                                                        'stock': len(serial_number)
-                                                    }
-                                                    print(
-                                                        f'\n{len(serial_number)} {chosen_product}(s) is(are) added to the inventory.')
-                                                    number_of_product = len(serial_number)
-
-                                                    del serial_number[0]
-                                                    print(
-                                                        f'\n{number_of_product} {chosen_product} from baker\'s record keeping has(have) been deleted.')
-                                                    if len(serial_number) < 1:
-                                                        del product[batch_number]'''
-                                        else:
-                                            product_inventory[batch_number] = {
-                                                'product_name': chosen_product,
-                                                'stock': value['stock'] + add_stock
-                                            }
-                                        print(f'\n{add_stock} {chosen_product}(s) is(are) added to the inventory.')
-
-                                        del serial_number[0: add_stock]
-                                        print(f'\n{add_stock} {chosen_product} from baker\'s record keeping has(have) been deleted.')
-                                        if len(serial_number) < 1:
-                                            del product[batch_number]
-
-                                        save_info_product_inventory(product_inventory)
-                                        save_info_product(product)
+                                while True:
+                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
+                                    if still_add == 'y':
                                         break
-                                break
+                                    elif still_add == 'n':
+                                        break
+                                    else:
+                                        print('\ninvalid, enter again.')
+
+                                if still_add == 'n':
+                                    break
+
+
+
+                                product_inventory[batch_number] = {
+                                    'product_name': chosen_product,
+                                    'stock': available_stock
+                                }
+
+                                print(f'\n{add_stock} {chosen_product}(s) is(are) added to the inventory.')
+
+                                del serial_number[0: add_stock]
+                                print(f'\n{add_stock} {chosen_product} from baker\'s record keeping has(have) been removed.')
+
+                                if len(serial_number) < 1:
+                                    del product[batch_number]
+
+                                save_info_product_inventory(product_inventory)
+                                save_info_product(product)
 
                         except ValueError:
                             print('Please enter a number.')
