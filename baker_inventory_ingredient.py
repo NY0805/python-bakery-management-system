@@ -61,7 +61,7 @@ def ingredient_categories():
     print('3. Fats and Oils')
     print('4. Dairy and Non-Dairy Products')
     print('5. Leavening Agents')
-    print('6. Spices and Flavouring')
+    print('6. Spices and Flavourings')
     print('6. Fillings and Toppings')
     print('7. Fruits and Vegetables')
     print('8. Preservatives and Stabilizers')
@@ -120,7 +120,7 @@ def ingredient_details():
 
     ingredient_data[batch_number] = {
         'category': category,
-        'product_name': ingredient_name,
+        'ingredient_name': ingredient_name,
     }
 
     save_info(ingredient_data)
@@ -166,4 +166,4 @@ def continue_adding():
         formatted_prompt = f'{i}. {prompt_text.ljust(max_prompt_length + 2)}: '
         ingredient_info[key] = input(formatted_prompt)'''
 
-
+ingredient_details()

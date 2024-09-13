@@ -1,6 +1,14 @@
 {
     "001": {
         "category": "Flours and Grains",
-        "product_name": "wheat flour"
+        "ingredient_name": "wheat flour"
+    },
+    "002": {
+        "category": "Flours and Grains",
+        "ingredient_name": "white flour"
+    },
+    "003": {
+        "category": "Sweeteners",
+        "ingredient_name": "brown sugar"
     }
 }

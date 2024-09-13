@@ -1,7 +1,7 @@
 import json
 import re
 from collections import defaultdict
-import baker_inventory_ingredient
+
 
 # Define the function that loads data from the file
 def load_data_from_recipe():
@@ -61,7 +61,7 @@ def validation_alphanum_only(info):
 
 
 def validation_alphabet_only(info):
-    if re.search(r'[A-Za-z ]+', info):
+    if re.fullmatch(r'[A-Za-z ]+', info):
         return True
     else:
         return False
@@ -84,7 +84,7 @@ def validation_digit_only(info):
 
 def format_ingredient_data(product):
     return (
-        f"Product Name: {product['product_name'].title()}\n"
+        f"{product['ingredient_name'].title()}"
     )
 
 
@@ -92,11 +92,11 @@ ingredient_list = load_data_from_inventory_ingredient()
 
 ingredient_category_groups = defaultdict(list)
 for value in ingredient_list.values():
-    ingredient_category_groups[value['category']].append(format_ingredient_data(value).split('\n'))
+    ingredient_category_groups[value['category']].append(format_ingredient_data(value))
 
 
-def recipe():
-    recipe_info = ['Recipe Name', 'Categories', 'Ingredient_Per_Unit', 'Variation', 'Notes']
+def create_recipe():
+    recipe_info = ['Recipe Name', 'Categories', 'Ingredient Name', 'Ingredient_Per_Unit', 'Variation', 'Notes']
 
     max_length = 0
     for item in recipe_info:
@@ -122,28 +122,143 @@ def recipe():
                 else:
                     print('Please enter a valid category based on the categories given. (Case sensitive.)\n')
             else:
-                print("Please enter a valid category. (Cannot contain any spacing, digits and special characters.)\n")
+                print('Please enter a valid category. (Cannot contain any spacing, digits and special characters.)\n')
 
+    recipe_ingredient()
+
+
+def recipe_ingredient():
+    ingredients = []
     while True:
-        print('Here are the ingredient list: ')
-        for category, item in ingredient_category_groups.items():
-            print(f'* Category: {category} *')
-            for i in item:
-                print(format_ingredient_data(i))
+        while True:
+            print('\nHere are the ingredient list:')
+            for category, items in ingredient_category_groups.items():
+                print(f'\n* {category} *')
+                for index, ingredient in enumerate(items, start=1):
+                    print(f"{index}. {ingredient.title()}")
 
-        ingredient_per_unit = []
-        ingredient_per_unit = input(f'3. {recipe_info[2].ljust(max_length + 2)}: ')
-        if validation_empty_entries(category):
-            match = re.match(r'[A-Za-z]+$', category.strip())
-            if match:
-                if category in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins', 'Others']:
-                    break
+            ingredient_name = input(f'\nEnter the ingredient name: ')
+            found_category = None
+            if validation_empty_entries(ingredient_name):
+                if validation_alphabet_only(ingredient_name):
+                    for category, items in ingredient_category_groups.items():
+                        for item in items:
+                            if ingredient_name.lower() == item.lower():
+                                found_category = category
+                                break
+                        if found_category:
+                            break
+                    else:
+                        print('Invalid ingredient name. Please enter ingredient name based on the ingredient list given.\n')
+                    if found_category:
+                        break
                 else:
-                    print('Please enter a valid category based on the categories given.\n')
+                    print(
+                        'Please enter a valid ingredient name. (Cannot contain any digits and special characters.)\n')
+
+        while True:
+            quantity_per_unit = input(f'Enter the quantity per unit of {ingredient_name}: ')
+            if validation_empty_entries(quantity_per_unit):
+                try:
+                    quantity_per_unit = float(quantity_per_unit)
+                    break
+                except ValueError:
+                    print('Please enter a valid quantity. (Cannot contain any alphabets and special characters.)\n')
+
+        while True:
+            category_units = {
+                'Flours and Grains': 'g, kg, cups',
+                'Sweeteners': 'g, ml, cups',
+                'Fats and Oils': 'g, ml',
+                'Dairy and Non-Dairy Products': 'g, kg, l, ml, cups',
+                'Leavening Agents': 'g, tsp',
+                'Spices and Flavourings': 'g, tsp, tbsp',
+                'Fillings and Toppings': 'g, pieces',
+                'Fruits and Vegetables': 'g, kg, pieces, cups',
+                'Preservatives and Stabilizers': 'g, tsp'
+            }
+
+            unit = category_units.get(found_category, '')
+
+            if found_category in ['Leavening Agents', 'Preservatives and Stabilizers']:
+                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon. *')
+            elif found_category == 'Spices and Flavourings':
+                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon, tbsp = tablespoon. *')
             else:
-                print(
-                    "Please enter a valid category. (Case sensitive. Cannot contain any spacing, digits and special characters.)\n")
+                print(f'* Allowable unit measurement: {unit} *')
+
+            unit_measurement = input(f'Enter the unit measurement of {ingredient_name}: ').strip()
+
+            allowable_unit = []
+            for item in unit.split(','):
+                allowable_unit.append(item.strip().lower())
+
+            if validation_empty_entries(unit_measurement):
+                if unit_measurement.isalpha():
+                    if unit_measurement in allowable_unit:
+                        break
+                    else:
+                        print('Please enter a valid unit from the unit given. (Case Sensitive.)\n')
+                else:
+                    print('Please enter a valid unit. (Cannot contain any alphabets and special characters.)\n')
+
+        ingredient_used = [ingredient_name, quantity_per_unit, unit_measurement]
+        ingredients.append(ingredient_used)
+
+        print('\nIngredient so far:')
+
+        max_length = 0
+        for item in ingredients:
+            if len(item) > max_length:
+                max_length = len(item)
+
+        for index, item in enumerate(ingredients, start=1):
+            print(f'{index}. {item[0].ljust(max_length).title()} x {item[1]} {item[2]}')
+
+        while True:
+            add_more = input('\nContinue adding ingredients? (y=yes, n=no)'
+                             '\n>>> ')
+            if add_more == 'y':
+                break
+            elif add_more == 'n':
+                while True:
+                    ingredient_notes = input("Any additional details or notes you'd like to include for these ingredients? If not, enter 'no'.\n>>> ")
+                    if validation_empty_entries(ingredient_notes):
+                        if ingredient_notes.lower() == 'no':
+                            print('Stop adding. Continue to instruction page......')
+                            pass # can directly call instruction function?
+                            break
+                        else:
+                            print(f'Note added: {ingredient_notes}')
+                            print('Stop adding. Continue to instruction page......')
+                            pass  # can directly call instruction function?
+                            break
+                break #kebujia
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+        if add_more == 'n': #kebujia
+            break
 
 
-recipe()
+def recipe_instruction():
+    print('hi')
 
+def continue_adding_ingredient():
+    while True:
+        try:
+            add_more = input('\nContinue adding ingredients? (y=yes, n=no)'
+                             '\n>>> ')
+            if add_more == 'y':
+                recipe_ingredient()
+                break
+            elif add_more == 'n':
+                print('Stop adding. Exiting to product management page......')
+                pass
+                break
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
+        except ValueError:
+            print('Invalid input. Please enter again.')
+
+
+create_recipe()

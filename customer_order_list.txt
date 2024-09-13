@@ -74,5 +74,14 @@
         ],
         "total_price": 24.0,
         "status": "Payment Complete"
+    },
+    {
+        "order_id": 2699141306,
+        "username": "lum",
+        "items_ordered": [
+            "nctdream x4"
+        ],
+        "total_price": 396.0,
+        "status": "Payment Complete"
     }
 ]
