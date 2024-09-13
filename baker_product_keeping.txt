@@ -92,5 +92,26 @@
             "cheese",
             "milk"
         ]
+    },
+    "009": {
+        "category": "Cakes",
+        "product_name": "tiramisu",
+        "product_code": "CK858",
+        "serial_number": [
+            "38625",
+            "29908",
+            "29393",
+            "29393"
+        ],
+        "quantity_produced": "4",
+        "batch_number": "009",
+        "date_of_production": "24-09-2024",
+        "shelf_life": "2days",
+        "expiry_date": "26-09-2024",
+        "recipe": "coffee soaked lady fingers",
+        "baker_name": "baker6",
+        "allergens": [
+            "coffee"
+        ]
     }
 }
