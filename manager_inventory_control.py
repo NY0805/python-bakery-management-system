@@ -100,15 +100,11 @@ def inventory_control_product():
                 print('\t\t\tCurrent product list')
                 print('-----------------------------------------------')
 
-                length = 0
                 for key, value in product.items():
-                    if len(value["product_name"]) > length:
-                        length = len(value["product_name"])
+                    product_name = value['product_name']
+                    quantity = len(value['serial_number'])
 
-                    product_name = value["product_name"]
-                    serial_number = value["serial_number"]
-
-                    print(f'Product name: {product_name.ljust(length + 4)} quantity: {len(serial_number)}')
+                    print(f'Product name: {product_name:<15} quantity: {quantity}')
 
                 chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
 
@@ -117,56 +113,117 @@ def inventory_control_product():
                     break
 
                 elif chosen_product in (product[batch_number]['product_name'] for batch_number in product):
-                    for batch_number, value in product.items():
-                        if value['product_name'] == chosen_product:
-                            serial_number = value['serial_number']
-
                     while True:
                         try:
                             add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
+                            if add_stock < 0:
+                                print('Please enter a valid input.')
 
-                            if chosen_product in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
-                                available_stock = len(value['stock']) + add_stock
+                            elif add_stock == 0:
+                                print('\nNo product is added.')
+                                break
 
+                            else:
+                                for batch_number, value in product.items():
+                                    if chosen_product == value['product_name']:
+                                        serial_number = value['serial_number']
 
-                            if add_stock > len(serial_number):
-                                print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
+                                        if add_stock > len(serial_number):
+                                            print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
+                                            add_stock = 0
+                                            break
 
-                                while True:
-                                    still_add = input('Do you want to add? (y=yes. n=no)\n>>> ')
-                                    if still_add == 'y':
+                                        if batch_number in product_inventory:
+                                            stock = product_inventory[batch_number]['stock'] + add_stock
+                                        else:
+                                            stock = add_stock
+
+                                        product_inventory[batch_number] = {
+                                            'product_name': chosen_product,
+                                            'stock': stock
+                                        }
+
+                                        quantity = len(serial_number) - stock
+                                        if quantity <= 0:
+                                            del product[batch_number]
+                                        else:
+                                            del serial_number[0: stock]
+
+                                        save_info_product(product)
+                                        save_info_product_inventory(product_inventory)
+
+                                        print(f'\n{add_stock} {chosen_product}(s) is(are) added into the inventory.')
+                                        print(f'Current stock of {chosen_product} in product inventory: {stock}')
                                         break
-                                    elif still_add == 'n':
-                                        break
-                                    else:
-                                        print('\ninvalid, enter again.')
-
-                                if still_add == 'n':
-                                    break
-
-
-
-                                product_inventory[batch_number] = {
-                                    'product_name': chosen_product,
-                                    'stock': available_stock
-                                }
-
-                                print(f'\n{add_stock} {chosen_product}(s) is(are) added to the inventory.')
-
-                                del serial_number[0: add_stock]
-                                print(f'\n{add_stock} {chosen_product} from baker\'s record keeping has(have) been removed.')
-
-                                if len(serial_number) < 1:
-                                    del product[batch_number]
-
-                                save_info_product_inventory(product_inventory)
-                                save_info_product(product)
+                                break
 
                         except ValueError:
                             print('Please enter a number.')
+                else:
+                    print('\nProduct not found, enter again.')
+
+            elif product_control == '2':
+                if len(product_inventory) == 0:
+                    print('\nOut of stock!')
+                    break
 
                 else:
-                    print('\nenter again.')
+                    print('\n-----------------------------------------------')
+                    print('\t\t\t', ' ', 'Product Inventory')
+                    print('-----------------------------------------------')
+                    for batch_number, value in product_inventory.items():
+                        product_name = value['product_name']
+                        available_quantity = value['stock']
+
+                        print(f'{product_name:<15}: {available_quantity}')
+
+                    product_stock = input('\nWhich products do you want to reduce? (or enter "cancel" to cancel)\n>>> ')
+
+                    if product_stock == 'cancel':
+                        print('\nCancelling. Exiting to product management page......')
+                        break
+
+                    elif product_stock in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
+                        while True:
+                            try:
+                                quantity_to_reduce = int(input(f'\nHow many {product_stock} do you want to reduce? '))
+                                if quantity_to_reduce < 0:
+                                    print('Please enter a valid input.')
+
+                                elif quantity_to_reduce == 0:
+                                    print('\nNo product is reduced.')
+                                    break
+
+                                else:
+                                    for batch_number, value in product_inventory.items():
+                                        if product_stock == value['product_name']:
+                                            available_stock = value['stock']
+
+                                            if quantity_to_reduce > available_stock:
+                                                print(f'\nOut of range. The current stock of {product_stock}(s) is(are) {available_stock}. ')
+                                                break
+
+                                            else:
+                                                stock_left = available_stock - quantity_to_reduce
+                                                print(f'\n{quantity_to_reduce} {product_stock}(s) is(are) reduced.')
+
+                                            product_inventory[batch_number] = {
+                                                'product_name': product_stock,
+                                                'stock': stock_left
+                                            }
+
+                                            if stock_left <= 0:
+                                                del product_inventory[batch_number]
+                                                print(f'Last {product_stock} has finished. Ask bakers to bake more {product_stock}.')
+
+                                            save_info_product_inventory(product_inventory)
+                                            break
+                                    break
+
+                            except ValueError:
+                                print('Please enter a number.')
+                    else:
+                        print('\nProduct not found, enter again.')
 
             else:
                 print('\ninvalid input')
