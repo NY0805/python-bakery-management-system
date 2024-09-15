@@ -411,6 +411,12 @@ def update_product():
                                     print('|⚠️ Invalid input. Please enter again. |')
                                     print('+--------------------------------------+')
                                     continue
+                                if new_value in product_data:
+                                    print('\n+--------------------------------------------------------+')
+                                    print('|⚠️ Duplicate batch number detected. Please enter again. |')
+                                    print('+--------------------------------------------------------+')
+                                    continue
+
 
                             elif attribute_of_product_data == 'date_of_production':
                                 if not validation_empty_entries(new_value):
@@ -437,6 +443,18 @@ def update_product():
                                     print('\n+--------------------------------------+')
                                     print('|⚠️ Invalid input. Please enter again. |')
                                     print('+--------------------------------------+')
+                                    continue
+                                # convert new value from string to datetime format
+                                expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
+                                # convert date_of _production from string to datetime format
+                                date_of_production_new = datetime.strptime([selected_product['date_of_production']], '%d-%m-%Y')
+
+                                max_expiry = date_of_production_new + timedelta(days=(int(product_data[selected_product['shelf_life']])) + 1)
+
+                                if not max_expiry >= expiry_date >= date_of_production_new:
+                                    print('\n+----------------------------------------------------------------------------------------------------------------------+')
+                                    print(f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product['date_of_production']]} to {max_expiry.strftime("%d-%m-%Y")}. |')
+                                    print('+----------------------------------------------------------------------------------------------------------------------+')
                                     continue
 
                             elif attribute_of_product_data == 'baker_name':

@@ -127,6 +127,13 @@ def create_recipe():
     recipe_ingredient()
 
 
+def is_duplicate(ingredient_name, ingredients):
+    for i in ingredients:
+        if ingredient_name.lower() == i[0].lower():
+            return False
+    return True
+
+
 def recipe_ingredient():
     ingredients = []
     while True:
@@ -139,18 +146,22 @@ def recipe_ingredient():
 
             ingredient_name = input(f'\nEnter the ingredient name: ')
             found_category = None
+
             if validation_empty_entries(ingredient_name):
                 if validation_alphabet_only(ingredient_name):
-                    for category, items in ingredient_category_groups.items():
-                        for item in items:
-                            if ingredient_name.lower() == item.lower():
-                                found_category = category
+                    if is_duplicate(ingredient_name, ingredients):
+                        for category, items in ingredient_category_groups.items():
+                            for item in items:
+                                if ingredient_name.lower() == item.lower():
+                                    found_category = category
+                                    break
+                            if found_category:
                                 break
-                        if found_category:
-                            break
+                        else:
+                            print(
+                                'Invalid ingredient name. Please enter ingredient name based on the ingredient list given.\n')
                     else:
-                        print(
-                            'Invalid ingredient name. Please enter ingredient name based on the ingredient list given.\n')
+                        print("Duplicate ingredient name. You've already added this ingredient.")
                     if found_category:
                         break
                 else:
@@ -158,54 +169,52 @@ def recipe_ingredient():
                         'Please enter a valid ingredient name. (Cannot contain any digits and special characters.)\n')
 
         while True:
-            try:
-                category_units = {
-                    'Flours and Grains': 'g, kg, cups',
-                    'Sweeteners': 'g, ml, cups',
-                    'Fats and Oils': 'g, ml',
-                    'Dairy and Non-Dairy Products': 'g, kg, l, ml, cups',
-                    'Leavening Agents': 'g, tsp',
-                    'Spices and Flavourings': 'g, tsp, tbsp',
-                    'Fillings and Toppings': 'g, pieces',
-                    'Fruits and Vegetables': 'g, kg, pieces, cups',
-                    'Preservatives and Stabilizers': 'g, tsp'
-                }
+            category_units = {
+                'Flours and Grains': 'g, kg, cups',
+                'Sweeteners': 'g, ml, cups',
+                'Fats and Oils': 'g, ml',
+                'Dairy and Non-Dairy Products': 'g, kg, l, ml, cups',
+                'Leavening Agents': 'g, tsp',
+                'Spices and Flavourings': 'g, tsp, tbsp',
+                'Fillings and Toppings': 'g, pieces',
+                'Fruits and Vegetables': 'g, kg, pieces, cups',
+                'Preservatives and Stabilizers': 'g, tsp'
+            }
 
-                unit = category_units.get(found_category, '')
+            unit = category_units.get(found_category, '')
 
-                if found_category in ['Leavening Agents', 'Preservatives and Stabilizers']:
-                    print(f'* Allowable unit measurement: {unit}, tsp = teaspoon. *')
-                elif found_category == 'Spices and Flavourings':
-                    print(f'* Allowable unit measurement: {unit}, tsp = teaspoon, tbsp = tablespoon. *')
-                else:
-                    print(f'* Allowable unit measurement: {unit} *')
+            if found_category in ['Leavening Agents', 'Preservatives and Stabilizers']:
+                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon. *')
+            elif found_category == 'Spices and Flavourings':
+                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon, tbsp = tablespoon. *')
+            else:
+                print(f'* Allowable unit measurement: {unit} *')
 
-                quantity_per_unit, unit_measurement = input(f'Enter the quantity per unit of {ingredient_name}: ').split()
+            unit_measurement = input(f'Enter the unit measurement of {ingredient_name}: ').strip()
 
-                if validation_empty_entries(quantity_per_unit):
-                    try:
-                        quantity_per_unit = float(quantity_per_unit)
+            allowable_unit = []
+            for item in unit.split(','):
+                allowable_unit.append(item.strip().lower())
+
+            if validation_empty_entries(unit_measurement):
+                if unit_measurement.isalpha():
+                    if unit_measurement in allowable_unit:
                         break
-                    except ValueError:
-                        print('Please enter a valid quantity. (Cannot contain any alphabets and special characters.)\n')
-
-                allowable_unit = []
-                for item in unit.split(','):
-                    allowable_unit.append(item.strip().lower())
-                print(allowable_unit)
-
-                if validation_empty_entries(unit_measurement):
-                    if unit_measurement.isalpha():
-                        if unit_measurement.strip().lower() in allowable_unit:
-                            break
-                        else:
-                            print('Please enter a valid unit from the unit given. (Case Sensitive.)\n')
                     else:
-                        print('Please enter a valid unit. (Cannot contain any alphabets and special characters.)\n')
-            except ValueError:
-                print('Please enter a valid quantity with unit measurement. (Eg: 23 ml)\n')
+                        print('Please enter a valid unit from the unit given. (Case Sensitive.)\n')
+                else:
+                    print('Please enter a valid unit. (Cannot contain any digits and special characters.)\n')
 
-        ingredient_used = [ingredient_name, quantity_per_unit, unit_measurement]
+        while True:
+            quantity_per_unit = input(f'Enter the quantity per unit of {ingredient_name}: ')
+            if validation_empty_entries(quantity_per_unit):
+                try:
+                    quantity_per_unit = float(quantity_per_unit)
+                    break
+                except ValueError:
+                    print('Please enter a valid quantity. (Cannot contain any alphabets and special characters.)\n')
+
+        ingredient_used = [ingredient_name.lower(), quantity_per_unit, unit_measurement]
         ingredients.append(ingredient_used)
 
         print('\nIngredient so far:')
@@ -245,10 +254,14 @@ def recipe_ingredient():
 
 
 def recipe_instruction():
-    print('hi')
+    print("Welcome to the Recipe Instruction page! Let's get started with creating your delicious bakery goods step by step.\n")
 
 
-def continue_adding_ingredient():
+
+
+
+
+def continue_adding_recipe():
     while True:
         try:
             add_more = input('\nContinue adding ingredients? (y=yes, n=no)'
