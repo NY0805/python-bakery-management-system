@@ -55,11 +55,9 @@ def print_in_column(info1, info2, width=60):
 
 
 def menu():
-    print('\n* Welcome to Morning Glory Bakery! *\n')
-    print(
-        'We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
-    print(
-        "Explore our menu, and don't forget to check out our unique creations in the others category for something special!")
+    print('\n* Morning Glory Bakery Menu *\n')
+    print('We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
+    print("Explore our menu, and don't forget to check out our unique creations in the others category for something special!")
 
     category_groups = defaultdict(list)
     for value in product_data.values():

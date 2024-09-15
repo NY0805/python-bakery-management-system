@@ -16,7 +16,7 @@ def order_management():
 
         elif order_management_choice == '2':
             print('\n-----------------------------------------------')
-            print('\t\t\t\tUPDATE ORDER STATUS')
+            print('\t\t\t', '', 'UPDATE ORDER STATUS')
             print('-----------------------------------------------')
             print('1. View order details\n2. Update order status\n3. Exit⛔🔙')
 
@@ -26,3 +26,6 @@ def order_management():
         else:
             break
         break
+
+
+order_management()

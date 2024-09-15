@@ -140,8 +140,6 @@ def manager():
             print('+-------------------------------------------+\n')
             manager_password = input('Password: ')
 
-
-
     else:
         print('\n+--------------------------------------------------------------+')
         print('|⚠️ You are not a manager, cannot access to manager privilege. |')
