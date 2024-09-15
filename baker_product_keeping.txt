@@ -58,8 +58,6 @@
         "product_name": "gingerbread",
         "product_code": "BS678",
         "serial_number": [
-            "biscuit1",
-            "biscuit2",
             "biscuit3"
         ],
         "quantity_produced": "3",
@@ -98,9 +96,6 @@
         "product_name": "tiramisu",
         "product_code": "CK858",
         "serial_number": [
-            "38625",
-            "29908",
-            "29393",
             "29393"
         ],
         "quantity_produced": "4",

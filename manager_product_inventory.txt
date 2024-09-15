@@ -1,1 +1,10 @@
-{}
+{
+    "009": {
+        "product_name": "tiramisu",
+        "stock": 3
+    },
+    "006": {
+        "product_name": "gingerbread",
+        "stock": 2
+    }
+}
