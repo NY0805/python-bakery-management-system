@@ -1,6 +1,6 @@
-[
+{
     {
-        "order_id": 1001,
+        "order_id": 5580946551,
         "username": "Mark0825",
         "items_ordered": [
             "Bread x1",
@@ -10,7 +10,7 @@
         "status": "Delivered"
     },
     {
-        "order_id": 1002,
+        "order_id": 5684950188,
         "username": "03jane_",
         "items_ordered": [
             "Muffin x2",
@@ -20,7 +20,7 @@
         "status": "Shipped"
     },
     {
-        "order_id": 1003,
+        "order_id": 1544631417,
         "username": "_eddie",
         "items_ordered": [
             "Bread x1",
@@ -30,7 +30,7 @@
         "status": "Processing"
     },
     {
-        "order_id": 1004,
+        "order_id": 4418942694,
         "username": "anna328_",
         "items_ordered": [
             "Biscuit x3"
@@ -39,7 +39,7 @@
         "status": "Delivered"
     },
     {
-        "order_id": 1005,
+        "order_id": 7841554976,
         "username": "andrew_520",
         "items_ordered": [
             "Muffin x1",
@@ -49,7 +49,7 @@
         "status": "Shipped"
     },
     {
-        "order_id": 2113594541,
+        "order_id": 9026863080,
         "username": "Ashley",
         "items_ordered": [
             "bagel x2"
@@ -57,31 +57,4 @@
         "total_price": 24.0,
         "status": "Payment Complete"
     },
-    {
-        "order_id": 4154607979,
-        "username": "marklee",
-        "items_ordered": [
-            "biscuit x3"
-        ],
-        "total_price": 0,
-        "status": "Canceled"
-    },
-    {
-        "order_id": 2084844464,
-        "username": "jeno",
-        "items_ordered": [
-            "cake x2"
-        ],
-        "total_price": 24.0,
-        "status": "Payment Complete"
-    },
-    {
-        "order_id": 2699141306,
-        "username": "lum",
-        "items_ordered": [
-            "nctdream x4"
-        ],
-        "total_price": 396.0,
-        "status": "Payment Complete"
-    }
-]
+}
