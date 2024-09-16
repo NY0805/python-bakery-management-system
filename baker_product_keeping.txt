@@ -9,7 +9,7 @@
         "quantity_produced": "1",
         "batch_number": "001",
         "date_of_production": "09-08-2004",
-        "shelf_life": "5 days",
+        "shelf_life": "6",
         "expiry_date": "17-08-2004",
         "recipe": "r",
         "baker_name": "r",
@@ -43,7 +43,7 @@
             "pie1"
         ],
         "quantity_produced": "1",
-        "batch_number": "003",
+        "batch_number": "007",
         "date_of_production": "27-08-2004",
         "shelf_life": "7 days",
         "expiry_date": "06-09-2004",

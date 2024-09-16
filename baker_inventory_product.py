@@ -438,9 +438,30 @@ def update_product():
                                     continue
 
                             elif attribute_of_product_data == 'shelf_life':
-                                if not validation_empty_entries(new_value):
-                                    continue
-                                if not re.match(r'^(\d+)\s*days$', new_value.strip()):
+                                if validation_empty_entries(attribute_of_product_data):
+                                    match = re.match(r'^(\d+)\s*days$', attribute_of_product_data.strip())
+
+                                    if match:
+                                        number = int(match.group(1))
+                                        if product_data[selected_product]['category'] in ['Breads', 'Muffins']:
+                                            if number <= 5:
+                                                break
+                                            else:
+                                                print('Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
+                                        elif product_data[selected_product]['category'] in ['Cakes', 'Pastries']:
+                                            if number <= 7:
+                                                break
+                                            else:
+                                                print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
+                                        elif product_data[selected_product]['category'] in ['Biscuits', 'Others']:
+                                            if number <= 14:
+                                                break
+                                            else:
+                                                print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
+                                    else:
+                                        print("Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
+
+                                else:
                                     print('\n+--------------------------------------+')
                                     print('|⚠️ Invalid input. Please enter again. |')
                                     print('+--------------------------------------+')
@@ -457,14 +478,14 @@ def update_product():
                                 # convert new value from string to datetime format
                                 expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
                                 # convert date_of _production from string to datetime format
-                                date_of_production_new = datetime.strptime([selected_product['date_of_production']], '%d-%m-%Y')
+                                date_of_production_new = datetime.strptime(product_data[selected_product]['date_of_production'], '%d-%m-%Y')
 
-                                max_expiry = date_of_production_new + timedelta(days=(int(product_data[selected_product['shelf_life']])) + 1)
+                                max_expiry = date_of_production_new + timedelta(days=product_data[selected_product]['shelf_life'] + 1)
 
                                 if not max_expiry >= expiry_date >= date_of_production_new:
-                                    print('\n+----------------------------------------------------------------------------------------------------------------------+')
-                                    print(f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product["date_of_production"]]} to {max_expiry.strftime("%d-%m-%Y")}. |')
-                                    print('+----------------------------------------------------------------------------------------------------------------------+')
+                                    print('\n+------------------------------------------------------------------------------------------------------------------------------------+')
+                                    print(f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
+                                    print('+------------------------------------------------------------------------------------------------------------------------------------+')
                                     continue
 
                             elif attribute_of_product_data == 'baker_name':
@@ -487,7 +508,7 @@ def update_product():
 
                             product_data[selected_product][attribute_of_product_data] = new_value
                             print(f'\n{attribute_of_product_data} of {selected_product} is updated.')
-                            #save_info(product_data)
+                            save_info(product_data)
                             break
 
                     elif attribute_of_product_data == 'cancel':
