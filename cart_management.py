@@ -1,89 +1,95 @@
 import uuid
-import json
+from product_menu import product_data  # Make sure this import is correct
 
-# Define the function that loads data from the file
-def load_data_from_products():
-    try:
-        file = open('customer_order_list.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
+# Function to display the product menu
+def display_menu(products):
+    print("\nProduct Menu:")
+    print(f"{'Code':<6} | {'Name':<20} | {'Price':<6}")
+    print("-" * 30)
+    for product in products.values():  # Iterate through the dictionary values
+        print(f"{product['product_code']:<6} | {product['product_name'].title():<20} | RM{float(product['price']):.2f}")
+    print("-" * 30)
+
+# Function to add an item to the cart
+def add_item_to_cart(cart, products):
+    display_menu(products)  # Show the product menu to the user
+    product_code = input("\nEnter the product code: ").strip()
+
+    # Find the product by code
+    product = next((item for item in products.values() if item['product_code'] == product_code), None)
+
+    if product:
+        quantity = int(input(f"How many {product['product_name']} would you like to add? "))
+        if product_code in cart:
+            cart[product_code]['quantity'] += quantity
         else:
-            return {}  # return empty dictionary if the file is empty
-    except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+            cart[product_code] = {'product_name': product['product_name'], 'price': float(product['price']),
+                                  'quantity': quantity}
+        print(f"\n{product['product_name']} x{quantity} has been added to your cart.")
+    else:
+        print("Invalid product code.")
 
-# Define the path to the order file
-ORDER_FILE = 'customer_order_list.txt'
+# Function to remove an item from the cart
+def remove_item_from_cart(cart):
+    product_code = input("\nEnter the product code to remove: ").strip()
+    if product_code in cart:
+        del cart[product_code]
+        print(f"Product {product_code} has been removed from the cart.")
+    else:
+        print("Product not found in the cart.")
 
-def generate_cart_id():
-    """Generate a unique cart ID using UUID."""
-    return str(uuid.uuid4())
+# Function to modify the quantity of an item in the cart
+def modify_item_quantity(cart):
+    product_code = input("\nEnter the product code to modify: ").strip()
+    if product_code in cart:
+        new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
+        cart[product_code]['quantity'] = new_quantity
+        print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
+    else:
+        print("Product not found in the cart.")
 
-def load_orders():
-    """Load orders from the file."""
-    try:
-        with open(ORDER_FILE, 'r') as file:
-            return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if the file is missing or empty
+# Function to view the cart
+def view_cart(cart):
+    if not cart:
+        print("\nYour cart is empty.")
+    else:
+        print("\nYour Cart:")
+        print(f"{'Product':<20} | {'Quantity':<8} | {'Price (RM)':<10}")
+        print("-" * 40)
+        total_price = 0
+        for item in cart.values():
+            item_total = item['quantity'] * item['price']
+            print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
+            total_price += item_total
+        print("-" * 40)
+        print(f"Total Price: RM{total_price:.2f}")
 
-def save_orders(orders):
-    """Save orders to the file."""
-    with open(ORDER_FILE, 'w') as file:
-        json.dump(orders, file, indent=4)
+# Function to handle payment or cancellation
+def make_payment_or_cancel(cart):
+    if not cart:
+        print("\nYour cart is empty. Nothing to checkout.")
+        return
 
-def update_order_list(order_id, username, items_ordered, total_price, status):
-    """Update the customer order list and save to file."""
-    orders = load_orders()  # Load existing orders from file
-    order_exists = False
+    print("\nWould you like to:")
+    print("1. Proceed with payment")
+    print("2. Cancel your order")
 
-    for order in orders:
-        if order["order_id"] == order_id:
-            # Update existing order
-            order["items_ordered"] = items_ordered
-            order["total_price"] = total_price
-            order["status"] = status
-            order_exists = True
-            break
+    choice = input("Select your option: ").strip()
+    if choice == '1':
+        print("\nPayment completed. Thank you for your purchase!")
+        cart.clear()  # Clear the cart after payment
+    elif choice == '2':
+        print("\nYour order has been canceled.")
+        cart.clear()  # Clear the cart after cancellation
+    else:
+        print("Invalid option. Returning to the main menu.")
 
-    if not order_exists:
-        # Append new order
-        orders.append({
-            "order_id": order_id,
-            "username": username,
-            "items_ordered": items_ordered,
-            "total_price": total_price,
-            "status": status
-        })
-
-    save_orders(orders)  # Save the updated orders back to file
-
+# Main shopping cart function
 def shopping_cart():
-    print("Welcome to the Shopping Cart Program!")
-
-    # Ask for customer name and create a new cart ID
+    cart = {}
     customer_name = input("Please enter your name: ")
-    cart_id = generate_cart_id()
-    print(f"Hello, {customer_name}! Your cart ID is: {cart_id}")
-
-    # Initialize the cart for the customer
-    cart = []
-    quantities = []
-    prices = []
-
-    def view_cart():
-        if len(cart) == 0:
-            print("Your shopping cart is empty.")
-        else:
-            print("This is what is in your shopping cart:")
-            for i in range(len(cart)):
-                print(f"{cart[i]} - Quantity: {quantities[i]}, Price: ${prices[i]:.2f}")
+    cart_id = str(uuid.uuid4())
+    print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
 
     while True:
         print("\nPlease choose one of the following options:")
@@ -94,79 +100,28 @@ def shopping_cart():
         print("5. Make payment or cancel")
         print("6. Exit to main menu")
 
-        select = int(input("Select your option: "))
+        option = input("Select your option: ").strip()
 
-        if select == 1:
-            item = input("What would you like to add? ")
-            quantity = int(input("Enter the quantity: "))
-            price = float(input("Enter the price of the item: $"))
-            if item in cart:
-                index = cart.index(item)
-                quantities[index] += quantity
-                prices[index] = price
-                print(f"Updated quantity of '{item}' to {quantities[index]}, price updated to ${price:.2f}.")
-            else:
-                cart.append(item)
-                quantities.append(quantity)
-                prices.append(price)
-                print(f"'{item}' has been added to your cart with quantity {quantity} and price ${price:.2f}.")
-
-        elif select == 2:
-            remove_item = input("Type the name of the item you would like to remove: ")
-            if remove_item in cart:
-                index = cart.index(remove_item)
-                cart.pop(index)
-                quantities.pop(index)
-                prices.pop(index)
-                print(f"'{remove_item}' has been removed from your cart.")
-            else:
-                print(f"'{remove_item}' is not in your cart.")
-
-        elif select == 3:
-            modify_item = input("Type the name of the item you want to modify: ")
-            if modify_item in cart:
-                index = cart.index(modify_item)
-                new_quantity = int(input(f"Enter the new quantity for '{modify_item}': "))
-                new_price = float(input(f"Enter the new price for '{modify_item}': $"))
-                quantities[index] = new_quantity
-                prices[index] = new_price
-                print(f"The quantity of '{modify_item}' has been updated to {new_quantity} and price to ${new_price:.2f}.")
-            else:
-                print(f"'{modify_item}' is not in your cart.")
-
-        elif select == 4:
-            view_cart()
-
-        elif select == 5:
-            view_cart()
-            if len(cart) > 0:
-                action = input("Would you like to (P)ay or (C)ancel your order? ").upper()
-                if action == "P":
-                    total_price = sum([quantities[i] * prices[i] for i in range(len(cart))])
-                    print(f"Your total is: ${total_price:.2f}. Payment processing...")
-                    update_order_list(int(cart_id[:8], 16), customer_name, [f"{cart[i]} x{quantities[i]}" for i in range(len(cart))], total_price, "Payment Complete")
-                    print("Payment completed successfully!")
-                    break
-                elif action == "C":
-                    update_order_list(int(cart_id[:8], 16), customer_name, [f"{cart[i]} x{quantities[i]}" for i in range(len(cart))], 0, "Canceled")
-                    print("Your order has been canceled.")
-                    break
-                else:
-                    print("Invalid option. Please try again.")
-            else:
-                print("Your cart is empty; no action needed.")
-
-        elif select == 6:
-            print("Returning to the main menu.")
+        if option == '1':
+            add_item_to_cart(cart, product_data)  # Use product_data here
+        elif option == '2':
+            remove_item_from_cart(cart)
+        elif option == '3':
+            modify_item_quantity(cart)
+        elif option == '4':
+            view_cart(cart)
+        elif option == '5':
+            make_payment_or_cancel(cart)
+        elif option == '6':
+            print("Thank you for visiting our system. Goodbye!")
             break
-
         else:
             print("Invalid option. Please try again.")
 
-    # Print the updated orders
-    print("Updated Customer Orders:")
-    for order in load_orders():
-        print(order)
+# Run the shopping cart program
+if __name__ == "__main__":
+    shopping_cart()
 
-# Call the shopping_cart function
-shopping_cart()
+
+
+
