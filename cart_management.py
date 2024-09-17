@@ -118,10 +118,6 @@ def shopping_cart():
         else:
             print("Invalid option. Please try again.")
 
-# Run the shopping cart program
-if __name__ == "__main__":
-    shopping_cart()
-
-
-
-
+    # Run the shopping cart program
+    if __name__ == "__main__":
+        shopping_cart()
