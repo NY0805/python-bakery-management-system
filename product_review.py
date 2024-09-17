@@ -19,29 +19,40 @@ def load_reviews():
     except FileNotFoundError:
         return []  # Return an empty list if the file does not exist
 
+
 # Save the updated reviews to a file
 def save_reviews(reviews):
     with open("customer_reviews.txt", "w") as file:
         json.dump(reviews, file, indent=4)
 
+
+def validation_rating(rating):
+        try:
+            if rating.isdigit() and int(rating) in range(1, 6):
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+
+
 # Allow the customer to submit a review for a purchased product
 def submit_review():
+    print('\n-----------------------------------------------')
+    print('\t\t\t', '', 'PRODUCT REVIEW')
+    print('-----------------------------------------------')
     # Get username and review details
     username = input("Enter your username: ")
     product_name = input("Enter the product name: ")
     review_text = input("Enter your review: ")
     rating = input("Rate your product (1-5): ")
 
-    # Validate rating input
-    if not rating.isdigit() or int(rating) not in range(1, 6):
-        print("Invalid rating. Please enter a number between 1 and 5.")
-        return
+
 
     # Create a review entry
     review = {
         "username": username,
-        "product_name": product_name,
-        "review_text": review_text,
+        "review": review_text,
         "rating": int(rating)
     }
 
@@ -56,4 +67,3 @@ def submit_review():
 
     print("Thank you for submitting your feedback! We have received your review.")
 
-submit_review()

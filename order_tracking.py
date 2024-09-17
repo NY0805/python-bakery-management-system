@@ -21,7 +21,9 @@ def load_data_from_tracking():
 
 def order_tracking():
     orders = load_data_from_tracking()
-
+    print('\n-----------------------------------------------')
+    print('\t\t\t', 'ORDER TRACKING')
+    print('-----------------------------------------------')
     order_id = int(input('enter id: '))
 
     for order in orders.values():
@@ -37,3 +39,4 @@ def order_tracking():
         else:
             print('Order ID cannot be found. Please check and try again.')
 
+order_tracking()

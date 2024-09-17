@@ -1,6 +1,7 @@
 import uuid
 from product_menu import product_data  # Make sure this import is correct
 
+
 # Function to display the product menu
 def display_menu(products):
     print("\nProduct Menu:")
@@ -9,6 +10,7 @@ def display_menu(products):
     for product in products.values():  # Iterate through the dictionary values
         print(f"{product['product_code']:<6} | {product['product_name'].title():<20} | RM{float(product['price']):.2f}")
     print("-" * 30)
+
 
 # Function to add an item to the cart
 def add_item_to_cart(cart, products):
@@ -29,24 +31,27 @@ def add_item_to_cart(cart, products):
     else:
         print("Invalid product code.")
 
+
 # Function to remove an item from the cart
 def remove_item_from_cart(cart):
-    product_code = input("\nEnter the product code to remove: ").strip()
+    product_code = input("\nPlease enter the product code of the item you wish to remove: ").strip()
     if product_code in cart:
         del cart[product_code]
-        print(f"Product {product_code} has been removed from the cart.")
+        print(f"Product {product_code} has been removed from the cart successfully!")
     else:
-        print("Product not found in the cart.")
+        print("Product cannot be found in the cart.")  # Display this message if the product is not in the cart
+
 
 # Function to modify the quantity of an item in the cart
 def modify_item_quantity(cart):
-    product_code = input("\nEnter the product code to modify: ").strip()
+    product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
     if product_code in cart:
         new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
         cart[product_code]['quantity'] = new_quantity
         print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
     else:
-        print("Product not found in the cart.")
+        print("Product cannot be found in the cart.")
+
 
 # Function to view the cart
 def view_cart(cart):
@@ -64,17 +69,18 @@ def view_cart(cart):
         print("-" * 40)
         print(f"Total Price: RM{total_price:.2f}")
 
+
 # Function to handle payment or cancellation
 def make_payment_or_cancel(cart):
     if not cart:
-        print("\nYour cart is empty. Nothing to checkout.")
+        print("\nYour cart is empty. Please add items before proceeding to checkout.")
         return
 
     print("\nWould you like to:")
-    print("1. Proceed with payment")
+    print("1. Proceed with your payment")
     print("2. Cancel your order")
 
-    choice = input("Select your option: ").strip()
+    choice = input("Please select your option: ").strip()
     if choice == '1':
         print("\nPayment completed. Thank you for your purchase!")
         cart.clear()  # Clear the cart after payment
@@ -84,12 +90,17 @@ def make_payment_or_cancel(cart):
     else:
         print("Invalid option. Returning to the main menu.")
 
+
 # Main shopping cart function
 def shopping_cart():
     cart = {}
     customer_name = input("Please enter your name: ")
     cart_id = str(uuid.uuid4())
     print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
+
+    print('\n-----------------------------------------------')
+    print('\t\t\t', '', 'CART MANAGEMENT')
+    print('-----------------------------------------------')
 
     while True:
         print("\nPlease choose one of the following options:")
@@ -113,11 +124,12 @@ def shopping_cart():
         elif option == '5':
             make_payment_or_cancel(cart)
         elif option == '6':
-            print("Thank you for visiting our system. Goodbye!")
+            print("Thank you for using shopping cart. Goodbye!")
             break
         else:
             print("Invalid option. Please try again.")
 
-    # Run the shopping cart program
-    if __name__ == "__main__":
-        shopping_cart()
+
+# Run the cart management program
+    shopping_cart()
+
