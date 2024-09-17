@@ -136,7 +136,7 @@ def create_recipe():
             max_length = len(item)
 
     while True:
-        print('\n💡 Categories: Breads, Cakes, Pastries, Biscuits, Muffins, Others 💡\n')
+        print('💡 Categories: Breads, Cakes, Pastries, Biscuits, Muffins, Others 💡')
         category = input(f'1. {recipe_info[1].ljust(max_length + 2)}: ')
         if validation_empty_entries(category):
             match = re.match(r'[A-Za-z]+$', category.strip())
@@ -176,16 +176,17 @@ def recipe_ingredient():
     add_notes = True
     while add_notes:
         while True:
+
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'INGREDIENT LIST')
-            print('-----------------------------------------------')
+            print('-----------------------------------------------\n')
             for category, items in ingredient_category_groups.items():
                 print(f'📍 {category} 📍')
                 for index, ingredient in enumerate(items, start=1):
                     print(f"{index}. {ingredient.title()}")
                 print('')
 
-            ingredient_name = input(f'Enter the ingredient name: ').strip()
+            ingredient_name = input(f'✏️ Enter the ingredient name: ').strip()
             found_category = None
 
             if validation_empty_entries(ingredient_name):
@@ -235,7 +236,7 @@ def recipe_ingredient():
             else:
                 print(f'\n💡 Allowable unit measurement: {unit} 💡')
 
-            unit_measurement = input(f'Enter the unit measurement of {ingredient_name}: ').strip()
+            unit_measurement = input(f'✏️ Enter the unit measurement of {ingredient_name}: ').strip()
 
             allowable_unit = []
             for item in unit.split(','):
@@ -255,7 +256,7 @@ def recipe_ingredient():
                     print('+----------------------------------------------------------------------------------+')
 
         while True:
-            quantity_per_unit = input(f'\nEnter the quantity per unit of {ingredient_name}: ').strip()
+            quantity_per_unit = input(f'\n✏️ Enter the quantity per unit of {ingredient_name}: ').strip()
             if validation_empty_entries(quantity_per_unit):
                 try:
                     quantity_per_unit = float(quantity_per_unit)
@@ -295,7 +296,7 @@ def recipe_ingredient():
                         "\nAny additional details or notes you'd like to include for these ingredients? If not, enter 'no'.\n>>> ")
                     if validation_empty_entries(ingredient_notes):
                         if ingredient_notes.lower() == 'no':
-                            print('\nStop adding. Proceeding to select the necessary equipment :)')
+                            print('\nStop adding. Proceeding to select the necessary equipment 😊')
                             add_notes = False
                             break
                         else:
@@ -325,19 +326,26 @@ def recipe_equipment(): # haven't test. and also unsure the .items or .values wh
     equipments = []
     print('\n-----------------------------------------------')
     print('\t\t\t', '', '', 'EQUIPMENT LIST')
-    print('-----------------------------------------------')
+    print('-----------------------------------------------\n')
     for category, items in equipment_category_groups.items():
         print(f'📍 {category} 📍')
         for index, equipment in enumerate(items, start=1):
             print(f"{index}. {equipment.title()}")
+        print('')
     print('💡 Please enter the name of selected equipment (or type "done" to finish)')
 
     while True:
-        equipment_name = input(f'\nEnter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
+        equipment_name = input(f'\n✏️ Enter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
 
         if equipment_name == 'done':
-            print('\nStop adding. Continue to Recipe Instruction page......')
-            break
+            if len(equipments) == 0:
+                print('\n+-----------------------------------------------------------+')
+                print('|⚠️ You must enter at least one equipment before finishing. |')
+                print('+-----------------------------------------------------------+')
+                continue
+            else:
+                print('\nStop adding. Continue to Recipe Instruction page......')
+                break
 
         if validation_empty_entries(equipment_name):
             if validation_alphabet_only(equipment_name):
@@ -377,13 +385,10 @@ def recipe_instruction():
     ingredients, ingredient_notes = recipe_ingredient()
     equipments = recipe_equipment()
 
-    #print('')
-    #print('-' * 140)
-    print('\n-----------------------------------------------')
-    print('\t\t\t', '', '', 'RECIPE INSTRUCTION')
-    print('-----------------------------------------------')
-    print("💡 Let's get started with creating your delicious bakery goods step by step.\n")
-    print("📍 Selected ingredients 📍")
+    print('')
+    print('-' * 140)
+    print("\n💡 Welcome to the Recipe Instruction page! Let's get started with creating your delicious bakery goods step by step.\n")
+    print("🥗 Selected ingredients 🥗")
     max_length = 0
     for item in ingredients:
         if len(item) > max_length:
@@ -392,7 +397,7 @@ def recipe_instruction():
     for index, item in enumerate(ingredients, start=1):
         print(f'{index}. {item[0].ljust(max_length).title()} x {item[1]} {item[2]}')
 
-    print("\n📍 Selected equipments 📍")
+    print("\n🛠️ Selected equipments 🛠️")
     for index, item in enumerate(equipments, start=1):
         print(f'{index}. {item}')
 
@@ -419,7 +424,7 @@ def recipe_instruction():
             baking_time = int(input('\nPlease provide the baking temperature (in minutes): '))
             if validation_empty_entries(baking_time):
                 if 0 < baking_time <= 90:
-                    print('\n📝Instructions(type "done" to finish)')
+                    print('\n📝 Instructions (type "done" to finish)')
                     break
                 else:
                     print('\n+-------------------------------------------------------------------------------------+')

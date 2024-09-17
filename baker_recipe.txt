@@ -68,5 +68,32 @@
             "a",
             "a"
         ]
+    },
+    "white choco macadamia": {
+        "recipe_category": "Cakes",
+        "recipe_name": "white choco macadamia",
+        "ingredient_used": [
+            [
+                "wheat flour",
+                900.0,
+                "g"
+            ],
+            [
+                "brown sugar",
+                20.0,
+                "ml"
+            ]
+        ],
+        "ingredient_notes": "im beautiful",
+        "equipment_used": [],
+        "baking_temperature": 300,
+        "baking_time": 60,
+        "instructions": [
+            "hh",
+            "hh",
+            "hh",
+            "hh",
+            "hh"
+        ]
     }
 }

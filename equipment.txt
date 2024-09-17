@@ -1,0 +1,2 @@
+Oven,Baking,ABC Corp,Model123,SN123456,Kitchen,5,bad
+Mixer,Mixing,XYZ Corp,Model789,SN987654,Prep Room,0,good
