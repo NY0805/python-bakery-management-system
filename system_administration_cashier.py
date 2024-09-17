@@ -120,14 +120,14 @@ def system_administration_cashier():
         print('\n-----------------------------------------------')
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
-        print('1. add cashier(s)\n2. remove cashier(s)\n3. edit cashier(s)\n4. exit')
+        print('1. Add Cashier(s)\n2. Remove Cashier(s)\n3. Edit Cashier(s)\n4. Back to Manager Privilege')
 
         manage_cashier = input('\nPlease choose a service:\n>>> ')
 
         if manage_cashier == '1':
             while True:
                 print('\n-----------------------------------------------')
-                print('\t\t\tNew Cashier Entry Form')
+                print('\t\t\tNEW CASHIER ENTRY FORM')
                 print('-----------------------------------------------')
                 cashier_accounts()
                 cashier = load_data_from_cashier()  # if don't put, the data will not save into dictionary
@@ -143,7 +143,7 @@ def system_administration_cashier():
                         print('|⚠️ Invalid input. Please enter again. |')
                         print('+--------------------------------------+\n')
                 if add_more == 'n':
-                    print('\nStop adding. Exiting to the service page......')
+                    print('\nStop adding. Exiting to Services page......')
                     break
 
         elif manage_cashier == '2':
@@ -156,7 +156,7 @@ def system_administration_cashier():
 
                 else:
                     print('\n-----------------------------------------------')
-                    print('\t\t\t\t', '', 'Cashier list')
+                    print('\t\t\t\t', '', 'CASHIER LIST')
                     print('-----------------------------------------------')
                     for index, key in enumerate(cashier, start=1):
                         print(f'{index}. {key}')
@@ -166,7 +166,7 @@ def system_administration_cashier():
                         index_of_cashier_to_remove = int(
                             input(f'\nWhich cashier do you want to remove? (or enter {len(cashier) + 1} to cancel)\n>>> '))
                         if index_of_cashier_to_remove == len(cashier) + 1:
-                            print('\nCancelling. Exiting to the service page......')
+                            print('\nCancelling. Exiting to Services page......')
                             break
 
                         elif 1 <= index_of_cashier_to_remove <= len(cashier):
@@ -189,7 +189,7 @@ def system_administration_cashier():
                                     print('+--------------------------------------+\n')
 
                             if remove_more == 'n':
-                                print('\nStop removing. Exiting to the service page......')
+                                print('\nStop removing. Exiting to Services page......')
                                 break
 
                         else:
@@ -205,7 +205,7 @@ def system_administration_cashier():
         elif manage_cashier == '3':
             while True:
                 print('\n-----------------------------------------------')
-                print('\t\t\t\t', '', 'Cashier list')
+                print('\t\t\t\t', '', 'CASHIER LIST')
                 print('-----------------------------------------------')
                 for cashier_list_index, cashier_list_key in enumerate(cashier, start=1):
                     print(f'{cashier_list_index}. {cashier_list_key}')
@@ -215,14 +215,14 @@ def system_administration_cashier():
                     index_of_cashier_to_edit = int(
                         input(f'\nWhich cashier do you want to edit? (or enter {len(cashier) + 1} to cancel)\n>>> '))
                     if index_of_cashier_to_edit == len(cashier) + 1:
-                        print('\nCancelling. Exiting to the service page......')
+                        print('\nCancelling. Exiting to Services page......')
                         break
 
                     elif 1 <= index_of_cashier_to_edit <= len(cashier):
                         selected_cashier = list(cashier.keys())[index_of_cashier_to_edit - 1]
                         while True:
                             print('\n-----------------------------------------------')
-                            print(f'\t\t\t\t {selected_cashier}\'s data')
+                            print(f'\t\t\t\t {selected_cashier.upper()}\'S DATA')
                             print('-----------------------------------------------')
 
                             for cashier_data_key, cashier_data_value in (cashier[selected_cashier].items()):
@@ -293,14 +293,14 @@ def system_administration_cashier():
                                         print('+-----------------------------+')
 
                             elif attribute_of_cashier_data == 'cancel':
-                                print('\nCancelling. Exiting to the cashier list......')
+                                print('\nCancelling. Exiting to Cashier List......')
                                 break
 
                             else:
-                                print('\nData not found.')
+                                print('\n❗Data not found.')
 
                     else:
-                        print('\nCashier not found.')
+                        print('\n❗Cashier not found.')
 
                 except ValueError:
                     print('\n+-----------------------------------------+')
@@ -308,7 +308,7 @@ def system_administration_cashier():
                     print('+-----------------------------------------+')
 
         elif manage_cashier == '4':
-            print('\nExiting to role management......')
+            print('\nExiting to Role Management......')
             system_administration.system_administration()
             break
 

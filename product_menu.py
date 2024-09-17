@@ -66,7 +66,7 @@ def menu():
     for category, products in category_groups.items():
         width = 70
         print('-' * (width * 2))
-        print(f'\n * Category: {category} *\n')
+        print(f'\n📍 {category} 📍\n')
 
         for i in range(0, len(products), 2):
             product1 = wrap_data(products[i], width=60)

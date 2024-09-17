@@ -58,9 +58,9 @@ def inventory_control_ingredient():
         print('\n-----------------------------------------------')
         print('\t\t\t', '', 'INGREDIENT MANAGEMENT')
         print('-----------------------------------------------')
-        print('1. add ingredients\n2. remove ingredients\n3. update ingredients\n4. exit⛔🔙')
+        print('1. Add Ingredients\n2. Remove Ingredients\n3. Update Ingredients\n4. Back to Main Inventory Management⛔🔙')
 
-        ingredient_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
+        ingredient_control = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')
         if ingredient_control == '1':
             print('add')
 
@@ -71,7 +71,7 @@ def inventory_control_ingredient():
             print('update')
 
         elif ingredient_control == '4':
-            print('\nExiting to the main inventory management......')
+            print('\nExiting to Main Inventory Management page......')
             break
 
         else:
@@ -83,21 +83,19 @@ def inventory_control_ingredient():
 def inventory_control_product():
     while True:
         if len(product_inventory) == 0:
-            print('\nThe product inventory is empty. Please restock in time.')
+            print('\n❗The product inventory is empty. Please restock in time.')
 
         print('\n-----------------------------------------------')
         print('\t\t\t', '', 'PRODUCT MANAGEMENT')
         print('-----------------------------------------------')
-        print(
-            '1. add products into inventory\n2. remove products from inventory\n3. update products in inventory\n4. exit⛔🔙\n')
-        product_control = input('What action do you wish to perform? (1, 2, 3, 4)\n>>> ')
+        print('1. Add products into inventory\n2. Remove products from inventory\n3. Update products in inventory\n4. Back to Main Inventory Management⛔🔙\n')
+        product_control = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')
 
         while True:
 
             if product_control == '1':
-                print('\nHere are the products produced by bakers.')
                 print('\n-----------------------------------------------')
-                print('\t\t\tCurrent product list')
+                print('\t', '', 'CURRENT PRODUCTS PRODUCED BY BAKERS')
                 print('-----------------------------------------------')
 
                 for key, value in product.items():
@@ -109,18 +107,20 @@ def inventory_control_product():
                 chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')
 
                 if chosen_product == 'cancel':
-                    print('\nCancelling. Exiting to product management page......')
+                    print('\nCancelling. Exiting to Product Management page......')
                     break
 
                 elif chosen_product in (product[batch_number]['product_name'] for batch_number in product):
                     while True:
                         try:
-                            add_stock = int(input(f'\nHow many {chosen_product} do you want to add? '))
+                            add_stock = int(input(f'\nNumber of {chosen_product} to add: '))
                             if add_stock < 0:
-                                print('Please enter a valid input.')
+                                print('\n+-------------------------------+')
+                                print('|⚠️ Please enter a valid input. |')
+                                print('+-------------------------------+')
 
                             elif add_stock == 0:
-                                print('\nNo product is added.')
+                                print('💡 No product is added.')
                                 break
 
                             else:
@@ -129,7 +129,9 @@ def inventory_control_product():
                                         serial_number = value['serial_number']
 
                                         if add_stock > len(serial_number):
-                                            print(f'\nNot enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. ')
+                                            print('\n+---------------------------------------------------------------------------------------+')
+                                            print(f'|⚠️ Not enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. |')
+                                            print('+---------------------------------------------------------------------------------------+')
                                             add_stock = 0
                                             break
 
@@ -138,7 +140,7 @@ def inventory_control_product():
                                         else:
                                             stock = add_stock
 
-                                        product_description = input('Add product description for menu display:\n>>> ')
+                                        product_description = input('\nAdd product description for menu display:\n>>> ')
 
                                         product_inventory[batch_number] = {
                                             'product_name': chosen_product,
@@ -161,18 +163,20 @@ def inventory_control_product():
                                 break
 
                         except ValueError:
-                            print('Please enter a number.')
+                            print('\n+--------------------------+')
+                            print('|⚠️ Please enter a number. |')
+                            print('+--------------------------+')
                 else:
-                    print('\nProduct not found, enter again.')
+                    print('\n❗Product not found, enter again.')
 
             elif product_control == '2':
                 if len(product_inventory) == 0:
-                    print('\nOut of stock!')
+                    print('\n❗Out of stock!')
                     break
 
                 else:
                     print('\n-----------------------------------------------')
-                    print('\t\t\t', ' ', 'Product Inventory')
+                    print('\t\t\t', ' ', 'PRODUCT INVENTORY')
                     print('-----------------------------------------------')
                     for batch_number, value in product_inventory.items():
                         product_name = value['product_name']
@@ -183,18 +187,20 @@ def inventory_control_product():
                     product_stock = input('\nWhich products do you want to reduce? (or enter "cancel" to cancel)\n>>> ')
 
                     if product_stock == 'cancel':
-                        print('\nCancelling. Exiting to product management page......')
+                        print('\nCancelling. Exiting to Product Management page......')
                         break
 
                     elif product_stock in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
                         while True:
                             try:
-                                quantity_to_reduce = int(input(f'\nHow many {product_stock} do you want to reduce? '))
+                                quantity_to_reduce = int(input(f'\nNumber of {product_stock} to reduce: '))
                                 if quantity_to_reduce < 0:
-                                    print('Please enter a valid input.')
+                                    print('\n+-------------------------------+')
+                                    print('|⚠️ Please enter a valid input. |')
+                                    print('+-------------------------------+')
 
                                 elif quantity_to_reduce == 0:
-                                    print('\nNo product is reduced.')
+                                    print('\n💡 No product is reduced.')
                                     break
 
                                 else:
@@ -203,7 +209,9 @@ def inventory_control_product():
                                             available_stock = value['stock']
 
                                             if quantity_to_reduce > available_stock:
-                                                print(f'\nOut of range. The current stock of {product_stock}(s) is(are) {available_stock}. ')
+                                                print('\n+------------------------------------------------------------------------------------+')
+                                                print(f'|⚠️ Out of range. The current stock of {product_stock}(s) is(are) {available_stock}. |')
+                                                print('+------------------------------------------------------------------------------------+')
                                                 break
 
                                             else:
@@ -217,25 +225,29 @@ def inventory_control_product():
 
                                             if stock_left <= 0:
                                                 del product_inventory[batch_number]
-                                                print(f'Last {product_stock} has finished. Ask bakers to bake more {product_stock}.')
+                                                print('\n+-------------------------------------------------------------------------------+')
+                                                print(f'|⚠️ Last {product_stock} has finished. Ask bakers to bake more {product_stock}. |')
+                                                print('+-------------------------------------------------------------------------------+')
 
                                             save_info_product_inventory(product_inventory)
                                             break
                                     break
 
                             except ValueError:
-                                print('Please enter a number.')
+                                print('\n+--------------------------+')
+                                print('|⚠️ Please enter a number. |')
+                                print('+--------------------------+')
                     else:
-                        print('\nProduct not found, enter again.')
+                        print('\n❗Product not found, enter again.')
 
             elif product_control == '3':
                 if len(product_inventory) == 0:
-                    print('\nOut of stock!')
+                    print('\n❗Out of stock!')
                     break
 
                 while True:
                     print('\n-----------------------------------------------')
-                    print('\t\t\t\tProduct list')
+                    print('\t\t\t\tPRODUCT LIST')
                     print('-----------------------------------------------')
                     for index, (key, value) in enumerate(product_inventory.items(), start=1):
                         print(f'{index}. {value["product_name"]}')
@@ -244,14 +256,14 @@ def inventory_control_product():
                     try:
                         product_to_update = int(input('\nEnter the product\'s index number to update: '))
                         if product_to_update == len(product_inventory) + 1:
-                            print('\nCancelling. Exiting to the product management page......')
+                            print('\nCancelling. Exiting to Product Management page......')
                             break
 
                         elif 1 <= product_to_update <= len(product_inventory):
                             selected_product = list(product_inventory.keys())[product_to_update - 1]
                             while True:
                                 print('\n-----------------------------------------------')
-                                print(f'\t\t\t\t {product_inventory[selected_product]["product_name"]}')
+                                print(f'\t\t\t\t {product_inventory[selected_product]["product_name"].upper()}')
                                 print('-----------------------------------------------')
 
                                 for product_inventory_key, product_inventory_value in (product_inventory[selected_product].items()):
@@ -293,35 +305,39 @@ def inventory_control_product():
                                             print('+------------------------------+')
 
                                 elif attribute_of_product_inventory == 'cancel':
-                                    print('\nCancelling. Exiting to the product list......')
+                                    print('\nCancelling. Exiting to Product List......')
                                     break
 
                                 else:
-                                    print('\nData not found.')
+                                    print('\n❗Data not found.')
                         else:
                             print('\n+------------------------------------------+')
                             print('|⚠️ Product not found. Please enter again. |')
                             print('+------------------------------------------+')
 
                     except ValueError:
-                        print('\nPlease enter a number.')
+                        print('\n+--------------------------+')
+                        print('|⚠️ Please enter a number. |')
+                        print('+--------------------------+')
                 break
 
             elif product_control == '4':
-                print('\nExiting to main inventory management......')
+                print('\nExiting to Main Inventory Management......')
                 return False
 
             else:
-                print('\ninvalid input')
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+')
                 break
 
-
+inventory_control_product()
 def main_control():
     while True:
         print('\n-----------------------------------------------')
         print('\t\t', ' ', 'MAIN INVENTORY MANAGEMENT')
         print('-----------------------------------------------')
-        print('1. ingredient inventory\n2. product inventory\n3. Exit⛔🔙')
+        print('1. Ingredient Inventory\n2. Product Inventory\n3. Back to Manager Privilege⛔🔙')
 
         control = input('\nSelect the inventory that you want to manage(1, 2, 3, 4):\n>>> ')
         if control == '1':
@@ -331,7 +347,7 @@ def main_control():
             inventory_control_product()
 
         elif control == '3':
-            print('\nExiting to manager privilege......')
+            print('\nExiting to Manager Privilege......')
             break
 
         else:

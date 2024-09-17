@@ -37,8 +37,8 @@ def activate_customer():
                 inactive_acc.append(customer_name)
 
         if len(inactive_acc) == 0:
-            print('\nNo account to activate.')
-            print('Back to service page......')
+            print('\n💡No account to activate.')
+            print('Back to Services page......')
             break
         else:
             print('\n-----------------------------------------------')
@@ -57,7 +57,7 @@ def activate_customer():
             activate = int(input('\nWhich account do you want to activate?\n>>> '))
 
             if activate == index_cancel:
-                print('Exiting to service page......')
+                print('Exiting to Services page......')
                 break
 
             elif 1 <= activate <= len(inactive_acc):
@@ -85,8 +85,8 @@ def deactivate_customer():
                 active_acc.append(customer_name)
 
         if len(active_acc) == 0:
-            print('\nNo account to deactivate.')
-            print('Back to service page......')
+            print('\n💡No account to deactivate.')
+            print('Back to Services page......')
             break
         else:
             print('\n-----------------------------------------------')
@@ -105,7 +105,7 @@ def deactivate_customer():
             deactivate = int(input('\nWhich account do you want to deactivate?\n>>> '))
 
             if deactivate == index_cancel:
-                print('Exiting to service page......')
+                print('Exiting to Services page......')
                 break
 
             elif 1 <= deactivate <= len(active_acc):
@@ -129,7 +129,7 @@ def edit_customer():
 
     while True:
         print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'Customer list')
+        print('\t\t\t\t', '', 'CUSTOMER LIST')
         print('-----------------------------------------------')
         for customer_list_index, customer_list in enumerate(customer, start=1):
             print(f'{customer_list_index}. {customer_list}')
@@ -139,7 +139,7 @@ def edit_customer():
             index_of_customer_to_edit = int(
                 input(f'\nWhich customer do you want to edit? (or enter {len(customer) + 1} to cancel)\n>>> '))
             if index_of_customer_to_edit == len(customer) + 1:
-                print('\nCancelling. Exiting to the service page......')
+                print('\nCancelling. Exiting to Services page......')
                 break
 
             elif 1 <= index_of_customer_to_edit <= len(customer):
@@ -147,7 +147,7 @@ def edit_customer():
                 selected_customer = list(customer.keys())[index_of_customer_to_edit - 1]
                 while True:
                     print('\n-----------------------------------------------')
-                    print(f'\t\t\t\t {selected_customer}\'s data')
+                    print(f'\t\t\t\t {selected_customer.upper()}\'S DATA')
                     print('-----------------------------------------------')
 
                     for customer_data_key, customer_data_value in (customer[selected_customer].items()):
@@ -170,16 +170,15 @@ def edit_customer():
                                             continue
 
                                     elif attribute_of_customer_data == 'customer_password':
-                                        if new_value != 'b@k3rm4st3r!':
-                                            print('\n+-----------------------------------------+')
-                                            print('|⚠️ Password incorrect. Please try again. |')
-                                            print('+-----------------------------------------+')
+                                        if len(new_value) < 8 or len(new_value) > 12:
+                                            print('\n+---------------------------------------------------------------------------+')
+                                            print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
+                                            print('+---------------------------------------------------------------------------+\n')
                                             continue
 
                                     elif attribute_of_customer_data == 'age':
                                         if int(new_value) < 18 or int(new_value) > 60:
-                                            print(
-                                                '\n+--------------------------------------------------------------------+')
+                                            print('\n+--------------------------------------------------------------------+')
                                             print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
                                             print('+--------------------------------------------------------------------+')
                                             continue
@@ -221,17 +220,17 @@ def edit_customer():
                                     print('+-----------------------------+')
 
                         else:
-                            print('\nData not found.')
+                            print('\n❗Data not found.')
 
                     elif attribute_of_customer_data == 'cancel':
-                        print('\nCancelling. Exiting to the customer list......')
+                        print('\nCancelling. Exiting to Customer List......')
                         break
 
                     else:
-                        print('\nData not found.')
+                        print('\n❗Data not found.')
 
             else:
-                print('\nCustomer not found.')
+                print('\n❗Customer not found.')
 
         except ValueError:
             print('\n+-----------------------------------------+')
@@ -268,7 +267,7 @@ def terminate_customer():
 
     while True:
         print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'Customer list')
+        print('\t\t\t\t', '', 'CUSTOMER LIST')
         print('-----------------------------------------------')
         for index, key in enumerate(customer, start=1):
             print(f'{index}. {key}')
@@ -277,7 +276,7 @@ def terminate_customer():
         try:
             index_of_customer_to_terminate = int(input(f'\nWhich customer do you want to terminate? (or enter {len(customer) + 1} to cancel)\n>>> '))
             if index_of_customer_to_terminate == len(customer) + 1:
-                print('\nCancelling. Exiting to the service page......')
+                print('\nCancelling. Exiting to Services page......')
                 break
 
             elif 1 <= index_of_customer_to_terminate <= len(customer):
@@ -298,7 +297,7 @@ def terminate_customer():
                             break
 
                         else:
-                            print('\nStop terminating. Exiting to the service page......')
+                            print('\nStop terminating. Exiting to Services page......')
                             break
                 break
 
@@ -320,7 +319,7 @@ def system_administration_customer():
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
         print(
-            '1. activate customer(s)\n2. deactivate customer(s)\n3. edit customer(s)\n4. terminate/remove customer account(s)\n5. exit')
+            '1. Activate Customer(s)\n2. Deactivate Customer(s)\n3. Edit Customer(s)\n4. Terminate/Remove Customer account(s)\n5. Back to Role Management')
 
         manage_customer = input('\nPlease choose a service:\n>>> ')
 
@@ -337,7 +336,7 @@ def system_administration_customer():
             terminate_customer()
 
         elif manage_customer == '5':
-            print('\nExiting to role management......')
+            print('\nExiting to Role Management......')
             system_administration.system_administration()
             break
 

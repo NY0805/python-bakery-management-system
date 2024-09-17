@@ -119,14 +119,14 @@ def system_administration_baker():
         print('\n-----------------------------------------------')
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
-        print('1. add baker(s)\n2. remove baker(s)\n3. edit baker(s)\n4. exit')
+        print('1. Add Baker(s)\n2. Remove Baker(s)\n3. Edit Baker(s)\n4. Back to Role Management')
 
         manage_baker = input('\nPlease choose a service:\n>>> ')
 
         if manage_baker == '1':
             while True:
                 print('\n-----------------------------------------------')
-                print('\t\t\tNew Baker Entry Form')
+                print('\t\t\tNEW BAKER ENTRY FORM')
                 print('-----------------------------------------------')
                 baker_accounts()
                 baker = load_data_from_baker()  # if don't put, the data will not save into dictionary
@@ -142,7 +142,7 @@ def system_administration_baker():
                         print('|⚠️ Invalid input. Please enter again. |')
                         print('+--------------------------------------+\n')
                 if add_more == 'n':
-                    print('\nStop adding. Exiting to the service page......')
+                    print('\nStop adding. Exiting to Services page......')
                     break
 
         elif manage_baker == '2':
@@ -155,7 +155,7 @@ def system_administration_baker():
 
                 else:
                     print('\n-----------------------------------------------')
-                    print('\t\t\t\t', '', 'Baker list')
+                    print('\t\t\t\t', '', 'BAKER LIST')
                     print('-----------------------------------------------')
                     for index, key in enumerate(baker, start=1):
                         print(f'{index}. {key}')
@@ -165,7 +165,7 @@ def system_administration_baker():
                         index_of_baker_to_remove = int(
                             input(f'\nWhich baker do you want to remove? (or enter {len(baker) + 1} to cancel)\n>>> '))
                         if index_of_baker_to_remove == len(baker) + 1:
-                            print('\nCancelling. Exiting to the service page......')
+                            print('\nCancelling. Exiting to Services page......')
                             break
 
                         elif 1 <= index_of_baker_to_remove <= len(baker):
@@ -186,7 +186,7 @@ def system_administration_baker():
                                         break
 
                                     else:
-                                        print('\nStop removing. Exiting to the service page......')
+                                        print('\nStop removing. Exiting to Services page......')
                                         break
                             break
 
@@ -203,7 +203,7 @@ def system_administration_baker():
         elif manage_baker == '3':
             while True:
                 print('\n-----------------------------------------------')
-                print('\t\t\t\t', '', 'Baker list')
+                print('\t\t\t\t', '', 'BAKER LIST')
                 print('-----------------------------------------------')
                 for baker_list_index, baker_list_key in enumerate(baker, start=1):
                     print(f'{baker_list_index}. {baker_list_key}')
@@ -212,14 +212,14 @@ def system_administration_baker():
                 try:
                     index_of_baker_to_edit = int(input(f'\nWhich baker do you want to edit? (or enter {len(baker) + 1} to cancel)\n>>> '))
                     if index_of_baker_to_edit == len(baker) + 1:
-                        print('\nCancelling. Exiting to the service page......')
+                        print('\nCancelling. Exiting to services page......')
                         break
 
                     elif 1 <= index_of_baker_to_edit <= len(baker):
                         selected_baker = list(baker.keys())[index_of_baker_to_edit - 1]
                         while True:
                             print('\n-----------------------------------------------')
-                            print(f'\t\t\t\t {selected_baker}\'s data')
+                            print(f'\t\t\t\t {selected_baker.upper()}\'S DATA')
                             print('-----------------------------------------------')
 
                             for baker_data_key, baker_data_value in (baker[selected_baker].items()):
@@ -290,14 +290,14 @@ def system_administration_baker():
                                         print('+-----------------------------+')
 
                             elif attribute_of_baker_data == 'cancel':
-                                print('\nCancelling. Exiting to the baker list......')
+                                print('\nCancelling. Exiting to Baker List......')
                                 break
 
                             else:
-                                print('\nData not found.')
+                                print('\n❗Data not found.')
 
                     else:
-                        print('\nBaker not found.')
+                        print('\n❗Baker not found.')
 
                 except ValueError:
                     print('\n+-----------------------------------------+')
@@ -305,7 +305,7 @@ def system_administration_baker():
                     print('+-----------------------------------------+')
 
         elif manage_baker == '4':
-            print('\nExiting to role management......')
+            print('\nExiting to Role Management......')
             system_administration.system_administration()
             break
 
