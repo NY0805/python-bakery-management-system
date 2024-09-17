@@ -174,7 +174,8 @@ def manager():
               'c. Financial management\n'
               'd. Inventory control\n'
               'e. Customer feedback\n'
-              'f. Exit')
+              'f. Notifications\n'
+              'g. Exit')
 
         choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
         if choice == 'a':
@@ -193,6 +194,9 @@ def manager():
             print('enter again.')
 
         elif choice == 'f':
+            print('enter again.')
+
+        elif choice == 'g':
             print('\nExiting to main page......')
             return False
 
