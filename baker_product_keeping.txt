@@ -9,7 +9,7 @@
         "quantity_produced": "1",
         "batch_number": "001",
         "date_of_production": "09-08-2004",
-        "shelf_life": "6",
+        "shelf_life": "5 days",
         "expiry_date": "17-08-2004",
         "recipe": "r",
         "baker_name": "r",
@@ -43,7 +43,7 @@
             "pie1"
         ],
         "quantity_produced": "1",
-        "batch_number": "007",
+        "batch_number": "003",
         "date_of_production": "27-08-2004",
         "shelf_life": "7 days",
         "expiry_date": "06-09-2004",
@@ -58,6 +58,8 @@
         "product_name": "gingerbread",
         "product_code": "BS678",
         "serial_number": [
+            "biscuit1",
+            "biscuit2",
             "biscuit3"
         ],
         "quantity_produced": "3",
@@ -96,6 +98,9 @@
         "product_name": "tiramisu",
         "product_code": "CK858",
         "serial_number": [
+            "38625",
+            "29908",
+            "29393",
             "29393"
         ],
         "quantity_produced": "4",

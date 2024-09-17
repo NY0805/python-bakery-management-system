@@ -3,7 +3,7 @@ import textwrap
 from collections import defaultdict
 
 
-def load_data_from_inventory_product():
+def load_data_from_product():
     try:
         file = open('baker_product_keeping.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
@@ -20,7 +20,7 @@ def load_data_from_inventory_product():
         return {}  # return empty dictionary if the file does not exist
 
 
-product_data = load_data_from_inventory_product()
+product_data = load_data_from_product()
 
 
 # Format the data retrieve from inventory product.txt

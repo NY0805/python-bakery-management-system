@@ -71,7 +71,7 @@ def inventory_control_ingredient():
             print('update')
 
         elif ingredient_control == '4':
-            print('\nExiting to the main inventory control page......')
+            print('\nExiting to the main inventory management......')
             break
 
         else:
@@ -138,9 +138,12 @@ def inventory_control_product():
                                         else:
                                             stock = add_stock
 
+                                        product_description = input('Add product description for menu display:\n>>> ')
+
                                         product_inventory[batch_number] = {
                                             'product_name': chosen_product,
-                                            'stock': stock
+                                            'stock': stock,
+                                            'description': product_description
                                         }
 
                                         quantity = len(serial_number) - stock
@@ -224,6 +227,89 @@ def inventory_control_product():
                                 print('Please enter a number.')
                     else:
                         print('\nProduct not found, enter again.')
+
+            elif product_control == '3':
+                if len(product_inventory) == 0:
+                    print('\nOut of stock!')
+                    break
+
+                while True:
+                    print('\n-----------------------------------------------')
+                    print('\t\t\t\tProduct list')
+                    print('-----------------------------------------------')
+                    for index, (key, value) in enumerate(product_inventory.items(), start=1):
+                        print(f'{index}. {value["product_name"]}')
+                    print(f'{len(product_inventory) + 1}. cancel')
+
+                    try:
+                        product_to_update = int(input('\nEnter the product\'s index number to update: '))
+                        if product_to_update == len(product_inventory) + 1:
+                            print('\nCancelling. Exiting to the product management page......')
+                            break
+
+                        elif 1 <= product_to_update <= len(product_inventory):
+                            selected_product = list(product_inventory.keys())[product_to_update - 1]
+                            while True:
+                                print('\n-----------------------------------------------')
+                                print(f'\t\t\t\t {product_inventory[selected_product]["product_name"]}')
+                                print('-----------------------------------------------')
+
+                                for product_inventory_key, product_inventory_value in (product_inventory[selected_product].items()):
+                                    print(f'{product_inventory_key.replace("_", " ").title()}: {product_inventory_value}')
+
+                                attribute_of_product_inventory = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                                if attribute_of_product_inventory in product_inventory[selected_product]:
+
+                                    while True:
+                                        try:
+                                            new_value = input(f'\nEnter new {attribute_of_product_inventory}: ')
+
+                                            if attribute_of_product_inventory == 'product_name':
+                                                if new_value in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
+                                                    print('\n+-----------------------------------------------------------------------+')
+                                                    print('|⚠️ Duplicate product name detected. Please enter another product name. |')
+                                                    print('+-----------------------------------------------------------------------+')
+                                                    continue
+
+                                            elif attribute_of_product_inventory == 'stock':
+                                                with open('baker_product_keeping.txt', 'r') as product_keeping:
+                                                    products = json.load(product_keeping)
+
+                                                    serial_number = products[selected_product]['serial_number']
+                                                    if int(new_value) > len(serial_number):
+                                                        print('\n+-----------------------------------------------------------+')
+                                                        print(f'|⚠️ The current stock of {products[selected_product]["product_name"]} is {len(serial_number)}. Please enter again. |')
+                                                        print('+-----------------------------------------------------------+')
+                                                        continue
+
+                                            product_inventory[selected_product][attribute_of_product_inventory] = new_value
+                                            print(f'\n{attribute_of_product_inventory} of {selected_product} is updated.')
+                                            save_info_product_inventory(product_inventory)
+                                            break
+
+                                        except ValueError:
+                                            print('\n+------------------------------+')
+                                            print('|⚠️ Please enter numbers only. |')
+                                            print('+------------------------------+')
+
+                                elif attribute_of_product_inventory == 'cancel':
+                                    print('\nCancelling. Exiting to the product list......')
+                                    break
+
+                                else:
+                                    print('\nData not found.')
+                        else:
+                            print('\n+------------------------------------------+')
+                            print('|⚠️ Product not found. Please enter again. |')
+                            print('+------------------------------------------+')
+
+                    except ValueError:
+                        print('\nPlease enter a number.')
+                break
+
+            elif product_control == '4':
+                print('\nExiting to main inventory management......')
+                return False
 
             else:
                 print('\ninvalid input')
