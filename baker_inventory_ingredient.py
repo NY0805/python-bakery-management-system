@@ -40,7 +40,9 @@ def ingredient_management():
         option_product_management = input('\nPlease choose a service:'
                                           '\n>>> ')
         if option_product_management not in ['1', '2', '3', '4']:
-            print('Please enter a valid number.')
+            print('\n+--------------------------------+')
+            print('|⚠️ Please enter a valid number. |')
+            print('+--------------------------------+\n')
         else:
             if option_product_management == '1':
                 ingredient_details()
@@ -50,13 +52,15 @@ def ingredient_management():
             elif option_product_management == '3':
                 pass
             elif option_product_management == '4':
-                print('Exiting to previous page...')
+                print('\nExiting to the previous page...')
                 break
 
 
 def ingredient_categories():
-    print('\nHere are the main types of bakery ingredients:')
-    print('\n1. Flours and Grains')
+    print('\n-----------------------------------------------')
+    print('\t\tMAIN CATEGORIES OF INGREDIENTS')
+    print('-----------------------------------------------')
+    print('1. Flours and Grains')
     print('2. Sweeteners')
     print('3. Fats and Oils')
     print('4. Dairy and Non-Dairy Products')
@@ -72,11 +76,13 @@ def ingredient_categories():
         option_product_categories = input('\nPlease input the category:'
                                           '\n>>> ')
         if option_product_categories not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
-            print('Please enter a valid number.')
+            print('\n+--------------------------------+')
+            print('|⚠️ Please enter a valid number. |')
+            print('+--------------------------------+')
             continue
         else:
             if option_product_categories == '10':
-                print('Going back to the previous page.')
+                print('\nGoing back to the previous page......')
                 ingredient_management()
                 break
             elif option_product_categories == '1':
@@ -104,7 +110,7 @@ def validation_empty_entries(info):
     if info:
         return True
     else:
-        print('Please enter something...\n')
+        print('\n❗Please enter something...\n')
         return False
 
 
@@ -113,10 +119,12 @@ def ingredient_details():
 
     category = ingredient_categories()
 
-    print('\nPlease fill out the following fields to add a new ingredient to the inventory:')
+    print('\n+---------------------------------------------------------------------------+')
+    print('|💡 Fill out the following fields to add a new ingredient to the inventory. |')
+    print('+---------------------------------------------------------------------------+')
 
-    ingredient_name = input('enter name: ')
-    batch_number = input('enter batch number: ')
+    ingredient_name = input('Ingredient name: ')
+    batch_number = input('Batch number: ')
 
     ingredient_data[batch_number] = {
         'category': category,
@@ -135,13 +143,17 @@ def continue_adding():
                 ingredient_details()
                 break
             elif add_more == 'n':
-                print('Stop adding... Existing to Product Management page.')
+                print('\nStop adding... Exiting to Ingredient Management page......')
                 ingredient_management()
                 break
             else:
-                print("Invalid input. Please enter 'y' or 'n'.")
+                print('\n+-------------------------------------------+')
+                print('|⚠️ Invalid input. Please enter "y" or "n". |')
+                print('+-------------------------------------------+')
         except ValueError:
-            print('Invalid input. Please enter again.')
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
 
 
 '''    # List to hold the input prompts based on ingredient type

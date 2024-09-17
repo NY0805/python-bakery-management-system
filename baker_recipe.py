@@ -66,7 +66,7 @@ def validation_empty_entries(info):
     if info:
         return True
     else:
-        print('Please enter something...\n')
+        print('\n❗Please enter something...\n')
         return False
 
 
@@ -136,7 +136,7 @@ def create_recipe():
             max_length = len(item)
 
     while True:
-        print('* Categories: Breads, Cakes, Pastries, Biscuits, Muffins, Others *')
+        print('\n💡 Categories: Breads, Cakes, Pastries, Biscuits, Muffins, Others 💡\n')
         category = input(f'1. {recipe_info[1].ljust(max_length + 2)}: ')
         if validation_empty_entries(category):
             match = re.match(r'[A-Za-z]+$', category.strip())
@@ -144,9 +144,13 @@ def create_recipe():
                 if category in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins', 'Others']:
                     break
                 else:
-                    print('Please enter a valid category based on the categories given. (Case sensitive.)\n')
+                    print('\n+----------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid category based on the categories given. (Case sensitive.) |')
+                    print('+----------------------------------------------------------------------------------+')
             else:
-                print('Please enter a valid category. (Cannot contain any spacing, digits and special characters.)\n')
+                print('\n+-----------------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid category. (Cannot contain any spacing, digits and special characters.) |')
+                print('+-----------------------------------------------------------------------------------------------+\n')
 
     while True:
         recipe_name = input(f'2. {recipe_info[0].ljust(max_length + 2)}: ')
@@ -154,7 +158,9 @@ def create_recipe():
             if validation_alphabet_only(recipe_name):
                 break
             else:
-                print('Please enter a valid recipe name. (Cannot contain any digits and special characters.)\n')
+                print('\n+-----------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid recipe name. (Cannot contain any digits and special characters.) |')
+                print('+-----------------------------------------------------------------------------------------+\n')
 
     return category, recipe_name
 
@@ -170,13 +176,16 @@ def recipe_ingredient():
     add_notes = True
     while add_notes:
         while True:
-            print('\nHere are the ingredient list:')
+            print('\n-----------------------------------------------')
+            print('\t\t\t', '', '', 'INGREDIENT LIST')
+            print('-----------------------------------------------')
             for category, items in ingredient_category_groups.items():
-                print(f'\n* {category} *')
+                print(f'📍 {category} 📍')
                 for index, ingredient in enumerate(items, start=1):
                     print(f"{index}. {ingredient.title()}")
+                print('')
 
-            ingredient_name = input(f'\nEnter the ingredient name: ').strip()
+            ingredient_name = input(f'Enter the ingredient name: ').strip()
             found_category = None
 
             if validation_empty_entries(ingredient_name):
@@ -190,15 +199,19 @@ def recipe_ingredient():
                             if found_category:
                                 break
                         else:
-                            print(
-                                'Invalid ingredient name. Please enter ingredient name based on the ingredient list given.\n')
+                            print('\n+---------------------------------------------------------------------------------------------+')
+                            print('|⚠️ Invalid ingredient name. Please enter ingredient name based on the ingredient list given. |')
+                            print('+---------------------------------------------------------------------------------------------+')
                     else:
-                        print("Duplicate ingredient name. You've already added this ingredient.")
+                        print('\n+---------------------------------------------------------------------+')
+                        print('|⚠️ Duplicate ingredient name. You\'ve already added this ingredient. |')
+                        print('+---------------------------------------------------------------------+')
                     if found_category:
                         break
                 else:
-                    print(
-                        'Please enter a valid ingredient name. (Cannot contain any digits and special characters.)\n')
+                    print('\n+---------------------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid ingredient name. (Cannot contain any digits and special characters.) |')
+                    print('+---------------------------------------------------------------------------------------------+')
 
         while True:
             category_units = {
@@ -216,11 +229,11 @@ def recipe_ingredient():
             unit = category_units.get(found_category, '')
 
             if found_category in ['Leavening Agents', 'Preservatives and Stabilizers']:
-                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon. *')
+                print(f'\n💡 Allowable unit measurement: {unit}, tsp = teaspoon. 💡')
             elif found_category == 'Spices and Flavourings':
-                print(f'* Allowable unit measurement: {unit}, tsp = teaspoon, tbsp = tablespoon. *')
+                print(f'\n💡 Allowable unit measurement: {unit}, tsp = teaspoon, tbsp = tablespoon. 💡')
             else:
-                print(f'* Allowable unit measurement: {unit} *')
+                print(f'\n💡 Allowable unit measurement: {unit} 💡')
 
             unit_measurement = input(f'Enter the unit measurement of {ingredient_name}: ').strip()
 
@@ -233,21 +246,30 @@ def recipe_ingredient():
                     if unit_measurement in allowable_unit:
                         break
                     else:
-                        print('Please enter a valid unit from the unit given. (Case Sensitive.)\n')
+                        print('\n+--------------------------------------------------------------------+')
+                        print('|⚠️ Please enter a valid unit from the unit given. (Case Sensitive.) |')
+                        print('+--------------------------------------------------------------------+')
                 else:
-                    print('Please enter a valid unit. (Cannot contain any digits and special characters.)\n')
+                    print('\n+----------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid unit. (Cannot contain any digits and special characters.) |')
+                    print('+----------------------------------------------------------------------------------+')
 
         while True:
-            quantity_per_unit = input(f'Enter the quantity per unit of {ingredient_name}: ').strip()
+            quantity_per_unit = input(f'\nEnter the quantity per unit of {ingredient_name}: ').strip()
             if validation_empty_entries(quantity_per_unit):
                 try:
                     quantity_per_unit = float(quantity_per_unit)
                     if quantity_per_unit > 0:
                         break
                     else:
-                        print('Please enter a valid quantity. (Greater than 0)\n')
+                        print('\n+---------------------------------------------------+')
+                        print('|⚠️ Please enter a valid quantity. (Greater than 0) |')
+                        print('+---------------------------------------------------+\n')
+
                 except ValueError:
-                    print('Please enter a valid quantity. (Cannot contain any alphabets and special characters.)\n')
+                    print('\n+-----------------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid quantity. (Cannot contain any alphabets and special characters.) |')
+                    print('+-----------------------------------------------------------------------------------------+\n')
 
         ingredient_used = [ingredient_name.lower(), quantity_per_unit, unit_measurement]
         ingredients.append(ingredient_used)
@@ -270,19 +292,21 @@ def recipe_ingredient():
             elif add_more == 'n':
                 while True:
                     ingredient_notes = input(
-                        "Any additional details or notes you'd like to include for these ingredients? If not, enter 'no'.\n>>> ")
+                        "\nAny additional details or notes you'd like to include for these ingredients? If not, enter 'no'.\n>>> ")
                     if validation_empty_entries(ingredient_notes):
                         if ingredient_notes.lower() == 'no':
-                            print('Stop adding. Proceeding to select the necessary equipment :)')
+                            print('\nStop adding. Proceeding to select the necessary equipment :)')
                             add_notes = False
                             break
                         else:
-                            print(f'Note added: {ingredient_notes}')
-                            print('Stop adding. Proceeding to select the necessary equipment :)')
+                            print(f'\nNote added: {ingredient_notes}')
+                            print('\nStop adding. Proceeding to select the necessary equipment 😊')
                             add_notes = False
                             break
             else:
-                print("Invalid input. Please enter 'y' or 'n'.")
+                print('\n+-------------------------------------------+')
+                print('|⚠️ Invalid input. Please enter "y" or "n". |')
+                print('+-------------------------------------------+')
             if not add_notes:
                 break
 
@@ -299,18 +323,20 @@ def is_equipment_duplicate(equipment_name, equipments):
 
 def recipe_equipment(): # haven't test. and also unsure the .items or .values when checking the input match the defaultdict or not
     equipments = []
-    print('\nHere are the equipment list:')
+    print('\n-----------------------------------------------')
+    print('\t\t\t', '', '', 'EQUIPMENT LIST')
+    print('-----------------------------------------------')
     for category, items in equipment_category_groups.items():
-        print(f'\n* {category} *')
+        print(f'📍 {category} 📍')
         for index, equipment in enumerate(items, start=1):
             print(f"{index}. {equipment.title()}")
-    print("Please enter the name of selected equipment (or type 'done' to finish):")
+    print('💡 Please enter the name of selected equipment (or type "done" to finish)')
 
     while True:
-        equipment_name = input(f'Enter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
+        equipment_name = input(f'\nEnter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
 
         if equipment_name == 'done':
-            print('Stop adding. Continue to instruction page......')
+            print('\nStop adding. Continue to Recipe Instruction page......')
             break
 
         if validation_empty_entries(equipment_name):
@@ -325,16 +351,20 @@ def recipe_equipment(): # haven't test. and also unsure the .items or .values wh
                         if found_category:
                             break
                     else:
-                        print(
-                            'Invalid equipment name. Please enter equipment name based on the equipment list given.\n')
+                        print('\n+------------------------------------------------------------------------------------------+')
+                        print('|⚠️ Invalid equipment name. Please enter equipment name based on the equipment list given. |')
+                        print('+------------------------------------------------------------------------------------------+')
                         continue
 
                     equipments.append(equipment_name)
                 else:
-                    print("Duplicate equipment name. You've already added this equipment.")
+                    print('\n+-------------------------------------------------------------------+')
+                    print('|⚠️ Duplicate equipment name. You\'ve already added this equipment. |')
+                    print('+-------------------------------------------------------------------+')
             else:
-                print(
-                    'Please enter a valid equipment name. (Cannot contain any digits and special characters.)\n')
+                print('\n+--------------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid equipment name. (Cannot contain any digits and special characters.) |')
+                print('+--------------------------------------------------------------------------------------------+')
 
     return equipments
 
@@ -347,10 +377,13 @@ def recipe_instruction():
     ingredients, ingredient_notes = recipe_ingredient()
     equipments = recipe_equipment()
 
-    print('')
-    print('-' * 140)
-    print("\nWelcome to the Recipe Instruction page! Let's get started with creating your delicious bakery goods step by step.\n")
-    print("Ingredient you've selected:")
+    #print('')
+    #print('-' * 140)
+    print('\n-----------------------------------------------')
+    print('\t\t\t', '', '', 'RECIPE INSTRUCTION')
+    print('-----------------------------------------------')
+    print("💡 Let's get started with creating your delicious bakery goods step by step.\n")
+    print("📍 Selected ingredients 📍")
     max_length = 0
     for item in ingredients:
         if len(item) > max_length:
@@ -359,7 +392,7 @@ def recipe_instruction():
     for index, item in enumerate(ingredients, start=1):
         print(f'{index}. {item[0].ljust(max_length).title()} x {item[1]} {item[2]}')
 
-    print("\nEquipment you've selected:")
+    print("\n📍 Selected equipments 📍")
     for index, item in enumerate(equipments, start=1):
         print(f'{index}. {item}')
 
@@ -368,32 +401,40 @@ def recipe_instruction():
 
     while True:
         try:
-            baking_temperature = int(input('Please provide the baking temperature (°C): '))
+            baking_temperature = int(input('\nPlease provide the baking temperature (°C): '))
             if validation_empty_entries(baking_temperature):
                 if 0 < baking_temperature <= 300:
                     break
                 else:
-                    print('Please enter a valid temperature. (Greater than 0°C, smaller than 301°C)\n')
+                    print('\n+----------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid temperature. (Greater than 0°C, smaller than 301°C) |')
+                    print('+----------------------------------------------------------------------------+')
         except ValueError:
-            print('Invalid input. Please enter a whole number for temperature.\n')
+            print('\n+---------------------------------------------------------------+')
+            print('|⚠️ Invalid input. Please enter a whole number for temperature. |')
+            print('+---------------------------------------------------------------+')
 
     while True:
         try:
-            baking_time = int(input('Please provide the baking temperature (in minutes): '))
+            baking_time = int(input('\nPlease provide the baking temperature (in minutes): '))
             if validation_empty_entries(baking_time):
                 if 0 < baking_time <= 90:
-                    print('\nInstruction:\n')
+                    print('\n📝Instructions(type "done" to finish)')
                     break
                 else:
-                    print('Please enter a valid time. (Greater than 0 minutes, smaller than 91 minutes.)\n')
+                    print('\n+-------------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid duration. (Greater than 0 minutes, smaller than 91 minutes.) |')
+                    print('+-------------------------------------------------------------------------------------+')
         except ValueError:
-            print('Invalid input. Please enter a whole number for time.\n')
+            print('\n+---------------------------------------------------------------+')
+            print('|⚠️ Invalid input. Please enter whole numbers for the duration. |')
+            print('+---------------------------------------------------------------+')
 
     while True:
         instruction = input(f'{len(instructions) + 1}. ').strip()
 
         if instruction == 'done':
-            print('Stop adding.')
+            print('\nStop adding instructions...')
             break
 
         if validation_empty_entries(instruction):
@@ -425,13 +466,17 @@ def continue_adding_recipe():
                 recipe_instruction()
                 break
             elif add_more == 'n':
-                print('Stop adding. Exiting to product management page......')
+                print('\nStop adding. Exiting to Product Management page......')
                 pass
                 break
             else:
-                print("Invalid input. Please enter 'y' or 'n'.")
+                print('\n+-------------------------------------------+')
+                print('|⚠️ Invalid input. Please enter "y" or "n". |')
+                print('+-------------------------------------------+')
         except ValueError:
-            print('Invalid input. Please enter again.')
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
 
 
 recipe_instruction()

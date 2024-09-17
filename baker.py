@@ -1,9 +1,3 @@
-# Account login
-# Recipe Management: Create, update, and delete digital recipes.
-# Inventory Check: Verify availability of required ingredients.
-# Production Record-keeping: Record production quantities, batch numbers, and expiration dates.
-# Equipment Management: Report equipment malfunctions or maintenance
-
 import json  # import json text file to record data
 
 # Define the function that loads data from the file

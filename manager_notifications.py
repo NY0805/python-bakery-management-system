@@ -43,7 +43,7 @@ def notification():
         save_info(notice)
 
     else:
-        print(f'📜 You have {len(notice)} notifications.')
+        print(f'🔔 You have {len(notice)} notifications.')
 
 
 

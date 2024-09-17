@@ -49,5 +49,24 @@
             "g",
             "g"
         ]
+    },
+    "banana bread": {
+        "recipe_category": "Breads",
+        "recipe_name": "banana bread",
+        "ingredient_used": [
+            [
+                "white flour",
+                4.0,
+                "cups"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [],
+        "baking_temperature": 200,
+        "baking_time": 3,
+        "instructions": [
+            "a",
+            "a"
+        ]
     }
 }
