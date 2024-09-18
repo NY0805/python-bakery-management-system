@@ -1,0 +1,39 @@
+{
+    "Convection ovens": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "Convection ovens",
+        "purchase_quantity": 1,
+        "serial_number": [
+            "oven1"
+        ],
+        "manufacturer": "minion",
+        "model_number": "CNTOVN001",
+        "purchase_date": "03-04-2004",
+        "next_scheduled_maintenance": "15-04-2005"
+    },
+    "toaster oven": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "toaster oven",
+        "purchase_quantity": 2,
+        "serial_number": [
+            "toasteroven1",
+            "toasteroven2"
+        ],
+        "manufacturer": "hiii",
+        "model_number": "TSTROVN0200",
+        "purchase_date": "05-07-2004",
+        "next_scheduled_maintenance": "16-10-2004"
+    },
+    "pastry brushes": {
+        "category": "Decorating Tools",
+        "equipment_name": "pastry brushes",
+        "purchase_quantity": 1,
+        "serial_number": [
+            "brushes1"
+        ],
+        "manufacturer": "nctdream",
+        "model_number": "PSTRYBRSHS563",
+        "purchase_date": "23-05-2004",
+        "next_scheduled_maintenance": "-"
+    }
+}
