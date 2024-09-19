@@ -127,7 +127,8 @@ def notification():
                                 malfunction_equipment.remove(equipment_name_to_repair)
                                 notice_value['current_condition'] = 'function well'
                                 malfunction_report -= 1
-                                #save_info(notice)
+                                break
+                                # save_info(notice)
 
 
                             elif repair_status == 'n' and ways_to_repair == 'b':
@@ -159,6 +160,7 @@ def notification():
         elif malfunction_report == 0 and maintenance_report == 0:
             print('🎉 Hooray! No notifications yet!')
             break
+        break
 
 
             #print(time.strftime("%d-%m-%Y"))

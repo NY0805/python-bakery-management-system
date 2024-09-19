@@ -1,39 +1,45 @@
 {
-    "Convection oven": {
+    "Convection ovens": {
         "category": "Ovens and Baking Appliances",
-        "equipment_name": "Convection oven",
+        "equipment_name": "Convection ovens",
         "purchase_quantity": 1,
         "serial_number": [
             "oven1"
         ],
-        "manufacturer": "minion",
-        "model_number": "CNTOVN001",
+        "manufacturer": "minionnn",
+        "model_number": "CVTOVN001",
         "purchase_date": "03-04-2004",
-        "next_scheduled_maintenance": "15-04-2005"
+        "next_scheduled_maintenance": "15-11-2004",
+        "manufacturer_email": "gg@gg.com",
+        "warranty": "1 year"
     },
-    "toaster oven": {
+    "Toaster oven": {
         "category": "Ovens and Baking Appliances",
-        "equipment_name": "toaster oven",
+        "equipment_name": "Toaster oven",
         "purchase_quantity": 2,
         "serial_number": [
             "toasteroven1",
             "toasteroven2"
         ],
-        "manufacturer": "hiii",
-        "model_number": "TSTROVN0200",
-        "purchase_date": "05-07-2004",
-        "next_scheduled_maintenance": "16-10-2004"
+        "manufacturer": "nctdream",
+        "model_number": "TSTROVN563",
+        "purchase_date": "06-07-2004",
+        "next_scheduled_maintenance": "24-09-2004",
+        "manufacturer_email": "nctdream@no1.com",
+        "warranty": "2 years"
     },
-    "pastry brushes": {
-        "category": "Decorating Tools",
-        "equipment_name": "pastry brushes",
+    "stand mixer": {
+        "category": "Mixing Equipment",
+        "equipment_name": "stand mixer",
         "purchase_quantity": 1,
         "serial_number": [
-            "brushes1"
+            "mixer1"
         ],
-        "manufacturer": "nctdream",
-        "model_number": "PSTRYBRSHS563",
-        "purchase_date": "23-05-2004",
-        "next_scheduled_maintenance": "-"
+        "manufacturer": "cheflum",
+        "model_number": "STDMXR034",
+        "purchase_date": "05-06-2004",
+        "next_scheduled_maintenance": "17-09-2004",
+        "manufacturer_email": "cheflum@super.com",
+        "warranty": "1 year"
     }
 }
