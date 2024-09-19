@@ -1,14 +1,18 @@
 {
     "toasteroven1": {
         "category": "Ovens and Baking Appliances",
-        "equipment_name": "toaster oven",
+        "equipment_name": "Toaster oven",
         "serial_number": "toasteroven1",
-        "model_number": "TSTROVN0200",
-        "report_date": "10-09-2024",
-        "current_condition": "maintenance needed",
-        "malfunction_date": "08-09-2024",
-        "last_maintenance_date": "07-08-2023",
-        "description": "ddf#dda22"
+        "model_number": "TSTROVN563",
+        "manufacturer_email": "nctdream@no1.com",
+        "warranty": "2 years",
+        "report_date": "20-09-2024",
+        "current_condition": "waiting to claim warranty / replace with a new one",
+        "severity": "medium",
+        "maintenance_needed_date": "06-09-2024",
+        "last_maintenance_date": "31-05-2023",
+        "next_scheduled_maintenance": "24-09-2004",
+        "description": "uuuuuuuuuuuuu"
     },
     "oven1": {
         "category": "Ovens and Baking Appliances",
@@ -16,35 +20,24 @@
         "serial_number": "oven1",
         "model_number": "CNTOVN001",
         "report_date": "08-08-2024",
-        "current_condition": "waiting to claim warranty / replace with a new one",
+        "current_condition": "malfunction",
         "malfunction_date": "15-07-2024",
         "last_maintenance_date": "12-04-2023",
         "description": "ddasdasc"
     },
-    "brushes1": {
-        "category": "Decorating Tools",
-        "equipment_name": "pastry brushes",
-        "serial_number": "brushes1",
-        "model_number": "PSTRYBRSHS563",
-        "report_date": "19-09-2024",
-        "current_condition": "maintenance needed",
-        "malfunction_date": "12-09-2024",
-        "last_maintenance_date": "23-03-2023",
-        "description": "ewdsc"
-    },
-     "mixer1": {
+    "mixer1": {
         "category": "Mixing Equipment",
         "equipment_name": "stand mixer",
         "serial_number": "mixer1",
         "model_number": "STDMXR034",
         "manufacturer_email": "cheflum@super.com",
         "warranty": "1 year",
-        "report_date": "19-09-2024",
+        "report_date": "20-09-2024",
         "current_condition": "maintenance needed",
-        "severity": "urgent",
-        "maintenance_needed_date": "05-04-2004",
-        "last_maintenance_date": "13-03-2004",
+        "severity": "high",
+        "maintenance_needed_date": "17-08-2024",
+        "last_maintenance_date": "11-03-2024",
         "next_scheduled_maintenance": "17-09-2004",
-        "description": "broke liao cannot use :("
+        "description": "dddddddddd"
     }
 }
