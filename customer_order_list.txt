@@ -1,6 +1,5 @@
 {
-    {
-        "order_id": 5580946551,
+    "5580946551": {
         "username": "Mark0825",
         "items_ordered": [
             "Bread x1",
@@ -9,8 +8,7 @@
         "total_price": 15.0,
         "status": "Delivered"
     },
-    {
-        "order_id": 5684950188,
+    "5684950188": {
         "username": "03jane_",
         "items_ordered": [
             "Muffin x2",
@@ -19,8 +17,7 @@
         "total_price": 12.5,
         "status": "Shipped"
     },
-    {
-        "order_id": 1544631417,
+    "1544631417": {
         "username": "_eddie",
         "items_ordered": [
             "Bread x1",
@@ -29,8 +26,7 @@
         "total_price": 8.0,
         "status": "Processing"
     },
-    {
-        "order_id": 4418942694,
+    "4418942694": {
         "username": "anna328_",
         "items_ordered": [
             "Biscuit x3"
@@ -38,8 +34,7 @@
         "total_price": 3.75,
         "status": "Delivered"
     },
-    {
-        "order_id": 7841554976,
+    "7841554976": {
         "username": "andrew_520",
         "items_ordered": [
             "Muffin x1",
@@ -48,13 +43,13 @@
         "total_price": 10.0,
         "status": "Shipped"
     },
-    {
-        "order_id": 9026863080,
+    "9026863080": {
         "username": "Ashley",
         "items_ordered": [
             "bagel x2"
         ],
         "total_price": 24.0,
         "status": "Payment Complete"
-    },
+    }
 }
+
