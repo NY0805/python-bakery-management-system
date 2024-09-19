@@ -72,6 +72,10 @@ def notification():
 
             if choice_of_report == 1:
                 malfunction_equipment = []
+                for notice_value in notice.values():
+                    if notice_value['current_condition'] == 'malfunction':
+                        malfunction_equipment.append(notice_value['equipment_name'].lower())
+
                 if len(malfunction_equipment) == 0:
                     print('\n❗There is currently no malfunction report.')
 
@@ -82,8 +86,6 @@ def notification():
 
                     for notice_value in notice.values():
                         if notice_value['current_condition'] == 'malfunction':
-                            malfunction_equipment.append(notice_value['equipment_name'].lower())
-
                             print(f'📍 {notice_value["equipment_name"].title()} 📍')
                             for sub_key, sub_value in notice_value.items():
                                 if sub_key == 'equipment_name':
@@ -113,9 +115,10 @@ def notification():
                                     if ways_to_repair == 'b':
                                         for equipment_key, equipment_value in baker_equipment.items():
                                             if equipment_name_to_repair.lower() == equipment_value['equipment_name'].lower():  # to ensure it is exactly the selected item
+                                                serial_number = notice_value['serial_number']
                                                 manufacturer_name = equipment_value['manufacturer']
                                                 manufacturer_email = equipment_value['manufacturer_email']
-                                                serial_number = notice_value['serial_number']
+
 
                                                 print('\n❗Important Information❗')
                                                 print(f'Serial number: {serial_number}\n'
@@ -139,9 +142,9 @@ def notification():
                                     elif repair_status == 'n' and ways_to_repair == 'b':
                                         for equipment in baker_equipment.values():
                                             warranty = equipment['warranty']
-                                            print('\n+---------------------------------------------+')
+                                            print('\n+---------------------------------------------------------+')
                                             print(f'|💡 There is a "{warranty}" warranty for this equipment. |')
-                                            print('+---------------------------------------------+\n')
+                                            print('+---------------------------------------------------------+\n')
                                             print('The equipment is probably broken. You may need to change a new one or claim the warranty from the manufacturer.')
                                             print('Exiting to Notification page......')
                                             notice_value['current_condition'] = 'waiting to claim warranty / replace with a new one'
