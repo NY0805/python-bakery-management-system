@@ -1,6 +1,7 @@
 import json
 from collections import defaultdict
 from datetime import datetime
+import time
 
 
 def load_data_from_baker_equipment():
@@ -45,7 +46,7 @@ def save_info_equipment_details(equipment_details):
 
 
 def save_info_equipment_management(equipment_management):
-    file = open('equipment_report_test.txt', 'w')  # open the file to write
+    file = open('notification.txt', 'w')  # open the file to write
     json.dump(equipment_management, file,
               indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
@@ -120,7 +121,7 @@ def enter_equipment():
 def equipment_management():
     print('\n-------------------------------------------------------')
     print('\t\t\t', '', 'EQUIPMENT MANAGEMENT MENU')
-    print('-------------------------------------------------------\n')
+    print('-------------------------------------------------------')
     print('1. Report Malfunction')
     print('2. Report Maintenance Needs')
     print('3. Back to Homepage\n')
@@ -146,7 +147,9 @@ def equipment_management():
 
 
 def equipment_lists():
-    print('Here are the equipment list:\n')
+    print('\n-------------------------------------------------------')
+    print('\t\t\t\t\tEQUIPMENT LIST')
+    print('-------------------------------------------------------')
     index = 1
     equipment_index_mapping = {}
     for category, items in equipment_category_groups.items():
@@ -191,26 +194,26 @@ def equipment_malfunction():
 
     print('\nBasic details of selected equipment:\n')
     print(f'{equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
-    print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment['equipment_name'].title()}')  # equipment name
+    print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
     for item, serial_number in enumerate(equipment['serial_number'], start=1):
         print(f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
-    print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment['manufacturer'].title()}')  # manufacturer
-    print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment['model_number']}')  # model number
-    print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment['purchase_date']}')  # purchase date
-    print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment['purchase_quantity']}')  # purchase quantity
-    print(f'{equipment_detail[7].ljust(max_length + 4)}: {equipment['next_scheduled_maintenance']}')  # next schedule maintenance
+    print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
+    print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
 
     print('')
     print('-' * 140)
     print('\nKindly complete the form to submit a report to manager:\n')
-    print(f'1. {equipment_detail[1].ljust(max_length + 4)}: {equipment['equipment_name'].title()}')  # equipment name
+    print(f'1. {equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
     print(f'2. {equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
-    print(f'3. {equipment_detail[4].ljust(max_length + 4)}: {equipment['model_number']}')  # model number
-    print(f'4. {equipment_detail[8].ljust(max_length + 4)}: #system date')  # report date
+    print(f'3. {equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
+    print(f'4. {equipment_detail[8].ljust(max_length + 4)}: {time.strftime("%d-%m-%Y")}')  # report date
     print(f'5. {equipment_detail[9].ljust(max_length + 4)}: Malfunction')  # current condition
 
     while True:
-        serial_number = input('Enter the serial number: ')
+        serial_number = input('\nEnter the serial number: ')
         if validation_empty_entries(serial_number):
             if validation_alphanum_only(serial_number):
                 if serial_number in equipment['serial_number']:
@@ -251,7 +254,7 @@ def equipment_malfunction():
                     'equipment_name': equipment['equipment_name'],
                     'serial_number': serial_number,
                     'model_number': equipment['model_number'],
-                    'report_date': 'system date',
+                    'report_date': time.strftime("%d-%m-%Y"),
                     'current_condition': 'malfunction',
                     'malfunction_date': malfunction_date,
                     'last_maintenance_date': last_maintenance_date,
@@ -259,7 +262,7 @@ def equipment_malfunction():
                 }
 
                 save_info_equipment_management(malfunction_data)
-                print('Malfunction report has been submitted. Thank you for reporting!\n')
+                print('\nMalfunction report has been submitted. Thank you for reporting!\n')
                 break
             elif confirmation == 'n':
                 print('Report submission has been canceled.\n')
@@ -275,7 +278,7 @@ def equipment_malfunction():
                 equipment_malfunction()
                 break
             elif report_more == 'n':
-                print('Exit the malfunction report page. Proceeding to equipment management menu......')
+                print('\nExit the malfunction report page. Proceeding to equipment management menu......')
                 equipment_management()
                 break
             else:

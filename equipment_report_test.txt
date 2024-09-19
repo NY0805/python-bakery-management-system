@@ -9,5 +9,16 @@
         "malfunction_date": "08-09-2024",
         "last_maintenance_date": "07-08-2024",
         "description": "ddf#dda22"
+    },
+    "oven1": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "Convection ovens",
+        "serial_number": "oven1",
+        "model_number": "CNTOVN001",
+        "report_date": "system date",
+        "current_condition": "malfunction",
+        "malfunction_date": "12-12-2022",
+        "last_maintenance_date": "12-12-2022",
+        "description": "ddasdasc"
     }
 }

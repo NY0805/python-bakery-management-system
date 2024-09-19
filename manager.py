@@ -148,15 +148,15 @@ def manager():
             become_manager = input('Do you want to be a manager (y=yes, n=no)?\n>>> ')
             if become_manager == 'y':
                 if len(manager_info) == 1:
-                    print('\nSorry, the manager position is not vacant.')
-                    print('Exiting to main page......')
+                    print('\n💡Sorry, the manager position is not vacant.')
+                    print('Exiting to Main page......')
                     return False
                 else:
                     manager_accounts()
                     break
 
             elif become_manager == 'n':
-                print('\nExiting to main page......')
+                print('\nExiting to Main page......')
                 return False
             else:
                 print('\n+--------------------------------------+')
@@ -169,13 +169,13 @@ def manager():
         print('\n-----------------------------------------------')
         print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
         print('-----------------------------------------------')
-        print('a. System administration\n'
-              'b. Order management\n'
-              'c. Financial management\n'
-              'd. Inventory control\n'
-              'e. Customer feedback\n'
+        print('a. System Administration\n'
+              'b. Order Management\n'
+              'c. Financial Management\n'
+              'd. Inventory Control\n'
+              'e. Customer Feedback\n'
               'f. Notifications\n'
-              'g. Exit')
+              'g. Back to Main page')
 
         choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
         if choice == 'a':
@@ -197,7 +197,7 @@ def manager():
             print('enter again.')
 
         elif choice == 'g':
-            print('\nExiting to main page......')
+            print('\nExiting to Main page......')
             return False
 
         else:

@@ -1,6 +1,35 @@
 {
-    "uncle": {
-        "noti_message": "aaaaa",
-        "noti_date": "ddddd"
+    "toasteroven1": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "toaster oven",
+        "serial_number": "toasteroven1",
+        "model_number": "TSTROVN0200",
+        "report_date": "system date",
+        "current_condition": "maintenance needed",
+        "malfunction_date": "08-09-2024",
+        "last_maintenance_date": "07-08-2024",
+        "description": "ddf#dda22"
+    },
+    "oven1": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "Convection oven",
+        "serial_number": "oven1",
+        "model_number": "CNTOVN001",
+        "report_date": "system date",
+        "current_condition": "malfunction",
+        "malfunction_date": "12-12-2022",
+        "last_maintenance_date": "12-12-2022",
+        "description": "ddasdasc"
+    },
+    "brushes1": {
+        "category": "Decorating Tools",
+        "equipment_name": "pastry brushes",
+        "serial_number": "brushes1",
+        "model_number": "PSTRYBRSHS563",
+        "report_date": "19-09-2024",
+        "current_condition": "maintenance needed",
+        "malfunction_date": "12-12-2022",
+        "last_maintenance_date": "23-03-2322",
+        "description": "ewdsc"
     }
 }

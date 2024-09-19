@@ -331,7 +331,7 @@ def inventory_control_product():
                 print('+--------------------------------------+')
                 break
 
-inventory_control_product()
+
 def main_control():
     while True:
         print('\n-----------------------------------------------')
