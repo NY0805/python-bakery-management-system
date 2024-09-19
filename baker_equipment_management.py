@@ -2,6 +2,7 @@ import json
 from collections import defaultdict
 from datetime import datetime
 import time
+import re
 
 
 def load_data_from_baker_equipment():
@@ -140,7 +141,7 @@ def equipment_management():
                     if equipment_management_type == 1:
                         equipment_malfunction()
                     elif equipment_management_type == 2:
-                        pass
+                        equipment_maintenance()
                     elif equipment_management_type == 3:
                         print('Exiting to baker privilege...')
                         break
@@ -184,7 +185,7 @@ def equipment_malfunction():
     malfunction_data = load_data_from_manager_notifications()
     print('')
     print('-' * 140)
-    print('\nWelcome to the Equipment Malfunction Report page. Please follow the instructions to report any issues.\n')
+    print('\nWelcome to the Equipment Malfunction Report page. Please follow the instructions to report any issues.')
     selected_equipment, equipment_info = equipment_lists()
     category, equipment = equipment_info  #unpacking of tuple
 
@@ -201,21 +202,22 @@ def equipment_malfunction():
     print(f'{equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
     print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
     for item, serial_number in enumerate(equipment['serial_number'], start=1):
-        print(f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
+        print(
+            f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
     print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment["manufacturer"].title()}')  # manufacturer
     print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
     print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment["purchase_date"]}')  # purchase date
     print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment["purchase_quantity"]}')  # purchase quantity
-    print(f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(
+        f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
     print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
     print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
-
 
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
-    print(f'1. {equipment_detail[8].ljust(max_length + 4)}: {time.strftime("%d-%m-%Y")}')  # report date
-    print(f'2. {equipment_detail[9].ljust(max_length + 4)}: Malfunction')  # current condition
+    print(f'1. {equipment_detail[10].ljust(max_length + 2)}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {equipment_detail[11].ljust(max_length + 2)}: Malfunction')  # current condition
 
     while True:
         serial_number = input('\nEnter the serial number: ')
@@ -271,7 +273,7 @@ def equipment_malfunction():
                     'report_date': time.strftime("%d-%m-%Y"),
                     'current_condition': 'malfunction',
                     'malfunction_date': malfunction_date,
-                    'last_maintenance_date': last_maintenance_date,
+                    'last_maintenance_date': last_maintenance_date_str,
                     'description': description
                 }
 
@@ -292,7 +294,7 @@ def equipment_malfunction():
                 equipment_malfunction()
                 break
             elif report_more == 'n':
-                print('\nExit the malfunction report page. Proceeding to equipment management menu......')
+                print('\nExit the maintenance needs report page. Proceeding to equipment management menu......')
                 equipment_management()
                 break
             else:
@@ -300,8 +302,138 @@ def equipment_malfunction():
 
 
 def equipment_maintenance():
-    print('hi')
+    maintenance_data = load_data_from_manager_notifications()
+    print('')
+    print('-' * 140)
+    print('\nWelcome to the Equipment Maintenance Report page. Please follow the instructions to report any issues.\n')
+    selected_equipment, equipment_info = equipment_lists()
+    category, equipment = equipment_info  # unpacking of tuple
 
-# equipment_management()
+    equipment_detail = ['Category', 'Equipment Name', 'Serial Number', 'Manufacturer', 'Model Number', 'Purchase Date',
+                        'Purchase Quantity', 'Next Scheduled Maintenance', 'Manufacturer Email', 'Warranty',
+                        'Date Of Report', 'Current Condition']
 
-enter_equipment()
+    max_length = 0
+    for item in equipment_detail:
+        if len(item) > max_length:
+            max_length = len(item)
+
+    print('\nBasic details of selected equipment:\n')
+    print(f'{equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
+    print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
+    for item, serial_number in enumerate(equipment['serial_number'], start=1):
+        print(
+            f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
+    print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
+    print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(
+        f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
+    print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
+
+    print('')
+    print('-' * 140)
+    print('\nKindly complete the necessary details to submit a report to manager:\n')
+    print(f'1. {equipment_detail[10].ljust(max_length + 2)}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {equipment_detail[11].ljust(max_length + 2)}: Maintenance Needed\n')  # current condition
+
+    while True:
+        serial_number = input('Enter the serial number: ')
+        if validation_empty_entries(serial_number):
+            if validation_alphanum_only(serial_number):
+                if serial_number in equipment['serial_number']:
+                    break
+                else:
+                    print('Please enter a valid serial number based on the list given. (Case sensitive)\n')
+            else:
+                print('Please enter a valid serial number. (Cannot contain any spacing and special characters.)\n')
+
+    while True:
+        maintenance_needed_date = input('Enter the date of incident (DD-MM-YYYY): ')
+        if validation_empty_entries(maintenance_needed_date):
+            # maintenance_needed_date_new = datetime.strptime(maintenance_needed_date, '%d-%m-%Y')
+            if validation_date(maintenance_needed_date):
+                # if maintenance_needed_date_new < systemdate
+                break
+            else:
+                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+
+    while True:
+        last_maintenance_date_str = input('Enter the last maintenance date (DD-MM-YYYY): ')
+        if validation_empty_entries(last_maintenance_date_str):
+            if validation_date(last_maintenance_date_str):
+                # convert last_maintenance_date_str from string to datetime format
+                last_maintenance_date = datetime.strptime(last_maintenance_date_str, '%d-%m-%Y')
+                # convert malfunction_date from string to datetime format
+                maintenance_needed_date_new = datetime.strptime(maintenance_needed_date, '%d-%m-%Y')
+                if last_maintenance_date <= maintenance_needed_date_new:
+                    break
+                else:
+                    print('Please enter a valid last maintenance date. Cannot greater than malfunction date.')
+            else:
+                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+
+    while True:
+        severity = input('Enter the severity of the issue (Choose between: urgent, high, medium, low): ').lower().strip()
+        if validation_empty_entries(severity):
+            if severity.isalpha():
+                if severity in ['urgent', 'high', 'medium', 'low']:
+                    break
+                else:
+                    print('Please input the severity level based on the given options.\n')
+            else:
+                print('Invalid input. (Cannot contain any spacings, digits and special characters.)\n')
+
+    while True:
+        description = input('Enter a clear description of the maintenance issue: ')
+        if validation_empty_entries(description):
+            break
+
+    while True:
+        confirmation = input('\nConfirm submission of malfunction report to manager? (y=yes, n=no)\n'
+                             '>>> ').lower().strip()
+        if validation_empty_entries(confirmation):
+            if confirmation == 'y':
+                maintenance_data[serial_number] = {
+                    'category': category,
+                    'equipment_name': equipment['equipment_name'],
+                    'serial_number': serial_number,
+                    'model_number': equipment['model_number'],
+                    'manufacturer_email': equipment['manufacturer_email'],
+                    'warranty': equipment['warranty'],
+                    'report_date': time.strftime("%d-%m-%Y"),
+                    'current_condition': 'maintenance needed',
+                    'severity': severity,
+                    'maintenance_needed_date': maintenance_needed_date,
+                    'last_maintenance_date': last_maintenance_date_str,
+                    'next_scheduled_maintenance': equipment['next_scheduled_maintenance'],
+                    'description': description
+                }
+
+                save_info_equipment_management(maintenance_data)
+                print('\nMaintenance needs report has been submitted. Thank you for reporting!\n')
+                break
+            elif confirmation == 'n':
+                print('Report submission has been canceled.\n')
+                break
+            else:
+                print("Please enter 'y' or 'n'.\n")
+
+    while True:
+        report_more = input('Continue reporting? (y=yes, n=no)\n'
+                            '>>> ').lower().strip()
+        if validation_empty_entries(report_more):
+            if report_more == 'y':
+                equipment_maintenance()
+                break
+            elif report_more == 'n':
+                print('\nExit the malfunction report page. Proceeding to equipment management menu......')
+                equipment_management()
+                break
+            else:
+                print("Please enter 'y' or 'n'.\n")
+
+
+equipment_management()

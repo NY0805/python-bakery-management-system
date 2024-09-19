@@ -31,5 +31,20 @@
         "malfunction_date": "12-09-2024",
         "last_maintenance_date": "23-03-2023",
         "description": "ewdsc"
+    },
+     "mixer1": {
+        "category": "Mixing Equipment",
+        "equipment_name": "stand mixer",
+        "serial_number": "mixer1",
+        "model_number": "STDMXR034",
+        "manufacturer_email": "cheflum@super.com",
+        "warranty": "1 year",
+        "report_date": "19-09-2024",
+        "current_condition": "maintenance needed",
+        "severity": "urgent",
+        "maintenance_needed_date": "05-04-2004",
+        "last_maintenance_date": "13-03-2004",
+        "next_scheduled_maintenance": "17-09-2004",
+        "description": "broke liao cannot use :("
     }
 }
