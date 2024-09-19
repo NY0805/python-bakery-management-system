@@ -1,5 +1,5 @@
 {
-    "Convection ovens": {
+    "Convection oven": {
         "category": "Ovens and Baking Appliances",
         "equipment_name": "Convection ovens",
         "purchase_quantity": 1,
