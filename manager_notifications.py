@@ -45,63 +45,64 @@ baker_equipment = load_data_from_baker_equipment()
 
 
 def notification():
-    print('\n-----------------------------------------------')
-    print(f'\t\t\t\tNOTIFICATIONS')
-    print('-----------------------------------------------')
 
-    malfunction_report = 0
-    maintenance_report = 0
-    for value in notice.values():
-        if value['current_condition'] == 'malfunction':
-            malfunction_report += 1
-        elif value['current_condition'] == 'maintenance needed':
-            maintenance_report += 1
+    while True:
+        print('\n-----------------------------------------------')
+        print(f'\t\t\t\tNOTIFICATIONS')
+        print('-----------------------------------------------')
+        malfunction_report = 0
+        maintenance_report = 0
 
-    if malfunction_report != 0:
-        print(f'🔔 {malfunction_report} notification(s) from Malfunction Report.')
-        if maintenance_report != 0:
-            print(f'🔔 {maintenance_report} notification(s) from Maintenance Report.\n\n')
+        for value in notice.values():
+            if value['current_condition'] == 'malfunction':
+                malfunction_report += 1
+            elif value['current_condition'] == 'maintenance needed':
+                maintenance_report += 1
 
-        while True:
-            print('1. Malfunction Report\n2. Maintenance Report')
-            choice_of_report = input('\nChoose a report to see more details: ')
+        if malfunction_report != 0:
+            print(f'🔔 {malfunction_report} notification(s) from Malfunction Report.')
+            if maintenance_report != 0:
+                print(f'🔔 {maintenance_report} notification(s) from Maintenance Report.\n')
 
-            if choice_of_report not in ['1,', '2']:
-                print('\n+--------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+\n')
-            if choice_of_report.lower() == '1' or 'malfunction_report':
-                print('\n-----------------------------------------------')
-                print(f'\t\t\tMALFUNCTION REPORT')
-                print('-----------------------------------------------')
-                malfunction_equipment = []
-                for notice_value in notice.values():
-                    if notice_value['current_condition'] == 'malfunction':
-                        malfunction_equipment.append(notice_value['equipment_name'].lower())
+            print('\n1. Malfunction Report\n2. Maintenance Report')
+            try:
+                choice_of_report = int(input('\nEnter a number to get more insights: '))
 
-                        print(f'📍 {notice_value["equipment_name"].title()} 📍')
-                        for sub_key, sub_value in notice_value.items():
-                            if sub_key == 'equipment_name':
-                                continue
-                            else:
-                                print(f'{sub_key:<23}: {sub_value}')
-                        print('')
+                if choice_of_report == 1:
+                    print('\n-----------------------------------------------')
+                    print(f'\t\t\tMALFUNCTION REPORT')
+                    print('-----------------------------------------------')
+                    malfunction_equipment = []
+                    for notice_value in notice.values():
+                        if notice_value['current_condition'] == 'malfunction':
+                            malfunction_equipment.append(notice_value['equipment_name'].lower())
 
-                        equipment_name_to_repair = input('Enter equipment name that need for repairment: ')
-                        while equipment_name_to_repair.lower() not in malfunction_equipment:
-                            print('\n+----------------------------------------------------------------------------+')
-                            print('|⚠️ Invalid input or this equipment didn\'t be reported. Please enter again. |')
-                            print('+----------------------------------------------------------------------------+\n')
-                            equipment_name_to_repair = input('Enter equipment name that need for repairment: ')
+                            print(f'📍 {notice_value["equipment_name"].title()} 📍')
+                            for sub_key, sub_value in notice_value.items():
+                                if sub_key == 'equipment_name':
+                                    continue
+                                else:
+                                    print(f'{sub_key:<23}: {sub_value}')
+                            print('')
 
-                        ways_to_repair = input('Do you want to repair yourself or contact the manufacturer? (a=repair yourself, b=contact manufacturer)\n>>> ')
-                        while ways_to_repair not in ['a', 'b']:
-                            print('\n+--------------------------------------+')
-                            print('|⚠️ Invalid input. Please enter again. |')
-                            print('+--------------------------------------+\n')
+                            equipment_name_to_repair = input('Enter equipment name that need for repairment (or enter "done" to return back): ')
+                            if equipment_name_to_repair == 'done':
+                                print('\nExiting to Notification page......')
+                                break
+
+                            while equipment_name_to_repair.lower() not in malfunction_equipment:
+                                print('\n+---------------------------------------------------------------------------+')
+                                print('|⚠️ Invalid input or this equipment didn\'t be reported. Please enter again. |')
+                                print('+---------------------------------------------------------------------------+\n')
+                                equipment_name_to_repair = input('Enter equipment name that need for repairment: ')
+
                             ways_to_repair = input('Do you want to repair yourself or contact the manufacturer? (a=repair yourself, b=contact manufacturer)\n>>> ')
+                            while ways_to_repair not in ['a', 'b']:
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Invalid input. Please enter again. |')
+                                print('+--------------------------------------+\n')
+                                ways_to_repair = input('Do you want to repair yourself or contact the manufacturer? (a=repair yourself, b=contact manufacturer)\n>>> ')
 
-                        else:
                             if ways_to_repair == 'b':
                                 for equipment_key, equipment_value in baker_equipment.items():
                                     if equipment_name_to_repair.lower() == equipment_value['equipment_name'].lower():  # to ensure it is exactly the selected item
@@ -109,48 +110,58 @@ def notification():
                                         #manufacturer_contact = equipment_value['manufacturer_email']
                                         serial_number = notice_value['serial_number']
 
-                                        print('\n❗Important Information:')
+                                        print('\n❗Important Information❗')
                                         print(f'Serial number: {serial_number}\n'
-                                              f'Manufacturer: {manufacturer_name}\n')
+                                              f'Manufacturer: {manufacturer_name}')
                                               #f'Contact email: {manufacturer_email}')
 
-                            while True:
-                                repair_status = input('Has the equipment function well? (y=yes, n=no)\n>>> ')
-                                if repair_status == 'y':
-                                    print('Great! Your bakery can resume smooth operations.\n')
-                                    malfunction_equipment.remove(equipment_name_to_repair)
-                                    notice_value['current_condition'] = 'function well'
-                                    #save_info(notice)
+                            repair_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
+                            while repair_status not in ['y', 'n']:
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Invalid input. Please enter again. |')
+                                print('+--------------------------------------+\n')
+                                repair_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
+
+                            if repair_status == 'y':
+                                print('Great! Your bakery can resume smooth operations.\n')
+                                malfunction_equipment.remove(equipment_name_to_repair)
+                                notice_value['current_condition'] = 'function well'
+                                malfunction_report -= 1
+                                #save_info(notice)
+
+
+                            elif repair_status == 'n' and ways_to_repair == 'b':
+                                for equipment in baker_equipment.values():
+                                    #warranty = equipment['warranty']
+                                    print('\n+---------------------------------------------+')
+                                    #print(f'|💡 There is a {warranty} for this equipment. |')
+                                    print('+---------------------------------------------+\n')
+                                    print('The equipment is probably broken. You may need to change a new one or claim the warranty from the manufacturer.')
+                                    print('Exiting to Notification page......')
                                     break
 
-                                elif repair_status == 'n':
-                                    for equipment in baker_equipment.values():
-                                        #warranty = equipment['warranty']
-                                        print('\n+---------------------------------------------+')
-                                        #print(f'|💡 There is a {warranty} for this equipment. |')
-                                        print('+---------------------------------------------+\n')
-                                        print('The equipment is probably broken. You may need to change a new one or claim the warranty from the manufacturer.\n')
-                                        break
-                                    break
-
-                                else:
-                                    print('\n+--------------------------------------+')
-                                    print('|⚠️ Invalid input. Please enter again. |')
-                                    print('+--------------------------------------+\n')
-
-            else:
-                print('\n+--------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+\n')
+                            elif repair_status == 'n' and ways_to_repair == 'a':
+                                print('\nThe equipment is probably broken. You may need to change a new one.')
+                                print('Exiting to Notification page......')
+                                break
 
 
+                else:
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('+--------------------------------------+\n')
+
+            except ValueError:
+                print('\n+------------------------------+')
+                print('|⚠️ Please enter numbers only. |')
+                print('+------------------------------+\n')
+
+        elif malfunction_report == 0 and maintenance_report == 0:
+            print('🎉 Hooray! No notifications yet!')
+            break
 
 
-    else:
-        print('🎉 Hooray! No notifications yet!')
-
-
-        #print(time.strftime("%d-%m-%Y"))
+            #print(time.strftime("%d-%m-%Y"))
 
 
 
