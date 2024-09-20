@@ -21,11 +21,26 @@ order_list = load_data_from_customer_order_list()
 
 
 def order_management():
-    print('\n-----------------------------------------------')
-    print('\t\t\t\tORDER DETAILS')
-    print('-----------------------------------------------')
-    for key, value in order_list.items():
-        print(f'{key}: {value}')
+    print('\n\t\t\t\t\t\t\t\t\t\tORDER DETAILS')
+    print('-' * 98)
+    header = ['Order Id']
+    for value in order_list.values():
+        for sub_key, sub_value in value.items():
+            header.append(sub_key.title().replace('_', ' '))
+        break
+
+    print(f'{header[0]:<20}{header[1]:<20}{header[2]:<25}{header[3]:<22}{header[4]}')
+    print('-' * 98)
+
+    for order_id, order_details in order_list.items():
+        print(f'{order_id:<20}{order_details["username"]:<20}{order_details["items_ordered"][0]:<25}{order_details["total_price"]:<22}{order_details["status"]}')
+
+        for items in order_details['items_ordered'][1:]:
+            print(f'{"":<20}{"":<20}{items:<25}{"":<22}{""}')
+        print('')
+
+
+
 
 
 order_management()
