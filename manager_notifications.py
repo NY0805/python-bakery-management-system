@@ -1,4 +1,5 @@
 import json
+import textwrap
 import time
 
 
@@ -40,9 +41,59 @@ def save_info(notice):
     file.close()  # close the file after writing
 
 
+def malfunction_data_group(malfunction_data):
+    return (
+        f"📍 {malfunction_data['equipment_name'].title()} 📍\n"
+        f"Category: {malfunction_data['category'].title()}\n"
+        f"Serial number: {malfunction_data['serial_number']}\n"
+        f"Model number: {malfunction_data['model_number']}\n"
+        f"Report date: {malfunction_data['report_date']}\n"
+        f"Current condition: {malfunction_data['current_condition']}\n"
+        f"Malfunction date: {malfunction_data['malfunction_date']}\n"
+        f"Last maintenance date: {malfunction_data['last_maintenance_date']}\n"
+        f"Description: {malfunction_data['description']}"
+    )
+
+
+def maintenance_data_group(maintenance_data):
+    return (
+        f"📍 {maintenance_data['equipment_name'].title()} 📍\n"
+        f"Category: {maintenance_data['category'].title()}\n"
+        f"Serial number: {maintenance_data['serial_number']}\n"
+        f"Model number: {maintenance_data['model_number']}\n"
+        f"Manufacturer email: {maintenance_data['manufacturer_email']}\n"
+        f"Warranty: {maintenance_data['warranty']}\n"
+        f"Report date: {maintenance_data['report_date']}\n"
+        f"Current condition: {maintenance_data['current_condition']}\n"
+        f"Severity: {maintenance_data['severity']}\n"
+        f"Maintenance needed date: {maintenance_data['maintenance_needed_date']}\n"
+        f"Last maintenance date: {maintenance_data['last_maintenance_date']}\n"
+        f"Next scheduled maintenance: {maintenance_data['next_scheduled_maintenance']}\n"
+        f"Description: {maintenance_data['description']}"
+    )
+
+
+def wrap_data(data_set, width=60):
+    wrapped_lines = []
+    for data in data_set:
+        wrapped_lines.extend(textwrap.wrap(data, width=width))
+    return wrapped_lines
+
+
+def print_in_column(info1, info2, width=56):
+    max_line = len(info1)
+    if len(info2) > max_line:
+        max_line = len(info2)
+    new_info1 = info1 + [""] * (max_line - len(info1))
+    new_info2 = info2 + [""] * (max_line - len(info2))
+
+    for line1, line2 in zip(new_info1, new_info2):
+        print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
+
+
 notice = load_data_from_notification()
 baker_equipment = load_data_from_baker_equipment()
-
+notifications = []
 
 def notification():
 
@@ -80,18 +131,29 @@ def notification():
                     print('\n❗There is currently no malfunction report.')
 
                 else:
-                    print('\n-----------------------------------------------')
-                    print(f'\t\t\tMALFUNCTION REPORT')
-                    print('-----------------------------------------------')
+                    print('')
+                    print('-' * 109)
+                    print(f'\t\t\t\t\t\t\t\t\t\t\tMALFUNCTION REPORT')
+                    print('-' * 109)
 
-                    for notice_value in notice.values():
-                        if notice_value['current_condition'] == 'malfunction':
-                            print(f'📍 {notice_value["equipment_name"].title()} 📍')
-                            for sub_key, sub_value in notice_value.items():
-                                if sub_key == 'equipment_name':
-                                    continue
-                                else:
-                                    print(f'{sub_key:<23}: {sub_value}')
+                    for value in notice.values():
+                        if value['current_condition'] == 'malfunction':
+                            notifications.append(malfunction_data_group(value).split('\n'))
+
+                    for i in range(0, len(notifications), 2):
+                        width = 55
+
+                        noti1 = wrap_data(notifications[i], width=60)
+                        if i + 1 < len(notifications):
+                            noti2 = wrap_data(notifications[i + 1], width=60)
+                        else:
+                            noti2 = []
+
+                        print_in_column(noti1, noti2)
+                        print('-' * (width * 2))
+                        if i == len(notifications) - 1:
+                            print('')
+                        else:
                             print('')
 
                     while True:
@@ -165,19 +227,31 @@ def notification():
                     print('\n❗There is currently no maintenance report.')
 
                 else:
-                    print('\n-----------------------------------------------')
-                    print(f'\t\t\t', '', 'MAINTENANCE REPORT')
-                    print('-----------------------------------------------')
+                    print('')
+                    print('-' * 109)
+                    print(f'\t\t\t\t\t\t\t\t\t\t\tMAINTENANCE REPORT')
+                    print('-' * 109)
 
-                    for notice_value in notice.values():
-                        if notice_value['current_condition'] == 'maintenance needed':
-                            print(f'📍 {notice_value["equipment_name"].title()} 📍')
-                            for sub_key, sub_value in notice_value.items():
-                                if sub_key == 'equipment_name':
-                                    continue
-                                else:
-                                    print(f'{sub_key:<30}: {sub_value}')
+                    for value in notice.values():
+                        if value['current_condition'] == 'maintenance needed':
+                            notifications.append(maintenance_data_group(value).split('\n'))
+
+                    for i in range(0, len(notifications), 2):
+                        width = 55
+
+                        noti1 = wrap_data(notifications[i], width=60)
+                        if i + 1 < len(notifications):
+                            noti2 = wrap_data(notifications[i + 1], width=60)
+                        else:
+                            noti2 = []
+
+                        print_in_column(noti1, noti2)
+                        print('-' * (width * 2))
+                        if i == len(notifications) - 1:
                             print('')
+                        else:
+                            print('')
+
 
                     while True:
                         equipment_name_for_maintenance = input('Enter equipment name that need for maintenance (or enter "done" to return back): ')
@@ -238,3 +312,4 @@ def notification():
             print('|⚠️ Please enter numbers only. |')
             print('+------------------------------+\n')
 
+notification()

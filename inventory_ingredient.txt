@@ -46,5 +46,21 @@
         "allergen_info": [
             "sweettt"
         ]
+    },
+    "2": {
+        "category": "Dairy and Non-Dairy Products",
+        "ingredient_name": "a",
+        "ingredient_form": "cream",
+        "batch_number": "2",
+        "unit_measurement": "ml",
+        "quantity_purchased": 4.0,
+        "purchase_date": "12-08-2024",
+        "expiry_date": "31-08-2025",
+        "supplier_name": "eee",
+        "supplier_contact": "123-4567832",
+        "storage_requirement": "freezer",
+        "allergen_info": [
+            "no"
+        ]
     }
 }

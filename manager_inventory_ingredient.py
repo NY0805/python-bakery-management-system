@@ -76,7 +76,7 @@ def validation_date(info, date_format='%d-%m-%Y'):
 
 def ingredient_management():
     print('\n-------------------------------------------------------')
-    print('\t\t\t\t', '', 'INGREDIENT MANAGEMENT')
+    print('\t\t\t\tINGREDIENT MANAGEMENT')
     print('-------------------------------------------------------')
     print('\n1. Add Ingredient')
     print('2. Update Ingredient')
@@ -361,7 +361,7 @@ def ingredient_details():
         storage_requirement = input(f'11. {ingredient_info[10].ljust(max_length + 1)}: ')
         if validation_empty_entries(storage_requirement):
             if validation_alphabet_only(storage_requirement):
-                if storage_requirement in ['dry storage', 'refrigerated', 'freezer']:
+                if storage_requirement in ['dry storage', 'refrigerator', 'freezer']:
                     break
                 else:
                     print('\n+-----------------------------------------------------------------------------------+')

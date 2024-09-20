@@ -7,7 +7,7 @@
         "manufacturer_email": "nctdream@no1.com",
         "warranty": "2 years",
         "report_date": "20-09-2024",
-        "current_condition": "waiting to claim warranty / replace with a new one",
+        "current_condition": "maintenance needed",
         "severity": "medium",
         "maintenance_needed_date": "06-09-2024",
         "last_maintenance_date": "31-05-2023",
