@@ -251,9 +251,9 @@ def recipe_ingredient():
                         print('|⚠️ Please enter a valid unit from the unit given. (Case Sensitive.) |')
                         print('+--------------------------------------------------------------------+')
                 else:
-                    print('\n+----------------------------------------------------------------------------------+')
-                    print('|⚠️ Please enter a valid unit. (Cannot contain any digits and special characters.) |')
-                    print('+----------------------------------------------------------------------------------+')
+                    print('\n+--------------------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
+                    print('+--------------------------------------------------------------------------------------------+')
 
         while True:
             quantity_per_unit = input(f'\n✏️ Enter the quantity per unit of {ingredient_name}: ').strip()
@@ -399,7 +399,7 @@ def recipe_instruction():
 
     print("\n🛠️ Selected equipments 🛠️")
     for index, item in enumerate(equipments, start=1):
-        print(f'{index}. {item}')
+        print(f'{index}. {item.title()}')
 
         if index == len(item) - 1:
             print('')

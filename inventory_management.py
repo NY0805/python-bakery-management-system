@@ -1,4 +1,4 @@
-import baker_inventory_product, baker_inventory_ingredient
+import baker_inventory_product, manager_inventory_ingredient
 
 
 def inventory_services():

@@ -95,5 +95,32 @@
             "hh",
             "hh"
         ]
+    },
+    "applepie": {
+        "recipe_category": "Pastries",
+        "recipe_name": "applepie",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                200.0,
+                "g"
+            ],
+            [
+                "maple syrup",
+                20.0,
+                "ml"
+            ]
+        ],
+        "ingredient_notes": "ffff",
+        "equipment_used": [
+            "convection ovens"
+        ],
+        "baking_temperature": 130,
+        "baking_time": 20,
+        "instructions": [
+            "jj",
+            "hh",
+            "jj"
+        ]
     }
 }

@@ -2,7 +2,6 @@ import json
 from collections import defaultdict
 from datetime import datetime
 import time
-import re
 
 
 def load_data_from_baker_equipment():

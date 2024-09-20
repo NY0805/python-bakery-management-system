@@ -1,14 +1,50 @@
 {
-    "001": {
+    "B001": {
         "category": "Flours and Grains",
-        "ingredient_name": "wheat flour"
+        "ingredient_name": "whole wheat flour",
+        "ingredient_form": "powdered",
+        "batch_number": "B001",
+        "unit_measurement": "g",
+        "quantity_purchased": 900.0,
+        "purchase_date": "05-06-2004",
+        "expiry_date": "26-07-2004",
+        "supplier_name": "cheflum",
+        "supplier_contact": "012-3456789",
+        "storage_requirement": "dry storage",
+        "allergen_info": [
+            "gluten"
+        ]
     },
-    "002": {
+    "B002": {
         "category": "Flours and Grains",
-        "ingredient_name": "white flour"
+        "ingredient_name": "cornmeal",
+        "ingredient_form": "granules",
+        "batch_number": "B002",
+        "unit_measurement": "g",
+        "quantity_purchased": 900.0,
+        "purchase_date": "07-08-2004",
+        "expiry_date": "09-08-2005",
+        "supplier_name": "minionnn",
+        "supplier_contact": "019-2345667",
+        "storage_requirement": "dry storage",
+        "allergen_info": [
+            "no"
+        ]
     },
-    "003": {
+    "B003": {
         "category": "Sweeteners",
-        "ingredient_name": "brown sugar"
+        "ingredient_name": "maple syrup",
+        "ingredient_form": "liquid",
+        "batch_number": "B003",
+        "unit_measurement": "ml",
+        "quantity_purchased": 200.0,
+        "purchase_date": "05-06-2004",
+        "expiry_date": "24-11-2004",
+        "supplier_name": "bananana",
+        "supplier_contact": "012-3456444",
+        "storage_requirement": "refrigerated",
+        "allergen_info": [
+            "sweettt"
+        ]
     }
 }

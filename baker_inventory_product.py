@@ -45,7 +45,7 @@ def validation_alphanum_only(info):
 
 
 def validation_alphabet_only(info):
-    if re.search(r'[A-Za-z ]+', info):
+    if re.fullmatch(r'[A-Za-z ]+', info):
         return True
     else:
         return False
@@ -223,7 +223,7 @@ def product_details():
                 break
             else:
                 print('\n+---------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a date of production. (With format of "day-month-year", "xx-xx-xxxx".) |')
+                print('|⚠️ Please enter a valid date of production. (With format of "day-month-year", "xx-xx-xxxx".) |')
                 print('+---------------------------------------------------------------------------------------+\n')
 
     while True:
@@ -314,9 +314,9 @@ def product_details():
             if validation_list_alphabet_only(allergens):
                 break
             else:
-                print('\n+------------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid product name. (Cannot contain any digits and special characters.) |')
-                print('+------------------------------------------------------------------------------------------+\n')
+                print('\n+--------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
+                print('+--------------------------------------------------------------------------------------+\n')
 
     serial_numbers = []
 

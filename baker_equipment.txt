@@ -1,7 +1,7 @@
 {
     "Convection oven": {
         "category": "Ovens and Baking Appliances",
-        "equipment_name": "Convection ovens",
+        "equipment_name": "Convection oven",
         "purchase_quantity": 1,
         "serial_number": [
             "oven1"
