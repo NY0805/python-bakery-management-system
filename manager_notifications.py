@@ -66,7 +66,7 @@ def notification():
         elif malfunction_report == 0 and maintenance_report == 0:
             print('🎉 Hooray! No notifications yet!')
 
-        print('\n1. Malfunction Report\n2. Maintenance Report')
+        print('\n1. Malfunction Report\n2. Maintenance Report\n3. Back to Manager Privilege')
         try:
             choice_of_report = int(input('\nEnter a number to get more insights: '))
 
@@ -224,6 +224,10 @@ def notification():
 
                     save_info(notice)
 
+            elif choice_of_report == 3:
+                print('\nExiting to Manager Privilege......')
+                return False
+
             else:
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
@@ -234,8 +238,3 @@ def notification():
             print('|⚠️ Please enter numbers only. |')
             print('+------------------------------+\n')
 
-
-
-
-
-notification()
