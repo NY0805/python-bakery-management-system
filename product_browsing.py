@@ -25,7 +25,7 @@ products = load_data_from_products()
 
 def browse_products():
     try:
-        # Display the products to customers
+        # Display the products available to customers
         print('\nAvailable Products:')
         for product in products.values():
             print(f'Product Name: {product['product_name']}')

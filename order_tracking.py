@@ -1,5 +1,4 @@
 import json
-import re
 
 
 # Define the function that loads data from the file
@@ -19,24 +18,25 @@ def load_data_from_tracking():
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
 
+
 def order_tracking():
     orders = load_data_from_tracking()
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
-    order_id = int(input('enter id: '))
+    order_id = input('Enter order ID: ')  # Keep order_id as a string
 
-    for order in orders.values():
-        if order['order_id'] == order_id:
+    # Check whether the order ID exists in the order dictionary.
+    if order_id in orders:
+        order = orders[order_id]  # Get the order details
+        # Display order information
+        print(f"Order ID: {order_id}")
+        print(f"Username: {order['username']}")
+        print(f"Items ordered: {order['items_ordered']}")
+        print(f"Total Price: RM{order['total_price']:.2f}")
+        print(f"Status: {order['status']}")
+    else:
+        print('Order ID cannot be found. Please check and try again.')  # Moved outside the loop
 
-            # Display order information
-            print(f'Order ID: {order['order_id']}')
-            print(f'Username: {order['username']}')
-            print(f'Items ordered: {order['items_ordered']}')
-            print(f'Total Price: {order['total_price']}')
-            print(f'Status: {order['status']}')
-            break
-        else:
-            print('Order ID cannot be found. Please check and try again.')
 
 order_tracking()

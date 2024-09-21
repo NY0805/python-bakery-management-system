@@ -1,6 +1,6 @@
 import json
 import uuid
-from product_menu import product_data  # Make sure this import is correct
+from product_menu import product_data
 
 
 # Function to display the product menu
@@ -51,7 +51,7 @@ def modify_item_quantity(cart):
         cart[product_code]['quantity'] = new_quantity
         print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
     else:
-        print("Product cannot be found in the cart.")
+        print(" ⚠️Product cannot be found in the cart!")
 
 
 # Function to view the cart
@@ -88,14 +88,14 @@ def save_order_to_file(cart, customer_name, order_id, status):
         "status": status
     }
 
-    # Write back to the file
+    # Write back to the file without overwriting existing orders
     with open("customer_order_list.txt", "w") as file:
         json.dump(order_data, file, indent=4)
 
     print("Order has been saved successfully.")
 
 
-# Function to handle payment or cancellation
+
 def make_payment_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty. Please add items before proceeding to checkout.")
@@ -108,14 +108,14 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
     choice = input("Please select your option: ").strip()
     if choice == '1':
         print("\nPayment completed. Thank you for your purchase!")
-        save_order_to_file(cart, customer_name, cart_id, "Payment Complete")  # Save the order with 'Payment Complete' status
+        save_order_to_file(cart, customer_name, cart_id, "Payment Complete")
         cart.clear()  # Clear the cart after payment
     elif choice == '2':
         print("\nYour order has been canceled.")
-        save_order_to_file(cart, customer_name, cart_id, "Canceled")  # Save the order with 'Canceled' status
+        save_order_to_file(cart, customer_name, cart_id, "Canceled")
         cart.clear()  # Clear the cart after cancellation
     else:
-        print("Invalid option. Returning to the main menu.")
+        print(" |⚠️Invalid option!Returning to the main menu.|")
 
 
 # Main shopping cart function
@@ -154,10 +154,14 @@ def shopping_cart():
             print("Thank you for using shopping cart. Goodbye!")
             break
         else:
-            print("Invalid option. Please try again.")
+            print("|⚠️Invalid option. Please try again.|")
 
 
 # Run the cart management program
 shopping_cart()
+
+
+
+
 
 
