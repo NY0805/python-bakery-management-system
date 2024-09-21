@@ -1,5 +1,7 @@
 import json
 
+import manager_inventory_ingredient
+
 
 def load_data_from_product():
     try:
@@ -51,33 +53,6 @@ def save_info_product(product):
 
 product = load_data_from_product()
 product_inventory = load_data_from_manager_product_inventory()
-
-
-def inventory_control_ingredient():
-    while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t', '', 'INGREDIENT MANAGEMENT')
-        print('-----------------------------------------------')
-        print('1. Add Ingredients\n2. Remove Ingredients\n3. Update Ingredients\n4. Back to Main Inventory Management⛔🔙')
-
-        ingredient_control = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')
-        if ingredient_control == '1':
-            print('add')
-
-        elif ingredient_control == '2':
-            print('remove')
-
-        elif ingredient_control == '3':
-            print('update')
-
-        elif ingredient_control == '4':
-            print('\nExiting to Main Inventory Management page......')
-            break
-
-        else:
-            print('\n+--------------------------------------+')
-            print('|⚠️ Invalid input. Please enter again. |')
-            print('+--------------------------------------+')
 
 
 def inventory_control_product():
@@ -341,7 +316,7 @@ def main_control():
 
         control = input('\nSelect the inventory that you want to manage(1, 2, 3, 4):\n>>> ')
         if control == '1':
-            inventory_control_ingredient()
+            manager_inventory_ingredient.ingredient_management()
 
         elif control == '2':
             inventory_control_product()
@@ -356,3 +331,4 @@ def main_control():
             print('+--------------------------------------+')
 
 
+#main_control()

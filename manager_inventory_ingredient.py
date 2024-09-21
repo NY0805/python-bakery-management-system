@@ -33,7 +33,7 @@ def validation_empty_entries(info):
     if info:
         return True
     else:
-        print('\n❗Please enter something...\n')
+        print('\n❗Please enter something...')
         return False
 
 
@@ -74,53 +74,51 @@ def validation_date(info, date_format='%d-%m-%Y'):
         return False
 
 
-def ingredient_management():
-    print('\n-------------------------------------------------------')
-    print('\t\t\t\tINGREDIENT MANAGEMENT')
-    print('-------------------------------------------------------')
-    print('\n1. Add Ingredient')
-    print('2. Update Ingredient')
-    print('3. Remove Ingredient')
-    print('4. Back to Previous Page')
+ingredient_data = load_data_from_inventory_ingredient()
 
+
+def ingredient_management():
     while True:
-        option_product_management = input('\nPlease choose a service:'
-                                          '\n>>> ')
+        print('\n-------------------------------------------------------')
+        print('\t\t\t\tINGREDIENT MANAGEMENT')
+        print('-------------------------------------------------------')
+        print('1. Add Ingredients\n2. Remove Ingredients\n3. Update Ingredients\n4. Back to Main Inventory Management⛔🔙')
+
+        option_product_management = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')
         if validation_empty_entries(option_product_management):
             if option_product_management not in ['1', '2', '3', '4']:
                 print('\n+--------------------------------+')
                 print('|⚠️ Please enter a valid number. |')
-                print('+--------------------------------+\n')
+                print('+--------------------------------+')
             else:
                 if option_product_management == '1':
-                    ingredient_details()
-                    break
+                    add_ingredient()
                 elif option_product_management == '2':
                     pass
                 elif option_product_management == '3':
-                    pass
+                    update_ingredient()
                 elif option_product_management == '4':
-                    print('\nExiting to the previous page...')
+                    print('\nExiting to Main Inventory Management page...')
                     break
 
 
 def ingredient_categories():
-    print('\n-----------------------------------------------')
-    print('\t\tMAIN CATEGORIES OF INGREDIENTS')
-    print('-----------------------------------------------')
-    print('1. Flours and Grains')
-    print('2. Sweeteners')
-    print('3. Fats and Oils')
-    print('4. Dairy and Non-Dairy Products')
-    print('5. Leavening Agents')
-    print('6. Spices and Flavourings')
-    print('6. Fillings and Toppings')
-    print('7. Fruits and Vegetables')
-    print('8. Preservatives and Stabilizers')
-    print('9. Others')
-    print('10. Back to Previous Page')
-
     while True:
+        print('\n-----------------------------------------------')
+        print('\t\tMAIN CATEGORIES OF INGREDIENTS')
+        print('-----------------------------------------------')
+        print('1. Flours and Grains')
+        print('2. Sweeteners')
+        print('3. Fats and Oils')
+        print('4. Dairy and Non-Dairy Products')
+        print('5. Leavening Agents')
+        print('6. Spices and Flavourings')
+        print('6. Fillings and Toppings')
+        print('7. Fruits and Vegetables')
+        print('8. Preservatives and Stabilizers')
+        print('9. Others')
+        print('10. Back to Ingredient Management page')
+
         option_product_categories = input('\nPlease input the category:'
                                           '\n>>> ')
         if validation_empty_entries(option_product_categories):
@@ -131,9 +129,8 @@ def ingredient_categories():
                 continue
             else:
                 if option_product_categories == '10':
-                    print('\nGoing back to the previous page......')
+                    print('\nGoing back to Ingredient Management page......')
                     ingredient_management()
-                    break
                 elif option_product_categories == '1':
                     category = 'Flours and Grains'
                     break
@@ -155,8 +152,7 @@ def ingredient_categories():
     return category
 
 
-def ingredient_details():
-    ingredient_data = load_data_from_inventory_ingredient()
+def add_ingredient():
 
     category = ingredient_categories()
 
@@ -368,22 +364,15 @@ def ingredient_details():
                     print('|⚠️ Please enter a valid storage requirement from the list given. (Case Sensitive.) |')
                     print('+-----------------------------------------------------------------------------------+\n')
             else:
-                print(
-                    '\n+---------------------------------------------------------------------------------------------------+')
-                print(
-                    '|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
-                print(
-                    '+-------------------------------------------------------------------------------------------------+\n')
+                print('\n+---------------------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
+                print('+-------------------------------------------------------------------------------------------------+\n')
 
     while True:
-        print(
-            '\n+---------------------------------------------------------------------------------------------------------+')
-        print(
-            '|💡 If there is more than one data item, separate them with a space.                                      |')
-        print(
-            '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
-        print(
-            '+---------------------------------------------------------------------------------------------------------+')
+        print('\n+---------------------------------------------------------------------------------------------------------+')
+        print('|💡 If there is more than one data item, separate them with a space.                                      |')
+        print('|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
+        print('+---------------------------------------------------------------------------------------------------------+')
         allergens = input(f'12. {ingredient_info[11].ljust(max_length + 1)}: ').split()
         if validation_empty_entries(allergens):
             if validation_list_alphabet_only(allergens):
@@ -419,7 +408,7 @@ def continue_adding():
             add_more = input('\nInformation saved. Continue adding? (y=yes, n=no)'
                              '\n>>> ')
             if add_more == 'y':
-                ingredient_details()
+                add_ingredient()
                 break
             elif add_more == 'n':
                 print('\nStop adding... Exiting to Ingredient Management page......')
@@ -435,5 +424,46 @@ def continue_adding():
             print('+--------------------------------------+')
 
 
+def update_ingredient():
+    while True:
+        print('\n-----------------------------------------------')
+        print('\t\t\t\tINGREDIENT LIST')
+        print('-----------------------------------------------')
+        for index, (key, value) in enumerate(ingredient_data.items(), start=1):
+            print(f'{index}. {value["ingredient_name"]}')
+        print(f'{len(ingredient_data) + 1}. cancel')
 
-ingredient_management()
+        try:
+            ingredient_to_update = int(input('\nEnter the ingredient\'s index number to update: '))
+            if ingredient_to_update == len(ingredient_data) + 1:
+                print('\nCancelling. Exiting to Ingredient Management page......')
+                break
+
+            elif 1 <= ingredient_to_update <= len(ingredient_data):
+                selected_ingredient = list(ingredient_data.keys())[ingredient_to_update - 1]
+                while True:
+                    print('\n-----------------------------------------------')
+                    print(f'\t\t\t\t {ingredient_data[selected_ingredient]["ingredient_name"].upper()}')
+                    print('-----------------------------------------------')
+
+                    for ingredient_data_key, ingredient_data_value in (ingredient_data[selected_ingredient].items()):
+                        print(f'{ingredient_data_key.replace("_", " ").title():<20}: {ingredient_data_value}')
+
+                    attribute_of_ingredient_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                    if attribute_of_ingredient_data in ingredient_data[selected_ingredient]:
+                        while True:
+                            try:
+                                new_value = input(f'\nEnter new {attribute_of_ingredient_data}: ')
+
+                                if attribute_of_ingredient_data == 'category':
+                                    if new_value not in
+                                        continue
+
+        except ValueError:
+            print('\n+--------------------------+')
+            print('|⚠️ Please enter a number. |')
+            print('+--------------------------+')
+
+
+update_ingredient()
+#ingredient_management()
