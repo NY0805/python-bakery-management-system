@@ -242,7 +242,7 @@ def inventory_control_product():
                                 print('-----------------------------------------------')
 
                                 for product_inventory_key, product_inventory_value in (product_inventory[selected_product].items()):
-                                    print(f'{product_inventory_key.replace("_", " ").title()}: {product_inventory_value}')
+                                    print(f'{product_inventory_key}: {product_inventory_value}')
 
                                 attribute_of_product_inventory = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                                 if attribute_of_product_inventory in product_inventory[selected_product]:
