@@ -157,7 +157,7 @@ def shopping_cart():
             print("|⚠️Invalid option. Please try again.|")
 
 
-# Run the cart management program
+# Call the cart management function
 shopping_cart()
 
 

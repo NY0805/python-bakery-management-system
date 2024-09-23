@@ -56,26 +56,25 @@ def submit_review():
     print('-----------------------------------------------')
 
     # Get username and review details
-    username = input("Enter your username: ")
-    product_name = input("Enter the product name: ")
-    review_text = input("Enter your review: ")
-    rating = input("Rate your product (1-5): ")
+    username = input('Enter your username: ')
+    product_name = input('Enter the product name: ')
+    review_text = input('Enter your review: ')
+    rating = input('Rate your product (1-5): ')
 
     # Validate rating input
     while not validation_rating(rating):
-        print("|⚠️Invalid rating. Please enter a number between 1 and 5.|")
-        rating = input("Rate your product (1-5): ")
+        print('|⚠️Invalid rating. Please enter a number between 1 and 5!|')
 
     # Create the new review dictionary
     review = {
-        "username": username,
-        "product_name": product_name,
-        "review": review_text,
-        "rating": int(rating)
+        'username': username,
+        'product_name': product_name,
+        'review': review_text,
+        'rating': int(rating)
     }
 
     # Save the new review
     save_reviews(review)
 
-    print("*****Thank you for your feedback!*****")
-    print("Your review has been successfully received.")
+    print('*****Thank you for your feedback!*****')
+    print('Your review has been successfully received.')

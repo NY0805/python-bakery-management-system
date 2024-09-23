@@ -1,3 +1,5 @@
+import json
+
 # Function to update purchase history
 # Constants for points and rewards in RM
 BASE_POINTS_PER_RM = 10  # Points earned per RM spent
@@ -8,11 +10,29 @@ FREE_SHIPPING_THRESHOLD = 25000  # Points needed for free shipping
 DISCOUNT_PURCHASE_COUNT = 5  # Every 5 purchases earn a discount
 FREE_ITEM_THRESHOLD = 100  # Total spending amount needed for a free item
 
-def calculate_points(transaction_value):
-    """Calculate points earned based on the transaction value."""
+
+def load_customer_loyalty_rewards():
+    try:
+        file = open('baker_product_keeping.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
+
+
+def calculate_points(transaction_value):  # Calculate points earned based on the transaction history
     points_earned = transaction_value * BASE_POINTS_PER_DOLLAR
     print(f"Points earned for RM{transaction_value} purchase: {points_earned}")
     return points_earned
+
 
 def update_loyalty_status(points_balance):
     """Update the loyalty status based on points balance."""
@@ -25,11 +45,13 @@ def update_loyalty_status(points_balance):
     else:
         return "Standard"
 
+
 def check_free_shipping(points_balance):
     """Check if the customer is eligible for free shipping."""
     if points_balance >= FREE_SHIPPING_THRESHOLD:
         print("You are eligible for free shipping!")
         # Implement the logic for sending a reward (e.g., send_reward_coupon())
+
 
 def update_purchase_history(username, purchase_amount):
     """Update customer's purchase history and calculate rewards."""
@@ -55,6 +77,7 @@ def update_purchase_history(username, purchase_amount):
     # Update customer data and save it
     customers[username] = customer
     save_customer_data(customers)
+
 
 def view_loyalty_rewards():
     """Allow customers to view their loyalty rewards."""

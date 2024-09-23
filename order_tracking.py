@@ -30,13 +30,13 @@ def order_tracking():
     if order_id in orders:
         order = orders[order_id]  # Get the order details
         # Display order information
-        print(f"Order ID: {order_id}")
-        print(f"Username: {order['username']}")
-        print(f"Items ordered: {order['items_ordered']}")
-        print(f"Total Price: RM{order['total_price']:.2f}")
-        print(f"Status: {order['status']}")
+        print(f'Order ID: {order_id}')
+        print(f'Username: {order['username']}')
+        print(f'Items ordered: {order['items_ordered']}')
+        print(f'Total Price: RM{order['total_price']:.2f}')
+        print(f'Status: {order['status']}')
     else:
-        print('Order ID cannot be found. Please check and try again.')  # Moved outside the loop
+        print('|⚠️Order ID cannot be found. Please check and try again!|')  # Moved outside the loop
 
 
 order_tracking()
