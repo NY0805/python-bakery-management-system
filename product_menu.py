@@ -24,13 +24,21 @@ product_data = load_data_from_product()
 
 
 # Format the data retrieve from inventory product.txt
-def format_product_data(product):
+def format_product_data(product, description):
+    with open(description, 'r') as file:
+        info = json.load(file)
+        for details in info.values():
+            if product['product_name'] == details['product_name']:
+                description_info = details['description']
+                break
+            else:
+                description_info = '-'
     return (
         f"Product Name: {product['product_name'].title()}\n"
-        f"Product Code: {product['product_code'][0]}\n"
+        f"Product Code: {product['product_code']}\n"
         f"Expiry Date: {product['expiry_date']}\n"
         f"Allergen: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-        f"Description: {product['description']}"
+        f"Description: {description_info}"
     )
 
 
@@ -60,8 +68,9 @@ def menu():
     print("Explore our menu, and don't forget to check out our unique creations in the others category for something special!")
 
     category_groups = defaultdict(list)
+    descriptions = 'manager_product_inventory.txt'
     for value in product_data.values():
-        category_groups[value['category']].append(format_product_data(value).split('\n'))
+        category_groups[value['category']].append(format_product_data(value, descriptions).split('\n'))
 
     for category, products in category_groups.items():
         width = 70

@@ -104,30 +104,38 @@ def inventory_control_product():
                                         serial_number = value['serial_number']
 
                                         if add_stock > len(serial_number):
-                                            print('\n+---------------------------------------------------------------------------------------+')
-                                            print(f'|⚠️ Not enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}. |')
-                                            print('+---------------------------------------------------------------------------------------+')
+                                            print(f'\n⚠️ Not enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}.')
                                             add_stock = 0
                                             break
 
                                         if batch_number in product_inventory:
-                                            stock = product_inventory[batch_number]['stock'] + add_stock
+                                            stock = int(product_inventory[batch_number]['stock']) + add_stock
                                         else:
                                             stock = add_stock
 
-                                        product_description = input('\nAdd product description for menu display:\n>>> ')
+                                        for inventory_key, inventory_value in product_inventory.items():
+                                            if 'description' in inventory_value:
+                                                if inventory_value['description'] is None:
+                                                    product_description = input('\nAdd product description for menu display:\n>>> ')
 
-                                        product_inventory[batch_number] = {
-                                            'product_name': chosen_product,
-                                            'stock': stock,
-                                            'description': product_description
-                                        }
+                                                    product_inventory[batch_number] = {
+                                                        'product_name': chosen_product,
+                                                        'stock': stock,
+                                                        'description': product_description
+                                                    }
+
+                                                else:
+                                                    product_inventory[batch_number] = {
+                                                        'product_name': chosen_product,
+                                                        'stock': stock,
+                                                        'description': inventory_value['description']
+                                                    }
 
                                         quantity = len(serial_number) - stock
                                         if quantity <= 0:
                                             del product[batch_number]
                                         else:
-                                            del serial_number[0: stock]
+                                            del serial_number[0: quantity]
 
                                         save_info_product(product)
                                         save_info_product_inventory(product_inventory)
@@ -331,4 +339,4 @@ def main_control():
             print('+--------------------------------------+')
 
 
-#main_control()
+main_control()

@@ -1,17 +1,32 @@
 {
     "009": {
         "product_name": "tiramisu",
-        "stock": "2",
-        "description": "pppp"
+        "stock": 2,
+        "description": "cccc"
     },
     "006": {
         "product_name": "gingerbread",
         "stock": 2,
-        "description": "wwww"
+        "description": "ssss"
     },
     "001": {
         "product_name": "banana bread",
         "stock": 1,
         "description": "yyyy"
+    },
+    "002": {
+        "product_name": "red velvet",
+        "stock": 1,
+        "description": "qqqq"
+    },
+    "003": {
+        "product_name": "apple pie",
+        "stock": 1,
+        "description": "ffff"
+    },
+    "004": {
+        "product_name": "cheezy bun",
+        "stock": 1,
+        "description": "cccc"
     }
 }
