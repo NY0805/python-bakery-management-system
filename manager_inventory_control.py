@@ -113,29 +113,19 @@ def inventory_control_product():
                                         else:
                                             stock = add_stock
 
-                                        for inventory_key, inventory_value in product_inventory.items():
-                                            if 'description' in inventory_value:
-                                                if inventory_value['description'] is None:
-                                                    product_description = input('\nAdd product description for menu display:\n>>> ')
+                                        product_description = input('Add product description for menu display:\n>>> ')
 
-                                                    product_inventory[batch_number] = {
-                                                        'product_name': chosen_product,
-                                                        'stock': stock,
-                                                        'description': product_description
-                                                    }
+                                        product_inventory[batch_number] = {
+                                            'product_name': chosen_product,
+                                            'stock': stock,
+                                            'description': product_description
+                                        }
 
-                                                else:
-                                                    product_inventory[batch_number] = {
-                                                        'product_name': chosen_product,
-                                                        'stock': stock,
-                                                        'description': inventory_value['description']
-                                                    }
-
-                                        quantity = len(serial_number) - stock
+                                        quantity = len(serial_number) - add_stock
                                         if quantity <= 0:
                                             del product[batch_number]
                                         else:
-                                            del serial_number[0: quantity]
+                                            del serial_number[0: add_stock]
 
                                         save_info_product(product)
                                         save_info_product_inventory(product_inventory)
