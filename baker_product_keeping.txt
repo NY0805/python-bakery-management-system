@@ -98,6 +98,8 @@
         "product_name": "tiramisu",
         "product_code": "CK858",
         "serial_number": [
+            "38625",
+            "29908",
             "29393",
             "29393"
         ],

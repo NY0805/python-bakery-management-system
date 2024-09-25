@@ -24,21 +24,23 @@ product_data = load_data_from_product()
 
 
 # Format the data retrieve from inventory product.txt
-def format_product_data(product, description):
-    with open(description, 'r') as file:
+def format_product_data(product, details):
+    with open(details, 'r') as file:
         info = json.load(file)
-        for details in info.values():
-            if product['product_name'] == details['product_name']:
-                description_info = details['description']
+        for detail in info.values():
+            if product['product_name'] == detail['product_name']:
+                description_info = detail['description']
+                price = detail['price']
                 break
             else:
                 description_info = '-'
+                price = '-'
     return (
-        f"Product Name: {product['product_name'].title()}\n"
-        f"Product Code: {product['product_code']}\n"
-        f"Expiry Date: {product['expiry_date']}\n"
-        f"Allergen: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-        f"Description: {description_info}"
+        f"{product['product_name'].title():<50}{price}\n"
+        f"{'Product Code':<10}: {product['product_code']}\n"
+        f"{'Best Before':<10}: {product['expiry_date']}\n"
+        f"{'Allergen':<10}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
+        f"{'Description':<10}: {description_info}"
     )
 
 
@@ -51,7 +53,7 @@ def wrap_data(formatted_product_data, width=60):
 
 
 # Format to print data retrieve from category_group dictionary side by side
-def print_in_column(info1, info2, width=60):
+def print_in_column(info1, info2, width=65):
     max_line = len(info1)
     if len(info2) > max_line:
         max_line = len(info2)
@@ -63,24 +65,23 @@ def print_in_column(info1, info2, width=60):
 
 
 def menu():
-    print('\n* Morning Glory Bakery Menu *\n')
-    print('We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
-    print("Explore our menu, and don't forget to check out our unique creations in the others category for something special!")
+    print('\n'+'•'*55, ' Morning Glory Bakery Menu ', '•'*55, '\n')
+    print('✨ We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
+    print("✨ Explore our menu, and don't forget to check out our unique creations in the 'Others' category for something special!\n")
 
     category_groups = defaultdict(list)
-    descriptions = 'manager_product_inventory.txt'
+    product_details = 'manager_product_inventory.txt'
     for value in product_data.values():
-        category_groups[value['category']].append(format_product_data(value, descriptions).split('\n'))
+        category_groups[value['category']].append(format_product_data(value, product_details).split('\n'))
 
     for category, products in category_groups.items():
-        width = 70
-        print('-' * (width * 2))
+
         print(f'\n📍 {category} 📍\n')
 
         for i in range(0, len(products), 2):
-            product1 = wrap_data(products[i], width=60)
+            product1 = wrap_data(products[i], width=65)
             if i + 1 < len(products):
-                product2 = wrap_data(products[i + 1], width=60)
+                product2 = wrap_data(products[i + 1], width=65)
             else:
                 product2 = []
 
@@ -89,7 +90,6 @@ def menu():
             if i == len(products) - 1:
                 print('')
             else:
-                print('')
                 print('')
 
 

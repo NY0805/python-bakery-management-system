@@ -1,7 +1,38 @@
 {
     "009": {
         "product_name": "tiramisu",
+        "stock": 1,
+        "price": "RM 8.50",
+        "description": "Coffee-soaked ladyfingers with creamy mascarpone and blueberry toppings"
+    },
+    "004": {
+        "product_name": "cheezy bun",
         "stock": 2,
-        "description": "tttt"
+        "price": "RM 5.00",
+        "description": "Extra gooey cheese for cheese aficionado"
+    },
+    "001": {
+        "product_name": "banana bread",
+        "stock": 1,
+        "price": "RM 4.50",
+        "description": "Rich in vitamin A and perfect for healthy treat"
+    },
+    "002": {
+        "product_name": "red velvet",
+        "stock": 1,
+        "price": "RM 10.50",
+        "description": "Moist cake full of cream cheese frosting"
+    },
+    "003": {
+        "product_name": "apple pie",
+        "stock": 1,
+        "price": "RM 5.00",
+        "description": "A mouthwatering dessert with tender filling covered by crispy crust"
+    },
+    "006": {
+        "product_name": "gingerbread",
+        "stock": 2,
+        "price": "RM 2.50",
+        "description": "Old-fashioned cookies with cute and creative appearance"
     }
 }

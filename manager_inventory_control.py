@@ -113,11 +113,33 @@ def inventory_control_product():
                                         else:
                                             stock = add_stock
 
-                                        product_description = input('Add product description for menu display:\n>>> ')
+                                        if 'price' not in product_inventory.get(batch_number, {}):
+                                            while True:
+                                                try:
+                                                    price = float(input('Price per unit: RM '))
+                                                    if price < 0:
+                                                        print('\n+-----------------------------------+')
+                                                        print('|⚠️ Please enter a positive number. |')
+                                                        print('+-----------------------------------+\n')
+                                                    price = f'RM {price:.2f}'
+                                                    break
+
+                                                except ValueError:
+                                                    print('\n+------------------------------+')
+                                                    print('|⚠️ Please enter numbers only. |')
+                                                    print('+------------------------------+\n')
+                                        else:
+                                            price = product_inventory[batch_number]['price']
+
+                                        if 'description' not in product_inventory.get(batch_number, {}):
+                                            product_description = input('Add product description for menu display:\n>>> ')
+                                        else:
+                                            product_description = product_inventory[batch_number]['description']
 
                                         product_inventory[batch_number] = {
                                             'product_name': chosen_product,
                                             'stock': stock,
+                                            'price': price,
                                             'description': product_description
                                         }
 
