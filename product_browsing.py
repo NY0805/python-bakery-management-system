@@ -1,4 +1,5 @@
 import json
+import re
 
 
 # Define the function that loads data from the file
@@ -36,6 +37,6 @@ def browse_products():
             print(f'Expiry Date: {product['expiry_date']}\n')
 
     except FileNotFoundError:
-        print('|⚠️Product data cannot be found.|')
+        print('Product data cannot be found.')
 
 

@@ -95,7 +95,6 @@ def save_order_to_file(cart, customer_name, order_id, status):
     print("Order has been saved successfully.")
 
 
-
 def make_payment_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty. Please add items before proceeding to checkout.")
@@ -159,9 +158,3 @@ def shopping_cart():
 
 # Call the cart management function
 shopping_cart()
-
-
-
-
-
-

@@ -83,6 +83,6 @@ def order_management():
                     print(f'\nStatus of order id {order_id_to_update} is updated to "{status}".\n')
                     break
 
-
+order_management()
 
 
