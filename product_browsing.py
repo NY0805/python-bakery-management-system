@@ -1,5 +1,4 @@
 import json
-import re
 
 
 # Define the function that loads data from the file
@@ -30,13 +29,17 @@ def browse_products():
     try:
         # Display the products available to customers
         print('\nAvailable Products:')
-        for product in products.values():
-            print(f'Product Name: {product['product_name']}')
-            print(f'Product Code: {product['product_code']}')
-            print(f'Allergen: {product['allergens']}')
-            print(f'Expiry Date: {product['expiry_date']}\n')
+        for product_code, product in products.items():  # Get the product code from the dictionary key
+            print(f'Product Code: {product_code}')  # Display the product code from the key
+            print(f'Product Name: {product["product_name"]}')
+            print(f'Stock: {product["stock"]}')
+            print(f'Price: {product["price"]}')
+            print(f'Description: {product["description"]}\n')
 
     except FileNotFoundError:
-        print('Product data cannot be found.')
+        print('|⚠️Product data cannot be found.|')
+
+browse_products()
+
 
 
