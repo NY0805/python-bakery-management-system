@@ -22,9 +22,9 @@ def load_data_from_inventory_ingredient():
 
 
 # Define the function that saves information to the file
-def save_info(ingredient_info):
+def save_info(ingredient_data):
     file = open('inventory_ingredient.txt', 'w')  # open the file to write
-    json.dump(ingredient_info, file,
+    json.dump(ingredient_data, file,
               indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
@@ -85,6 +85,7 @@ ingredient_data = load_data_from_inventory_ingredient()
 
 
 def ingredient_management():
+
     while True:
         print('\n-------------------------------------------------------')
         print('\t\t\t\tINGREDIENT MANAGEMENT')
@@ -449,6 +450,7 @@ def update_ingredient():
             elif 1 <= ingredient_to_update <= len(ingredient_data):
                 selected_ingredient = list(ingredient_data.keys())[ingredient_to_update - 1]
                 while True:
+                    print('')
                     printed_centered(ingredient_data[selected_ingredient]["ingredient_name"].upper())
 
                     for ingredient_data_key, ingredient_data_value in (ingredient_data[selected_ingredient].items()):
@@ -756,17 +758,17 @@ def update_ingredient():
                                     print('+------------------------------+')
 
                         elif attribute_of_ingredient_data == 'cancel':
-                            print('Cancelling. Exiting to Ingredient List......')
+                            print('\nCancelling. Exiting to Ingredient List......')
                             break
 
                         else:
                             print('\n+--------------------------------------+')
                             print('|⚠️ Invalid input. Please enter again. |')
-                            print('+--------------------------------------+')
+                            print('+--------------------------------------+\n')
                             continue
 
-                        save_info(ingredient_data)
-                        print(f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
+                    print(f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
+                    save_info(ingredient_data)
 
         except ValueError:
             print('\n+--------------------------+')
