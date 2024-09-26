@@ -23,6 +23,9 @@ def load_data_from_product():
 product_data = load_data_from_product()
 
 
+
+
+
 # Format the data retrieve from inventory product.txt
 def format_product_data(product, details):
     with open(details, 'r') as file:
@@ -36,11 +39,11 @@ def format_product_data(product, details):
                 description_info = '-'
                 price = '-'
     return (
-        f"{product['product_name'].title():<50}{price}\n"
-        f"{'Product Code':<10}: {product['product_code']}\n"
+        f"{product['product_code']} - {product['product_name'].title():<45}{price}\n"
         f"{'Best Before':<10}: {product['expiry_date']}\n"
         f"{'Allergen':<10}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-        f"{'Description':<10}: {description_info}"
+        f""
+        f"{description_info}"
     )
 
 
