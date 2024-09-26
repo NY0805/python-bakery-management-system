@@ -1,26 +1,24 @@
 import json
 
 
-def load_reviews():
+def load_review():
     try:
-        # Open the file and read the content
-        with open('customer_reviews.txt', 'r') as file:
-            content = file.read().strip()
-
-        if content:  # Check if the file is not empty
+        file = open('customer_reviews.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
             try:
-                return json.loads(content)  # Parse the content as JSON
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
-                print("Error loading review data. The file format might be incorrect.")
-                return []  # Return an empty list if parsing fails
+                return {}  # return empty dictionary if the content does not parse successfully
         else:
-            return []  # Return an empty list if the file is empty
-
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return []  # Return an empty list if the file does not exist
+        return {}  # return empty dictionary if the file does not exist
 
 
-# Save customer's review to txt file
+# Save customers' reviews to a txt file
 def save_reviews(new_review):
     try:
         # Try to read the existing reviews
@@ -55,15 +53,16 @@ def submit_review():
     print('\t\t\t', '', 'PRODUCT REVIEW')
     print('-----------------------------------------------')
 
-    # Get username and review details
+    # Collect customer usernames and their reviews
     username = input('Enter your username: ')
     product_name = input('Enter the product name: ')
     review_text = input('Enter your review: ')
     rating = input('Rate your product (1-5): ')
 
-    # Validate rating input
-    while not validation_rating(rating):
+    # Validate rating input once
+    if not validation_rating(rating):
         print('|⚠️Invalid rating. Please enter a number between 1 and 5!|')
+        rating = input('Rate your product (1-5): ')
 
     # Create the new review dictionary
     review = {
@@ -75,6 +74,9 @@ def submit_review():
 
     # Save the new review
     save_reviews(review)
-
+    print()
     print('*****Thank you for your feedback!*****')
     print('Your review has been successfully received.')
+
+
+submit_review()
