@@ -46,9 +46,99 @@
     "9026863080": {
         "username": "Ashley",
         "items_ordered": [
-            "bagel x2"
+            "Bagel x2"
         ],
         "total_price": 24.0,
+        "status": "Processing"
+    },
+    "3716950492": {
+        "username": "leo_tiger",
+        "items_ordered": [
+            "Bread x3",
+            "Pastry x1"
+        ],
+        "total_price": 14.5,
+        "status": "Processing"
+    },
+    "2507494821": {
+        "username": "julia_b",
+        "items_ordered": [
+            "Muffin x2",
+            "Bagel x1"
+        ],
+        "total_price": 9.0,
+        "status": "Delivered"
+    },
+    "9648523077": {
+        "username": "sam_93",
+        "items_ordered": [
+            "Cake x1",
+            "Bread x2"
+        ],
+        "total_price": 11.0,
+        "status": "Payment Complete"
+    },
+    "2789401753": {
+        "username": "violet23",
+        "items_ordered": [
+            "Pastry x3",
+            "Bagel x2"
+        ],
+        "total_price": 18.0,
+        "status": "Processing"
+    },
+    "5194803762": {
+        "username": "johnny_br",
+        "items_ordered": [
+            "Cake x1",
+            "Biscuit x4"
+        ],
+        "total_price": 12.25,
+        "status": "Delivered"
+    },
+    "3852910374": {
+        "username": "ellie12",
+        "items_ordered": [
+            "Pastry x1",
+            "Muffin x2"
+        ],
+        "total_price": 7.5,
+        "status": "Payment Complete"
+    },
+    "7745826904": {
+        "username": "kyle_m",
+        "items_ordered": [
+            "Bread x1",
+            "Biscuit x5"
+        ],
+        "total_price": 6.5,
+        "status": "Processing"
+    },
+    "9856204139": {
+        "username": "melody_r",
+        "items_ordered": [
+            "Bagel x3",
+            "Cake x1"
+        ],
+        "total_price": 16.0,
+        "status": "Delivered"
+    },
+    "5619472380": {
+        "username": "harry_p",
+        "items_ordered": [
+            "Pastry x2",
+            "Bread x1"
+        ],
+        "total_price": 8.75,
+        "status": "Payment Complete"
+    },
+    "4096813270": {
+        "username": "emily_w",
+        "items_ordered": [
+            "Muffin x3",
+            "Cake x2"
+        ],
+        "total_price": 20.0,
         "status": "Processing"
     }
 }
