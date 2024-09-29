@@ -1,0 +1,38 @@
+{
+    "009": {
+        "Product Name": "tiramisu",
+        "Stock": 1,
+        "Price": "RM 8.50",
+        "Discount": "0%"
+    },
+    "004": {
+        "Product Name": "cheezy bun",
+        "Stock": 2,
+        "Price": "RM 5.00",
+        "Discount": "5%"
+    },
+    "001": {
+        "Product Name": "banana bread",
+        "Stock": 1,
+        "Price": "RM 4.50",
+        "Discount": "15%"
+    },
+    "002": {
+        "Product Name": "red velvet",
+        "Stock": 1,
+        "Price": "RM 10.50",
+        "Discount": "8%"
+    },
+    "003": {
+        "Product Name": "apple pie",
+        "Stock": 1,
+        "Price": "RM 5.00",
+        "Discount": "12%"
+    },
+    "006": {
+        "Product Name": "gingerbread",
+        "Stock": 2,
+        "Price": "RM 2.50",
+        "Discount": "20%"
+    }
+}

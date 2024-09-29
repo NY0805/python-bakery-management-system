@@ -13,7 +13,7 @@ FREE_ITEM_THRESHOLD = 100  # Total spending amount needed for a free item
 
 def load_customer_loyalty_rewards():
     try:
-        file = open('baker_product_keeping.txt', 'r')  # open the file and read
+        file = open('.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -34,8 +34,7 @@ def calculate_points(transaction_value):  # Calculate points earned based on the
     return points_earned
 
 
-def update_loyalty_status(points_balance):
-    """Update the loyalty status based on points balance."""
+def update_loyalty_status(points_balance):  # Update the loyalty status based on points balance
     if points_balance >= GOLD_REQUIREMENT:
         return "Gold"
     elif points_balance >= SILVER_REQUIREMENT:
@@ -46,15 +45,13 @@ def update_loyalty_status(points_balance):
         return "Standard"
 
 
-def check_free_shipping(points_balance):
-    """Check if the customer is eligible for free shipping."""
+def check_free_shipping(points_balance):  # Check if the customer is eligible for free shipping
     if points_balance >= FREE_SHIPPING_THRESHOLD:
         print("You are eligible for free shipping!")
         # Implement the logic for sending a reward (e.g., send_reward_coupon())
 
 
-def update_purchase_history(username, purchase_amount):
-    """Update customer's purchase history and calculate rewards."""
+def update_purchase_history(username, purchase_amount):  # Update customer's purchase history and calculate rewards
     customers = load_customer_data()
 
     if username in customers:
@@ -79,8 +76,7 @@ def update_purchase_history(username, purchase_amount):
     save_customer_data(customers)
 
 
-def view_loyalty_rewards():
-    """Allow customers to view their loyalty rewards."""
+def view_loyalty_rewards():  # Allow customers to check their loyalty rewards
     username = input("Enter your username: ")
     customers = load_customer_data()
     if username in customers:

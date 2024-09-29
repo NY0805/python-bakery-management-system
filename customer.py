@@ -291,6 +291,7 @@ def save_customer_data(data):
     with open("customers.json", "w") as file:
         json.dump(data, file)
 
+
 def customer_menu():
     while True:
         print("WELCOME TO MORNING GLORY BAKERY!")
@@ -302,7 +303,7 @@ def customer_menu():
         print("6. Submit Review")
         print("7. View Loyalty Rewards")
         print("8. Update Personal Information")
-        print("9. Manage Accounts")  # Added 'Manage Accounts' option
+        print("9. Manage Accounts")
         print("0. Exit")
 
         option = input("Please select an option (0-9): ")
@@ -314,7 +315,7 @@ def customer_menu():
         elif option == "3":
             product_menu.menu()
         elif option == "4":
-            cart_management.view_cart()  # Calls the function to view cart
+            cart_management.view_cart()
         elif option == "5":
             order_tracking.order_tracking()
         elif option == "6":
@@ -324,7 +325,7 @@ def customer_menu():
         elif option == "8":
            update_personal_information()
         elif option == "9":
-            manage_accounts()  # Call the function to manage accounts
+            manage_accounts()
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break
