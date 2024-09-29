@@ -33,6 +33,6 @@
         "Product Name": "gingerbread",
         "Stock": 2,
         "Price": "RM 2.50",
-        "Discount": "20%"
+        "Discount": "10%"
     }
 }

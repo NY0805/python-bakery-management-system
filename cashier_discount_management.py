@@ -119,5 +119,5 @@ def manage_discounts():
             print("|⚠️Invalid option. Please try again.|")
 
 
-# Call the function to manage discounts
+# Call the function
 manage_discounts()
