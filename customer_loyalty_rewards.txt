@@ -50,4 +50,3 @@
         "loyalty_points": 1
     }
 }
-

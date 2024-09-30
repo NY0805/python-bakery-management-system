@@ -31,13 +31,13 @@ def save_customer_data(customers):
         json.dump(customers, file, indent=4)
 
 
-def calculate_points(transaction_value):  # Calculate points earned based on the transaction history
+def calculate_points(transaction_value):
     points_earned = transaction_value * BASE_POINTS_PER_RM
     print(f"Points earned for RM{transaction_value} purchase: {points_earned}")
     return points_earned
 
 
-def update_loyalty_status(points_balance):  # Update the loyalty status based on points balance
+def update_loyalty_status(points_balance):
     if points_balance >= GOLD_REQUIREMENT:
         return "Gold"
     elif points_balance >= SILVER_REQUIREMENT:
@@ -48,24 +48,22 @@ def update_loyalty_status(points_balance):  # Update the loyalty status based on
         return "Standard"
 
 
-def check_free_shipping(points_balance):  # Check if the customer is eligible for free shipping
+def check_free_shipping(points_balance):
     if points_balance >= FREE_SHIPPING_THRESHOLD:
         print("You are eligible for free shipping!")
 
 
-def update_purchase_history(username, purchase_amount):  # Update customer's purchase history and calculate rewards
+def update_purchase_history(username, purchase_amount):
     customers = load_customer_data()
     points_earned = calculate_points(purchase_amount)
 
     if username in customers:
         customer = customers[username]
         customer['total_spending (RM)'] += purchase_amount  # Update total spending
-        customer['purchase_count'] += 1
         customer['loyalty_points'] += points_earned
     else:
         customer = {
-            'total_spending (RM)': purchase_amount,  # Initial total spending
-            'purchase_count': 1,
+            'total_spending (RM)': purchase_amount,
             'loyalty_points': points_earned
         }
 
@@ -73,23 +71,26 @@ def update_purchase_history(username, purchase_amount):  # Update customer's pur
     customers[username] = customer
     save_customer_data(customers)
 
-    # Apply rewards based on purchase count and total spending amount
-    if customer['purchase_count'] % DISCOUNT_PURCHASE_COUNT == 0:
-        print("Congratulations! You've earned a 10% discount.")
-
+    # Apply rewards based on total spending amount
     if customer['total_spending (RM)'] >= FREE_ITEM_THRESHOLD:
         print("Congratulations! You've earned a free item.")
 
 
-def view_loyalty_rewards():  # Allow customers to check their loyalty rewards
+def view_loyalty_rewards():
     username = input("Enter your username: ")
     customers = load_customer_data()
-    if username in customers:
-        customer = customers[username]
-        print(f"Customer {username} has {customer['purchase_count']} purchases and total spending (RM) {customer['total_spending (RM)']}.")
-        print(f"Loyalty points: {customer['loyalty_points']}")
-    else:
-        print("|⚠️Customer cannot be found!|")
+
+    # Check if the user exists
+    for user_id, customer in customers.items():
+        print(f"Checking user: {customer['username']}")  # Debugging line
+        if customer['username'] == username:
+            print(
+                f"Customer {username} has total spending (RM) {customer.get('total_spending (RM)', 0)}.")
+            print(f"Loyalty points: {customer.get('loyalty_points', 0)}")
+            return
+
+    # If no user found, show message
+    print("|⚠️Customer cannot be found!|")
 
 
 def loyalty_rewards():
@@ -123,5 +124,5 @@ def loyalty_rewards():
             print("|⚠️Invalid option! Please try again.|")
 
 
-
+loyalty_rewards()
 
