@@ -98,7 +98,8 @@ def view_cart(cart):
         print("-" * 40)
         total_price = 0
         for item in cart.values():
-            item_total = item['quantity'] * item['price']
+            # Remove 'RM' and convert price to float for calculations
+            item_total = item['quantity'] * float(item['price'].replace('RM', '').strip())
             print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
             total_price += item_total
         print("-" * 40)
@@ -124,7 +125,8 @@ def save_order_to_file(cart, customer_name, cart_id, status):
 
 
 def make_payment_or_cancel(cart, customer_name, cart_id):
-    total_price = sum(float(item['price'].replace('RM ', '')) * item['quantity'] for item in cart.values())
+    # Calculate total price, removing 'RM' from the price string
+    total_price = sum(float(item['price'].replace('RM', '').strip()) * item['quantity'] for item in cart.values())
     print()
     print(f"Total price for your order: RM{total_price:.2f}")
 
@@ -144,7 +146,6 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
         print("Your order has been canceled.")
     else:
         print("|⚠️Invalid option! Returning to the main menu.|")
-
 
 # Main shopping cart function
 def shopping_cart():
@@ -167,7 +168,7 @@ def shopping_cart():
     print('\n-----------------------------------------------')
     print('\t\t\t', '', 'CART MANAGEMENT')
     print('-----------------------------------------------')
-
+    print()
     while True:
         print("\nPlease select an option:")
         print("1. Add item")

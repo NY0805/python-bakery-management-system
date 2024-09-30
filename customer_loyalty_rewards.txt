@@ -1,0 +1,53 @@
+{
+    "5580946551": {
+        "username": "Mark0825",
+        "total_spending (RM)": 15.0,
+        "loyalty_points": 1
+    },
+    "5684950188": {
+        "username": "03jane_",
+        "total_spending (RM)": 12.5,
+        "loyalty_points": 1
+    },
+    "1544631417": {
+        "username": "_eddie",
+        "total_spending (RM)": 8.0,
+        "loyalty_points": 1
+    },
+    "4418942694": {
+        "username": "anna328_",
+        "total_spending (RM)": 3.75,
+        "loyalty_points": 0
+    },
+    "7841554976": {
+        "username": "andrew_520",
+        "total_spending (RM)": 10.0,
+        "loyalty_points": 1
+    },
+    "9026863080": {
+        "username": "Ashley",
+        "total_spending (RM)": 24.0,
+        "loyalty_points": 2
+    },
+    "3716950492": {
+        "username": "leo_tiger",
+        "total_spending (RM)": 14.5,
+        "loyalty_points": 1
+    },
+    "2507494821": {
+        "username": "julia_b",
+        "total_spending (RM)": 9.0,
+        "loyalty_points": 1
+    },
+    "9648523077": {
+        "username": "sam_93",
+        "total_spending (RM)": 11.0,
+        "loyalty_points": 1
+    },
+    "2789401753": {
+        "username": "violet23",
+        "total_spending (RM)": 18.0,
+        "loyalty_points": 1
+    }
+}
+

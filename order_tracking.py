@@ -24,6 +24,7 @@ def order_tracking():
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
+    print()
     order_id = input('Enter your order ID: ')  # Keep order_id as a string
 
     # Check whether the order ID exists in the order dictionary.
