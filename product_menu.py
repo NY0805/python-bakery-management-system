@@ -47,7 +47,7 @@ def format_product_data(product, details):
 
 
 # Wrap the formatted data if it exceeds the space of 60 characters
-def wrap_data(formatted_product_data, width=60):
+def wrap_data(formatted_product_data, width=65):
     wrapped_lines = []
     for data in formatted_product_data:
         wrapped_lines.extend(textwrap.wrap(data, width=width))

@@ -21,10 +21,10 @@
         "ingredient_form": "granules",
         "batch_number": "B002",
         "unit_measurement": "g",
-        "quantity_purchased": 900.0,
+        "quantity_purchased": 300.0,
         "purchase_date": "07-08-2004",
         "expiry_date": "09-08-2005",
-        "supplier_name": "minionnn",
+        "supplier_name": "lum",
         "supplier_contact": "019-2345667",
         "storage_requirement": "dry storage",
         "allergen_info": [

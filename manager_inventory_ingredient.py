@@ -121,16 +121,16 @@ def ingredient_categories():
         print('4. Dairy and Non-Dairy Products')
         print('5. Leavening Agents')
         print('6. Spices and Flavourings')
-        print('6. Fillings and Toppings')
-        print('7. Fruits and Vegetables')
-        print('8. Preservatives and Stabilizers')
-        print('9. Others')
-        print('10. Back to Ingredient Management page')
+        print('7. Fillings and Toppings')
+        print('8. Fruits and Vegetables')
+        print('9. Preservatives and Stabilizers')
+        print('10. Others')
+        print('11. Back to Ingredient Management page')
 
         option_product_categories = input('\nPlease input the category:'
                                           '\n>>> ')
         if validation_empty_entries(option_product_categories):
-            if option_product_categories not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
+            if option_product_categories not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', "11"]:
                 print('\n+--------------------------------+')
                 print('|⚠️ Please enter a valid number. |')
                 print('+--------------------------------+')
@@ -155,6 +155,18 @@ def ingredient_categories():
                     category = 'Leavening Agents'
                     break
                 elif option_product_categories == '6':
+                    category = 'Spices and Flavourings'
+                    break
+                elif option_product_categories == '7':
+                    category = 'Fillings and Toppings'
+                    break
+                elif option_product_categories == '8':
+                    category = 'Fruits and Vegetables'
+                    break
+                elif option_product_categories == '9':
+                    category = 'Preservatives and Stabilizers'
+                    break
+                elif option_product_categories == '10':
                     category = 'Others'
                     break
     return category
@@ -445,7 +457,7 @@ def update_ingredient():
         print('\t\t\t\tINGREDIENT LIST')
         print('-----------------------------------------------')
         for index, (key, value) in enumerate(ingredient_data.items(), start=1):
-            print(f'{index}. {value["ingredient_name"]}')
+            print(f'{index}. {value['ingredient_name']}')
         print(f'{len(ingredient_data) + 1}. cancel')
 
         try:
@@ -655,8 +667,8 @@ def update_ingredient():
 
                                 if attribute_of_ingredient_data == 'quantity_purchased':
                                     try:
-                                        quantity_purchased = float(new_value)
-                                        if quantity_purchased > 0:
+                                        new_value = float(new_value)
+                                        if new_value > 0:
                                             break
                                         else:
                                             print('\n+---------------------------------------------------+')
@@ -768,9 +780,10 @@ def update_ingredient():
                             print('+--------------------------------------+')
                             continue
 
-                    print(
-                        f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
-                    save_info(ingredient_data)
+                        print(
+                            f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
+                        ingredient_data[selected_ingredient].update({attribute_of_ingredient_data: new_value})
+                        save_info(ingredient_data)
 
         except ValueError:
             print('\n+--------------------------+')
