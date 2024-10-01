@@ -2,12 +2,10 @@ import json
 
 # Constants for points and rewards in RM
 BASE_POINTS_PER_RM = 10  # Points earned per RM spent
-BRONZE_REQUIREMENT = 10000  # Points needed for Bronze status
-SILVER_REQUIREMENT = 20000  # Points needed for Silver status
-GOLD_REQUIREMENT = 40000  # Points needed for Gold status
-FREE_SHIPPING_THRESHOLD = 25000  # Points needed for free shipping
-DISCOUNT_PURCHASE_COUNT = 5  # Every 5 purchases earn a discount
-FREE_ITEM_THRESHOLD = 100  # Total spending amount needed for a free item
+BRONZE_REQUIREMENT = 500  # Points needed for Bronze status
+SILVER_REQUIREMENT = 1000  # Points needed for Silver status
+GOLD_REQUIREMENT = 2000  # Points needed for Gold status
+FREE_SHIPPING_THRESHOLD = 350  # Points needed for free shipping
 
 
 def load_customer_data():
@@ -48,9 +46,22 @@ def update_loyalty_status(points_balance):
         return "Standard"
 
 
-def check_free_shipping(points_balance):
-    if points_balance >= FREE_SHIPPING_THRESHOLD:
-        print("You are eligible for free shipping!")
+def check_free_shipping(username):
+    customers = load_customer_data()
+    if username in customers:
+        customer = customers[username]
+        points_balance = customer['loyalty_points']
+        status = customer.get('status', 'Standard')
+
+        # Gold members automatically have free shipping
+        if status == "Gold":
+            print("As a Gold member, you are eligible for free shipping!")
+        elif points_balance >= FREE_SHIPPING_THRESHOLD:
+            print("You are eligible for free shipping!")
+        else:
+            print(f"You need {FREE_SHIPPING_THRESHOLD - points_balance} more points to be eligible for free shipping.")
+    else:
+        print("|⚠️Customer cannot be found!|")
 
 
 def update_purchase_history(username, purchase_amount):
@@ -64,33 +75,34 @@ def update_purchase_history(username, purchase_amount):
     else:
         customer = {
             'total_spending (RM)': purchase_amount,
-            'loyalty_points': points_earned
+            'loyalty_points': points_earned,
+            'status': 'Standard'  # New customers start with "Standard" status
         }
+
+    # Update status based on new points balance
+    customer['status'] = update_loyalty_status(customer['loyalty_points'])
 
     # Update customer data
     customers[username] = customer
     save_customer_data(customers)
 
-    # Apply rewards based on total spending amount
-    if customer['total_spending (RM)'] >= FREE_ITEM_THRESHOLD:
-        print("Congratulations! You've earned a free item.")
-
 
 def view_loyalty_rewards():
-    username = input("Enter your username: ")
-    customers = load_customer_data()
+    username = input("Enter your username: ").strip().lower()  # Strip whitespace and convert to lowercase
+    customers = load_customer_data()  # Load the customer data
 
-    # Check if the user exists
-    for user_id, customer in customers.items():
-        print(f"Checking user: {customer['username']}")  # Debugging line
-        if customer['username'] == username:
-            print(
-                f"Customer {username} has total spending (RM) {customer.get('total_spending (RM)', 0)}.")
-            print(f"Loyalty points: {customer.get('loyalty_points', 0)}")
+    # Loop through all customer records
+    for customer_id, customer_info in customers.items():
+        # If a matching username is found
+        if customer_info['username'].strip().lower() == username:
+            print(f"Customer {customer_info['username']} has a total spending of RM {customer_info['total_spending (RM)']}.")
+            print(f"Loyalty points: {customer_info['loyalty_points']}")
+            print(f"Status: {customer_info['status']}")
             return
 
-    # If no user found, show message
+    # If no matching username is found
     print("|⚠️Customer cannot be found!|")
+
 
 
 def loyalty_rewards():
@@ -101,7 +113,8 @@ def loyalty_rewards():
         print()
         print("1. Update Purchase History")
         print("2. View Loyalty Rewards")
-        print("3. Exit to main menu")
+        print("3. Check Free Shipping Eligibility")
+        print("4. Exit to main menu")
 
         choice = input("Select your option:  ")
 
@@ -117,6 +130,10 @@ def loyalty_rewards():
             view_loyalty_rewards()
 
         elif choice == '3':
+            username = input("Enter your username: ")
+            check_free_shipping(username)
+
+        elif choice == '4':
             print("Thank you for using the Customer Loyalty Program. Goodbye!")
             break
 
@@ -125,4 +142,6 @@ def loyalty_rewards():
 
 
 loyalty_rewards()
+
+
 

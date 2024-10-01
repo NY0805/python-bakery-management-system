@@ -1,52 +1,62 @@
 {
     "5580946551": {
         "username": "Mark0825",
-        "total_spending (RM)": 15.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 55.0,
+        "loyalty_points": 550,
+        "status": "Bronze"
     },
     "5684950188": {
         "username": "03jane_",
-        "total_spending (RM)": 12.5,
-        "loyalty_points": 1
+        "total_spending (RM)": 150.0,
+        "loyalty_points": 1500,
+        "status": "Silver"
     },
     "1544631417": {
         "username": "_eddie",
-        "total_spending (RM)": 8.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 25.0,
+        "loyalty_points": 250,
+        "status": "Standard"
     },
     "4418942694": {
         "username": "anna328_",
-        "total_spending (RM)": 3.75,
-        "loyalty_points": 0
+        "total_spending (RM)": 45.0,
+        "loyalty_points": 450,
+        "status": "Standard"
     },
     "7841554976": {
         "username": "andrew_520",
-        "total_spending (RM)": 10.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 205.0,
+        "loyalty_points": 2050,
+        "status": "Gold"
     },
     "9026863080": {
         "username": "Ashley",
-        "total_spending (RM)": 24.0,
-        "loyalty_points": 2
+        "total_spending (RM)": 95.0,
+        "loyalty_points": 950,
+        "status": "Bronze"
     },
     "3716950492": {
         "username": "leo_tiger",
-        "total_spending (RM)": 14.5,
-        "loyalty_points": 1
+        "total_spending (RM)": 110.0,
+        "loyalty_points": 1100,
+        "status": "Silver"
     },
     "2507494821": {
         "username": "julia_b",
-        "total_spending (RM)": 9.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 210.0,
+        "loyalty_points": 2100,
+        "status": "Gold"
     },
     "9648523077": {
         "username": "sam_93",
-        "total_spending (RM)": 11.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 65.0,
+        "loyalty_points": 650,
+        "status": "Bronze"
     },
     "2789401753": {
         "username": "violet23",
-        "total_spending (RM)": 18.0,
-        "loyalty_points": 1
+        "total_spending (RM)": 85.0,
+        "loyalty_points": 850,
+        "status": "Bronze"
     }
 }
