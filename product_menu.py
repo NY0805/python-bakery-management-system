@@ -41,7 +41,7 @@ def format_product_data(product, details):
     return (
         f"{product['product_code']} - {product['product_name'].title():<45}{price}\n"
         f"{'Best Before':<12}: {product['expiry_date']}\n"
-        f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"       
+        f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
         f"🥑 {description_info}"
     )
 
@@ -63,7 +63,7 @@ def print_in_column(info1, info2, width=65):
     new_info2 = info2 + [""] * (max_line - len(info2))
 
     for line1, line2 in zip(new_info1, new_info2):
-        print(f'{line1.ljust(width + 10)}{line2.ljust(width)}')
+        print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
 
 
 def menu():

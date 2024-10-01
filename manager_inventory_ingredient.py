@@ -32,7 +32,7 @@ def save_info(ingredient_data):
 def printed_centered(info):
     print('-' * 47)
     side_space = (47 - len(info)) // 2
-    print(' '*side_space + info + ' '*(47-len(info)-side_space))
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
     print('-' * 47)
 
 
@@ -85,12 +85,12 @@ ingredient_data = load_data_from_inventory_ingredient()
 
 
 def ingredient_management():
-
     while True:
         print('\n-------------------------------------------------------')
         print('\t\t\t\tINGREDIENT MANAGEMENT')
         print('-------------------------------------------------------')
-        print('1. Add Ingredients\n2. Remove Ingredients\n3. Update Ingredients\n4. Back to Main Inventory Management⛔🔙')
+        print(
+            '1. Add Ingredients\n2. Remove Ingredients\n3. Update Ingredients\n4. Back to Main Inventory Management⛔🔙')
 
         option_product_management = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')
         if validation_empty_entries(option_product_management):
@@ -161,7 +161,6 @@ def ingredient_categories():
 
 
 def add_ingredient():
-
     category = ingredient_categories()
 
     ingredient_info = ['Ingredient Name', 'Ingredient Form', 'Batch Number', 'Unit Measurement', 'Quantity Purchased',
@@ -219,7 +218,8 @@ def add_ingredient():
                     print('|⚠️ Please enter a valid form from the ingredient form given. (Case Sensitive.) |')
                     print('+-------------------------------------------------------------------------------+')
             else:
-                print('\n+--------------------------------------------------------------------------------------------+')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
                 print('+--------------------------------------------------------------------------------------------+')
 
@@ -372,15 +372,22 @@ def add_ingredient():
                     print('|⚠️ Please enter a valid storage requirement from the list given. (Case Sensitive.) |')
                     print('+-----------------------------------------------------------------------------------+\n')
             else:
-                print('\n+---------------------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
-                print('+-------------------------------------------------------------------------------------------------+\n')
+                print(
+                    '\n+---------------------------------------------------------------------------------------------------+')
+                print(
+                    '|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
+                print(
+                    '+-------------------------------------------------------------------------------------------------+\n')
 
     while True:
-        print('\n+---------------------------------------------------------------------------------------------------------+')
-        print('|💡 If there is more than one data item, separate them with a space.                                      |')
-        print('|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
-        print('+---------------------------------------------------------------------------------------------------------+')
+        print(
+            '\n+---------------------------------------------------------------------------------------------------------+')
+        print(
+            '|💡 If there is more than one data item, separate them with a space.                                      |')
+        print(
+            '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
+        print(
+            '+---------------------------------------------------------------------------------------------------------+')
         allergens = input(f'12. {ingredient_info[11].ljust(max_length + 1)}: ').split()
         if validation_empty_entries(allergens):
             if validation_list_alphabet_only(allergens):
@@ -523,122 +530,67 @@ def update_ingredient():
                                     '+---------------------------------------------------------------------------------------------------------+')
 
                             while True:
-                                try:
-                                    new_value = input(f'\nEnter new {attribute_of_ingredient_data}: ')
 
-                                    if attribute_of_ingredient_data == 'category':
-                                        if new_value not in [category.lower() for category in categories]:
-                                            print('\n+--------------------------------------+')
-                                            print('|⚠️ Out of category. Please enter again. |')
-                                            print('+----------------------------------------+')
+                                new_value = input(f'\nEnter new {attribute_of_ingredient_data}: ')
+
+                                if attribute_of_ingredient_data == 'category':
+                                    if new_value not in [category.lower() for category in categories]:
+                                        print('\n+--------------------------------------+')
+                                        print('|⚠️ Out of category. Please enter again. |')
+                                        print('+----------------------------------------+')
+                                    else:
+                                        break
+
+                                if attribute_of_ingredient_data == 'ingredient_name':
+                                    if validation_alphabet_only(new_value):
+                                        if new_value in (ingredient_data[selected_ingredient]['ingredient_name'] for
+                                                         selected_ingredient in ingredient_data):
+                                            print(
+                                                '\n+-----------------------------------------------------------------------------+')
+                                            print(
+                                                '|⚠️ Duplicate ingredient name detected. Please enter another ingredient name. |')
+                                            print(
+                                                '+-----------------------------------------------------------------------------+')
                                         else:
                                             break
+                                    else:
+                                        print(
+                                            '\n+---------------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid ingredient name. (Cannot contain any digits and special characters.) |')
+                                        print(
+                                            '+---------------------------------------------------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'ingredient_name':
-                                        if validation_alphabet_only(new_value):
-                                            if new_value in (ingredient_data[selected_ingredient]['ingredient_name'] for
-                                                             selected_ingredient in ingredient_data):
-                                                print(
-                                                    '\n+-----------------------------------------------------------------------------+')
-                                                print(
-                                                    '|⚠️ Duplicate ingredient name detected. Please enter another ingredient name. |')
-                                                print(
-                                                    '+-----------------------------------------------------------------------------+')
-                                            else:
-                                                break
-                                        else:
-                                            print(
-                                                '\n+---------------------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid ingredient name. (Cannot contain any digits and special characters.) |')
-                                            print(
-                                                '+---------------------------------------------------------------------------------------------+')
+                                if attribute_of_ingredient_data == 'ingredient_form':
 
-
-                                    if attribute_of_ingredient_data == 'ingredient_form':
-
-                                        if validation_empty_entries(new_value):
-                                            if validation_list_alphabet_only(new_value):
-                                                ingredient_form_list = {
-                                                    'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
-                                                    'Sweeteners': 'granulated, liquid, powdered',
-                                                    'Fats and Oils': 'solid, liquid',
-                                                    'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
-                                                    'Leavening Agents': 'powdered, granules, liquid',
-                                                    'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-                                                    'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-                                                    'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
-                                                    'Preservatives and Stabilizers': 'powdered, liquid, crystals'
-                                                }
-
-                                                category = ingredient_data[selected_ingredient]['category']
-                                                form = ingredient_form_list.get(category, '')
-                                                allowable_form = []
-                                                for item in form.split(','):
-                                                    allowable_form.append(item.strip().lower())
-                                                if new_value in allowable_form:
-                                                    break
-                                                else:
-                                                    print(
-                                                        '\n+-------------------------------------------------------------------------------+')
-                                                    print(
-                                                        '|⚠️ Please enter a valid form from the ingredient form given. (Case Sensitive.) |')
-                                                    print(
-                                                        '+-------------------------------------------------------------------------------+')
-                                            else:
-                                                print(
-                                                    '\n+--------------------------------------------------------------------------------------------+')
-                                                print(
-                                                    '|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
-                                                print(
-                                                    '+--------------------------------------------------------------------------------------------+')
-
-                                    if attribute_of_ingredient_data == 'batch_number':
-                                        if validation_alphanum_only(new_value):
-                                            if new_value in ingredient_data:
-                                                print(
-                                                    '\n+---------------------------------------------------------------------------+')
-                                                print(
-                                                    '|⚠️ Duplicate batch number detected. Please input the correct batch number. |')
-                                                print(
-                                                    '+---------------------------------------------------------------------------+')
-                                            else:
-                                                break
-                                        else:
-                                            print(
-                                                '\n+-------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid batch number. (Cannot contain any special characters.) |')
-                                            print(
-                                                '+-------------------------------------------------------------------------------+')
-
-                                    if attribute_of_ingredient_data == 'unit_measurement':
-                                        if new_value.isalpha():
-                                            category_units = {
-                                                'Flours and Grains': 'g, kg',
-                                                'Sweeteners': 'g, kg, ml, l',
-                                                'Fats and Oils': 'g, kg, ml, l',
-                                                'Dairy and Non-Dairy Products': 'g, kg, ml, l',
-                                                'Leavening Agents': 'g, kg',
-                                                'Spices and Flavourings': 'g, kg, ml',
-                                                'Fillings and Toppings': 'g, kg, l',
-                                                'Fruits and Vegetables': 'g, kg, l',
-                                                'Preservatives and Stabilizers': 'g, kg, ml'
+                                    if validation_empty_entries(new_value):
+                                        if validation_list_alphabet_only(new_value):
+                                            ingredient_form_list = {
+                                                'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+                                                'Sweeteners': 'granulated, liquid, powdered',
+                                                'Fats and Oils': 'solid, liquid',
+                                                'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+                                                'Leavening Agents': 'powdered, granules, liquid',
+                                                'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
+                                                'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
+                                                'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+                                                'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                             }
+
                                             category = ingredient_data[selected_ingredient]['category']
-                                            unit = category_units.get(category, '')
-                                            allowable_unit = []
-                                            for item in unit.split(','):
-                                                allowable_unit.append(item.strip().lower())
-                                            if new_value in allowable_unit:
+                                            form = ingredient_form_list.get(category, '')
+                                            allowable_form = []
+                                            for item in form.split(','):
+                                                allowable_form.append(item.strip().lower())
+                                            if new_value in allowable_form:
                                                 break
                                             else:
                                                 print(
-                                                    '\n+--------------------------------------------------------------------+')
+                                                    '\n+-------------------------------------------------------------------------------+')
                                                 print(
-                                                    '|⚠️ Please enter a valid unit from the unit given. (Case Sensitive.) |')
+                                                    '|⚠️ Please enter a valid form from the ingredient form given. (Case Sensitive.) |')
                                                 print(
-                                                    '+--------------------------------------------------------------------+')
+                                                    '+-------------------------------------------------------------------------------+')
                                         else:
                                             print(
                                                 '\n+--------------------------------------------------------------------------------------------+')
@@ -647,115 +599,164 @@ def update_ingredient():
                                             print(
                                                 '+--------------------------------------------------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'quantity_purchased':
-                                        try:
-                                            quantity_purchased = float(new_value)
-                                            if quantity_purchased > 0:
-                                                break
-                                            else:
-                                                print('\n+---------------------------------------------------+')
-                                                print('|⚠️ Please enter a valid quantity. (Greater than 0) |')
-                                                print('+---------------------------------------------------+')
+                                if attribute_of_ingredient_data == 'batch_number':
+                                    if validation_alphanum_only(new_value):
+                                        if new_value in ingredient_data:
+                                            print(
+                                                '\n+---------------------------------------------------------------------------+')
+                                            print(
+                                                '|⚠️ Duplicate batch number detected. Please input the correct batch number. |')
+                                            print(
+                                                '+---------------------------------------------------------------------------+')
+                                        else:
+                                            break
+                                    else:
+                                        print(
+                                            '\n+-------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid batch number. (Cannot contain any special characters.) |')
+                                        print(
+                                            '+-------------------------------------------------------------------------------+')
 
-                                        except ValueError:
-                                            print(
-                                                '\n+-----------------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid quantity. (Cannot contain any alphabets and special characters.) |')
-                                            print(
-                                                '+-----------------------------------------------------------------------------------------+')
-
-                                    if attribute_of_ingredient_data == 'purchase_date':
-                                        if validation_date(new_value):
-                                            # if purchased_date <= systemdate:
+                                if attribute_of_ingredient_data == 'unit_measurement':
+                                    if new_value.isalpha():
+                                        category_units = {
+                                            'Flours and Grains': 'g, kg',
+                                            'Sweeteners': 'g, kg, ml, l',
+                                            'Fats and Oils': 'g, kg, ml, l',
+                                            'Dairy and Non-Dairy Products': 'g, kg, ml, l',
+                                            'Leavening Agents': 'g, kg',
+                                            'Spices and Flavourings': 'g, kg, ml',
+                                            'Fillings and Toppings': 'g, kg, l',
+                                            'Fruits and Vegetables': 'g, kg, l',
+                                            'Preservatives and Stabilizers': 'g, kg, ml'
+                                        }
+                                        category = ingredient_data[selected_ingredient]['category']
+                                        unit = category_units.get(category, '')
+                                        allowable_unit = []
+                                        for item in unit.split(','):
+                                            allowable_unit.append(item.strip().lower())
+                                        if new_value in allowable_unit:
                                             break
                                         else:
                                             print(
-                                                '\n+----------------------------------------------------------------------------------------+')
+                                                '\n+--------------------------------------------------------------------+')
                                             print(
-                                                '|⚠️ Please enter a valid purchase date. (With format of "day-month-year", "xx-xx-xxxx".) |')
+                                                '|⚠️ Please enter a valid unit from the unit given. (Case Sensitive.) |')
                                             print(
-                                                '+----------------------------------------------------------------------------------------+')
+                                                '+--------------------------------------------------------------------+')
+                                    else:
+                                        print(
+                                            '\n+--------------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
+                                        print(
+                                            '+--------------------------------------------------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'expiry_date':
-                                        if validation_date(new_value):
-                                            # convert expiry_date_str from string to datetime format
-                                            expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
-                                            # convert purchase_date from string to datetime format
-                                            purchased_date_new = datetime.strptime(
-                                                ingredient_data[selected_ingredient]['purchase_date'], '%d-%m-%Y')
-                                            if expiry_date >= purchased_date_new:
-                                                break
-                                            else:
-                                                print(
-                                                    '\n+---------------------------------------------------------------+')
-                                                print(
-                                                    '|⚠️ The expired date does not fall within the allowable period. |')
-                                                print(
-                                                    f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}.      |')
-                                                print(
-                                                    '+---------------------------------------------------------------+')
+                                if attribute_of_ingredient_data == 'quantity_purchased':
+                                    try:
+                                        quantity_purchased = float(new_value)
+                                        if quantity_purchased > 0:
+                                            break
                                         else:
-                                            print(
-                                                '\n+--------------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid expiry date. (With format of "day-month-year", "xx-xx-xxxx".) |')
-                                            print(
-                                                '+--------------------------------------------------------------------------------------+')
+                                            print('\n+---------------------------------------------------+')
+                                            print('|⚠️ Please enter a valid quantity. (Greater than 0) |')
+                                            print('+---------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'supplier_name':
-                                        if re.match(r'^[a-zA-Z0-9 ]+$', new_value):
+                                    except ValueError:
+                                        print(
+                                            '\n+-----------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid quantity. (Cannot contain any alphabets and special characters.) |')
+                                        print(
+                                            '+-----------------------------------------------------------------------------------------+')
+
+                                if attribute_of_ingredient_data == 'purchase_date':
+                                    if validation_date(new_value):
+                                        # if purchased_date <= systemdate:
+                                        break
+                                    else:
+                                        print(
+                                            '\n+----------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid purchase date. (With format of "day-month-year", "xx-xx-xxxx".) |')
+                                        print(
+                                            '+----------------------------------------------------------------------------------------+')
+
+                                if attribute_of_ingredient_data == 'expiry_date':
+                                    if validation_date(new_value):
+                                        # convert expiry_date_str from string to datetime format
+                                        expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
+                                        # convert purchase_date from string to datetime format
+                                        purchased_date_new = datetime.strptime(
+                                            ingredient_data[selected_ingredient]['purchase_date'], '%d-%m-%Y')
+                                        if expiry_date >= purchased_date_new:
                                             break
                                         else:
                                             print(
-                                                '\n+--------------------------------------------------------------------------------+')
+                                                '\n+---------------------------------------------------------------+')
                                             print(
-                                                '|⚠️ Please enter a valid supplier name. (Cannot contain any special characters.) |')
+                                                '|⚠️ The expired date does not fall within the allowable period. |')
                                             print(
-                                                '+--------------------------------------------------------------------------------+')
+                                                f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}.      |')
+                                            print(
+                                                '+---------------------------------------------------------------+')
+                                    else:
+                                        print(
+                                            '\n+--------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid expiry date. (With format of "day-month-year", "xx-xx-xxxx".) |')
+                                        print(
+                                            '+--------------------------------------------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'supplier_contact':
-                                        if re.fullmatch(r'^\d{3}-\d{7}$', new_value):
+                                if attribute_of_ingredient_data == 'supplier_name':
+                                    if re.match(r'^[a-zA-Z0-9 ]+$', new_value):
+                                        break
+                                    else:
+                                        print(
+                                            '\n+--------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid supplier name. (Cannot contain any special characters.) |')
+                                        print(
+                                            '+--------------------------------------------------------------------------------+')
+
+                                if attribute_of_ingredient_data == 'supplier_contact':
+                                    if re.fullmatch(r'^\d{3}-\d{7}$', new_value):
+                                        break
+                                    else:
+                                        print('\n+-----------------------------------------------+')
+                                        print('|⚠️ Invalid contact number. Please enter again. |')
+                                        print('+-----------------------------------------------+')
+
+                                if attribute_of_ingredient_data == 'storage_requirement':
+                                    if validation_alphabet_only(new_value):
+                                        if new_value in ['dry storage', 'refrigerator', 'freezer']:
                                             break
                                         else:
-                                            print('\n+-----------------------------------------------+')
-                                            print('|⚠️ Invalid contact number. Please enter again. |')
-                                            print('+-----------------------------------------------+')
+                                            print(
+                                                '\n+-----------------------------------------------------------------------------------+')
+                                            print(
+                                                '|⚠️ Please enter a valid storage requirement from the list given. (Case Sensitive.) |')
+                                            print(
+                                                '+-----------------------------------------------------------------------------------+')
+                                    else:
+                                        print(
+                                            '\n+---------------------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
+                                        print(
+                                            '+-------------------------------------------------------------------------------------------------+')
 
-                                    if attribute_of_ingredient_data == 'storage_requirement':
-                                        if validation_alphabet_only(new_value):
-                                            if new_value in ['dry storage', 'refrigerator', 'freezer']:
-                                                break
-                                            else:
-                                                print(
-                                                    '\n+-----------------------------------------------------------------------------------+')
-                                                print(
-                                                    '|⚠️ Please enter a valid storage requirement from the list given. (Case Sensitive.) |')
-                                                print(
-                                                    '+-----------------------------------------------------------------------------------+')
-                                        else:
-                                            print(
-                                                '\n+---------------------------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid storage requirement. (Cannot contain any digits and special characters.) |')
-                                            print(
-                                                '+-------------------------------------------------------------------------------------------------+')
-
-                                    if attribute_of_ingredient_data == 'allergen_info':
-                                        if validation_list_alphabet_only(new_value):
-                                            break
-                                        else:
-                                            print(
-                                                '\n+--------------------------------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
-                                            print(
-                                                '+--------------------------------------------------------------------------------------+')
-
-                                except ValueError:
-                                    print('\n+------------------------------+')
-                                    print('|⚠️ Please enter numbers only. |')
-                                    print('+------------------------------+')
+                                if attribute_of_ingredient_data == 'allergen_info':
+                                    if validation_list_alphabet_only(new_value):
+                                        break
+                                    else:
+                                        print(
+                                            '\n+--------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
+                                        print(
+                                            '+--------------------------------------------------------------------------------------+')
 
                         elif attribute_of_ingredient_data == 'cancel':
                             print('\nCancelling. Exiting to Ingredient List......')
@@ -764,10 +765,11 @@ def update_ingredient():
                         else:
                             print('\n+--------------------------------------+')
                             print('|⚠️ Invalid input. Please enter again. |')
-                            print('+--------------------------------------+\n')
+                            print('+--------------------------------------+')
                             continue
 
-                    print(f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
+                    print(
+                        f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
                     save_info(ingredient_data)
 
         except ValueError:
@@ -776,5 +778,5 @@ def update_ingredient():
             print('+--------------------------+')
 
 
-#update_ingredient()
+update_ingredient()
 #ingredient_management()
