@@ -1,5 +1,3 @@
-import json
-
 import manager
 import customer
 import cashier
@@ -53,7 +51,8 @@ while True:
             cashier.cashier_accounts()
 
         elif role == 4:
-            customer.customer()
+            pass
+            #customer.customer()
 
         elif role == 5:
             print('\n--------------------YOU ARE EXIT--------------------')

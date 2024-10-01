@@ -40,10 +40,9 @@ def format_product_data(product, details):
                 price = '-'
     return (
         f"{product['product_code']} - {product['product_name'].title():<45}{price}\n"
-        f"{'Best Before':<10}: {product['expiry_date']}\n"
-        f"{'Allergen':<10}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-        f""
-        f"{description_info}"
+        f"{'Best Before':<12}: {product['expiry_date']}\n"
+        f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"       
+        f"🥑 {description_info}"
     )
 
 
@@ -91,9 +90,9 @@ def menu():
             print_in_column(product1, product2)
 
             if i == len(products) - 1:
-                print('')
+                print('\n'+'-'*139)
             else:
-                print('')
+                print('\n'+'-'*139)
 
 
 menu()

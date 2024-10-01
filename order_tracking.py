@@ -24,20 +24,19 @@ def order_tracking():
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
-    print()
-    order_id = input('Enter your order ID: ')  # Keep order_id as a string
+    order_id = input('Enter order ID: ')  # Keep order_id as a string
 
     # Check whether the order ID exists in the order dictionary.
     if order_id in orders:
         order = orders[order_id]  # Get the order details
         # Display order information
         print(f'Order ID: {order_id}')
-        print(f'Username: {order["username"]}')  # Use double quotes here
-        print(f'Items ordered: {order["items_ordered"]}')  # Use double quotes here
-        print(f'Total Price: RM{order["total_price"]:.2f}')  # Use double quotes here
-        print(f'Status: {order["status"]}')  # Use double quotes here
+        print(f'Username: {order['username']}')
+        print(f'Items ordered: {order['items_ordered']}')
+        print(f'Total Price: RM{order['total_price']:.2f}')
+        print(f'Status: {order['status']}')
     else:
-        print('|⚠️Order ID cannot be found. Please check and try again!|')
+        print('|⚠️Order ID cannot be found. Please check and try again!|')  # Moved outside the loop
 
 
 order_tracking()
