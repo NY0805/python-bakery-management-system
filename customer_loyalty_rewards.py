@@ -37,11 +37,11 @@ def calculate_points(transaction_value):
 
 def update_loyalty_status(points_balance):
     if points_balance >= GOLD_REQUIREMENT:
-        return "Gold"
+        return "MORNING GLORY'S GOLD"
     elif points_balance >= SILVER_REQUIREMENT:
-        return "Silver"
+        return "MORNING GLORY'S SILVER"
     elif points_balance >= BRONZE_REQUIREMENT:
-        return "Bronze"
+        return "MORNING GLORY'S BRONZE"
     else:
         return "Standard"
 
@@ -102,7 +102,6 @@ def view_loyalty_rewards():
 
     # If no matching username is found
     print("|⚠️Customer cannot be found!|")
-
 
 
 def loyalty_rewards():

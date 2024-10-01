@@ -1,5 +1,5 @@
 import json
-import uuid
+import random
 from product_menu import product_data
 
 
@@ -8,9 +8,23 @@ def display_menu(products):
     print("\nProduct Menu:")
     print(f"{'Code':<6} | {'Name':<20} | {'Price':<6}")
     print("-" * 30)
-    for product in products.values():  # Iterate through the dictionary values
+    for product in products.values():
         print(f"{product['product_code']:<6} | {product['product_name'].title():<20} | RM{float(product['price']):.2f}")
     print("-" * 30)
+
+
+# Function to generate a 10-digit numeric cart_id
+def generate_cart_id():
+    return ''.join([str(random.randint(0, 9)) for _ in range(10)])
+
+
+def generate_order_id(order_data):
+    existing_order_ids = [int(order['order_id'][3:]) for order in order_data.values()]
+    if existing_order_ids:
+        new_order_num = max(existing_order_ids) + 1
+    else:
+        new_order_num = 1
+    return f"ORD{new_order_num:03}"
 
 
 # Function to enable customers to add items to the cart
@@ -72,7 +86,7 @@ def view_cart(cart):
 
 
 # Function to save the order to a JSON file with cart_id as key
-def save_order_to_file(cart, customer_name, order_id, status):
+def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     try:
         # Try to load the existing orders
         with open("customer_order_list.txt", "r") as file:
@@ -81,10 +95,11 @@ def save_order_to_file(cart, customer_name, order_id, status):
         order_data = {}  # If file not found, start with an empty dictionary
 
     # Create the new order entry
-    order_data[order_id] = {
+    order_data[cart_id] = {
+        "order_id": order_id,
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x{item['quantity']}" for item in cart.values()],
-        "total_price": sum(item['quantity'] * item['price'] for item in cart.values()),
+        "total_price (RM)": sum(item['quantity'] * item['price'] for item in cart.values()),
         "status": status
     }
 
@@ -105,13 +120,22 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
     print("2. Cancel your order")
 
     choice = input("Please select your option: ").strip()
+
+    try:
+        with open("customer_order_list.txt", "r") as file:
+            order_data = json.load(file)
+    except FileNotFoundError:
+        order_data = {}
+
+    order_id = generate_order_id(order_data)  # Generate a new order ID
+
     if choice == '1':
         print("\nPayment completed. Thank you for your purchase!")
-        save_order_to_file(cart, customer_name, cart_id, "Payment Complete")
+        save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Complete")
         cart.clear()  # Clear the cart after payment
     elif choice == '2':
         print("\nYour order has been canceled.")
-        save_order_to_file(cart, customer_name, cart_id, "Canceled")
+        save_order_to_file(cart, customer_name, cart_id, order_id, "Canceled")
         cart.clear()  # Clear the cart after cancellation
     else:
         print(" |⚠️Invalid option!Returning to the main menu.|")
@@ -121,7 +145,7 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
 def shopping_cart():
     cart = {}
     customer_name = input("Please enter your name: ")
-    cart_id = str(uuid.uuid4())  # Generate a unique cart ID
+    cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
     print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
 
     print('\n-----------------------------------------------')
@@ -130,6 +154,7 @@ def shopping_cart():
 
     while True:
         print("\nPlease select an option:")
+        print()
         print("1. Add item")
         print("2. Remove item")
         print("3. Modify item quantity in cart")
@@ -140,7 +165,7 @@ def shopping_cart():
         option = input("Select your option: ").strip()
 
         if option == '1':
-            add_item_to_cart(cart, product_data)  # Use product_data here
+            add_item_to_cart(cart, product_data)
         elif option == '2':
             remove_item_from_cart(cart)
         elif option == '3':

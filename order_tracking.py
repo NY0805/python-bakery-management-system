@@ -9,8 +9,7 @@ def load_data_from_tracking():
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(content)  # parse the content as json format into python dictionary
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -24,19 +23,26 @@ def order_tracking():
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
-    order_id = input('Enter order ID: ')  # Keep order_id as a string
+    order_id = input('Enter your **Order ID**: ')  # Let the user input the actual order_id like ORD011
 
-    # Check whether the order ID exists in the order dictionary.
-    if order_id in orders:
-        order = orders[order_id]  # Get the order details
-        # Display order information
-        print(f'Order ID: {order_id}')
-        print(f'Username: {order['username']}')
-        print(f'Items ordered: {order['items_ordered']}')
-        print(f'Total Price: RM{order['total_price']:.2f}')
-        print(f'Status: {order['status']}')
-    else:
-        print('|⚠️Order ID cannot be found. Please check and try again!|')  # Moved outside the loop
+    # Search for the order by order_id
+    order_found = False
+    for order_key, order in orders.items():
+        if order['order_id'] == order_id:  # Compare the input with the order_id in the order details
+            # Display order information
+            print(f'Order ID: {order_id}')
+            print(f'Username: {order["username"]}')
+            print(f'Items ordered: {order["items_ordered"]}')
+            print(f'Total Price: RM{order["total_price (RM)"]:.2f}')
+            print(f'Status: {order["status"]}')
+            order_found = True
+            break
+
+    if not order_found:
+        print('|⚠️Order ID cannot be found. Please check and try again!|')
 
 
+# Call the function to track the order
 order_tracking()
+
+
