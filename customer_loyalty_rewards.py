@@ -91,17 +91,29 @@ def view_loyalty_rewards():
     username = input("Enter your username: ").strip().lower()  # Strip whitespace and convert to lowercase
     customers = load_customer_data()  # Load the customer data
 
+    # Initialize a flag to check if a matching customer is found
+    customer_found = False
+
+    print('\n' + '•' * 60 + ' Loyalty Rewards Information ' + '•' * 60 + '\n')
+
+    # Print header with proper column widths for alignment
+    print(f"{'Username'.ljust(25)}{'Total Spending (RM)'.ljust(25)}{'Loyalty Points'.ljust(20)}{'Status'.ljust(15)}")
+    print('-' * 85)
+
     # Loop through all customer records
     for customer_id, customer_info in customers.items():
         # If a matching username is found
         if customer_info['username'].strip().lower() == username:
-            print(f"Customer {customer_info['username']} has a total spending of RM {customer_info['total_spending (RM)']}.")
-            print(f"Loyalty points: {customer_info['loyalty_points']}")
-            print(f"Status: {customer_info['status']}")
-            return
+            print(f"{customer_info['username'].ljust(25)}{str(customer_info['total_spending (RM)']).ljust(25)}"
+                  f"{str(customer_info['loyalty_points']).ljust(20)}{customer_info['status'].ljust(15)}")
+            customer_found = True
+            break
 
-    # If no matching username is found
-    print("|⚠️Customer cannot be found!|")
+    if not customer_found:
+        # If no matching username is found
+        print("|⚠️Customer cannot be found!|")
+
+    print('-' * 85 + '\n')
 
 
 def loyalty_rewards():
