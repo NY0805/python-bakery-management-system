@@ -325,13 +325,11 @@ def add_ingredient():
                 if expiry_date >= purchased_date_new:
                     break
                 else:
-                    print(
-                        '\n+-----------------------------------------------------------------------------------------+')
-                    print('|⚠️ The expired date does not fall within the allowable period.                         |')
-                    print(
-                        f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}. |')
-                    print(
-                        '+------------------------------------------------------------------------------------------+\n')
+                    print('\n+---------------------------------------------------------------+')
+                    print('|⚠️ The expired date does not fall within the allowable period. |')
+                    print(f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}.      |')
+                    print('+---------------------------------------------------------------+\n')
+
             else:
                 print('\n+----------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid purchase date. (With format of "day-month-year", "xx-xx-xxxx".) |')
@@ -705,14 +703,10 @@ def update_ingredient():
                                         if expiry_date >= purchased_date_new:
                                             break
                                         else:
-                                            print(
-                                                '\n+---------------------------------------------------------------+')
-                                            print(
-                                                '|⚠️ The expired date does not fall within the allowable period. |')
-                                            print(
-                                                f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}.      |')
-                                            print(
-                                                '+---------------------------------------------------------------+')
+                                            print('\n+---------------------------------------------------------------+')
+                                            print('|⚠️ The expired date does not fall within the allowable period. |')
+                                            print(f'| * Allowable period: Greater than or equal to {purchased_date_new.strftime("%d-%m-%Y")}.      |')
+                                            print('+---------------------------------------------------------------+')
                                     else:
                                         print(
                                             '\n+--------------------------------------------------------------------------------------+')

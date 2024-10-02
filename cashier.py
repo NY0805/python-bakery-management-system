@@ -61,7 +61,7 @@ def cashier_accounts():
         print('Welcome, cashier', cashier_name, '!')
         while True:
             print('\n-----------------------------------------------')
-            print('\t\t\t', '', '', 'BAKER PRIVILEGE')
+            print('\t\t\t', '', '', 'CASHIER PRIVILEGE')
             print('-----------------------------------------------')
             print('a. Product display\n'
                   'b. Manage discount\n'

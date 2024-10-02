@@ -40,7 +40,7 @@ def order_management():
         print('-' * 105)
 
         for order_id, order_details in order_list.items():
-            print(f'{order_id:<20}{order_details["username"]:<20}{order_details["items_ordered"][0]:<25}{order_details["total_price"]:<22}{order_details["status"]}')
+            print(f'{order_id:<20}{order_details["username"]:<20}{order_details["items_ordered"][0]:<25}{order_details["total_price (RM)"]:<22}{order_details["status"]}')
 
             for items in order_details['items_ordered'][1:]:
                 print(f'{"":<20}{"":<20}{items:<25}{"":<22}{""}')
@@ -83,6 +83,6 @@ def order_management():
                     print(f'\nStatus of order id {order_id_to_update} is updated to "{status}".\n')
                     break
 
-#order_management()
+order_management()
 
 
