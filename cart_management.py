@@ -1,16 +1,16 @@
 import json
 import random
 from product_menu import product_data
-
+from manager_inventory_control import product_inventory
 
 # Function to display the product menu
-def display_menu(products):
+def display_menu(products, product_details):
     print("\nProduct Menu:")
     print(f"{'Code':<6} | {'Name':<20} | {'Price':<6}")
-    print("-" * 30)
-    for product in products.values():
-        print(f"{product['product_code']:<6} | {product['product_name'].title():<20} | RM{float(product['price']):.2f}")
-    print("-" * 30)
+    print("-" * 40)
+    for (product, detail) in zip(products.values(), product_details.values()):
+        print(f"{product['product_code']:<6} | {product['product_name'].title():<20} | {detail['price']}")
+    print("-" * 40)
 
 
 # Function to generate a 10-digit numeric cart_id
@@ -29,7 +29,7 @@ def generate_order_id(order_data):
 
 # Function to enable customers to add items to the cart
 def add_item_to_cart(cart, products):
-    display_menu(products)  # Show the product menu to the user
+    display_menu(product_data, product_inventory)  # Show the product menu to the user
     product_code = input("\nEnter the product code: ").strip()
 
     # Find the product by code

@@ -79,4 +79,4 @@ def submit_review():
     print('Your review has been successfully received.')
 
 
-submit_review()
+#submit_review()

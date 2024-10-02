@@ -457,7 +457,7 @@ def update_ingredient():
         print('\t\t\t\tINGREDIENT LIST')
         print('-----------------------------------------------')
         for index, (key, value) in enumerate(ingredient_data.items(), start=1):
-            print(f'{index}. {value['ingredient_name']}')
+            print(f'{index}. {value["ingredient_name"]}')
         print(f'{len(ingredient_data) + 1}. cancel')
 
         try:
@@ -791,5 +791,5 @@ def update_ingredient():
             print('+--------------------------+')
 
 
-update_ingredient()
+#update_ingredient()
 #ingredient_management()
