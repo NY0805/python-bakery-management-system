@@ -46,21 +46,30 @@ def validate_discount_input():
 def add_discount():
     product_code = input("Enter product code: ")
     if product_code in discounts:
-        discount = validate_discount_input()  # Use the validated input
-        discounts[product_code]['Discount'] = f"{discount}%"  # Update only the discount field
-        save_discounts(discounts)  # Save the updated discounts to the file
-        print(f"Discount for product {product_code} updated to {discount}%.")
+        print(f"Product {product_code} already has a discount. Use 'Modify Discount' if you want to update it.")
     else:
-        print(f"|⚠️Product {product_code} not found. Please add the product before applying a discount.|")
+        discount = validate_discount_input()  # Use the validated input
+        product_name = input("Enter product name: ")
+        price = input("Enter product price: ")
+        stock = input("Enter product stock: ")
+        # Add the new product with the discount
+        discounts[product_code] = {
+            'Product Name': product_name,
+            'Price': f"{price}",
+            'Discount': f"{discount}%",
+            'Stock': stock
+        }
+        save_discounts(discounts)  # Save the updated discounts to the file
+        print(f"Discount for product {product_code} added with {discount}%.")
 
 
-# Function to delete a discount (set to 0%)
+# Function to delete a discount (set to 0% or remove product)
 def delete_discount():
     product_code = input("Enter product code: ")
     if product_code in discounts:
-        discounts[product_code]['Discount'] = "0%"  # Reset discount to 0%
+        del discounts[product_code]  # Remove the product from the discounts
         save_discounts(discounts)  # Save the updated discounts to the file
-        print(f"Discount for product {product_code} has been reset to 0%.")
+        print(f"Product {product_code} and its discount have been deleted.")
     else:
         print(f"|⚠️No discount found for product {product_code}.|")
 
@@ -74,41 +83,53 @@ def modify_discount():
         save_discounts(discounts)  # Save the updated discounts to the file
         print(f"Discount for product {product_code} updated to {new_discount}%.")
     else:
-        print(f"|⚠️No discount found for product {product_code}. Use 'add' to create a new discount.|")
+        print(f"|⚠️No discount found for product {product_code}. Use 'Add Discount' to create a new discount.|")
 
 
 # Display all products with discounts
 def display_discounts():
     if discounts:
-        print("Current Discounts and Product Details:")
+        print('\n' + '•' * 60 + ' Current Discounts and Product Details ' + '•' * 60 + '\n')
+
+        # Print header with proper column widths for alignment
+        print(f"{'Product Code'.ljust(15)}{'Product Name'.ljust(25)}{'Price'.ljust(15)}{'Discount'.ljust(15)}{'Stock'.ljust(10)}")
+        print('-' * 80)
+
         for product_code, product_info in discounts.items():
-            print(f"Product Code: {product_code}")
-            for key, value in product_info.items():
-                print(f"  {key}: {value}")
+            product_name = product_info.get('Product Name', '').ljust(25)
+            price = product_info.get('Price', '').ljust(15)
+            discount = product_info.get('Discount', '').ljust(15)
+            stock = str(product_info.get('Stock', '')).ljust(10)
+
+            print(f"{product_code.ljust(15)}{product_name}{price}{discount}{stock}")
+        print('-' * 80 + '\n')
     else:
-        print("|⚠️No discounts available!|")
+        print("|⚠️ No discounts available! |")
 
 
-# Let user choose an option
+# Main menu for managing discounts
 def manage_discounts():
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\t', '', 'DISCOUNT MANAGEMENT')
         print('-----------------------------------------------')
-        print("1. Add/Update Discount")
-        print("2. Reset Discount")
-        print("3. View All Discounts")
-        print("4. Exit")
+        print("1. Add Discount")
+        print("2. Modify Discount")
+        print("3. Delete Discount")
+        print("4. View All Discounts")
+        print("5. Exit")
 
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter your choice (1-5): ")
 
         if choice == '1':
             add_discount()
         elif choice == '2':
-            delete_discount()
+            modify_discount()
         elif choice == '3':
-            display_discounts()
+            delete_discount()
         elif choice == '4':
+            display_discounts()
+        elif choice == '5':
             confirm_exit = input("Are you sure you want to exit? yes=y / no=n: ").lower()
             if confirm_exit == 'y':
                 print("***Exiting Discount Management. Goodbye!***")
@@ -116,8 +137,8 @@ def manage_discounts():
             else:
                 print("Returning to the menu.")
         else:
-            print("|⚠️Invalid option. Please try again.|")
+            print("|⚠️ Invalid option. Please try again.|")
 
 
-# Call the function
+# Start the discount management system
 manage_discounts()

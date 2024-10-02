@@ -1,36 +1,42 @@
 {
     "009": {
         "Product Name": "tiramisu",
+        "product_code": "CK858",
         "Stock": 1,
         "Price": "RM 8.50",
         "Discount": "0%"
     },
     "004": {
         "Product Name": "cheezy bun",
+        "product_code": "CH123",
         "Stock": 2,
         "Price": "RM 5.00",
         "Discount": "5%"
     },
     "001": {
         "Product Name": "banana bread",
+        "product_code": "BR890",
         "Stock": 1,
         "Price": "RM 4.50",
         "Discount": "15%"
     },
     "002": {
         "Product Name": "red velvet",
+        "product_code": "CK857",
         "Stock": 1,
         "Price": "RM 10.50",
         "Discount": "8%"
     },
     "003": {
         "Product Name": "apple pie",
+        "product_code": "PA932",
         "Stock": 1,
         "Price": "RM 5.00",
         "Discount": "12%"
     },
     "006": {
         "Product Name": "gingerbread",
+        "product_code": "BS678",
         "Stock": 2,
         "Price": "RM 2.50",
         "Discount": "10%"
