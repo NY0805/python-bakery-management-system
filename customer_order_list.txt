@@ -6,7 +6,7 @@
             "Bread x1",
             "Cake x1"
         ],
-        "total_price (RM)": 15.00,
+        "total_price (RM)": 15.0,
         "status": "Processing"
     },
     "5684950188": {
@@ -16,7 +16,7 @@
             "Muffin x2",
             "Cake x1"
         ],
-        "total_price (RM)": 12.50,
+        "total_price (RM)": 12.5,
         "status": "Delivered"
     },
     "1544631417": {
@@ -26,7 +26,7 @@
             "Bread x1",
             "Pastry x2"
         ],
-        "total_price (RM)": 8.00,
+        "total_price (RM)": 8.0,
         "status": "Payment Complete"
     },
     "4418942694": {
@@ -45,7 +45,7 @@
             "Muffin x1",
             "Cake x2"
         ],
-        "total_price (RM)": 10.00,
+        "total_price (RM)": 10.0,
         "status": "Delivered"
     },
     "9026863080": {
@@ -54,7 +54,7 @@
         "items_ordered": [
             "Bagel x2"
         ],
-        "total_price (RM)": 24.00,
+        "total_price (RM)": 24.0,
         "status": "Processing"
     },
     "3716950492": {
@@ -64,7 +64,7 @@
             "Bread x3",
             "Pastry x1"
         ],
-        "total_price (RM)": 14.50,
+        "total_price (RM)": 14.5,
         "status": "Processing"
     },
     "2507494821": {
@@ -74,7 +74,7 @@
             "Muffin x2",
             "Bagel x1"
         ],
-        "total_price (RM)": 9.00,
+        "total_price (RM)": 9.0,
         "status": "Delivered"
     },
     "9648523077": {
@@ -84,7 +84,7 @@
             "Cake x1",
             "Bread x2"
         ],
-        "total_price (RM)": 11.00,
+        "total_price (RM)": 11.0,
         "status": "Payment Complete"
     },
     "2789401753": {
@@ -94,7 +94,7 @@
             "Pastry x3",
             "Bagel x2"
         ],
-        "total_price (RM)": 18.00,
+        "total_price (RM)": 18.0,
         "status": "Processing"
     },
     "5194803762": {
@@ -114,7 +114,7 @@
             "Pastry x1",
             "Muffin x2"
         ],
-        "total_price (RM)": 7.50,
+        "total_price (RM)": 7.5,
         "status": "Payment Complete"
     },
     "7745826904": {
@@ -124,7 +124,7 @@
             "Bread x1",
             "Biscuit x5"
         ],
-        "total_price (RM)": 6.50,
+        "total_price (RM)": 6.5,
         "status": "Processing"
     },
     "9856204139": {
@@ -134,7 +134,7 @@
             "Bagel x3",
             "Cake x1"
         ],
-        "total_price (RM)": 16.00,
+        "total_price (RM)": 16.0,
         "status": "Delivered"
     },
     "5619472380": {
@@ -154,7 +154,25 @@
             "Muffin x3",
             "Cake x2"
         ],
-        "total_price (RM)": 20.00,
+        "total_price (RM)": 20.0,
         "status": "Processing"
+    },
+    "3389297167": {
+        "order_id": "ORD017",
+        "username": "sos",
+        "items_ordered": [
+            "gingerbread x2"
+        ],
+        "total_price (RM)": 5.0,
+        "status": "Payment Complete"
+    },
+    "3433487365": {
+        "order_id": "ORD018",
+        "username": "jaemin",
+        "items_ordered": [
+            "apple pie x7"
+        ],
+        "total_price (RM)": 35.0,
+        "status": "Canceled"
     }
 }
