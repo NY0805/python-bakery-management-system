@@ -3,8 +3,8 @@
         "order_id": "ORD001",
         "username": "Mark0825",
         "items_ordered": [
-            "Bread x1",
-            "Cake x1"
+            "Bread x 1",
+            "Cake x 1"
         ],
         "total_price (RM)": 15.0,
         "status": "Preparing"
@@ -13,8 +13,8 @@
         "order_id": "ORD002",
         "username": "03jane_",
         "items_ordered": [
-            "Muffin x2",
-            "Cake x1"
+            "Muffin x 2",
+            "Cake x 1"
         ],
         "total_price (RM)": 12.5,
         "status": "Payment Completed"
@@ -23,8 +23,8 @@
         "order_id": "ORD003",
         "username": "_eddie",
         "items_ordered": [
-            "Bread x1",
-            "Pastry x2"
+            "Bread x 1",
+            "Pastry x 2"
         ],
         "total_price (RM)": 8.0,
         "status": "Canceled"
@@ -33,7 +33,7 @@
         "order_id": "ORD004",
         "username": "anna328_",
         "items_ordered": [
-            "Biscuit x3"
+            "Biscuit x 3"
         ],
         "total_price (RM)": 3.75,
         "status": "Payment Completed"
@@ -42,8 +42,8 @@
         "order_id": "ORD005",
         "username": "andrew_520",
         "items_ordered": [
-            "Muffin x1",
-            "Cake x2"
+            "Muffin x 1",
+            "Cake x 2"
         ],
         "total_price (RM)": 10.0,
         "status": "Preparing"
@@ -52,7 +52,7 @@
         "order_id": "ORD006",
         "username": "Ashley",
         "items_ordered": [
-            "Bagel x2"
+            "Bagel x 2"
         ],
         "total_price (RM)": 24.0,
         "status": "Canceled"
@@ -61,8 +61,8 @@
         "order_id": "ORD007",
         "username": "leo_tiger",
         "items_ordered": [
-            "Bread x3",
-            "Pastry x1"
+            "Bread x 3",
+            "Pastry x 1"
         ],
         "total_price (RM)": 14.5,
         "status": "Payment Completed"
@@ -71,8 +71,8 @@
         "order_id": "ORD008",
         "username": "julia_b",
         "items_ordered": [
-            "Muffin x2",
-            "Bagel x1"
+            "Muffin x 2",
+            "Bagel x 1"
         ],
         "total_price (RM)": 9.0,
         "status": "Preparing"
@@ -81,8 +81,8 @@
         "order_id": "ORD009",
         "username": "sam_93",
         "items_ordered": [
-            "Cake x1",
-            "Bread x2"
+            "Cake x 1",
+            "Bread x 2"
         ],
         "total_price (RM)": 11.0,
         "status": "Payment Completed"
@@ -91,8 +91,8 @@
         "order_id": "ORD010",
         "username": "violet23",
         "items_ordered": [
-            "Pastry x3",
-            "Bagel x2"
+            "Pastry x 3",
+            "Bagel x 2"
         ],
         "total_price (RM)": 18.0,
         "status": "Preparing"
@@ -101,8 +101,8 @@
         "order_id": "ORD011",
         "username": "johnny_br",
         "items_ordered": [
-            "Cake x1",
-            "Biscuit x4"
+            "Cake x 1",
+            "Biscuit x 4"
         ],
         "total_price (RM)": 12.25,
         "status": "Preparing"
@@ -111,8 +111,8 @@
         "order_id": "ORD012",
         "username": "ellie12",
         "items_ordered": [
-            "Pastry x1",
-            "Muffin x2"
+            "Pastry x 1",
+            "Muffin x 2"
         ],
         "total_price (RM)": 7.5,
         "status": "Payment Completed"
@@ -121,8 +121,8 @@
         "order_id": "ORD013",
         "username": "kyle_m",
         "items_ordered": [
-            "Bread x1",
-            "Biscuit x5"
+            "Bread x 1",
+            "Biscuit x 5"
         ],
         "total_price (RM)": 6.5,
         "status": "Payment Completed"
@@ -131,8 +131,8 @@
         "order_id": "ORD014",
         "username": "melody_r",
         "items_ordered": [
-            "Bagel x3",
-            "Cake x1"
+            "Bagel x 3",
+            "Cake x 1"
         ],
         "total_price (RM)": 16.0,
         "status": "Preparing"
@@ -141,8 +141,8 @@
         "order_id": "ORD015",
         "username": "harry_p",
         "items_ordered": [
-            "Pastry x2",
-            "Bread x1"
+            "Pastry x 2",
+            "Bread x 1"
         ],
         "total_price (RM)": 8.75,
         "status": "Payment Completed"
@@ -151,8 +151,8 @@
         "order_id": "ORD016",
         "username": "emily_w",
         "items_ordered": [
-            "Muffin x3",
-            "Cake x2"
+            "Muffin x 3",
+            "Cake x 2"
         ],
         "total_price (RM)": 20.0,
         "status": "Preparing"
@@ -161,7 +161,7 @@
         "order_id": "ORD017",
         "username": "sos",
         "items_ordered": [
-            "gingerbread x2"
+            "gingerbread x 2"
         ],
         "total_price (RM)": 5.0,
         "status": "Payment Completed"
@@ -170,7 +170,7 @@
         "order_id": "ORD018",
         "username": "jaemin",
         "items_ordered": [
-            "apple pie x7"
+            "apple pie x 7"
         ],
         "total_price (RM)": 35.0,
         "status": "Canceled"

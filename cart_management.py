@@ -160,7 +160,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     order_data[cart_id] = {
         "order_id": order_id,
         "username": customer_name,
-        "items_ordered": [f"{item['product_name']} x{item['quantity']}" for item in cart.values()],
+        "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
         "total_price (RM)": sum(item['quantity'] * float(item['price'].replace('RM ', '')) for item in cart.values()),
         "status": status
     }
