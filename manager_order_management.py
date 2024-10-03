@@ -28,60 +28,69 @@ order_list = load_data_from_customer_order_list()
 
 def order_management():
     while True:
-        print('\n\t\t\t\t\t\t\t\t\t\tORDER DETAILS')
-        print('-' * 105)
-        header = ['Order ID']
+        print('\n', '\t'*13, 'ORDER DETAILS')
+        print('-' * 125)
+        header = ['Cart Id']
         for value in order_list.values():
             for sub_key, sub_value in value.items():
                 header.append(sub_key.title().replace('_', ' '))
             break
 
-        print(f'{header[0]:<20}{header[1]:<20}{header[2]:<25}{header[3]:<22}{header[4]}')
-        print('-' * 105)
+        print(f'{header[0]:<19}{header[1]:<19}{header[2]:<20}{header[3]:<24}{header[4]:<26}{header[5]}')
+        print('-' * 125)
 
-        for order_id, order_details in order_list.items():
-            print(f'{order_id:<20}{order_details["username"]:<20}{order_details["items_ordered"][0]:<25}{order_details["total_price (RM)"]:<22}{order_details["status"]}')
+        for cart_id, order_details in order_list.items():
+            print(f'{cart_id:<19}{order_details["order_id"]:<19}{order_details["username"]:<20}{order_details["items_ordered"][0]:<24}{order_details["total_price (RM)"]:<26}{order_details["status"]}')
 
             for items in order_details['items_ordered'][1:]:
-                print(f'{"":<20}{"":<20}{items:<25}{"":<22}{""}')
+                print(f'{"":<19}{"":<19}{"":<20}{items:<24}{"":<26}{""}')
             print('')
-        print('-'*105, '\n')
+        print('-'*125, '\n')
 
-        while True:
-            order_id_to_update = input('Enter Order ID to update order status (or enter "cancel" to exit):\n>>> ')
-            if order_id_to_update not in order_list.keys() and order_id_to_update != 'cancel':
-                print('\n+-------------------------------------------+')
-                print('|⚠️ Order id not found. Please enter again. |')
-                print('+-------------------------------------------+\n')
-            elif order_id_to_update == 'cancel':
-                print('\nExiting to Manager Privilege......')
-                return False
-            else:
-                break
+        order_id_to_update = input('Enter Order ID to update order status (or enter "cancel" to exit):\n>>> ')
+        if order_id_to_update == 'cancel':
+            print('\nExiting to Manager Privilege...')
+            break  # Exit the entire loop
 
-        while True:
-            update_status = input('\nPlease update the status [processing, delivered, payment complete ("cancel" to return back)]:\n>>> ')
-            if update_status not in ['processing', 'delivered', 'payment complete'] and update_status != 'cancel':
-                print('\n+-------------------------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. (Case sensitive) |')
-                print('+-------------------------------------------------------+')
+            # Check if the order_id_to_update exists in order_list
+        for cart_id, order_details in order_list.items():
+            if order_details['order_id'] == order_id_to_update:
+                # Proceed to update the order status
+                while True:
+                    update_status = input('\nPlease update the status [preparing, payment complete, canceled (or enter "back" to return back)]:\n>>> ')
 
-            elif update_status == 'cancel':
-                break
+                    if update_status == 'back':
+                        break  # Exit the inner status update loop
 
-            else:
-                order_details = order_list[order_id_to_update]
-                status = order_details['status']
-                if update_status == status.lower():
-                    print('\n+---------------------------------------------------+')
-                    print('|⚠️ This is the current status. Please enter again. |')
-                    print('+---------------------------------------------------+')
+                    # Validate status input
+                    if update_status not in ['preparing', 'payment complete', 'canceled']:
+                        print('\n+-------------------------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter again. (Case sensitive) |')
+                        print('+-------------------------------------------------------+')
+                        continue  # Continue to the next iteration for valid input
 
-                else:
-                    status = update_status.title()
-                    save_info(order_list)
-                    print(f'\nStatus of order id {order_id_to_update} is updated to "{status}".\n')
-                    break
+                    # Check if the new status is different from the current status
+                    current_status = order_details['status'].lower()
+                    if update_status.lower() == current_status:
+                        print('\n+---------------------------------------------------+')
+                        print('|⚠️ This is the current status. Please enter again. |')
+                        print('+---------------------------------------------------+')
+                        continue  # Continue for a different input
+
+                    # Update the status and save the information
+                    order_details['status'] = update_status.title()  # Set the new status
+                    save_info(order_list)  # Assuming save_info is a function to save the order list
+                    print(f'\nStatus of order ID {order_id_to_update} is updated to "{order_details["status"]}".\n')
+                    break  # Exit the inner status update loop
+                break  # Exit the for-loop when the order ID is found
+        else:
+            # If the loop completes without finding the order_id, show a not found message
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Order ID not found. Please enter again. |')
+            print('+-------------------------------------------+\n')
+
+
+
 
 order_management()
 

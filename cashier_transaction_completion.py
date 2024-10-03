@@ -1,9 +1,11 @@
 import random
 from datetime import datetime  # %I = 01-12, %H = 00-23
 from system_administration_cashier import load_data_from_cashier
+from manager_order_management import load_data_from_customer_order_list
 
 overall_width = 100
 cashier = load_data_from_cashier()
+customer_info = load_data_from_customer_order_list()
 
 
 def centered(word, width):
@@ -14,8 +16,8 @@ def centered(word, width):
         print(word)
 
 
-def receipt():
-    print('')
+def receipt(customer):
+    print(' ')
     header = ['MORNING GLORY BAKERY',
               'Reg: 219875000123 (80851-Z)',
               '51, Lorong Maplewood, Taman Springfield, 47180, Puchong, Selangor.',
@@ -25,17 +27,31 @@ def receipt():
     for i in header:
         centered(i, overall_width)
 
+    #print('\n' + '-' * overall_width)
+    print('\n')
     current_time = datetime.now().strftime("%I:%M:%S %p")
     current_date = datetime.now().strftime("%d/%m/%Y")
-    print('\n' + current_time + current_date.rjust(overall_width-len(current_date)-1))
-    print('-' * overall_width)
+    print(current_time + current_date.rjust(overall_width-len(current_date)-1))
+
     invoice_second_part = random.randint(1000001, 10000000)
-    print('Invoice no: MGB-' + str(invoice_second_part), end='')
+    print(f'{"Invoice no":<11}: MGB-{str(invoice_second_part)}', end='')
     for cashier_details in cashier.values():
         cashier_username = cashier_details['cashier_username']
-        print('Cashier: '.rjust(overall_width-len(cashier_username)-23) + cashier_username)
+        print('Cashier: '.rjust(overall_width-len(cashier_username)-24) + cashier_username)
+
+    for cart_id, customer_details in customer_info.items():
+        if customer in cart_id:
+            username = customer_details['username']
+            order_id = customer_details['order_id']
+            print(f'{"Username":<11}: {username}')
+            print(f'{"Order ID":<11}: {order_id}')
+
+    summary_header = ['Item', 'Qty', 'Price(RM)', 'Amount(RM)']
+    print(f'\n{summary_header[0]:<40}{summary_header[1]:<25}{summary_header[2]:<25}{summary_header[3]}')
+    print('-' * overall_width)
 
 
 
 
-receipt()
+
+receipt(str(9648523077))

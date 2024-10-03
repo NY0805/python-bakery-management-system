@@ -2,7 +2,7 @@
     "B001": {
         "category": "Flours and Grains",
         "ingredient_name": "whole wheat flour",
-        "ingredient_form": "powdered",
+        "ingredient_form": "granules",
         "batch_number": "B001",
         "unit_measurement": "g",
         "quantity_purchased": 900.0,
