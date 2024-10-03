@@ -193,7 +193,7 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
 
     if choice == '1':
         print("\nPayment completed. Thank you for your purchase!")
-        save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Complete")
+        save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Completed")
         cart.clear()  # Clear the cart after payment
     elif choice == '2':
         print("\nYour order has been canceled.")

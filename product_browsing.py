@@ -29,12 +29,15 @@ def browse_products():
     try:
         # Display the products available to customers
         print('\nAvailable Products:')
+        print('-----------------------------------------------')
+
         for product_code, product in products.items():  # Get the product code from the dictionary key
-            print(f'Product Code: {product_code}')  # Display the product code from the key
+            print(f'Product Code: {product_code}')
             print(f'Product Name: {product["product_name"]}')
             print(f'Stock: {product["stock"]}')
             print(f'Price: {product["price"]}')
-            print(f'Description: {product["description"]}\n')
+            print(f'Description: {product["description"]}')
+            print('-----------------------------------------------')
 
     except FileNotFoundError:
         print('|⚠️Product data cannot be found.|')
