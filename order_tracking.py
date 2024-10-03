@@ -23,18 +23,20 @@ def order_tracking():
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
-    order_id = input('Enter your **Order ID**: ')  # Let the user input the actual order_id like ORD011
+    order_id = input('Enter your Order ID: ')  # Let the user input the actual order_id like ORD011
 
     # Search for the order by order_id
     order_found = False
     for order_key, order in orders.items():
         if order['order_id'] == order_id:  # Compare the input with the order_id in the order details
-            # Display order information
-            print(f'Order ID: {order_id}')
-            print(f'Username: {order["username"]}')
-            print(f'Items ordered: {order["items_ordered"]}')
-            print(f'Total Price: RM{order["total_price (RM)"]:.2f}')
-            print(f'Status: {order["status"]}')
+            print(f'\n{"Order Details":^55}')
+            print('-' * 55)
+            print(f'{"Order ID:":<20} {order_id}')
+            print(f'{"Username:":<20} {order["username"]}')
+            print(f'{"Items Ordered:":<20} {", ".join(order["items_ordered"])}')
+            print(f'{"Total Price:":<20} RM{order["total_price (RM)"]:.2f}')
+            print(f'{"Status:":<20} {order["status"]}')
+            print('-' * 55)
             order_found = True
             break
 

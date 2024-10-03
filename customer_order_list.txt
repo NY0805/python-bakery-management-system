@@ -7,7 +7,7 @@
             "Cake x1"
         ],
         "total_price (RM)": 15.0,
-        "status": "Processing"
+        "status": "Preparing"
     },
     "5684950188": {
         "order_id": "ORD002",
@@ -17,7 +17,7 @@
             "Cake x1"
         ],
         "total_price (RM)": 12.5,
-        "status": "Delivered"
+        "status": "Payment Completed"
     },
     "1544631417": {
         "order_id": "ORD003",
@@ -27,7 +27,7 @@
             "Pastry x2"
         ],
         "total_price (RM)": 8.0,
-        "status": "Payment Complete"
+        "status": "Canceled"
     },
     "4418942694": {
         "order_id": "ORD004",
@@ -36,7 +36,7 @@
             "Biscuit x3"
         ],
         "total_price (RM)": 3.75,
-        "status": "Delivered"
+        "status": "Payment Completed"
     },
     "7841554976": {
         "order_id": "ORD005",
@@ -46,7 +46,7 @@
             "Cake x2"
         ],
         "total_price (RM)": 10.0,
-        "status": "Delivered"
+        "status": "Preparing"
     },
     "9026863080": {
         "order_id": "ORD006",
@@ -55,7 +55,7 @@
             "Bagel x2"
         ],
         "total_price (RM)": 24.0,
-        "status": "Processing"
+        "status": "Canceled"
     },
     "3716950492": {
         "order_id": "ORD007",
@@ -65,7 +65,7 @@
             "Pastry x1"
         ],
         "total_price (RM)": 14.5,
-        "status": "Processing"
+        "status": "Payment Completed"
     },
     "2507494821": {
         "order_id": "ORD008",
@@ -75,7 +75,7 @@
             "Bagel x1"
         ],
         "total_price (RM)": 9.0,
-        "status": "Delivered"
+        "status": "Preparing"
     },
     "9648523077": {
         "order_id": "ORD009",
@@ -85,7 +85,7 @@
             "Bread x2"
         ],
         "total_price (RM)": 11.0,
-        "status": "Payment Complete"
+        "status": "Payment Completed"
     },
     "2789401753": {
         "order_id": "ORD010",
@@ -95,7 +95,7 @@
             "Bagel x2"
         ],
         "total_price (RM)": 18.0,
-        "status": "Processing"
+        "status": "Preparing"
     },
     "5194803762": {
         "order_id": "ORD011",
@@ -105,7 +105,7 @@
             "Biscuit x4"
         ],
         "total_price (RM)": 12.25,
-        "status": "Delivered"
+        "status": "Preparing"
     },
     "3852910374": {
         "order_id": "ORD012",
@@ -115,7 +115,7 @@
             "Muffin x2"
         ],
         "total_price (RM)": 7.5,
-        "status": "Payment Complete"
+        "status": "Payment Completed"
     },
     "7745826904": {
         "order_id": "ORD013",
@@ -125,7 +125,7 @@
             "Biscuit x5"
         ],
         "total_price (RM)": 6.5,
-        "status": "Processing"
+        "status": "Payment Completed"
     },
     "9856204139": {
         "order_id": "ORD014",
@@ -135,7 +135,7 @@
             "Cake x1"
         ],
         "total_price (RM)": 16.0,
-        "status": "Delivered"
+        "status": "Preparing"
     },
     "5619472380": {
         "order_id": "ORD015",
@@ -145,7 +145,7 @@
             "Bread x1"
         ],
         "total_price (RM)": 8.75,
-        "status": "Payment Complete"
+        "status": "Payment Completed"
     },
     "4096813270": {
         "order_id": "ORD016",
@@ -155,7 +155,7 @@
             "Cake x2"
         ],
         "total_price (RM)": 20.0,
-        "status": "Processing"
+        "status": "Preparing"
     },
     "3389297167": {
         "order_id": "ORD017",
@@ -164,7 +164,7 @@
             "gingerbread x2"
         ],
         "total_price (RM)": 5.0,
-        "status": "Payment Complete"
+        "status": "Payment Completed"
     },
     "3433487365": {
         "order_id": "ORD018",
