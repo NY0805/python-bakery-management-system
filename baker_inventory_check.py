@@ -129,8 +129,9 @@ def recipe_lists():
         if values['recipe_name'].lower() == recipe_choose.lower():
             print(f'{recipe_info[0].ljust(max_length + 2)}: {values['recipe_category']}')
             print(f'{recipe_info[1].ljust(max_length + 2)}: {values['recipe_name'].title()}')
-            print(f'\n{recipe_info[2]}: ')
-            for i, item in enumerate(values['ingredient_used'], start=1):
+            print(f'\n{recipe_info[2]}:')
+            ingredient_index = 1
+            for item in values['ingredient_used']:
 
                 max_length = 0
                 for items in values['ingredient_used']:
@@ -142,7 +143,28 @@ def recipe_lists():
                     if len(str(items[1])) > max_length_unit:
                         max_length_unit = len(str(items[1]))
 
-                print(f'{i}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
+                print(f'{ingredient_index}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
+                ingredient_index += 1
+
+            print(f'\n{recipe_info[3].ljust(max_length + 2)}: {values['ingredient_notes'].title()}')
+            print(f'\n{recipe_info[4]}:')
+            equipment_index = 1
+            for item in values['equipment_used']:
+                print(f'{equipment_index}. {item.title()}')
+                equipment_index += 1
+            print(f'\n{recipe_info[5].ljust(max_length + 2)}: {values['baking_temperature']}')
+            print(f'{recipe_info[6].ljust(max_length + 2)}: {values['baking_time']}')
+            print(f'\n{recipe_info[7]}:')
+            instruction_index = 1
+            for instruction in values['instructions']:
+                print(f'{instruction_index}. {instruction.title()}')
+                instruction_index += 1
+
+
+
+
+
+
 
 
 
