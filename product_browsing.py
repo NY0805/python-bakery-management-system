@@ -40,7 +40,7 @@ def browse_products():
             print('-----------------------------------------------')
 
     except FileNotFoundError:
-        print('|⚠️Product data cannot be found.|')
+        print('|⚠️Product data cannot be found!|')
 
 browse_products()
 

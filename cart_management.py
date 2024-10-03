@@ -237,7 +237,7 @@ def shopping_cart():
         elif option == '5':
             make_payment_or_cancel(cart, customer_name, cart_id)
         elif option == '6':
-            print("Thank you for using the shopping cart. Goodbye!")
+            print("Thank you for using shopping cart. Goodbye!")
             break
         else:
             print("|⚠️ Invalid option. Please try again.|")
