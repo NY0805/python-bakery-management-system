@@ -37,6 +37,7 @@ def browse_products():
             print(f'Stock: {product["stock"]}')
             print(f'Price: {product["price"]}')
             print(f'Description: {product["description"]}')
+            print()
             print('-----------------------------------------------')
 
     except FileNotFoundError:

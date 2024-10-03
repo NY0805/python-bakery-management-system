@@ -215,7 +215,7 @@ def shopping_cart():
     print('-----------------------------------------------')
 
     while True:
-        print("\nPlease select an option:")
+        print("\n Please select an option:")
         print()
         print("1. Add item")
         print("2. Remove item")
