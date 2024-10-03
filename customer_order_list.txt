@@ -6,7 +6,7 @@
             "banana bread x 1",
             "red velvet x 1"
         ],
-        "total_price (RM)": 15.00,
+        "total_price (RM)": 15.0,
         "status": "Preparing"
     },
     "5684950188": {
@@ -16,7 +16,7 @@
             "gingerbread x 2",
             "red velvet x 1"
         ],
-        "total_price (RM)": 12.50,
+        "total_price (RM)": 15.5,
         "status": "Payment Completed"
     },
     "1544631417": {
@@ -26,7 +26,7 @@
             "banana bread x 1",
             "apple pie x 2"
         ],
-        "total_price (RM)": 8.00,
+        "total_price (RM)": 14.5,
         "status": "Canceled"
     },
     "4418942694": {
@@ -35,7 +35,7 @@
         "items_ordered": [
             "gingerbread x 3"
         ],
-        "total_price (RM)": 3.75,
+        "total_price (RM)": 7.5,
         "status": "Payment Completed"
     },
     "7841554976": {
@@ -45,134 +45,134 @@
             "gingerbread x 1",
             "red velvet x 2"
         ],
-        "total_price (RM)": 10.00,
+        "total_price (RM)": 23.5,
         "status": "Preparing"
     },
-    "9026863080": {
+    "5548156914": {
         "order_id": "ORD006",
-        "username": "Ashley",
+        "username": "rachel_lee",
         "items_ordered": [
             "banana bread x 2"
         ],
-        "total_price (RM)": 24.00,
-        "status": "Canceled"
+        "total_price (RM)": 9.0,
+        "status": "Payment Completed"
     },
-    "3716950492": {
+    "9875428598": {
         "order_id": "ORD007",
-        "username": "leo_tiger",
+        "username": "john_smith",
         "items_ordered": [
             "banana bread x 3",
             "apple pie x 1"
         ],
-        "total_price (RM)": 14.50,
-        "status": "Payment Completed"
+        "total_price (RM)": 18.5,
+        "status": "Preparing"
     },
-    "2507494821": {
+    "4567891234": {
         "order_id": "ORD008",
-        "username": "julia_b",
+        "username": "mary_jane",
         "items_ordered": [
             "gingerbread x 2",
             "banana bread x 1"
         ],
-        "total_price (RM)": 9.00,
-        "status": "Preparing"
+        "total_price (RM)": 9.5,
+        "status": "Payment Completed"
     },
-    "9648523077": {
+    "6543219876": {
         "order_id": "ORD009",
-        "username": "sam_93",
+        "username": "lisa_wang",
         "items_ordered": [
             "red velvet x 1",
             "banana bread x 2"
         ],
-        "total_price (RM)": 11.00,
-        "status": "Payment Completed"
+        "total_price (RM)": 19.5,
+        "status": "Canceled"
     },
-    "2789401753": {
+    "3216549870": {
         "order_id": "ORD010",
-        "username": "violet23",
+        "username": "peter_chen",
         "items_ordered": [
             "apple pie x 3",
             "banana bread x 2"
         ],
-        "total_price (RM)": 18.00,
-        "status": "Preparing"
+        "total_price (RM)": 24.0,
+        "status": "Payment Completed"
     },
-    "5194803762": {
+    "1597534862": {
         "order_id": "ORD011",
-        "username": "johnny_br",
+        "username": "jessica_k",
         "items_ordered": [
             "red velvet x 1",
             "gingerbread x 4"
         ],
-        "total_price (RM)": 12.25,
+        "total_price (RM)": 20.5,
         "status": "Preparing"
     },
-    "3852910374": {
+    "7896541230": {
         "order_id": "ORD012",
-        "username": "ellie12",
+        "username": "chris_d",
         "items_ordered": [
             "apple pie x 1",
             "gingerbread x 2"
         ],
-        "total_price (RM)": 7.50,
+        "total_price (RM)": 10.0,
         "status": "Payment Completed"
     },
-    "7745826904": {
+    "2345678901": {
         "order_id": "ORD013",
-        "username": "kyle_m",
+        "username": "karen_w",
         "items_ordered": [
             "banana bread x 1",
             "gingerbread x 5"
         ],
-        "total_price (RM)": 6.50,
-        "status": "Payment Completed"
+        "total_price (RM)": 17.0,
+        "status": "Canceled"
     },
-    "9856204139": {
+    "8765432109": {
         "order_id": "ORD014",
-        "username": "melody_r",
+        "username": "nick_t",
         "items_ordered": [
             "banana bread x 3",
             "red velvet x 1"
         ],
-        "total_price (RM)": 16.00,
+        "total_price (RM)": 24.0,
         "status": "Preparing"
     },
-    "5619472380": {
+    "1234567890": {
         "order_id": "ORD015",
-        "username": "harry_p",
+        "username": "mike_h",
         "items_ordered": [
             "gingerbread x 2",
             "banana bread x 1"
         ],
-        "total_price (RM)": 8.75,
+        "total_price (RM)": 9.5,
         "status": "Payment Completed"
     },
-    "4096813270": {
+    "1357924680": {
         "order_id": "ORD016",
-        "username": "emily_w",
+        "username": "lily_x",
         "items_ordered": [
             "gingerbread x 3",
             "red velvet x 2"
         ],
-        "total_price (RM)": 20.00,
-        "status": "Preparing"
+        "total_price (RM)": 28.5,
+        "status": "Canceled"
     },
-    "3389297167": {
+    "2468135790": {
         "order_id": "ORD017",
-        "username": "sos322",
+        "username": "tom_b",
         "items_ordered": [
             "gingerbread x 2"
         ],
-        "total_price (RM)": 5.00,
+        "total_price (RM)": 5.0,
         "status": "Payment Completed"
     },
-    "3433487365": {
+    "3579246801": {
         "order_id": "ORD018",
-        "username": "jaemin",
+        "username": "sara_j",
         "items_ordered": [
             "apple pie x 7"
         ],
-        "total_price (RM)": 35.00,
-        "status": "Canceled"
+        "total_price (RM)": 35.0,
+        "status": "Preparing"
     }
 }

@@ -5,7 +5,6 @@ from collections import defaultdict
 
 product_data = product_menu.product_data
 
-
 # Function to generate a 10-digit numeric cart_id
 def generate_cart_id():
     return ''.join([str(random.randint(0, 9)) for _ in range(10)])
@@ -58,7 +57,7 @@ def add_item_to_cart(cart):
             product_price = None
             for key, value in manager_data.items():
                 if value['product_name'] == product_name:
-                    product_price = value.get("price", None)
+                    product_price = float(value.get("price", 0).replace('RM ', ''))  # Use float directly
                     break  # Exit loop once the product is found
 
             if product_price is not None:  # Check if price is available
@@ -73,20 +72,20 @@ def add_item_to_cart(cart):
                         print("Invalid quantity. Please enter a valid number greater than 0.")
 
                 # Calculate total price
-                total_price = float(product_price.replace('RM ', '')) * quantity  # Calculate total price
-                formatted_total_price = f"{total_price:.2f}"  # Format to 2 decimal places
+                total_price = product_price * quantity  # Calculate total price
+                formatted_total_price = f"{total_price:.1f}"  # Format to 1 decimal place
 
                 # Add to cart or update existing quantity
                 if product_code_input not in cart:
                     cart[product_code_input] = {
                         'product_name': product_name,
-                        'price': product_price,
+                        'price': product_price,  # Store price as float
                         'quantity': 0  # Initialize quantity
                     }
                 cart[product_code_input]['quantity'] += quantity  # Update quantity in cart
 
                 print(f"\n{product_name} x{quantity} has been added to your cart.")
-                print(f"Total price for this addition: {product_price} x {quantity} = RM {formatted_total_price}")
+                print(f"Total price for this addition: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
             else:
                 print(f"\nThe price for {product_name} is not available in the manager's inventory. Cannot add to cart.")
             break  # Exit loop after finding the product
@@ -118,11 +117,11 @@ def modify_item_quantity(cart):
             cart[product_code]['quantity'] = new_quantity
 
             # Calculate new total price
-            new_total_price = new_quantity * float(cart[product_code]['price'].replace('RM ', ''))
+            new_total_price = new_quantity * cart[product_code]['price']
 
             # Display updated information and new total price
             print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
-            print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.2f}")
+            print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.1f}")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
     else:
@@ -140,16 +139,13 @@ def view_cart(cart):
     print("-" * 40)
 
     for item in cart.values():
-        # Convert price to float after removing 'RM ' if it exists
-        item_price = float(item['price'].replace('RM ', ''))
-        item_total = item['quantity'] * item_price
-        print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
+        item_total = item['quantity'] * item['price']
+        print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.1f}")
 
     print("-" * 40)
 
 
 # Function to save the order to a JSON file with cart_id as key
-
 def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     try:
         with open("customer_order_list.txt", "r") as file:
@@ -162,7 +158,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
         "order_id": order_id,
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
-        "total_price (RM)": f"RM {sum(item['quantity'] * float(item['price'].replace('RM ', '')) for item in cart.values()):.2f}",  # Format total price
+        "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.1f}",  # Format total price
         "status": status
     }
 
@@ -179,8 +175,12 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
         return
 
     print("\nWould you like to:")
+    print('...............................................')
+    print()
     print("1. Proceed with your payment")
     print("2. Cancel your order")
+    print()
+    print('...............................................')
 
     choice = input("Please select your option: ").strip()
 
@@ -238,13 +238,11 @@ def shopping_cart():
         elif option == '5':
             make_payment_or_cancel(cart, customer_name, cart_id)
         elif option == '6':
-            print("Thank you for using shopping cart. Goodbye!")
+            print("Exiting to main menu...Goodbye!")
             break
         else:
-            print("|⚠️ Invalid option. Please try again.|")
+            print("⚠️ Invalid option! Please try again.")
 
-
-# Call the cart management function
+# Start the shopping cart process
 product_menu.menu()
 shopping_cart()
-
