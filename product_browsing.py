@@ -32,6 +32,7 @@ def browse_products():
         print('-----------------------------------------------')
 
         for product_code, product in products.items():  # Get the product code from the dictionary key
+            print()
             print(f'Product Code: {product_code}')
             print(f'Product Name: {product["product_name"]}')
             print(f'Stock: {product["stock"]}')

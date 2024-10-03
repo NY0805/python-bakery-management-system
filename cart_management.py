@@ -72,7 +72,9 @@ def add_item_to_cart(cart):
                     else:
                         print("Invalid quantity. Please enter a valid number greater than 0.")
 
+                # Calculate total price
                 total_price = float(product_price.replace('RM ', '')) * quantity  # Calculate total price
+                formatted_total_price = f"{total_price:.2f}"  # Format to 2 decimal places
 
                 # Add to cart or update existing quantity
                 if product_code_input not in cart:
@@ -84,10 +86,9 @@ def add_item_to_cart(cart):
                 cart[product_code_input]['quantity'] += quantity  # Update quantity in cart
 
                 print(f"\n{product_name} x{quantity} has been added to your cart.")
-                print(f"Total price for this addition: {product_price} x {quantity} = RM {total_price:.2f}")
+                print(f"Total price for this addition: {product_price} x {quantity} = RM {formatted_total_price}")
             else:
-                print(
-                    f"\nThe price for {product_name} is not available in the manager's inventory. Cannot add to cart.")
+                print(f"\nThe price for {product_name} is not available in the manager's inventory. Cannot add to cart.")
             break  # Exit loop after finding the product
 
     if not product_found:
@@ -147,8 +148,8 @@ def view_cart(cart):
     print("-" * 40)
 
 
-
 # Function to save the order to a JSON file with cart_id as key
+
 def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     try:
         with open("customer_order_list.txt", "r") as file:
@@ -161,7 +162,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
         "order_id": order_id,
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
-        "total_price (RM)": sum(item['quantity'] * float(item['price'].replace('RM ', '')) for item in cart.values()),
+        "total_price (RM)": f"RM {sum(item['quantity'] * float(item['price'].replace('RM ', '')) for item in cart.values()):.2f}",  # Format total price
         "status": status
     }
 
