@@ -29,7 +29,10 @@ def order_tracking():
     order_found = False
     for order_key, order in orders.items():
         if order['order_id'] == order_id:  # Compare the input with the order_id in the order details
-            print(f'\n{"Order Details":^55}')
+            print('**********************************')
+            print(f'\n{"Order Details":^30}')
+            print('**********************************')
+            print()
             print('-' * 55)
             print(f'{"Order ID:":<20} {order_id}')
             print(f'{"Username:":<20} {order["username"]}')
