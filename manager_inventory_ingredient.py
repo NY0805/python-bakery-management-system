@@ -785,6 +785,6 @@ def update_ingredient():
             print('+--------------------------+')
 
 
-update_ingredient()
+#update_ingredient()
 #ingredient_management()
 

@@ -2,10 +2,12 @@ import random
 from datetime import datetime  # %I = 01-12, %H = 00-23
 from system_administration_cashier import load_data_from_cashier
 from manager_order_management import load_data_from_customer_order_list
+from manager_inventory_control import load_data_from_manager_product_inventory
 
 overall_width = 100
 cashier = load_data_from_cashier()
 customer_info = load_data_from_customer_order_list()
+inventory = load_data_from_manager_product_inventory()
 
 
 def centered(word, width):
@@ -22,17 +24,15 @@ def receipt(customer):
               'Reg: 219875000123 (80851-Z)',
               '51, Lorong Maplewood, Taman Springfield, 47180, Puchong, Selangor.',
               'Tel: 04-5678951',
-              'Email: morningglorybakery@gmail.com',
-              'CASH SALES']
+              'Email: morningglorybakery@gmail.com']
     for i in header:
         centered(i, overall_width)
 
-    #print('\n' + '-' * overall_width)
     print('\n')
     current_time = datetime.now().strftime("%I:%M:%S %p")
     current_date = datetime.now().strftime("%d/%m/%Y")
     print(current_time + current_date.rjust(overall_width-len(current_date)-1))
-
+    print(' ')
     invoice_second_part = random.randint(1000001, 10000000)
     print(f'{"Invoice no":<11}: MGB-{str(invoice_second_part)}', end='')
     for cashier_details in cashier.values():
@@ -45,13 +45,34 @@ def receipt(customer):
             order_id = customer_details['order_id']
             print(f'{"Username":<11}: {username}')
             print(f'{"Order ID":<11}: {order_id}')
+            print(f'{"Cart ID":<11}: {cart_id}')
 
     summary_header = ['Item', 'Qty', 'Price(RM)', 'Amount(RM)']
     print(f'\n{summary_header[0]:<40}{summary_header[1]:<25}{summary_header[2]:<25}{summary_header[3]}')
     print('-' * overall_width)
 
+    for cart_id, customer_details in customer_info.items():
+        if str(customer) in cart_id:
+            #print(f'{" ":<40}{"":<25}{"":<25}{""}')
+            for item in customer_details['items_ordered']:
+                item_name, quantity = item.split('x')
 
+                print(f'{item_name.title():<40}{quantity:<25}{"":<25}{customer_details["total_price (RM)"]}')
+                '''for product_details in inventory.values():
+                    if item_name == product_details['product_name']:
+                        item_price = product_details['price'].replace('RM ', '')'''
 
+    print('')
+    print('-' * overall_width)
+    print(f'{"Points earned: ":<65}{"Subtotal: ":<25}')
+    print('Discount: '.rjust(75))
+    print('Service tax @ 6%:'.rjust(74))
+    print('\n' + 'TOTAL: '.rjust(75) + '\n' * 3)
+    warning = 'Goods sold are not returnable and refundable !'
+
+    centered(warning, overall_width)
+    appreciation = '***** Thank You Please Come Again *****'
+    centered(appreciation, overall_width)
 
 
 receipt(str(9648523077))
