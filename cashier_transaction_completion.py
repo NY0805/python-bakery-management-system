@@ -1,13 +1,37 @@
 import random
+import json
 from datetime import datetime  # %I = 01-12, %H = 00-23
 from system_administration_cashier import load_data_from_cashier
 from manager_order_management import load_data_from_customer_order_list
 from manager_inventory_control import load_data_from_manager_product_inventory
 
+
+def load_data_from_cashier_transaction_keeping():
+    try:
+        file = open('cashier_transaction_keeping.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
+
+
+def save_info(transaction_keeping):
+    file = open('cashier_transaction_keeping.txt', 'w')  # open the file to write
+    json.dump(transaction_keeping, file,indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file.close()  # close the file after writing
+
 overall_width = 100
 cashier = load_data_from_cashier()
 customer_info = load_data_from_customer_order_list()
 inventory = load_data_from_manager_product_inventory()
+transaction_keeping = load_data_from_cashier_transaction_keeping()
 
 
 def centered(word, width):
@@ -65,11 +89,14 @@ def receipt(customer):
     print('-' * overall_width)
 
     subtotal = sum(total_amount)
-    print(f'{"Points earned: ":<65}{"Subtotal: ":<25}{subtotal:.2f}')
-    print('Discount: '.rjust(75))
+    print(f'{"Points earned: "}{subtotal * 10:<50}{"Subtotal: ":<25}{subtotal:.2f}')
+
+    discounted_price = 0
+    print(f'{"Discount: ".rjust(75)}{"".ljust(15)}{discounted_price}')
     service_tax = subtotal * 0.06
-    print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax}')
-    print(f'\n{"TOTAL: ".rjust(75)}{"".ljust(15)}{subtotal + service_tax}')
+    print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
+    total = subtotal + service_tax - discounted_price
+    print(f'\n{"TOTAL: ".rjust(75)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
     warning = 'Goods sold are not returnable and refundable !'
@@ -77,5 +104,14 @@ def receipt(customer):
     appreciation = '***** Thank You Please Come Again *****'
     centered(appreciation, overall_width)
 
+    for cart_id, customer_details in customer_info.items():
+        if customer == cart_id:
+            transaction_keeping[customer] = {
+                "order_id": customer_details['order_id'],
+                "order_date": current_date,
+                "total_spend": total
+            }
+    save_info(transaction_keeping)
 
-receipt(str(1357924680))
+
+receipt(str(5580946551))
