@@ -132,7 +132,7 @@ def manage_discounts():
         elif choice == '5':
             confirm_exit = input("Are you sure you want to exit? yes=y / no=n: ").lower()
             if confirm_exit == 'y':
-                print("***Exiting Discount Management. Goodbye!***")
+                print("*** Exiting Discount Management. Goodbye! ***")
                 break
             else:
                 print("Returning to the menu.")

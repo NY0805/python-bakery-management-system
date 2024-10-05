@@ -37,7 +37,7 @@ def order_tracking():
             print(f'{"Order ID:":<20} {order_id}')
             print(f'{"Username:":<20} {order["username"]}')
             print(f'{"Items Ordered:":<20} {", ".join(order["items_ordered"])}')
-            print(f'{"Total Price:":<20} RM{order["total_price (RM)"]:.2f}')
+            print(f'{"Total Price:":<20} RM{order["total_price (RM)"]:.1f}')
             print(f'{"Status:":<20} {order["status"]}')
             print('-' * 55)
             order_found = True

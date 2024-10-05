@@ -72,7 +72,7 @@ def add_item_to_cart(cart):
                     print("Invalid quantity. Please enter a valid number greater than 0.")
 
             # Calculate the total price
-            total_price = product_price * quantity  # Calculate total price
+            total_price = float(product_price * quantity)  # Calculate total price as float
             formatted_total_price = f"{total_price:.1f}"  # Format to 1 decimal place
 
             # Add to cart or update existing quantity
@@ -85,7 +85,7 @@ def add_item_to_cart(cart):
             cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
 
             print(f"\n{product_name} x{quantity} has been added to your cart.")
-            print(f"Total price for this addition: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
+            print(f"Total price: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
             return  # Exit the function after processing
 
     # If the product is not found after the loop
@@ -181,7 +181,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     print("Order has been saved successfully.")
 
 
-def make_payment_or_cancel(cart, customer_name, cart_id):
+def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty. Please add items before proceeding to checkout.")
         return
@@ -234,7 +234,7 @@ def shopping_cart():
         print("2. Remove item")
         print("3. Modify item quantity in cart")
         print("4. View cart")
-        print("5. Make payment or cancel")
+        print("5. Checkout or cancel")
         print("6. Exit to main menu")
 
         option = input("Select your option: ").strip()
@@ -248,7 +248,7 @@ def shopping_cart():
         elif option == '4':
             view_cart(cart)
         elif option == '5':
-            make_payment_or_cancel(cart, customer_name, cart_id)
+            checkout_or_cancel(cart, customer_name, cart_id)
         elif option == '6':
             print("Exiting to main menu...Goodbye!")
             break

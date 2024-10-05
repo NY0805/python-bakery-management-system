@@ -3,60 +3,72 @@
         "username": "Mark0825",
         "total_spending (RM)": 55.0,
         "loyalty_points": 550,
-        "status": "Bronze"
+        "status": "MORNING GLORY'S BRONZE",
+        "discount_per_point (RM)": 0.02
     },
     "5684950188": {
         "username": "03jane_",
         "total_spending (RM)": 150.0,
         "loyalty_points": 1500,
-        "status": "Silver"
+        "status": "MORNING GLORY'S SILVER",
+        "discount_per_point (RM)": 0.05
     },
     "1544631417": {
         "username": "_eddie",
         "total_spending (RM)": 25.0,
         "loyalty_points": 250,
-        "status": "Standard"
+        "status": "Standard",
+        "discount_per_point (RM)": 0.00
     },
     "4418942694": {
         "username": "anna328_",
         "total_spending (RM)": 45.0,
         "loyalty_points": 450,
-        "status": "Standard"
+        "status": "Standard",
+        "discount_per_point (RM)": 0.00
     },
     "7841554976": {
         "username": "andrew_520",
         "total_spending (RM)": 205.0,
         "loyalty_points": 2050,
-        "status": "Gold"
+        "status": "MORNING GLORY'S GOLD",
+        "discount_per_point (RM)": 0.10
     },
     "9026863080": {
         "username": "Ashley",
         "total_spending (RM)": 95.0,
         "loyalty_points": 950,
-        "status": "Bronze"
+        "status": "MORNING GLORY'S BRONZE",
+        "discount_per_point (RM)": 0.02
     },
     "3716950492": {
         "username": "leo_tiger",
         "total_spending (RM)": 110.0,
         "loyalty_points": 1100,
-        "status": "Silver"
+        "status": "MORNING GLORY'S SILVER",
+        "discount_per_point (RM)": 0.05
     },
     "2507494821": {
         "username": "julia_b",
         "total_spending (RM)": 210.0,
         "loyalty_points": 2100,
-        "status": "Gold"
+        "status": "MORNING GLORY'S GOLD",
+        "discount_per_point (RM)": 0.10
     },
     "9648523077": {
         "username": "sam_93",
         "total_spending (RM)": 65.0,
         "loyalty_points": 650,
-        "status": "Bronze"
+        "status": "MORNING GLORY'S BRONZE",
+        "discount_per_point (RM)": 0.02
     },
     "2789401753": {
         "username": "violet23",
         "total_spending (RM)": 85.0,
         "loyalty_points": 850,
-        "status": "Bronze"
+        "status": "MORNING GLORY'S BRONZE",
+        "discount_per_point (RM)": 0.02
     }
 }
+
+
