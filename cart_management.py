@@ -42,6 +42,7 @@ def load_manager_data():
 
 
 def add_item_to_cart(cart):
+    product_menu.menu()
     baker_data = load_baker_data()  # Load baker product data
     manager_data = load_manager_data()  # Load manager product data
 
@@ -202,7 +203,7 @@ def make_payment_or_cancel(cart, customer_name, cart_id):
 # Main shopping cart function
 def shopping_cart():
     cart = defaultdict(lambda: {'quantity': 0})  # Initialize cart using defaultdict
-    customer_name = input("Please enter your name: ")
+    customer_name = input("Please enter your username: ")
     cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
     print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
 
@@ -239,5 +240,4 @@ def shopping_cart():
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-product_menu.menu()
 shopping_cart()
