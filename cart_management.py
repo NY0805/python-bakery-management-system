@@ -5,6 +5,7 @@ from collections import defaultdict
 
 product_data = product_menu.product_data
 
+
 # Function to generate a 10-digit numeric cart_id
 def generate_cart_id():
     return ''.join([str(random.randint(0, 9)) for _ in range(10)])
@@ -90,38 +91,53 @@ def add_item_to_cart(cart):
     # If the product is not found after the loop
     print("Invalid product code. Please ensure you entered it correctly.")
 
+
 # Function to remove an item from the cart
 def remove_item_from_cart(cart):
-    product_code = input("\nPlease enter the product code of the item you wish to remove: ").strip()
-    if product_code in cart:
-        del cart[product_code]
-        print(f"Product {product_code} has been removed from the cart successfully!")
-    else:
-        print("Product cannot be found in the cart.")
+    while True:
+        product_code = input("\nPlease enter the product code of the item you wish to remove: ").strip()
+        if product_code in cart:
+            del cart[product_code]
+            print(f"Product {product_code} has been removed from the cart successfully!")
+        else:
+            print("Product cannot be found in the cart.")
+
+        continue_removing = input(
+            "\nDo you want to continue removing from the cart? (yes = y / no = n): ").lower().strip()
+        if continue_removing != 'y':
+            print("Exiting item removal process.")
+            break
 
 
 # Function to modify the quantity of an item in the cart
 def modify_item_quantity(cart):
-    product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
-    if product_code in cart:
-        try:
-            new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
-            if new_quantity < 0:
-                print("Quantity cannot be negative.")
-                return
-            # Update quantity
-            cart[product_code]['quantity'] = new_quantity
+    while True:
+        product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
+        if product_code in cart:
+            try:
+                new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
+                if new_quantity < 0:
+                    print("Quantity cannot be negative.")
+                    return
+                # Update quantity
+                cart[product_code]['quantity'] = new_quantity
 
-            # Calculate new total price
-            new_total_price = new_quantity * cart[product_code]['price']
+                # Calculate new total price
+                new_total_price = new_quantity * cart[product_code]['price']
 
-            # Display updated information and new total price
-            print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
-            print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.1f}")
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-    else:
-        print("⚠️ Product cannot be found in the cart!")
+                # Display updated information and new total price
+                print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
+                print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.1f}")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+        else:
+            print("⚠️ Product cannot be found in the cart!")
+
+        # Ask if the user wants to continue modifying items
+        continue_modifying = input("\nDo you want to continue modifying item quantities? (yes = y / no = n): ").lower().strip()
+        if continue_modifying != 'y':
+            print("Exiting item quantity modification process.")
+            break
 
 
 # Function to view the cart
