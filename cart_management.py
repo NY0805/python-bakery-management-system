@@ -46,53 +46,48 @@ def add_item_to_cart(cart):
     manager_data = load_manager_data()  # Load manager product data
 
     product_code_input = input("\nEnter the product code: ").strip()
-    # Check if the product code exists in baker_data
-    product_found = False  # Flag to check if product is found
+
+    # Directly search for the product in baker_data
     for item in baker_data.values():
         if item['product_code'] == product_code_input:
-            product_found = True
             product_name = item["product_name"]  # Retrieve product name
 
-            # Get the price from manager_data using the correct product name
-            product_price = None
+            # Get the price from manager_data
             for key, value in manager_data.items():
                 if value['product_name'] == product_name:
-                    product_price = float(value.get("price", 0).replace('RM ', ''))  # Use float directly
+                    product_price = float(value.get("price", 0).replace('RM ', ''))  # Convert price to float
                     break  # Exit loop once the product is found
 
-            if product_price is not None:  # Check if price is available
-                while True:  # Loop until valid quantity is entered
-                    quantity = input(f"How many {product_name} would you like to add? ")
+            # Get the quantity to add to the cart
+            while True:  # Loop until a valid quantity is entered
+                quantity = input(f"How many {product_name} would you like to add? ")
 
-                    # Validate the quantity input
-                    if quantity.isdigit() and int(quantity) > 0:
-                        quantity = int(quantity)
-                        break  # Exit loop if valid input
-                    else:
-                        print("Invalid quantity. Please enter a valid number greater than 0.")
+                # Validate the quantity input
+                if quantity.isdigit() and int(quantity) > 0:
+                    quantity = int(quantity)
+                    break  # Exit loop if valid input
+                else:
+                    print("Invalid quantity. Please enter a valid number greater than 0.")
 
-                # Calculate total price
-                total_price = product_price * quantity  # Calculate total price
-                formatted_total_price = f"{total_price:.1f}"  # Format to 1 decimal place
+            # Calculate the total price
+            total_price = product_price * quantity  # Calculate total price
+            formatted_total_price = f"{total_price:.1f}"  # Format to 1 decimal place
 
-                # Add to cart or update existing quantity
-                if product_code_input not in cart:
-                    cart[product_code_input] = {
-                        'product_name': product_name,
-                        'price': product_price,  # Store price as float
-                        'quantity': 0  # Initialize quantity
-                    }
-                cart[product_code_input]['quantity'] += quantity  # Update quantity in cart
+            # Add to cart or update existing quantity
+            if product_code_input not in cart:
+                cart[product_code_input] = {
+                    'product_name': product_name,
+                    'price': product_price,  # Store price as float
+                    'quantity': 0  # Initialize quantity
+                }
+            cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
 
-                print(f"\n{product_name} x{quantity} has been added to your cart.")
-                print(f"Total price for this addition: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
-            else:
-                print(f"\nThe price for {product_name} is not available in the manager's inventory. Cannot add to cart.")
-            break  # Exit loop after finding the product
+            print(f"\n{product_name} x{quantity} has been added to your cart.")
+            print(f"Total price for this addition: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
+            return  # Exit the function after processing
 
-    if not product_found:
-        print("Invalid product code. Please ensure you entered it correctly.")
-
+    # If the product is not found after the loop
+    print("Invalid product code. Please ensure you entered it correctly.")
 
 # Function to remove an item from the cart
 def remove_item_from_cart(cart):

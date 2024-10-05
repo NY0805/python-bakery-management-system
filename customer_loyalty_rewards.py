@@ -5,7 +5,6 @@ BASE_POINTS_PER_RM = 10  # Points earned per RM spent
 BRONZE_REQUIREMENT = 500  # Points needed for Bronze status
 SILVER_REQUIREMENT = 1000  # Points needed for Silver status
 GOLD_REQUIREMENT = 2000  # Points needed for Gold status
-FREE_SHIPPING_THRESHOLD = 350  # Points needed for free shipping
 
 
 def load_customer_data():
@@ -44,24 +43,6 @@ def update_loyalty_status(points_balance):
         return "MORNING GLORY'S BRONZE"
     else:
         return "Standard"
-
-
-def check_free_shipping(username):
-    customers = load_customer_data()
-    if username in customers:
-        customer = customers[username]
-        points_balance = customer['loyalty_points']
-        status = customer.get('status', 'Standard')
-
-        # Gold members automatically have free shipping
-        if status == "Gold":
-            print("As a Gold member, you are eligible for free shipping!")
-        elif points_balance >= FREE_SHIPPING_THRESHOLD:
-            print("You are eligible for free shipping!")
-        else:
-            print(f"You need {FREE_SHIPPING_THRESHOLD - points_balance} more points to be eligible for free shipping.")
-    else:
-        print("|⚠️Customer cannot be found!|")
 
 
 def update_purchase_history(username, purchase_amount):
@@ -124,8 +105,7 @@ def loyalty_rewards():
         print()
         print("1. Update Purchase History")
         print("2. View Loyalty Rewards")
-        print("3. Check Free Shipping Eligibility")
-        print("4. Exit to main menu")
+        print("3. Exit to main menu")
 
         choice = input("Select your option:  ")
 
@@ -141,10 +121,6 @@ def loyalty_rewards():
             view_loyalty_rewards()
 
         elif choice == '3':
-            username = input("Enter your username: ")
-            check_free_shipping(username)
-
-        elif choice == '4':
             print("Thank you for using the Customer Loyalty Program. Goodbye!")
             break
 
