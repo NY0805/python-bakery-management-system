@@ -31,11 +31,10 @@ def save_info(manager_info):
     file.close()  # close the file after writing
 
 
-manager_info = load_data_from_manager()
+manager_info = load_data_from_manager()  # store the data that retrieved from file into manager_info
 
 
 def manager_accounts():
-    # initialize 'info' as the name of dictionary that store data loaded from file
 
     print('\n+----------------------------------------------------------------+')
     print('|⚠️ This is your FIRST TIME login, kindly complete your profile. |')

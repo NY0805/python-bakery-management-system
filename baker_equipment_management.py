@@ -4,6 +4,7 @@ from datetime import datetime
 import time
 
 
+# loads baker equipment data from the file
 def load_data_from_baker_equipment():
     try:
         file = open('baker_equipment.txt', 'r')  # open the file and read
@@ -21,6 +22,7 @@ def load_data_from_baker_equipment():
         return {}  # return empty dictionary if the file does not exist
 
 
+# loads manager notification data from the file
 def load_data_from_manager_notifications():
     try:
         file = open('notification.txt', 'r')  # open the file and read
@@ -38,6 +40,7 @@ def load_data_from_manager_notifications():
         return {}  # return empty dictionary if the file does not exist
 
 
+# function that save baker equipment data to 2 different files
 def save_info_equipment_details(equipment_details):
     file = open('baker_equipment.txt', 'w')  # open the file to write
     json.dump(equipment_details, file,
@@ -52,6 +55,7 @@ def save_info_equipment_management(equipment_management):
     file.close()  # close the file after writing
 
 
+# empty entries validation function
 def validation_empty_entries(info):
     if info:
         return True
@@ -60,6 +64,7 @@ def validation_empty_entries(info):
         return False
 
 
+# function that validate digits only
 def validation_digit_only(info):
     if info.isdigit():
         return True

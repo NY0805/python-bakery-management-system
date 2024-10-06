@@ -26,39 +26,39 @@ def save_info(cashier_info):
     file.close()  # close the file after writing
 
 
-cashier_info = load_data_from_file()
+cashier_info = load_data_from_file()  # store the data that retrieved from file into cashier_info
 
 
 def cashier_accounts():
-    # initialize 'info' as the name of dictionary that store data loaded from file
-
+    #
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'CASHIER')
     print('----------------------------------------------------')
     cashier_name = input('Name: ')
-    if cashier_name in cashier_info:
-        cashier_username = input('Username: ')
-        while cashier_username != (cashier_info[cashier_name]['cashier_username']):
+    if cashier_name in cashier_info:  # check if cashier name in the cashier_info
+        cashier_username = input('Username: ')  # ask for username
+        while cashier_username != (cashier_info[cashier_name]['cashier_username']):  # continue looping if username not found in cashier_info
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
             cashier_username = input('Username: ')
 
-        cashier_password = input('Password: ')
-        while len(cashier_password) < 8 or len(cashier_password) > 12:
+        cashier_password = input('Password: ')  # ask for password
+        while len(cashier_password) < 8 or len(cashier_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
             print('+---------------------------------------------------------------------------+\n')
             cashier_password = input('Password: ')
 
-        while cashier_password != 'securec@sh$':
+        while cashier_password != 'securec@sh$':  # continue to validate the password of cashier after the password length is correct
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect password. Please enter again. |')
             print('+-------------------------------------------+\n')
             cashier_password = input('Password: ')
 
-        print('\nLogin successfully!')
+        print('\nLogin successfully!')  # login successfully if the password meet the 2 requirements above
         print('Welcome, cashier', cashier_name, '!')
+        #  display cashier privilege
         while True:
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'CASHIER PRIVILEGE')
@@ -69,6 +69,7 @@ def cashier_accounts():
                   'd. Reporting\n'
                   'e. Exit')
 
+            #  collect the choice of user and execute corresponding functions
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
 
             if choice == 'a':
@@ -92,12 +93,13 @@ def cashier_accounts():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
 
+    # notify users they are not a cashier if their names not in cashier_info
     else:
         print('\n+--------------------------------------------------------------+')
         print('|⚠️ You are not a cashier, cannot access to cashier privilege. |')
         print('+--------------------------------------------------------------+\n')
         while True:
-            become_cashier = input('Do you want to be a cashier (y=yes, n=no)?\n>>> ')
+            become_cashier = input('Do you want to be a cashier (y=yes, n=no)?\n>>> ')  # ask users if they want to be a cashier
             if become_cashier == 'y':
                 print('\nPlease contact manager to register as a cashier. Upon approval, you can log in again.')
                 print('Exiting to main page......')

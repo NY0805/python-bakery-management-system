@@ -1,12 +1,13 @@
 import json  # import json text file to record data
 
+
 # Define the function that loads data from the file
 def load_data_from_file():
     try:
         file = open('baker.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
+        if content:  # check if the file is not empty
             try:
                 return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
@@ -25,39 +26,39 @@ def save_info(baker_info):
     file.close()  # close the file after writing
 
 
-baker_info = load_data_from_file()
+baker_info = load_data_from_file()  # store the data that retrieved from file into baker_info
 
 
 def baker_accounts():
-    # initialize 'info' as the name of dictionary that store data loaded from file
 
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'BAKER')
     print('----------------------------------------------------')
     baker_name = input('Name: ')
-    if baker_name in baker_info:
-        baker_username = input('Username: ')
-        while baker_username != (baker_info[baker_name]['baker_username']):
+    if baker_name in baker_info:  # check if baker name in the baker_info
+        baker_username = input('Username: ')  # ask for username
+        while baker_username != (baker_info[baker_name]['baker_username']):  # continue looping if username not found in baker_info
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
             baker_username = input('Username: ')
 
-        baker_password = input('Password: ')
-        while len(baker_password) < 8 or len(baker_password) > 12:
+        baker_password = input('Password: ')  # ask for password
+        while len(baker_password) < 8 or len(baker_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
             print('+---------------------------------------------------------------------------+\n')
             baker_password = input('Password: ')
 
-        while baker_password != 'b@k3rm4st3r!':
+        while baker_password != 'b@k3rm4st3r!':  # continue to validate the password of baker after the password length is correct
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect password. Please enter again. |')
             print('+-------------------------------------------+\n')
             baker_password = input('Password: ')
 
-        print('\nLogin successfully!')
+        print('\nLogin successfully!')  # login successfully if the password meet the 2 requirements above
         print('Welcome, baker', baker_name, '!')
+        #  display baker privilege
         while True:
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'BAKER PRIVILEGE')
@@ -68,6 +69,7 @@ def baker_accounts():
                   'd. Equipment management\n'
                   'e. Exit')
 
+            #  collect the choice of user and execute corresponding functions
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
 
             if choice == 'a':
@@ -91,12 +93,13 @@ def baker_accounts():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
 
+    # notify users they are not a baker if their names not in baker_info
     else:
         print('\n+----------------------------------------------------------+')
         print('|⚠️ You are not a baker, cannot access to baker privilege. |')
         print('+----------------------------------------------------------+\n')
         while True:
-            become_baker = input('Do you want to be a baker (y=yes, n=no)?\n>>> ')
+            become_baker = input('Do you want to be a baker (y=yes, n=no)?\n>>> ')  # ask users if they want to be a baker
             if become_baker == 'y':
                 print('\nPlease contact manager to register as a baker. Upon approval, you can log in again.')
                 print('Exiting to main page......')

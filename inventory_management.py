@@ -1,4 +1,6 @@
-import baker_product_keeping, manager_inventory_ingredient
+import baker_product_keeping
+import manager_inventory_ingredient
+import manager_inventory_control
 
 
 def inventory_services():
@@ -24,11 +26,11 @@ def inventory_services():
                 print('Please enter a valid number.\n')
             else:
                 if inventory_services_type == '1':
-                    baker_inventory_ingredient.ingredient_management()
+                    manager_inventory_ingredient.ingredient_management()
                 elif inventory_services_type == '2':
-                    baker_inventory_product.product_management()
+                    manager_inventory_control.inventory_control_product()
                 elif inventory_services_type == '3':
-                    print('Exiting to baker privilege...')
+                    print('Exiting to Baker Privilege...')
                     break
         except ValueError:
             print('Please enter a valid number.\n')

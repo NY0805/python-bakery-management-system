@@ -95,6 +95,7 @@ notice = load_data_from_notification()
 baker_equipment = load_data_from_baker_equipment()
 notifications = []
 
+
 def notification():
 
     while True:
@@ -312,4 +313,4 @@ def notification():
             print('|⚠️ Please enter numbers only. |')
             print('+------------------------------+\n')
 
-#notification()
+notification()
