@@ -3,6 +3,7 @@ import textwrap
 import time
 
 
+# Define the function that loads notification data from the file
 def load_data_from_notification():
     try:
         file = open('notification.txt', 'r')  # open the file and read
@@ -19,6 +20,7 @@ def load_data_from_notification():
         return {}  # return empty dictionary if the file does not exist
 
 
+# Define the function that loads equipment data from the file
 def load_data_from_baker_equipment():
     try:
         file = open('baker_equipment.txt', 'r')  # open the file and read
@@ -35,12 +37,14 @@ def load_data_from_baker_equipment():
         return {}  # return empty dictionary if the file does not exist
 
 
+# Define the function that saves notification data to the file
 def save_info(notice):
     file = open('notification.txt', 'w')  # open the file to write
     json.dump(notice, file,indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 
+# group for malfunction equipment
 def malfunction_data_group(malfunction_data):
     return (
         f"📍 {malfunction_data['equipment_name'].title()} 📍\n"
@@ -55,6 +59,7 @@ def malfunction_data_group(malfunction_data):
     )
 
 
+# group for equipments that need maintenance
 def maintenance_data_group(maintenance_data):
     return (
         f"📍 {maintenance_data['equipment_name'].title()} 📍\n"
@@ -80,6 +85,7 @@ def wrap_data(data_set, width=60):
     return wrapped_lines
 
 
+# define the format of displaying the content
 def print_in_column(info1, info2, width=56):
     max_line = len(info1)
     if len(info2) > max_line:
@@ -91,9 +97,9 @@ def print_in_column(info1, info2, width=56):
         print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
 
 
-notice = load_data_from_notification()
-baker_equipment = load_data_from_baker_equipment()
-notifications = []
+notice = load_data_from_notification()  # store the data that retrieved from file into notice
+baker_equipment = load_data_from_baker_equipment()  # store the data that retrieved from file into baker_equipment
+notifications = []  # create a list for the number of notifications received
 
 
 def notification():
@@ -102,28 +108,31 @@ def notification():
         print('\n-----------------------------------------------')
         print(f'\t\t\t\tNOTIFICATIONS')
         print('-----------------------------------------------')
+        # initialize the number of malfunction and maintenance reports to 0
         malfunction_report = 0
         maintenance_report = 0
 
+        # if there is any malfunction equipments or equipments that need maintenance
         for value in notice.values():
             if value['current_condition'] == 'malfunction':
-                malfunction_report += 1
+                malfunction_report += 1  # add the number of equipments that are malfunction to the report
             elif value['current_condition'] == 'maintenance needed':
-                maintenance_report += 1
+                maintenance_report += 1  # add the number of equipments that need maintenance to the report
 
+        # display how many reports if the report is not empty
         if malfunction_report != 0:
             print(f'🔔 {malfunction_report} notification(s) from Malfunction Report.')
         if maintenance_report != 0:
             print(f'🔔 {maintenance_report} notification(s) from Maintenance Report.\n')
         elif malfunction_report == 0 and maintenance_report == 0:
-            print('🎉 Hooray! No notifications yet!')
+            print('🎉 Hooray! No notifications yet!')  # if there is no report, print the message of no notification
 
         print('\n1. Malfunction Report\n2. Maintenance Report\n3. Back to Manager Privilege')
         try:
-            choice_of_report = int(input('\nEnter a number to get more insights: '))
+            choice_of_report = int(input('\nEnter a number to get more insights: '))  # choose which report insights to see
 
-            if choice_of_report == 1:
-                malfunction_equipment = []
+            if choice_of_report == 1:  # malfunction report
+                malfunction_equipment = []  # create a list to store the equipment names that are malfunction
                 for notice_value in notice.values():
                     if notice_value['current_condition'] == 'malfunction':
                         malfunction_equipment.append(notice_value['equipment_name'].lower())
@@ -136,10 +145,10 @@ def notification():
                     print('-' * 109)
                     print(f'\t\t\t\t\t\t\t\t\t\t\tMALFUNCTION REPORT')
                     print('-' * 109)
-
+                    # display the malfunction equipment details in 2 columns for easy reading
                     for value in notice.values():
                         if value['current_condition'] == 'malfunction':
-                            notifications.append(malfunction_data_group(value).split('\n'))
+                            notifications.append(malfunction_data_group(value).split('\n'))  # append the malfunction equipment details into the malfunction group
 
                     for i in range(0, len(notifications), 2):
                         width = 55
@@ -158,15 +167,17 @@ def notification():
                             print('')
 
                     while True:
-                        equipment_name_to_repair = input('Enter equipment name that need for repairment (or enter "done" to return back): ')
-                        if equipment_name_to_repair.lower() not in malfunction_equipment:
-                            if equipment_name_to_repair == 'done':
+                        equipment_name_to_repair = input('Enter equipment name that need for repairment (or enter "done" to return back): ')  # collect the equipment name to repair
+                        if equipment_name_to_repair.lower() not in malfunction_equipment:  # check if the name not in the list of malfunction equipment
+                            if equipment_name_to_repair == 'done':  # user choose to return back to the previous page
                                 print('\nExiting to Notification page......')
                                 break
                             else:
                                 print('\n+---------------------------------------------------------------------------+')
                                 print('|⚠️ Invalid input or this equipment didn\'t be reported. Please enter again. |')
                                 print('+---------------------------------------------------------------------------+\n')
+
+                        # the name is in the list of malfunction equipment
                         else:
                             ways_to_repair = input('Do you want to repair yourself or contact the manufacturer? (r=repair yourself, c=contact manufacturer)\n>>> ')
                             while ways_to_repair not in ['r', 'c']:
@@ -175,9 +186,9 @@ def notification():
                                 print('+--------------------------------------+\n')
                                 ways_to_repair = input('Do you want to repair yourself or contact the manufacturer? (r=repair yourself, c=contact manufacturer)\n>>> ')
 
-                            if ways_to_repair == 'c':
+                            if ways_to_repair == 'c':  # contact manufacturer
                                 for equipment_key, equipment_value in baker_equipment.items():
-                                    if equipment_name_to_repair.lower() == equipment_value['equipment_name'].lower():  # to ensure it is exactly the selected item
+                                    if equipment_name_to_repair.lower() == equipment_value['equipment_name'].lower():  # compare the selected equipment exactly match with the name in notice and return true
                                         print(f'\n❗Please contact the manufacturer for repairment booking by this email: {equipment_value["manufacturer_email"]}')
 
                             repair_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
@@ -187,39 +198,41 @@ def notification():
                                 print('+--------------------------------------+')
                                 repair_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
 
-                            if repair_status == 'y':
+                            if repair_status == 'y':  # equipment function well after repairment
                                 print('\nGreat! Your bakery can resume smooth operations.')
                                 malfunction_equipment.remove(equipment_name_to_repair)
                                 for notice_value in notice.values():
                                     if equipment_name_to_repair == notice_value['equipment_name'].lower():
-                                        notice_value['current_condition'] = 'function well'
-                                malfunction_report -= 1
+                                        notice_value['current_condition'] = 'function well'  # update the condition to function well
+                                malfunction_report -= 1  # reduce the number of malfunction report upon read
                                 break
 
-                            elif repair_status == 'n' and ways_to_repair == 'c':
+                            elif repair_status == 'n' and ways_to_repair == 'c':  # manufacturer failed to repair the equipment
                                 for equipment in notice.values():
                                     if equipment_name_to_repair == equipment['equipment_name'].lower():
                                         warranty = equipment['warranty']
                                         print(f'\n💡 There is a "{warranty}" warranty for this equipment.\n')
+                                        # advice user to change a new equipment or claim the warranty
                                         print('The equipment is probably broken. You may need to change a new one or claim the warranty from the manufacturer.')
                                         print('Exiting to Notification page......')
-                                        equipment['current_condition'] = 'waiting to claim warranty / replace with a new one'
-                                malfunction_report -= 1
+                                        equipment['current_condition'] = 'waiting to claim warranty / replace with a new one'  # update the condition
+                                malfunction_report -= 1  # # reduce the number of malfunction report upon read
                                 break
 
-                            elif repair_status == 'n' and ways_to_repair == 'r':
+                            elif repair_status == 'n' and ways_to_repair == 'r':  # users repair the equipment themselves but still malfunction
+                                # advice user change a new equipment
                                 print('\nThe equipment is probably broken. You may need to change a new one.')
                                 print('Exiting to Notification page......')
                                 for equipment in notice.values():
                                     if equipment_name_to_repair == equipment['equipment_name'].lower():
-                                        equipment['current_condition'] = 'waiting to replace with a new one'
-                                malfunction_report -= 1
+                                        equipment['current_condition'] = 'waiting to replace with a new one'  # update the condition
+                                malfunction_report -= 1  # reduce the number of malfunction report upon read
                                 break
 
                     save_info(notice)
 
-            elif choice_of_report == 2:
-                maintenance_equipment = []
+            elif choice_of_report == 2:  # maintenance report
+                maintenance_equipment = []  # create a list to store the equipment names that need maintenance
                 for notice_value in notice.values():
                     if notice_value['current_condition'] == 'maintenance needed':
                         maintenance_equipment.append(notice_value['equipment_name'].lower())
@@ -232,10 +245,10 @@ def notification():
                     print('-' * 109)
                     print(f'\t\t\t\t\t\t\t\t\t\t\tMAINTENANCE REPORT')
                     print('-' * 109)
-
+                    # display the details of equipments that need maintenance in 2 columns for easy reading
                     for value in notice.values():
                         if value['current_condition'] == 'maintenance needed':
-                            notifications.append(maintenance_data_group(value).split('\n'))
+                            notifications.append(maintenance_data_group(value).split('\n'))  # append the details of equipments that need maintenance into the maintenance group
 
                     for i in range(0, len(notifications), 2):
                         width = 55
@@ -255,19 +268,21 @@ def notification():
 
 
                     while True:
-                        equipment_name_for_maintenance = input('Enter equipment name that need for maintenance (or enter "done" to return back): ')
-                        if equipment_name_for_maintenance.lower() not in maintenance_equipment:
-                            if equipment_name_for_maintenance == 'done':
+                        equipment_name_for_maintenance = input('Enter equipment name that need for maintenance (or enter "done" to return back): ')  # collect the equipment name that need maintenance
+                        if equipment_name_for_maintenance.lower() not in maintenance_equipment:  # check if the name not in the list of maintenance equipment
+                            if equipment_name_for_maintenance == 'done':  # user choose to return back to the previous page
                                 print('\nExiting to Notification page......')
                                 break
                             else:
                                 print('\n+---------------------------------------------------------------------------+')
                                 print('|⚠️ Invalid input or this equipment didn\'t be reported. Please enter again. |')
                                 print('+---------------------------------------------------------------------------+\n')
+
+                        # the name is in the list of maintenance equipment
                         else:
                             for notice_value in notice.values():
-                                if equipment_name_for_maintenance == notice_value['equipment_name'].lower():
-                                    print(f'\n❗Please contact the manufacturer for maintenance booking by this email: {notice_value["manufacturer_email"]}')
+                                if equipment_name_for_maintenance == notice_value['equipment_name'].lower():  # compare the selected equipment exactly match with the name in notice and return true
+                                    print(f'\n❗Please contact the manufacturer for maintenance booking by this email: {notice_value["manufacturer_email"]}')  # ask user to contact manufacturer for maintenance
 
 
                             maintenance_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
@@ -277,29 +292,30 @@ def notification():
                                 print('+--------------------------------------+')
                                 maintenance_status = input('\nHas the equipment function well? (y=yes, n=no)\n>>> ')
 
-                            if maintenance_status == 'y':
+                            if maintenance_status == 'y':  # equipment function well after maintenance
                                 print('\nGreat! Your bakery can resume smooth operations.')
                                 maintenance_equipment.remove(equipment_name_for_maintenance)
                                 for notice_value in notice.values():
                                     if equipment_name_for_maintenance == notice_value['equipment_name'].lower():
-                                        notice_value['current_condition'] = 'function well'
-                                maintenance_report -= 1
+                                        notice_value['current_condition'] = 'function well'  # update the condition to function well
+                                maintenance_report -= 1  # reduce the number of maintenance report upon read
                                 break
 
-                            elif maintenance_status == 'n':
+                            elif maintenance_status == 'n':  # equipment not function well after maintenance
                                 for equipment in notice.values():
                                     if equipment_name_for_maintenance == equipment['equipment_name'].lower():
                                         warranty = equipment['warranty']
                                         print(f'\n💡 There is a "{warranty}" warranty for this equipment.\n')
+                                        # advice user to change a new equipment or claim the warranty
                                         print('The equipment is probably broken. You may need to change a new one or claim the warranty from the manufacturer.')
                                         print('Exiting to Notification page......')
-                                        equipment['current_condition'] = 'waiting to claim warranty / replace with a new one'
-                                maintenance_report -= 1
+                                        equipment['current_condition'] = 'waiting to claim warranty / replace with a new one'  # update the condition
+                                maintenance_report -= 1  # reduce the number of maintenance report upon read
                                 break
 
-                    save_info(notice)
+                    save_info(notice)  # save all the changes
 
-            elif choice_of_report == 3:
+            elif choice_of_report == 3:  # return to the previous page
                 print('\nExiting to Manager Privilege......')
                 return False
 
@@ -313,4 +329,4 @@ def notification():
             print('|⚠️ Please enter numbers only. |')
             print('+------------------------------+\n')
 
-notification()
+#notification()

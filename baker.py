@@ -1,7 +1,7 @@
 import json  # import json text file to record data
+from manager import load_data_from_manager
 
-
-# Define the function that loads data from the file
+# Define the function that loads baker data from the file
 def load_data_from_file():
     try:
         file = open('baker.txt', 'r')  # open the file and read
@@ -27,23 +27,25 @@ def save_info(baker_info):
 
 
 baker_info = load_data_from_file()  # store the data that retrieved from file into baker_info
+manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
 
+# baker account login function
 def baker_accounts():
 
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'BAKER')
     print('----------------------------------------------------')
-    baker_name = input('Name: ')
+    baker_name = input('Name: ')  # ask for baker name
     if baker_name in baker_info:  # check if baker name in the baker_info
         baker_username = input('Username: ')  # ask for username
-        while baker_username != (baker_info[baker_name]['baker_username']):  # continue looping if username not found in baker_info
+        while baker_username != (baker_info[baker_name]['baker_username']):  # continue looping if username not match with the name
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
             baker_username = input('Username: ')
 
-        baker_password = input('Password: ')  # ask for password
+        baker_password = input('Password: ')  # ask for baker password
         while len(baker_password) < 8 or len(baker_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
@@ -101,7 +103,10 @@ def baker_accounts():
         while True:
             become_baker = input('Do you want to be a baker (y=yes, n=no)?\n>>> ')  # ask users if they want to be a baker
             if become_baker == 'y':
-                print('\nPlease contact manager to register as a baker. Upon approval, you can log in again.')
+                print('\nPlease contact manager by the methods below👇 to register as a cashier. Upon approval, you can log in again.')
+                for manager_details in manager.values():
+                    print(
+                        f'✉️ {manager_details["email"]}\n📞 {manager_details["contact_no"]}\n')  # provide contact details of manager
                 print('Exiting to main page......')
                 break
             elif become_baker == 'n':

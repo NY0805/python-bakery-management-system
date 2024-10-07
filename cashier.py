@@ -1,7 +1,7 @@
 import json  # import json text file to record data
+from manager import load_data_from_manager
 
-
-# Define the function that loads data from the file
+# Define the function that loads cashier data from the file
 def load_data_from_file():
     try:
         file = open('cashier.txt', 'r')  # open the file and read
@@ -18,7 +18,7 @@ def load_data_from_file():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Define the function that saves information to the file
+# Define the function that saves cashier data to the file
 def save_info(cashier_info):
 
     file = open('cashier.txt', 'w')  # open the file to write
@@ -27,23 +27,25 @@ def save_info(cashier_info):
 
 
 cashier_info = load_data_from_file()  # store the data that retrieved from file into cashier_info
+manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
 
+# cashier account login function
 def cashier_accounts():
     #
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'CASHIER')
     print('----------------------------------------------------')
-    cashier_name = input('Name: ')
+    cashier_name = input('Name: ')  # ask for cashier name
     if cashier_name in cashier_info:  # check if cashier name in the cashier_info
         cashier_username = input('Username: ')  # ask for username
-        while cashier_username != (cashier_info[cashier_name]['cashier_username']):  # continue looping if username not found in cashier_info
+        while cashier_username != (cashier_info[cashier_name]['cashier_username']):  # continue looping if username not match with the name
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
             cashier_username = input('Username: ')
 
-        cashier_password = input('Password: ')  # ask for password
+        cashier_password = input('Password: ')  # ask for cashier password
         while len(cashier_password) < 8 or len(cashier_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
@@ -101,7 +103,9 @@ def cashier_accounts():
         while True:
             become_cashier = input('Do you want to be a cashier (y=yes, n=no)?\n>>> ')  # ask users if they want to be a cashier
             if become_cashier == 'y':
-                print('\nPlease contact manager to register as a cashier. Upon approval, you can log in again.')
+                print('\nPlease contact manager by the methods below👇 to register as a cashier. Upon approval, you can log in again.')
+                for manager_details in manager.values():
+                    print(f'✉️ {manager_details["email"]}\n📞 {manager_details["contact_no"]}\n')  # provide contact details of manager
                 print('Exiting to main page......')
                 break
             elif become_cashier == 'n':

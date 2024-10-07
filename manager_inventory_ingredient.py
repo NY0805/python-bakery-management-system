@@ -1,9 +1,9 @@
 import json  # import json text file to record data
 import re
-from datetime import datetime
+from datetime import datetime  # %I = 01-12, %H = 00-23
 
 
-# Define the function that loads data from the file
+# Define the function that loads ingredient inventory data from the file
 def load_data_from_inventory_ingredient():
     try:
         file = open('inventory_ingredient.txt', 'r')  # open the file and read
@@ -21,7 +21,7 @@ def load_data_from_inventory_ingredient():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Define the function that saves information to the file
+# Define the function that saves ingredient inventory data to the file
 def save_info(ingredient_data):
     file = open('inventory_ingredient.txt', 'w')  # open the file to write
     json.dump(ingredient_data, file,
@@ -29,9 +29,10 @@ def save_info(ingredient_data):
     file.close()  # close the file after writing
 
 
+# define the function to print content in center
 def printed_centered(info):
     print('-' * 47)
-    side_space = (47 - len(info)) // 2
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
     print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
     print('-' * 47)
 
@@ -81,9 +82,10 @@ def validation_date(info, date_format='%d-%m-%Y'):
         return False
 
 
-ingredient_data = load_data_from_inventory_ingredient()
+ingredient_data = load_data_from_inventory_ingredient() # store the data that retrieved from file into ingredient_data
 
 
+# define function to manage ingredient in the inventory
 def ingredient_management():
     while True:
         print('\n-------------------------------------------------------')
@@ -307,8 +309,8 @@ def add_ingredient():
         purchased_date = input(f'6. {ingredient_info[5].ljust(max_length + 2)}: ')
         if validation_empty_entries(purchased_date):
             if validation_date(purchased_date):
-                # if purchased_date <= systemdate:
-                break
+                if purchased_date <= datetime.now().strftime("%d/%m/%Y"):
+                    break
             else:
                 print('\n+----------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid purchase date. (With format of "day-month-year", "xx-xx-xxxx".) |')
@@ -449,35 +451,40 @@ def continue_adding():
             print('+--------------------------------------+')
 
 
+# function to update ingredient details in the inventory
 def update_ingredient():
+    index = 1
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\t\tINGREDIENT LIST')
         print('-----------------------------------------------')
-        for index, (key, value) in enumerate(ingredient_data.items(), start=1):
+        for key, value in ingredient_data.items():
             print(f'{index}. {value["ingredient_name"]}')
+            index += 1
         print(f'{len(ingredient_data) + 1}. cancel')
 
         try:
-            ingredient_to_update = int(input('\nEnter the ingredient\'s index number to update: '))
-            if ingredient_to_update == len(ingredient_data) + 1:
+            ingredient_to_update = int(input('\nEnter the ingredient\'s index number to update: '))  # identify which ingredient to update
+            if ingredient_to_update == len(ingredient_data) + 1:  # cancel update
                 print('\nCancelling. Exiting to Ingredient Management page......')
                 break
 
             elif 1 <= ingredient_to_update <= len(ingredient_data):
-                selected_ingredient = list(ingredient_data.keys())[ingredient_to_update - 1]
+                selected_ingredient = list(ingredient_data.keys())[ingredient_to_update - 1]  # append all the keys into a list and identify the selected ingredient by indexing
                 while True:
                     print('')
-                    printed_centered(ingredient_data[selected_ingredient]["ingredient_name"].upper())
+                    printed_centered(ingredient_data[selected_ingredient]["ingredient_name"].upper())  # display the ingredient name
 
+                    # display the details of ingredient in a custom format
                     for ingredient_data_key, ingredient_data_value in (ingredient_data[selected_ingredient].items()):
                         if ingredient_data_key == 'allergen_info':
                             print(f'{ingredient_data_key:<20}: {", ".join(ingredient_data_value)}')
                         else:
                             print(f'{ingredient_data_key:<20}: {ingredient_data_value}')
 
-                    attribute_of_ingredient_data = input(
-                        '\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                    attribute_of_ingredient_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+
+                    # gather the category of ingredients into a list
                     categories = ['Flours and Grains', 'Sweeteners', 'Fats and Oils', 'Dairy and Non-Dairy Products',
                                   'Leavening Agents', 'Spices and Flavourings', 'Fillings and Toppings',
                                   'Fruits and Vegetables', 'Preservatives and Stabilizers', 'Others']
@@ -485,10 +492,12 @@ def update_ingredient():
                         if attribute_of_ingredient_data in ingredient_data[selected_ingredient]:
                             if attribute_of_ingredient_data == 'category':
                                 print('')
+                                # display tne category in 2 lines
                                 print(*categories[0:5], sep=' ▫️ ')
                                 print(*categories[5:], sep=' ▫️ ')
 
                             elif attribute_of_ingredient_data == 'ingredient_form':
+                                # determine the form of each ingredient
                                 ingredient_form_list = {
                                     'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
                                     'Sweeteners': 'granulated, liquid, powdered',
@@ -501,11 +510,12 @@ def update_ingredient():
                                     'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                 }
 
-                                category = ingredient_data[selected_ingredient]['category']
-                                form = ingredient_form_list.get(category, '')
+                                category = ingredient_data[selected_ingredient]['category']  # access the category for the selected ingredient
+                                form = ingredient_form_list.get(category, '')  # determine the allowable form for the selected ingredient
                                 print(f'\n💡 Allowable ingredient form: {form}.💡')
 
                             elif attribute_of_ingredient_data == 'unit_measurement':
+                                # determine the unit measurements for each ingredient category
                                 category_units = {
                                     'Flours and Grains': 'g, kg',
                                     'Sweeteners': 'g, kg, ml, l',
@@ -518,13 +528,8 @@ def update_ingredient():
                                     'Preservatives and Stabilizers': 'g, kg, ml'
                                 }
                                 category = ingredient_data[selected_ingredient]['category']
-                                unit = category_units.get(category, '')
-
+                                unit = category_units.get(category, '')  # determine the allowable unit measurement for the selected ingredient
                                 print(f'\n💡 Allowable unit measurement: {unit} 💡')
-
-                                allowable_unit = []
-                                for item in unit.split(','):
-                                    allowable_unit.append(item.strip().lower())
 
                             elif attribute_of_ingredient_data == 'storage_requirement':
                                 print(f'\n💡 Allowable storage requirement: dry storage, refrigerated, freezer 💡')
@@ -541,8 +546,9 @@ def update_ingredient():
 
                             while True:
 
-                                new_value = input(f'\nEnter new {attribute_of_ingredient_data}: ')
+                                new_value = input(f'\nEnter new {attribute_of_ingredient_data}: ')  # collect new value for the selected attribute
 
+                                # validate new value for each attribute
                                 if attribute_of_ingredient_data == 'category':
                                     if new_value not in [category.lower() for category in categories]:
                                         print('\n+--------------------------------------+')
@@ -553,6 +559,7 @@ def update_ingredient():
 
                                 if attribute_of_ingredient_data == 'ingredient_name':
                                     if validation_alphabet_only(new_value):
+                                        # if the new ingredient name existed, duplication occurs
                                         if new_value in (ingredient_data[selected_ingredient]['ingredient_name'] for
                                                          selected_ingredient in ingredient_data):
                                             print(
@@ -592,7 +599,8 @@ def update_ingredient():
                                             allowable_form = []
                                             for item in form.split(','):
                                                 allowable_form.append(item.strip().lower())
-                                            if new_value in allowable_form:
+
+                                            if new_value in allowable_form:  # validate new unit is in the list of allowable form
                                                 break
                                             else:
                                                 print(
@@ -605,13 +613,13 @@ def update_ingredient():
                                             print(
                                                 '\n+--------------------------------------------------------------------------------------------+')
                                             print(
-                                                '|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
+                                                '|⚠️ Please enter a valid form. (Cannot contain any spacings, digits and special characters.) |')
                                             print(
                                                 '+--------------------------------------------------------------------------------------------+')
 
                                 if attribute_of_ingredient_data == 'batch_number':
                                     if validation_alphanum_only(new_value):
-                                        if new_value in ingredient_data:
+                                        if new_value in ingredient_data:  # if the new batch number existed, duplication occurs
                                             print(
                                                 '\n+---------------------------------------------------------------------------+')
                                             print(
@@ -646,7 +654,8 @@ def update_ingredient():
                                         allowable_unit = []
                                         for item in unit.split(','):
                                             allowable_unit.append(item.strip().lower())
-                                        if new_value in allowable_unit:
+
+                                        if new_value in allowable_unit:  # validate new unit is in the list of allowable unit
                                             break
                                         else:
                                             print(
@@ -666,7 +675,7 @@ def update_ingredient():
                                 if attribute_of_ingredient_data == 'quantity_purchased':
                                     try:
                                         new_value = float(new_value)
-                                        if new_value > 0:
+                                        if new_value > 0:  # ensure the quantity must in positive
                                             break
                                         else:
                                             print('\n+---------------------------------------------------+')
@@ -683,8 +692,8 @@ def update_ingredient():
 
                                 if attribute_of_ingredient_data == 'purchase_date':
                                     if validation_date(new_value):
-                                        # if purchased_date <= systemdate:
-                                        break
+                                        if new_value <= datetime.now().strftime("%d/%m/%Y"):  # make sure the new purchased date entered is valid and logic
+                                            break
                                     else:
                                         print(
                                             '\n+----------------------------------------------------------------------------------------+')
@@ -700,7 +709,7 @@ def update_ingredient():
                                         # convert purchase_date from string to datetime format
                                         purchased_date_new = datetime.strptime(
                                             ingredient_data[selected_ingredient]['purchase_date'], '%d-%m-%Y')
-                                        if expiry_date >= purchased_date_new:
+                                        if expiry_date >= purchased_date_new:  # ensure the expiry date is after the purchased date
                                             break
                                         else:
                                             print('\n+---------------------------------------------------------------+')
@@ -727,7 +736,7 @@ def update_ingredient():
                                             '+--------------------------------------------------------------------------------+')
 
                                 if attribute_of_ingredient_data == 'supplier_contact':
-                                    if re.fullmatch(r'^\d{3}-\d{7}$', new_value):
+                                    if re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # validate the format of supplier's contact number
                                         break
                                     else:
                                         print('\n+-----------------------------------------------+')
@@ -774,8 +783,8 @@ def update_ingredient():
                             print('+--------------------------------------+')
                             continue
 
-                        print(
-                            f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
+                        # display a message that inform users the information is updated
+                        print(f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
                         ingredient_data[selected_ingredient].update({attribute_of_ingredient_data: new_value})
                         save_info(ingredient_data)
 
