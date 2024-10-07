@@ -1,0 +1,44 @@
+[
+    {
+        "username": "anna328_",
+        "product_name": "gingerbread",
+        "review": "I love the flavor and the taste is excellent. Will definitely buy it again.",
+        "rating": 5
+    },
+    {
+        "username": "rachel_lee",
+        "product_name": "banana bread",
+        "review": "The banana bread was fresh and delicious.",
+        "rating": 4
+    },
+    {
+        "username": "mary_jane",
+        "product_name": "gingerbread, banana bread",
+        "review": "Both the gingerbread and banana bread were wonderful! The flavors were spot on.",
+        "rating": 5
+    },
+    {
+        "username": "jessica_k",
+        "product_name": "red velvet, gingerbread",
+        "review": "The red velvet was moist and tasty, but the gingerbread tasted a little bit weird.",
+        "rating": 3
+    },
+    {
+        "username": "john_smith",
+        "product_name": "banana bread, apple pie",
+        "review": "The banana bread was delicious, but the apple pie was a bit too sweet.",
+        "rating": 4
+    },
+    {
+        "username": "chris_d",
+        "product_name": "apple pie, gingerbread",
+        "review": "The apple pie was sweet and the gingerbread was nicely spiced. Great experience!",
+        "rating": 5
+    },
+    {
+        "username": "mike_h",
+        "product_name": "gingerbread, banana bread",
+        "review": "Loved the gingerbread and banana bread! Very nice texture and tasty.",
+        "rating": 4
+    }
+]
