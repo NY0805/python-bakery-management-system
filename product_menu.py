@@ -3,6 +3,7 @@ import textwrap
 from collections import defaultdict
 
 
+# define the function that loads product data from file
 def load_data_from_product():
     try:
         file = open('baker_product_keeping.txt', 'r')  # open the file and read
@@ -20,10 +21,7 @@ def load_data_from_product():
         return {}  # return empty dictionary if the file does not exist
 
 
-product_data = load_data_from_product()
-
-
-
+product_data = load_data_from_product()  # store the data that retrieved from file into product_data
 
 
 # Format the data retrieve from inventory product.txt
@@ -66,8 +64,9 @@ def print_in_column(info1, info2, width=65):
         print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
 
 
+# define the function to display menu
 def menu():
-    print('\n'+'•'*55, ' Morning Glory Bakery Menu ', '•'*55, '\n')
+    print('\n'+'•'*55, ' Morning Glory Bakery Menu ', '•'*55, '\n')  # title of menu
     print('✨ We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
     print("✨ Explore our menu, and don't forget to check out our unique creations in the 'Others' category for something special!\n")
 

@@ -36,8 +36,8 @@ def baker_accounts():
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'BAKER')
     print('----------------------------------------------------')
-    baker_name = input('Name: ')  # ask for baker name
-    if baker_name in baker_info:  # check if baker name in the baker_info
+    baker_name = input('Name: ')  # ask for baker's name
+    if baker_name in baker_info:  # check if baker's name in the baker_info
         baker_username = input('Username: ')  # ask for username
         while baker_username != (baker_info[baker_name]['baker_username']):  # continue looping if username not match with the name
             print('\n+-------------------------------------------+')
@@ -45,7 +45,7 @@ def baker_accounts():
             print('+-------------------------------------------+\n')
             baker_username = input('Username: ')
 
-        baker_password = input('Password: ')  # ask for baker password
+        baker_password = input('Password: ')  # ask for baker's password
         while len(baker_password) < 8 or len(baker_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
             print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')

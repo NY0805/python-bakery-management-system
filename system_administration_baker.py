@@ -3,6 +3,7 @@ import re
 import system_administration
 
 
+# Define the function that loads baker data from the file
 def load_data_from_baker():
     try:
         file = open('baker.txt', 'r')  # open the file and read
@@ -20,49 +21,50 @@ def load_data_from_baker():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Define the function that saves information to the file
+# Define the function that saves baker data to the file
 def save_info(baker):
     file = open('baker.txt', 'w')  # open the file to write
     json.dump(baker, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()
 
 
+# define the function to register bakers
 def baker_accounts():
-    baker = load_data_from_baker()
+    baker = load_data_from_baker()  # store the data that retrieved from file into baker
 
-    baker_name = input('Name: ')
-    while baker_name in baker:
+    baker_name = input('Name: ')  # ask for baker's name
+    while baker_name in baker:  # check if baker's name exists in baker
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
         print('+--------------------------------------------------+')
         baker_name = input('\nName: ')
 
-    baker_username = input('Username: ')
-    while baker_username in (baker[baker_name]['baker_username'] for baker_name in baker):
+    baker_username = input('Username: ')  # ask for baker's username
+    while baker_username in (baker[baker_name]['baker_username'] for baker_name in baker):  # continue looping if there is a duplication of username
         print('\n+----------------------------------------------------------+')
         print('|⚠️ Username has been used. Please enter another username. |')
         print('+----------------------------------------------------------+')
         baker_username = input('\nUsername: ')
 
     while True:
-        baker_password = input('Password: ')
+        baker_password = input('Password: ')  # set the password for baker
         if baker_password == 'b@k3rm4st3r!':
             while True:
                 try:
-                    age = int(input('Age: '))
-                    if age < 18 or age > 60:
+                    age = int(input('Age: '))  # ask for baker's age
+                    if age < 18 or age > 60:  # check if the age is between 18 - 60
                         print('\n+--------------------------------------------------------------------+')
                         print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
                         print('+--------------------------------------------------------------------+\n')
                     else:
-                        break  # Exit the loop if age is valid
+                        break  # exit the loop if age is valid
                 except ValueError:
                     print('\n+-----------------------------+')
                     print('|⚠️ Please enter a valid age. |')
                     print('+-----------------------------+\n')
 
             while True:
-                gender = input('Gender(m=male, f=female): ')
+                gender = input('Gender(m=male, f=female): ')  # ask for baker's gender
                 if gender not in ['f', 'm']:
                     print('\n+--------------------------------------+')
                     print('|⚠️ Invalid input. Please enter again. |')
@@ -72,20 +74,20 @@ def baker_accounts():
                     break
                 else:
                     gender = 'male'
-                    break  # Exit the loop if age is valid
+                    break
 
             while True:
-                contact_no = input('Contact number(xxx-xxx xxxx): ')
-                if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):
+                contact_no = input('Contact number(xxx-xxx xxxx): ')  # ask for baker's contact number
+                if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):  # check if the contact number match the specific pattern
                     print('\n+-----------------------------------------------+')
                     print('|⚠️ Invalid contact number. Please enter again. |')
                     print('+-----------------------------------------------+\n')
                 else:
-                    break  # Exit the loop if age is valid
+                    break
 
             while True:
-                email = input('Email: ') # define the format of email
-                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+                email = input('Email: ') # ask for baker's email
+                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):  # check if the email match the specific pattern
                     print('\n+--------------------------------------+')
                     print('|⚠️ Invalid email. Please enter again. |')
                     print('+--------------------------------------+\n')
@@ -103,7 +105,7 @@ def baker_accounts():
             }
             save_info(baker)
 
-            print(f'\n{baker_username} is added.\n')  # let user know their information are saved
+            print(f'\n{baker_username} is added.\n')  # inform user that the information is saved
             return False
 
         else:
@@ -112,27 +114,28 @@ def baker_accounts():
             print('+-------------------------------------------+\n')
 
 
+# define the function to manage baker
 def system_administration_baker():
-    baker = load_data_from_baker()
+    baker = load_data_from_baker()  # store the data that retrieved from file into baker
 
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
-        print('1. Add Baker(s)\n2. Remove Baker(s)\n3. Edit Baker(s)\n4. Back to Role Management')
+        print('1. Add Baker(s)\n2. Remove Baker(s)\n3. Update Baker(s)\n4. Back to Role Management')  # provide the option for baker management
 
         manage_baker = input('\nPlease choose a service:\n>>> ')
 
-        if manage_baker == '1':
+        if manage_baker == '1':  # add baker
             while True:
                 print('\n-----------------------------------------------')
                 print('\t\t\tNEW BAKER ENTRY FORM')
                 print('-----------------------------------------------')
-                baker_accounts()
-                baker = load_data_from_baker()  # if don't put, the data will not save into dictionary
+                baker_accounts()  # fill up the details of baker to complete the registration
+                baker = load_data_from_baker()  # read the information of baker again from file (if don't put, the data will not save into dictionary)
 
                 while True:
-                    add_more = input('Continue to add? (y=yes, n=no)\n>>> ')
+                    add_more = input('Continue to add? (y=yes, n=no)\n>>> ')  # after one baker has been added, ask user if they want continue adding
                     if add_more == 'y':
                         break
                     elif add_more == 'n':
@@ -145,37 +148,39 @@ def system_administration_baker():
                     print('\nStop adding. Exiting to Services page......')
                     break
 
-        elif manage_baker == '2':
+        elif manage_baker == '2':  # remove baker
             while True:
-                if len(baker) <= 1:
+                if len(baker) <= 1:  # if the current baker is 1, prevent user from removing the last baker to ensure the daily operation of the bakery
                     print('\n+---------------------------------------------------------------------------------------+')
                     print('|💡 To ensure the daily normal operation, you cannot remove the last baker in the list. |')
                     print('+---------------------------------------------------------------------------------------+\n')
                     break
 
-                else:
+                else:  # if baker more than 1
                     print('\n-----------------------------------------------')
                     print('\t\t\t\t', '', 'BAKER LIST')
                     print('-----------------------------------------------')
-                    for index, key in enumerate(baker, start=1):
+                    index = 1
+                    for key in baker:
                         print(f'{index}. {key}')
+                        index += 1
                     print(f'{len(baker) + 1}. cancel')
 
                     try:
                         index_of_baker_to_remove = int(
                             input(f'\nWhich baker do you want to remove? (or enter {len(baker) + 1} to cancel)\n>>> '))
-                        if index_of_baker_to_remove == len(baker) + 1:
+                        if index_of_baker_to_remove == len(baker) + 1:  # cancel the process
                             print('\nCancelling. Exiting to Services page......')
                             break
 
                         elif 1 <= index_of_baker_to_remove <= len(baker):
-                            baker_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]
-                            del baker[baker_to_remove]
+                            baker_to_remove = list(baker.keys())[index_of_baker_to_remove - 1]  # identify baker to remove by accesing the index of key of baker
+                            del baker[baker_to_remove]  # delete the selected baker
                             save_info(baker)
-                            print(f'\n{baker_to_remove} is removed.\n')
+                            print(f'\n{baker_to_remove} is removed.\n')  # inform user that the selected baker is removed successfully
 
                             while True:
-                                remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')
+                                remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')  # ask user if they want to continue removing
                                 if remove_more not in ['y', 'n']:
                                     print('\n+--------------------------------------+')
                                     print('|⚠️ Invalid input. Please enter again. |')
@@ -200,13 +205,15 @@ def system_administration_baker():
                         print('|⚠️ Invalid input. Please enter a number. |')
                         print('+-----------------------------------------+\n')
 
-        elif manage_baker == '3':
+        elif manage_baker == '3':  # update baker
             while True:
                 print('\n-----------------------------------------------')
                 print('\t\t\t\t', '', 'BAKER LIST')
                 print('-----------------------------------------------')
-                for baker_list_index, baker_list_key in enumerate(baker, start=1):
-                    print(f'{baker_list_index}. {baker_list_key}')
+                index = 1
+                for baker_list_key in baker:
+                    print(f'{index}. {baker_list_key}')
+                    index += 1
                 print(f'{len(baker) + 1}. cancel')
 
                 try:
@@ -216,38 +223,38 @@ def system_administration_baker():
                         break
 
                     elif 1 <= index_of_baker_to_edit <= len(baker):
-                        selected_baker = list(baker.keys())[index_of_baker_to_edit - 1]
+                        selected_baker = list(baker.keys())[index_of_baker_to_edit - 1]  # identify the selected baker to update
                         while True:
                             print('\n-----------------------------------------------')
                             print(f'\t\t\t\t {selected_baker.upper()}\'S DATA')
                             print('-----------------------------------------------')
 
                             for baker_data_key, baker_data_value in (baker[selected_baker].items()):
-                                print(f'{baker_data_key.replace("_", " ").title()}: {baker_data_value}')
+                                print(f'{baker_data_key.replace("_", " ").title()}: {baker_data_value}')  # print the details of baker and replace the underscore with a space
 
                             attribute_of_baker_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
-                            if attribute_of_baker_data in baker[selected_baker]:
+                            if attribute_of_baker_data in baker[selected_baker]:  # check if the attribute inputted found in baker's data
 
                                 while True:
                                     try:
                                         new_value = input(f'\nEnter new {attribute_of_baker_data}: ')
 
                                         if attribute_of_baker_data == 'baker_username':
-                                            if new_value in (baker[baker_name]['baker_username'] for baker_name in baker):
+                                            if new_value in (baker[baker_name]['baker_username'] for baker_name in baker):  # if new value same with the current username in file, duplication occurs
                                                 print('\n+----------------------------------------------------------+')
                                                 print('|⚠️ Username has been used. Please enter another username. |')
                                                 print('+----------------------------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'baker_password':
-                                            if new_value != 'b@k3rm4st3r!':
+                                            if new_value != 'b@k3rm4st3r!':  # check if password is correct
                                                 print('\n+-----------------------------------------+')
                                                 print('|⚠️ Password incorrect. Please try again. |')
                                                 print('+-----------------------------------------+')
                                                 continue
 
                                         elif attribute_of_baker_data == 'age':
-                                            if int(new_value) < 18 or int(new_value) > 60:
+                                            if int(new_value) < 18 or int(new_value) > 60:  # check if the age is between 18 - 60
                                                 print('\n+--------------------------------------------------------------------+')
                                                 print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
                                                 print('+--------------------------------------------------------------------+')
@@ -266,21 +273,21 @@ def system_administration_baker():
                                                 new_value = 'male'
 
                                         elif attribute_of_baker_data == 'contact_no':
-                                            if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):
+                                            if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # check if the contact number match the specific pattern
                                                 print('\n+-----------------------------------------------+')
                                                 print('|⚠️ Invalid contact number. Please enter again. |')
                                                 print('+-----------------------------------------------+')
                                                 continue
 
-                                        elif attribute_of_baker_data == 'email':  # define the format of email
-                                            if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):
+                                        elif attribute_of_baker_data == 'email':
+                                            if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):  # check if the email match the specific pattern
                                                 print('\n+--------------------------------------+')
                                                 print('|⚠️ Invalid email. Please enter again. |')
                                                 print('+--------------------------------------+')
                                                 continue
 
-                                        baker[selected_baker][attribute_of_baker_data] = new_value
-                                        print(f'\n{attribute_of_baker_data} of {selected_baker} is updated.')
+                                        baker[selected_baker][attribute_of_baker_data] = new_value  # update the value of attributes
+                                        print(f'\n{attribute_of_baker_data} of {selected_baker} is updated.')  # inform user that the information is updated
                                         save_info(baker)
                                         break
 
@@ -294,17 +301,17 @@ def system_administration_baker():
                                 break
 
                             else:
-                                print('\n❗Data not found.')
+                                print('\n❗Data not found.')  # selected attribute not found
 
                     else:
-                        print('\n❗Baker not found.')
+                        print('\n❗Baker not found.')  # selected baker not found
 
                 except ValueError:
                     print('\n+-----------------------------------------+')
                     print('|⚠️ Invalid input. Please enter a number. |')
                     print('+-----------------------------------------+')
 
-        elif manage_baker == '4':
+        elif manage_baker == '4':  # return back to the previous page
             print('\nExiting to Role Management......')
             system_administration.system_administration()
             break
