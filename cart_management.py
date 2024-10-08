@@ -1,7 +1,6 @@
 import json
 import random
 import product_menu
-from collections import defaultdict
 
 product_data = product_menu.product_data
 
@@ -42,6 +41,7 @@ def load_manager_data():
         return {}
 
 
+# Function to add an item to the cart
 def add_item_to_cart(cart):
     product_menu.menu()
     baker_data = load_baker_data()  # Load baker product data
@@ -80,9 +80,10 @@ def add_item_to_cart(cart):
                 cart[product_code_input] = {
                     'product_name': product_name,
                     'price': product_price,  # Store price as float
-                    'quantity': 0  # Initialize quantity
+                    'quantity': quantity  # Initialize quantity
                 }
-            cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
+            else:
+                cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
 
             print(f"\n{product_name} x{quantity} has been added to your cart.")
             print(f"Total price: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
@@ -129,7 +130,7 @@ def modify_item_quantity(cart):
                 print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
                 print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.1f}")
             except ValueError:
-                print("Invalid input. Please enter a valid number.")
+                print("Invalid input! Please enter a valid number.")
         else:
             print("⚠️ Product cannot be found in the cart!")
 
@@ -147,6 +148,7 @@ def view_cart(cart):
         return
 
     print("\nYour Cart:")
+    print()
     print(f"{'Product':<20} | {'Quantity':<8} | Price (RM)")
     print("-" * 40)
 
@@ -188,10 +190,8 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
     print("\nWould you like to:")
     print('...............................................')
-    print()
     print("1. Proceed with your payment")
     print("2. Cancel your order")
-    print()
     print('...............................................')
 
     choice = input("Please select your option: ").strip()
@@ -218,7 +218,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
 # Main shopping cart function
 def shopping_cart():
-    cart = defaultdict(lambda: {'quantity': 0})  # Initialize cart using defaultdict
+    cart = {}  # Initialize cart as a regular dictionary
     customer_name = input("Please enter your username: ")
     cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
     print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
