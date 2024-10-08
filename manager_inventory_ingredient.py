@@ -409,6 +409,7 @@ def add_ingredient():
                 print('|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
                 print('+--------------------------------------------------------------------------------------+\n')
 
+
     ingredient_data[batch_number] = {
         'category': category,
         'ingredient_name': ingredient_name,
