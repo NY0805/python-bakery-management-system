@@ -1,4 +1,5 @@
 import json
+import random
 from collections import defaultdict
 from datetime import datetime
 import time
@@ -217,6 +218,8 @@ def equipment_malfunction():
     print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
     print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
 
+
+
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
@@ -238,6 +241,7 @@ def equipment_malfunction():
         malfunction_date = input('Enter the date of malfunction (DD-MM-YYYY): ')
         if validation_empty_entries(malfunction_date):
             if validation_date(malfunction_date):
+                # cannot smaller than system date
                 break
             else:
                 print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
@@ -267,7 +271,26 @@ def equipment_malfunction():
                              '>>> ').lower().strip()
         if validation_empty_entries(confirmation):
             if confirmation == 'y':
+                previous_number = None
+                while True:
+                    try:
+                        # Generate a random number between 1000 and 9999
+                        report_number = random.randint(1000, 9999)
+                        # Try checking for duplicates in 'report_number'
+                        if report_number in malfunction_data['report_number']:
+                            continue  # If duplicate found, generate again
+                        else:
+                            previous_number = report_number
+                            break  # Exit the loop when a unique number is found
+                    except KeyError:
+                        # Handle the case where 'report_number' key does not exist
+                        print('\nGenerating report number...')
+                        report_number = random.randint(1000, 9999)
+                        previous_number = report_number  # Assign the generated number
+                        break  # Exit loop since we don't need to check for duplicates in this case
+
                 malfunction_data[serial_number] = {
+                    'report_number': previous_number,
                     'category': category,
                     'equipment_name': equipment['equipment_name'],
                     'serial_number': serial_number,
@@ -400,7 +423,26 @@ def equipment_maintenance():
                              '>>> ').lower().strip()
         if validation_empty_entries(confirmation):
             if confirmation == 'y':
+                previous_number = None
+                while True:
+                    try:
+                        # Generate a random number between 1000 and 9999
+                        report_number = random.randint(1000, 9999)
+                        # Try checking for duplicates in 'report_number'
+                        if report_number in maintenance_data['report_number']:
+                            continue  # If duplicate found, generate again
+                        else:
+                            previous_number = report_number
+                            break  # Exit the loop when a unique number is found
+                    except KeyError:
+                        # Handle the case where 'report_number' key does not exist
+                        print('\nGenerating report number...')
+                        report_number = random.randint(1000, 9999)
+                        previous_number = report_number  # Assign the generated number
+                        break  # Exit loop since we don't need to check for duplicates in this case
+
                 maintenance_data[serial_number] = {
+                    'report_number': previous_number,
                     'category': category,
                     'equipment_name': equipment['equipment_name'],
                     'serial_number': serial_number,

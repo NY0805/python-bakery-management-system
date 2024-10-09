@@ -51,10 +51,10 @@ def financial_management():
     while True:
         print(f'\n💰 Today\'s {"Income":<9}: RM {today_income:.2f}{"":<25}'
               f'💰 {datetime.strftime(datetime.now(), "%B")}\'s Income So Far : RM {this_month_income:.2f}')
-        print(f'💸 Today\'s {"Expenses":<9}: RM {"":<31}💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
+        print(f'💸 Today\'s {"Expenses":<9}: RM {"":<29}💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
 
         printed_centered('Financial Management')
-        print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Overall Tracking\n5. Back to Manager Privilege')
+        print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Overall Financial Tracking\n5. Back to Manager Privilege')
         track_choice = input('\nWhich financial data do you want to track:\n>>> ')
         if track_choice == '1':
             '''headers = ['Daily Income(RM)', 'Monthly Income(RM)', 'Total income(RM)']
