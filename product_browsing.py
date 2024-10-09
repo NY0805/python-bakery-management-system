@@ -27,7 +27,7 @@ def browse_products():
     print('\t\t\t', '', 'PRODUCT BROWSING')
     print('-----------------------------------------------')
     try:
-        # Display the products available to customers
+        # Display the available products and their details to customers
         print('\nAvailable Products:')
         print('===============================================')
 
@@ -42,7 +42,7 @@ def browse_products():
             print('===============================================')
 
     except FileNotFoundError:
-        print('|⚠️Product data cannot be found!|')
+        print('|⚠️Product data cannot be found!|')  # Display the message if the product file cannot be found
 
 browse_products()
 

@@ -18,7 +18,7 @@ def load_review():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Save customers' reviews to a txt file
+# Save a new customer review to customer_reviews.txt
 def save_reviews(new_review):
     try:
         # Try to read the existing reviews
@@ -28,7 +28,7 @@ def save_reviews(new_review):
         # If the file doesn't exist, start with an empty list
         reviews = []
 
-    # Append the new review to the existing reviews
+    # Add the new review to the list of existing reviews
     reviews.append(new_review)
 
     # Write all reviews back to the file
@@ -36,7 +36,7 @@ def save_reviews(new_review):
         json.dump(reviews, file, indent=4)
 
 
-# Validate that the rating is a number between 1 and 5
+# Validate that the rating input is a valid number between 1 and 5
 def validation_rating(rating):
     try:
         if rating.isdigit() and int(rating) in range(1, 6):
@@ -47,24 +47,24 @@ def validation_rating(rating):
         return False
 
 
-# Allow the customer to submit a review for a purchased product
+# Allow the customer to submit a review for a product they purchased
 def submit_review():
     print('\n-----------------------------------------------')
     print('\t\t\t', '', 'PRODUCT REVIEW')
     print('-----------------------------------------------')
 
-    # Collect customer usernames and their reviews
+    # Collect details from the customer
     username = input('Enter your username: ')
     product_name = input('Enter the product name: ')
     review_text = input('Enter your review: ')
     rating = input('Rate your product (1-5): ')
 
-    # Validate rating input once
+    # Validate the rating to ensure it's between 1 and 5
     if not validation_rating(rating):
         print('|⚠️Invalid rating. Please enter a number between 1 and 5!|')
         rating = input('Rate your product (1-5): ')
 
-    # Create the new review dictionary
+    # Create a dictionary to store the customer's review details
     review = {
         'username': username,
         'product_name': product_name,
