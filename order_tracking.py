@@ -23,16 +23,13 @@ def order_tracking():
     print('\n-----------------------------------------------')
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
-    order_id = input('Enter your Order ID: ')  # Let the user input the actual order_id like ORD011
+    order_id = input('Enter your Order ID: ')  # Prompt the customer to enter their order ID to start tracking
 
     # Search for the order by order_id
     order_found = False
     for order_key, order in orders.items():
         if order['order_id'] == order_id:  # Compare the input with the order_id in the order details
-            print('**********************************')
             print(f'\n{"Order Details":^30}')
-            print('**********************************')
-            print()
             print('-' * 55)
             print(f'{"Order ID:":<20} {order_id}')
             print(f'{"Username:":<20} {order["username"]}')
@@ -41,10 +38,11 @@ def order_tracking():
             print(f'{"Status:":<20} {order["status"]}')
             print('-' * 55)
             order_found = True
-            break
+            break # Exit the loop once the order is found
 
     if not order_found:
         print('|⚠️Order ID cannot be found. Please check and try again!|')
+        # If the customer's entered order ID cannot be found, display this message
 
 
 # Call the function to track the order
