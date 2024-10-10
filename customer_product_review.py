@@ -18,31 +18,16 @@ def load_review():
         return {}  # return empty dictionary if the file does not exist
 
 
-'''# Save a new customer review to customer_reviews.txt
-def save_reviews(new_review):
-    try:
-        # Try to read the existing reviews
-        with open('customer_reviews.txt', 'r') as file:
-            reviews = json.load(file)
-    except FileNotFoundError:
-        # If the file doesn't exist, start with an empty list
-        reviews = []
-
-    # Add the new review to the list of existing reviews
-    reviews.append(new_review)
-
-    # Write all reviews back to the file
-    with open('customer_reviews.txt', 'w') as file:
-        json.dump(reviews, file, indent=4)'''
-
-
 # Define the function that saves customers' orders data to the file
 def save_reviews(new_review):
     file = open('customer_reviews.txt', 'w')  # open the file to write
     json.dump(new_review, file,indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
+
 review = load_review()
+
+
 # Validate that the rating input is a valid number between 1 and 5
 def validation_rating(rating):
     try:
@@ -85,4 +70,4 @@ def submit_review():
     print('Your review has been successfully received.')
 
 
-submit_review()
+#submit_review()
