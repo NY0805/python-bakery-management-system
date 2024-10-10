@@ -65,7 +65,6 @@ def view_loyalty_rewards():
     print('-' * 85 + '\n')
 
 
-
 def loyalty_rewards():
     while True:
         print('\n-----------------------------------------------')
@@ -81,7 +80,7 @@ def loyalty_rewards():
             view_loyalty_rewards()
 
         elif choice == '2':
-            print("Thank you for using the Customer Loyalty Program. Goodbye!")
+            print("Thank you for visiting Customer Loyalty Program. Goodbye!")
             break
 
         else:

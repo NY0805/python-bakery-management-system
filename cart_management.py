@@ -5,17 +5,19 @@ import product_menu
 product_data = product_menu.product_data
 
 
-# Function to generate a 10-digit numeric cart_id
+# Function to generate a 10 digit numeric cart_id
 def generate_cart_id():
     return ''.join([str(random.randint(0, 9)) for _ in range(10)])
 
 
+# Function to generate a new order ID based on existing orders
 def generate_order_id(order_data):
     existing_order_ids = [int(order['order_id'][3:]) for order in order_data.values()]
     new_order_num = max(existing_order_ids) + 1 if existing_order_ids else 1
     return f"ORD{new_order_num:03}"
 
 
+# Function to load baker data from a JSON file
 def load_baker_data():
     try:
         with open('baker_product_keeping.txt', 'r') as file:
@@ -29,6 +31,7 @@ def load_baker_data():
         return {}
 
 
+# Function to load manager data from a JSON file
 def load_manager_data():
     try:
         with open('manager_product_inventory.txt', 'r') as file:
@@ -41,7 +44,7 @@ def load_manager_data():
         return {}
 
 
-# Function to add an item to the cart
+# Function to enable customers to add items to the cart
 def add_item_to_cart(cart):
     product_menu.menu()
     baker_data = load_baker_data()  # Load baker product data
@@ -89,8 +92,8 @@ def add_item_to_cart(cart):
             print(f"Total price: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
             return  # Exit the function after processing
 
-    # If the product is not found after the loop
-    print("Invalid product code. Please ensure you entered it correctly.")
+    # Print the message if product cannot be found
+    print(" |⚠️ Invalid product code! Please ensure you entered it correctly.|")
 
 
 # Function to remove an item from the cart
@@ -144,7 +147,7 @@ def modify_item_quantity(cart):
 # Function to view the cart
 def view_cart(cart):
     if not cart:
-        print("Your cart is empty.")
+        print("Your cart is empty.") # Print this message if cart is empty
         return
 
     print("\nYour Cart:")
@@ -183,6 +186,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     print("Order has been saved successfully.")
 
 
+# Function for checkout or cancellation
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty. Please add items before proceeding to checkout.")

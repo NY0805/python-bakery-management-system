@@ -4,7 +4,7 @@ import re
 import cart_management
 import order_tracking
 import product_menu
-import product_review
+import customer_product_review
 
 
 # Define the function that loads data from the file

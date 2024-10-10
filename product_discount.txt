@@ -18,21 +18,21 @@
         "product_code": "BR890",
         "Stock": 1,
         "Price": "RM 4.50",
-        "Discount": "15%"
+        "Discount": "0%"
     },
     "002": {
         "Product Name": "red velvet",
         "product_code": "CK857",
         "Stock": 1,
         "Price": "RM 10.50",
-        "Discount": "8%"
+        "Discount": "0%"
     },
     "003": {
         "Product Name": "apple pie",
         "product_code": "PA932",
         "Stock": 1,
         "Price": "RM 5.00",
-        "Discount": "12%"
+        "Discount": "0%"
     },
     "006": {
         "Product Name": "gingerbread",
