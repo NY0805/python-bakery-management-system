@@ -89,7 +89,7 @@ def financial_management():
                         for receipt_details in transaction_keeping.values():
                             chosen_date = datetime.strptime(receipt_details['order_date'], '%d/%m/%Y')
                             if chosen_date.strftime("%B") == custom_month_for_income and chosen_date.year == custom_year_for_income:
-                                income_of_that_month += receipt_details['total_spend']
+                                income_of_that_month += receipt_details['total_spend(RM)']
                         print(f'\n💰 {custom_month_for_income.title()} Income: RM {income_of_that_month:.2f}')
 
                 except ValueError:
