@@ -234,7 +234,7 @@ def display_cart(cart):
 # Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
-        print("\nYour cart is empty. Please add items before proceeding to checkout.")
+        print("\nYour cart is empty! Please add items before proceeding to checkout.")
         return
 
     # Display cart and total price before making a decision
