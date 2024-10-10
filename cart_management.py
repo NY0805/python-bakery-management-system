@@ -311,4 +311,4 @@ def shopping_cart():
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-shopping_cart()
+#shopping_cart()

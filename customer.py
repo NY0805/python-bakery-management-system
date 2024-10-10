@@ -5,6 +5,7 @@ import cart_management
 import order_tracking
 import product_menu
 import customer_product_review
+import customer_loyalty_rewards
 
 
 # Define the function that loads data from the file
@@ -124,7 +125,6 @@ def sign_up():
 
 
 def login():
-
     customer_name = input('\nName: ')
     if customer_name in customer_info:
         customer_username = input("Username: ")
@@ -142,13 +142,14 @@ def login():
             customer_password = input("Password: ")
 
         print(f'\nWelcome back, {customer_name}!\n')
-
+        return customer_username  # Return the username after successful login
     else:
         print('\n+------------------------------------------------------------+')
         print('|⚠️ This is your FIRST TIME login, please create an account. |')
         print('+------------------------------------------------------------+')
         print('Directing to sign up page......\n')
         sign_up()
+        return None  # Return None if sign-up is initiated
 
 
 def customer():
@@ -295,8 +296,9 @@ def save_customer_data(data):
     with open("customers.json", "w") as file:
         json.dump(data, file)
 
-
 def customer_menu():
+    logged_in_username = None  # Initialize username
+
     while True:
         print("WELCOME TO MORNING GLORY BAKERY!")
         print("1. Sign Up")
@@ -315,7 +317,7 @@ def customer_menu():
         if option == "1":
             sign_up()
         elif option == "2":
-            login()
+            logged_in_username = login()  # Update the username variable
         elif option == "3":
             product_menu.menu()
         elif option == "4":
@@ -323,9 +325,12 @@ def customer_menu():
         elif option == "5":
             order_tracking.order_tracking()
         elif option == "6":
-            product_review.submit_review()
+            if logged_in_username:  # Check if the user is logged in
+                customer_product_review.submit_review(logged_in_username)  # Pass the logged-in username
+            else:
+                print("You need to log in first to submit a review.")
         elif option == "7":
-            view_loyalty_rewards()
+            customer_loyalty_rewards.view_loyalty_rewards()
         elif option == "8":
            update_personal_information()
         elif option == "9":
@@ -337,3 +342,4 @@ def customer_menu():
             print("Invalid option, please try again.")
 
 
+customer_menu()

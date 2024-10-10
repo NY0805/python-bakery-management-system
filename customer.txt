@@ -46,5 +46,14 @@
         "contact_no": "014-2949302",
         "email": "gg@gg.com",
         "address": "12,ifog"
+    },
+    "jack09": {
+        "customer_username": "Jack09",
+        "customer_password": "890Jack89",
+        "age": 23,
+        "gender": "prefer not to say",
+        "contact_no": "018-9043468",
+        "email": "jacklee@gmail.com",
+        "address": "2333,sdsdsdjjddndn"
     }
 }
