@@ -2,91 +2,91 @@
     "5580946551": {
         "order_id": "ORD001",
         "order_date": "08/10/2024",
-        "total_spend": 15.9
+        "total_spend(RM)": 15.9
     },
     "5684950188": {
         "order_id": "ORD002",
         "order_date": "08/10/2024",
-        "total_spend": 16.43
+        "total_spend(RM)": 16.43
     },
     "1544631417": {
         "order_id": "ORD003",
         "order_date": "08/10/2024",
-        "total_spend": 15.37
+        "total_spend(RM)": 15.37
     },
     "4418942694": {
         "order_id": "ORD004",
         "order_date": "08/10/2024",
-        "total_spend": 7.95
+        "total_spend(RM)": 7.95
     },
     "7841554976": {
         "order_id": "ORD005",
         "order_date": "08/10/2024",
-        "total_spend": 24.91
+        "total_spend(RM)": 24.91
     },
     "5548156914": {
         "order_id": "ORD006",
         "order_date": "08/10/2024",
-        "total_spend": 9.54
+        "total_spend(RM)": 9.54
     },
     "9875428598": {
         "order_id": "ORD007",
         "order_date": "08/10/2024",
-        "total_spend": 19.61
+        "total_spend(RM)": 19.61
     },
     "4567891234": {
         "order_id": "ORD008",
         "order_date": "08/10/2024",
-        "total_spend": 10.07
+        "total_spend(RM)": 10.07
     },
     "6543219876": {
         "order_id": "ORD009",
         "order_date": "08/10/2024",
-        "total_spend": 20.67
+        "total_spend(RM)": 20.67
     },
     "3216549870": {
         "order_id": "ORD010",
         "order_date": "08/10/2024",
-        "total_spend": 25.44
+        "total_spend(RM)": 25.44
     },
     "1597534862": {
         "order_id": "ORD011",
         "order_date": "08/10/2024",
-        "total_spend": 21.73
+        "total_spend(RM)": 21.73
     },
     "7896541230": {
         "order_id": "ORD012",
         "order_date": "07/10/2024",
-        "total_spend": 10.6
+        "total_spend(RM)": 10.6
     },
     "2345678901": {
         "order_id": "ORD013",
         "order_date": "07/10/2023",
-        "total_spend": 18.02
+        "total_spend(RM)": 18.02
     },
     "8765432109": {
         "order_id": "ORD014",
         "order_date": "07/10/2023",
-        "total_spend": 25.44
+        "total_spend(RM)": 25.44
     },
     "1234567890": {
         "order_id": "ORD015",
         "order_date": "08/9/2024",
-        "total_spend": 10.07
+        "total_spend(RM)": 10.07
     },
     "1357924680": {
         "order_id": "ORD016",
         "order_date": "08/9/2024",
-        "total_spend": 30.21
+        "total_spend(RM)": 30.21
     },
     "2468135790": {
         "order_id": "ORD017",
         "order_date": "08/9/2023",
-        "total_spend": 5.3
+        "total_spend(RM)": 5.3
     },
     "3579246801": {
         "order_id": "ORD018",
         "order_date": "08/9/2023",
-        "total_spend": 37.1
+        "total_spend(RM)": 37.1
     }
 }

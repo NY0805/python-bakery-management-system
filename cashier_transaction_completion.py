@@ -116,7 +116,7 @@ def receipt(customer):
             transaction_keeping[customer] = {
                 "order_id": customer_details['order_id'],
                 "order_date": current_date,
-                "total_spend": total
+                "total_spend(RM)": total
             }
     save_info(transaction_keeping)  # save the data
 
