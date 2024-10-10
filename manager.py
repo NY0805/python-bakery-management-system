@@ -1,6 +1,8 @@
 import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 
+import manager_customer_feedback
+import manager_financial_management
 import manager_notifications
 import system_administration
 import manager_order_management
@@ -188,13 +190,13 @@ def manager():
             manager_order_management.order_management()
 
         elif choice == 'c':
-            print('enter again.')
+            manager_financial_management.financial_management()
 
         elif choice == 'd':
             manager_inventory_control.main_control()
 
         elif choice == 'e':
-            print('enter again.')
+            manager_customer_feedback.monitor_review()
 
         elif choice == 'f':
             manager_notifications.notification()

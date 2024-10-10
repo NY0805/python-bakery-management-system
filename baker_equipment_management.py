@@ -290,7 +290,7 @@ def equipment_malfunction():
                         break  # Exit loop since we don't need to check for duplicates in this case
 
                 malfunction_data[serial_number] = {
-                    'report_number': previous_number,
+                    'report_number': f'REPORT-{previous_number}',
                     'category': category,
                     'equipment_name': equipment['equipment_name'],
                     'serial_number': serial_number,
