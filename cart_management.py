@@ -44,11 +44,26 @@ def load_manager_data():
         return {}
 
 
-# Function to enable customers to add items to the cart
+# Function to load discount data from a JSON file
+def load_discount_data():
+    try:
+        with open('product_discount.txt', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print("Error: product_discount.txt file not found.")
+        return {}
+    except json.JSONDecodeError:
+        print("Error: product_discount.txt file is not a valid JSON.")
+        return {}
+
+
+# Function to enable customers to add items to the cart (with discount check)
+# Function to enable customers to add items to the cart (with discount check)
 def add_item_to_cart(cart):
     product_menu.menu()
     baker_data = load_baker_data()  # Load baker product data
     manager_data = load_manager_data()  # Load manager product data
+    discount_data = load_discount_data()  # Load discount data
 
     product_code_input = input("\nEnter the product code: ").strip()
 
@@ -63,6 +78,16 @@ def add_item_to_cart(cart):
                     product_price = float(value.get("price", 0).replace('RM ', ''))  # Convert price to float
                     break  # Exit loop once the product is found
 
+            # Check if the product has a discount in discount_data
+            discount_percentage = 0  # Default to 0% discount if no discount found
+            for discount_item in discount_data.values():
+                if discount_item['product_code'] == product_code_input:
+                    discount_percentage = float(discount_item['Discount'].replace('%', '')) / 100
+                    break
+
+            # Calculate the discounted price if applicable
+            discounted_price = product_price * (1 - discount_percentage)
+
             # Get the quantity to add to the cart
             while True:  # Loop until a valid quantity is entered
                 quantity = input(f"How many {product_name} would you like to add? ")
@@ -74,22 +99,27 @@ def add_item_to_cart(cart):
                 else:
                     print("Invalid quantity. Please enter a valid number greater than 0.")
 
-            # Calculate the total price
-            total_price = float(product_price * quantity)  # Calculate total price as float
-            formatted_total_price = f"{total_price:.1f}"  # Format to 1 decimal place
+            # Inform customer about the discount and price details
+            if discount_percentage > 0:
+                print(f"\nThe product '{product_name}' has a discount of {discount_percentage * 100}%.")
+                print(f"Original price: RM {product_price} per unit.")
+                print(f"Discounted price: RM {discounted_price} per unit.")
+
+            # Calculate the total price with discount
+            total_price = discounted_price * quantity  # Calculate total price as float
 
             # Add to cart or update existing quantity
             if product_code_input not in cart:
                 cart[product_code_input] = {
                     'product_name': product_name,
-                    'price': product_price,  # Store price as float
+                    'price': discounted_price,  # Store discounted price as float
                     'quantity': quantity  # Initialize quantity
                 }
             else:
                 cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
 
             print(f"\n{product_name} x{quantity} has been added to your cart.")
-            print(f"Total price: RM {product_price:.1f} x {quantity} = RM {formatted_total_price}")
+            print(f"Total price: RM {discounted_price} x {quantity} = RM {total_price}")
             return  # Exit the function after processing
 
     # Print the message if product cannot be found
@@ -157,7 +187,7 @@ def view_cart(cart):
 
     for item in cart.values():
         item_total = item['quantity'] * item['price']
-        print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.1f}")
+        print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
 
     print("-" * 40)
 
@@ -175,7 +205,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
         "order_id": order_id,
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
-        "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.1f}",  # Format total price
+        "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.2f}",  # Format total price
         "status": status
     }
 
@@ -186,11 +216,29 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     print("Order has been saved successfully.")
 
 
-# Function for checkout or cancellation
+# Function to display cart details and calculate the total price
+def display_cart(cart):
+    total_amount = 0.0
+    print("\nYour cart details:")
+    for product_code, item in cart.items():
+        product_name = item['product_name']
+        price_per_item = item['price']  # Already discounted if applicable
+        quantity = item['quantity']
+        item_total = price_per_item * quantity
+        total_amount += item_total
+        print(f"{product_name} x{quantity} @ RM {price_per_item:.2f} each = RM {item_total:.2f}")
+    print(f"\nTotal amount: RM {total_amount:.2f}")
+    return total_amount
+
+
+# Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty. Please add items before proceeding to checkout.")
         return
+
+    # Display cart and total price before making a decision
+    total_price = display_cart(cart)
 
     print("\nWould you like to:")
     print('...............................................')
@@ -208,7 +256,9 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
     order_id = generate_order_id(order_data)  # Generate a new order ID
 
+    # If user chooses to proceed with payment
     if choice == '1':
+        print(f"\nTotal price to pay: RM {total_price:.2f}")
         print("\nPayment completed. Thank you for your purchase!")
         save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Completed")
         cart.clear()  # Clear the cart after payment
@@ -218,6 +268,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         cart.clear()  # Clear the cart after cancellation
     else:
         print("⚠️ Invalid option! Returning to the main menu.")
+
 
 
 # Main shopping cart function
