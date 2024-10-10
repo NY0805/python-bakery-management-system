@@ -222,6 +222,7 @@ def add_ingredient():
         allowable_form = []
         for item in form.split(','):
             allowable_form.append(item.strip().lower())
+            print(allowable_form)
 
         if validation_empty_entries(ingredient_form):
             if ingredient_form.isalpha():
@@ -309,8 +310,12 @@ def add_ingredient():
         purchased_date = input(f'6. {ingredient_info[5].ljust(max_length + 2)}: ')
         if validation_empty_entries(purchased_date):
             if validation_date(purchased_date):
-                if purchased_date <= datetime.now().strftime("%d/%m/%Y"):
+                if purchased_date <= datetime.now().strftime("%d-%m-%Y"):
                     break
+                else:
+                    print('\n+-------------------------------------------------------+')
+                    print('|⚠️ Purchased date should not larger than current date. |')
+                    print('+-------------------------------------------------------+\n')
             else:
                 print('\n+----------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid purchase date. (With format of "day-month-year", "xx-xx-xxxx".) |')
@@ -377,7 +382,7 @@ def add_ingredient():
         storage_requirement = input(f'11. {ingredient_info[10].ljust(max_length + 1)}: ')
         if validation_empty_entries(storage_requirement):
             if validation_alphabet_only(storage_requirement):
-                if storage_requirement in ['dry storage', 'refrigerator', 'freezer']:
+                if storage_requirement in ['dry storage', 'refrigerated', 'freezer']:
                     break
                 else:
                     print('\n+-----------------------------------------------------------------------------------+')
@@ -421,6 +426,7 @@ def add_ingredient():
         'expiry_date': expiry_date_str,
         'supplier_name': supplier_name,
         'supplier_contact': supplier_contact,
+        'cost_per_unit': f'RM {cost_per_unit:.2f}',
         'storage_requirement': storage_requirement,
         'allergen_info': allergens
     }
@@ -693,8 +699,12 @@ def update_ingredient():
 
                                 if attribute_of_ingredient_data == 'purchase_date':
                                     if validation_date(new_value):
-                                        if new_value <= datetime.now().strftime("%d/%m/%Y"):  # make sure the new purchased date entered is valid and logic
+                                        if new_value <= datetime.now().strftime("%d-%m-%Y"):  # make sure the new purchased date entered is valid and logic
                                             break
+                                        else:
+                                            print('\n+-------------------------------------------------------+')
+                                            print('|⚠️ Purchased date should not larger than current date. |')
+                                            print('+-------------------------------------------------------+\n')
                                     else:
                                         print(
                                             '\n+----------------------------------------------------------------------------------------+')
@@ -744,9 +754,23 @@ def update_ingredient():
                                         print('|⚠️ Invalid contact number. Please enter again. |')
                                         print('+-----------------------------------------------+')
 
+                                if attribute_of_ingredient_data == 'cost_per_unit':
+                                    if validation_empty_entries(new_value):
+                                        if new_value.isdigit():
+                                            if int(new_value) > 0:
+                                                break
+                                            else:
+                                                print('\n+-----------------------------------------------+')
+                                                print('|⚠️ Invalid cost per unit. Must greater than 0. |')
+                                                print('+-----------------------------------------------+\n')
+                                        else:
+                                            print('\n+--------------------------------------------------------------------------------------+')
+                                            print('|⚠️ Please enter a valid cost. (Cannot contain any alphabets and special characters.)  |')
+                                            print('+--------------------------------------------------------------------------------------+\n')
+
                                 if attribute_of_ingredient_data == 'storage_requirement':
                                     if validation_alphabet_only(new_value):
-                                        if new_value in ['dry storage', 'refrigerator', 'freezer']:
+                                        if new_value in ['dry storage', 'refrigerated', 'freezer']:
                                             break
                                         else:
                                             print(
@@ -796,5 +820,5 @@ def update_ingredient():
 
 
 #update_ingredient()
-#ingredient_management()
+ingredient_management()
 

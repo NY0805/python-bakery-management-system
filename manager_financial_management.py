@@ -21,11 +21,11 @@ def load_data_from_cashier_transaction_keeping():
 
 
 # define the function to print content in center
-def printed_centered(info):
-    print('-' * 95)
-    side_space = (95 - len(info)) // 2  # determine how much blank space to leave
-    print(' ' * side_space + info + ' ' * (95 - len(info) - side_space))
-    print('-' * 95)
+def printed_centered(info, width):
+    print('-' * width)
+    side_space = (width - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (width - len(info) - side_space))
+    print('-' * width)
 
 
 def validate_year(year):
@@ -42,13 +42,7 @@ def validate_year(year):
 transaction_keeping = load_data_from_cashier_transaction_keeping()
 equipment_report_keeping = load_data_from_equipment_report_keeping()
 
-'''headers = ['Daily Income(RM)', 'Monthly Income(RM)', 'Total income(RM)']
-            total_char = 0
-            for header in headers:
-                total_char += len(header)
-            print('\n' + '-' * (total_char+16))
-            print(f'{headers[0]:<25}{headers[1]:<25}{headers[2]}')
-            print('-' * (total_char+16) + '\n')'''
+
 #📆
 
 
@@ -75,7 +69,7 @@ def financial_management():
               f'💰 {datetime.strftime(datetime.now(), "%B")}\'s Income So Far : RM {this_month_income:.2f}')
         print(f'💸 Today\'s {"Expenses":<9}: RM {"":<29}💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
 
-        printed_centered('Financial Management')
+        printed_centered('Financial Management', 95)
         print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Overall Financial Tracking\n5. Back to Manager Privilege')
         track_choice = input('\nWhich financial data do you want to track:\n>>> ')
         if track_choice == '1':
@@ -148,13 +142,15 @@ def financial_management():
         elif track_choice == '4':
             while True:
                 try:
-                    custom_year_for_expenses = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
-                    if int(custom_year_for_expenses) == 0:
+                    custom_year_for_overview = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
+                    if int(custom_year_for_overview) == 0:
                         break
 
-                    elif validate_year(custom_year_for_expenses):
-                        print('')
-
+                    elif validate_year(custom_year_for_overview):
+                        headers = ['Date', 'Description', 'Income(RM)', 'Expenses(RM)']
+                        printed_centered(f'{custom_year_for_overview} FINANCIAL REPORT', 73)
+                        print(f'{headers[0]:<15}{headers[1]:<25}{headers[2]:<20}{headers[3]}')
+                        print('-' * 73 + '\n')
 
                 except ValueError:
                     print('\n+-------------------------------------+')
