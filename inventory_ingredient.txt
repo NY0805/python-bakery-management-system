@@ -6,11 +6,11 @@
         "batch_number": "B001",
         "unit_measurement": "g",
         "quantity_purchased": 900.0,
-        "purchase_date": "05-06-2004",
-        "expiry_date": "26-07-2004",
+        "purchase_date": "11-10-2024",
+        "expiry_date": "12-12-2024",
         "supplier_name": "cheflum",
         "supplier_contact": "012-3456789",
-        "cost_per_unit": "RM 7.00",
+        "cost_per_unit": "RM 0.20",
         "storage_requirement": "dry storage",
         "allergen_info": [
             "gluten"
@@ -27,7 +27,7 @@
         "expiry_date": "09-08-2005",
         "supplier_name": "lum",
         "supplier_contact": "019-2345667",
-        "cost_per_unit": "RM 8.60",
+        "cost_per_unit": "RM 0.80",
         "storage_requirement": "dry storage",
         "allergen_info": [
             "no"
@@ -44,7 +44,7 @@
         "expiry_date": "24-11-2004",
         "supplier_name": "bananana",
         "supplier_contact": "012-3456444",
-        "cost_per_unit": "RM 3.00",
+        "cost_per_unit": "RM 0.50",
         "storage_requirement": "refrigerated",
         "allergen_info": [
             "sweettt"
@@ -61,7 +61,7 @@
         "expiry_date": "31-08-2025",
         "supplier_name": "charlie",
         "supplier_contact": "123-4567832",
-        "cost_per_unit": "RM 4.50",
+        "cost_per_unit": "RM 1.00",
         "storage_requirement": "freezer",
         "allergen_info": [
             "milk"
@@ -78,7 +78,7 @@
         "expiry_date": "08-08-2025",
         "supplier_name": "charplin",
         "supplier_contact": "234-3478532",
-        "cost_per_unit": "RM 5.00",
+        "cost_per_unit": "RM 0.50",
         "storage_requirement": "dry storage",
         "allergen_info": [
             "no"
@@ -95,7 +95,7 @@
         "expiry_date": "11-11-2024",
         "supplier_name": "mickey",
         "supplier_contact": "123-4059321",
-        "cost_per_unit": "RM 10.00",
+        "cost_per_unit": "RM 3.00",
         "storage_requirement": "refrigerated",
         "allergen_info": [
             "apple"

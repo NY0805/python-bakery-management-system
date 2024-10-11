@@ -58,7 +58,7 @@ def receipt(customer):
 
     print('\n' + '=' * overall_width)  # print a separate line
     current_time = datetime.now().strftime("%I:%M:%S %p")  # convert the time into string for readability and store it into "current_time" variable.If not in string, it will display 13:45:45.123456
-    current_date = datetime.now().strftime("%d/%m/%Y")  # convert the date into string for self-formatting and store it into "current_date" variable
+    current_date = datetime.now().strftime("%d-%m-%Y")  # convert the date into string for self-formatting and store it into "current_date" variable
     print(current_time + current_date.rjust(overall_width-len(current_date)-1))  # specify the format of printing date and time
     print(' ')  # blank a line
     invoice_no = random.randint(1000001, 10000000)  # determine the invoice number in random in a range from 1000001 to 10000000
@@ -112,13 +112,18 @@ def receipt(customer):
 
     # determine the format of data as dictionary format to be saved to the file
     for cart_id, customer_details in customer_info.items():
-        if customer == cart_id:
-            transaction_keeping[customer] = {
-                "order_id": customer_details['order_id'],
-                "order_date": current_date,
-                "total_spend(RM)": total
-            }
+        purchased_items = []
+        for item in customer_details['items_ordered']:
+            item_name, quantity = item.split('x')
+            purchased_items.append(item_name)
+            if customer == cart_id:
+                transaction_keeping[f'MGB-{invoice_no}'] = {
+                    "order_id": customer_details['order_id'],
+                    "items": purchased_items,
+                    "order_date": current_date,
+                    "total_spend(RM)": total
+                }
     save_info(transaction_keeping)  # save the data
 
 
-receipt(str(3579246801))
+receipt(str(1597534862))

@@ -7,7 +7,7 @@
         "repair_cost": "RM 55.00",
         "manufacturer_email": "gg@gg.com",
         "warranty": "1 year",
-        "report_date": "09-10-2024",
+        "report_date": "11-10-2024",
         "current_condition": "function well",
         "malfunction_date": "11-11-1111",
         "last_maintenance_date": "11-11-1111",

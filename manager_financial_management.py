@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from manager_notifications import load_data_from_equipment_report_keeping
+from manager_inventory_ingredient import load_data_from_inventory_ingredient
 
 # Define the function that loads customers' orders data from the file
 def load_data_from_cashier_transaction_keeping():
@@ -41,6 +42,7 @@ def validate_year(year):
 
 transaction_keeping = load_data_from_cashier_transaction_keeping()
 equipment_report_keeping = load_data_from_equipment_report_keeping()
+ingredient_keeping = load_data_from_inventory_ingredient()
 
 
 #📆
@@ -51,23 +53,39 @@ def financial_management():
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
               'November', 'December']
     today_income = 0
+    today_expenses = 0
     this_month_income = 0
     total_income_so_far = 0
 
     for receipt_details in transaction_keeping.values():
-        order_date = datetime.strptime(receipt_details['order_date'], '%d/%m/%Y')  # retrieve all date from order_list
+        order_date = datetime.strptime(receipt_details['order_date'], '%d-%m-%Y')  # retrieve all date from order_list
         total_income_so_far += receipt_details['total_spend(RM)']
 
-        if order_date == datetime.now().strftime('%d/%m/%Y'):
+        if order_date.strftime('%d-%m-%Y') == datetime.now().strftime('%d-%m-%Y'):
             today_income += receipt_details['total_spend(RM)']
 
         if order_date.month == datetime.now().month:
             this_month_income += receipt_details['total_spend(RM)']
 
+    for equipment_details in equipment_report_keeping.values():
+        repair_date = equipment_details['report_date']
+        unit, repair_cost = equipment_details['repair_cost'].split(' ')
+
+        if repair_date == datetime.now().strftime('%d-%m-%Y'):
+            today_expenses += float(repair_cost)
+
+    for ingredient_details in ingredient_keeping.values():
+        purchase_date = ingredient_details['purchase_date']
+        unit, ingredient_cost = ingredient_details['cost_per_unit'].split(' ')
+        cost = float(ingredient_cost) * ingredient_details['quantity_purchased']
+
+        if purchase_date == datetime.now().strftime('%d-%m-%Y'):
+            today_expenses += cost
+
     while True:
-        print(f'\n💰 Today\'s {"Income":<9}: RM {today_income:.2f}{"":<25}'
+        print(f'\n💰 Today\'s {"Income":<9}: RM {today_income:.2f}'.ljust(56) +
               f'💰 {datetime.strftime(datetime.now(), "%B")}\'s Income So Far : RM {this_month_income:.2f}')
-        print(f'💸 Today\'s {"Expenses":<9}: RM {"":<29}💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
+        print(f'💸 Today\'s {"Expenses":<9}: RM {today_expenses:.2f}'.ljust(55)+f'💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
 
         printed_centered('Financial Management', 95)
         print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Overall Financial Tracking\n5. Back to Manager Privilege')
@@ -91,13 +109,14 @@ def financial_management():
                             if custom_month_for_income.lower() == 'cancel':
                                 break
 
-                        if custom_month_for_income in months:
-                            income_of_that_month = 0
-                            for receipt_details in transaction_keeping.values():
-                                chosen_date = datetime.strptime(receipt_details['order_date'], '%d/%m/%Y')
-                                if chosen_date.strftime("%B") == custom_month_for_income and chosen_date.year == custom_year_for_income:
-                                    income_of_that_month += receipt_details['total_spend(RM)']
-                            print(f'\n💰 {custom_year_for_income} {custom_month_for_income.title()} Income: RM {income_of_that_month:.2f}')
+                        else:
+                            if custom_month_for_income in months:
+                                income_of_that_month = 0
+                                for receipt_details in transaction_keeping.values():
+                                    chosen_date = datetime.strptime(receipt_details['order_date'], '%d-%m-%Y')
+                                    if chosen_date.strftime("%B") == custom_month_for_income and chosen_date.year == int(custom_year_for_income):
+                                        income_of_that_month += receipt_details['total_spend(RM)']
+                                print(f'\n💲 {custom_year_for_income} {custom_month_for_income.title()} Income: RM {income_of_that_month:.2f}\n')
                 except ValueError:
                     print('\n+-------------------------------------+')
                     print('|⚠️ Invalid year. Please enter again. |')
@@ -111,7 +130,7 @@ def financial_management():
                         break
 
                     elif validate_year(custom_year_for_expenses):
-                        custom_month_for_expenses = input('\nInsert a month (or enter "cancel" to reseelct year):\n>>> ').title()
+                        custom_month_for_expenses = input('\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
                         if custom_month_for_expenses.lower() == 'cancel':
                             continue
                         while custom_month_for_expenses not in months:
@@ -127,9 +146,18 @@ def financial_management():
                             for equipment_details in equipment_report_keeping.values():
                                 unit, repair_cost = equipment_details['repair_cost'].split(' ')
                                 chosen_date = datetime.strptime(equipment_details['report_date'], '%d-%m-%Y')
-                                if chosen_date.strftime("%B") == custom_month_for_expenses and chosen_date.year == custom_year_for_expenses:
+                                if chosen_date.strftime("%B") == custom_month_for_expenses and chosen_date.year == int(custom_year_for_expenses):
                                     expenses_of_that_month += float(repair_cost)
-                            print(f'\n💰 {custom_year_for_expenses} {custom_month_for_expenses.title()} Expenses: RM {expenses_of_that_month:.2f}')
+
+                            for ingredient_details in ingredient_keeping.values():
+                                purchase_date = datetime.strptime(ingredient_details['purchase_date'], '%d-%m-%Y')
+                                unit, ingredient_cost = ingredient_details['cost_per_unit'].split(' ')
+                                cost = float(ingredient_cost) * ingredient_details['quantity_purchased']
+                                if purchase_date.strftime("%B") == custom_month_for_expenses and purchase_date.year == int(custom_year_for_expenses):
+                                    expenses_of_that_month += float(cost)
+
+
+                            print(f'\n💲 {custom_year_for_expenses} {custom_month_for_expenses.title()} Expenses: RM {expenses_of_that_month:.2f}\n')
 
                 except ValueError:
                     print('\n+-------------------------------------+')
@@ -148,9 +176,20 @@ def financial_management():
 
                     elif validate_year(custom_year_for_overview):
                         headers = ['Date', 'Description', 'Income(RM)', 'Expenses(RM)']
-                        printed_centered(f'{custom_year_for_overview} FINANCIAL REPORT', 73)
-                        print(f'{headers[0]:<15}{headers[1]:<25}{headers[2]:<20}{headers[3]}')
-                        print('-' * 73 + '\n')
+                        print('')
+                        printed_centered(f'📊 {custom_year_for_overview} FINANCIAL REPORT 📊', 95)
+                        print(f'{headers[0]:<22}{headers[1]:<28}{headers[2]:<25}{headers[3]}')
+                        print('-' * 95)
+
+                        for receipt_details in transaction_keeping.values():
+                            if len(receipt_details['items']) == 1:
+                                print(f'{receipt_details["order_date"]:<22}{receipt_details["items"][0]:<28}{receipt_details["total_spend(RM)"]:.2f}{"":<25}{""}')
+
+                            else:
+                                print(f'{receipt_details["order_date"]:<22}{receipt_details["items"][0]:<28}{"":<25}{""}')
+                                for item in receipt_details['items'][1:]:
+                                    print(f'{"":<22}{item:<28}{receipt_details["total_spend(RM)"]:.2f}{"":<25}{""}')
+                            print('_.'*45)
 
                 except ValueError:
                     print('\n+-------------------------------------+')
