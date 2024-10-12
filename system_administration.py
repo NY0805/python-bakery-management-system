@@ -33,7 +33,7 @@ def system_administration():
         elif role == '4':  # return to the previous page
             print('\nExiting to Manager Privilege......')
             break
-        break
+        return False
 
 
 

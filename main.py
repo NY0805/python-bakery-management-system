@@ -25,48 +25,51 @@ bakery = '''
 
 # print the bakery illustration and bakery name
 print(bakery)
-print('***************************************************')
-print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
-print('***************************************************')
 
-# provide the options for different roles
-while True:
-    print('\nRole Options: ')
-    print('1. Manager👨‍💼👩‍💼')
-    print('2. Baker🧑‍🍳🍞')
-    print('3. Cashier🖥️💰')
-    print('4. Customer👦👧')
-    print('5. Exit the program⛔🔙')
 
-    # identify the role and run each role's function
-    try:
-        role = int(input('\nWho are you? (1, 2, 3, 4):\n>>> '))
+def main():
+    print('***************************************************')
+    print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
+    print('***************************************************')
 
-        if role == 1:
-            manager.manager()
+    # provide the options for different roles
+    while True:
+        print('\nRole Options: ')
+        print('1. Manager👨‍💼👩‍💼')
+        print('2. Baker🧑‍🍳🍞')
+        print('3. Cashier🖥️💰')
+        print('4. Customer👦👧')
+        print('5. Exit the program⛔🔙')
 
-        elif role == 2:
-            baker.baker_accounts()
+        # identify the role and run each role's function
+        try:
+            role = int(input('\nWho are you? (1, 2, 3, 4):\n>>> '))
 
-        elif role == 3:
-            cashier.cashier_accounts()
+            if role == 1:
+                manager.manager()
 
-        elif role == 4:
-            customer.customer()
+            elif role == 2:
+                baker.baker_accounts()
 
-        elif role == 5:
-            print('\n--------------------YOU ARE EXIT--------------------')
-            exit()
+            elif role == 3:
+                cashier.cashier_accounts()
 
-    # display error message if the input is invalid
-        else:
+            elif role == 4:
+                customer.customer()
+
+            elif role == 5:
+                print('\n--------------------YOU ARE EXIT--------------------')
+                exit()
+
+        # display error message if the input is invalid
+            else:
+                print('\n+------------------+')
+                print('|⚠️ Invalid input. |')
+                print('+------------------+')
+
+        except ValueError:
             print('\n+------------------+')
             print('|⚠️ Invalid input. |')
             print('+------------------+')
 
-    except ValueError:
-        print('\n+------------------+')
-        print('|⚠️ Invalid input. |')
-        print('+------------------+')
-
-
+main()

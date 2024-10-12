@@ -1,34 +1,10 @@
 {
     "wen": {
-        "baker_username": "wen",
-        "baker_password": "b@k3rm4st3r!",
-        "age": 46,
-        "gender": "male",
-        "contact_no": "456-6758432",
-        "email": "ff@ff.ff"
-    },
-    "bean": {
-        "baker_username": "baker3",
+        "baker_username": "baker1",
         "baker_password": "b@k3rm4st3r!",
         "age": 23,
-        "gender": "male",
-        "contact_no": "123-3456732",
-        "email": "gg@gg.gg"
-    },
-    "elsa": {
-        "baker_username": "baker4",
-        "baker_password": "b@k3rm4st3r!",
-        "age": 45,
         "gender": "female",
-        "contact_no": "456-5748321",
+        "contact_no": "123-4563782",
         "email": "ee@ee.ee"
-    },
-    "connie": {
-        "baker_username": "baker5",
-        "baker_password": "b@k3rm4st3r!",
-        "age": 34,
-        "gender": "female",
-        "contact_no": "123-4567382",
-        "email": "ff@ff.ff"
     }
 }

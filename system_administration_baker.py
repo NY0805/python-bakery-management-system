@@ -181,19 +181,31 @@ def system_administration_baker():
 
                             while True:
                                 remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')  # ask user if they want to continue removing
-                                if remove_more not in ['y', 'n']:
+                                if remove_more == 'y':
+                                    break
+                                elif remove_more == 'n':
+                                    break
+                                else:
                                     print('\n+--------------------------------------+')
                                     print('|⚠️ Invalid input. Please enter again. |')
                                     print('+--------------------------------------+\n')
+                            if remove_more == 'n':
+                                print('\nStop removing. Exiting to Services page......')
+                                break
+
+                            '''if remove_more not in ['y', 'n']:
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Invalid input. Please enter again. |')
+                                print('+--------------------------------------+\n')
+
+                            else:
+                                if remove_more == 'y':
+                                    break
 
                                 else:
-                                    if remove_more == 'y':
-                                        break
-
-                                    else:
-                                        print('\nStop removing. Exiting to Services page......')
-                                        break
-                            break
+                                    print('\nStop removing. Exiting to Services page......')
+                                    break
+                        #break'''
 
                         else:
                             print('\n+--------------------------------------+')

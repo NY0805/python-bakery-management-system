@@ -44,11 +44,6 @@ def manager_accounts():
     print('+----------------------------------------------------------------+\n')
 
     manager_name = input('Name: ')  # ask for manager name
-    while manager_name in manager_info:  # check if manager name in the manager_info
-        print('\n+--------------------------------------------------+')
-        print('|⚠️ Warning: One person can only have one account! |')
-        print('+--------------------------------------------------+\n')
-        manager_name = input('Name: ')
 
     manager_username = input('Username: ')  # ask for manager username
     while manager_username in (manager_info[manager_name]['manager_username'] for manager_name in manager_info):  # continue looping if username not match with the name
@@ -211,6 +206,6 @@ def manager():
             print('+--------------------------------------+')
 
 
-#manager()
+manager()
 
 
