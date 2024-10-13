@@ -344,7 +344,7 @@ def inventory_control_product():
 
 
 # main inventory control for products and ingredients
-def main_control():
+def inventory_control():
     while True:
         print('\n-----------------------------------------------')
         print('\t\t', ' ', 'MAIN INVENTORY MANAGEMENT')
@@ -369,4 +369,4 @@ def main_control():
             print('+--------------------------------------+')
 
 
-#main_control()
+#inventory_control()

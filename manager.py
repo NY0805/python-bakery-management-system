@@ -188,7 +188,7 @@ def manager():
             manager_financial_management.financial_management()
 
         elif choice == 'd':
-            manager_inventory_control.main_control()
+            manager_inventory_control.inventory_control()
 
         elif choice == 'e':
             manager_customer_feedback.monitor_review()

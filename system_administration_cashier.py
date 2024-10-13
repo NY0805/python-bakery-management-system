@@ -123,7 +123,7 @@ def system_administration_cashier():
         print('\n-----------------------------------------------')
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
-        print('1. Add Cashier(s)\n2. Remove Cashier(s)\n3. Edit Cashier(s)\n4. Back to Manager Privilege')  # provide the option for cashier management
+        print('1. Add Cashier(s)\n2. Remove Cashier(s)\n3. Update Cashier(s)\n4. Back to Manager Privilege')  # provide the option for cashier management
 
         manage_cashier = input('\nPlease choose a service:\n>>> ')
 

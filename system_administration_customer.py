@@ -129,7 +129,7 @@ def deactivate_customer():
 
 
 # define the function to update customers' details
-def edit_customer():
+def update_customer():
 
     while True:
         print('\n-----------------------------------------------')
@@ -305,7 +305,7 @@ def system_administration_customer():
         print('\t\t\t\t', '', 'SERVICES')
         print('-----------------------------------------------')
         print(
-            '1. Activate Customer(s)\n2. Deactivate Customer(s)\n3. Update Customer(s)\n4. Terminate/Remove Customer account(s)\n5. Back to Role Management')  # provide the option for customer management
+            '1. Activate Customer(s)\n2. Deactivate Customer(s)\n3. Update Customer(s)\n4. Terminate/Remove Customer Account(s)\n5. Back to Role Management')  # provide the option for customer management
 
         manage_customer = input('\nPlease choose a service:\n>>> ')
 
@@ -316,7 +316,7 @@ def system_administration_customer():
             deactivate_customer()
 
         elif manage_customer == '3':  # update customer
-            edit_customer()
+            update_customer()
 
         elif manage_customer == '4':  # terminate/remove customer
             terminate_customer()
