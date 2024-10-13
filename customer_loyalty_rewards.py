@@ -15,6 +15,7 @@ REDEEM_RATES = {
     "Standard": None  # Standard users cannot redeem vouchers
 }
 
+
 def load_customer_data():
     try:
         with open('customer_loyalty_rewards.txt', 'r') as file:
@@ -63,7 +64,7 @@ def redeem_cash_voucher(customer_info):
     if max_vouchers > 0:
         print(f"\nYou have {points} loyalty points.")
         print(f"As a {status} member, you can redeem up to {max_vouchers} cash vouchers (Each RM{VOUCHER_VALUE}).")
-        choice = input("Would you like to redeem your points for cash vouchers? (y/n): ").lower()
+        choice = input("Would you like to redeem your points for cash vouchers? yes=y no=n (y/n): ").lower()
         if choice == 'y':
             num_vouchers = int(input(f"How many vouchers would you like to redeem (up to {max_vouchers})? "))
             if 0 < num_vouchers <= max_vouchers:
@@ -77,7 +78,7 @@ def redeem_cash_voucher(customer_info):
         else:
             print("No vouchers redeemed.")
     else:
-        print(f"Sorry, you don't have enough points to redeem a cash voucher. You need at least {points_per_voucher} points per voucher.")
+        print(f" Your points are not enough! You need at least {points_per_voucher} points per voucher.")
 
 
 def view_loyalty_rewards():
