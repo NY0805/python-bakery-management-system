@@ -1,68 +1,68 @@
 {
-    "5580946551": {
+    "1": {
         "username": "Mark0825",
         "total_spending (RM)": 55.0,
         "loyalty_points": 550,
         "status": "MORNING GLORY'S BRONZE",
         "redeem_rate (RM)": 120
     },
-    "5684950188": {
+    "2": {
         "username": "03jane_",
         "total_spending (RM)": 150.0,
         "loyalty_points": 1500,
         "status": "MORNING GLORY'S SILVER",
         "redeem_rate (RM)": 90
     },
-    "1544631417": {
+    "3": {
         "username": "_eddie",
         "total_spending (RM)": 25.0,
         "loyalty_points": 250,
         "status": "Standard",
         "redeem_rate (RM)": null
     },
-    "4418942694": {
+    "4": {
         "username": "anna328_",
         "total_spending (RM)": 45.0,
         "loyalty_points": 450,
         "status": "Standard",
         "redeem_rate (RM)": null
     },
-    "7841554976": {
+    "5": {
         "username": "andrew_520",
         "total_spending (RM)": 205.0,
         "loyalty_points": 2050,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 70
     },
-    "9026863080": {
+    "6": {
         "username": "Ashley",
         "total_spending (RM)": 95.0,
         "loyalty_points": 950,
         "status": "MORNING GLORY'S BRONZE",
         "redeem_rate (RM)": 120
     },
-    "3716950492": {
+    "7": {
         "username": "leo_tiger",
         "total_spending (RM)": 110.0,
         "loyalty_points": 1100,
         "status": "MORNING GLORY'S SILVER",
         "redeem_rate (RM)": 90
     },
-    "2507494821": {
+    "8": {
         "username": "julia_b",
         "total_spending (RM)": 210.0,
         "loyalty_points": 2100,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 70
     },
-    "9648523077": {
+    "9": {
         "username": "sam_93",
         "total_spending (RM)": 65.0,
         "loyalty_points": 650,
         "status": "MORNING GLORY'S BRONZE",
         "redeem_rate (RM)": 120
     },
-    "2789401753": {
+    "10": {
         "username": "violet23",
         "total_spending (RM)": 85.0,
         "loyalty_points": 850,
