@@ -35,19 +35,13 @@ def save_customer_data(customers):
 
 def update_customer_info(username, customer_info):
     customers = load_customer_data()  # Load existing customer data
-
-    # Iterate through customers to find the one with the matching username
-    for customer_id, info in customers.items():
-        if info["username"] == username:
-            # Update existing customer information
-            customers[customer_id].update(customer_info)
-            print(f"Updated information for {username}.")
-            break
-    else:
-        print(f"User {username} does not exist. No update made.")
-        return  # Exit the function if the user doesn't exist
-
-    save_customer_data(customers)  # Save the updated customer data
+    for customer_id, customer in customers.items():
+        if customer['username'] == username:
+            customers[customer_id] = customer_info  # Update customer info
+            print(f"Information for {username} has been updated.")
+            save_customer_data(customers)  # Save updated customer data to file
+            return
+    print(f"User {username} not found. No update performed.")
 
 
 def redeem_cash_voucher(customer_info):
@@ -57,7 +51,7 @@ def redeem_cash_voucher(customer_info):
     points_per_voucher = REDEEM_RATES.get(status)
 
     if points_per_voucher is None:
-        print("Sorry, Standard users cannot redeem cash vouchers.")
+        print("Standard users cannot redeem cash vouchers.")
         return
 
     max_vouchers = points // points_per_voucher
@@ -78,7 +72,7 @@ def redeem_cash_voucher(customer_info):
         else:
             print("No vouchers redeemed.")
     else:
-        print(f" Your points are not enough! You need at least {points_per_voucher} points per voucher.")
+        print(f"Your points are not enough! You need at least {points_per_voucher} points per voucher.")
 
 
 def view_loyalty_rewards():
@@ -93,7 +87,7 @@ def view_loyalty_rewards():
             print(f"Total Spending (RM): {customer_info['total_spending (RM)']}")
             print(f"Loyalty Points: {customer_info['loyalty_points']}")
             print(f"Status: {customer_info['status']}")
-            print(f"Redeem Rate: {customer_info['redeem_rate (RM)']}")  # Use redeem_rate
+            print(f"Redeem Rate: {REDEEM_RATES[customer_info['status']]} points per voucher")  # Use redeem_rate
             redeem_cash_voucher(customer_info)
             break
     else:
@@ -106,7 +100,7 @@ def loyalty_rewards():
         print('\t\t\tCUSTOMER LOYALTY REWARDS')
         print('-----------------------------------------------')
         print()
-        print("1. View Loyalty Rewards")
+        print("1. View and Redeem Loyalty Rewards")
         print("2. Exit to main menu")
 
         choice = input("Select your option: ")
@@ -118,6 +112,7 @@ def loyalty_rewards():
             break
         else:
             print("|⚠️Invalid option! Please try again.|")
+
 
 # Start the loyalty rewards program
 loyalty_rewards()

@@ -216,21 +216,6 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     print("Order has been saved successfully.")
 
 
-# Function to display cart details and calculate the total price
-def display_cart(cart):
-    total_amount = 0.0
-    print("\nYour cart details:")
-    for product_code, item in cart.items():
-        product_name = item['product_name']
-        price_per_item = item['price']  # Already discounted if applicable
-        quantity = item['quantity']
-        item_total = price_per_item * quantity
-        total_amount += item_total
-        print(f"{product_name} x{quantity} @ RM {price_per_item:.2f} each = RM {item_total:.2f}")
-    print(f"\nTotal amount: RM {total_amount:.2f}")
-    return total_amount
-
-
 # Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
@@ -311,4 +296,4 @@ def shopping_cart():
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-#shopping_cart()
+shopping_cart()

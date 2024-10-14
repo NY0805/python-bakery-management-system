@@ -300,7 +300,9 @@ def customer_menu():
     logged_in_username = None  # Initialize username
 
     while True:
+        print('\n-----------------------------------------------')
         print("WELCOME TO MORNING GLORY BAKERY!")
+        print('\n-----------------------------------------------')
         print("1. Sign Up")
         print("2. Login")
         print("3. Browse Products")
@@ -342,4 +344,4 @@ def customer_menu():
             print("Invalid option, please try again.")
 
 
-#customer_menu()
+customer_menu()
