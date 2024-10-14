@@ -1,50 +1,80 @@
 import json
+import product_menu
+
+product_data = product_menu.product_data
 
 
-# Define the function that loads data from the file
-def load_data_from_products():
+# Load product categories and names from baker_product_keeping.txt
+def load_categories():
     try:
-        file = open('manager_product_inventory.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
-        else:
-            return {}  # return empty dictionary if the file is empty
+        with open('baker_product_keeping.txt', 'r') as file:
+            categories = json.load(file)  # Assuming this is structured as a JSON object
+            return {v["category"]: v["product_name"] for k, v in categories.items()}  # Map categories to product names
     except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+        print("Categories file not found!")
+        return {}
+    except json.JSONDecodeError:
+        print("Error decoding JSON from categories file.")
+        return {}
 
 
-products = load_data_from_products()
+# Load product details from manager_product_inventory.txt
+def load_product_details():
+    try:
+        with open('manager_product_inventory.txt', 'r') as file:
+            content = file.read().strip()
+            return json.loads(content)
+    except FileNotFoundError:
+        print("Products file not found!")
+        return {}
+    except json.JSONDecodeError:
+        print("Error decoding JSON from products file.")
+        return {}
 
 
 def browse_products():
+    # Load data
+    categories = load_categories()
+    products = load_product_details()
+
     print('\n-----------------------------------------------')
-    print('\t\t\t', '', 'PRODUCT BROWSING')
+    print('\t\t\tPRODUCT BROWSING')
     print('-----------------------------------------------')
-    try:
-        # Display the available products and their details to customers
-        print('\nAvailable Products:')
-        print('===============================================')
 
-        for product_code, product in products.items():  # Get the product code from the dictionary key
-            print()
-            print(f'Product Code: {product_code}')
-            print(f'Product Name: {product["product_name"]}')
-            print(f'Stock: {product["stock"]}')
-            print(f'Price: {product["price"]}')
-            print(f'Description: {product["description"]}')
-            print()
-            print('===============================================')
+    # Menu options for the customer
+    while True:
+        print("Please choose an option:")
+        print("1. Search for products by category")
+        print("2. Exit")
 
-    except FileNotFoundError:
-        print('|⚠️Product data cannot be found!|')  # Display the message if the product file cannot be found
+        choice = input("Enter your choice (1/2): ")
+
+        if choice == '1':
+            category_input = input("Please enter the product category you want to search for: ")
+
+            # Check if the category exists in the baker's product list
+            if category_input in categories:
+                print(f"Products in category '{category_input}':")
+                print('===============================================')
+
+                # Loop through the products to find matches based on the category and product name
+                for product_code, product in products.items():
+                    if product["product_name"].lower() == categories[category_input].lower():  # Match product name
+                        print(f'Product Code: {product_code}')
+                        print(f'Product Name: {product["product_name"]}')
+                        print(f'Price: {product["price"]}')
+                        print(f'Description: {product["description"]}')
+                        print('-----------------------------------------------')
+            else:
+                print(f"The category '{category_input}' does not exist.")
+
+        elif choice == '2':
+            print("Thank you for visiting our system. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice, please try again.")
 
 browse_products()
-
 
 
