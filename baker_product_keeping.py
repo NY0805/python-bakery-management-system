@@ -115,6 +115,7 @@ def product_categories():
     print('7. Back to Previous Page')
 
     while True:
+        category = None
         option_product_categories = input('\nPlease input the category:'
                                           '\n>>> ')
         if option_product_categories not in ['1', '2', '3', '4', '5', '6', '7']:
@@ -254,7 +255,6 @@ def product_details():
                         print('|⚠️ Please enter a valid shelf life. (Cannot be more than 14 days.) |')
                         print('+------------------------------------------------------------------+\n')
             else:
-                print("\n")
                 print('\n+---------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a number followed by "days". (Case sensitive & no special characters.) |')
                 print('+---------------------------------------------------------------------------------------+\n')
@@ -377,9 +377,8 @@ def continue_adding():
 # function to update product information
 def update_product():
     product_data = load_data_from_inventory_product()
-
-    index = 1
     while True:
+        index = 1
         print('\n------------------------------------------------')
         print('\t\t\t\t', 'PRODUCT LIST')
         print('------------------------------------------------')
@@ -400,6 +399,8 @@ def update_product():
                 for batch_number, product in product_data.items():
                     product_name = [product['product_name']]  # create a list to store all the product name
                     selected_product = product_name[index_of_product_to_edit - 1]  # indicate which product is selected
+                    selected_product_index = list(product_data.keys())[index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
+
                     while True:
                         print('\n-----------------------------------------------')
                         print(f'\t\t\t\t {selected_product.upper()}\'S DATA')
@@ -408,7 +409,8 @@ def update_product():
                         for product_data_key, product_data_value in product.items():
                             print(f'{product_data_key}: {product_data_value}')  # list down the attributes of the selected product
 
-                        attribute_of_product_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
+                        print('\nTo change the information, please enter the exact matching name. Example: product_name.')
+                        attribute_of_product_data = input('Which information do you want to update? (or enter \"cancel\")\n>>> ')
                         if attribute_of_product_data in product:
                             while True:
                                 new_value = input(f'\nEnter new {attribute_of_product_data}: ')
@@ -554,8 +556,8 @@ def update_product():
                                         print('+--------------------------------------+')
                                         continue
 
-                                product_data[selected_product][attribute_of_product_data] = new_value  # assign the new value entered to the attributes
                                 print(f'\n{attribute_of_product_data} of {selected_product} is updated.')  # inform user about the data is updated
+                                product_data[selected_product_index].update({attribute_of_product_data: new_value}) # assign the new value entered to the attributes
                                 save_info(product_data)  # save the data
                                 break
 

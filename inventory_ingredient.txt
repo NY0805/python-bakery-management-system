@@ -5,7 +5,7 @@
         "ingredient_form": "granules",
         "batch_number": "B001",
         "unit_measurement": "g",
-        "quantity_purchased": 900.0,
+        "quantity_purchased": 800.0,
         "purchase_date": "11-10-2024",
         "expiry_date": "12-12-2024",
         "supplier_name": "cheflum",

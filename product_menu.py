@@ -94,4 +94,19 @@ def menu():
                 print('\n'+'-'*139)
 
 
-#menu()
+
+
+def format_product_data_new(product):
+    return (
+        f"{product['product_code']} - {product['product_name'].title()}\n"
+        f"{'Best Before':<12}: {product['expiry_date']}\n"
+        f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
+    )
+
+menu()
+
+category_groups = defaultdict(list)
+for value in product_data.values():
+    category_groups[value['category']].append(format_product_data_new(value).split('\n'))
+
+print(category_groups)
