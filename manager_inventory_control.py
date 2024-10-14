@@ -119,7 +119,8 @@ def inventory_control_product():
                                         else:
                                             stock = add_stock  # directly assign the quantity products if the products haven't in the inventory
 
-                                        if 'price' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that not priced yet, and return empty value instead of errors vice versa
+                                        #if 'price' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that not priced yet, and return empty value instead of errors vice versa
+                                        if 'price' not in product_inventory[batch_number] or batch_number not in product_inventory:
                                             while True:
                                                 try:
                                                     price = float(input('Price per unit: RM '))  # determine the price per unit for each newly added products
@@ -369,4 +370,4 @@ def inventory_control():
             print('+--------------------------------------+')
 
 
-#inventory_control()
+inventory_control()

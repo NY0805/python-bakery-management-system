@@ -1,7 +1,7 @@
 {
     "009": {
         "product_name": "tiramisu",
-        "stock": 3,
+        "stock": 4,
         "price": "RM 8.50",
         "description": "Coffee-soaked ladyfingers with creamy mascarpone and blueberry toppings"
     },
