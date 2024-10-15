@@ -7,6 +7,7 @@
             "red velvet x 1"
         ],
         "total_price (RM)": 15.0,
+        "order_date": "26-08-2004",
         "status": "Preparing"
     },
     "5684950188": {
@@ -17,6 +18,7 @@
             "red velvet x 1"
         ],
         "total_price (RM)": 15.5,
+        "order_date": "09-09-2004",
         "status": "Payment Completed"
     },
     "1544631417": {
@@ -27,6 +29,7 @@
             "apple pie x 2"
         ],
         "total_price (RM)": 14.5,
+        "order_date": "09-09-2004",
         "status": "Canceled"
     },
     "4418942694": {
@@ -36,6 +39,7 @@
             "gingerbread x 3"
         ],
         "total_price (RM)": 7.5,
+        "order_date": "11-09-2004",
         "status": "Payment Completed"
     },
     "7841554976": {
@@ -46,6 +50,7 @@
             "red velvet x 2"
         ],
         "total_price (RM)": 23.5,
+        "order_date": "12-09-2004",
         "status": "Preparing"
     },
     "5548156914": {
@@ -55,6 +60,7 @@
             "banana bread x 2"
         ],
         "total_price (RM)": 9.0,
+        "order_date": "13-09-2004",
         "status": "Payment Completed"
     },
     "9875428598": {
@@ -65,6 +71,7 @@
             "apple pie x 1"
         ],
         "total_price (RM)": 18.5,
+        "order_date": "13-09-2004",
         "status": "Preparing"
     },
     "4567891234": {
@@ -75,6 +82,7 @@
             "banana bread x 1"
         ],
         "total_price (RM)": 9.5,
+        "order_date": "14-09-2004",
         "status": "Payment Completed"
     },
     "6543219876": {
@@ -85,6 +93,7 @@
             "banana bread x 2"
         ],
         "total_price (RM)": 19.5,
+        "order_date": "14-09-2004",
         "status": "Canceled"
     },
     "3216549870": {
@@ -95,6 +104,7 @@
             "banana bread x 2"
         ],
         "total_price (RM)": 24.0,
+        "order_date": "14-09-2004",
         "status": "Payment Completed"
     },
     "1597534862": {
@@ -105,6 +115,7 @@
             "gingerbread x 4"
         ],
         "total_price (RM)": 20.5,
+        "order_date": "14-09-2004",
         "status": "Preparing"
     },
     "7896541230": {
@@ -115,6 +126,7 @@
             "gingerbread x 2"
         ],
         "total_price (RM)": 10.0,
+        "order_date": "15-09-2004",
         "status": "Payment Completed"
     },
     "2345678901": {
@@ -125,6 +137,7 @@
             "gingerbread x 5"
         ],
         "total_price (RM)": 17.0,
+        "order_date": "15-09-2004",
         "status": "Canceled"
     },
     "8765432109": {
@@ -135,6 +148,7 @@
             "red velvet x 1"
         ],
         "total_price (RM)": 24.0,
+        "order_date": "15-09-2004",
         "status": "Preparing"
     },
     "1234567890": {
@@ -145,6 +159,7 @@
             "banana bread x 1"
         ],
         "total_price (RM)": 9.5,
+        "order_date": "16-09-2004",
         "status": "Payment Completed"
     },
     "1357924680": {
@@ -155,6 +170,7 @@
             "red velvet x 2"
         ],
         "total_price (RM)": 28.5,
+        "order_date": "16-09-2004",
         "status": "Canceled"
     },
     "2468135790": {
@@ -164,6 +180,7 @@
             "gingerbread x 2"
         ],
         "total_price (RM)": 5.0,
+        "order_date": "16-09-2004",
         "status": "Payment Completed"
     },
     "3579246801": {
@@ -173,6 +190,7 @@
             "apple pie x 7"
         ],
         "total_price (RM)": 35.0,
+        "order_date": "16-09-2004",
         "status": "Preparing"
     }
 }

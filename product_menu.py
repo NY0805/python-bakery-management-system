@@ -122,4 +122,3 @@ def format_product_data_new(product):
     )
 
 
-menu()
