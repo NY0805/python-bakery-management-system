@@ -91,88 +91,89 @@ def inventory_control_product():
                     print('\nCancelling. Exiting to Product Management page......')
                     break
 
-                elif chosen_product in (product[batch_number]['product_name'] for batch_number in product):  # check if the chosen product is in the list of product name
-                    while True:
-                        try:
-                            add_stock = int(input(f'\nNumber of {chosen_product} to add: '))  # collect the number of each product to add into the inventory
-                            if add_stock < 0:  # validate the input is not smaller than 0
-                                print('\n+-------------------------------+')
-                                print('|⚠️ Please enter a valid input. |')
-                                print('+-------------------------------+')
+                product_found = False
+                for batch_number, value in product.items():
+                    if chosen_product == value['product_name']:  # check if the chosen product is in the list of product name
+                        product_found = True
+                        while True:
+                            try:
+                                add_stock = int(input(f'\nNumber of {chosen_product} to add: '))  # collect the number of each product to add into the inventory
+                                if add_stock < 0:  # validate the input is not smaller than 0
+                                    print('\n+-------------------------------+')
+                                    print('|⚠️ Please enter a valid input. |')
+                                    print('+-------------------------------+')
 
-                            elif add_stock == 0:  # input equals to 0 means nothing is added
-                                print('💡 No product is added.')
-                                break
+                                elif add_stock == 0:  # input equals to 0 means nothing is added
+                                    print('\n💡 No product is added.')
+                                    break
 
-                            else:
-                                for batch_number, value in product.items():
-                                    if chosen_product == value['product_name']:
-                                        serial_number = value['serial_number']
+                                else:
+                                    serial_number = value['serial_number']
 
-                                        if add_stock > len(serial_number): # if the input exceed the actual quantity of the products
-                                            print(f'\n⚠️ Not enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}.')
-                                            add_stock = 0
-                                            break
-
-                                        if batch_number in product_inventory:  # check whether th products already exist in the inventory
-                                            stock = int(product_inventory[batch_number]['stock']) + add_stock  # add the user input to the previous quantity
-                                        else:
-                                            stock = add_stock  # directly assign the quantity products if the products haven't in the inventory
-
-                                        #if 'price' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that not priced yet, and return empty value instead of errors vice versa
-                                        if 'price' not in product_inventory[batch_number] or batch_number not in product_inventory:
-                                            while True:
-                                                try:
-                                                    price = float(input('Price per unit: RM '))  # determine the price per unit for each newly added products
-                                                    if price < 0:  # validate the price as a positive number
-                                                        print('\n+-----------------------------------+')
-                                                        print('|⚠️ Please enter a positive number. |')
-                                                        print('+-----------------------------------+\n')
-                                                    price = f'RM {price:.2f}'  # convert the price into 2 decimal places
-                                                    break
-
-                                                except ValueError:
-                                                    print('\n+------------------------------+')
-                                                    print('|⚠️ Please enter numbers only. |')
-                                                    print('+------------------------------+\n')
-                                        else:
-                                            price = product_inventory[batch_number]['price']  # the original price will not be updated if the products is already in the inventory
-
-                                        if 'description' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that no description yet, and return empty value instead of errors vice versa
-                                            product_description = input('Add product description for menu display:\n>>> ')  # add the product description
-                                        else:
-                                            product_description = product_inventory[batch_number]['description']  # the existing descripiton will not be updated if the products are already in the inventory
-
-                                        # update the dictionary with user input
-                                        product_inventory[batch_number] = {
-                                            'product_name': chosen_product,
-                                            'stock': stock,
-                                            'price': price,
-                                            'description': product_description
-                                        }
-
-                                        quantity = len(serial_number) - add_stock  # reduce the quantity of products in record keeping after being added into inventory
-                                        # if the quantity of products finished, the record for the particular product will be deleted
-                                        if quantity <= 0:
-                                            del product[batch_number]
-                                        else:
-                                            del serial_number[0: add_stock]  # if there is any product left, the system will only delete the serial number of the particular product that has been added into the inventory
-
-                                        # save the updates of both product inventory and product record keeping
-                                        save_info_product(product)
-                                        save_info_product_inventory(product_inventory)
-
-                                        #  display messages that inform users about the updates
-                                        print(f'\n{add_stock} {chosen_product}(s) is(are) added into the inventory.')
-                                        print(f'Current stock of {chosen_product} in product inventory: {stock}')
+                                    if add_stock > len(serial_number): # if the input exceed the actual quantity of the products
+                                        print(f'\n⚠️ Not enough. The current number of {chosen_product}(s) is(are) {len(serial_number)}.')
+                                        add_stock = 0
                                         break
-                                break
 
-                        except ValueError:
-                            print('\n+--------------------------+')
-                            print('|⚠️ Please enter a number. |')
-                            print('+--------------------------+')
-                else:
+                                    if batch_number in product_inventory:  # check whether th products already exist in the inventory
+                                        stock = int(product_inventory[batch_number]['stock']) + add_stock  # add the user input to the previous quantity
+                                    else:
+                                        stock = add_stock  # directly assign the quantity products if the products haven't in the inventory
+
+                                    #if 'price' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that not priced yet, and return empty value instead of errors vice versa
+                                    if 'price' not in product_inventory[batch_number] or batch_number not in product_inventory:
+                                        while True:
+                                            try:
+                                                price = float(input('Price per unit: RM '))  # determine the price per unit for each newly added products
+                                                if price < 0:  # validate the price as a positive number
+                                                    print('\n+-----------------------------------+')
+                                                    print('|⚠️ Please enter a positive number. |')
+                                                    print('+-----------------------------------+\n')
+                                                price = f'RM {price:.2f}'  # convert the price into 2 decimal places
+                                                break
+
+                                            except ValueError:
+                                                print('\n+------------------------------+')
+                                                print('|⚠️ Please enter numbers only. |')
+                                                print('+------------------------------+\n')
+                                    else:
+                                        price = product_inventory[batch_number]['price']  # the original price will not be updated if the products is already in the inventory
+
+                                    if 'description' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that no description yet, and return empty value instead of errors vice versa
+                                        product_description = input('Add product description for menu display:\n>>> ')  # add the product description
+                                    else:
+                                        product_description = product_inventory[batch_number]['description']  # the existing descripiton will not be updated if the products are already in the inventory
+
+                                    # update the dictionary with user input
+                                    product_inventory[batch_number] = {
+                                        'product_name': chosen_product,
+                                        'stock': stock,
+                                        'price': price,
+                                        'description': product_description
+                                    }
+
+                                    quantity = len(serial_number) - add_stock  # reduce the quantity of products in record keeping after being added into inventory
+                                    # if the quantity of products finished, the record for the particular product will be deleted
+                                    if quantity <= 0:
+                                        del product[batch_number]
+                                    else:
+                                        del serial_number[0: add_stock]  # if there is any product left, the system will only delete the serial number of the particular product that has been added into the inventory
+
+                                    # save the updates of both product inventory and product record keeping
+                                    save_info_product(product)
+                                    save_info_product_inventory(product_inventory)
+
+                                    #  display messages that inform users about the updates
+                                    print(f'\n{add_stock} {chosen_product}(s) is(are) added into the inventory.')
+                                    print(f'Current stock of {chosen_product} in product inventory: {stock}')
+                                    break
+
+                            except ValueError:
+                                print('\n+--------------------------+')
+                                print('|⚠️ Please enter a number. |')
+                                print('+--------------------------+')
+
+                if not product_found:
                     print('\n❗Product not found, enter again.')  # error message appears if the chosen products are not found
 
             elif product_control == '2':  # remove products from the inventory
@@ -196,66 +197,67 @@ def inventory_control_product():
                         print('\nCancelling. Exiting to Product Management page......')
                         break
 
-                    elif product_stock in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):  # check if the chosen product found in the inventory
-                        while True:
-                            try:
-                                quantity_to_reduce = int(input(f'\nNumber of {product_stock} to reduce: '))  # collect thr quantity of products to remove
-                                if quantity_to_reduce < 0:
-                                    print('\n+-------------------------------+')
-                                    print('|⚠️ Please enter a valid input. |')
-                                    print('+-------------------------------+')
+                    product_found = False
+                    for batch_number, value in product_inventory.items():
+                        if product_stock == value['product_name']:  # check if the chosen product found in the inventory
+                            product_found = True
+                            while True:
+                                try:
+                                    quantity_to_reduce = int(input(f'\nNumber of {product_stock} to reduce: '))  # collect thr quantity of products to remove
+                                    if quantity_to_reduce < 0:
+                                        print('\n+-------------------------------+')
+                                        print('|⚠️ Please enter a valid input. |')
+                                        print('+-------------------------------+')
 
-                                elif quantity_to_reduce == 0:
-                                    print('\n💡 No product is reduced.')
-                                    break
+                                    elif quantity_to_reduce == 0:
+                                        print('\n💡 No product is reduced.')
+                                        break
 
-                                else:
-                                    for batch_number, value in product_inventory.items():
-                                        if product_stock == value['product_name']:
-                                            available_stock = value['stock']
+                                    else:
+                                        available_stock = value['stock']
 
-                                            if quantity_to_reduce > available_stock:  # check if the quantity inputted exceed the original stock in the inventory
-                                                print('\n+------------------------------------------------------------------------------------+')
-                                                print(f'|⚠️ Out of range. The current stock of {product_stock}(s) is(are) {available_stock}. |')
-                                                print('+------------------------------------------------------------------------------------+')
-                                                break
-
-                                            else:
-                                                stock_left = available_stock - quantity_to_reduce  # update the value of stock after being removed
-                                                print(f'\n{quantity_to_reduce} {product_stock}(s) is(are) reduced.')
-
-                                            # update the dictionary with user input
-                                            product_inventory[batch_number] = {
-                                                'product_name': product_stock,
-                                                'stock': stock_left,
-                                                'price': value['price'],
-                                                'description': value['description']
-                                            }
-
-                                            if stock_left <= 0:
-                                                del product_inventory[batch_number]  # if there is no stock left, delete the product from the inventory
-                                                print('\n+-------------------------------------------------------------------------------+')
-                                                print(f'|⚠️ Last {product_stock} has finished. Ask bakers to bake more {product_stock}. |')
-                                                print('+-------------------------------------------------------------------------------+')
-
-                                            save_info_product_inventory(product_inventory)
+                                        if quantity_to_reduce > available_stock:  # check if the quantity inputted exceed the original stock in the inventory
+                                            print(f'⚠️ Out of range. The current stock of {product_stock}(s) is(are) {available_stock}.')
                                             break
-                                    break
 
-                            except ValueError:
-                                print('\n+--------------------------+')
-                                print('|⚠️ Please enter a number. |')
-                                print('+--------------------------+')
-                    else:
+                                        else:
+                                            stock_left = available_stock - quantity_to_reduce  # update the value of stock after being removed
+                                            print(f'\n{quantity_to_reduce} {product_stock}(s) is(are) reduced.')
+
+                                        # update the dictionary with user input
+                                        product_inventory[batch_number] = {
+                                            'product_name': product_stock,
+                                            'stock': stock_left,
+                                            'price': value['price'],
+                                            'description': value['description']
+                                        }
+
+                                        if stock_left <= 0:
+                                            del product_inventory[batch_number]  # if there is no stock left, delete the product from the inventory
+                                            print('\n+-------------------------------------------------------------------------------+')
+                                            print(f'|⚠️ Last {product_stock} has finished. Ask bakers to bake more {product_stock}. |')
+                                            print('+-------------------------------------------------------------------------------+')
+                                        break
+
+
+                                except ValueError:
+                                    print('\n+--------------------------+')
+                                    print('|⚠️ Please enter a number. |')
+                                    print('+--------------------------+')
+                            save_info_product_inventory(product_inventory)
+                            break
+                    if not product_found:
                         print('\n❗Product not found, enter again.')
+
+
 
             elif product_control == '3':  # update product details in the inventory
                 if len(product_inventory) == 0:
                     print('\n❗Out of stock!')  # warning message appears if the inventory is empty
                     break
 
-                index = 1
                 while True:
+                    index = 1
                     print('\n-----------------------------------------------')
                     print('\t\t\t\tPRODUCT LIST')
                     print('-----------------------------------------------')
@@ -290,10 +292,15 @@ def inventory_control_product():
 
                                             # validate the new value for each attribute
                                             if attribute_of_product_inventory == 'product_name':  # if new value equals to the current product name, duplication occurs
-                                                if new_value in (product_inventory[batch_number]['product_name'] for batch_number in product_inventory):
-                                                    print('\n+-----------------------------------------------------------------------+')
-                                                    print('|⚠️ Duplicate product name detected. Please enter another product name. |')
-                                                    print('+-----------------------------------------------------------------------+')
+                                                duplicate = False
+                                                for value in product_inventory.values():
+                                                    if new_value == value['product_name']:
+                                                        print('\n+-----------------------------------------------------------------------+')
+                                                        print('|⚠️ Duplicate product name detected. Please enter another product name. |')
+                                                        print('+-----------------------------------------------------------------------+')
+                                                        duplicate = True
+                                                        break
+                                                if duplicate:
                                                     continue
 
                                             elif attribute_of_product_inventory == 'stock':
@@ -307,9 +314,19 @@ def inventory_control_product():
                                                         print('+-----------------------------------------------------------+')
                                                         continue
 
+                                            elif attribute_of_product_inventory == 'price':
+                                                try:
+                                                    new_value = float(new_value)  # Ensure the entered value is a valid float number
+                                                    new_value = f'RM {new_value:.2f}'  # Format the price as 'RM {value}' with 2 decimal places
+                                                except ValueError:
+                                                    print('\n+-------------------------------+')
+                                                    print('|⚠️ Please enter a valid price. |')
+                                                    print('+-------------------------------+')
+                                                    continue  # Ask for new input if the price is not valid
+
                                             # update the information
                                             product_inventory[selected_product][attribute_of_product_inventory] = new_value
-                                            print(f'\n{attribute_of_product_inventory} of {selected_product} is updated.')
+                                            print(f'\n{attribute_of_product_inventory.title().replace("_", " ")} is updated.')
                                             save_info_product_inventory(product_inventory)
                                             break
 

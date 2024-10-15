@@ -1,7 +1,7 @@
 {
     "009": {
         "product_name": "tiramisu",
-        "stock": 4,
+        "stock": 5,
         "price": "RM 8.50",
         "description": "Coffee-soaked ladyfingers with creamy mascarpone and blueberry toppings"
     },
@@ -10,12 +10,6 @@
         "stock": 2,
         "price": "RM 5.00",
         "description": "Extra gooey cheese for cheese aficionado"
-    },
-    "001": {
-        "product_name": "banana bread",
-        "stock": 1,
-        "price": "RM 4.50",
-        "description": "Rich in vitamin A and perfect for healthy treat"
     },
     "002": {
         "product_name": "red velvet",
@@ -31,8 +25,14 @@
     },
     "006": {
         "product_name": "gingerbread",
-        "stock": 2,
+        "stock": 1,
         "price": "RM 2.50",
         "description": "Old-fashioned cookies with cute and creative appearance"
+    },
+    "001": {
+        "product_name": "banana bread",
+        "stock": "1",
+        "price": "RM 4.50",
+        "description": "Rich in vitamin A and perfect for healthy treat"
     }
 }

@@ -98,9 +98,9 @@
         "product_name": "tiramisu",
         "product_code": "CK858",
         "serial_number": [
-            "29908",
             "29393",
-            "29393"
+            "45322",
+            "34121"
         ],
         "quantity_produced": "4",
         "batch_number": "009",
