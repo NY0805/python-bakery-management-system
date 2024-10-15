@@ -194,5 +194,19 @@
         "maintenance_needed_date": "12-12-1212",
         "last_maintenance_date": "12-12-1212",
         "description": "edfedc"
+    },
+    "REPORT-7685": {
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "Convection oven",
+        "serial_number": "oven1",
+        "model_number": "CVTOVN001",
+        "repair_cost": "RM 120.00",
+        "manufacturer_email": "gg@gg.com",
+        "warranty": "1 year",
+        "report_date": "15-10-2024",
+        "current_condition": "function well",
+        "malfunction_date": "12-12-1212",
+        "last_maintenance_date": "12-12-1212",
+        "description": "sdfdfcd"
     }
 }

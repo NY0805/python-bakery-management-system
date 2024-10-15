@@ -1,0 +1,15 @@
+{
+    "2844": {
+        "report_type": "yearly sales report",
+        "selected_year": "2004",
+        "total_sales": 90.0,
+        "total_order": 8
+    },
+    "6748": {
+        "report_type": "monthly sales report",
+        "selected_year": "2004",
+        "selected_month": "9",
+        "total_sales": 90.0,
+        "total_order": 8
+    }
+}
