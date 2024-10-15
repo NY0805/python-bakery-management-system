@@ -1,30 +1,4 @@
 {
-    "red velvet": {
-        "recipe_category": "Cakes",
-        "recipe_name": "red velvet",
-        "ingredient_used": [
-            [
-                "white flour",
-                300.0,
-                "g"
-            ],
-            [
-                "brown sugar",
-                40.0,
-                "ml"
-            ]
-        ],
-        "ingredient_notes": "no",
-        "equipment_used": [],
-        "baking_temperature": 150,
-        "baking_time": 20,
-        "instructions": [
-            "g",
-            "g",
-            "g",
-            "g"
-        ]
-    },
     "tiramisu": {
         "recipe_category": "Cakes",
         "recipe_name": "tiramisu",

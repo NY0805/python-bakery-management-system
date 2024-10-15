@@ -1,6 +1,4 @@
 import json
-import textwrap
-from collections import defaultdict
 
 
 # define the function that loads product data from file
@@ -37,7 +35,7 @@ def format_product_data(product, details):
                 description_info = '-'
                 price = '-'
     return (
-        f"{product['product_code']} - {product['product_name'].title():<45}{price}\n"
+        f"{product['product_code']} - {product['product_name'].title():<45} {price}\n"
         f"{'Best Before':<12}: {product['expiry_date']}\n"
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
         f"🥑 {description_info}"
@@ -48,7 +46,21 @@ def format_product_data(product, details):
 def wrap_data(formatted_product_data, width=65):
     wrapped_lines = []
     for data in formatted_product_data:
-        wrapped_lines.extend(textwrap.wrap(data, width=width))
+        info_line = []
+        info = data.split()
+        length = 0
+
+        for word in info:
+            if length + len(word) + len(info_line) <= width:
+                info_line.append(word)
+                length += len(word)
+            else:
+                wrapped_lines.append(' '.join(info_line))
+                info_line = [word]
+                length = len(word)
+        if info_line:
+            wrapped_lines.append(' '.join(info_line))
+
     return wrapped_lines
 
 
@@ -57,8 +69,8 @@ def print_in_column(info1, info2, width=65):
     max_line = len(info1)
     if len(info2) > max_line:
         max_line = len(info2)
-    new_info1 = info1 + [""] * (max_line - len(info1))
-    new_info2 = info2 + [""] * (max_line - len(info2))
+    new_info1 = list(info1) + [""] * (max_line - len(info1))
+    new_info2 = list(info2) + [""] * (max_line - len(info2))
 
     for line1, line2 in zip(new_info1, new_info2):
         print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
@@ -66,14 +78,22 @@ def print_in_column(info1, info2, width=65):
 
 # define the function to display menu
 def menu():
-    print('\n'+'•'*55, ' Morning Glory Bakery Menu ', '•'*55, '\n')  # title of menu
-    print('✨ We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
-    print("✨ Explore our menu, and don't forget to check out our unique creations in the 'Others' category for something special!\n")
+    print('\n' + '•' * 55, ' Morning Glory Bakery Menu ', '•' * 55, '\n')  # title of menu
+    print(
+        '✨ We offer a delightful selection of fresh breads, cakes, pastries, biscuits, and muffins, all baked daily to satisfy your cravings.')
+    print(
+        "✨ Explore our menu, and don't forget to check out our unique creations in the 'Others' category for something special!\n")
 
-    category_groups = defaultdict(list)
+    category_groups = {}
     product_details = 'manager_product_inventory.txt'
+
     for value in product_data.values():
-        category_groups[value['category']].append(format_product_data(value, product_details).split('\n'))
+        category = value['category']
+
+        if category not in category_groups:
+            category_groups[category] = []
+
+        category_groups[category].append(format_product_data(value, product_details).split('\n'))
 
     for category, products in category_groups.items():
 
@@ -89,11 +109,9 @@ def menu():
             print_in_column(product1, product2)
 
             if i == len(products) - 1:
-                print('\n'+'-'*139)
+                print('\n' + '-' * 139)
             else:
-                print('\n'+'-'*139)
-
-
+                print('\n')
 
 
 def format_product_data_new(product):
@@ -103,10 +121,5 @@ def format_product_data_new(product):
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
     )
 
+
 menu()
-
-category_groups = defaultdict(list)
-for value in product_data.values():
-    category_groups[value['category']].append(format_product_data_new(value).split('\n'))
-
-print(category_groups)

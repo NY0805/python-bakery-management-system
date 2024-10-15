@@ -76,6 +76,8 @@ def format_recipe_data(product):
 
 recipe_list = load_data_from_baker_recipe()
 
+ingredient_list = load_data_from_inventory_ingredient()
+
 recipe_category_groups = defaultdict(list)
 for value in recipe_list.values():
     recipe_category_groups[value['recipe_category']].append(format_recipe_name(value))
@@ -93,7 +95,7 @@ def recipe_lists():
             print('')
 
         recipe_choose = input('What recipe you would like to work on today? Please enter the recipe name.\n'
-                              '>>> ').strip()
+                              '>>> ').lower().strip()
         found_recipe = None
 
         if validation_empty_entries(recipe_choose):
@@ -126,7 +128,7 @@ def recipe_lists():
 
     print('\nHere are the details for your chosen recipe:\n')
     for values in recipe_list.values():
-        if values['recipe_name'].lower() == recipe_choose.lower():
+        if values['recipe_name'].lower() == recipe_choose:
             print(f'{recipe_info[0].ljust(max_length + 2)}: {values['recipe_category']}')
             print(f'{recipe_info[1].ljust(max_length + 2)}: {values['recipe_name'].title()}')
             print(f'\n{recipe_info[2]}:')
@@ -143,7 +145,8 @@ def recipe_lists():
                     if len(str(items[1])) > max_length_unit:
                         max_length_unit = len(str(items[1]))
 
-                print(f'{ingredient_index}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
+                print(
+                    f'{ingredient_index}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
                 ingredient_index += 1
 
             print(f'\n{recipe_info[3].ljust(max_length + 2)}: {values['ingredient_notes'].title()}')
@@ -161,10 +164,25 @@ def recipe_lists():
                 instruction_index += 1
 
 
+    while True:
+        quantity = input('Please enter the quantity you want to produce: ')
 
+        selected_recipe = recipe_list[recipe_choose]
 
+        for item in selected_recipe['ingredient_used']:
+            ingredient_name = item[0]
+            quantity_needed = float(quantity) * item[1]
+            print(quantity_needed)
 
+            for key, items in ingredient_list.items():
+                if items['ingredient_name'].lower() == ingredient_name.lower():
+                    current_quantity = items['quantity_purchased']
+                    print(current_quantity)
 
+                    if quantity_needed <= current_quantity:
+                        print(f'{ingredient_name} available')
+                    else:
+                        print(f'{ingredient_name} not available')
 
 
 

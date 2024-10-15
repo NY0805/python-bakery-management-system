@@ -1,17 +1,15 @@
 {
     "001": {
-        "category": "Breads",
+        "category": "Cakes",
         "product_name": "banana bread",
         "product_code": "BR890",
-        "serial_number": [
-            "bread1"
-        ],
+        "serial_number": "bread2",
         "quantity_produced": "2",
         "batch_number": "001",
         "date_of_production": "09-08-2004",
         "shelf_life": "5 days",
         "expiry_date": "17-08-2004",
-        "recipe": "r",
+        "recipe": "cancel",
         "baker_name": "r",
         "allergens": [
             "r"

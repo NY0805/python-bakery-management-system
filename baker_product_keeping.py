@@ -173,9 +173,12 @@ def product_details():
                 quantity = int(quantity_produced)
                 break
             else:
-                print('\n+--------------------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid quantity produced. (Cannot contain any alphabets and special characters.) |')
-                print('+--------------------------------------------------------------------------------------------------+\n')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------------+')
+                print(
+                    '|⚠️ Please enter a valid quantity produced. (Cannot contain any alphabets and special characters.) |')
+                print(
+                    '+--------------------------------------------------------------------------------------------------+\n')
 
     while True:
         product_name = input(f'2. {product_info[0].ljust(max_length + 2)}: ')
@@ -198,9 +201,11 @@ def product_details():
                 else:
                     break
             else:
-                print('\n+--------------------------------------------------------------------------------------------+')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid product code. (Cannot contain any special characters and spacings.) |')
-                print('+--------------------------------------------------------------------------------------------+\n')
+                print(
+                    '+--------------------------------------------------------------------------------------------+\n')
 
     while True:
         batch_number = input(f'3. {product_info[2].ljust(max_length + 2)}: ')
@@ -273,12 +278,18 @@ def product_details():
                 if max_expiry >= expiry_date >= date_of_production_new:
                     break
                 else:
-                    print('\n+---------------------------------------------------------------------------------------------------------+')
-                    print('|⚠️ The expired date does not fall within the allowable period.                                           |')
-                    print('|   The allowable period must between the date of production and date of production + shelf life + 1 day. |')
-                    print('|                                                                                                         |')
-                    print(f'| * Allowable period: {date_of_production} to {max_expiry.strftime("%d-%m-%Y")}.                          |')
-                    print('+---------------------------------------------------------------------------------------------------------+\n')
+                    print(
+                        '\n+---------------------------------------------------------------------------------------------------------+')
+                    print(
+                        '|⚠️ The expired date does not fall within the allowable period.                                           |')
+                    print(
+                        '|   The allowable period must between the date of production and date of production + shelf life + 1 day. |')
+                    print(
+                        '|                                                                                                         |')
+                    print(
+                        f'| * Allowable period: {date_of_production} to {max_expiry.strftime("%d-%m-%Y")}.                          |')
+                    print(
+                        '+---------------------------------------------------------------------------------------------------------+\n')
             else:
                 print('\n+--------------------------------------------------------------------+')
                 print('|⚠️ Invalid date format. Please enter the date in DD-MM-YYYY format. |')
@@ -305,10 +316,14 @@ def product_details():
                 print('+-----------------------------------------------------------------------------+\n')
 
     while True:
-        print('\n+---------------------------------------------------------------------------------------------------------+')
-        print('|💡 If there is more than one data item, separate them with a space.                                      |')
-        print('|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
-        print('+---------------------------------------------------------------------------------------------------------+\n')
+        print(
+            '\n+---------------------------------------------------------------------------------------------------------+')
+        print(
+            '|💡 If there is more than one data item, separate them with a space.                                      |')
+        print(
+            '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
+        print(
+            '+---------------------------------------------------------------------------------------------------------+\n')
         allergens = input(f'9. {product_info[9].ljust(max_length + 2)}: ').split()
         if validation_empty_entries(allergens):
             if validation_list_alphabet_only(allergens):
@@ -325,9 +340,12 @@ def product_details():
             serial_number = input(f'Enter serial number for item {i + 1}: ')
             if validation_empty_entries(serial_number):
                 if not validation_alphanum_only(serial_number):
-                    print('\n+---------------------------------------------------------------------------------------------+')
-                    print('|⚠️ Please enter a valid serial number. (Cannot contain any special characters and spacings.) |')
-                    print('+---------------------------------------------------------------------------------------------+\n')
+                    print(
+                        '\n+---------------------------------------------------------------------------------------------+')
+                    print(
+                        '|⚠️ Please enter a valid serial number. (Cannot contain any special characters and spacings.) |')
+                    print(
+                        '+---------------------------------------------------------------------------------------------+\n')
                 else:
                     serial_numbers.append(serial_number)
                 break
@@ -389,7 +407,8 @@ def update_product():
 
         try:
             index_of_product_to_edit = int(
-                input(f'\nEnter batch number to update the information of the product (or enter {len(product_data) + 1} to cancel):\n>>> '))
+                input(
+                    f'\nEnter index number to update the information of the product (or enter {len(product_data) + 1} to cancel):\n>>> '))
             if index_of_product_to_edit == len(product_data) + 1:  # if "Cancel" is selected
                 print('\nCancelling. Exiting to Product Management page......')  # return to the previous page
                 product_management()
@@ -399,7 +418,8 @@ def update_product():
                 for batch_number, product in product_data.items():
                     product_name = [product['product_name']]  # create a list to store all the product name
                     selected_product = product_name[index_of_product_to_edit - 1]  # indicate which product is selected
-                    selected_product_index = list(product_data.keys())[index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
+                    selected_product_index = list(product_data.keys())[
+                        index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
 
                     while True:
                         print('\n-----------------------------------------------')
@@ -407,21 +427,31 @@ def update_product():
                         print('-----------------------------------------------')
 
                         for product_data_key, product_data_value in product.items():
-                            print(f'{product_data_key}: {product_data_value}')  # list down the attributes of the selected product
+                            print(
+                                f'{product_data_key}: {product_data_value}')  # list down the attributes of the selected product
 
-                        print('\nTo change the information, please enter the exact matching name. Example: product_name.')
-                        attribute_of_product_data = input('Which information do you want to update? (or enter \"cancel\")\n>>> ')
+                        print(
+                            '\nTo change the information, please enter the exact matching name. Example: product_name.')
+                        attribute_of_product_data = input(
+                            'Which information do you want to update? (or enter \"cancel\")\n>>> ')
                         if attribute_of_product_data in product:
                             while True:
                                 new_value = input(f'\nEnter new {attribute_of_product_data}: ')
                                 # continue to validate the value entered for each attribute
                                 if attribute_of_product_data == 'category':
+
+                                    # if change category, need to change shelf life and expiry date too if needed
+
                                     if not validation_empty_entries(new_value):
                                         continue
-                                    if new_value not in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins', 'Others']:
-                                        print('\n+-------------------------------------------------------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter Breads, Cakes, Pastries, Biscuits, Muffins or Others. |')
-                                        print('+-------------------------------------------------------------------------------------+')
+                                    if new_value not in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins',
+                                                         'Others']:
+                                        print(
+                                            '\n+-------------------------------------------------------------------------------------+')
+                                        print(
+                                            '|⚠️ Invalid input. Please enter Breads, Cakes, Pastries, Biscuits, Muffins or Others. |')
+                                        print(
+                                            '+-------------------------------------------------------------------------------------+')
                                         continue
 
                                 elif attribute_of_product_data == 'product_name':
@@ -455,6 +485,7 @@ def update_product():
                                         print('+----------------------------------------------------+')
                                         continue
 
+                                # add enter serial no based on quantity produced
                                 elif attribute_of_product_data == 'quantity_produced':
                                     if not validation_empty_entries(new_value):
                                         continue
@@ -497,19 +528,23 @@ def update_product():
                                                 if number <= 5:
                                                     break
                                                 else:
-                                                    print('Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
+                                                    print(
+                                                        'Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
                                             elif product_data[selected_product]['category'] in ['Cakes', 'Pastries']:
                                                 if number <= 7:
                                                     break
                                                 else:
-                                                    print('Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
+                                                    print(
+                                                        'Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
                                             elif product_data[selected_product]['category'] in ['Biscuits', 'Others']:
                                                 if number <= 14:
                                                     break
                                                 else:
-                                                    print('Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
+                                                    print(
+                                                        'Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
                                         else:
-                                            print("Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
+                                            print(
+                                                "Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
 
                                     else:
                                         print('\n+--------------------------------------+')
@@ -528,14 +563,19 @@ def update_product():
                                     # convert new value from string to datetime format
                                     expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
                                     # convert date_of _production from string to datetime format
-                                    date_of_production_new = datetime.strptime(product_data[selected_product]['date_of_production'], '%d-%m-%Y')
+                                    date_of_production_new = datetime.strptime(
+                                        product_data[selected_product]['date_of_production'], '%d-%m-%Y')
 
-                                    max_expiry = date_of_production_new + timedelta(days=product_data[selected_product]['shelf_life'] + 1)
+                                    max_expiry = date_of_production_new + timedelta(
+                                        days=product_data[selected_product]['shelf_life'] + 1)
 
                                     if not max_expiry >= expiry_date >= date_of_production_new:
-                                        print('\n+------------------------------------------------------------------------------------------------------------------------------------+')
-                                        print(f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
-                                        print('+------------------------------------------------------------------------------------------------------------------------------------+')
+                                        print(
+                                            '\n+------------------------------------------------------------------------------------------------------------------------------------+')
+                                        print(
+                                            f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
+                                        print(
+                                            '+------------------------------------------------------------------------------------------------------------------------------------+')
                                         continue
 
                                 elif attribute_of_product_data == 'baker_name':
@@ -556,8 +596,9 @@ def update_product():
                                         print('+--------------------------------------+')
                                         continue
 
-                                print(f'\n{attribute_of_product_data} of {selected_product} is updated.')  # inform user about the data is updated
-                                product_data[selected_product_index].update({attribute_of_product_data: new_value}) # assign the new value entered to the attributes
+                                print(
+                                    f'\n{attribute_of_product_data} of {selected_product} is updated.')  # inform user about the data is updated
+                                product_data[selected_product_index].update({attribute_of_product_data: new_value})  # assign the new value entered to the attributes
                                 save_info(product_data)  # save the data
                                 break
 
@@ -574,6 +615,7 @@ def update_product():
             print('\n+-----------------------------------------+')
             print('|⚠️ Invalid input. Please enter a number. |')
             print('+-----------------------------------------+')
+
 
 
 product_management()

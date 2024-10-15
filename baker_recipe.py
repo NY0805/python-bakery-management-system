@@ -115,20 +115,59 @@ recipe_data = load_data_from_recipe()
 
 equipment_list = load_data_from_equipment()
 
-equipment_category_groups = defaultdict(list)
+equipment_category_groups = {}
 for value in equipment_list.values():
-    equipment_category_groups[value['category']].append(format_equipment_data(value))
+    equipment_category = value['category']
 
+    if equipment_category not in equipment_category_groups:
+        equipment_category_groups[equipment_category] = []
+
+    equipment_category_groups[equipment_category].append(format_equipment_data(value))
 
 ingredient_list = load_data_from_inventory_ingredient()
 
-ingredient_category_groups = defaultdict(list)
+ingredient_category_groups = {}
 for value in ingredient_list.values():
-    ingredient_category_groups[value['category']].append(format_ingredient_data(value))
+    ingredient_category = value['category']
+
+    if ingredient_category not in ingredient_category_groups:
+        ingredient_category_groups[ingredient_category] = []
+
+    ingredient_category_groups[ingredient_category].append(format_ingredient_data(value))
+
+
+def recipe_management():
+    print('\n-------------------------------------------------------')
+    print('\t\t\t\t', '', 'RECIPE MANAGEMENT')
+    print('-------------------------------------------------------')
+    print('\n1. Add Recipe')
+    print('2. Update Recipe')
+    print('3. Remove Recipe')
+    print('4. Back to Previous Page')
+
+    while True:
+        option_recipe_management = input('\nPlease choose a service:'
+                                         '\n>>> ')
+        if option_recipe_management not in ['1', '2', '3', '4']:
+            print('Please enter a valid number.')
+        else:
+            if option_recipe_management == '1':
+                create_recipe()
+                break
+            elif option_recipe_management == '2':
+                pass
+                break
+            elif option_recipe_management == '3':
+                delete_recipe()
+                break
+            elif option_recipe_management == '4':
+                print('\nExiting to the previous page......')
+                break
 
 
 def create_recipe():
-    recipe_info = ['Recipe Name', 'Recipe\'s Category', 'Recipe Code', 'Ingredient Name', 'Ingredient_Per_Unit', 'Variation', 'Notes']
+    recipe_info = ['Recipe Name', 'Recipe\'s Category', 'Recipe Code', 'Ingredient Name', 'Ingredient_Per_Unit',
+                   'Variation', 'Notes']
 
     max_length = 0
     for item in recipe_info:
@@ -148,9 +187,12 @@ def create_recipe():
                     print('|⚠️ Please enter a valid category based on the categories given. (Case sensitive.) |')
                     print('+----------------------------------------------------------------------------------+')
             else:
-                print('\n+-----------------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid category. (Cannot contain any spacing, digits and special characters.) |')
-                print('+-----------------------------------------------------------------------------------------------+\n')
+                print(
+                    '\n+-----------------------------------------------------------------------------------------------+')
+                print(
+                    '|⚠️ Please enter a valid category. (Cannot contain any spacing, digits and special characters.) |')
+                print(
+                    '+-----------------------------------------------------------------------------------------------+\n')
 
     while True:
         recipe_name = input(f'2. {recipe_info[0].ljust(max_length + 2)}: ')
@@ -164,6 +206,7 @@ def create_recipe():
 
     return category, recipe_name
 
+
 def is_ingredient_duplicate(ingredient_name, ingredients):
     for i in ingredients:
         if ingredient_name.lower() == i[0].lower():
@@ -176,14 +219,15 @@ def recipe_ingredient():
     add_notes = True
     while add_notes:
         while True:
-
             print('\n-----------------------------------------------')
             print('\t\t\t', '', '', 'INGREDIENT LIST')
             print('-----------------------------------------------\n')
             for category, items in ingredient_category_groups.items():
+                index = 1
                 print(f'📍 {category} 📍')
-                for index, ingredient in enumerate(items, start=1):
+                for ingredient in items:
                     print(f"{index}. {ingredient.title()}")
+                    index += 1
                 print('')
 
             ingredient_name = input(f'✏️ Enter the ingredient name: ').strip()
@@ -200,9 +244,12 @@ def recipe_ingredient():
                             if found_category:
                                 break
                         else:
-                            print('\n+---------------------------------------------------------------------------------------------+')
-                            print('|⚠️ Invalid ingredient name. Please enter ingredient name based on the ingredient list given. |')
-                            print('+---------------------------------------------------------------------------------------------+')
+                            print(
+                                '\n+---------------------------------------------------------------------------------------------+')
+                            print(
+                                '|⚠️ Invalid ingredient name. Please enter ingredient name based on the ingredient list given. |')
+                            print(
+                                '+---------------------------------------------------------------------------------------------+')
                     else:
                         print('\n+---------------------------------------------------------------------+')
                         print('|⚠️ Duplicate ingredient name. You\'ve already added this ingredient. |')
@@ -210,9 +257,12 @@ def recipe_ingredient():
                     if found_category:
                         break
                 else:
-                    print('\n+---------------------------------------------------------------------------------------------+')
-                    print('|⚠️ Please enter a valid ingredient name. (Cannot contain any digits and special characters.) |')
-                    print('+---------------------------------------------------------------------------------------------+')
+                    print(
+                        '\n+---------------------------------------------------------------------------------------------+')
+                    print(
+                        '|⚠️ Please enter a valid ingredient name. (Cannot contain any digits and special characters.) |')
+                    print(
+                        '+---------------------------------------------------------------------------------------------+')
 
         while True:
             category_units = {
@@ -251,9 +301,12 @@ def recipe_ingredient():
                         print('|⚠️ Please enter a valid unit from the unit given. (Case Sensitive.) |')
                         print('+--------------------------------------------------------------------+')
                 else:
-                    print('\n+--------------------------------------------------------------------------------------------+')
-                    print('|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
-                    print('+--------------------------------------------------------------------------------------------+')
+                    print(
+                        '\n+--------------------------------------------------------------------------------------------+')
+                    print(
+                        '|⚠️ Please enter a valid unit. (Cannot contain any spacings, digits and special characters.) |')
+                    print(
+                        '+--------------------------------------------------------------------------------------------+')
 
         while True:
             quantity_per_unit = input(f'\n✏️ Enter the quantity per unit of {ingredient_name}: ').strip()
@@ -268,9 +321,11 @@ def recipe_ingredient():
                         print('+---------------------------------------------------+\n')
 
                 except ValueError:
-                    print('\n+-----------------------------------------------------------------------------------------+')
+                    print(
+                        '\n+-----------------------------------------------------------------------------------------+')
                     print('|⚠️ Please enter a valid quantity. (Cannot contain any alphabets and special characters.) |')
-                    print('+-----------------------------------------------------------------------------------------+\n')
+                    print(
+                        '+-----------------------------------------------------------------------------------------+\n')
 
         ingredient_used = [ingredient_name.lower(), quantity_per_unit, unit_measurement]
         ingredients.append(ingredient_used)
@@ -315,22 +370,23 @@ def recipe_ingredient():
 
 
 def is_equipment_duplicate(equipment_name, equipments):
-
     for i in equipments:
         if equipment_name.lower() == i.lower():
             return False
     return True
 
 
-def recipe_equipment(): # haven't test. and also unsure the .items or .values when checking the input match the defaultdict or not
+def recipe_equipment():  # haven't test. and also unsure the .items or .values when checking the input match the defaultdict or not
     equipments = []
     print('\n-----------------------------------------------')
     print('\t\t\t', '', '', 'EQUIPMENT LIST')
     print('-----------------------------------------------\n')
     for category, items in equipment_category_groups.items():
+        index = 1
         print(f'📍 {category} 📍')
-        for index, equipment in enumerate(items, start=1):
+        for equipment in items:
             print(f"{index}. {equipment.title()}")
+            index += 1
         print('')
     print('💡 Please enter the name of selected equipment (or type "done" to finish)')
 
@@ -359,9 +415,12 @@ def recipe_equipment(): # haven't test. and also unsure the .items or .values wh
                         if found_category:
                             break
                     else:
-                        print('\n+------------------------------------------------------------------------------------------+')
-                        print('|⚠️ Invalid equipment name. Please enter equipment name based on the equipment list given. |')
-                        print('+------------------------------------------------------------------------------------------+')
+                        print(
+                            '\n+------------------------------------------------------------------------------------------+')
+                        print(
+                            '|⚠️ Invalid equipment name. Please enter equipment name based on the equipment list given. |')
+                        print(
+                            '+------------------------------------------------------------------------------------------+')
                         continue
 
                     equipments.append(equipment_name)
@@ -370,7 +429,8 @@ def recipe_equipment(): # haven't test. and also unsure the .items or .values wh
                     print('|⚠️ Duplicate equipment name. You\'ve already added this equipment. |')
                     print('+-------------------------------------------------------------------+')
             else:
-                print('\n+--------------------------------------------------------------------------------------------+')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid equipment name. (Cannot contain any digits and special characters.) |')
                 print('+--------------------------------------------------------------------------------------------+')
 
@@ -378,7 +438,6 @@ def recipe_equipment(): # haven't test. and also unsure the .items or .values wh
 
 
 def recipe_instruction():
-
     instructions = []
 
     category, recipe_name = create_recipe()
@@ -387,21 +446,25 @@ def recipe_instruction():
 
     print('')
     print('-' * 140)
-    print("\n💡 Welcome to the Recipe Instruction page! Let's get started with creating your delicious bakery goods step by step.\n")
+    print(
+        "\n💡 Welcome to the Recipe Instruction page! Let's get started with creating your delicious bakery goods step by step.\n")
     print("🥗 Selected ingredients 🥗")
     max_length = 0
+    index = 1
     for item in ingredients:
         if len(item) > max_length:
             max_length = len(item)
 
-    for index, item in enumerate(ingredients, start=1):
         print(f'{index}. {item[0].ljust(max_length).title()} x {item[1]} {item[2]}')
+        index += 1
 
     print("\n🛠️ Selected equipments 🛠️")
-    for index, item in enumerate(equipments, start=1):
+    index = 1
+    for item in equipments:
         print(f'{index}. {item.title()}')
+        index += 1
 
-        if index == len(item) - 1:
+        if index == len(item):
             print('')
 
     while True:
@@ -484,4 +547,71 @@ def continue_adding_recipe():
             print('+--------------------------------------+')
 
 
-recipe_instruction()
+def delete_recipe():
+    while True:
+        index = 1
+        print('\n-----------------------------------------------')
+        print('\t\t\t\t', '', 'PRODUCT LIST')
+        print('-----------------------------------------------')
+        for name, info in recipe_data.items():
+            print(f'{index}. {name.title()}')
+            index += 1
+        print(f'{len(recipe_data) + 1}. cancel')
+
+        try:
+            index_remove_recipe = int(
+                input(f'\nWhich recipe do you want to remove? (or enter {len(recipe_data) + 1} to cancel)\n>>> '))
+            if index_remove_recipe == len(recipe_data) + 1:  # cancel the process
+                print('\nCancelling. Exiting to Services page......')
+                recipe_management()
+                break
+
+            elif 1 <= index_remove_recipe <= len(recipe_data):
+                recipe_to_remove = list(recipe_data.keys())[
+                    index_remove_recipe - 1]  # identify baker to remove by accesing the index of key of baker
+                del recipe_data[recipe_to_remove]  # delete the selected baker
+                save_info(recipe_data)
+                print(f'\n{recipe_to_remove.title()} is removed.\n')  # inform user that the selected baker is removed successfully
+
+                while True:
+                    remove_more = input(
+                        'Continue to remove? (y=yes, n=no)\n>>> ')  # ask user if they want to continue removing
+                    if remove_more == 'y':
+                        break
+                    elif remove_more == 'n':
+                        print('\nStop removing. Exiting to Services page......')
+                        recipe_management()
+                        break
+                    else:
+                        print('\n+--------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter again. |')
+                        print('+--------------------------------------+')
+                    break
+
+                '''if remove_more not in ['y', 'n']:
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('+--------------------------------------+')
+    
+                else:
+                    if remove_more == 'y':
+                        break
+    
+                    else:
+                        print('\nStop removing. Exiting to Services page......')
+                        break
+            #break'''
+
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+')
+
+        except ValueError:
+            print('\n+-----------------------------------------+')
+            print('|⚠️ Invalid input. Please enter a number. |')
+            print('+-----------------------------------------+')
+
+
+recipe_management()
+
