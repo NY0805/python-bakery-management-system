@@ -11,8 +11,8 @@
     },
     "shinchan": {
         "customer_username": "customer4",
-        "customer_password": "12345678",
-        "age": 45,
+        "customer_password": "87654321",
+        "age": 46,
         "gender": "prefer not to say",
         "contact_no": "456-6758432",
         "email": "ff@ff.ff",

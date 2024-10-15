@@ -3,9 +3,9 @@ import re
 
 import cart_management
 import order_tracking
-import product_menu
 import customer_product_review
 import customer_loyalty_rewards
+import product_browsing
 
 
 # Define the function that loads data from the file
@@ -186,43 +186,43 @@ def customer():
 
 # Function to update customer information
 def update_personal_information():
-
     if not customer_info:
         print("No customer data available.")
         return
 
-    customer_username = input("Enter your username: ")
-    found = False
+    customer_username = input("Enter your name: ")
 
-    for customers in customer_info:
-        if customers["customer_username"] == customer_username:
-            found = True
-            print("What do you want to update?")
-            print("1. Password")
-            print("2. Age")
-            print("3. Gender")
-            print("4. Contact Number")
-            print("5. Email")
-            print("6. Address")  # Added option to update address
-            choice = input("Choose the field number to update: ")
+    # Check if the username exists in customer_info
+    if customer_username in customer_info:
+        customers = customer_info[customer_username]  # Access the user's info dictionary
+        print("What do you want to update?")
+        print("1. Password")
+        print("2. Age")
+        print("3. Gender")
+        print("4. Contact Number")
+        print("5. Email")
+        print("6. Address")
 
-            if choice == "1":
-                while True:
-                    new_password = input("Enter new password: ")
-                    if len(new_password) < 8 or len(new_password) > 12:
-                        print('\n+---------------------------------------------------------------------------+')
-                        print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
-                        print('+---------------------------------------------------------------------------+\n')
+        choice = input("Choose the field number to update: ")
 
-                    else:
-                        customer_info["customer_password"] = new_password
-                        break
+        if choice == "1":
+            while True:
+                new_password = input("Enter new password: ")
+                if len(new_password) < 8 or len(new_password) > 12:
+                    print('\n+---------------------------------------------------------------------------+')
+                    print('|⚠️ Invalid password length. Please make sure it is between 8 to 12 digits! |')
+                    print('+---------------------------------------------------------------------------+\n')
+                else:
+                    customers["customer_password"] = new_password
+                    break
 
-            elif choice == "2":
+        elif choice == "2":
+            while True:  # Loop to ensure valid age input
                 try:
                     new_age = int(input("Enter new age: "))
                     if new_age >= 12:
-                        customer_info["age"] = new_age
+                        customers["age"] = new_age
+                        break  # Exit the loop on success
                     else:
                         print('\n+----------------------+')
                         print('|⚠️ You are under age. |')
@@ -232,53 +232,56 @@ def update_personal_information():
                     print('|⚠️ Invalid age. Please enter numbers only. |')
                     print('+-------------------------------------------+\n')
 
-            elif choice == "3":
-                new_gender = input("Select your gender(m=male, f=female, x=prefer not to say): ")
-                if new_gender in ['f', 'm', 'x']:
-                    if new_gender == 'f':
-                        customer_info["gender"] = 'female'
-                    elif new_gender == 'm':
-                        customer_info['gender'] = 'male'
-                    else:
-                        customer_info['gender'] = 'prefer not to say'
+        elif choice == "3":
+            new_gender = input("Select your gender(m=male, f=female, x=prefer not to say): ")
+            if new_gender in ['f', 'm', 'x']:
+                if new_gender == 'f':
+                    customers["gender"] = 'female'
+                elif new_gender == 'm':
+                    customers["gender"] = 'male'
+                else:
+                    customers["gender"] = 'prefer not to say'
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+\n')
+
+        elif choice == "4":
+            while True:  # Loop to ensure valid contact number input
+                new_contact_no = input("Enter new contact number: ")
+                if re.fullmatch(r'^\d{3}-\d{7}$', new_contact_no):
+                    customers["contact_no"] = new_contact_no
+                    break
+                else:
+                    print('\n+-----------------------------------------------+')
+                    print('|⚠️ Invalid contact number. Please enter again. |')
+                    print('+-----------------------------------------------+\n')
+
+        elif choice == "5":
+            while True:  # Loop to ensure valid email input
+                new_email = input("Enter new email: ")
+                if re.fullmatch(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$', new_email):
+                    customers["email"] = new_email
+                    break
                 else:
                     print('\n+--------------------------------------+')
-                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('|⚠️ Invalid email. Please enter again. |')
                     print('+--------------------------------------+\n')
 
-            elif choice == "4":
-                while True:
-                    new_contact_no = input("Enter new contact number: ")
-                    if re.fullmatch(r'^\d{3}-\d{7}$', new_contact_no):
-                        customer_info["contact_no"] = new_contact_no
-                        break
-                    else:
-                        print('\n+-----------------------------------------------+')
-                        print('|⚠️ Invalid contact number. Please enter again. |')
-                        print('+-----------------------------------------------+\n')
+        elif choice == "6":
+            new_address = input("Enter new address: ")
+            customers["address"] = new_address
 
-            elif choice == "5":
-                while True:
-                    new_email = input("Enter new email: ")
-                    if re.fullmatch(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$', new_email):
-                        customer_info["email"] = new_email
-                        break
-                    else:
-                        print('\n+--------------------------------------+')
-                        print('|⚠️ Invalid email. Please enter again. |')
-                        print('+--------------------------------------+\n')
+        else:
+            print("\n+----------------------------+")
+            print("|⚠️ Invalid choice selected.  |")
+            print("|   Please choose a valid option (1-6). |")
+            print("+----------------------------+\n")
+            return
 
-            elif choice == "6":  # Added case for updating address
-                new_address = input("Enter new address: ")
-                customer_info["address"] = new_address
-            else:
-                print("Invalid choice.")
-
-            save_info(customer_info)
-            print("Your information has been updated.")
-            break
-
-    if not found:
+        save_info(customer_info)  # Save the entire customer_info dictionary
+        print("Your information has been updated.")
+    else:
         print("Customer not found.")
 
 
@@ -311,7 +314,6 @@ def customer_menu():
         print("6. Submit Review")
         print("7. View Loyalty Rewards")
         print("8. Update Personal Information")
-        print("9. Manage Accounts")
         print("0. Exit")
 
         option = input("Please select an option (0-9): ")
@@ -321,9 +323,9 @@ def customer_menu():
         elif option == "2":
             logged_in_username = login()  # Update the username variable
         elif option == "3":
-            product_menu.menu()
+            product_browsing.browse_products()
         elif option == "4":
-            cart_management.view_cart()
+            cart_management.shopping_cart()
         elif option == "5":
             order_tracking.order_tracking()
         elif option == "6":
@@ -335,8 +337,6 @@ def customer_menu():
             customer_loyalty_rewards.view_loyalty_rewards()
         elif option == "8":
            update_personal_information()
-        elif option == "9":
-            manage_accounts()
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break

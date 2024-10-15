@@ -87,6 +87,7 @@ def modify_discount():
 
 
 # Display all products with discounts
+# Display all products with discounts
 def display_discounts():
     if discounts:
         print('\n' + '•' * 60 + ' Current Discounts and Product Details ' + '•' * 60 + '\n')
@@ -95,16 +96,28 @@ def display_discounts():
         print(f"{'Product Code'.ljust(15)}{'Product Name'.ljust(25)}{'Price'.ljust(15)}{'Discount'.ljust(15)}{'Stock'.ljust(10)}")
         print('-' * 80)
 
+        has_discount = False  # Track if any products with discounts exist
+
         for product_code, product_info in discounts.items():
+            # Extract product details
             product_name = product_info.get('Product Name', '').ljust(25)
             price = product_info.get('Price', '').ljust(15)
-            discount = product_info.get('Discount', '').ljust(15)
+            discount = product_info.get('Discount', '')
             stock = str(product_info.get('Stock', '')).ljust(10)
 
-            print(f"{product_code.ljust(15)}{product_name}{price}{discount}{stock}")
+            # Only display products with a discount greater than 0%
+            discount_value = float(discount[:-1]) if discount else 0  # Extract the numeric value from the string
+            if discount_value > 0:  # Check if the discount is greater than 0%
+                print(f"{product_code.ljust(15)}{product_name}{price}{discount.ljust(15)}{stock}")
+                has_discount = True  # Set flag to True if we display at least one discount
+
         print('-' * 80 + '\n')
+
+        if not has_discount:  # If no products with discounts were displayed
+            print("|⚠️ No products with discounts available! |")
     else:
         print("|⚠️ No discounts available! |")
+
 
 
 # Main menu for managing discounts

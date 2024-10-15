@@ -1,6 +1,7 @@
 import json
 import random
 import product_menu
+from datetime import datetime
 
 product_data = product_menu.product_data
 
@@ -57,7 +58,6 @@ def load_discount_data():
         return {}
 
 
-# Function to enable customers to add items to the cart (with discount check)
 # Function to enable customers to add items to the cart (with discount check)
 def add_item_to_cart(cart):
     product_menu.menu()
@@ -130,48 +130,66 @@ def add_item_to_cart(cart):
 def remove_item_from_cart(cart):
     while True:
         product_code = input("\nPlease enter the product code of the item you wish to remove: ").strip()
+
         if product_code in cart:
             del cart[product_code]
             print(f"Product {product_code} has been removed from the cart successfully!")
         else:
-            print("Product cannot be found in the cart.")
+            print("⚠️ Product cannot be found in the cart.")
 
+        # Ask if the user wants to continue removing items
         continue_removing = input(
             "\nDo you want to continue removing from the cart? (yes = y / no = n): ").lower().strip()
-        if continue_removing != 'y':
+
+        # Check user input for continuation or exit
+        if continue_removing in ['y', 'yes']:
+            continue  # Continue the loop to remove more items
+        elif continue_removing in ['n', 'no']:
             print("Exiting item removal process.")
-            break
+            break  # Exit the removal process
+        else:
+            print("Invalid input! Please enter 'y' for yes or 'n' for no.")
 
 
 # Function to modify the quantity of an item in the cart
 def modify_item_quantity(cart):
     while True:
         product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
+
         if product_code in cart:
-            try:
-                new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
-                if new_quantity < 0:
-                    print("Quantity cannot be negative.")
-                    return
-                # Update quantity
-                cart[product_code]['quantity'] = new_quantity
+            while True:
+                try:
+                    new_quantity = int(input(f"Enter new quantity for {cart[product_code]['product_name']}: "))
+                    if new_quantity < 0:
+                        print("Quantity cannot be negative.")
+                        continue  # Prompt again for a valid quantity
+                    # Update quantity
+                    cart[product_code]['quantity'] = new_quantity
 
-                # Calculate new total price
-                new_total_price = new_quantity * cart[product_code]['price']
+                    # Calculate new total price
+                    new_total_price = new_quantity * cart[product_code]['price']
 
-                # Display updated information and new total price
-                print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
-                print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.1f}")
-            except ValueError:
-                print("Invalid input! Please enter a valid number.")
+                    # Display updated information and new total price
+                    print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
+                    print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.2f}")
+                    break  # Exit the quantity loop after a successful update
+
+                except ValueError:
+                    print("Invalid input! Please enter a valid number.")
+
         else:
             print("⚠️ Product cannot be found in the cart!")
 
-        # Ask if the user wants to continue modifying items
-        continue_modifying = input("\nDo you want to continue modifying item quantities? (yes = y / no = n): ").lower().strip()
-        if continue_modifying != 'y':
-            print("Exiting item quantity modification process.")
-            break
+        while True:
+            continue_modifying = input(
+                "\nDo you want to continue modifying item quantities? (yes = y / no = n): ").lower().strip()
+            if continue_modifying == 'y':
+                break  # Continue modifying
+            elif continue_modifying == 'n':
+                print("Exiting item quantity modification process.")
+                return  # Or use break to exit the loop
+            else:
+                print("Invalid input! Please enter 'y' for yes or 'n' for no.")
 
 
 # Function to view the cart
@@ -194,6 +212,9 @@ def view_cart(cart):
 
 # Function to save the order to a JSON file with cart_id as key
 def save_order_to_file(cart, customer_name, cart_id, order_id, status):
+    # Get the current date in 'DD-MM-YYYY' format
+    order_date = datetime.now().strftime("%d-%m-%Y")  # Date in 'DD-MM-YYYY' format
+
     try:
         with open("customer_order_list.txt", "r") as file:
             order_data = json.load(file)
@@ -206,6 +227,7 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
         "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.2f}",  # Format total price
+        "order_date": order_date,  # Add the order date in 'DD-MM-YYYY' format
         "status": status
     }
 
@@ -216,44 +238,57 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     print("Order has been saved successfully.")
 
 
+# Function to display the cart and calculate the total price
+def display_cart(cart):
+    total_price = 0.0
+    print("\nYour cart contains:")
+    for item in cart.values():
+        print(f"{item['product_name']} x {item['quantity']} at RM {item['price']:.2f}")
+        total_price += item['quantity'] * item['price']
+    print(f"\nTotal price: RM {total_price:.2f}")
+    return total_price
+
+
 # Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
-    if not cart:
+    if not cart:  # Check if the cart is empty
         print("\nYour cart is empty! Please add items before proceeding to checkout.")
         return
 
-    # Display cart and total price before making a decision
+    # Display the cart and total price
     total_price = display_cart(cart)
 
+    # Options for the user to either proceed with payment or cancel the order
     print("\nWould you like to:")
-    print('...............................................')
-    print("1. Proceed with your payment")
-    print("2. Cancel your order")
-    print('...............................................')
+    print("1. Proceed with your payment")  # Proceed with payment
+    print("2. Cancel your order")          # Cancel the order
 
-    choice = input("Please select your option: ").strip()
+    choice = input("Please select your option (1 or 2): ").strip()
 
+    # Try to load existing order data, if not, create an empty order list
     try:
         with open("customer_order_list.txt", "r") as file:
             order_data = json.load(file)
     except FileNotFoundError:
         order_data = {}
 
-    order_id = generate_order_id(order_data)  # Generate a new order ID
+    # Generate a new order ID
+    order_id = generate_order_id(order_data)
 
-    # If user chooses to proceed with payment
-    if choice == '1':
+    # Process the user's choice
+    if choice == '1':  # If they choose to pay
         print(f"\nTotal price to pay: RM {total_price:.2f}")
         print("\nPayment completed. Thank you for your purchase!")
         save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Completed")
         cart.clear()  # Clear the cart after payment
-    elif choice == '2':
+    elif choice == '2':  # If they choose to cancel
         print("\nYour order has been canceled.")
         save_order_to_file(cart, customer_name, cart_id, order_id, "Canceled")
         cart.clear()  # Clear the cart after cancellation
     else:
-        print("⚠️ Invalid option! Returning to the main menu.")
+        print("⚠️ Invalid option! Returning to the main menu.")  # Invalid input handling
 
+# Assuming other parts of your code like save_order_to_file and generate_order_id are already defined
 
 
 # Main shopping cart function
@@ -296,4 +331,4 @@ def shopping_cart():
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-shopping_cart()
+#shopping_cart()
