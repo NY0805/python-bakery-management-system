@@ -80,7 +80,7 @@ def submit_review(logged_in_username):
     reviews = load_review()
 
     # Update the review for the user
-    reviews[username] = {
+    reviews[logged_in_username] = {
         'product_name': product_name,
         'review': review_text,
         'rating': int(rating)
