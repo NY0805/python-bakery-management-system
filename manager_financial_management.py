@@ -91,7 +91,7 @@ def financial_management():
         print(f'💸 Today\'s {"Expenses":<9}: RM {today_expenses:.2f}'.ljust(55)+f'💵 {"Total Income So Far":<24}: RM {total_income_so_far:.2f}\n')
 
         printed_centered('Financial Management', 95)
-        print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Overall Financial Tracking\n5. Back to Manager Privilege')
+        print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Back to Manager Privilege')
         track_choice = input('\nWhich financial data do you want to track:\n>>> ')
         if track_choice == '1':
             while True:
@@ -206,8 +206,6 @@ def financial_management():
                                     print(f'{ingredient_details["purchase_date"]:<35}{ingredient_details["ingredient_name"]:<40}{ingredient_cost:.2f}')
                                     print('\n')
 
-
-
                 except ValueError:
                     print('\n+-------------------------------------+')
                     print('|⚠️ Invalid year. Please enter again. |')
@@ -216,34 +214,55 @@ def financial_management():
         elif track_choice == '3':
             while True:
                 try:
-                    print('\nProfit Tracking:'
-                          '1. Yearly profit\n'
-                          '2. Monthly profit\n')
-                    profit_type = int(input('Type of profit to track: '))
+                    print('\nProfit Tracking:\n'
+                          '1. Annual Profit Summary\n'
+                          '2. Monthly Profit Summary\n')
+                    profit_type = input('Type of profit to track: ')
 
-                    if profit_type == 1:
-                        custom_year_for_profit = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
-                        if int(custom_year_for_profit) == 0:
-                            break
+                    while True:
+                        if profit_type == '1':
+                            custom_year_for_profit = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
+                            if int(custom_year_for_profit) == 0:
+                                continue
 
-                        elif validate_year(custom_year_for_profit):
-                            for receipt_details in transaction_keeping.values():
-                                if datetime.strptime(receipt_details['order_date'], '%d-%m-%Y').year == sales_report['']:
-                                    this_month_income += receipt_details['total_spend(RM)']
+                            elif validate_year(custom_year_for_profit):
+                                printed_centered(f'📊 {custom_year_for_profit} PROFIT SUMMARY 📊', 70)
+                                total_sales = 0
+                                total_orders = 0
+                                for sales in sales_report.values():
+                                    if sales['report_type'] == 'yearly sales report' and sales['selected_year'] == custom_year_for_profit:
+                                        total_sales += sales['total_sales']
+                                        total_orders += sales['total_order']
 
-                        custom_month_for_profit = input('\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
-                        if custom_month_for_profit.lower() == 'cancel':
-                            continue
-                        while custom_month_for_profit not in months:
-                            print('\n+-------------------------------------+')
-                            print('|⚠️ Invalid month. Please enter again. |')
-                            print('+--------------------------------------+')
-                            custom_month_for_profit = input('\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
-                            if custom_month_for_profit.lower() == 'cancel':
-                                break
+                                print(f'Total sales: RM {total_sales:.2f} ({total_orders} orders)')
 
-                        if custom_month_for_profit in months:
+                                total_repair_cost = 0
+                                total_ingredient_cost = 0
+                                for equipment_details in equipment_report_keeping.values():
+                                    if (datetime.strptime(equipment_details['report_date'], '%d-%m-$Y').year == int(custom_year_for_profit)):
+                                        total_repair_cost += equipment_details["repair_cost"]
 
+                                for ingredient_details in ingredient_keeping.values():
+                                    if (datetime.strptime(ingredient_details['purchase_date'], '%d-%m-$Y').year == int(custom_year_for_profit)):
+                                        total_ingredient_cost += ingredient_details['purchase_date']
+
+                                print(f'Total expenses: RM {total_repair_cost + total_ingredient_cost:.2f}\n')
+                                print('-' * 70)
+
+                        elif profit_type == '2':
+                            pass
+
+                    else:
+                        print('error')
+
+                except ValueError:
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter again. |')
+                    print('+--------------------------------------+')
+
+        elif track_choice == 4:
+            print('\nExiting to Manager Privilege......')
+            break
 
         else:
             print('\n+--------------------------------------+')
