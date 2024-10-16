@@ -48,9 +48,6 @@ ingredient_keeping = load_data_from_inventory_ingredient()
 sales_report = load_data_from_sales_report()
 
 
-#📆
-
-
 def financial_management():
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
               'November', 'December']
@@ -103,7 +100,7 @@ def financial_management():
 
                     elif validate_year(custom_year_for_income):
                         custom_month_for_income = input(
-                            '\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
+                            '\nInsert the name of a month (or enter "cancel" to reselect year):\n>>> ').title()
                         if custom_month_for_income.lower() == 'cancel':
                             continue
                         while custom_month_for_income not in months:
@@ -111,7 +108,7 @@ def financial_management():
                             print('|⚠️ Invalid month. Please enter again. |')
                             print('+--------------------------------------+')
                             custom_month_for_income = input(
-                                '\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
+                                '\nInsert the name of a month (or enter "cancel" to reselect year):\n>>> ').title()
                             if custom_month_for_income.lower() == 'cancel':
                                 break
 
@@ -168,7 +165,7 @@ def financial_management():
 
                     elif validate_year(custom_year_for_expenses):
                         custom_month_for_expenses = input(
-                            '\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
+                            '\nInsert the name of a month (or enter "cancel" to reselect year):\n>>> ').title()
                         if custom_month_for_expenses.lower() == 'cancel':
                             continue
                         while custom_month_for_expenses not in months:
@@ -176,7 +173,7 @@ def financial_management():
                             print('|⚠️ Invalid month. Please enter again. |')
                             print('+--------------------------------------+')
                             custom_month_for_expenses = input(
-                                '\nInsert a month (or enter "cancel" to reselect year):\n>>> ').title()
+                                '\nInsert the name of a month (or enter "cancel" to reselect year):\n>>> ').title()
                             if custom_month_for_expenses.lower() == 'cancel':
                                 break
 
@@ -214,7 +211,7 @@ def financial_management():
                                         "%B") == custom_month_for_expenses and equipment_converted_date.year == int(
                                         custom_year_for_expenses):
                                     print(
-                                        f'{equipment_details["report_date"]:<35}{equipment_details["equipment_name"]:<40}{equipment_repair_cost:.2f}')
+                                        f'{equipment_details["report_date"]:<35}{equipment_details["equipment_name"]:<40}{float(equipment_repair_cost):.2f}')
                                     print('\n')
 
                             for ingredient_details in ingredient_keeping.values():
@@ -255,7 +252,8 @@ def financial_management():
                                 break
 
                             elif validate_year(custom_year_for_profit):
-                                printed_centered(f'📊 {custom_year_for_profit} PROFIT SUMMARY 📊', 70)
+                                print('')
+                                printed_centered(f'📊 {custom_year_for_profit} PROFIT SUMMARY 📊', 85)
                                 total_sales = 0
                                 total_orders = 0
                                 for sales in sales_report.values():
@@ -280,16 +278,34 @@ def financial_management():
                                         total_ingredient_cost += float(cost)
 
                                 print(f'Total expenses: RM {total_repair_cost + total_ingredient_cost:.2f}\n')
-                                print('-' * 70)
+                                print('-' * 85)
 
                                 net_profit = total_sales - (total_repair_cost + total_ingredient_cost)
-                                print(f'Net profit: RM {net_profit:.2f}')
-
-                                profit_margin = (net_profit/total_sales) * 100
-                                print(f'Profit margin: RM {profit_margin:.2f}')
-
                                 if net_profit < 0:
-                                    print('Cashflow: ')
+                                    print(f'Net profit: RM {net_profit:.2f} (deficit)')
+                                elif net_profit > 0:
+                                    print(f'Net profit: RM {net_profit:.2f} (surplus)')
+                                else:
+                                    print(f'Net profit: RM {net_profit:.2f} (break-even point)')
+
+                                try:
+                                    profit_margin = (net_profit/total_sales) * 100
+                                    print(f'Profit margin: {profit_margin:.2f}%\n')
+
+                                    if profit_margin < 0:
+                                        print(f'The bakery lost approximately RM {profit_margin/100:.2f} for every RM earned.')
+                                        print('❗ It is a significant loss. Please pay immediate attention to this financial issues.')
+                                    elif profit_margin > 0:
+                                        print(f'The bakery make RM {profit_margin/100:.2f} for every RM earned.')
+                                        print('🎊 Congrats! The business is healthy and sustainable.')
+                                    else:
+                                        print(f'The bakery is not making any profit.')
+                                        print('A robust business strategy is needed to enhance the profitability in the future.')
+
+                                    print('\n' + '-' * 85)
+
+                                except ZeroDivisionError:
+                                    print('\n⚠️ The profit margin cannot be calculated as it has no income.')
 
                         except ValueError:
                             print('\n+--------------------------------------+')
@@ -297,8 +313,80 @@ def financial_management():
                             print('+--------------------------------------+')
 
                 elif profit_type == '2':
-                    pass
+                    while True:
+                        try:
+                            chosen_year = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
+                            if int(chosen_year) == 0:
+                                break
+                            elif validate_year(chosen_year):
+                                custom_month_for_profit = input('Insert the name of a month:\n>>> ').title()
 
+                                if custom_month_for_profit in months:
+                                    print('')
+                                    printed_centered(f'📆 {chosen_year} {custom_month_for_profit} PROFIT SUMMARY 📆', 85)
+                                    monthly_sales = 0
+                                    monthly_orders = 0
+                                    for sales in sales_report.values():
+                                        converted_month = datetime.strptime(custom_month_for_profit, '%B').month
+                                        if sales['report_type'] == 'monthly sales report' and int(sales['selected_month']) == converted_month:
+                                            monthly_sales += sales['total_sales']
+                                            monthly_orders += sales['total_order']
+
+                                    print(f'Total monthly sales: RM {monthly_sales:.2f} ({monthly_orders} orders)')
+
+                                    monthly_repair_cost = 0
+                                    monthly_ingredient_cost = 0
+                                    for equipment_details in equipment_report_keeping.values():
+                                        converted_report_date = datetime.strptime(equipment_details['report_date'], '%d-%m-%Y')
+                                        if converted_report_date.strftime('%B') == custom_month_for_profit:
+                                            unit, equipment_cost = equipment_details['repair_cost'].split(' ')
+                                            monthly_repair_cost += float(equipment_cost)
+
+                                    for ingredient_details in ingredient_keeping.values():
+                                        converted_purchase_date = datetime.strptime(ingredient_details['purchase_date'], '%d-%m-%Y')
+                                        unit, ingredient_cost = ingredient_details['cost_per_unit'].split(' ')
+                                        cost = float(ingredient_cost) * ingredient_details['quantity_purchased']
+                                        if converted_purchase_date.strftime('%B') == custom_month_for_profit:
+                                            monthly_ingredient_cost += float(cost)
+
+                                    print(f'Total expenses: RM {monthly_repair_cost + monthly_ingredient_cost:.2f}\n')
+
+                                    net_profit = monthly_sales - (monthly_repair_cost + monthly_ingredient_cost)
+                                    if net_profit < 0:
+                                        print(f'Net profit: RM {net_profit:.2f} (deficit)')
+                                    elif net_profit > 0:
+                                        print(f'Net profit: RM {net_profit:.2f} (surplus)')
+                                    else:
+                                        print(f'Net profit: RM {net_profit:.2f} (break-even point)')
+
+                                    try:
+                                        profit_margin = (net_profit/monthly_sales) * 100
+                                        print(f'Profit margin: {profit_margin:.2f}%\n')
+
+                                        if profit_margin < 0:
+                                            print(f'The bakery lost approximately RM {profit_margin/100:.2f} for every RM earned.')
+                                            print('❗ The bakery might be facing financial struggles. Try to reduce costs and\n adjust pricing to prevent continued losses.')
+                                        elif profit_margin > 0:
+                                            print(f'The bakery make RM {profit_margin/100:.2f} for every RM earned.')
+                                            print('🎊 Congrats! The business is healthy and sustainable.')
+                                        else:
+                                            print(f'The bakery is not making any profit.')
+                                            print('A robust business strategy is needed to enhance the profitability in the future.')
+
+                                        print('\n' + '-' * 85)
+
+                                    except ZeroDivisionError:
+                                        print('\n⚠️ The profit margin cannot be calculated as it has no income.')
+
+                                else:
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Invalid month. Please enter again. |')
+                                    print('+--------------------------------------+')
+
+                        except ValueError:
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
 
         elif track_choice == '4':
             print('\nExiting to Manager Privilege......')
@@ -310,4 +398,4 @@ def financial_management():
             print('+--------------------------------------+')
 
 
-financial_management()
+#financial_management()

@@ -387,4 +387,4 @@ def inventory_control():
             print('+--------------------------------------+')
 
 
-inventory_control()
+#inventory_control()

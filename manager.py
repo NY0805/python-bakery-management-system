@@ -177,7 +177,7 @@ def manager():
               'g. Back to Main page')
 
         #  collect the choice of user and execute corresponding functions
-        choice = input('\nSelect a choice (a, b, c, d, e, f): \n>>> ')
+        choice = input('\nSelect a choice (a, b, c, d, e, f, g): \n>>> ')
         if choice == 'a':
             system_administration.system_administration()
 
