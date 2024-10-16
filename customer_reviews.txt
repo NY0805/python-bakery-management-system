@@ -33,5 +33,10 @@
         "product_name": "gingerbread, banana bread",
         "review": "Loved the gingerbread and banana bread! Very nice texture and tasty.",
         "rating": 4
+    },
+    "customer4": {
+        "product_name": "gingerbread x 7",
+        "review": "RRR",
+        "rating": 4
     }
 }

@@ -68,5 +68,12 @@
         "loyalty_points": 850,
         "status": "MORNING GLORY'S BRONZE",
         "redeem_rate (RM)": 120
+    },
+    "11": {
+        "username": "Jenolee",
+        "total_spending (RM)": 600.0,
+        "loyalty_points": 6000,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 70
     }
 }

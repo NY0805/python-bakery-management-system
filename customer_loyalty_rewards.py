@@ -33,17 +33,6 @@ def save_customer_data(customers):
         json.dump(customers, file, indent=4)
 
 
-def update_customer_info(username, customer_info):
-    customers = load_customer_data()  # Load existing customer data
-    for customer_id, customer in customers.items():
-        if customer['username'] == username:
-            customers[customer_id] = customer_info  # Update customer info
-            print(f"Information for {username} has been updated.")
-            save_customer_data(customers)  # Save updated customer data to file
-            return
-    print(f"User {username} not found. No update performed.")
-
-
 def determine_status(loyalty_points):
     """Determine customer status based on loyalty points."""
     if loyalty_points >= GOLD_REQUIREMENT:
@@ -54,6 +43,17 @@ def determine_status(loyalty_points):
         return "MORNING GLORY'S BRONZE"
     else:
         return "Standard"
+
+
+def update_customer_info(username, customer_info):
+    customers = load_customer_data()  # Load existing customer data
+    for customer_id, customer in customers.items():
+        if customer['username'] == username:
+            customers[customer_id] = customer_info  # Update customer info
+            print(f"Information for {username} has been updated.")
+            save_customer_data(customers)  # Save updated customer data to file
+            return
+    print(f"User {username} not found. No update performed.")
 
 
 def create_new_customer():
@@ -69,7 +69,7 @@ def create_new_customer():
             print("Invalid input! Please enter a numeric value.")
 
     # Calculate loyalty points based on spending
-    loyalty_points = int(total_spending * 10)  # Assume 10 points for every 1 RM spent
+    loyalty_points = int(total_spending * BASE_POINTS_PER_RM)  # Assume points based on spending
 
     # Determine status and redeem rate
     status = determine_status(loyalty_points)  # Determine status based on points
@@ -91,7 +91,6 @@ def create_new_customer():
     # Save updated customer data
     save_customer_data(customers)
     print(f"New customer {username} loyalty rewards created successfully!")
-
 
 
 def update_customer_loyalty_information(username):
@@ -117,7 +116,8 @@ def update_customer_loyalty_information(username):
                 except ValueError:
                     print("Invalid input! Please enter an integer value.")
 
-            status = determine_status(loyalty_points)  # Determine new status based on updated points
+            # Automatically determine new status based on updated points
+            status = determine_status(loyalty_points)
             redeem_rate = REDEEM_RATES[status]  # Get redeem rate based on updated status
 
             # Update customer information
@@ -215,5 +215,5 @@ def loyalty_rewards():
 
 
 # Start the loyalty rewards program
-loyalty_rewards()
+# loyalty_rewards()
 

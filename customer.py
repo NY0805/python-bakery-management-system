@@ -299,8 +299,9 @@ def save_customer_data(data):
     with open("customers.json", "w") as file:
         json.dump(data, file)
 
+
 def customer_menu():
-    logged_in_username = None  # Initialize username
+    logged_in_username = None  # Initialize as None, meaning no user is logged in yet
 
     while True:
         print('\n-----------------------------------------------')
@@ -321,7 +322,7 @@ def customer_menu():
         if option == "1":
             sign_up()
         elif option == "2":
-            logged_in_username = login()  # Update the username variable
+            logged_in_username = login()  # Update the logged-in username
         elif option == "3":
             product_browsing.browse_products()
         elif option == "4":
@@ -334,9 +335,9 @@ def customer_menu():
             else:
                 print("You need to log in first to submit a review.")
         elif option == "7":
-            customer_loyalty_rewards.view_loyalty_rewards()
+            customer_loyalty_rewards.loyalty_rewards()
         elif option == "8":
-           update_personal_information()
+            update_personal_information()
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break

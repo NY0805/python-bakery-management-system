@@ -202,5 +202,45 @@
         "total_price (RM)": "11.25",
         "order_date": "15-10-2024",
         "status": "Payment Completed"
+    },
+    "8079287939": {
+        "order_id": "ORD020",
+        "username": "llll",
+        "items_ordered": [
+            "gingerbread x 6"
+        ],
+        "total_price (RM)": "13.50",
+        "order_date": "15-10-2024",
+        "status": "Payment Completed"
+    },
+    "7323218667": {
+        "order_id": "ORD021",
+        "username": "customer4",
+        "items_ordered": [
+            "gingerbread x 7"
+        ],
+        "total_price (RM)": "15.75",
+        "order_date": "15-10-2024",
+        "status": "Payment Completed"
+    },
+    "3195999113": {
+        "order_id": "ORD022",
+        "username": "1",
+        "items_ordered": [
+            "gingerbread x 5"
+        ],
+        "total_price (RM)": "11.25",
+        "order_date": "15-10-2024",
+        "status": "Payment Completed"
+    },
+    "9495494798": {
+        "order_id": "ORD023",
+        "username": "1",
+        "items_ordered": [
+            "gingerbread x 4"
+        ],
+        "total_price (RM)": "9.00",
+        "order_date": "16-10-2024",
+        "status": "Canceled"
     }
 }

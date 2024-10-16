@@ -6,10 +6,7 @@ def load_review():
         with open('customer_reviews.txt', 'r') as file:
             content = file.read().strip()
         if content:
-            try:
-                return json.loads(content)
-            except json.JSONDecodeError:
-                return {}
+            return json.loads(content)
         else:
             return {}
     except FileNotFoundError:
@@ -37,36 +34,50 @@ def validation_rating(rating):
     return rating.isdigit() and int(rating) in range(1, 6)
 
 
-def submit_review(username):
+def submit_review(logged_in_username):
     print('\n-----------------------------------------------')
-    print('\t\t\t', '', 'PRODUCT REVIEW')
+    print('\t\t\tPRODUCT REVIEW')
     print('-----------------------------------------------')
 
-    # Load customer order list to check if the user has purchased anything
-    order_list = load_order_list()
-    if username not in order_list:
-        print('|⚠️ You have not purchased any items. Please buy something before writing a review!|')
+    # Initialize variables to check for valid purchase and product name
+    valid_purchase_found = False
+    product_name = None
+
+    # Load order list to check if the user has completed any purchases
+    order_list = load_order_list()  # Ensure the order list is loaded here
+
+    # Check if the user has completed any purchases
+    for order_id, order_data in order_list.items():  # Use .items() method to iterate through the dictionary
+        if order_data["username"] == logged_in_username:  # Match with logged-in username
+            if order_data["status"] == "Payment Completed":
+                valid_purchase_found = True
+                product_name = order_data['items_ordered'][0]  # Get the first product name
+                review_text = input('Enter your review: ')
+                rating = input('Rate your product (1-5): ')
+                break  # Exit the loop after finding a valid order
+
+    # Check if no valid purchase was found
+    if not valid_purchase_found:  # Use if instead of else if
+        print('|⚠️ You have not completed any purchases. Please buy something before writing a review!|')
         return
-
-    # Check if the user has any items with a status other than 'Canceled'
-    has_purchased = any(item['status'] != 'Canceled' for item in order_list[username]['items ordered'])
-    if not has_purchased:
-        print('|⚠️ You have not purchased any items. Please buy something before writing a review!|')
-        return
-
-    # Allow customer to enter review details
-    review_text = input('Enter your review: ')
-    rating = input('Rate your product (1-5): ')
-
-    # Validate the rating to ensure it's between 1 and 5
-    while not validation_rating(rating):
-        print('|⚠️ Invalid rating. Please enter a number between 1 and 5!|')
-        rating = input('Rate your product (1-5): ')
 
     # Load existing reviews
     reviews = load_review()
-    # Get the first product name from the order list for the user
-    product_name = order_list[username]['items ordered'][0]['product_name']  # Get the first product for simplicity
+
+    # Update the review for the user
+    reviews[logged_in_username] = {
+        'product_name': product_name,
+        'review': review_text,
+        'rating': int(rating)  # Convert rating to an integer
+    }
+
+    # Save the updated reviews
+    save_reviews(reviews)
+    print()
+    print('***** Thank you for your feedback! *****')
+    print('Your review has been successfully received.')
+
+    reviews = load_review()
 
     # Update the review for the user
     reviews[username] = {
@@ -81,8 +92,5 @@ def submit_review(username):
     print('***** Thank you for your feedback! *****')
     print('Your review has been successfully received.')
 
-# Assuming you have access to the logged-in username
-username = "the_logged_in_username"  # Replace this with the actual logged-in username
 
-# Call submit_review with the username
-#submit_review(username)
+#submit_review
