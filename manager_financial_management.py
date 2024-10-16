@@ -268,11 +268,9 @@ def financial_management():
                                 total_repair_cost = 0
                                 total_ingredient_cost = 0
                                 for equipment_details in equipment_report_keeping.values():
-                                    if (datetime.strptime(equipment_details['report_date'], '%d-%m-%Y').year == int(
-                                            custom_year_for_profit)):
-                                        total_repair_cost += float(equipment_details["repair_cost"])
-                                    else:
-                                        break
+                                    if (datetime.strptime(equipment_details['report_date'], '%d-%m-%Y').year == int(custom_year_for_profit)):
+                                        unit, equipment_cost = equipment_details['repair_cost'].split(' ')
+                                        total_repair_cost += float(equipment_cost)
 
                                 for ingredient_details in ingredient_keeping.values():
                                     unit, ingredient_cost = ingredient_details['cost_per_unit'].split(' ')
@@ -280,11 +278,18 @@ def financial_management():
                                     if (datetime.strptime(ingredient_details['purchase_date'], '%d-%m-%Y').year == int(
                                             custom_year_for_profit)):
                                         total_ingredient_cost += float(cost)
-                                    else:
-                                        break
 
                                 print(f'Total expenses: RM {total_repair_cost + total_ingredient_cost:.2f}\n')
                                 print('-' * 70)
+
+                                net_profit = total_sales - (total_repair_cost + total_ingredient_cost)
+                                print(f'Net profit: RM {net_profit:.2f}')
+
+                                profit_margin = (net_profit/total_sales) * 100
+                                print(f'Profit margin: RM {profit_margin:.2f}')
+
+                                if net_profit < 0:
+                                    print('Cashflow: ')
 
                         except ValueError:
                             print('\n+--------------------------------------+')
