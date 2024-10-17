@@ -290,24 +290,6 @@ def add_ingredient():
                 print('+--------------------------------------------------------------------------------------------+')
 
     while True:
-        print(f'\n💡 Example: 500 for a 500g pack 💡')
-        quantity_per_unit = input(f'5. {ingredient_info[12].ljust(max_length + 2)}: ').strip()
-        if validation_empty_entries(quantity_per_unit):
-            try:
-                quantity_per_unit = float(quantity_per_unit)
-                if quantity_per_unit > 0:
-                    break
-                else:
-                    print('\n+---------------------------------------------------+')
-                    print('|⚠️ Please enter a valid quantity. (Greater than 0) |')
-                    print('+---------------------------------------------------+\n')
-
-            except ValueError:
-                print('\n+-----------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid quantity. (Cannot contain any alphabets and special characters.) |')
-                print('+-----------------------------------------------------------------------------------------+\n')
-
-    while True:
         cost_per_unit = input(f'5. {ingredient_info[9].ljust(max_length + 2)}: ').strip()
         if validation_empty_entries(cost_per_unit):
             try:
@@ -315,14 +297,14 @@ def add_ingredient():
                 if cost_per_unit > 0:
                     break
                 else:
-                    print('\n+---------------------------------------------------+')
+                    print('\n+-----------------------------------------------+')
                     print('|⚠️ Please enter a valid cost. (Greater than 0) |')
-                    print('+---------------------------------------------------+\n')
+                    print('+-----------------------------------------------+\n')
 
             except ValueError:
-                print('\n+-----------------------------------------------------------------------------------------+')
+                print('\n+-------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid cost. (Cannot contain any alphabets and special characters.) |')
-                print('+-----------------------------------------------------------------------------------------+\n')
+                print('+-------------------------------------------------------------------------------------+\n')
 
     while True:
         quantity_purchased = input(f'5. {ingredient_info[4].ljust(max_length + 2)}: ').strip()
@@ -396,21 +378,6 @@ def add_ingredient():
                 print('\n+-----------------------------------------------+')
                 print('|⚠️ Invalid contact number. Please enter again. |')
                 print('+-----------------------------------------------+\n')
-
-    while True:
-        cost_per_unit = input(f'10. {ingredient_info[9].ljust(max_length + 1)}: RM ')
-        if validation_empty_entries(cost_per_unit):
-            if cost_per_unit.isdigit():
-                if int(cost_per_unit) > 0:
-                    break
-                else:
-                    print('\n+-----------------------------------------------+')
-                    print('|⚠️ Invalid cost per unit. Must greater than 0. |')
-                    print('+-----------------------------------------------+\n')
-            else:
-                print('\n+--------------------------------------------------------------------------------------+')
-                print('|⚠️ Please enter a valid cost. (Cannot contain any alphabets and special characters.)  |')
-                print('+--------------------------------------------------------------------------------------+\n')
 
     while True:
         print(f'\n💡 Allowable storage requirement: dry storage, refrigerated, freezer 💡')

@@ -52,7 +52,8 @@ def receipt(customer):
               'Reg: 219875000123 (80851-Z)',
               '51, Lorong Maplewood, Taman Springfield, 47180, Puchong, Selangor.',
               'Tel: 04-5678951',
-              'Email: morningglorybakery@gmail.com']
+              'Email: morningglorybakery@gmail.com',
+              'Business hours: 9.00AM - 6.00PM']
     for i in header:
         centered(i, overall_width)  # call the function to print the header in the middle
 
@@ -126,4 +127,4 @@ def receipt(customer):
     save_info(transaction_keeping)  # save the data
 
 
-#receipt(str(1597534862))
+receipt(str(5580946551))
