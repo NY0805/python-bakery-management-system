@@ -286,6 +286,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         # Generate receipt
         print(f"Generating receipt for Cart ID: {cart_id}...")
+        customer_loyalty_rewards.determine_loyalty_points()
         cashier_transaction_completion.receipt(str(cart_id))
 
         # Clear cart after receipt generation
