@@ -120,6 +120,7 @@ def loyalty_rewards():
 
         if choice == '1':
             customer_info = view_loyalty_rewards()
+
         elif choice == '2':
             username = input("Enter your username: ").strip()
             customers = load_customer_data()
@@ -127,6 +128,7 @@ def loyalty_rewards():
                 if customer_info['username'] == username:
                     redeem_cash_voucher(customer_info)
                     break
+
         elif choice == '3':
             print("Thank you for visiting Customer Loyalty Program. Goodbye!")
             break
