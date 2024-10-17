@@ -232,15 +232,5 @@
         "total_price (RM)": "11.25",
         "order_date": "15-10-2024",
         "status": "Payment Completed"
-    },
-    "9495494798": {
-        "order_id": "ORD023",
-        "username": "1",
-        "items_ordered": [
-            "gingerbread x 4"
-        ],
-        "total_price (RM)": "9.00",
-        "order_date": "16-10-2024",
-        "status": "Canceled"
     }
 }

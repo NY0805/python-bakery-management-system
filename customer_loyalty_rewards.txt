@@ -2,7 +2,7 @@
     "1": {
         "username": "Mark0825",
         "total_spending (RM)": 55.0,
-        "loyalty_points": 550,
+        "loyalty_points": 430,
         "status": "MORNING GLORY'S BRONZE",
         "redeem_rate (RM)": 120
     },
@@ -75,5 +75,22 @@
         "loyalty_points": 6000,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 70
+    },
+    "12": {
+        "username": "fff",
+        "total_spending (RM)": 15.75,
+        "loyalty_points": 157,
+        "status": "Standard",
+        "redeem_rate (RM)": null
+    },
+    "13": {
+        "username": "jack",
+        "total_spending (RM)": 13.5,
+        "loyalty_points": 135,
+        "status": "Standard",
+        "redeem_rate (RM)": null,
+        "order_ids": [
+            "ORD039"
+        ]
     }
 }

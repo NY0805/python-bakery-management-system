@@ -60,16 +60,13 @@ def view_loyalty_rewards():
             print(f"Loyalty Points: {customer_info['loyalty_points']}")
             print(f"Status: {customer_info['status']}")
             print(f"Redeem Rate: {customer_info['redeem_rate (RM)']} points per voucher")  # Display redeem rate
+            return customer_info
 
-            # Redeem cash voucher option
-            redeem_cash_voucher(customer_info)
-            break
-    else:
-        print(f"User {username} does not exist.")
+    print(f"User {username} does not exist.")
+    return None
 
 
-def redeem_cash_voucher(customer_info):
-    """Allow the customer to redeem cash vouchers using loyalty points."""
+def redeem_cash_voucher(customer_info):  # Allow customer to redeem cash vouchers using their loyalty points
     username = customer_info['username']
     points = customer_info['loyalty_points']
     status = customer_info['status']
@@ -109,66 +106,32 @@ def redeem_cash_voucher(customer_info):
         print(f"Your points are not enough! You need at least {points_per_voucher} points per voucher.")
 
 
-def update_loyalty_rewards(username, total_spending, order_id):
-    """Update or create customer loyalty rewards based on total spending."""
-    # Load existing customer data
-    customers = load_customer_data()
-
-    # Check if the customer already exists
-    if username in customers.values():
-        # Find the existing customer's ID
-        customer_id = [cid for cid, info in customers.items() if info["username"] == username][0]
-        loyalty_points, status = determine_loyalty_points(total_spending)
-
-        # Update existing customer's total spending and loyalty points
-        customers[customer_id]["total_spending (RM)"] += total_spending
-        customers[customer_id]["loyalty_points"] += loyalty_points
-        customers[customer_id]["status"], customers[customer_id]["redeem_rate (RM)"] = determine_loyalty_points(
-            customers[customer_id]["total_spending (RM)"])
-
-        # Append the new order ID to the existing list of order IDs
-        if "order_id" not in customers[customer_id]:
-            customers[customer_id]["order_id"] = []
-        customers[customer_id]["order_id"].append(order_id)
-
-    else:
-        # New customer, calculate loyalty points and status
-        loyalty_points, status = determine_loyalty_points(total_spending)
-        redeem_rate = REDEEM_RATES[status]
-
-        # Create new customer entry
-        customer_id = str(len(customers) + 1)  # Create a new customer ID
-        customers[customer_id] = {
-            "username": username,
-            "total_spending (RM)": total_spending,
-            "loyalty_points": loyalty_points,
-            "status": status,
-            "redeem_rate (RM)": redeem_rate,
-            "order_id": [order_id]  # Initialize with the current order ID
-        }
-
-    # Save updated customer data
-    save_customer_data(customers)
-    print(f"Customer {username}'s loyalty rewards updated successfully!")
-
-
 def loyalty_rewards():
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\tCUSTOMER LOYALTY REWARDS')
         print('-----------------------------------------------')
         print()
-        print("1. View and Redeem Loyalty Rewards")
-        print("2. Exit to main menu")
+        print("1. View Loyalty Rewards")
+        print("2. Redeem Cash Vouchers")
+        print("3. Exit to main menu")
 
         choice = input("Select your option: ")
 
         if choice == '1':
-            view_loyalty_rewards()
+            customer_info = view_loyalty_rewards()
         elif choice == '2':
+            username = input("Enter your username: ").strip()
+            customers = load_customer_data()
+            for customer_id, customer_info in customers.items():
+                if customer_info['username'] == username:
+                    redeem_cash_voucher(customer_info)
+                    break
+        elif choice == '3':
             print("Thank you for visiting Customer Loyalty Program. Goodbye!")
             break
         else:
             print("|⚠️Invalid option! Please try again.|")
+
 
 loyalty_rewards()

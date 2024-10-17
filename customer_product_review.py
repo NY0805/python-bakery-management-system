@@ -3,14 +3,19 @@ import json
 
 def load_review():
     try:
-        with open('customer_reviews.txt', 'r') as file:
-            content = file.read().strip()
-        if content:
-            return json.loads(content)
+        file = open('customer_reviews.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
         else:
-            return {}
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 def save_reviews(new_review):
@@ -20,14 +25,19 @@ def save_reviews(new_review):
 
 def load_order_list():
     try:
-        with open('customer_order_list.txt', 'r') as file:
-            content = file.read().strip()
-        if content:
-            return json.loads(content)
+        file = open('customer_order_list.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
         else:
-            return {}
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 def validation_rating(rating):
@@ -43,12 +53,12 @@ def submit_review(logged_in_username):
     valid_purchase_found = False
     product_name = None
 
-    # Load order list to check if the user has completed any purchases
-    order_list = load_order_list()  # Ensure the order list is loaded here
+    # Load the order list from 'customer_order_list.txt' to check the user's purchase history
+    order_list = load_order_list()
 
     # Check if the user has completed any purchases
     for order_id, order_data in order_list.items():  # Use .items() method to iterate through the dictionary
-        if order_data["username"] == logged_in_username:  # Match with logged-in username
+        if order_data["username"] == logged_in_username:  # Match the current order with the logged-in user's username
             if order_data["status"] == "Payment Completed":
                 valid_purchase_found = True
                 product_name = order_data['items_ordered'][0]  # Get the first product name
@@ -90,7 +100,7 @@ def submit_review(logged_in_username):
     save_reviews(reviews)
     print()
     print('***** Thank you for your feedback! *****')
-    print('Your review has been successfully received.')
+    print('Your review has been successfully received.')  # Display the message after the review has been saved
 
 
 #submit_review
