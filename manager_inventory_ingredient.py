@@ -566,7 +566,7 @@ def update_ingredient():
                                     else:
                                         break
 
-                                if attribute_of_ingredient_data == 'ingredient_name':
+                                elif attribute_of_ingredient_data == 'ingredient_name':
                                     if validation_alphabet_only(new_value):
                                         # if the new ingredient name existed, duplication occurs
                                         if new_value in (ingredient_data[selected_ingredient]['ingredient_name'] for
@@ -587,7 +587,7 @@ def update_ingredient():
                                         print(
                                             '+---------------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'ingredient_form':
+                                elif attribute_of_ingredient_data == 'ingredient_form':
 
                                     if validation_empty_entries(new_value):
                                         if validation_list_alphabet_only(new_value):
@@ -626,7 +626,7 @@ def update_ingredient():
                                             print(
                                                 '+--------------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'batch_number':
+                                elif attribute_of_ingredient_data == 'batch_number':
                                     if validation_alphanum_only(new_value):
                                         if new_value in ingredient_data:  # if the new batch number existed, duplication occurs
                                             print(
@@ -645,7 +645,7 @@ def update_ingredient():
                                         print(
                                             '+-------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'unit_measurement':
+                                elif attribute_of_ingredient_data == 'unit_measurement':
                                     if new_value.isalpha():
                                         category_units = {
                                             'Flours and Grains': 'g, kg',
@@ -681,7 +681,7 @@ def update_ingredient():
                                         print(
                                             '+--------------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'quantity_purchased':
+                                elif attribute_of_ingredient_data == 'quantity_purchased':
                                     try:
                                         new_value = float(new_value)
                                         if new_value > 0:  # ensure the quantity must in positive
@@ -699,7 +699,7 @@ def update_ingredient():
                                         print(
                                             '+-----------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'purchase_date':
+                                elif attribute_of_ingredient_data == 'purchase_date':
                                     if validation_date(new_value):
                                         if new_value <= datetime.now().strftime("%d-%m-%Y"):  # make sure the new purchased date entered is valid and logic
                                             break
@@ -715,7 +715,7 @@ def update_ingredient():
                                         print(
                                             '+----------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'expiry_date':
+                                elif attribute_of_ingredient_data == 'expiry_date':
                                     if validation_date(new_value):
                                         # convert expiry_date_str from string to datetime format
                                         expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
@@ -737,7 +737,7 @@ def update_ingredient():
                                         print(
                                             '+--------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'supplier_name':
+                                elif attribute_of_ingredient_data == 'supplier_name':
                                     if new_value.replace(" ", "").isalpha():
                                         break
                                     else:
@@ -748,7 +748,7 @@ def update_ingredient():
                                         print(
                                             '+--------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'supplier_contact':
+                                elif attribute_of_ingredient_data == 'supplier_contact':
                                     if re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # validate the format of supplier's contact number
                                         break
                                     else:
@@ -756,7 +756,7 @@ def update_ingredient():
                                         print('|⚠️ Invalid contact number. Please enter again. |')
                                         print('+-----------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'cost_per_unit':
+                                elif attribute_of_ingredient_data == 'cost_per_unit':
                                     if validation_empty_entries(new_value):
                                         if new_value.isdigit():
                                             if int(new_value) > 0:
@@ -770,7 +770,7 @@ def update_ingredient():
                                             print('|⚠️ Please enter a valid cost. (Cannot contain any alphabets and special characters.)  |')
                                             print('+--------------------------------------------------------------------------------------+\n')
 
-                                if attribute_of_ingredient_data == 'storage_requirement':
+                                elif attribute_of_ingredient_data == 'storage_requirement':
                                     if validation_alphabet_only(new_value):
                                         if new_value in ['dry storage', 'refrigerated', 'freezer']:
                                             break
@@ -789,7 +789,7 @@ def update_ingredient():
                                         print(
                                             '+-------------------------------------------------------------------------------------------------+')
 
-                                if attribute_of_ingredient_data == 'allergen_info':
+                                elif attribute_of_ingredient_data == 'allergen_info':
                                     if validation_list_alphabet_only(new_value):
                                         break
                                     else:
@@ -814,6 +814,11 @@ def update_ingredient():
                         print(f'\n{attribute_of_ingredient_data} of {ingredient_data[selected_ingredient]["ingredient_name"]} is updated.')
                         ingredient_data[selected_ingredient].update({attribute_of_ingredient_data: new_value})
                         save_info(ingredient_data)
+
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+')
 
         except ValueError:
             print('\n+--------------------------+')
