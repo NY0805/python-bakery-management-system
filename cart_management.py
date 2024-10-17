@@ -1,6 +1,8 @@
 import json
 import random
 import product_menu
+import cashier_transaction_completion
+import customer_loyalty_rewards
 from datetime import datetime
 
 product_data = product_menu.product_data
@@ -251,44 +253,50 @@ def display_cart(cart):
 
 # Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
-    if not cart:  # Check if the cart is empty
+    if not cart:
         print("\nYour cart is empty! Please add items before proceeding to checkout.")
         return
 
-    # Display the cart and total price
     total_price = display_cart(cart)
+    print(f"Current cart ID: {cart_id}")
 
-    # Options for the user to either proceed with payment or cancel the order
     print("\nWould you like to:")
-    print("1. Proceed with your payment")  # Proceed with payment
-    print("2. Cancel your order")          # Cancel the order
+    print("1. Proceed with your payment")
+    print("2. Cancel your order")
 
     choice = input("Please select your option (1 or 2): ").strip()
 
-    # Try to load existing order data, if not, create an empty order list
+    print(f"User choice: {choice}")  # Debugging choice
+
+    # Load existing order data
     try:
         with open("customer_order_list.txt", "r") as file:
             order_data = json.load(file)
     except FileNotFoundError:
         order_data = {}
 
-    # Generate a new order ID
     order_id = generate_order_id(order_data)
 
-    # Process the user's choice
-    if choice == '1':  # If they choose to pay
+    if choice == '1':
         print(f"\nTotal price to pay: RM {total_price:.2f}")
         print("\nPayment completed. Thank you for your purchase!")
+
+        # Save the updated order to the file
         save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Completed")
-        cart.clear()  # Clear the cart after payment
-    elif choice == '2':  # If they choose to cancel
+
+        # Generate receipt
+        print(f"Generating receipt for Cart ID: {cart_id}...")
+        cashier_transaction_completion.receipt(str(cart_id))
+
+        # Clear cart after receipt generation
+        cart.clear()
+
+    elif choice == '2':
         print("\nYour order has been canceled.")
         save_order_to_file(cart, customer_name, cart_id, order_id, "Canceled")
-        cart.clear()  # Clear the cart after cancellation
+        cart.clear()
     else:
-        print("⚠️ Invalid option! Returning to the main menu.")  # Invalid input handling
-
-# Assuming other parts of your code like save_order_to_file and generate_order_id are already defined
+        print("⚠️ Invalid option! Returning to the main menu.")
 
 
 # Main shopping cart function
@@ -331,4 +339,4 @@ def shopping_cart():
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-#shopping_cart()
+shopping_cart()
