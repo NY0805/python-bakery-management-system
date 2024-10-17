@@ -128,10 +128,13 @@ def loyalty_rewards():
                 if customer_info['username'] == username:
                     redeem_cash_voucher(customer_info)
                     break
+            else:
+                print(f"Invalid username. Please try again.")
 
         elif choice == '3':
             print("Thank you for visiting Customer Loyalty Program. Goodbye!")
             break
+
         else:
             print("|⚠️Invalid option! Please try again.|")
 
