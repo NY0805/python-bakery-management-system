@@ -69,6 +69,7 @@ def view_loyalty_rewards():
 
 
 def redeem_cash_voucher(customer_info):
+    """Allow the customer to redeem cash vouchers using loyalty points."""
     username = customer_info['username']
     points = customer_info['loyalty_points']
     status = customer_info['status']
@@ -78,18 +79,30 @@ def redeem_cash_voucher(customer_info):
         print("Standard users cannot redeem cash vouchers.")
         return
 
-    max_vouchers = points // points_per_voucher
+    max_vouchers = points // points_per_voucher  # Calculate the maximum number of vouchers
     if max_vouchers > 0:
         print(f"\nYou have {points} loyalty points.")
-        print(f"As a {status} member, you can redeem up to {max_vouchers} cash vouchers (Each RM{VOUCHER_VALUE}).")
+        print(f"As a {status} member, you can redeem up to {max_vouchers} cash vouchers (Each RM10).")
         choice = input("Would you like to redeem your points for cash vouchers? yes=y no=n (y/n): ").lower()
         if choice == 'y':
-            num_vouchers = int(input(f"How many vouchers would you like to redeem (up to {max_vouchers})? "))
-            if 0 < num_vouchers <= max_vouchers:
-                customer_info['loyalty_points'] -= num_vouchers * points_per_voucher  # Deduct points
-                print(f"Success! You have redeemed {num_vouchers} voucher(s) worth RM{num_vouchers * VOUCHER_VALUE}.")
-            else:
-                print("|⚠️Invalid number of vouchers!|")
+            try:
+                num_vouchers = int(input(f"How many vouchers would you like to redeem (up to {max_vouchers})? "))
+                if 0 < num_vouchers <= max_vouchers:
+                    customer_info['loyalty_points'] -= num_vouchers * points_per_voucher  # Deduct points
+                    print(f"Success! You have redeemed {num_vouchers} voucher(s) worth RM{num_vouchers * 10}.")
+
+                    # Save the updated customer data
+                    customers = load_customer_data()
+                    for customer_id, info in customers.items():
+                        if info['username'] == username:
+                            customers[customer_id]['loyalty_points'] = customer_info['loyalty_points']  # Update points
+                            save_customer_data(customers)  # Save to file
+                            print("Your updated loyalty points have been saved.")
+                            break
+                else:
+                    print("|⚠️Invalid number of vouchers!|")
+            except ValueError:
+                print("|⚠️Please enter a valid number!|")
         else:
             print("No vouchers redeemed.")
     else:
@@ -158,3 +171,4 @@ def loyalty_rewards():
         else:
             print("|⚠️Invalid option! Please try again.|")
 
+loyalty_rewards()
