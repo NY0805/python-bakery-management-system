@@ -388,6 +388,7 @@ def financial_management():
                             print('|⚠️ Invalid input. Please enter again. |')
                             print('+--------------------------------------+')
 
+
         elif track_choice == '4':
             print('\nExiting to Manager Privilege......')
             break

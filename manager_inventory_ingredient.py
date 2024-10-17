@@ -738,7 +738,7 @@ def update_ingredient():
                                             '+--------------------------------------------------------------------------------------+')
 
                                 if attribute_of_ingredient_data == 'supplier_name':
-                                    if re.match(r'^[a-zA-Z0-9 ]+$', new_value):
+                                    if new_value.replace(" ", "").isalpha():
                                         break
                                     else:
                                         print(
