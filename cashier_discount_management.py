@@ -119,7 +119,6 @@ def display_discounts():
         print("|⚠️ No discounts available! |")
 
 
-
 # Main menu for managing discounts
 def manage_discounts():
     while True:

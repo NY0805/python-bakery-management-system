@@ -106,6 +106,7 @@ def redeem_cash_voucher(customer_info):  # Allow customer to redeem cash voucher
         print(f"Your points are not enough! You need at least {points_per_voucher} points per voucher.")
 
 
+
 def loyalty_rewards():
     while True:
         print('\n-----------------------------------------------')
