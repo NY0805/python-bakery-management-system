@@ -45,7 +45,7 @@ def validate_discount_input():
 def add_discount():
     product_code = input("Enter product code: ")
 
-    # Load the file line by line to check if the product_code exists
+    # Open the file and check if the product code exists
     with open("product_discount.txt", "r") as f:
         found = False
         for line in f:
@@ -54,21 +54,17 @@ def add_discount():
                 print(f"Product {product_code} already exists. Please use 'Modify Discount' to update the discount.")
                 break
 
-    # If the product code does not exist, allow adding a new product with a discount
+    # If the product code does not exist, allow adding a new discount
     if not found:
-        print(f"Product code {product_code} does not exist. Adding a new product.")
-        product_name = input("Enter product name: ")
-        price = input("Enter product price: ")
-        stock = input("Enter product stock: ")
-        discount = validate_discount_input()  # Get the discount input
+        discount = validate_discount_input()  # Get the discount input from the user
 
         # Format the new product entry
         new_entry = f'''
         "{len(open("product_discount.txt").readlines()) + 1}": {{
-            "Product Name": "{product_name}",
+            "Product Name": "N/A",  
             "product_code": "{product_code}",
-            "Stock": {stock},
-            "Price": "RM {price}",
+            "Stock": 0,  # Assume stock defaults to 0
+            "Price": "RM 0.00",  
             "Discount": "{discount}%"
         }},
         '''
@@ -77,7 +73,8 @@ def add_discount():
         with open("product_discount.txt", "a") as f:
             f.write(new_entry)
 
-        print(f"New product {product_name} added with a discount of {discount}%.")
+        print(f"New product with code {product_code} added with a discount of {discount}%.")
+
 
 
 # Function to delete a discount (set to 0% or remove product)
