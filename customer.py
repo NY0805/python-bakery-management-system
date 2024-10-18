@@ -285,6 +285,55 @@ def update_personal_information():
         print("Customer not found.")
 
 
+# Function to manage customer account (view or delete)
+def account_management():
+    customer_info = load_data_from_customer()
+
+    if not customer_info:  # Check if customer data is loaded
+        print("No customer data available.")
+        return
+
+    # Prompt for username input
+    customer_name = input("Please enter your name: ").lower()  # Convert to lowercase
+
+    # Check if the customer_name exists in the loaded customer data
+    if customer_name in customer_info:
+        print(f"Welcome, {customer_name}!")
+        print("What would you like to do?")
+        print("1. View Account Details")
+        print("2. Delete Account")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            # Display account details
+            customer = customer_info[customer_name]
+            print("\n+---------------------------+")
+            print(f"Username: {customer_name}")
+            print(f"Password: {customer['customer_password']}")
+            print(f"Age: {customer['age']}")
+            print(f"Gender: {customer['gender']}")
+            print(f"Contact No: {customer['contact_no']}")
+            print(f"Email: {customer['email']}")
+            print(f"Address: {customer['address']}")
+            print("+---------------------------+\n")
+
+        elif choice == "2":
+            # Confirm account deletion
+            confirm = input("Are you sure you want to delete your account? (y/n): ")
+            if confirm.lower() == 'y':
+                del customer_info[customer_name]  # Remove the customer from the dictionary
+                save_info(customer_info)  # Save the updated data back to the file
+                print(f"Account '{customer_name}' has been deleted.")
+            else:
+                print("Account deletion cancelled.")
+        else:
+            print("Invalid choice.")
+    else:
+        print(f"Account with the name '{customer_name}' not found.")
+
+
+
 # Function to load customer data
 def load_customer_data():
     try:
@@ -315,6 +364,7 @@ def customer_menu():
         print("6. Submit Review")
         print("7. View Loyalty Rewards")
         print("8. Update Personal Information")
+        print("9. Manage Account")
         print("0. Exit")
 
         option = input("Please select an option (0-9): ")
@@ -338,6 +388,8 @@ def customer_menu():
             customer_loyalty_rewards.loyalty_rewards()
         elif option == "8":
             update_personal_information()
+        elif option == "9":
+            account_management()
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break
