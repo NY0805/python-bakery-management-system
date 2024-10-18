@@ -95,7 +95,11 @@ def receipt(customer):
     print('')
     print('-' * overall_width)
 
-    subtotal = sum(total_amount)  # calculate subtotal by adding the amount in "total_amount"
+    # calculate subtotal by adding the amount in "total_amount"
+    subtotal = 0
+    for amount in total_amount:
+        subtotal += amount
+
     print(f'{"Points earned: "}{subtotal * 10:<50}{"Subtotal: ":<25}{subtotal:.2f}')
 
     discounted_price = 0  # initiate the discounted_price to 0
@@ -127,4 +131,4 @@ def receipt(customer):
     save_info(transaction_keeping)  # save the data
 
 
-#receipt(str(0730506230))
+receipt(str(1944428264))

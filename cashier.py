@@ -1,4 +1,6 @@
 import json  # import json text file to record data
+
+import cashier_transaction_completion
 from manager import load_data_from_manager
 
 # Define the function that loads cashier data from the file
