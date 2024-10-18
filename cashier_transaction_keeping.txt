@@ -228,5 +228,13 @@
         ],
         "order_date": "17-10-2024",
         "total_spend(RM)": 21.73
+    },
+    "MGB-4828174": {
+        "order_id": "ORD024",
+        "items": [
+            "cheezy bun "
+        ],
+        "order_date": "18-10-2024",
+        "total_spend(RM)": 5.3
     }
 }

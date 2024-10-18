@@ -30,7 +30,6 @@ def save_info(transaction_keeping):
 
 overall_width = 100  # initiate the width of display panel
 cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
-customer_info = load_data_from_customer_order_list()  # store the data that retrieved from file into customer_info
 inventory = load_data_from_manager_product_inventory()  # store the data that retrieved from file into inventory
 transaction_keeping = load_data_from_cashier_transaction_keeping()  # store the data that retrieved from file into transaction_keeping
 
@@ -46,6 +45,7 @@ def centered(word, width):
 
 # define the format of displaying the receipt
 def receipt(customer):
+    customer_info = load_data_from_customer_order_list()  # store the data that retrieved from file into customer_info
     print(' ')
     # header of the receipt
     header = ['MORNING GLORY BAKERY',
@@ -127,4 +127,4 @@ def receipt(customer):
     save_info(transaction_keeping)  # save the data
 
 
-#receipt(str(5580946551))
+#receipt(str(0730506230))

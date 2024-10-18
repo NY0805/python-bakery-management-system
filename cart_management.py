@@ -4,13 +4,14 @@ import product_menu
 import cashier_transaction_completion
 import customer_loyalty_rewards
 from datetime import datetime
+from manager_order_management import load_data_from_customer_order_list
 
 product_data = product_menu.product_data
 
 
 # Function to generate a 10 digit numeric cart_id
 def generate_cart_id():
-    return ''.join([str(random.randint(0, 9)) for _ in range(10)])
+    return ''.join([str(random.randint(1, 9)) for _ in range(10)])
 
 
 # Function to generate a new order ID based on existing orders
@@ -286,8 +287,9 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         # Generate receipt
         print(f"Generating receipt for Cart ID: {cart_id}...")
-        customer_loyalty_rewards.determine_loyalty_points()
+        customer_loyalty_rewards.determine_loyalty_points(total_price)
         cashier_transaction_completion.receipt(str(cart_id))
+
 
         # Clear cart after receipt generation
         cart.clear()

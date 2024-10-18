@@ -101,6 +101,7 @@ def customer_feedback():
                     print('\n+------------------------------------+')
                     print('|⚠️ Invalid input. Please enter again. |')
                     print('+--------------------------------------+\n')
+                    continue_reply = input('Continue to reply customers? (y=yes, n=no)\n>>> ')
 
                 if continue_reply == 'y':
                     continue
@@ -110,4 +111,4 @@ def customer_feedback():
 
         break
 
-#monitor_review()
+#customer_feedback()

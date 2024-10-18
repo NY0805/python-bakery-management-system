@@ -232,5 +232,25 @@
         "total_price (RM)": "11.25",
         "order_date": "15-10-2024",
         "status": "Payment Completed"
+    },
+    "5398121111": {
+        "order_id": "ORD023",
+        "username": "1",
+        "items_ordered": [
+            "cheezy bun x 1"
+        ],
+        "total_price (RM)": "5.00",
+        "order_date": "18-10-2024",
+        "status": "Payment Completed"
+    },
+    "1944428264": {
+        "order_id": "ORD024",
+        "username": "a",
+        "items_ordered": [
+            "cheezy bun x 1"
+        ],
+        "total_price (RM)": "5.00",
+        "order_date": "18-10-2024",
+        "status": "Payment Completed"
     }
 }
