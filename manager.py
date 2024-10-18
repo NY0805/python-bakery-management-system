@@ -191,7 +191,7 @@ def manager():
             manager_inventory_control.inventory_control()
 
         elif choice == 'e':
-            manager_customer_feedback.monitor_review()
+            manager_customer_feedback.customer_feedback()
 
         elif choice == 'f':
             manager_notifications.notification()

@@ -31,7 +31,7 @@ review = load_review()
 manager_response = load_data_from_manager_customer_feedback()
 
 
-def monitor_review():
+def customer_feedback():
     while True:
         print('\n', '\t'*15, 'CUSTOMER FEEDBACK')
         print('-' * 140)
