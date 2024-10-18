@@ -42,36 +42,19 @@ def validate_discount_input():
             print("⚠️ Invalid input. Please enter a valid number.")
 
 
-# Function to add a discount (or update it if it exists)
-import json
-
 def add_discount():
     product_code = input("Enter product code: ")
 
-    # Load existing discounts from product_discount.txt
+    # Load the file line by line to check if the product_code exists
     with open("product_discount.txt", "r") as f:
-        discounts = json.load(f)  # Load as a JSON object
+        found = False
+        for line in f:
+            if f'"product_code": "{product_code}"' in line:
+                found = True
+                print(f"Product {product_code} already exists. Please use 'Modify Discount' to update the discount.")
+                break
 
-    # Check if the product_code exists in the 'product_code' field of the discounts dictionary
-    found = False
-    for code, details in discounts.items():
-        if details['product_code'] == product_code:
-            found = True
-            # Check if the discount is already greater than 0%
-            if details['Discount'] != "0%":
-                print(f"Product {product_code} already has a discount of {details['Discount']}. Use 'Modify Discount' if you want to update it.")
-            else:
-                discount = validate_discount_input()  # Ask for the discount input
-                discounts[code]['Discount'] = f"{discount}%"  # Add discount for the product
-
-                # Save the updated discounts back to the file
-                with open("product_discount.txt", "w") as f:
-                    json.dump(discounts, f, indent=4)  # Save as JSON with indentation
-
-                print(f"Discount for product {product_code} added with {discount}%.")
-            break
-
-    # If the product does not exist in the txt file, add it as a new product
+    # If the product code does not exist, allow adding a new product with a discount
     if not found:
         print(f"Product code {product_code} does not exist. Adding a new product.")
         product_name = input("Enter product name: ")
@@ -79,22 +62,22 @@ def add_discount():
         stock = input("Enter product stock: ")
         discount = validate_discount_input()  # Get the discount input
 
-        # Add the new product with the discount
-        discounts[len(discounts) + 1] = {
-            'Product Name': product_name,
-            'product_code': product_code,
-            'Stock': int(stock),
-            'Price': f"RM {price}",
-            'Discount': f"{discount}%"
-        }
+        # Format the new product entry
+        new_entry = f'''
+        "{len(open("product_discount.txt").readlines()) + 1}": {{
+            "Product Name": "{product_name}",
+            "product_code": "{product_code}",
+            "Stock": {stock},
+            "Price": "RM {price}",
+            "Discount": "{discount}%"
+        }},
+        '''
 
-        # Save the new product along with the updated discounts back to the file
-        with open("product_discount.txt", "w") as f:
-            json.dump(discounts, f, indent=4)  # Save as JSON with indentation
+        # Append the new entry to the file
+        with open("product_discount.txt", "a") as f:
+            f.write(new_entry)
 
         print(f"New product {product_name} added with a discount of {discount}%.")
-
-
 
 
 # Function to delete a discount (set to 0% or remove product)
