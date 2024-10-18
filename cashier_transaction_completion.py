@@ -130,5 +130,5 @@ def receipt(customer):
                 }
     save_info(transaction_keeping)  # save the data
 
+#receipt(str(346578392))
 
-receipt(str(1944428264))

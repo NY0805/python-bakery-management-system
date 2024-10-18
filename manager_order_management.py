@@ -45,7 +45,7 @@ def order_management():
 
         # display the details of order_list and specify the spaces between each other
         for cart_id, order_details in order_list.items():
-            print(f'{cart_id:<19}{order_details["order_id"]:<19}{order_details["username"]:<20}{order_details["items_ordered"][0]:<24}{order_details["total_price (RM)"]:<26.2f}{order_details["status"]}')
+            print(f'{cart_id:<19}{order_details["order_id"]:<19}{order_details["username"]:<20}{order_details["items_ordered"][0]:<24}{float(order_details["total_price (RM)"]):<26.2f}{order_details["status"]}')
 
             for items in order_details['items_ordered'][1:]:  # for each item in the list of items_ordered
                 print(f'{"":<19}{"":<19}{"":<20}{items:<24}{"":<26}{""}')  # display the items line by line and other details that not relevant will be empty
