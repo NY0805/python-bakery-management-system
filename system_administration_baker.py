@@ -32,13 +32,6 @@ def save_info(baker):
 def baker_accounts():
     baker = load_data_from_baker()  # store the data that retrieved from file into baker
 
-    baker_name = input('Name: ')  # ask for baker's name
-    while baker_name in baker:  # check if baker's name exists in baker
-        print('\n+--------------------------------------------------+')
-        print('|⚠️ Warning: One person can only have one account! |')
-        print('+--------------------------------------------------+')
-        baker_name = input('\nName: ')
-
     baker_username = input('Username: ')  # ask for baker's username
     while baker_username in (baker[baker_name]['baker_username'] for baker_name in baker):  # continue looping if there is a duplication of username
         print('\n+----------------------------------------------------------+')
@@ -95,7 +88,7 @@ def baker_accounts():
                     break
 
             # update the dictionary with user input
-            baker[baker_name] = {
+            baker[baker_username] = {
                 'baker_username': baker_username,
                 'baker_password': baker_password,
                 'age': age,
@@ -192,20 +185,6 @@ def system_administration_baker():
                             if remove_more == 'n':
                                 print('\nStop removing. Exiting to Services page......')
                                 break
-
-                            '''if remove_more not in ['y', 'n']:
-                                print('\n+--------------------------------------+')
-                                print('|⚠️ Invalid input. Please enter again. |')
-                                print('+--------------------------------------+\n')
-
-                            else:
-                                if remove_more == 'y':
-                                    break
-
-                                else:
-                                    print('\nStop removing. Exiting to Services page......')
-                                    break
-                        #break'''
 
                         else:
                             print('\n+--------------------------------------+')

@@ -38,8 +38,8 @@ customer_info = load_data_from_customer()
 
 def sign_up():
 
-    customer_name = input('\nName: ')
-    if customer_name in customer_info:
+    customer_username = input("Username: ")
+    if customer_username in customer_info:
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
         print('+--------------------------------------------------+')
@@ -48,13 +48,6 @@ def sign_up():
         login()
 
     else:
-        customer_username = input("Username: ")
-        while customer_username in (customer_info[customer_name]['customer_username'] for customer_name in customer_info):
-            print('\n+----------------------------------------------------------+')
-            print('|⚠️ Username has been used. Please enter another username. |')
-            print('+----------------------------------------------------------+\n')
-            customer_username = input('Username: ')
-
         customer_password = input("Password: ")
         while len(customer_password) < 8 or len(customer_password) > 12:
             print('\n+---------------------------------------------------------------------------+')
@@ -109,7 +102,7 @@ def sign_up():
 
         address = input('Address: ')
 
-        customer_info[customer_name] = {
+        customer_info[customer_username] = {
             'customer_username': customer_username,
             'customer_password': customer_password,
             'age': age,
@@ -121,7 +114,7 @@ def sign_up():
 
         save_info(customer_info)
         print('\nInformation saved.')
-        print(f'Welcome, {customer_name}! Your account has been created successfully!\n')
+        print(f'Welcome, {customer_username}! Your account has been created successfully!\n')
 
 
 def login():

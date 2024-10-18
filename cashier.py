@@ -38,14 +38,12 @@ def cashier_accounts():
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'CASHIER')
     print('----------------------------------------------------')
-    cashier_name = input('Name: ')  # ask for cashier's name
-    if cashier_name in cashier_info:  # check if cashier's name in the cashier_info
-        cashier_username = input('Username: ')  # ask for username
-        while cashier_username != (cashier_info[cashier_name]['cashier_username']):  # continue looping if username not match with the name
-            print('\n+-------------------------------------------+')
-            print('|⚠️ Incorrect username. Please enter again. |')
-            print('+-------------------------------------------+\n')
-            cashier_username = input('Username: ')
+    cashier_username = input('Username: ')  # ask for username
+    while cashier_username not in cashier_info:  # continue looping if username not match with the name
+        print('\n+-------------------------------------------+')
+        print('|⚠️ Incorrect username. Please enter again. |')
+        print('+-------------------------------------------+\n')
+        cashier_username = input('Username: ')
 
         cashier_password = input('Password: ')  # ask for cashier's password
         while len(cashier_password) < 8 or len(cashier_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
@@ -61,7 +59,7 @@ def cashier_accounts():
             cashier_password = input('Password: ')
 
         print('\nLogin successfully!')  # login successfully if the password meet the 2 requirements above
-        print('Welcome, cashier', cashier_name, '!')
+        print('Welcome, cashier', cashier_username, '!')
         #  display cashier privilege
         while True:
             print('\n-----------------------------------------------')

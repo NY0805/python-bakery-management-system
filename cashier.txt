@@ -1,5 +1,5 @@
 {
-    "meimei": {
+    "cashier1": {
         "cashier_username": "cashier1",
         "cashier_password": "securec@sh$",
         "age": "56",

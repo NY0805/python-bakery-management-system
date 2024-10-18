@@ -1,5 +1,5 @@
 {
-    "dora": {
+    "customer3": {
         "customer_username": "customer3",
         "customer_password": "12345678",
         "age": 34,
@@ -9,7 +9,7 @@
         "address": "gg",
         "account_status": "inactive"
     },
-    "shinchan": {
+    "customer4": {
         "customer_username": "customer4",
         "customer_password": "87654321",
         "age": 46,
@@ -19,7 +19,7 @@
         "address": "gg",
         "account_status": "inactive"
     },
-    "spongebob": {
+    "customer5": {
         "customer_username": "customer5",
         "customer_password": "12345678",
         "age": 12,
@@ -29,7 +29,7 @@
         "address": "ttt",
         "account_status": "inactive"
     },
-    "penguin": {
+    "customer1": {
         "customer_username": "customer1",
         "customer_password": "qwertyui",
         "age": 21,

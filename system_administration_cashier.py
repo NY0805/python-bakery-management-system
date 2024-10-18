@@ -33,13 +33,6 @@ def save_info(cashier):
 def cashier_accounts():
     cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
 
-    cashier_name = input('Name: ')  # ask for cashier's name
-    while cashier_name in cashier:  # check if cashier's name exists in cashier
-        print('\n+--------------------------------------------------+')
-        print('|⚠️ Warning: One person can only have one account! |')
-        print('+--------------------------------------------------+')
-        cashier_name = input('\nName: ')
-
     cashier_username = input('Username: ')  # ask for cashier's username
     while cashier_username in (cashier[cashier_name]['cashier_username'] for cashier_name in cashier):  # continue looping if there is a duplication of username
         print('\n+----------------------------------------------------------+')
@@ -96,7 +89,7 @@ def cashier_accounts():
                     break
 
             # update the dictionary with user input
-            cashier[cashier_name] = {
+            cashier[cashier_username] = {
                 'cashier_username': cashier_username,
                 'cashier_password': cashier_password,
                 'age': age,
