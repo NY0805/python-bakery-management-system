@@ -28,8 +28,6 @@ def save_discounts(discounts):
 # Load the initial product data from the file
 discounts = discount_management()
 
-
-# Helper function to validate discount input
 def validate_discount_input():
     while True:
         try:
