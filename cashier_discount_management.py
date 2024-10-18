@@ -4,19 +4,17 @@ import json
 # Function to load product data and discounts from the file
 def discount_management():
     try:
-        file = open('product_discount.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
-        else:
-            return {}  # return empty dictionary if the file is empty
+        with open('product_discount.txt', 'r') as file:
+            content = file.read().strip()  # Strip unnecessary whitespaces
+            if content:  # Check if the file is not empty
+                try:
+                    return json.loads(content)  # Parse the content as JSON format into a Python dictionary
+                except json.JSONDecodeError:
+                    return {}  # Return an empty dictionary if parsing fails
+            else:
+                return {}  # Return an empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+        return {}  # Return an empty dictionary if the file does not exist
 
 
 # Function to save product data and discounts to the file
@@ -27,6 +25,7 @@ def save_discounts(discounts):
 
 # Load the initial product data from the file
 discounts = discount_management()
+
 
 def validate_discount_input():
     while True:
@@ -41,19 +40,8 @@ def validate_discount_input():
 
 
 def add_discount():
-    # Attempt to read existing product data
-    try:
-        with open('product_discount.txt', 'r') as file:  # Open the file and read
-            content = file.read().strip()  # Strip unnecessary whitespaces
-            if content:  # Check if the file is not empty
-                try:
-                    products = json.loads(content)  # Parse the content as JSON
-                except json.JSONDecodeError:
-                    products = {}  # Return empty dictionary if parsing fails
-            else:
-                products = {}  # Return empty dictionary if the file is empty
-    except FileNotFoundError:
-        products = {}  # Return empty dictionary if the file does not exist
+    # Load existing products
+    products = discount_management()
 
     product_code = input("Enter product code: ")
 
@@ -87,22 +75,7 @@ def add_discount():
             print("Invalid input. Please enter a numeric value for price.")
 
     # Validate discount input
-    while True:
-        discount_input = input("Enter discount percentage: ")
-        try:
-            discount = float(discount_input)
-            if discount >= 0:  # Ensure discount is non-negative
-                break  # Break the loop if valid input
-            else:
-                print("Please enter a valid positive number for discount.")
-        except ValueError:
-            print("Invalid input. Please enter a numeric value for discount.")
-
-    try:
-        with open("product_discount.txt", "r") as f:
-            products = json.load(f)
-    except FileNotFoundError:
-        products = {}  # If the file doesn't exist, start with an empty dictionary
+    discount = validate_discount_input()  # Get a valid discount percentage
 
     # Create a new product entry
     new_entry_number = str(len(products) + 1)  # Increment the count for the new entry
@@ -119,69 +92,63 @@ def add_discount():
     products[new_entry_number] = new_entry
 
     # Write back to the file, retaining existing products
-    with open("product_discount.txt", "w") as f:
-        json.dump(products, f, indent=4)
+    save_discounts(products)
 
-    print(f"New product {product_name} added with a discount of {discount}%.")
+    print(f"New product {product_name} added with a discount of {discount} %.")
 
 
 # Function to delete a discount (set to 0% or remove product)
 def delete_discount():
     product_code = input("Enter product code: ")
-    if product_code in discounts:
-        del discounts[product_code]  # Remove the product from the discounts
-        save_discounts(discounts)  # Save the updated discounts to the file
-        print(f"Product {product_code} and its discount have been deleted.")
-    else:
+    found = False
+
+    for details in discounts.values():
+        if details['product_code'] == product_code:
+            found = True
+            if details['Discount'] != "0%":
+                details['Discount'] = "0%"  # Set the discount to 0%
+                save_discounts(discounts)
+                print(f"Product {product_code}'s discount has been deleted and set to 0%.")
+            else:
+                print(f"|⚠️The discount for product {product_code} is already 0%, no changes made.|")
+            break
+
+    if not found:
         print(f"|⚠️No discount found for product {product_code}.|")
 
 
 # Function to modify an existing discount
 def modify_discount():
     product_code = input("Enter product code: ")
-    if product_code in discounts:
-        new_discount = validate_discount_input()  # Use the validated input
-        discounts[product_code]['Discount'] = f"{new_discount}%"  # Update the discount field
-        save_discounts(discounts)  # Save the updated discounts to the file
-        print(f"Discount for product {product_code} updated to {new_discount}%.")
-    else:
+    found = False
+
+    for details in discounts.values():
+        if details['product_code'] == product_code:
+            found = True
+            new_discount = validate_discount_input()  # Use the validated input
+            details['Discount'] = f"{new_discount}%"  # Update the discount field
+            save_discounts(discounts)  # Save the updated discounts to the file
+            print(f"Discount for product {product_code} updated to {new_discount}%.")
+            break
+
+    if not found:
         print(f"|⚠️No discount found for product {product_code}. Use 'Add Discount' to create a new discount.|")
 
 
-# Display all products with discounts
-# Display all products with discounts
 def display_discounts():
-    if discounts:
-        print('\n' + '•' * 60 + ' Current Discounts and Product Details ' + '•' * 60 + '\n')
+    print('\n -- Current Discounts and Product Details -- ')
+    print('─' * 47)
+    for product_number, product_info in discounts.items():
+        product_name = product_info.get('Product Name', '').ljust(20)
+        product_code_display = product_info.get('product_code', '').ljust(15)
+        stock = str(product_info.get('Stock', 0)).ljust(10)
+        price = product_info.get('Price', '').ljust(15)
+        discount = product_info.get('Discount', '0%').ljust(15)
+        print(f"{product_name}{product_code_display}{stock}{price}{discount}")
 
-        # Print header with proper column widths for alignment
-        print(f"{'Product Code'.ljust(15)}{'Product Name'.ljust(25)}{'Price'.ljust(15)}{'Discount'.ljust(15)}{'Stock'.ljust(10)}")
-        print('-' * 80)
-
-        has_discount = False  # Track if any products with discounts exist
-
-        for product_code, product_info in discounts.items():
-            # Extract product details
-            product_name = product_info.get('Product Name', '').ljust(25)
-            price = product_info.get('Price', '').ljust(15)
-            discount = product_info.get('Discount', '')
-            stock = str(product_info.get('Stock', '')).ljust(10)
-
-            # Only display products with a discount greater than 0%
-            discount_value = float(discount[:-1]) if discount else 0  # Extract the numeric value from the string
-            if discount_value > 0:  # Check if the discount is greater than 0%
-                print(f"{product_code.ljust(15)}{product_name}{price}{discount.ljust(15)}{stock}")
-                has_discount = True  # Set flag to True if we display at least one discount
-
-        print('-' * 80 + '\n')
-
-        if not has_discount:  # If no products with discounts were displayed
-            print("|⚠️ No products with discounts available! |")
-    else:
-        print("|⚠️ No discounts available! |")
+    print('-' * 80)
 
 
-# Main menu for managing discounts
 def manage_discounts():
     while True:
         print('\n-----------------------------------------------')
