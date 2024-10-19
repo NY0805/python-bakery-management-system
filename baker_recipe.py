@@ -1,6 +1,5 @@
 import json
 import re
-from collections import defaultdict
 
 
 # Define the function that loads data from the file
