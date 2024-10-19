@@ -62,12 +62,12 @@ def order_management():
             if order_details['order_id'] == order_id_to_update:
 
                 while True:
-                    update_status = input('\nPlease update the status [preparing, payment completed, canceled (or enter "back" to return back)]:\n>>> ')
+                    update_status = input('\nPlease update the status [payment completed, canceled (or enter "back" to return back)]:\n>>> ')
 
                     if update_status == 'back':  # return to the previous page
                         break
 
-                    if update_status not in ['preparing', 'payment completed', 'canceled']:
+                    if update_status not in ['payment completed', 'canceled']:
                         print('\n+-------------------------------------------------------+')
                         print('|⚠️ Invalid input. Please enter again. (Case sensitive) |')
                         print('+-------------------------------------------------------+')

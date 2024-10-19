@@ -35,7 +35,7 @@ def format_product_data(product, details):
                 description_info = '-'
                 price = '-'
     return (
-        f"{product['product_code']} - {product['product_name'].title():<45} {price}\n"
+        f"{product['product_code']} - {product['product_name'].title():<45}{price}\n"
         f"{'Best Before':<12}: {product['expiry_date']}\n"
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
         f"🥑 {description_info}"
@@ -121,4 +121,4 @@ def format_product_data_new(product):
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
     )
 
-
+menu()

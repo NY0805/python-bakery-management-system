@@ -109,7 +109,8 @@ def sign_up():
             'gender': gender,
             'contact_no': contact_no,
             'email': email,
-            "address": address
+            'address': address,
+            'account_status': 'active'
         }
 
         save_info(customer_info)
@@ -118,31 +119,23 @@ def sign_up():
 
 
 def login():
-    customer_name = input('\nName: ')
-    if customer_name in customer_info:
-        customer_username = input("Username: ")
-        while customer_username != customer_info[customer_name]['customer_username']:
-            print('\n+-------------------------------------------+')
-            print('|⚠️ Incorrect username. Please enter again. |')
-            print('+-------------------------------------------+\n')
-            customer_username = input("Username: ")
-
-        customer_password = input("Password: ")
-        while customer_password != customer_info[customer_name]['customer_password']:
-            print('\n+-------------------------------------------+')
-            print('|⚠️ Incorrect password. Please enter again. |')
-            print('+-------------------------------------------+\n')
-            customer_password = input("Password: ")
-
-        print(f'\nWelcome back, {customer_name}!\n')
-        return customer_username  # Return the username after successful login
-    else:
+    customer_username = input("Username: ")
+    while customer_username not in customer_info:
         print('\n+------------------------------------------------------------+')
         print('|⚠️ This is your FIRST TIME login, please create an account. |')
         print('+------------------------------------------------------------+')
         print('Directing to sign up page......\n')
         sign_up()
-        return None  # Return None if sign-up is initiated
+
+    customer_password = input("Password: ")
+    while customer_password != customer_info[customer_username]['customer_password']:
+        print('\n+-------------------------------------------+')
+        print('|⚠️ Incorrect password. Please enter again. |')
+        print('+-------------------------------------------+\n')
+        customer_password = input("Password: ")
+
+    print(f'\nWelcome back, {customer_username}!\n')
+    return customer_username  # Return the username after successful login
 
 
 def customer():
@@ -183,7 +176,7 @@ def update_personal_information():
         print("No customer data available.")
         return
 
-    customer_username = input("Enter your name: ")
+    customer_username = input("Enter your username: ")
 
     # Check if the username exists in customer_info
     if customer_username in customer_info:
@@ -309,6 +302,7 @@ def account_management():
             print(f"Contact No: {customer['contact_no']}")
             print(f"Email: {customer['email']}")
             print(f"Address: {customer['address']}")
+            print(f"Account status: {customer['account_status']}")
             print("+---------------------------+\n")
 
         elif choice == "2":
@@ -324,7 +318,6 @@ def account_management():
             print("Invalid choice.")
     else:
         print(f"Account with the name '{customer_name}' not found.")
-
 
 
 # Function to load customer data
