@@ -24,41 +24,54 @@ def generate_order_id(order_data):
 # Function to load baker data from a JSON file
 def load_baker_data():
     try:
-        with open('baker_product_keeping.txt', 'r') as file:
-            baker_data = json.load(file)
-            return baker_data
+        file = open('baker_product_keeping.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        print("Error: baker_product_keeping.txt file not found.")
-        return {}
-    except json.JSONDecodeError:
-        print("Error: baker_product_keeping.txt file is not a valid JSON.")
-        return {}
-
+        return {}  # return empty dictionary if the file does not exist
 
 # Function to load manager data from a JSON file
 def load_manager_data():
     try:
-        with open('manager_product_inventory.txt', 'r') as file:
-            return json.load(file)
+        file = open('manager_product_inventory.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        print("Error: manager_product_inventory.txt file not found.")
-        return {}
-    except json.JSONDecodeError:
-        print("Error: manager_product_inventory.txt file is not a valid JSON.")
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 # Function to load discount data from a JSON file
 def load_discount_data():
     try:
-        with open('product_discount.txt', 'r') as file:
-            return json.load(file)
+        file = open('product_discount.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        print("Error: product_discount.txt file not found.")
-        return {}
-    except json.JSONDecodeError:
-        print("Error: product_discount.txt file is not a valid JSON.")
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 # Function to enable customers to add items to the cart (with discount check)

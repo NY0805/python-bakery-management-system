@@ -357,7 +357,7 @@ def save_customer_data():
 
 
 def customer_menu():
-    logged_in_username = None  # Initialize as None, meaning no user is logged in yet
+    logged_in_username = None  # Initialize as None, means that no user is logged in yet
 
     while True:
         print('\n-----------------------------------------------')
