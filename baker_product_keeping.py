@@ -420,24 +420,24 @@ def update_product():
                 break
 
             elif 1 <= index_of_product_to_edit <= len(product_data):
-                for batch_number, product in product_data.items():
-                    product_name = [product['product_name']]  # create a list to store all the product name
-                    selected_product = product_name[index_of_product_to_edit - 1]  # indicate which product is selected
-                    selected_product_index = list(product_data.keys())[
-                        index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
 
-                    while True:
+                while True:
+                    for batch_number, product in product_data.items():
+                        selected_product_key = list(product_data.keys())[index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
+
                         print('')
-                        printed_centered(f'{selected_product.upper()}\'S DATA')
+                        printed_centered(f'{product_data[selected_product_key]["product_name"].upper()}\'S DATA')
 
-                        for product_data_key, product_data_value in product.items():
-                            print(
-                                f'{product_data_key}: {product_data_value}')  # list down the attributes of the selected product
+                        for key, value in product_data[selected_product_key].items():
+                            print(f'{key}: {value}')  # list down the attributes of the selected product
 
-                        print(
-                            '\nTo change the information, please enter the exact matching name. Example: product_name.')
-                        attribute_of_product_data = input(
-                            'Which information do you want to update? (or enter \"cancel\")\n>>> ')
+                        print('\nTo change the information, please enter the exact matching name. Example: product_name.')
+                        attribute_of_product_data = input('Which information do you want to update? (or enter \"cancel\")\n>>> ')
+                        if attribute_of_product_data == 'cancel':
+                            print('\nCancelling. Exiting to the Product List......')
+                            update_product()
+                            break
+
                         if attribute_of_product_data in product:
                             while True:
                                 new_value = input(f'\nEnter new {attribute_of_product_data}: ')
@@ -528,19 +528,19 @@ def update_product():
 
                                         if match:
                                             number = int(match.group(1))
-                                            if product_data[selected_product]['category'] in ['Breads', 'Muffins']:
+                                            if product_data[selected_product_key]['category'] in ['Breads', 'Muffins']:
                                                 if number <= 5:
                                                     break
                                                 else:
                                                     print(
                                                         'Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
-                                            elif product_data[selected_product]['category'] in ['Cakes', 'Pastries']:
+                                            elif product_data[selected_product_key]['category'] in ['Cakes', 'Pastries']:
                                                 if number <= 7:
                                                     break
                                                 else:
                                                     print(
                                                         'Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
-                                            elif product_data[selected_product]['category'] in ['Biscuits', 'Others']:
+                                            elif product_data[selected_product_key]['category'] in ['Biscuits', 'Others']:
                                                 if number <= 14:
                                                     break
                                                 else:
@@ -568,16 +568,16 @@ def update_product():
                                     expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
                                     # convert date_of _production from string to datetime format
                                     date_of_production_new = datetime.strptime(
-                                        product_data[selected_product]['date_of_production'], '%d-%m-%Y')
+                                        product_data[selected_product_key]['date_of_production'], '%d-%m-%Y')
 
                                     max_expiry = date_of_production_new + timedelta(
-                                        days=product_data[selected_product]['shelf_life'] + 1)
+                                        days=product_data[selected_product_key]['shelf_life'] + 1)
 
                                     if not max_expiry >= expiry_date >= date_of_production_new:
                                         print(
                                             '\n+------------------------------------------------------------------------------------------------------------------------------------+')
                                         print(
-                                            f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
+                                            f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product_key]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
                                         print(
                                             '+------------------------------------------------------------------------------------------------------------------------------------+')
                                         continue
@@ -601,17 +601,13 @@ def update_product():
                                         continue
 
                                 print(
-                                    f'\n{attribute_of_product_data} of {selected_product} is updated.')  # inform user about the data is updated
-                                product_data[selected_product_index].update({attribute_of_product_data: new_value})  # assign the new value entered to the attributes
+                                    f'\n{attribute_of_product_data} of {selected_product_key} is updated.')  # inform user about the data is updated
+                                product_data[selected_product_key].update({attribute_of_product_data: new_value})  # assign the new value entered to the attributes
                                 save_info(product_data)  # save the data
                                 break
-
-                        elif attribute_of_product_data == 'cancel':
-                            print('\nCancelling. Exiting to the Product List......')
-                            break
-
                         else:
                             print('\n❗Data not found.')  # error displayed if attribute entered not found
+
             else:
                 print('\n❗Product not found.')  # error displayed if selected product not found
 
@@ -621,5 +617,5 @@ def update_product():
             print('+-----------------------------------------+')
 
 
-
+update_product()
 #product_management()
