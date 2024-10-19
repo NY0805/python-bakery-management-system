@@ -41,6 +41,7 @@ def format_product_data(product, details):
         f"🥑 {description_info}"
     )
 
+menu()
 
 # Wrap the formatted data if it exceeds the space of 60 characters
 def wrap_data(formatted_product_data, width=65):

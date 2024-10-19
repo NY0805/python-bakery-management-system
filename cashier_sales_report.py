@@ -52,113 +52,160 @@ def validation_empty_entries(info):
         return False
 
 
-sales_list = load_data_from_customer_order_list()
+customer_order_list = load_data_from_customer_order_list()
 sales_report_file = load_data_from_sales_report()
 
 
 def generate_sales_report():
-    print('\nWelcome to sales report page.')
-    print('1. yearly report')
-    print('2. monthly report')
-    report_service = input('choose: ')
-    if report_service == '1':
-        yearly_sales_performance()
-    elif report_service == '2':
-        monthly_sales_performance()
+    print('Welcome to sales performance page.')
+    print('1. Yearly report')
+    print('2. Monthly report')
+    print('3. Product popularity')
+    print('4. Back to previous page')
+    while True:
+        report_service = input('\nPlease input the index number of the service you choose: ')
+        if validation_empty_entries(report_service):
+            if report_service == '1':
+                yearly_sales_performance()
+                break
+            elif report_service == '2':
+                monthly_sales_performance()
+                break
+            elif report_service == '3':
+                pass
+                break
+            elif report_service == '4':
+                pass
+            else:
+                print('Please enter a valid index number.')
+
+
+def allowable_year():
+    allowable_years = set()
+    for key, items in customer_order_list.items():
+        order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
+        allowable_years.add(order_date.year)
+
+    allowable_years_unpack = ', '.join(str(year) for year in list(allowable_years))
+
+    return allowable_years_unpack
+
+
+def allowable_month(report_year):
+    allowable_months = set()
+    for key, items in customer_order_list.items():
+        order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
+        if order_date.year == int(report_year):
+            allowable_months.add(order_date.month)
+
+    allowable_month_unpack = ', '.join(str(month) for month in list(allowable_months))
+
+    return allowable_month_unpack
 
 
 def yearly_sales_performance():
     while True:
         while True:
-            report_num = random.randint(1000,9999)
-            if report_num not in sales_list.keys():
+            report_num = random.randint(1000, 9999)
+            if report_num not in sales_report_file.keys():
                 break
 
-        allowable_years = set()
-        for key, items in sales_list.items():
-            order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
-            allowable_years.add(order_date.year)
+        allowable_years = allowable_year()
 
-        allowable_years_unpack = ', '.join(str(year) for year in list(allowable_years))
-
-        print(f'\nAllowable year: {allowable_years_unpack}')
+        print(f'\nAllowable year: {allowable_years}')
 
         report_year = input('Please enter the year you want to generate report: ')
         if validation_empty_entries(report_year):
-            if report_year in allowable_years_unpack:
+            if report_year in allowable_years:
                 total_sales = 0
                 total_orders = 0
-                for key, item in sales_list.items():
+                for key, item in customer_order_list.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
                     if order_year == int(report_year):
                         if item['status'] == 'Payment Completed':
-                            total_sales += item['total_price (RM)']
+                            total_sales += float(item['total_price (RM)'])
                             total_orders += 1
-                print(f'total sales: {total_sales}')
-                print(f'total orders: {total_orders}')
+                print('\n----------------------------------------------------------')
+                print(f"\t\t\t{report_year}'S YEARLY PERFORMANCE SUMMARY")
+                print('----------------------------------------------------------')
+                print(f'Total sales: {total_sales}')
+                print(f'Total orders: {total_orders}')
                 break
             else:
-                print('please enter based on given year')
+                print('Please enter based on given year.')
 
     while True:
-        save_report = input('Save this report to system? (y=yes, n=no): ')
-        if save_report == 'y':
-            sales_report_file[report_num] = {
-                'report_type': 'yearly sales report',
-                'selected_year': report_year,
-                'total_sales': total_sales,
-                'total_order': total_orders
-            }
-            save_info(sales_report_file)
-            break
-        elif save_report == 'n':
-            print('\nexit to previous page.')
-            generate_sales_report()
-            break
-        else:
-            print('please enter y or n.')
+        save_report = input('\nSave this report to system? (y=yes, n=no): ').lower().strip()
+        if validation_empty_entries(save_report):
+            if save_report == 'y':
+                report_exist = False
+                for key, value in sales_report_file.items():
+                    if value['report_type'] == 'yearly sales report' and report_year == value['selected_year']:
+                        print('The report cannot be saved because the same report has been saved previously.')
+                        report_exist = True
 
+                if not report_exist:
+                    sales_report_file[report_num] = {
+                        'report_type': 'yearly sales report',
+                        'selected_year': report_year,
+                        'total_sales': total_sales,
+                        'total_order': total_orders
+                    }
+                    save_info(sales_report_file)
+                    print('Successfully saved!')
+                    break
+                break
+            elif save_report == 'n':
+                print('Exit to previous page.')
+                break
+            else:
+                print("Please enter 'y' or 'n'.")
+
+    while True:
+        generate_more = input('\nContinue generating yearly sales report? (y=yes, n=no)\n'
+                              '>>> ').lower().strip()
+        if validation_empty_entries(generate_more):
+            if generate_more == 'y':
+                yearly_sales_performance()
+                break
+            elif generate_more == 'n':
+                print('\nExit the yearly performance report page......')
+                generate_sales_report()
+                break
+            else:
+                print("Please enter 'y' or 'n'.\n")
 
 
 def monthly_sales_performance():
     while True:
         while True:
             report_num = random.randint(1000, 9999)
-            if report_num not in sales_list.keys():
+            if report_num not in sales_report_file.keys():
                 break
-        allowable_years = set()
-        for key, items in sales_list.items():
-            order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
-            allowable_years.add(order_date.year)
 
-        allowable_years_unpack = ', '.join(str(year) for year in list(allowable_years))
+        allowable_years = allowable_year()
 
-        print(f'\nAllowable year: {allowable_years_unpack}')
+        print(f'\nAllowable year: {allowable_years}')
 
         report_year = input('Please enter the year you want to generate report: ')
         if validation_empty_entries(report_year):
-            if int(report_year) in allowable_years:
+            if report_year in allowable_years:
                 break
             else:
                 print('please enter a valid year based on given year.')
 
     while True:
-        allowable_month = set()
-        for key, items in sales_list.items():
-            order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
-            allowable_month.add(order_date.month)
+        allowable_months = allowable_month(report_year)
 
-        allowable_month_unpack = ', '.join(str(month) for month in list(allowable_month))
-
-        print(f'\nAllowable month: {allowable_month_unpack}')
+        print(f'\nAllowable month: {allowable_months}')
 
         report_month = input('Please enter the month you want to generate report: ')
         if validation_empty_entries(report_month):
-            if int(report_month) in allowable_month:
+            if report_month in allowable_months:
                 total_sales = 0
                 total_orders = 0
-                for key, item in sales_list.items():
+                for key, item in customer_order_list.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
                     order_month = order_date.month
@@ -166,32 +213,250 @@ def monthly_sales_performance():
                     if order_year == int(report_year):
                         if order_month == int(report_month):
                             if item['status'] == 'Payment Completed':
-                                total_sales += item['total_price (RM)']
+                                total_sales += float(item['total_price (RM)'])
                                 total_orders += 1
+                print('\n----------------------------------------------------------')
+                print(f"\t\t\t{report_month}/{report_year} SALES PERFORMANCE SUMMARY")
+                print('----------------------------------------------------------')
                 print(f'total sales: {total_sales}')
                 print(f'total orders: {total_orders}')
                 break
             else:
-                print('please enter based on given month')
+                print('Please enter based on given month.')
 
     while True:
-        save_report = input('Save this report to system? (y=yes, n=no): ')
-        if save_report == 'y':
-            sales_report_file[report_num] = {
-                'report_type': 'monthly sales report',
-                'selected_year': report_year,
-                'selected_month': report_month,
-                'total_sales': total_sales,
-                'total_order': total_orders
-            }
-            save_info(sales_report_file)
-            break
-        elif save_report == 'n':
-            print('\nexit to previous page.')
-            generate_sales_report()
-            break
-        else:
-            print('please enter y or n.')
+        save_report = input('\nSave this report to system? (y=yes, n=no): ').lower().strip()
+        if validation_empty_entries(save_report):
+            if save_report == 'y':
+                report_exist = False
+                for key, value in sales_report_file.items():
+                    if value['report_type'] == 'monthly sales report' and report_year == value[
+                        'selected_year'] and report_month == value['selected_month']:
+                        print('The report cannot be saved because the same report has been saved previously.')
+                        report_exist = True
 
+                if not report_exist:
+                    sales_report_file[report_num] = {
+                        'report_type': 'monthly sales report',
+                        'selected_year': report_year,
+                        'selected_month': report_month,
+                        'total_sales': total_sales,
+                        'total_order': total_orders
+                    }
+                    save_info(sales_report_file)
+                    print('Successfully saved!')
+                    break
+                break
+            elif save_report == 'n':
+                print('Exit to previous page.')
+                break
+            else:
+                print("Please enter 'y' or 'n'.")
+
+    while True:
+        generate_more = input('\nContinue generating monthly sales report? (y=yes, n=no)\n'
+                              '>>> ').lower().strip()
+        if validation_empty_entries(generate_more):
+            if generate_more == 'y':
+                monthly_sales_performance()
+                break
+            elif generate_more == 'n':
+                print('\nExit the yearly performance report page......')
+                generate_sales_report()
+                break
+            else:
+                print("Please enter 'y' or 'n'.\n")
+
+
+def product_popularity():
+    while True:
+        while True:
+            report_num = random.randint(1000, 9999)
+            if report_num not in sales_report_file.keys():
+                break
+
+        while True:
+            print('Welcome to product popularity page!')
+            print('1. Yearly report')
+            print('2. Monthly report')
+            print('3. Overall product popularity summary')
+            print('4. Back to previous page')
+            report_service = input('\nPlease input the index number of the service you choose: ')
+            if validation_empty_entries(report_service):
+                if report_service == '1':
+                    allowable_years = allowable_year()
+
+                    print(f'\nAllowable year: {allowable_years}')
+
+                    report_year = input('Please enter the year you want to generate report: ')
+                    if validation_empty_entries(report_year):
+                        if report_year in allowable_years:
+                            product_ordered = {}
+                            for key, item in customer_order_list.items():
+                                order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
+                                order_year = order_date.year
+                                if order_year == int(report_year):
+                                    if item['status'] == 'Payment Completed':
+                                        for product in item['items_ordered']:
+                                            total_product = product.split(' x ')
+                                            if total_product[0] in product_ordered:
+                                                product_ordered[total_product[0]] += int(total_product[1])
+                                            else:
+                                                product_ordered[total_product[0]] = int(total_product[1])
+                                        print(product_ordered)
+
+                            best_seller = None
+                            least_seller = None
+                            max_quantity = -1
+                            min_quantity = float('inf')
+
+                            if product_ordered:
+                                for name, quantity in product_ordered.items():
+                                    if quantity > max_quantity:
+                                        max_quantity = quantity
+                                        best_seller = name
+
+                                    if quantity < min_quantity:
+                                        min_quantity = quantity
+                                        least_seller = name
+
+                            else:
+                                best_seller = 'No products sold'
+                                max_quantity = 0
+                                least_seller = 'No products sold'
+                                min_quantity = 0
+
+                            print('\n----------------------------------------------------------')
+                            print(f"\t\t\t{report_year}'S PRODUCT POPULARITY SUMMARY")
+                            print('----------------------------------------------------------')
+                            print(f'\nTop-selling product: {best_seller}, Total quantity sold: {max_quantity}')
+                            print(f'Least-selling product: {least_seller}, Total quantity sold: {min_quantity}\n')
+                            break
+                        else:
+                            print('Please enter a valid year based on given year.')
+                            break
+
+                elif report_service == '2':
+                    while True:
+                        allowable_years = allowable_year()
+
+                        print(f'\nAllowable year: {allowable_years}')
+
+                        report_year = input('Please enter the year you want to generate report: ')
+                        if validation_empty_entries(report_year):
+                            if report_year in allowable_years:
+                                break
+                            else:
+                                print('Please enter a valid year based on given year.\n')
+
+                    while True:
+                        allowable_months = allowable_month(report_year)
+
+                        print(f'\nAllowable month: {allowable_months}')
+
+                        report_month = input('Please enter the month you want to generate report: ')
+                        if validation_empty_entries(report_month):
+                            if report_month in allowable_months:
+                                product_ordered = {}
+                                for key, item in customer_order_list.items():
+                                    order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
+                                    order_year = order_date.year
+                                    order_month = order_date.month
+                                    if order_year == int(report_year) and order_month == int(report_month):
+                                        if item['status'] == 'Payment Completed':
+                                            for product in item['items_ordered']:
+                                                total_product = product.split(' x ')
+                                                if total_product[0] in product_ordered:
+                                                    product_ordered[total_product[0]] += int(total_product[1])
+                                                else:
+                                                    product_ordered[total_product[0]] = int(total_product[1])
+                                            print(product_ordered)
+
+                                best_seller = None
+                                least_seller = None
+                                max_quantity = -1
+                                min_quantity = float('inf')
+
+                                if product_ordered:
+                                    for name, quantity in product_ordered.items():
+                                        if quantity > max_quantity:
+                                            max_quantity = quantity
+                                            best_seller = name
+
+                                        if quantity < min_quantity:
+                                            min_quantity = quantity
+                                            least_seller = name
+                                else:
+                                    best_seller = 'No products sold'
+                                    max_quantity = 0
+                                    least_seller = 'No products sold'
+                                    min_quantity = 0
+
+                                print('\n----------------------------------------------------------')
+                                print(f"\t\t\t{report_month}/{report_year} PRODUCT POPULARITY SUMMARY")
+                                print('----------------------------------------------------------')
+                                print(f'\n{'Top-selling product':<25}: {best_seller}, Total quantity sold: {max_quantity}')
+                                print(f'{'Least-selling product':<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                                break
+                            else:
+                                print('Please enter based on given month.\n')
+                                break
+                elif report_service == '3':
+                    product_ordered = {}
+                    for key, item in customer_order_list.items():
+                        if item['status'] == 'Payment Completed':
+                            for product in item['items_ordered']:
+                                total_product = product.split(' x ')
+                                if total_product[0] in product_ordered:
+                                    product_ordered[total_product[0]] += int(total_product[1])
+                                else:
+                                    product_ordered[total_product[0]] = int(total_product[1])
+                            print(product_ordered)
+
+                    best_seller = None
+                    least_seller = None
+                    max_quantity = -1
+                    min_quantity = float('inf')
+
+                    if product_ordered:
+                        for name, quantity in product_ordered.items():
+                            if quantity > max_quantity:
+                                max_quantity = quantity
+                                best_seller = name
+
+                            if quantity < min_quantity:
+                                min_quantity = quantity
+                                least_seller = name
+                    else:
+                        best_seller = 'No products sold'
+                        max_quantity = 0
+                        least_seller = 'No products sold'
+                        min_quantity = 0
+
+                    print('\n----------------------------------------------------------')
+                    print(f"\t\t\tOVERALL PRODUCT POPULARITY SUMMARY")
+                    print('----------------------------------------------------------')
+                    print(f'\n{'Top-selling product':<25}: {best_seller}, Total quantity sold: {max_quantity}')
+                    print(f'{'Least-selling product':<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                    break
+                    break
+                elif report_service == '4':
+                    generate_sales_report()
+                    break
+                else:
+                    print('Please enter a valid index number.')
+
+
+'''        product_ordered = {}
+        for key, items in customer_order_list.items():
+            for product in items['items_ordered']:
+                total_product = product.split(' x ')
+                if total_product[0] in product_ordered:
+                    product_ordered[total_product[0]] += int(total_product[1])
+                else:
+                    product_ordered[total_product[0]] = int(total_product[1])
+        print()
+        print(product_ordered)'''
 
 #generate_sales_report()
+product_popularity()

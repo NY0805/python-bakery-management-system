@@ -49,7 +49,7 @@ def validation_empty_entries(info):
         return True
     else:
         print('❗Please enter something...\n')
-        return False
+        return Fal
 
 
 def validation_alphabet_only(info):
