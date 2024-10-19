@@ -1,59 +1,112 @@
 {
-    "customer3": {
-        "customer_username": "customer3",
+    "Mark": {
+        "customer_username": "Mark0825",
         "customer_password": "12345678",
-        "age": 34,
-        "gender": "prefer not to say",
-        "contact_no": "345-4567382",
-        "email": "ff@ff.ff",
-        "address": "gg",
-        "account_status": "inactive"
+        "age": 30,
+        "gender": "male",
+        "contact_no": "012-3456789",
+        "email": "mark0825@gmail.com",
+        "address": "123 Mark Street, Cityville",
+        "account_status": "active",
+        "loyalty_points": 4092
     },
-    "customer4": {
-        "customer_username": "customer4",
-        "customer_password": "87654321",
-        "age": 46,
-        "gender": "prefer not to say",
-        "contact_no": "456-6758432",
-        "email": "ff@ff.ff",
-        "address": "gg",
-        "account_status": "inactive"
-    },
-    "customer5": {
-        "customer_username": "customer5",
-        "customer_password": "12345678",
-        "age": 12,
+    "customer2": {
+        "customer_username": "03jane_",
+        "customer_password": "123234568",
+        "age": 28,
         "gender": "female",
-        "contact_no": "123-4567821",
-        "email": "ff@fff.ff",
-        "address": "ttt",
-        "account_status": "inactive"
+        "contact_no": "018-7654321",
+        "email": "jane03@gmail.com",
+        "address": "456 Jane Avenue, Townsville",
+        "account_status": "active",
+        "loyalty_points": 2355
     },
-    "customer1": {
-        "customer_username": "customer1",
-        "customer_password": "qwertyui",
-        "age": 21,
+    "eddie": {
+        "customer_username": "_eddie",
+        "customer_password": "Eddie12345",
+        "age": 25,
+        "gender": "male",
+        "contact_no": "019-8765432",
+        "email": "_eddie@gmail.com",
+        "address": "789 Eddie Lane, Villageburg",
+        "account_status": "inactive",
+        "loyalty_points": 0
+    },
+    "anna": {
+        "customer_username": "anna328_",
+        "customer_password": "Anna328pass",
+        "age": 22,
         "gender": "female",
-        "contact_no": "345-5678432",
-        "email": "ff@ff.ff",
-        "address": "r"
+        "contact_no": "011-2233445",
+        "email": "anna328@gmail.com",
+        "address": "321 Anna Road, Hamlet City",
+        "account_status": "active",
+        "loyalty_points": 80
     },
-    "lum": {
-        "customer_username": "lum",
-        "customer_password": "00000000",
-        "age": 13,
-        "gender": "prefer not to say",
-        "contact_no": "014-2949302",
-        "email": "gg@gg.com",
-        "address": "12,ifog"
+    "andrew": {
+        "customer_username": "andrew_520",
+        "customer_password": "Andrew520pass",
+        "age": 32,
+        "gender": "male",
+        "contact_no": "017-1122334",
+        "email": "andrew520@gmail.com",
+        "address": "654 Andrew Drive, Metropolis",
+        "account_status": "active",
+        "loyalty_points": 2050
     },
-    "jack09": {
-        "customer_username": "Jack09",
-        "customer_password": "890Jack89",
-        "age": 23,
-        "gender": "prefer not to say",
-        "contact_no": "018-9043468",
-        "email": "jacklee@gmail.com",
-        "address": "2333,sdsdsdjjddndn"
+    "ashley": {
+        "customer_username": "Ashley",
+        "customer_password": "Ashleypass123",
+        "age": 27,
+        "gender": "female",
+        "contact_no": "015-3344556",
+        "email": "ashley@gmail.com",
+        "address": "987 Ashley Boulevard, Suburbia",
+        "account_status": "inactive",
+        "loyalty_points": 0
+    },
+    "leo": {
+        "customer_username": "leo_tiger",
+        "customer_password": "LeoTiger99",
+        "age": 29,
+        "gender": "male",
+        "contact_no": "016-5566778",
+        "email": "leo_tiger@gmail.com",
+        "address": "321 Leo Way, City Center",
+        "account_status": "active",
+        "loyalty_points": 1100
+    },
+    "julia": {
+        "customer_username": "julia_b",
+        "customer_password": "JuliaB2022",
+        "age": 24,
+        "gender": "female",
+        "contact_no": "014-7788990",
+        "email": "julia_b@gmail.com",
+        "address": "456 Julia Street, Urban Town",
+        "account_status": "active",
+        "loyalty_points": 2100
+    },
+    "9sam": {
+        "customer_username": "sam_93",
+        "customer_password": "Sam93Password",
+        "age": 31,
+        "gender": "male",
+        "contact_no": "013-9900112",
+        "email": "sam_93@gmail.com",
+        "address": "789 Sam Avenue, Greenfield",
+        "account_status": "active",
+        "loyalty_points": 650
+    },
+    "violet": {
+        "customer_username": "violet23",
+        "customer_password": "Violet23pass",
+        "age": 26,
+        "gender": "female",
+        "contact_no": "012-2233445",
+        "email": "violet23@gmail.com",
+        "address": "321 Violet Lane, Riverside",
+        "account_status": "active",
+        "loyalty_points": 850
     }
 }

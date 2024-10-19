@@ -110,7 +110,8 @@ def sign_up():
             'contact_no': contact_no,
             'email': email,
             'address': address,
-            'account_status': 'active'
+            'account_status': 'active',
+            'loyalty_points': 0
         }
 
         save_info(customer_info)
@@ -288,6 +289,7 @@ def account_management():
         print("What would you like to do?")
         print("1. View Account Details")
         print("2. Delete Account")
+        print("3. Exit to main menu")
 
         choice = input("Enter your choice: ")
 
@@ -314,6 +316,9 @@ def account_management():
                 print(f"Account '{customer_name}' has been deleted.")
             else:
                 print("Account deletion cancelled.")
+
+        elif choice == "3":
+            return
         else:
             print("Invalid choice.")
     else:
@@ -383,7 +388,10 @@ def customer_menu():
         elif option == "3":
             product_browsing.browse_products()
         elif option == "4":
-            cart_management.shopping_cart()
+            if logged_in_username:
+                cart_management.shopping_cart()
+            else:
+                print("You need to log in first.")
         elif option == "5":
             order_tracking.order_tracking()
         elif option == "6":
@@ -396,7 +404,10 @@ def customer_menu():
         elif option == "8":
             update_personal_information()
         elif option == "9":
-            account_management()
+            if logged_in_username:
+                account_management()
+            else:
+                print("You need to log in first.")
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break
@@ -404,4 +415,4 @@ def customer_menu():
             print("Invalid option, please try again.")
 
 
-#customer_menu()
+customer_menu()

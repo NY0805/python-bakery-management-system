@@ -1,96 +1,82 @@
 {
-    "1": {
+    "ORD001": {
         "username": "Mark0825",
         "total_spending (RM)": 55.0,
-        "loyalty_points": 430,
-        "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120
+        "loyalty_points": 4092,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 120,
+        "voucher_redeem": 10
     },
-    "2": {
+    "ORD002": {
         "username": "03jane_",
         "total_spending (RM)": 150.0,
-        "loyalty_points": 1500,
-        "status": "MORNING GLORY'S SILVER",
-        "redeem_rate (RM)": 90
+        "loyalty_points": 2355,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 90,
+        "voucher_redeem": 0
     },
-    "3": {
+    "ORD003": {
         "username": "_eddie",
         "total_spending (RM)": 25.0,
         "loyalty_points": 250,
         "status": "Standard",
-        "redeem_rate (RM)": null
+        "redeem_rate (RM)": null,
+        "voucher_redeem": 0
     },
-    "4": {
+    "ORD004": {
         "username": "anna328_",
         "total_spending (RM)": 45.0,
         "loyalty_points": 450,
         "status": "Standard",
-        "redeem_rate (RM)": null
+        "redeem_rate (RM)": null,
+        "voucher_redeem": 0
     },
-    "5": {
+    "ORD005": {
         "username": "andrew_520",
         "total_spending (RM)": 205.0,
         "loyalty_points": 2050,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 70
+        "redeem_rate (RM)": 70,
+        "voucher_redeem": 0
     },
-    "6": {
+    "ORD006": {
         "username": "Ashley",
         "total_spending (RM)": 95.0,
         "loyalty_points": 950,
         "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120
+        "redeem_rate (RM)": 120,
+        "voucher_redeem": 0
     },
-    "7": {
+    "ORD007": {
         "username": "leo_tiger",
         "total_spending (RM)": 110.0,
         "loyalty_points": 1100,
         "status": "MORNING GLORY'S SILVER",
-        "redeem_rate (RM)": 90
+        "redeem_rate (RM)": 90,
+        "voucher_redeem": 0
     },
-    "8": {
+    "ORD008": {
         "username": "julia_b",
         "total_spending (RM)": 210.0,
         "loyalty_points": 2100,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 70
+        "redeem_rate (RM)": 70,
+        "voucher_redeem": 0
     },
-    "9": {
+    "ORD009": {
         "username": "sam_93",
         "total_spending (RM)": 65.0,
         "loyalty_points": 650,
         "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120
+        "redeem_rate (RM)": 120,
+        "voucher_redeem": 0
     },
-    "10": {
+    "ORD010": {
         "username": "violet23",
         "total_spending (RM)": 85.0,
         "loyalty_points": 850,
         "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120
-    },
-    "11": {
-        "username": "Jenolee",
-        "total_spending (RM)": 600.0,
-        "loyalty_points": 6000,
-        "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 70
-    },
-    "12": {
-        "username": "fff",
-        "total_spending (RM)": 15.75,
-        "loyalty_points": 157,
-        "status": "Standard",
-        "redeem_rate (RM)": null
-    },
-    "13": {
-        "username": "jack",
-        "total_spending (RM)": 13.5,
-        "loyalty_points": 135,
-        "status": "Standard",
-        "redeem_rate (RM)": null,
-        "order_ids": [
-            "ORD039"
-        ]
+        "redeem_rate (RM)": 120,
+        "voucher_redeem": 0
     }
 }

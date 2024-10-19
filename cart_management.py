@@ -6,9 +6,6 @@ import customer_loyalty_rewards
 from datetime import datetime
 from manager_order_management import load_data_from_customer_order_list
 
-product_data = product_menu.product_data
-
-
 # Function to generate a 10 digit numeric cart_id
 def generate_cart_id():
     return ''.join([str(random.randint(1, 9)) for _ in range(10)])
@@ -264,14 +261,12 @@ def display_cart(cart):
     print(f"\nTotal price: RM {total_price:.2f}")
     return total_price
 
-
-# Main checkout or cancel function
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty! Please add items before proceeding to checkout.")
         return
 
-    total_price = display_cart(cart)
+    total_price = display_cart(cart)  # Displays and calculates total price
     print(f"Current cart ID: {cart_id}")
 
     print("\nWould you like to:")
@@ -279,7 +274,6 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     print("2. Cancel your order")
 
     choice = input("Please select your option (1 or 2): ").strip()
-
     print(f"User choice: {choice}")  # Debugging choice
 
     # Load existing order data
@@ -289,30 +283,75 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     except FileNotFoundError:
         order_data = {}
 
-    order_id = generate_order_id(order_data)
+    order_id = generate_order_id(order_data)  # Generate order ID
 
     if choice == '1':
         print(f"\nTotal price to pay: RM {total_price:.2f}")
         print("\nPayment completed. Thank you for your purchase!")
 
         # Save the updated order to the file
-        save_order_to_file(cart, customer_name, cart_id, order_id, "Payment Completed")
-
+        save_order_to_file(cart, customer_name, cart_id, order_id, "Order Placed")
         # Generate receipt
         print(f"Generating receipt for Cart ID: {cart_id}...")
-        customer_loyalty_rewards.determine_loyalty_points(total_price)
         cashier_transaction_completion.receipt(str(cart_id))
 
+        # Load loyalty rewards data to update points
+        loyalty_data = customer_loyalty_rewards.load_loyalty_rewards()
+
+        # Check if the customer exists in loyalty rewards
+        order_info = next((info for info in loyalty_data.values() if info['username'] == customer_name), None)
+
+        if order_info:  # If order_info is found, proceed with updating points
+            # Calculate points change
+            points_change = customer_loyalty_rewards.determine_loyalty_points(total_price)[0]
+            order_info['loyalty_points'] += points_change  # Add points
+            print(f"{customer_name}'s loyalty points updated to: {order_info['loyalty_points']}")
+
+            # Check if status needs to be updated
+            new_status = customer_loyalty_rewards.update_customer_status(order_info['loyalty_points'])
+            if new_status != order_info['status']:  # Update status if it changes
+                order_info['status'] = new_status  # Update status
+                print(f"{customer_name}'s loyalty status updated to: {new_status}")
+
+            # Update loyalty points in customer_loyalty_rewards.txt
+            customer_loyalty_rewards.save_loyalty_rewards(loyalty_data)
+
+            # Load customer data to update loyalty points
+            try:
+                with open("customer.txt", "r") as file:
+                    customer_data = json.load(file)
+            except FileNotFoundError:
+                customer_data = {}
+
+            # Update the customer's loyalty points in customer.txt
+            customer_found = False  # Flag to check if the customer exists
+            for key, customer_info in customer_data.items():
+                if customer_info['customer_username'] == customer_name:
+                    customer_info['loyalty_points'] += points_change  # Add points
+                    customer_found = True
+                    # Save the updated data
+                    with open("customer.txt", "w") as file:
+                        json.dump(customer_data, file, indent=4)
+                    print(f"{customer_name}'s loyalty points updated in customer.txt to: {customer_info['loyalty_points']}")
+                    break  # Exit loop after finding the customer
+
+            if not customer_found:
+                print(f"Customer {customer_name} does not exist in customer.txt.")
+
+        else:
+            print(f"Cannot update points: {customer_name} does not exist in loyalty rewards.")
 
         # Clear cart after receipt generation
         cart.clear()
 
     elif choice == '2':
-        print("\nYour order has been canceled.")
-        save_order_to_file(cart, customer_name, cart_id, order_id, "Canceled")
+        print("Order canceled. Your cart has been cleared.")
         cart.clear()
     else:
-        print("⚠️ Invalid option! Returning to the main menu.")
+        print("Invalid choice. Please select 1 or 2.")
+
+
+
 
 
 # Main shopping cart function
