@@ -6,5 +6,13 @@
         "gender": "female",
         "contact_no": "123-4563782",
         "email": "ee@ee.ee"
+    },
+    "baker2": {
+        "baker_username": "baker2",
+        "baker_password": "b@k3rm4st3r!",
+        "age": 34,
+        "gender": "female",
+        "contact_no": "123-3456732",
+        "email": "ed@dd.dd"
     }
 }

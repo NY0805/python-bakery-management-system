@@ -362,7 +362,7 @@ def customer_menu():
     while True:
         print('\n-----------------------------------------------')
         print("WELCOME TO MORNING GLORY BAKERY!")
-        print('\n-----------------------------------------------')
+        print('-----------------------------------------------')
         print("1. Sign Up")
         print("2. Login")
         print("3. Browse Products")
@@ -404,4 +404,4 @@ def customer_menu():
             print("Invalid option, please try again.")
 
 
-customer_menu()
+#customer_menu()

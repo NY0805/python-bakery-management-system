@@ -1,213 +1,208 @@
 {
-    "MGB-7933702": {
+    "MGB-6589443": {
         "order_id": "ORD001",
         "items": [
-            "banana bread ",
-            "red velvet "
+            "banana bread x 1",
+            "red velvet x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 15.9
     },
-    "MGB-7288577": {
+    "MGB-8982647": {
         "order_id": "ORD002",
         "items": [
-            "gingerbread ",
-            "red velvet "
+            "gingerbread x 2",
+            "red velvet x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 16.43
     },
-    "MGB-7053192": {
+    "MGB-9076253": {
         "order_id": "ORD003",
         "items": [
-            "banana bread ",
-            "apple pie "
+            "banana bread x 1",
+            "apple pie x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 15.37
     },
-    "MGB-9908155": {
+    "MGB-6447259": {
         "order_id": "ORD004",
         "items": [
-            "gingerbread "
+            "gingerbread x 3"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 7.95
     },
-    "MGB-7668666": {
+    "MGB-5566228": {
         "order_id": "ORD005",
         "items": [
-            "gingerbread ",
-            "red velvet "
+            "gingerbread x 1",
+            "red velvet x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 24.91
     },
-    "MGB-1221763": {
+    "MGB-1493407": {
         "order_id": "ORD006",
         "items": [
-            "banana bread "
+            "banana bread x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 9.54
     },
-    "MGB-5368854": {
+    "MGB-8244202": {
         "order_id": "ORD007",
         "items": [
-            "banana bread ",
-            "apple pie "
+            "banana bread x 3",
+            "apple pie x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 19.61
     },
-    "MGB-4111119": {
+    "MGB-6485060": {
         "order_id": "ORD008",
         "items": [
-            "gingerbread ",
-            "banana bread "
+            "gingerbread x 2",
+            "banana bread x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 10.07
     },
-    "MGB-9785176": {
+    "MGB-5210564": {
         "order_id": "ORD009",
         "items": [
-            "red velvet ",
-            "banana bread "
+            "red velvet x 1",
+            "banana bread x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 20.67
     },
-    "MGB-6459225": {
+    "MGB-2282369": {
         "order_id": "ORD010",
         "items": [
-            "apple pie ",
-            "banana bread "
+            "apple pie x 3",
+            "banana bread x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 25.44
     },
-    "MGB-6194195": {
+    "MGB-7205586": {
+        "order_id": "ORD011",
+        "items": [
+            "red velvet x 1",
+            "gingerbread x 4"
+        ],
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 21.73
+    },
+    "MGB-9897321": {
         "order_id": "ORD012",
         "items": [
-            "apple pie ",
-            "gingerbread "
+            "apple pie x 1",
+            "gingerbread x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 10.6
     },
-    "MGB-7777118": {
+    "MGB-4648801": {
         "order_id": "ORD013",
         "items": [
-            "banana bread ",
-            "gingerbread "
+            "banana bread x 1",
+            "gingerbread x 5"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 18.02
     },
-    "MGB-7794619": {
+    "MGB-3831968": {
         "order_id": "ORD014",
         "items": [
-            "banana bread ",
-            "red velvet "
+            "banana bread x 3",
+            "red velvet x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 25.44
     },
-    "MGB-5643926": {
+    "MGB-6890829": {
         "order_id": "ORD015",
         "items": [
-            "gingerbread ",
-            "banana bread "
+            "gingerbread x 2",
+            "banana bread x 1"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 10.07
     },
-    "MGB-4411230": {
+    "MGB-3388800": {
         "order_id": "ORD016",
         "items": [
-            "gingerbread ",
-            "red velvet "
+            "gingerbread x 3",
+            "red velvet x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 30.21
     },
-    "MGB-7272319": {
+    "MGB-3328150": {
         "order_id": "ORD017",
         "items": [
-            "gingerbread "
+            "gingerbread x 2"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 5.3
     },
-    "MGB-5450920": {
+    "MGB-7441800": {
         "order_id": "ORD018",
         "items": [
-            "apple pie "
+            "apple pie x 7"
         ],
-        "order_date": "11-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 37.1
     },
-    "MGB-1504772": {
-        "order_id": "ORD011",
+    "MGB-6959589": {
+        "order_id": "ORD019",
         "items": [
-            "red velvet ",
-            "gingerbread "
+            "gingerbread x 5"
         ],
-        "order_date": "11-10-2024",
-        "total_spend(RM)": 21.73
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 13.25
     },
-    "MGB-8180117": {
-        "order_id": "ORD011",
+    "MGB-3424932": {
+        "order_id": "ORD020",
         "items": [
-            "red velvet ",
-            "gingerbread "
+            "gingerbread x 6"
         ],
-        "order_date": "17-10-2024",
-        "total_spend(RM)": 21.73
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 15.9
     },
-    "MGB-5889278": {
-        "order_id": "ORD011",
+    "MGB-6170747": {
+        "order_id": "ORD021",
         "items": [
-            "red velvet ",
-            "gingerbread "
+            "gingerbread x 7"
         ],
-        "order_date": "17-10-2024",
-        "total_spend(RM)": 21.73
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 18.55
     },
-    "MGB-6895422": {
-        "order_id": "ORD011",
+    "MGB-6407557": {
+        "order_id": "ORD022",
         "items": [
-            "red velvet ",
-            "gingerbread "
+            "gingerbread x 5"
         ],
-        "order_date": "17-10-2024",
-        "total_spend(RM)": 21.73
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 13.25
     },
-    "MGB-3340162": {
-        "order_id": "ORD011",
+    "MGB-9757487": {
+        "order_id": "ORD023",
         "items": [
-            "red velvet ",
-            "gingerbread "
+            "cheezy bun x 1"
         ],
-        "order_date": "17-10-2024",
-        "total_spend(RM)": 21.73
+        "order_date": "19-10-2024",
+        "total_spend(RM)": 5.3
     },
-    "MGB-4763399": {
-        "order_id": "ORD011",
-        "items": [
-            "red velvet ",
-            "gingerbread "
-        ],
-        "order_date": "17-10-2024",
-        "total_spend(RM)": 21.73
-    },
-    "MGB-4828174": {
+    "MGB-4381453": {
         "order_id": "ORD024",
         "items": [
-            "cheezy bun "
+            "cheezy bun x 1"
         ],
-        "order_date": "18-10-2024",
+        "order_date": "19-10-2024",
         "total_spend(RM)": 5.3
     }
 }

@@ -236,9 +236,9 @@ def financial_management():
                 print('\nProfit Tracking:\n'
                       '1. Annual Profit Summary\n'
                       '2. Monthly Profit Summary\n')
-                profit_type = input('Type of profit to track (1 or 2): ')
+                profit_type = input('Type of profit to track (1, 2 or "cancel"): ')
 
-                if profit_type not in ['1', '2']:
+                if profit_type not in ['1', '2', 'cancel']:
                     print('\n+--------------------------------------+')
                     print('|⚠️ Invalid input. Please enter again. |')
                     print('+--------------------------------------+')
@@ -387,8 +387,8 @@ def financial_management():
                             print('\n+--------------------------------------+')
                             print('|⚠️ Invalid input. Please enter again. |')
                             print('+--------------------------------------+')
-
-
+                else:
+                    break
         elif track_choice == '4':
             print('\nExiting to Manager Privilege......')
             break
@@ -399,4 +399,4 @@ def financial_management():
             print('+--------------------------------------+')
 
 
-financial_management()
+#financial_management()

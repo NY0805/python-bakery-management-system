@@ -41,7 +41,7 @@ def format_product_data(product, details):
         f"🥑 {description_info}"
     )
 
-menu()
+
 
 # Wrap the formatted data if it exceeds the space of 60 characters
 def wrap_data(formatted_product_data, width=65):
@@ -122,4 +122,4 @@ def format_product_data_new(product):
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
     )
 
-menu()
+#menu()

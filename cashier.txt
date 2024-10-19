@@ -1,10 +1,18 @@
 {
     "cashier1": {
         "cashier_username": "cashier1",
-        "cashier_password": "securec@sh$",
+        "cashier_password": "securec@sh123",
         "age": "56",
         "gender": "female",
         "contact_no": "345-5674832",
         "email": "ff@vv.vv"
+    },
+    "cashier2": {
+        "cashier_username": "cashier2",
+        "cashier_password": "securec@sh123",
+        "age": 34,
+        "gender": "female",
+        "contact_no": "123-3456732",
+        "email": "ff@ff.ff"
     }
 }

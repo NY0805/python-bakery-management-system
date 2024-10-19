@@ -40,7 +40,7 @@ def order_management():
                 header.append(sub_key.title().replace('_', ' '))  # append other details of orders into the header list and replace all underscore with space to enhance readability
             break
 
-        print(f'{header[0]:<19}{header[1]:<19}{header[2]:<20}{header[3]:<24}{header[4]:<26}{header[5]}')  # display the headers
+        print(f'{header[0]:<19}{header[1]:<19}{header[2]:<20}{header[3]:<24}{header[4]:<26}{header[6]}')  # display the headers
         print('-' * 125)
 
         # display the details of order_list and specify the spaces between each other
@@ -52,6 +52,7 @@ def order_management():
             print('')
         print('-'*125, '\n')
 
+        print()
         order_id_to_update = input('Enter Order ID to update order status (or enter "cancel" to exit):\n>>> ')  # identify the order id to update
         if order_id_to_update == 'cancel':
             print('\nExiting to Manager Privilege...')

@@ -459,4 +459,4 @@ def product_popularity():
         print(product_ordered)'''
 
 #generate_sales_report()
-product_popularity()
+#product_popularity()

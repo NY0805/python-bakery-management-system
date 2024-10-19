@@ -117,18 +117,14 @@ def receipt(customer):
 
     # determine the format of data as dictionary format to be saved to the file
     for cart_id, customer_details in customer_info.items():
-        purchased_items = []
-        for item in customer_details['items_ordered']:
-            item_name, quantity = item.split('x')
-            purchased_items.append(item_name)
-            if customer == cart_id:
-                transaction_keeping[f'MGB-{invoice_no}'] = {
-                    "order_id": customer_details['order_id'],
-                    "items": purchased_items,
-                    "order_date": current_date,
-                    "total_spend(RM)": total
-                }
+        if customer == cart_id:
+            transaction_keeping[f'MGB-{invoice_no}'] = {
+                "order_id": customer_details['order_id'],
+                "items": customer_details['items_ordered'],
+                "order_date": current_date,
+                "total_spend(RM)": total
+            }
     save_info(transaction_keeping)  # save the data
 
-#receipt(str(346578392))
+#receipt(str(1346578392))
 

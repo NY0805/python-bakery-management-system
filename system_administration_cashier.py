@@ -71,7 +71,7 @@ def cashier_accounts():
                     break
 
             while True:
-                contact_no = input('Contact number(xxx-xxx xxxx): ')  # ask for cashier's contact number
+                contact_no = input('Contact number(xxx-xxxxxxx): ')  # ask for cashier's contact number
                 if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):  # check if the contact number match the specific pattern
                     print('\n+-----------------------------------------------+')
                     print('|⚠️ Invalid contact number. Please enter again. |')
@@ -121,26 +121,35 @@ def system_administration_cashier():
         manage_cashier = input('\nPlease choose a service:\n>>> ')
 
         if manage_cashier == '1':  #add cashier
-            while True:
-                print('\n-----------------------------------------------')
-                print('\t\t\tNEW CASHIER ENTRY FORM')
-                print('-----------------------------------------------')
-                cashier_accounts()  # fill up the details of cashier to complete the registration
-                cashier = load_data_from_cashier()  # read the information of cashier again from file (if don't put, the data will not save into dictionary)
-
+            if len(cashier) == 2:
+                print('\nThe cashier position is currently full.')
+            else:
                 while True:
-                    add_more = input('Continue to add? (y=yes, n=no)\n>>> ')  # after one cashier has been added, ask user if they want continue adding
-                    if add_more == 'y':
+                    print('\n-----------------------------------------------')
+                    print('\t\t\tNEW CASHIER ENTRY FORM')
+                    print('-----------------------------------------------')
+                    cashier_accounts()  # fill up the details of cashier to complete the registration
+                    cashier = load_data_from_cashier()  # read the information of cashier again from file (if don't put, the data will not save into dictionary)
+
+                    while True:
+                        add_more = input('Continue to add? (y=yes, n=no)\n>>> ')  # after one cashier has been added, ask user if they want continue adding
+                        if add_more == 'y':
+                            if len(cashier) == 2:
+                                print('\nThe cashier position is currently full.')
+                                break
+                            else:
+                                break
+                        elif add_more == 'n':
+                            break
+                        else:
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+\n')
+                    if add_more == 'n':
+                        print('\nStop adding. Exiting to Services page......')
                         break
-                    elif add_more == 'n':
+                    elif add_more == 'y':
                         break
-                    else:
-                        print('\n+--------------------------------------+')
-                        print('|⚠️ Invalid input. Please enter again. |')
-                        print('+--------------------------------------+\n')
-                if add_more == 'n':
-                    print('\nStop adding. Exiting to Services page......')
-                    break
 
         elif manage_cashier == '2':  # remove cashier
             while True:
@@ -226,71 +235,70 @@ def system_administration_cashier():
                             print('-----------------------------------------------')
 
                             for cashier_data_key, cashier_data_value in (cashier[selected_cashier].items()):
-                                print(f'{cashier_data_key.replace("_", " ").title()}: {cashier_data_value}')  # print the details of cashier and replace the underscore with a space
+                                print(f'{cashier_data_key}: {cashier_data_value}')  # print the details of cashier and replace the underscore with a space
 
                             attribute_of_cashier_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                             if attribute_of_cashier_data in cashier[selected_cashier]:  # check if the attribute inputted found in cashier's data
 
                                 while True:
-                                    try:
-                                        new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
-
-                                        if attribute_of_cashier_data == 'cashier_username':
-                                            if new_value in (cashier[cashier_name]['cashier_username'] for cashier_name in cashier):  # if new value same with the current username in file, duplication occurs
-                                                print('\n+----------------------------------------------------------+')
-                                                print('|⚠️ Username has been used. Please enter another username. |')
-                                                print('+----------------------------------------------------------+')
-                                                continue
-
-                                        elif attribute_of_cashier_data == 'cashier_password':
-                                            if new_value != 'securec@sh123':  # check if the password is correct
-                                                print('\n+-----------------------------------------+')
-                                                print('|⚠️ Password incorrect. Please try again. |')
-                                                print('+-----------------------------------------+')
-                                                continue
-
-                                        elif attribute_of_cashier_data == 'age':
-                                            if int(new_value) < 18 or int(new_value) > 60:  # check if the age is between 18 - 60
-                                                print('\n+--------------------------------------------------------------------+')
-                                                print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
-                                                print('+--------------------------------------------------------------------+')
-                                                continue
-
-                                        elif attribute_of_cashier_data == 'gender':
-                                            if new_value not in ['f', 'm']:
-                                                print('\n+--------------------------------------+')
-                                                print('|⚠️ Invalid input. Please enter again. |')
-                                                print('+--------------------------------------+')
-                                                continue
-                                            elif new_value == 'f':
-                                                new_value = 'female'
-
-                                            else:
-                                                new_value = 'male'
-
-                                        elif attribute_of_cashier_data == 'contact_no':
-                                            if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # check if the contact number match the specific pattern
-                                                print('\n+-----------------------------------------------+')
-                                                print('|⚠️ Invalid contact number. Please enter again. |')
-                                                print('+-----------------------------------------------+')
-                                                continue
-
-                                        elif attribute_of_cashier_data == 'email':  # define the format of email
-                                            if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):  # check if the email match the specific pattern
-                                                print('\n+--------------------------------------+')
-                                                print('|⚠️ Invalid email. Please enter again. |')
-                                                print('+--------------------------------------+')
-                                                continue
-
-                                        cashier[selected_cashier][attribute_of_cashier_data] = new_value  # update the value of attributes
-                                        print(f'\n{attribute_of_cashier_data} of {selected_cashier} is updated.')  # inform user that the information is updated
-                                        save_info(cashier)
+                                    if attribute_of_cashier_data == 'cashier_password':
+                                        print('\n+------------------------------------------------------------------------+')
+                                        print('|⚠️ This password is created by manager. You are not allow to change it. |')
+                                        print('+------------------------------------------------------------------------+')
                                         break
+                                    else:
+                                        try:
+                                            new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
 
-                                    except ValueError:
-                                        print('\n+-----------------------------+')
-                                        print('|⚠️ Please enter a valid age. |')
-                                        print('+-----------------------------+')
+                                            if attribute_of_cashier_data == 'cashier_username':
+                                                if new_value in (cashier[cashier_name]['cashier_username'] for cashier_name in cashier):  # if new value same with the current username in file, duplication occurs
+                                                    print('\n+----------------------------------------------------------+')
+                                                    print('|⚠️ Username has been used. Please enter another username. |')
+                                                    print('+----------------------------------------------------------+')
+                                                    continue
+
+                                            elif attribute_of_cashier_data == 'age':
+                                                if int(new_value) < 18 or int(new_value) > 60:  # check if the age is between 18 - 60
+                                                    print('\n+--------------------------------------------------------------------+')
+                                                    print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
+                                                    print('+--------------------------------------------------------------------+')
+                                                    continue
+
+                                            elif attribute_of_cashier_data == 'gender':
+                                                if new_value not in ['f', 'm']:
+                                                    print('\n+--------------------------------------+')
+                                                    print('|⚠️ Invalid input. Please enter again. |')
+                                                    print('+--------------------------------------+')
+                                                    continue
+                                                elif new_value == 'f':
+                                                    new_value = 'female'
+
+                                                else:
+                                                    new_value = 'male'
+
+                                            elif attribute_of_cashier_data == 'contact_no':
+                                                if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # check if the contact number match the specific pattern
+                                                    print('\n+-----------------------------------------------+')
+                                                    print('|⚠️ Invalid contact number. Please enter again. |')
+                                                    print('+-----------------------------------------------+')
+                                                    continue
+
+                                            elif attribute_of_cashier_data == 'email':  # define the format of email
+                                                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):  # check if the email match the specific pattern
+                                                    print('\n+--------------------------------------+')
+                                                    print('|⚠️ Invalid email. Please enter again. |')
+                                                    print('+--------------------------------------+')
+                                                    continue
+
+                                            cashier[selected_cashier][attribute_of_cashier_data] = new_value  # update the value of attributes
+                                            print(f'\n{attribute_of_cashier_data} of {selected_cashier} is updated.')  # inform user that the information is updated
+                                            save_info(cashier)
+                                            break
+
+                                        except ValueError:
+                                            print('\n+-----------------------------+')
+                                            print('|⚠️ Please enter a valid age. |')
+                                            print('+-----------------------------+')
 
                             elif attribute_of_cashier_data == 'cancel':
                                 print('\nCancelling. Exiting to Cashier List......')
