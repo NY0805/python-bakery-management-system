@@ -395,8 +395,8 @@ def product_popularity():
                                 print('\n----------------------------------------------------------')
                                 print(f"\t\t\t{report_month}/{report_year} PRODUCT POPULARITY SUMMARY")
                                 print('----------------------------------------------------------')
-                                print(f'\n{'Top-selling product':<25}: {best_seller}, Total quantity sold: {max_quantity}')
-                                print(f'{'Least-selling product':<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                                print(f'\n{"Top-selling product":<25}: {best_seller}, Total quantity sold: {max_quantity}')
+                                print(f'{"Least-selling product":<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
                                 break
                             else:
                                 print('Please enter based on given month.\n')
@@ -436,8 +436,8 @@ def product_popularity():
                     print('\n----------------------------------------------------------')
                     print(f"\t\t\tOVERALL PRODUCT POPULARITY SUMMARY")
                     print('----------------------------------------------------------')
-                    print(f'\n{'Top-selling product':<25}: {best_seller}, Total quantity sold: {max_quantity}')
-                    print(f'{'Least-selling product':<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                    print(f'\n{"Top-selling product":<25}: {best_seller}, Total quantity sold: {max_quantity}')
+                    print(f'{"Least-selling product":<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
                     break
                     break
                 elif report_service == '4':
