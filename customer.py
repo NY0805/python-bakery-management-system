@@ -281,7 +281,7 @@ def account_management():
         return
 
     # Prompt for username input
-    customer_name = input("Please enter your name: ").lower()  # Convert to lowercase
+    customer_name = input("Please enter your name: ")  # Convert to lowercase
 
     # Check if the customer_name exists in the loaded customer data
     if customer_name in customer_info:
@@ -305,6 +305,7 @@ def account_management():
             print(f"Email: {customer['email']}")
             print(f"Address: {customer['address']}")
             print(f"Account status: {customer['account_status']}")
+            print(f"loyalty_points:{customer['loyalty_points']}")
             print("+---------------------------+\n")
 
         elif choice == "2":
@@ -404,10 +405,7 @@ def customer_menu():
         elif option == "8":
             update_personal_information()
         elif option == "9":
-            if logged_in_username:
                 account_management()
-            else:
-                print("You need to log in first.")
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break
