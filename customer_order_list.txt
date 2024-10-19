@@ -8,7 +8,7 @@
         ],
         "total_price (RM)": 15.0,
         "order_date": "26-08-2004",
-        "status": "Preparing"
+        "status": "Order Placed"
     },
     "5684950188": {
         "order_id": "ORD002",
@@ -19,7 +19,7 @@
         ],
         "total_price (RM)": 15.5,
         "order_date": "09-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "1544631417": {
         "order_id": "ORD003",
@@ -40,7 +40,7 @@
         ],
         "total_price (RM)": 7.5,
         "order_date": "11-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "7841554976": {
         "order_id": "ORD005",
@@ -51,7 +51,7 @@
         ],
         "total_price (RM)": 23.5,
         "order_date": "12-09-2004",
-        "status": "Preparing"
+        "status": "Order Placed"
     },
     "5548156914": {
         "order_id": "ORD006",
@@ -61,7 +61,7 @@
         ],
         "total_price (RM)": 9.0,
         "order_date": "13-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "9875428598": {
         "order_id": "ORD007",
@@ -72,7 +72,7 @@
         ],
         "total_price (RM)": 18.5,
         "order_date": "13-09-2004",
-        "status": "Preparing"
+        "status": "Canceled"
     },
     "4567891234": {
         "order_id": "ORD008",
@@ -83,7 +83,7 @@
         ],
         "total_price (RM)": 9.5,
         "order_date": "14-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "6543219876": {
         "order_id": "ORD009",
@@ -105,7 +105,7 @@
         ],
         "total_price (RM)": 24.0,
         "order_date": "14-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "1597534862": {
         "order_id": "ORD011",
@@ -116,7 +116,7 @@
         ],
         "total_price (RM)": 20.5,
         "order_date": "14-09-2004",
-        "status": "Preparing"
+        "status": "Order Placed"
     },
     "7896541230": {
         "order_id": "ORD012",
@@ -127,7 +127,7 @@
         ],
         "total_price (RM)": 10.0,
         "order_date": "15-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "2345678901": {
         "order_id": "ORD013",
@@ -149,7 +149,7 @@
         ],
         "total_price (RM)": 24.0,
         "order_date": "15-09-2004",
-        "status": "Preparing"
+        "status": "canceled"
     },
     "1234567890": {
         "order_id": "ORD015",
@@ -160,7 +160,7 @@
         ],
         "total_price (RM)": 9.5,
         "order_date": "16-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "1357924680": {
         "order_id": "ORD016",
@@ -181,7 +181,7 @@
         ],
         "total_price (RM)": 5.0,
         "order_date": "16-09-2004",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     },
     "3579246801": {
         "order_id": "ORD018",
@@ -191,66 +191,6 @@
         ],
         "total_price (RM)": 35.0,
         "order_date": "16-09-2004",
-        "status": "Preparing"
-    },
-    "5661068023": {
-        "order_id": "ORD019",
-        "username": "sshin",
-        "items_ordered": [
-            "gingerbread x 5"
-        ],
-        "total_price (RM)": "11.25",
-        "order_date": "15-10-2024",
-        "status": "Payment Completed"
-    },
-    "8079287939": {
-        "order_id": "ORD020",
-        "username": "llll",
-        "items_ordered": [
-            "gingerbread x 6"
-        ],
-        "total_price (RM)": "13.50",
-        "order_date": "15-10-2024",
-        "status": "Payment Completed"
-    },
-    "7323218667": {
-        "order_id": "ORD021",
-        "username": "customer4",
-        "items_ordered": [
-            "gingerbread x 7"
-        ],
-        "total_price (RM)": "15.75",
-        "order_date": "15-10-2024",
-        "status": "Payment Completed"
-    },
-    "3195999113": {
-        "order_id": "ORD022",
-        "username": "1",
-        "items_ordered": [
-            "gingerbread x 5"
-        ],
-        "total_price (RM)": "11.25",
-        "order_date": "15-10-2024",
-        "status": "Payment Completed"
-    },
-    "5398121111": {
-        "order_id": "ORD023",
-        "username": "1",
-        "items_ordered": [
-            "cheezy bun x 1"
-        ],
-        "total_price (RM)": "5.00",
-        "order_date": "18-10-2024",
-        "status": "Payment Completed"
-    },
-    "1346578392": {
-        "order_id": "ORD024",
-        "username": "a",
-        "items_ordered": [
-            "cheezy bun x 1"
-        ],
-        "total_price (RM)": "5.00",
-        "order_date": "18-10-2024",
-        "status": "Payment Completed"
+        "status": "Order Placed"
     }
 }
