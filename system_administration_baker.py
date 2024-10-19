@@ -319,3 +319,4 @@ def system_administration_baker():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
+system_administration_baker()

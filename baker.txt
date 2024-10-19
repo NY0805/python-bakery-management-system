@@ -10,7 +10,7 @@
     "baker2": {
         "baker_username": "baker2",
         "baker_password": "b@k3rm4st3r!",
-        "age": 56,
+        "age": "34",
         "gender": "male",
         "contact_no": "123-4567832",
         "email": "ff@ff.ff"
