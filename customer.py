@@ -323,16 +323,37 @@ def account_management():
 # Function to load customer data
 def load_customer_data():
     try:
-        with open("customers.json", "r") as file:
-            return json.load(file)
+        file = open('customer.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 # Function to save customer data
-def save_customer_data(data):
-    with open("customers.json", "w") as file:
-        json.dump(data, file)
+def save_customer_data():
+    try:
+        file = open('customer.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
 
 def customer_menu():
