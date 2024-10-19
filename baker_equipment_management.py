@@ -88,6 +88,13 @@ def validation_date(info, date_format='%d-%m-%Y'):
         return False
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 equipment_list = load_data_from_baker_equipment()
 
 equipment_info = load_data_from_baker_equipment()
@@ -129,9 +136,8 @@ def enter_equipment():
 
 
 def equipment_management():
-    print('\n-------------------------------------------------------')
-    print('\t\t\t', '', 'EQUIPMENT MANAGEMENT MENU')
-    print('-------------------------------------------------------')
+    print('')
+    printed_centered('EQUIPMENT MANAGEMENT MENU')
     print('1. Report Malfunction')
     print('2. Report Maintenance Needs')
     print('3. Back to Homepage\n')
@@ -155,11 +161,9 @@ def equipment_management():
             except ValueError:
                 print('Please enter a valid number. (Cannot contain spacing.)\n')
 
-
 def equipment_lists():
-    print('\n-------------------------------------------------------')
-    print('\t\t\t\t\tEQUIPMENT LIST')
-    print('-------------------------------------------------------')
+    print('')
+    printed_centered('EQUIPMENT LIST')
     index = 1
     equipment_index_mapping = {}
     for category, items in equipment_category_groups.items():
@@ -184,7 +188,6 @@ def equipment_lists():
                 print('Please enter a valid number. (Cannot contain spacing.)\n')
 
     return selected_index, equipment_index_mapping[selected_index]
-
 
 def equipment_malfunction():
     malfunction_data = load_data_from_manager_notifications()
@@ -217,8 +220,6 @@ def equipment_malfunction():
         f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
     print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
     print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
-
-
 
     print('')
     print('-' * 140)
@@ -482,4 +483,4 @@ def equipment_maintenance():
                 print("Please enter 'y' or 'n'.\n")
 
 
-equipment_management()
+#equipment_management()

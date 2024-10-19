@@ -56,7 +56,6 @@
         "product_name": "gingerbread",
         "product_code": "BS678",
         "serial_number": [
-            "biscuit1",
             "biscuit2",
             "biscuit3"
         ],

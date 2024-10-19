@@ -33,6 +33,13 @@ def save_info(manager_info):
     file.close()  # close the file after writing
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 manager_info = load_data_from_manager()  # store the data that retrieved from file into manager_info
 
 
@@ -117,9 +124,8 @@ def manager_accounts():
 # create a function for manager
 def manager():
 
-    print('\n----------------------------------------------------')
-    print('\t\t\t\t\t', '', 'MANAGER')
-    print('----------------------------------------------------')
+    print('')
+    printed_centered('MANAGER')
     manager_name = input('Name: ')
     if manager_name in manager_info:
 
@@ -165,9 +171,8 @@ def manager():
     print('Welcome, manager', manager_name, '!')
     # display manager privilege
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t', '', '', 'MANAGER PRIVILEGE')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('MANAGER PRIVILEGE')
         print('a. System Administration\n'
               'b. Order Management\n'
               'c. Financial Management\n'

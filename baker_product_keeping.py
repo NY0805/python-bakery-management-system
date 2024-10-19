@@ -74,6 +74,13 @@ def validation_date(info, date_format='%d-%m-%Y'):
         return False
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 def product_management():
     print('\n-------------------------------------------------------')
     print('\t\t\t\t', '', 'PRODUCT MANAGEMENT')
@@ -103,9 +110,8 @@ def product_management():
 
 
 def product_categories():
-    print('\n-----------------------------------------------')
-    print('\t\tMAIN TYPES OF BAKERY PRODUCTS')
-    print('-----------------------------------------------')
+    print('')
+    printed_centered('MAIN TYPES OF BAKERY PRODUCTS')
     print('1. Breads')
     print('2. Cakes')
     print('3. Pastries')
@@ -397,9 +403,8 @@ def update_product():
     product_data = load_data_from_inventory_product()
     while True:
         index = 1
-        print('\n------------------------------------------------')
-        print('\t\t\t\t', 'PRODUCT LIST')
-        print('------------------------------------------------')
+        print('')
+        printed_centered('PRODUCT LIST')
         for batch_number, product in product_data.items():
             print(f'{index}. {product["product_name"].title()}')
             index += 1
@@ -422,9 +427,8 @@ def update_product():
                         index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
 
                     while True:
-                        print('\n-----------------------------------------------')
-                        print(f'\t\t\t\t {selected_product.upper()}\'S DATA')
-                        print('-----------------------------------------------')
+                        print('')
+                        printed_centered(f'{selected_product.upper()}\'S DATA')
 
                         for product_data_key, product_data_value in product.items():
                             print(
@@ -618,4 +622,4 @@ def update_product():
 
 
 
-product_management()
+#product_management()

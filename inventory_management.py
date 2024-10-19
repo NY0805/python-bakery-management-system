@@ -3,6 +3,13 @@ import manager_inventory_ingredient
 import manager_inventory_control
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 def inventory_services():
     print('\nEasily manage your bakery\'s inventory with our system!')
     print('With our system, you can effortlessly:\n'
@@ -11,9 +18,8 @@ def inventory_services():
           '\t- Remove outdated or unused items\n'
           '\t- Check inventory levels')
     print('Stay on top of your supplies to ensure fresh and delicious baked goods every day!')
-    print('\n-------------------------------------------------------')
-    print('\t\t\t', '', 'INVENTORY MANAGEMENT MENU')
-    print('-------------------------------------------------------\n')
+    print('')
+    printed_centered('INVENTORY MANAGEMENT MENU')
     print('1. Ingredient Management')
     print('2. Product Management')
     print('3. Back to Homepage\n')
@@ -36,4 +42,4 @@ def inventory_services():
             print('Please enter a valid number.\n')
 
 
-inventory_services()
+#inventory_services()

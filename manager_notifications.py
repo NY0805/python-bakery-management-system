@@ -122,6 +122,12 @@ def print_in_column(info1, info2, width=56):
         print(f'{line1.ljust(width + 8)}{line2.ljust(width)}')
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
 
 equipment_report_keeping = load_data_from_equipment_report_keeping()
 baker_equipment = load_data_from_baker_equipment()  # store the data that retrieved from file into baker_equipment
@@ -131,9 +137,8 @@ def notification():
     while True:
         notice = load_data_from_notification()  # store the data that retrieved from file into notice
         notifications = []  # create a list for the number of notifications received
-        print('\n-----------------------------------------------')
-        print(f'\t\t\t\tNOTIFICATIONS')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('NOTIFICATIONS')
         # initialize the number of malfunction and maintenance reports to 0
         malfunction_report = 0
         maintenance_report = 0

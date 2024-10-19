@@ -40,19 +40,18 @@ def order_management():
                 header.append(sub_key.title().replace('_', ' '))  # append other details of orders into the header list and replace all underscore with space to enhance readability
             break
 
-        print(f'{header[0]:<19}{header[1]:<19}{header[2]:<20}{header[3]:<24}{header[4]:<26}{header[6]}')  # display the headers
+        print(f'{header[1]:<19}{header[0]:<19}{header[2]:<20}{header[3]:<24}{header[4]:<26}{header[6]}')  # display the headers
         print('-' * 125)
 
         # display the details of order_list and specify the spaces between each other
         for cart_id, order_details in order_list.items():
-            print(f'{cart_id:<19}{order_details["order_id"]:<19}{order_details["username"]:<20}{order_details["items_ordered"][0]:<24}{float(order_details["total_price (RM)"]):<26.2f}{order_details["status"]}')
+            print(f'{order_details["order_id"]:<19}{cart_id:<19}{order_details["username"]:<20}{order_details["items_ordered"][0]:<24}{float(order_details["total_price (RM)"]):<26.2f}{order_details["status"]}')
 
             for items in order_details['items_ordered'][1:]:  # for each item in the list of items_ordered
                 print(f'{"":<19}{"":<19}{"":<20}{items:<24}{"":<26}{""}')  # display the items line by line and other details that not relevant will be empty
             print('')
         print('-'*125, '\n')
 
-        print()
         order_id_to_update = input('Enter Order ID to update order status (or enter "cancel" to exit):\n>>> ')  # identify the order id to update
         if order_id_to_update == 'cancel':
             print('\nExiting to Manager Privilege...')

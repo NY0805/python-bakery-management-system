@@ -28,6 +28,13 @@ def save_info(baker):
     file.close()
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 # define the function to register bakers
 def baker_accounts():
     baker = load_data_from_baker()  # store the data that retrieved from file into baker
@@ -112,9 +119,8 @@ def system_administration_baker():
     baker = load_data_from_baker()  # store the data that retrieved from file into baker
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'SERVICES')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('SERVICES')
         print('1. Add Baker(s)\n2. Remove Baker(s)\n3. Update Baker(s)\n4. Back to Role Management')  # provide the option for baker management
 
         manage_baker = input('\nPlease choose a service:\n>>> ')
@@ -124,9 +130,8 @@ def system_administration_baker():
                 print('\nThe baker position is currently full.')
             else:
                 while True:
-                    print('\n-----------------------------------------------')
-                    print('\t\t\tNEW BAKER ENTRY FORM')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('NEW BAKER ENTRY FORM')
                     baker_accounts()  # fill up the details of baker to complete the registration
                     baker = load_data_from_baker()  # read the information of baker again from file (if don't put, the data will not save into dictionary)
 
@@ -147,8 +152,6 @@ def system_administration_baker():
                     if add_more == 'n':
                         print('\nStop adding. Exiting to Services page......')
                         break
-                    elif add_more == 'y':
-                        break
 
         elif manage_baker == '2':  # remove baker
             while True:
@@ -159,9 +162,8 @@ def system_administration_baker():
                     break
 
                 else:  # if baker more than 1
-                    print('\n-----------------------------------------------')
-                    print('\t\t\t\t', '', 'BAKER LIST')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('BAKER LIST')
                     index = 1
                     for key in baker:
                         print(f'{index}. {key}')
@@ -207,9 +209,8 @@ def system_administration_baker():
 
         elif manage_baker == '3':  # update baker
             while True:
-                print('\n-----------------------------------------------')
-                print('\t\t\t\t', '', 'BAKER LIST')
-                print('-----------------------------------------------')
+                print('')
+                printed_centered('BAKER LIST')
                 index = 1
                 for baker_list_key in baker:
                     print(f'{index}. {baker_list_key}')
@@ -225,9 +226,7 @@ def system_administration_baker():
                     elif 1 <= index_of_baker_to_edit <= len(baker):
                         selected_baker = list(baker.keys())[index_of_baker_to_edit - 1]  # identify the selected baker to update
                         while True:
-                            print('\n-----------------------------------------------')
-                            print(f'\t\t\t\t {selected_baker.upper()}\'S DATA')
-                            print('-----------------------------------------------')
+                            printed_centered(f'{selected_baker.upper()}\'S DATA')
 
                             for baker_data_key, baker_data_value in (baker[selected_baker].items()):
                                 print(f'{baker_data_key}: {baker_data_value}')  # print the details of baker and replace the underscore with a space

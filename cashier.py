@@ -28,23 +28,31 @@ def save_info(cashier_info):
     file.close()  # close the file after writing
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 cashier_info = load_data_from_file()  # store the data that retrieved from file into cashier_info
 manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
 
 # cashier account login function
 def cashier_accounts():
-    #
-    print('\n----------------------------------------------------')
-    print('\t\t\t\t\t', '', 'CASHIER')
-    print('----------------------------------------------------')
-    cashier_username = input('Username: ')  # ask for username
-    while cashier_username not in cashier_info:  # continue looping if username not match with the name
-        print('\n+-------------------------------------------+')
-        print('|⚠️ Incorrect username. Please enter again. |')
-        print('+-------------------------------------------+\n')
-        cashier_username = input('Username: ')
 
+    print('')
+    printed_centered('CASHIER')
+    cashier_username = input('Username: ')  # ask for username
+    if cashier_username not in cashier_info:  # continue looping if username not match with the name
+        print('\n+--------------------------------------------------------------+')
+        print('|⚠️ You are not a cashier, cannot access to cashier privilege. |')
+        print('+--------------------------------------------------------------+\n')
+        print('Exiting to Main Page......')
+        return False
+
+    else:
         cashier_password = input('Password: ')  # ask for cashier's password
         while len(cashier_password) < 8 or len(cashier_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
@@ -62,14 +70,13 @@ def cashier_accounts():
         print('Welcome, cashier', cashier_username, '!')
         #  display cashier privilege
         while True:
-            print('\n-----------------------------------------------')
-            print('\t\t\t', '', '', 'CASHIER PRIVILEGE')
-            print('-----------------------------------------------')
+            print('')
+            printed_centered('CASHIER PRIVILEGE')
             print('a. Product display\n'
                   'b. Manage discount\n'
                   'c. Transaction completion\n'
                   'd. Reporting\n'
-                  'e. Exit')
+                  'e. Back to Main page')
 
             #  collect the choice of user and execute corresponding functions
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
@@ -94,23 +101,3 @@ def cashier_accounts():
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
-
-    # notify users they are not a cashier if their names not in cashier_info
-    else:
-        print('\n+--------------------------------------------------------------+')
-        print('|⚠️ You are not a cashier, cannot access to cashier privilege. |')
-        print('+--------------------------------------------------------------+\n')
-        while True:
-            become_cashier = input('Do you want to be a cashier (y=yes, n=no)?\n>>> ')  # ask users if they want to be a cashier
-            if become_cashier == 'y':
-                print('\nPlease contact manager by the methods below👇 to register as a cashier. Upon approval, you can log in again.')
-                for manager_details in manager.values():
-                    print(f'✉️ {manager_details["email"]}\n📞 {manager_details["contact_no"]}\n')  # provide contact details of manager
-                print('Exiting to main page......')
-                break
-            elif become_cashier == 'n':
-                break
-            else:
-                print('\n+--------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+\n')

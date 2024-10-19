@@ -29,6 +29,13 @@ def save_info(cashier):
     file.close()
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 # define the function to register cashiers
 def cashier_accounts():
     cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
@@ -113,9 +120,8 @@ def system_administration_cashier():
     cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'SERVICES')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('SERVICES')
         print('1. Add Cashier(s)\n2. Remove Cashier(s)\n3. Update Cashier(s)\n4. Back to Manager Privilege')  # provide the option for cashier management
 
         manage_cashier = input('\nPlease choose a service:\n>>> ')
@@ -125,9 +131,8 @@ def system_administration_cashier():
                 print('\nThe cashier position is currently full.')
             else:
                 while True:
-                    print('\n-----------------------------------------------')
-                    print('\t\t\tNEW CASHIER ENTRY FORM')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('NEW CASHIER ENTRY FORM')
                     cashier_accounts()  # fill up the details of cashier to complete the registration
                     cashier = load_data_from_cashier()  # read the information of cashier again from file (if don't put, the data will not save into dictionary)
 
@@ -148,8 +153,6 @@ def system_administration_cashier():
                     if add_more == 'n':
                         print('\nStop adding. Exiting to Services page......')
                         break
-                    elif add_more == 'y':
-                        break
 
         elif manage_cashier == '2':  # remove cashier
             while True:
@@ -160,9 +163,8 @@ def system_administration_cashier():
                     break
 
                 else:  # if baker more than 1
-                    print('\n-----------------------------------------------')
-                    print('\t\t\t\t', '', 'CASHIER LIST')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('CASHIER LIST')
                     index = 1
                     for key in cashier:
                         print(f'{index}. {key}')
@@ -211,9 +213,8 @@ def system_administration_cashier():
 
         elif manage_cashier == '3':  # update cashier
             while True:
-                print('\n-----------------------------------------------')
-                print('\t\t\t\t', '', 'CASHIER LIST')
-                print('-----------------------------------------------')
+                print('')
+                printed_centered('CASHIER LIST')
                 index = 1
                 for cashier_list_key in cashier:
                     print(f'{index}. {cashier_list_key}')

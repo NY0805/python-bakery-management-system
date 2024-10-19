@@ -222,7 +222,6 @@ def add_ingredient():
         allowable_form = []
         for item in form.split(','):
             allowable_form.append(item.strip().lower())
-            print(allowable_form)
 
         if validation_empty_entries(ingredient_form):
             if ingredient_form.isalpha():

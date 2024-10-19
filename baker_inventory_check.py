@@ -49,7 +49,7 @@ def validation_empty_entries(info):
         return True
     else:
         print('❗Please enter something...\n')
-        return Fal
+        return False
 
 
 def validation_alphabet_only(info):
@@ -74,6 +74,13 @@ def format_recipe_data(product):
     )
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 recipe_list = load_data_from_baker_recipe()
 
 ingredient_list = load_data_from_inventory_ingredient()
@@ -85,9 +92,8 @@ for value in recipe_list.values():
 
 def recipe_lists():
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t', '', '', 'RECIPE LIST')
-        print('-----------------------------------------------\n')
+        print('')
+        printed_centered('RECIPE LIST')
         for category, items in recipe_category_groups.items():
             print(f'📍 {category} 📍')
             for index, ingredient in enumerate(items, start=1):

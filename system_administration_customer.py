@@ -26,6 +26,12 @@ def save_info(customer):
     json.dump(customer, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
 
 customer = load_data_from_customer()  # store the data that retrieved from file into customer
 
@@ -43,9 +49,8 @@ def activate_customer():
             print('Back to Services page......')
             break
         else:
-            print('\n-----------------------------------------------')
-            print('\t\t\t\tINACTIVE ACCOUNT')
-            print('-----------------------------------------------')
+            print('')
+            printed_centered('INACTIVE ACCOUNT')
 
         index = 1
         for name in inactive_acc:
@@ -92,9 +97,8 @@ def deactivate_customer():
             print('Back to Services page......')
             break
         else:
-            print('\n-----------------------------------------------')
-            print('\t\t\t\tINACTIVE ACCOUNT')
-            print('-----------------------------------------------')
+            print('')
+            printed_centered('ACTIVE ACCOUNT')
 
         index = 1
         for name in active_acc:
@@ -132,9 +136,8 @@ def deactivate_customer():
 def update_customer():
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'CUSTOMER LIST')
-        print('-----------------------------------------------')
+        print('')
+        print('CUSTOMER LIST')
         index = 1
         for customer_list in customer:
             print(f'{index}. {customer_list}')
@@ -152,9 +155,8 @@ def update_customer():
 
                 selected_customer = list(customer.keys())[index_of_customer_to_edit - 1]  # determine the selected customer names from the list by indexing
                 while True:
-                    print('\n-----------------------------------------------')
-                    print(f'\t\t\t\t {selected_customer.upper()}\'S DATA')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered(f'{selected_customer.upper()}\'S DATA')
 
                     for customer_data_key, customer_data_value in (customer[selected_customer].items()):
                         # display all the details of customers except their account status
@@ -249,9 +251,8 @@ def update_customer():
 def terminate_customer():
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'CUSTOMER LIST')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('CUSTOMER LIST')
         index = 1
         for key in customer:
             print(f'{index}. {key}')
@@ -301,9 +302,8 @@ def terminate_customer():
 def system_administration_customer():
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\t', '', 'SERVICES')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('SERVICES')
         print(
             '1. Activate Customer(s)\n2. Deactivate Customer(s)\n3. Update Customer(s)\n4. Terminate/Remove Customer Account(s)\n5. Back to Role Management')  # provide the option for customer management
 

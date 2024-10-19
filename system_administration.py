@@ -4,14 +4,19 @@ import system_administration_baker
 import system_administration_cashier
 import system_administration_customer
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
 
 # define a function to manage roles
 def system_administration():
 
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t\t\tROLE MANAGEMENT')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('ROLE MANAGEMENT')
         print('1. Baker🧑‍🍳🍞\n2. Cashier🖥️💰\n3. Customer👦👧\n4. Back to Manager Privilege⛔🔙')  # provide role selection
 
         role = input('\nWhich role do you want to manage(1, 2, 3, 4):\n>>> ')  # identify which role to manage

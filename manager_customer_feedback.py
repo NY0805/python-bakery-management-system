@@ -31,6 +31,13 @@ review = load_review()
 manager_response = load_data_from_manager_customer_feedback()
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 def customer_feedback():
     while True:
         rating_five = 0
@@ -50,9 +57,8 @@ def customer_feedback():
             else:
                 rating_one += 1
 
-        print('\n-----------------------------')
-        print('  CUSTOMER RATINGS OVERVIEW')
-        print('-----------------------------')
+        print('')
+        printed_centered('CUSTOMER RATINGS OVERVIEW')
         print(f'⭐⭐⭐⭐⭐{"5-star rating:".rjust(15)} {rating_five}')
         print(f'⭐⭐⭐⭐{"4-star rating:".rjust(17)} {rating_four}')
         print(f'⭐⭐⭐{"3-star rating:".rjust(19)} {rating_three}')
@@ -62,7 +68,7 @@ def customer_feedback():
         choice = input('\nDo you want to view and reply to customer feedback? (y=yes, n=no)\n>>> ')
         if choice == 'y':
             while True:
-                print('\n', '\t'*15, 'CUSTOMER FEEDBACK')
+                print('\n\n', '\t'*15, 'CUSTOMER FEEDBACK')
                 print('-' * 140)
                 header = ['Username']  # create a list for headers and append the first item in the list
                 for review_details in review.values():  # access the values of order_list

@@ -26,6 +26,13 @@ def save_info(baker_info):
     file.close()  # close the file after writing
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 baker_info = load_data_from_file()  # store the data that retrieved from file into baker_info
 manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
@@ -33,16 +40,17 @@ manager = load_data_from_manager()  # store the data that retrieved from file in
 # baker account login function
 def baker_accounts():
 
-    print('\n----------------------------------------------------')
-    print('\t\t\t\t\t', '', 'BAKER')
-    print('----------------------------------------------------')
+    print('')
+    printed_centered('BAKER')
     baker_username = input('Username: ')  # ask for username
-    while baker_username not in baker_info:  # continue looping if username not match with the name
-        print('\n+-------------------------------------------+')
-        print('|⚠️ Incorrect username. Please enter again. |')
-        print('+-------------------------------------------+\n')
-        baker_username = input('Username: ')
+    if baker_username not in baker_info:  # continue looping if username not match with the name
+        print('\n+----------------------------------------------------------+')
+        print('|⚠️ You are not a baker, cannot access to baker privilege. |')
+        print('+----------------------------------------------------------+\n')
+        print('Exiting to Main Page......')
+        return False
 
+    else:
         baker_password = input('Password: ')  # ask for baker's password
         while len(baker_password) < 8 or len(baker_password) > 12:  # repeating the prompt to input when password length is not between 8-12 digits
             print('\n+---------------------------------------------------------------------------+')
@@ -60,14 +68,14 @@ def baker_accounts():
         print('Welcome, baker', baker_username, '!')
         #  display baker privilege
         while True:
-            print('\n-----------------------------------------------')
-            print('\t\t\t', '', '', 'BAKER PRIVILEGE')
-            print('-----------------------------------------------')
+            print('')
+            printed_centered('BAKER PRIVILEGE')
+
             print('a. Recipe management\n'
                   'b. Inventory check\n'
                   'c. Product record-keeping\n'
                   'd. Equipment management\n'
-                  'e. Exit')
+                  'e. Back to Main page')
 
             #  collect the choice of user and execute corresponding functions
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
@@ -92,29 +100,6 @@ def baker_accounts():
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
-
-    # notify users they are not a baker if their names not in baker_info
-    else:
-        print('\n+----------------------------------------------------------+')
-        print('|⚠️ You are not a baker, cannot access to baker privilege. |')
-        print('+----------------------------------------------------------+\n')
-        while True:
-            become_baker = input('Do you want to be a baker (y=yes, n=no)?\n>>> ')  # ask users if they want to be a baker
-            if become_baker == 'y':
-                print('\nPlease contact manager by the methods below👇 to register as a cashier. Upon approval, you can log in again.')
-                for manager_details in manager.values():
-                    print(
-                        f'✉️ {manager_details["email"]}\n📞 {manager_details["contact_no"]}\n')  # provide contact details of manager
-                print('Exiting to main page......')
-                break
-            elif become_baker == 'n':
-                break
-            else:
-                print('\n+--------------------------------------+')
-                print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+\n')
-
-
 
 
 

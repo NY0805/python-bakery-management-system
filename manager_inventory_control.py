@@ -54,6 +54,13 @@ def save_info_product(product):
     file.close()  # close the file after writing
 
 
+def printed_centered(info):
+    print('-' * 47)
+    side_space = (47 - len(info)) // 2  # determine how much blank space to leave
+    print(' ' * side_space + info + ' ' * (47 - len(info) - side_space))
+    print('-' * 47)
+
+
 product = load_data_from_product()  # store the data that retrieved from file into product
 product_inventory = load_data_from_manager_product_inventory()  # store the data that retrieved from file into product_inventory
 
@@ -65,18 +72,16 @@ def inventory_control_product():
             print('\n❗The product inventory is empty. Please restock in time.')  # output a warning message when the product in inventory is empty
 
         # display the options of how to control the product in the inventory
-        print('\n-----------------------------------------------')
-        print('\t\t\t', '', 'PRODUCT MANAGEMENT')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('PRODUCT MANAGEMENT')
         print('1. Add products into inventory\n2. Remove products from inventory\n3. Update products in inventory\n4. Back to Main Inventory Management⛔🔙\n')
         product_control = input('\nWhat action do you wish to perform? (1, 2, 3, 4)\n>>> ')  # collect user preference
 
         while True:
 
             if product_control == '1':  # add products into inventory
-                print('\n-----------------------------------------------')
-                print('\t', '', 'CURRENT PRODUCTS PRODUCED BY BAKERS')
-                print('-----------------------------------------------')
+                print('')
+                printed_centered('CURRENT PRODUCTS PRODUCED BY BAKERS')
 
                 # retrieve the information of product name and quantity to display
                 for key, value in product.items():
@@ -85,7 +90,7 @@ def inventory_control_product():
 
                     print(f'Product name: {product_name:<15} quantity: {quantity}')
 
-                chosen_product = input('\nWhich product do you want to restock? (or enter "cancel" to cancel)\n>>> ')  # collect user's chosen product
+                chosen_product = input('\nPlease enter product name to restock (or enter "cancel" to cancel)\n>>> ')  # collect user's chosen product
 
                 if chosen_product == 'cancel':
                     print('\nCancelling. Exiting to Product Management page......')
@@ -182,9 +187,8 @@ def inventory_control_product():
                     break
 
                 else:
-                    print('\n-----------------------------------------------')
-                    print('\t\t\t', ' ', 'PRODUCT INVENTORY')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('PRODUCT INVENTORY')
                     for batch_number, value in product_inventory.items():
                         product_name = value['product_name']
                         available_quantity = value['stock']
@@ -258,9 +262,8 @@ def inventory_control_product():
 
                 while True:
                     index = 1
-                    print('\n-----------------------------------------------')
-                    print('\t\t\t\tPRODUCT LIST')
-                    print('-----------------------------------------------')
+                    print('')
+                    printed_centered('PRODUCT LIST')
                     for key, value in product_inventory.items():
                         print(f'{index}. {value["product_name"].title()}')
                         index += 1
@@ -276,9 +279,8 @@ def inventory_control_product():
                             selected_product = list(product_inventory.keys())[product_to_update - 1]  # append all the keys into a list and identify the selected product by indexing
                             while True:
                                 # display the product name
-                                print('\n-----------------------------------------------')
-                                print(f'\t\t\t\t {product_inventory[selected_product]["product_name"].upper()}')
-                                print('-----------------------------------------------')
+                                print('')
+                                printed_centered(f'{product_inventory[selected_product]["product_name"].upper()}')
 
                                 for product_inventory_key, product_inventory_value in (product_inventory[selected_product].items()):
                                     print(f'{product_inventory_key}: {product_inventory_value}')  # display the dedtails of the selected product
@@ -364,9 +366,8 @@ def inventory_control_product():
 # main inventory control for products and ingredients
 def inventory_control():
     while True:
-        print('\n-----------------------------------------------')
-        print('\t\t', ' ', 'MAIN INVENTORY MANAGEMENT')
-        print('-----------------------------------------------')
+        print('')
+        printed_centered('MAIN INVENTORY MANAGEMENT')
         print('1. Ingredient Inventory\n2. Product Inventory\n3. Back to Manager Privilege⛔🔙')
 
         # determine which inventory to manage and execute their corresponding functions

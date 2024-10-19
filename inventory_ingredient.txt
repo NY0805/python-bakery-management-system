@@ -100,5 +100,22 @@
         "allergen_info": [
             "apple"
         ]
+    },
+    "B007": {
+        "category": "Spices and Flavourings",
+        "ingredient_name": "chilly",
+        "ingredient_form": "liquid",
+        "batch_number": "B007",
+        "unit_measurement": "kg",
+        "quantity_purchased": 2.0,
+        "purchase_date": "13-06-2008",
+        "expiry_date": "13-07-2008",
+        "supplier_name": "abc",
+        "supplier_contact": "123-4567843",
+        "cost_per_unit": "RM 0.80",
+        "storage_requirement": "dry storage",
+        "allergen_info": [
+            "bjbj"
+        ]
     }
 }
