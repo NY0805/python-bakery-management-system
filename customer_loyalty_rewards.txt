@@ -2,7 +2,7 @@
     "ORD001": {
         "username": "Mark0825",
         "total_spending (RM)": 55.0,
-        "loyalty_points": 4092,
+        "loyalty_points": 4377,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 120,
         "voucher_redeem": 10

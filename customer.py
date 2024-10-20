@@ -11,43 +11,37 @@ import product_browsing
 # Define the function that loads data from the file
 def load_data_from_customer():
     try:
-        file = open('customer.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
-        else:
-            return {}  # return empty dictionary if the file is empty
+        with open('customer.txt', 'r') as file:  # use with statement to open the file
+            content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+            if content:  # check if the file is not empty
+                try:
+                    return json.loads(content)  # parse the content as json format into python dictionary
+                except json.JSONDecodeError:
+                    return {}  # return empty dictionary if the content does not parse successfully
+            else:
+                return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
 
 
 def save_info(customer_info):
-
-    file = open('customer.txt', 'w')  # open the file to write
-    json.dump(customer_info, file, indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
-    file.close()  # close the file after writing
+    with open('customer.txt', 'w') as file:  # use with statement to open the file
+        json.dump(customer_info, file, indent=4)  # convert the dictionary into JSON format
 
 
 customer_info = load_data_from_customer()
 
 
 def sign_up():
-
     customer_name = input("Name: ")
     customer_username = input("Username: ")
-    if customer_username in customer_info:
+
+    if customer_username in [info['customer_username'] for info in customer_info.values()]:
         print('\n+--------------------------------------------------+')
         print('|⚠️ Warning: One person can only have one account! |')
         print('+--------------------------------------------------+')
-        print('You already have an account.')
-        print('Directing to the login page......')
+        print('You already have an account. Directing to the login page......')
         login()
-
     else:
         customer_password = input("Password: ")
         while len(customer_password) < 8 or len(customer_password) > 12:
@@ -71,28 +65,21 @@ def sign_up():
                 print('+-------------------------------------------+\n')
 
         while True:
-            gender = input('Gender(m=male, f=female, x=prefer not to say): ')
+            gender = input('Gender (m=male, f=female, x=prefer not to say): ')
             if gender not in ['f', 'm', 'x']:
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+\n')
             else:
-                if gender == 'f':
-                    gender = 'female'
-                    break
-                elif gender == 'm':
-                    gender = 'male'
-                    break
-                else:
-                    gender = 'prefer not to say'
-                    break
+                gender = 'female' if gender == 'f' else 'male' if gender == 'm' else 'prefer not to say'
+                break
 
-        contact_no = input('Contact number(xxx-xxxxxxx): ')
+        contact_no = input('Contact number (xxx-xxxxxxx): ')
         while not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):
             print('\n+-----------------------------------------------+')
             print('|⚠️ Invalid contact number. Please enter again. |')
             print('+-----------------------------------------------+\n')
-            contact_no = input('Contact number(xxx-xxxxxxx): ')
+            contact_no = input('Contact number (xxx-xxxxxxx): ')
 
         email = input('Email: ')
         while not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
@@ -122,34 +109,35 @@ def sign_up():
 
 def login():
     customer_name = input('\nName: ')
+
     if customer_name in customer_info:
         customer_username = input("Username: ")
-        while customer_username not in customer_info[customer_name][customer_username]:
+        # Check if the username matches the one in customer_info for the given customer_name
+        if customer_info[customer_name]['customer_username'] != customer_username:
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect username. Please enter again. |')
             print('+-------------------------------------------+\n')
+            return None
 
         customer_password = input("Password: ")
-        while customer_password != customer_info[customer_username]['customer_password']:
+        while customer_password != customer_info[customer_name]['customer_password']:
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect password. Please enter again. |')
             print('+-------------------------------------------+\n')
             customer_password = input("Password: ")
 
-        print(f'\nWelcome back, {customer_info[customer_name]}!\n')
+        print(f'\nWelcome back, {customer_name}!\n')
         return customer_username  # Return the username after successful login
-
     else:
         print('\n+------------------------------------------------------------+')
-        print('|⚠️ This is your FIRST TIME login, please create an account. |')
+        print('|⚠️ This is your FIRST TIME logging in, please create an account. |')
         print('+------------------------------------------------------------+')
-        print('Directing to sign up page......\n')
+        print('Directing to sign-up page......\n')
         sign_up()
         return None  # Return None if sign-up is initiated
 
-def customer():
-    #customer_info = load_data_from_customer()
 
+def customer():
     print('\n----------------------------------------------------')
     print('\t\t\t\t\t', '', 'CUSTOMER')
     print('----------------------------------------------------')
@@ -336,7 +324,6 @@ def account_management():
         print(f"Account with the name '{customer_name}' not found.")
 
 
-
 # Function to load customer data
 def load_customer_data():
     try:
@@ -416,7 +403,7 @@ def customer_menu():
         elif option == "8":
             update_personal_information()
         elif option == "9":
-                account_management()
+            account_management()
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break

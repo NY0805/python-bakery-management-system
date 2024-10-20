@@ -403,5 +403,5 @@ def shopping_cart():
         else:
             print("⚠️ Invalid option! Please try again.")
 
-# Start the shopping cart process
-shopping_cart()
+
+#shopping_cart()

@@ -16,7 +16,7 @@ REDEEM_RATES = {
 def determine_loyalty_points(total_price):
     # Calculate loyalty points based on total price
     points = int(total_price * BASE_POINTS_PER_RM)
-    return points
+    return points,
 
 
 def update_customer_status(points):
@@ -242,4 +242,4 @@ def loyalty_rewards():
             print("|⚠️ Invalid option! Please try again.|")
 
 
-loyalty_rewards()
+#loyalty_rewards()
