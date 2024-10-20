@@ -101,13 +101,12 @@ def receipt(customer):
 
     # calculate subtotal by adding the amount in "total_amount"
     subtotal = 0
-    service_tax = 0
     for amount in total_amount:
         subtotal += amount
 
     print(f'{"":<65}{"Subtotal: ":<25}{subtotal:.2f}')
     total_discount_price = 0
-    subtotal_discount_price = 0
+    non_discount_price = 0
     if str(customer) in customer_info:
         customer_details = customer_info[str(customer)]
         for discounts in discount_management.values():
@@ -123,13 +122,13 @@ def receipt(customer):
                         discounted_price = (float(price) - (float(price) * float(discount_value))/100) * int(quantity)
                         total_discount_price += discounted_price
                     else:
-                        subtotal_discount_price += (float(price) * int(quantity))
+                        non_discount_price += (float(price) * int(quantity))
 
-    print(f'{"Discounted price: ".rjust(75)}{"".ljust(15)}{subtotal_discount_price+total_discount_price:.2f}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
-    service_tax = (subtotal_discount_price + total_discount_price) * 0.06  # calculate the service tax
+    print(f'{"Discounted price: ".rjust(75)}{"".ljust(15)}{non_discount_price+total_discount_price:.2f}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
+    service_tax = (non_discount_price + total_discount_price) * 0.06  # calculate the service tax
 
     print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
-    total = subtotal_discount_price + total_discount_price + service_tax  # calculate the final amount that need to be paid by customers
+    total = non_discount_price + total_discount_price + service_tax  # calculate the final amount that need to be paid by customers
     print(f'\n{"Points earned: "}{int(total * 10)}{"TOTAL: ".rjust(57)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
@@ -151,5 +150,5 @@ def receipt(customer):
             }
     save_info(transaction_keeping)  # save the data
 
-receipt(str(9257521182))
+#receipt(str(9257521182))
 
