@@ -24,7 +24,7 @@ def order_tracking():
     print('\t\t\t', 'ORDER TRACKING')
     print('-----------------------------------------------')
 
-    while True:  # Add a loop to allow repeated input if the order ID is not found
+    while True:
         order_id = input('Enter your Order ID: ')  # Prompt the customer to enter their order ID
 
         # Search for the order by order_id
@@ -40,16 +40,15 @@ def order_tracking():
                 print(f'{"Status:":<20} {order["status"]}')
                 print('-' * 55)
                 order_found = True
-                break  # Exit the loop once the order is found
+                break  # Exit the loop when a matching order is found
 
         if order_found:
-            break  # Exit the input loop if the order is found
+            break  # Exit the outer loop after displaying the order details
 
-        # If the customer's entered order ID cannot be found, display this message
+        # Display this message if Order ID cannot be found
         print('|⚠️ Order ID cannot be found. Please check and try again!|')
 
 
-# Call the function to track the order
 #order_tracking()
 
 

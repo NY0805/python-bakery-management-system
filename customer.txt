@@ -8,7 +8,7 @@
         "email": "mark0825@gmail.com",
         "address": "123 Mark Street, Cityville",
         "account_status": "active",
-        "loyalty_points": 3977
+        "loyalty_points": 4262
     },
     "customer2": {
         "customer_username": "03jane_",
@@ -140,7 +140,7 @@
         "email": "SS@gmail.com",
         "address": "as",
         "account_status": "active",
-        "loyalty_points": 332
+        "loyalty_points": 4132
     },
     "abc": {
         "customer_username": "abc",
@@ -173,6 +173,6 @@
         "email": "s@gmail.com",
         "address": "2",
         "account_status": "active",
-        "loyalty_points": 1235
+        "loyalty_points": 2679
     }
 }

@@ -304,16 +304,97 @@
         "order_date": "20-10-2024",
         "status": "Order Placed"
     },
-    "9257521182": {
+    "4956127816": {
         "order_id": "ORD030",
-        "username": "jen",
+        "username": "nct",
         "items_ordered": [
-            "red velvet x 2",
-            "cheezy bun x 1",
-            "gingerbread x 1"
+            "cheezy bun x 3",
+            "gingerbread x 2"
         ],
-        "total_price (RM)": "28.00",
+        "total_price (RM)": "18.75",
         "order_date": "20-10-2024",
-        "status": "Payment Completed"
+        "status": "Order Placed"
+    },
+    "9672913988": {
+        "order_id": "ORD031",
+        "username": "Mark0825",
+        "items_ordered": [
+            "cheezy bun x 6"
+        ],
+        "total_price (RM)": "28.50",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "1948275678": {
+        "order_id": "ORD032",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 8"
+        ],
+        "total_price (RM)": "38.00",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "7985634389": {
+        "order_id": "ORD033",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 6"
+        ],
+        "total_price (RM)": "28.50",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "1628595974": {
+        "order_id": "ORD034",
+        "username": "nct",
+        "items_ordered": [
+            "apple pie x 10"
+        ],
+        "total_price (RM)": "50.00",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "8537541889": {
+        "order_id": "ORD035",
+        "username": "SOS",
+        "items_ordered": [
+            "apple pie x 4",
+            "cheezy bun x 5"
+        ],
+        "total_price (RM)": "43.75",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "6951477389": {
+        "order_id": "ORD036",
+        "username": "SOS",
+        "items_ordered": [
+            "cheezy bun x 5",
+            "tiramisu x 4"
+        ],
+        "total_price (RM)": "57.75",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "1496441985": {
+        "order_id": "ORD037",
+        "username": "SOS",
+        "items_ordered": [
+            "cheezy bun x 30"
+        ],
+        "total_price (RM)": "142.50",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
+    },
+    "5896571668": {
+        "order_id": "ORD038",
+        "username": "SOS",
+        "items_ordered": [
+            "cheezy bun x 40"
+        ],
+        "total_price (RM)": "190.00",
+        "order_date": "20-10-2024",
+        "status": "Order Placed"
     }
 }
