@@ -17,7 +17,7 @@
         "ingredient_notes": "nct dream no1",
         "equipment_used": [],
         "baking_temperature": 90,
-        "baking_time": 30,
+        "baking_time": 50,
         "instructions": [
             "g",
             "g",
@@ -29,9 +29,9 @@
         "recipe_name": "banana bread",
         "ingredient_used": [
             [
-                "white flour",
-                4.0,
-                "cups"
+                "wheat flour",
+                900.0,
+                "g"
             ]
         ],
         "ingredient_notes": "no",
@@ -95,6 +95,53 @@
             "jj",
             "hh",
             "jj"
+        ]
+    },
+    "bello": {
+        "recipe_category": "Biscuits",
+        "recipe_name": "bello",
+        "ingredient_used": [
+            [
+                "maple syrup",
+                30.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "i love cat",
+        "equipment_used": [
+            "convection oven",
+            "stand mixer"
+        ],
+        "baking_temperature": 30,
+        "baking_time": 30,
+        "instructions": [
+            "djfoj",
+            "fjdf"
+        ]
+    },
+    "applecake": {
+        "recipe_category": "Cakes",
+        "recipe_name": "applecake",
+        "ingredient_used": [
+            [
+                "apple",
+                600.0,
+                "g"
+            ],
+            [
+                "maple syrup",
+                900.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer"
+        ],
+        "baking_temperature": 30,
+        "baking_time": 30,
+        "instructions": [
+            "no"
         ]
     }
 }

@@ -20,9 +20,9 @@ def load_data_from_sales_report():
         return {}  # return empty dictionary if the file does not exist
 
 
-def load_data_from_customer_order_list():
+def load_data_from_cashier_transaction_keeping():
     try:
-        file = open('customer_order_list.txt', 'r')  # open the file and read
+        file = open('cashier_transaction_keeping.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
@@ -52,7 +52,7 @@ def validation_empty_entries(info):
         return False
 
 
-customer_order_list = load_data_from_customer_order_list()
+cashier_transaction_keeping = load_data_from_cashier_transaction_keeping()
 sales_report_file = load_data_from_sales_report()
 
 
@@ -72,17 +72,19 @@ def generate_sales_report():
                 monthly_sales_performance()
                 break
             elif report_service == '3':
-                pass
+                product_popularity()
                 break
             elif report_service == '4':
                 pass
             else:
-                print('Please enter a valid index number.')
+                print('\n+-------------------------------------+')
+                print('|⚠️ Please enter a valid index number |')
+                print('+-------------------------------------+')
 
 
 def allowable_year():
     allowable_years = set()
-    for key, items in customer_order_list.items():
+    for key, items in cashier_transaction_keeping.items():
         order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
         allowable_years.add(order_date.year)
 
@@ -93,7 +95,7 @@ def allowable_year():
 
 def allowable_month(report_year):
     allowable_months = set()
-    for key, items in customer_order_list.items():
+    for key, items in cashier_transaction_keeping.items():
         order_date = datetime.strptime(items['order_date'], '%d-%m-%Y')
         if order_date.year == int(report_year):
             allowable_months.add(order_date.month)
@@ -119,13 +121,12 @@ def yearly_sales_performance():
             if report_year in allowable_years:
                 total_sales = 0
                 total_orders = 0
-                for key, item in customer_order_list.items():
+                for key, item in cashier_transaction_keeping.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
                     if order_year == int(report_year):
-                        if item['status'] == 'Payment Completed':
-                            total_sales += float(item['total_price (RM)'])
-                            total_orders += 1
+                        total_sales += float(item['total_spend(RM)'])
+                        total_orders += 1
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_year}'S YEARLY PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
@@ -133,7 +134,9 @@ def yearly_sales_performance():
                 print(f'Total orders: {total_orders}')
                 break
             else:
-                print('Please enter based on given year.')
+                print('\n+-------------------------------------+')
+                print('|⚠️ Please enter based on given year. |')
+                print('+-------------------------------------+')
 
     while True:
         save_report = input('\nSave this report to system? (y=yes, n=no): ').lower().strip()
@@ -142,7 +145,10 @@ def yearly_sales_performance():
                 report_exist = False
                 for key, value in sales_report_file.items():
                     if value['report_type'] == 'yearly sales report' and report_year == value['selected_year']:
-                        print('The report cannot be saved because the same report has been saved previously.')
+                        print('\n+--------------------------------------------------------------------------------+')
+                        print('|⚠️ The report cannot be saved because the same report has been saved previously.|')
+                        print('+--------------------------------------------------------------------------------+')
+
                         report_exist = True
 
                 if not report_exist:
@@ -153,14 +159,19 @@ def yearly_sales_performance():
                         'total_order': total_orders
                     }
                     save_info(sales_report_file)
-                    print('Successfully saved!')
+                    print('\n+---------------------+')
+                    print('| Successfully saved! |')
+                    print('+---------------------+')
+
                     break
                 break
             elif save_report == 'n':
-                print('Exit to previous page.')
+                print('Exit to previous page......')
                 break
             else:
-                print("Please enter 'y' or 'n'.")
+                print('\n+------------------------+')
+                print('|⚠️ Please enter y or n. |')
+                print('+------------------------+')
 
     while True:
         generate_more = input('\nContinue generating yearly sales report? (y=yes, n=no)\n'
@@ -174,7 +185,9 @@ def yearly_sales_performance():
                 generate_sales_report()
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+------------------------+')
+                print('|⚠️ Please enter y or n. |')
+                print('+------------------------+')
 
 
 def monthly_sales_performance():
@@ -193,7 +206,9 @@ def monthly_sales_performance():
             if report_year in allowable_years:
                 break
             else:
-                print('please enter a valid year based on given year.')
+                print('\n+--------------------------------------------------+')
+                print('|⚠️ Please enter a valid year based on given year. |')
+                print('+--------------------------------------------------+')
 
     while True:
         allowable_months = allowable_month(report_year)
@@ -205,16 +220,15 @@ def monthly_sales_performance():
             if report_month in allowable_months:
                 total_sales = 0
                 total_orders = 0
-                for key, item in customer_order_list.items():
+                for key, item in cashier_transaction_keeping.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
                     order_month = order_date.month
 
                     if order_year == int(report_year):
                         if order_month == int(report_month):
-                            if item['status'] == 'Payment Completed':
-                                total_sales += float(item['total_price (RM)'])
-                                total_orders += 1
+                            total_sales += float(item['total_spend(RM)'])
+                            total_orders += 1
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_month}/{report_year} SALES PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
@@ -222,7 +236,9 @@ def monthly_sales_performance():
                 print(f'total orders: {total_orders}')
                 break
             else:
-                print('Please enter based on given month.')
+                print('\n+--------------------------------------+')
+                print('|⚠️ Please enter based on given month. |')
+                print('+--------------------------------------+')
 
     while True:
         save_report = input('\nSave this report to system? (y=yes, n=no): ').lower().strip()
@@ -232,7 +248,9 @@ def monthly_sales_performance():
                 for key, value in sales_report_file.items():
                     if value['report_type'] == 'monthly sales report' and report_year == value[
                         'selected_year'] and report_month == value['selected_month']:
-                        print('The report cannot be saved because the same report has been saved previously.')
+                        print('\n+--------------------------------------------------------------------------------+')
+                        print('|⚠️ The report cannot be saved because the same report has been saved previously.|')
+                        print('+--------------------------------------------------------------------------------+')
                         report_exist = True
 
                 if not report_exist:
@@ -251,7 +269,9 @@ def monthly_sales_performance():
                 print('Exit to previous page.')
                 break
             else:
-                print("Please enter 'y' or 'n'.")
+                print('\n+-----------------------+')
+                print('|⚠️ Please enter y or n.|')
+                print('+-----------------------+')
 
     while True:
         generate_more = input('\nContinue generating monthly sales report? (y=yes, n=no)\n'
@@ -265,7 +285,9 @@ def monthly_sales_performance():
                 generate_sales_report()
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+-----------------------+')
+                print('|⚠️ Please enter y or n.|')
+                print('+-----------------------+')
 
 
 def product_popularity():
@@ -292,18 +314,17 @@ def product_popularity():
                     if validation_empty_entries(report_year):
                         if report_year in allowable_years:
                             product_ordered = {}
-                            for key, item in customer_order_list.items():
+                            for key, item in cashier_transaction_keeping.items():
                                 order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                                 order_year = order_date.year
                                 if order_year == int(report_year):
-                                    if item['status'] == 'Payment Completed':
-                                        for product in item['items_ordered']:
-                                            total_product = product.split(' x ')
-                                            if total_product[0] in product_ordered:
-                                                product_ordered[total_product[0]] += int(total_product[1])
-                                            else:
-                                                product_ordered[total_product[0]] = int(total_product[1])
-                                        print(product_ordered)
+                                    for product in item['items']:
+                                        total_product = product.split(' x ')
+                                        if total_product[0] in product_ordered:
+                                            product_ordered[total_product[0]] += int(total_product[1])
+                                        else:
+                                            product_ordered[total_product[0]] = int(total_product[1])
+                                    print(product_ordered)
 
                             best_seller = None
                             least_seller = None
@@ -333,7 +354,9 @@ def product_popularity():
                             print(f'Least-selling product: {least_seller}, Total quantity sold: {min_quantity}\n')
                             break
                         else:
-                            print('Please enter a valid year based on given year.')
+                            print('\n+-------------------------------------------------+')
+                            print('|⚠️ Please enter a valid year based on given year.|')
+                            print('+-------------------------------------------------+')
                             break
 
                 elif report_service == '2':
@@ -347,7 +370,9 @@ def product_popularity():
                             if report_year in allowable_years:
                                 break
                             else:
-                                print('Please enter a valid year based on given year.\n')
+                                print('\n+-------------------------------------------------+')
+                                print('|⚠️ Please enter a valid year based on given year.|')
+                                print('+-------------------------------------------------+')
 
                     while True:
                         allowable_months = allowable_month(report_year)
@@ -358,19 +383,18 @@ def product_popularity():
                         if validation_empty_entries(report_month):
                             if report_month in allowable_months:
                                 product_ordered = {}
-                                for key, item in customer_order_list.items():
+                                for key, item in cashier_transaction_keeping.items():
                                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                                     order_year = order_date.year
                                     order_month = order_date.month
                                     if order_year == int(report_year) and order_month == int(report_month):
-                                        if item['status'] == 'Payment Completed':
-                                            for product in item['items_ordered']:
-                                                total_product = product.split(' x ')
-                                                if total_product[0] in product_ordered:
-                                                    product_ordered[total_product[0]] += int(total_product[1])
-                                                else:
-                                                    product_ordered[total_product[0]] = int(total_product[1])
-                                            print(product_ordered)
+                                        for product in item['items']:
+                                            total_product = product.split(' x ')
+                                            if total_product[0] in product_ordered:
+                                                product_ordered[total_product[0]] += int(total_product[1])
+                                            else:
+                                                product_ordered[total_product[0]] = int(total_product[1])
+                                        print(product_ordered)
 
                                 best_seller = None
                                 least_seller = None
@@ -399,19 +423,20 @@ def product_popularity():
                                 print(f'{"Least-selling product":<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
                                 break
                             else:
-                                print('Please enter based on given month.\n')
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Please enter based on given month. |')
+                                print('+--------------------------------------+')
                                 break
                 elif report_service == '3':
                     product_ordered = {}
-                    for key, item in customer_order_list.items():
-                        if item['status'] == 'Payment Completed':
-                            for product in item['items_ordered']:
-                                total_product = product.split(' x ')
-                                if total_product[0] in product_ordered:
-                                    product_ordered[total_product[0]] += int(total_product[1])
-                                else:
-                                    product_ordered[total_product[0]] = int(total_product[1])
-                            print(product_ordered)
+                    for key, item in cashier_transaction_keeping.items():
+                        for product in item['items']:
+                            total_product = product.split(' x ')
+                            if total_product[0] in product_ordered:
+                                product_ordered[total_product[0]] += int(total_product[1])
+                            else:
+                                product_ordered[total_product[0]] = int(total_product[1])
+                        print(product_ordered)
 
                     best_seller = None
                     least_seller = None
@@ -444,19 +469,10 @@ def product_popularity():
                     generate_sales_report()
                     break
                 else:
-                    print('Please enter a valid index number.')
+                    print('\n+-------------------------------------+')
+                    print('|⚠️ Please enter a valid index number.|')
+                    print('+-------------------------------------+')
 
 
-'''        product_ordered = {}
-        for key, items in customer_order_list.items():
-            for product in items['items_ordered']:
-                total_product = product.split(' x ')
-                if total_product[0] in product_ordered:
-                    product_ordered[total_product[0]] += int(total_product[1])
-                else:
-                    product_ordered[total_product[0]] = int(total_product[1])
-        print()
-        print(product_ordered)'''
-
-#generate_sales_report()
+generate_sales_report()
 #product_popularity()
