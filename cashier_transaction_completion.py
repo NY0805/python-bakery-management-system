@@ -89,33 +89,48 @@ def receipt(customer):
             for item in customer_details['items_ordered']:
                 item_name, quantity = item.split('x')  # split the item into 2 parts by the separator 'x', store the splitted values in item_name and quantity
 
-                item_price = customer_details['total_price (RM)']
-                amount = int(quantity) * float(item_price)  # calculate the amount of each item by multiplying the quantity and the price
-                print(f'{item_name.title():<40}{quantity:<25}{item_price:<25}{amount:.2f}')  # print the details in a custom format
-                total_amount.append(amount)  # append the amount of each item into the list "total_amount"
-
-                '''for product_details in inventory.values():
+                for product_details in inventory.values():
                     if product_details['product_name'] in item_name:
                         item_price = product_details['price'].replace('RM ', '')  # 'RM' is replaced with empty since it is mentioned in the table header
                         amount = int(quantity) * float(item_price)  # calculate the amount of each item by multiplying the quantity and the price
                         print(f'{item_name.title():<40}{quantity:<25}{item_price:<25}{amount:.2f}')  # print the details in a custom format
                         total_amount.append(amount)  # append the amount of each item into the list "total_amount"
-'''
+
     print('')
     print('-' * overall_width)
 
     # calculate subtotal by adding the amount in "total_amount"
     subtotal = 0
+    service_tax = 0
     for amount in total_amount:
         subtotal += amount
 
-    print(f'{"Points earned: "}{subtotal * 10:<50}{"Subtotal: ":<25}{subtotal:.2f}')
+    print(f'{"":<65}{"Subtotal: ":<25}{subtotal:.2f}')
+    total_discount_price = 0
+    subtotal_discount_price = 0
+    if str(customer) in customer_info:
+        customer_details = customer_info[str(customer)]
+        for discounts in discount.values():
+            unit, price = discounts['Price'].split(' ')
+            discount_value, percentage = discounts['Discount'].split('%')
 
-    #print(f'{"Discount: ".rjust(75)}{"".ljust(15)}{discounted_price}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
-    service_tax = subtotal * 0.06  # calculate the service tax
+            for item in customer_details['items_ordered']:
+                item_name, quantity = item.split('x')  # split the item into 2 parts by the separator 'x', store the splitted values in item_name and quantity
+
+                if item_name.strip() == discounts['Product Name'].strip():
+
+                    if float(discount_value) != 0:
+                        discounted_price = ((float(price) * float(discount_value))/100) * int(quantity)
+                        total_discount_price += discounted_price
+                    else:
+                        subtotal_discount_price += (float(price) * int(quantity))
+
+    print(f'{"Discounted price: ".rjust(75)}{"".ljust(15)}{subtotal_discount_price+total_discount_price:.2f}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
+    service_tax = (subtotal_discount_price + total_discount_price) * 0.06  # calculate the service tax
+
     print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
-    total = subtotal + service_tax  # calculate the final amount that need to be paid by customers
-    print(f'\n{"TOTAL: ".rjust(75)}{"".ljust(15)}{total:.2f}')
+    total = subtotal_discount_price + total_discount_price + service_tax  # calculate the final amount that need to be paid by customers
+    print(f'\n{"Points earned: "}{total * 10}{"TOTAL: ".rjust(56)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
     warning = 'Goods sold are not returnable and refundable !'  # message that warning customers the items are not returnable and refundable
@@ -136,5 +151,5 @@ def receipt(customer):
             }
     save_info(transaction_keeping)  # save the data
 
-#receipt(str(5319258866))
+receipt(str(1234567890))
 

@@ -144,9 +144,9 @@ def recipe_lists():
     print('\nHere are the details for your chosen recipe:\n')
     for values in recipe_list.values():
         if values['recipe_name'].lower() == recipe_choose:
-            print(f'{'Recipe Category':<20}: {values['recipe_category']}')
-            print(f'{'Recipe Name':<20}: {values['recipe_name']}')
-            print(f'{'\nIngredient Used'}:')
+            print(f'{"Recipe Category":<20}: {values["recipe_category"]}')
+            print(f'{"Recipe Name":<20}: {values["recipe_name"]}')
+            print(f'\n{"Ingredient Used"}:')
             ingredient_index = 1
             max_length = 0
             for item in values['ingredient_used']:
@@ -161,15 +161,15 @@ def recipe_lists():
                 print(
                     f'{ingredient_index}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
                 ingredient_index += 1
-            print(f'{'Ingredient Notes':<20}: {values['ingredient_notes']}')
-            print(f'{'\nEquipment Used'}:')
+            print(f'{"Ingredient Notes":<20}: {values["ingredient_notes"]}')
+            print(f'\n{"Equipment Used"}:')
             equipment_index = 1
             for item in values['equipment_used']:
                 print(f'{equipment_index}. {item.title()}')
                 equipment_index += 1
-            print(f'{'Baking Temperature (°C)':<25}: {values['baking_temperature']}')
-            print(f'{'Baking Time (min)':<25}: {values['baking_time']}')
-            print(f'{'\nInstructions'}:')
+            print(f'{"Baking Temperature (°C)":<25}: {values["baking_temperature"]}')
+            print(f'{"Baking Time (min)":<25}: {values["baking_time"]}')
+            print(f'\n{"Instructions"}:')
             instruction_index = 1
             for instruction in values['instructions']:
                 print(f'{instruction_index}. {instruction.upper()}')
@@ -310,7 +310,7 @@ def recipe_lists():
                             print('+-------------------------------------------+')
 
             else:
-                print(f'Not enough {', '.join(unavailable_ingredients)} in stock. You can produce a maximum of '
+                print(f'Not enough {", ".join(unavailable_ingredients)} in stock. You can produce a maximum of '
                       f'{max_possible_quantity} units of {selected_recipe["recipe_name"]}.')
 
         except ValueError:

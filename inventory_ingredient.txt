@@ -39,7 +39,7 @@
         "ingredient_form": "liquid",
         "batch_number": "B003",
         "unit_measurement": "l",
-        "quantity_purchased": 1.0,
+        "quantity_purchased": 0.4,
         "purchase_date": "05-06-2004",
         "expiry_date": "24-11-2004",
         "supplier_name": "bananana",
