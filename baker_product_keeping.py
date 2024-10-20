@@ -255,9 +255,13 @@ def product_details():
         quantity_produced = input(f'1. {product_info[7].ljust(max_length + 2)}: ').strip()
         if validation_empty_entries(quantity_produced):
             if quantity_produced.isdigit():
-                if category == unsaved_product_list[selected_unsaved_product]["production_quantity"]:
+                if int(quantity_produced) == int(unsaved_product_list[selected_unsaved_product]["production_quantity"]):
                     quantity = int(quantity_produced)
                     break
+                else:
+                    print('\n+-------------------------------------------------------+')
+                    print('|⚠️ Quantity produced must same as production quantity. |')
+                    print('+-------------------------------------------------------+\n')
             else:
                 print(
                     '\n+--------------------------------------------------------------------------------------------------+')
@@ -312,12 +316,12 @@ def product_details():
         date_of_production = input(f'4. {product_info[3].ljust(max_length + 2)}: ').strip()
         if validation_empty_entries(date_of_production):
             if validation_date(date_of_production):
-                if date_of_production == '20-10-2024':
+                if date_of_production == unsaved_product_list[selected_unsaved_product]["date_of_production"]:
                     break
                 else:
-                    print('\n+--------------------------------------------------------------------+')
-                    print('|⚠️ Please enter a valid date of production based on the date given. |')
-                    print('+--------------------------------------------------------------------+\n')
+                    print('\n+--------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid date of production based on the date given above. |')
+                    print('+--------------------------------------------------------------------------+\n')
             else:
                 print(
                     '\n+---------------------------------------------------------------------------------------------+')
@@ -450,6 +454,9 @@ def product_details():
     }
 
     save_info(product_data)
+
+    del unsaved_product_list[selected_unsaved_product]  # delete the selected product
+    save_info(unsaved_product_list)
 
     while True:
         try:
