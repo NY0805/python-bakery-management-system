@@ -104,7 +104,7 @@ def ingredient_management():
                 if option_product_management == '1':
                     add_ingredient()
                 elif option_product_management == '2':
-                    pass
+                    remove_ingredient()
                 elif option_product_management == '3':
                     update_ingredient()
                 elif option_product_management == '4':
@@ -459,6 +459,65 @@ def continue_adding():
             print('+--------------------------------------+')
 
 
+def remove_ingredient():
+    while True:
+        print('')
+        printed_centered('INGREDIENT LIST')
+        index = 1
+        for ingredient in ingredient_data.values():
+            print(f'{index}. {ingredient["ingredient_name"]}')
+            index += 1
+        print(f'{len(ingredient_data) + 1}. cancel')
+
+        try:
+            index_of_ingredient_to_remove = int(input(f'\nWhich ingredient do you want to remove? (or enter {len(ingredient_data) + 1} to cancel)\n>>> '))
+            if index_of_ingredient_to_remove == len(ingredient_data) + 1:  # cancel the process
+                print('\nCancelling. Exiting to Ingredient Management page......')
+                break
+
+            elif 1 <= index_of_ingredient_to_remove <= len(ingredient_data):
+                ingredient_to_remove = list(ingredient_data.keys())[index_of_ingredient_to_remove - 1]  # identify baker to remove by accesing the index of key of baker
+                while True:
+                    print(f'\n💡 Current quantity of {ingredient_data[ingredient_to_remove]["ingredient_name"].title()}: {ingredient_data[ingredient_to_remove]["quantity_purchased"]} {ingredient_data[ingredient_to_remove]["unit_measurement"]}')
+                    try:
+                        quantity_remove = float(input('Enter the quantity to remove: '))
+
+                        ingredient_data[ingredient_to_remove]['quantity_purchased'] -= quantity_remove  # delete the selected baker
+                        print(f'\n{quantity_remove} {ingredient_data[ingredient_to_remove]["unit_measurement"]} of {ingredient_data[ingredient_to_remove]["ingredient_name"].title()} is removed.\n')  # inform user that the selected baker is removed successfully
+
+                        save_info(ingredient_data)
+                        break
+
+                    except ValueError:
+                        print('\n+---------------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter numbers only. |')
+                        print('+---------------------------------------------+')
+
+                while True:
+                    remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')  # ask user if they want to continue removing
+                    if remove_more == 'y':
+                        break
+                    elif remove_more == 'n':
+                        break
+                    else:
+                        print('\n+--------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter again. |')
+                        print('+--------------------------------------+\n')
+                if remove_more == 'n':
+                    print('\nStop removing. Exiting to Ingredient Management page......')
+                    break
+
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+\n')
+
+        except ValueError:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
+
+remove_ingredient()
 # function to update ingredient details in the inventory
 def update_ingredient():
     while True:

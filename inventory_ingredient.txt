@@ -25,7 +25,7 @@
         "quantity_purchased": 300.0,
         "purchase_date": "07-08-2004",
         "expiry_date": "09-08-2005",
-        "supplier_name": "lum",
+        "supplier_name": "hxlum",
         "supplier_contact": "019-2345667",
         "cost_per_unit": "RM 0.80",
         "storage_requirement": "dry storage",
