@@ -153,17 +153,6 @@
         "account_status": "active",
         "loyalty_points": 2802
     },
-    "nct": {
-        "customer_username": "nct",
-        "customer_password": "12345678",
-        "age": 44,
-        "gender": "male",
-        "contact_no": "012-9999999",
-        "email": "s@gmail.com",
-        "address": "2",
-        "account_status": "active",
-        "loyalty_points": 1235
-    },
     "lum": {
         "customer_username": "lum",
         "customer_password": "12345678",
@@ -174,5 +163,16 @@
         "address": "dd",
         "account_status": "active",
         "loyalty_points": 0
+    },
+    "nct": {
+        "customer_username": "nct",
+        "customer_password": "12345678",
+        "age": 44,
+        "gender": "male",
+        "contact_no": "012-9999999",
+        "email": "s@gmail.com",
+        "address": "2",
+        "account_status": "active",
+        "loyalty_points": 1235
     }
 }
