@@ -12,13 +12,15 @@ REDEEM_RATES = {
     "Standard": None
 }
 
+
 def determine_loyalty_points(total_price):
-    """Calculate loyalty points based on total price."""
-    points = int(total_price * BASE_POINTS_PER_RM)  # Earn points based on RM spent
-    return points,  # Return as a tuple
+    # Calculate loyalty points based on total price
+    points = int(total_price * BASE_POINTS_PER_RM)
+    return points
+
 
 def update_customer_status(points):
-    """Determine customer status based on points."""
+    # Determine customer status based on points
     if points >= GOLD_REQUIREMENT:
         return "MORNING GLORY'S GOLD"
     elif points >= SILVER_REQUIREMENT:
@@ -28,18 +30,21 @@ def update_customer_status(points):
     else:
         return "Standard"  # Match your file's terminology
 
+
 def load_customer_data():
-    """Load customer data from customer.txt."""
+    # Load customer data from customer.txt
     try:
         with open("customer.txt", "r") as file:
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
 
+
 def save_customer_data(data):
-    """Save updated customer data to customer.txt."""
+    # Save updated customer data to txt
     with open("customer.txt", "w") as file:
         json.dump(data, file, indent=4)
+
 
 def update_customer_loyalty_points(customer_name, points_change):
     """Update the loyalty points for a specific customer."""
@@ -74,6 +79,7 @@ def update_customer_loyalty_points(customer_name, points_change):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
 def update_loyalty_rewards(username, points_change, new_status):
     """Update loyalty rewards for the given username."""
     rewards = load_loyalty_rewards()  # Load current loyalty rewards
@@ -89,6 +95,7 @@ def update_loyalty_rewards(username, points_change, new_status):
     save_loyalty_rewards(rewards)
     print("Updated loyalty rewards saved to customer_loyalty_rewards.txt.")
 
+
 def load_loyalty_rewards():
     """Load customer loyalty rewards data from a file."""
     try:
@@ -101,10 +108,12 @@ def load_loyalty_rewards():
     except FileNotFoundError:
         return {}
 
+
 def save_loyalty_rewards(rewards):
     """Save customer loyalty rewards data to a file."""
     with open('customer_loyalty_rewards.txt', 'w') as file:
         json.dump(rewards, file, indent=4)
+
 
 def log_redeem_history(username, total_spend, points_earned, status):
     """Log the redeem history for a customer."""
@@ -174,8 +183,38 @@ def redeem_cash_voucher(username):
 
     print(f"User {username} does not exist in loyalty rewards.")
 
+
+def view_loyalty_rewards(username):
+    # Display loyalty rewards information for a specific user
+    rewards = load_loyalty_rewards()  # Load from customer_loyalty_rewards.txt
+
+    # Check if the username exists in the rewards data
+    user_rewards = [reward for order_id, reward in rewards.items() if reward['username'] == username]
+
+    if user_rewards:
+        print('\n --Loyalty Rewards Information-- ')
+        print()
+        print("\n--Redeem History--")
+        print('-' * 150)
+        header = f"{'Order ID':<10} | {'Total Spending (RM)':<20} | {'Points Earned':<15} | {'Status':<20} | {'Redeem Rate (RM)':<15} | {'Vouchers Redeemed':<15}"
+        print(header)
+        print('-' * 150)
+        # Display the values in aligned format
+        for order_id, r in rewards.items():
+            if r['username'] == username:
+                points_earned = r.get('loyalty_points', '-')
+                voucher_redeemed = r.get('voucher_redeem', '-')
+                status = r.get('status', '-')  # Get status to avoid KeyError
+                redeem_rate = r.get('redeem_rate (RM)', '-')  # Get redeem rate to avoid KeyError
+                print(
+                    f"{order_id:<10} | {r['total_spending (RM)']:<20} | {points_earned:<15} | {status:<20} | {redeem_rate:<15} | {voucher_redeemed:<15}")
+
+        print('-' * 150)
+    else:
+        print(f"No loyalty rewards found for username: {username}")
+
+
 def loyalty_rewards():
-    """Main function to manage loyalty rewards."""
     while True:
         print('\n-----------------------------------------------')
         print('\t\t\tCUSTOMER LOYALTY REWARDS')
@@ -203,41 +242,4 @@ def loyalty_rewards():
             print("|⚠️ Invalid option! Please try again.|")
 
 
-def view_loyalty_rewards(username):
-    """Display loyalty rewards information for a specific user."""
-    rewards = load_loyalty_rewards()  # Load from customer_loyalty_rewards.txt
-
-    # Check if the username exists in the rewards data
-    user_rewards = [reward for order_id, reward in rewards.items() if reward['username'] == username]
-
-    if user_rewards:
-        print('\n --Loyalty Rewards Information-- ')
-        print()
-
-        # Display redeem history header
-        print("\n--Redeem History--")
-        print('-' * 150)
-
-        # Display category labels and values with alignment
-        header = f"{'Order ID':<10} | {'Total Spending (RM)':<20} | {'Points Earned':<15} | {'Status':<20} | {'Redeem Rate (RM)':<15} | {'Vouchers Redeemed':<15}"
-        print(header)
-        print('-' * 150)
-
-        # Display the values in aligned format
-        for order_id, r in rewards.items():
-            if r['username'] == username:
-                points_earned = r.get('loyalty_points', '-')  # Use .get() to avoid KeyError
-                voucher_redeemed = r.get('voucher_redeem', '-')  # Use .get() to avoid KeyError
-                status = r.get('status', '-')  # Get status to avoid KeyError
-                redeem_rate = r.get('redeem_rate (RM)', '-')  # Get redeem rate to avoid KeyError
-                print(
-                    f"{order_id:<10} | {r['total_spending (RM)']:<20} | {points_earned:<15} | {status:<20} | {redeem_rate:<15} | {voucher_redeemed:<15}")
-
-        print('-' * 150)
-    else:
-        print(f"No loyalty rewards found for username: {username}")
-
-# Example usage
-# view_loyalty_rewards("Mark0825")  # You can call this function with the username when needed
-
-#loyalty_rewards()
+loyalty_rewards()

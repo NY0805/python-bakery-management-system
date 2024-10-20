@@ -6,6 +6,7 @@ import customer_loyalty_rewards
 from datetime import datetime
 from manager_order_management import load_data_from_customer_order_list
 
+
 # Function to generate a 10 digit numeric cart_id
 def generate_cart_id():
     return ''.join([str(random.randint(1, 9)) for _ in range(10)])
@@ -34,6 +35,7 @@ def load_baker_data():
             return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
         return {}  # return empty dictionary if the file does not exist
+
 
 # Function to load manager data from a JSON file
 def load_manager_data():
@@ -261,6 +263,7 @@ def display_cart(cart):
     print(f"\nTotal price: RM {total_price:.2f}")
     return total_price
 
+
 def checkout_or_cancel(cart, customer_name, cart_id):
     if not cart:
         print("\nYour cart is empty! Please add items before proceeding to checkout.")
@@ -349,9 +352,6 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         cart.clear()
     else:
         print("Invalid choice. Please select 1 or 2.")
-
-
-
 
 
 # Main shopping cart function

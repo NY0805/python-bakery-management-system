@@ -99,5 +99,5 @@ def browse_products():
             print("|⚠️Invalid choice, please try again.|")
 
 
-browse_products()
+#browse_products()
 
