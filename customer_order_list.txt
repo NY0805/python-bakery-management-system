@@ -303,5 +303,17 @@
         "total_price (RM)": "38.00",
         "order_date": "20-10-2024",
         "status": "Order Placed"
+    },
+    "9257521182": {
+        "order_id": "ORD030",
+        "username": "jen",
+        "items_ordered": [
+            "red velvet x 2",
+            "cheezy bun x 1",
+            "gingerbread x 1"
+        ],
+        "total_price (RM)": "28.00",
+        "order_date": "20-10-2024",
+        "status": "Payment Completed"
     }
 }

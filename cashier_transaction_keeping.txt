@@ -212,5 +212,15 @@
         ],
         "order_date": "20-10-2024",
         "total_spend(RM)": "9.54"
+    },
+    "MGB-2242260": {
+        "order_id": "ORD030",
+        "items": [
+            "red velvet x 2",
+            "cheezy bun x 1",
+            "gingerbread x 1"
+        ],
+        "order_date": "20-10-2024",
+        "total_spend(RM)": "22.79"
     }
 }

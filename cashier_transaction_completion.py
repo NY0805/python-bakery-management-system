@@ -29,11 +29,11 @@ def save_info(transaction_keeping):
     file.close()  # close the file after writing
 
 
-overall_width = 100  # initiate the width of display panel
+terminal_width = 100  # initiate the width of display panel
 cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
 inventory = load_data_from_manager_product_inventory()  # store the data that retrieved from file into inventory
 transaction_keeping = load_data_from_cashier_transaction_keeping()  # store the data that retrieved from file into transaction_keeping
-discount = discount_management()
+discount_management = discount_management()
 
 
 # define a function to arrange the content in the center
@@ -57,14 +57,14 @@ def receipt(customer):
               'Email: morningglorybakery@gmail.com',
               'Business hours: 9.00AM - 6.00PM']
     print('')
-    print('-' * overall_width)
+    print('-' * terminal_width)
     for i in header:
-        centered(i, overall_width)  # call the function to print the header in the middle
+        centered(i, terminal_width)  # call the function to print the header in the middle
 
-    print('\n' + '=' * overall_width)  # print a separate line
+    print('\n' + '=' * terminal_width)  # print a separate line
     current_time = datetime.now().strftime("%I:%M:%S %p")  # convert the time into string for readability and store it into "current_time" variable.If not in string, it will display 13:45:45.123456
     current_date = datetime.now().strftime("%d-%m-%Y")  # convert the date into string for self-formatting and store it into "current_date" variable
-    print(current_time + current_date.rjust(overall_width-len(current_date)-1))  # specify the format of printing date and time
+    print(current_time + current_date.rjust(terminal_width-len(current_date)-1))  # specify the format of printing date and time
     print(' ')  # blank a line
     invoice_no = random.randint(1000001, 10000000)  # determine the invoice number in random in a range from 1000001 to 10000000
     print(f'{"Invoice no":<11}: MGB-{str(invoice_no)}')
@@ -80,7 +80,7 @@ def receipt(customer):
     # add the header of the table that used to display details in a list
     summary_header = ['Item', 'Qty', 'Price(RM)', 'Amount(RM)']
     print(f'\n{summary_header[0]:<40}{summary_header[1]:<25}{summary_header[2]:<25}{summary_header[3]}')  # print the table header in a custom format, with determining the spaces needed among the words
-    print('-' * overall_width)  # print a separate line
+    print('-' * terminal_width)  # print a separate line
 
     # create a list to store the total amount to pay for each item
     total_amount = []
@@ -97,7 +97,7 @@ def receipt(customer):
                         total_amount.append(amount)  # append the amount of each item into the list "total_amount"
 
     print('')
-    print('-' * overall_width)
+    print('-' * terminal_width)
 
     # calculate subtotal by adding the amount in "total_amount"
     subtotal = 0
@@ -110,7 +110,7 @@ def receipt(customer):
     subtotal_discount_price = 0
     if str(customer) in customer_info:
         customer_details = customer_info[str(customer)]
-        for discounts in discount.values():
+        for discounts in discount_management.values():
             unit, price = discounts['Price'].split(' ')
             discount_value, percentage = discounts['Discount'].split('%')
 
@@ -120,7 +120,7 @@ def receipt(customer):
                 if item_name.strip() == discounts['Product Name'].strip():
 
                     if float(discount_value) != 0:
-                        discounted_price = ((float(price) * float(discount_value))/100) * int(quantity)
+                        discounted_price = (float(price) - (float(price) * float(discount_value))/100) * int(quantity)
                         total_discount_price += discounted_price
                     else:
                         subtotal_discount_price += (float(price) * int(quantity))
@@ -130,14 +130,14 @@ def receipt(customer):
 
     print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
     total = subtotal_discount_price + total_discount_price + service_tax  # calculate the final amount that need to be paid by customers
-    print(f'\n{"Points earned: "}{total * 10}{"TOTAL: ".rjust(56)}{"".ljust(15)}{total:.2f}')
+    print(f'\n{"Points earned: "}{int(total * 10)}{"TOTAL: ".rjust(57)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
     warning = 'Goods sold are not returnable and refundable !'  # message that warning customers the items are not returnable and refundable
-    centered(warning, overall_width)  # print the warning message in the center according to the customize display panel's width
+    centered(warning, terminal_width)  # print the warning message in the center according to the customize display panel's width
     appreciation = '***** Thank You Please Come Again *****'  # express the appreciation to customers
-    centered(appreciation, overall_width)  # print the appreciation in the center according to the customize display panel's width
-    print('-' * overall_width)
+    centered(appreciation, terminal_width)  # print the appreciation in the center according to the customize display panel's width
+    print('-' * terminal_width)
     print('')
 
     # determine the format of data as dictionary format to be saved to the file
@@ -151,5 +151,5 @@ def receipt(customer):
             }
     save_info(transaction_keeping)  # save the data
 
-receipt(str(1234567890))
+receipt(str(9257521182))
 

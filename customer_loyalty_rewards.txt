@@ -112,5 +112,14 @@
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,
         "redeem_history": []
+    },
+    "14": {
+        "username": "jen",
+        "total_spending (RM)": 56.0,
+        "loyalty_points": 560,
+        "status": "MORNING GLORY'S STANDARD",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
     }
 }

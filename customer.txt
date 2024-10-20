@@ -129,7 +129,7 @@
         "email": "sd@gmail.com",
         "address": "12",
         "account_status": "active",
-        "loyalty_points": 0
+        "loyalty_points": 560
     },
     "SOS": {
         "customer_username": "SOS",
