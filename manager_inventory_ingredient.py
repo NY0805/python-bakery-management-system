@@ -517,7 +517,7 @@ def remove_ingredient():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-remove_ingredient()
+
 # function to update ingredient details in the inventory
 def update_ingredient():
     while True:
