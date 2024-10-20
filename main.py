@@ -27,7 +27,7 @@ bakery = '''
 print(bakery)
 
 print('***************************************************')
-print('\t\tWELCOME TO《MORNING GLORY BAKERY》')
+print('\t\tWELCOME TO 《MORNING GLORY BAKERY》')
 print('***************************************************')
 
 # provide the options for different roles

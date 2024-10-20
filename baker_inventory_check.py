@@ -294,7 +294,7 @@ def recipe_lists():
                             print('+-------------------------------------------+')
 
                 while True:
-                    produce_more = input('\nContinue adding new recipe? (y=yes, n=no)'
+                    produce_more = input('\nContinue working on another recipe? (y=yes, n=no)'
                                          '\n>>> ')
                     if validation_empty_entries(produce_more):
                         if produce_more == 'y':

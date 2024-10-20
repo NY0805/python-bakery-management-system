@@ -1,6 +1,5 @@
 import json
 import random
-from collections import defaultdict
 from datetime import datetime
 import time
 
@@ -41,7 +40,7 @@ def load_data_from_manager_notifications():
         return {}  # return empty dictionary if the file does not exist
 
 
-# function that save baker equipment data to 2 different files
+# function that save new added equipment data to baker equipment file
 def save_info_equipment_details(equipment_details):
     file = open('baker_equipment.txt', 'w')  # open the file to write
     json.dump(equipment_details, file,
@@ -49,6 +48,7 @@ def save_info_equipment_details(equipment_details):
     file.close()  # close the file after writing
 
 
+# function that save malfunction and maintenance report to manager notification file
 def save_info_equipment_management(equipment_management):
     file = open('notification.txt', 'w')  # open the file to write
     json.dump(equipment_management, file,
@@ -56,38 +56,25 @@ def save_info_equipment_management(equipment_management):
     file.close()  # close the file after writing
 
 
-# empty entries validation function
+# validate empty entries
 def validation_empty_entries(info):
     if info:
-        return True
+        return True  # if user input have value, return True
     else:
-        print('❗Please enter something...\n')
-        return False
+        print('\n❗Please enter something...\n')
+        return False  # if user input does not have value, print error message and return false
 
 
-# function that validate digits only
-def validation_digit_only(info):
-    if info.isdigit():
-        return True
-    else:
-        return False
-
-
-def validation_alphanum_only(info):
-    if info.isalnum():
-        return True
-    else:
-        return False
-
-
+# validate whether user's input is in date format
 def validation_date(info, date_format='%d-%m-%Y'):
     try:
         datetime.strptime(info, date_format)
-        return True
+        return True  # if user input is in date format, return True
     except ValueError:
-        return False
+        return False  # if user input not in date format, return False
 
 
+# function to print message with border on top and bottom
 def printed_centered(info):
     print('-' * 47)
     side_space = (47 - len(info)) // 2  # determine how much blank space to leave
@@ -95,13 +82,16 @@ def printed_centered(info):
     print('-' * 47)
 
 
-equipment_list = load_data_from_baker_equipment()
+equipment_list = load_data_from_baker_equipment()  #
 
-equipment_info = load_data_from_baker_equipment()
-
-equipment_category_groups = defaultdict(list)
+equipment_category_groups = {}
 for value in equipment_list.values():
-    equipment_category_groups[value['category']].append(value)
+    equipment_category = value['category']
+
+    if equipment_category not in equipment_category_groups:
+        equipment_category_groups[equipment_category] = []
+
+    equipment_category_groups[equipment_category].append(value)
 
 
 def enter_equipment():
@@ -119,7 +109,7 @@ def enter_equipment():
     manufacturer_email = input('enter manufacturer email: ')
     warranty = input('enter warranty: ')
 
-    equipment_info[equipment_name] = {
+    equipment_list[equipment_name] = {
         'category': category,
         'equipment_name': equipment_name,
         'purchase_quantity': purchase_quantity,
@@ -132,7 +122,7 @@ def enter_equipment():
         'warranty': warranty
     }
 
-    save_info_equipment_details(equipment_info)
+    save_info_equipment_details(equipment_list)
 
 
 def equipment_management():
@@ -157,9 +147,14 @@ def equipment_management():
                         print('Exiting to baker privilege...')
                         break
                 else:
-                    print('Please enter a valid service type.\n')
+                    print('\n+--------------------------------------+')
+                    print('|⚠️ Please enter a valid service type. |')
+                    print('+--------------------------------------+\n')
             except ValueError:
-                print('Please enter a valid number. (Cannot contain spacing.)\n')
+                print('\n+----------------------------------------------------------+')
+                print('|⚠️ Please enter a valid number. (Cannot contain spacing.) |')
+                print('+----------------------------------------------------------+\n')
+
 
 def equipment_lists():
     print('')
@@ -183,11 +178,16 @@ def equipment_lists():
                 if 1 <= selected_index <= len(equipment_index_mapping):
                     break
                 else:
-                    print('Please enter a valid number based on list given.\n')
+                    print('\n+----------------------------------------------------+')
+                    print('|⚠️ Please enter a valid number based on list given. |')
+                    print('+----------------------------------------------------+\n')
             except ValueError:
-                print('Please enter a valid number. (Cannot contain spacing.)\n')
+                print('\n+----------------------------------------------------------+')
+                print('|⚠️ Please enter a valid number. (Cannot contain spacing.) |')
+                print('+----------------------------------------------------------+\n')
 
     return selected_index, equipment_index_mapping[selected_index]
+
 
 def equipment_malfunction():
     malfunction_data = load_data_from_manager_notifications()
@@ -197,55 +197,62 @@ def equipment_malfunction():
     selected_equipment, equipment_info = equipment_lists()
     category, equipment = equipment_info  #unpacking of tuple
 
-    equipment_detail = ['Category', 'Equipment Name', 'Serial Number', 'Manufacturer', 'Model Number', 'Purchase Date',
-                        'Purchase Quantity', 'Next Scheduled Maintenance', 'Manufacturer Email', 'Warranty',
-                        'Date Of Report', 'Current Condition']
-
-    max_length = 0
-    for item in equipment_detail:
-        if len(item) > max_length:
-            max_length = len(item)
+    max_length = len('Next Scheduled Maintenance')
 
     print('\nBasic details of selected equipment:\n')
-    print(f'{equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
-    print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
-    for item, serial_number in enumerate(equipment['serial_number'], start=1):
-        print(
-            f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
-    print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment["manufacturer"].title()}')  # manufacturer
-    print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
-    print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment["purchase_date"]}')  # purchase date
-    print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment["purchase_quantity"]}')  # purchase quantity
-    print(
-        f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
-    print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
-    print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
+    print(f'{'Category':<28}: {category.title()}')  # category
+    print(f'{'Equipment Name':<28}: {equipment["equipment_name"].title()}')  # equipment name
+    index = 1
+    for serial_number in equipment['serial_number']:
+        print(f'Serial Number {str(index).ljust((max_length + 1) - len('Serial Number'))}: {serial_number}')
+        index += 1
+    print(f'{'Manufacturer':<28}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{'Model Number':<28}: {equipment["model_number"]}')  # model number
+    print(f'{'Purchase Date':<28}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{'Purchase Quantity':<28}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(f'{'Next Scheduled Maintenance':<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(f'{'Manufacturer Email':<28}: {equipment["manufacturer_email"]}')  # manufacturer email
+    print(f'{'Warranty':<28}: {equipment["warranty"]}')  # warranty
 
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
-    print(f'1. {equipment_detail[10].ljust(max_length + 2)}: {time.strftime("%d-%m-%Y")}')  # report date
-    print(f'2. {equipment_detail[11].ljust(max_length + 2)}: Malfunction')  # current condition
+    print(f'1. {'Date of Report':<20}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {'Current Condition':<20}: Malfunction')  # current condition
+    print('')
 
     while True:
-        serial_number = input('\nEnter the serial number: ')
+        serial_number = input('Enter the serial number: ').strip()
         if validation_empty_entries(serial_number):
-            if validation_alphanum_only(serial_number):
+            if serial_number.isalnum():
                 if serial_number in equipment['serial_number']:
                     break
                 else:
-                    print('Please enter a valid serial number based on the list given. (Case sensitive)\n')
+                    print('\n+--------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid serial number based on the list given. (Case sensitive) |')
+                    print('+--------------------------------------------------------------------------------+\n')
             else:
-                print('Please enter a valid serial number. (Cannot contain any spacing and special characters.)\n')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------+')
+                print('|⚠️ Please enter a valid serial number. (Cannot contain any spacing and special characters.) |')
+                print(
+                    '+--------------------------------------------------------------------------------------------+\n')
 
     while True:
         malfunction_date = input('Enter the date of malfunction (DD-MM-YYYY): ')
         if validation_empty_entries(malfunction_date):
             if validation_date(malfunction_date):
-                # cannot smaller than system date
-                break
+                malfunction_date = datetime.strptime(malfunction_date, '%d-%m-%Y')
+                if malfunction_date <= datetime.now():
+                    break
+                else:
+                    print('\n+-------------------------------------------------------------------------------+')
+                    print(f'|⚠️ Please enter a valid malfunction date. Cannot greater than date of report. |')
+                    print('+-------------------------------------------------------------------------------+\n')
             else:
-                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+                print('\n+--------------------------------------------------------------------+')
+                print('|⚠️ Invalid date format. Please enter the date in DD-MM-YYYY format. |')
+                print('+--------------------------------------------------------------------+\n')
 
     while True:
         last_maintenance_date_str = input('Enter the last maintenance date (DD-MM-YYYY): ')
@@ -254,13 +261,16 @@ def equipment_malfunction():
                 # convert last_maintenance_date_str from string to datetime format
                 last_maintenance_date = datetime.strptime(last_maintenance_date_str, '%d-%m-%Y')
                 # convert malfunction_date from string to datetime format
-                malfunction_date_new = datetime.strptime(malfunction_date, '%d-%m-%Y')
-                if last_maintenance_date <= malfunction_date_new:
+                if last_maintenance_date <= malfunction_date:
                     break
                 else:
-                    print('Please enter a valid last maintenance date. Cannot greater than malfunction date.')
+                    print('\n+-------------------------------------------------------------------------------------+')
+                    print('|⚠️ Please enter a valid last maintenance date. Cannot greater than malfunction date. |')
+                    print('+-------------------------------------------------------------------------------------+\n')
             else:
-                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+                print('\n+--------------------------------------------------------------------+')
+                print('|⚠️ Invalid date format. Please enter the date in DD-MM-YYYY format. |')
+                print('+--------------------------------------------------------------------+\n')
 
     while True:
         description = input('Enter a clear description of the malfunction: ')
@@ -312,7 +322,9 @@ def equipment_malfunction():
                 print('Report submission has been canceled.\n')
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+----------------------------+')
+                print("|⚠️ Please enter 'y' or 'n'. |")
+                print('+----------------------------+\n')
 
     while True:
         report_more = input('Continue reporting? (y=yes, n=no)\n'
@@ -326,67 +338,75 @@ def equipment_malfunction():
                 equipment_management()
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+----------------------------+')
+                print("|⚠️ Please enter 'y' or 'n'. |")
+                print('+----------------------------+\n')
 
 
 def equipment_maintenance():
     maintenance_data = load_data_from_manager_notifications()
+
     print('')
     print('-' * 140)
-    print('\nWelcome to the Equipment Maintenance Report page. Please follow the instructions to report any issues.\n')
+    print('\nWelcome to the Equipment Maintenance Report page. Please follow the instructions to report any issues.')
     selected_equipment, equipment_info = equipment_lists()
     category, equipment = equipment_info  # unpacking of tuple
 
-    equipment_detail = ['Category', 'Equipment Name', 'Serial Number', 'Manufacturer', 'Model Number', 'Purchase Date',
-                        'Purchase Quantity', 'Next Scheduled Maintenance', 'Manufacturer Email', 'Warranty',
-                        'Date Of Report', 'Current Condition']
-
-    max_length = 0
-    for item in equipment_detail:
-        if len(item) > max_length:
-            max_length = len(item)
+    max_length = len('Next Scheduled Maintenance')
 
     print('\nBasic details of selected equipment:\n')
-    print(f'{equipment_detail[0].ljust(max_length + 4)}: {category.title()}')  # category
-    print(f'{equipment_detail[1].ljust(max_length + 4)}: {equipment["equipment_name"].title()}')  # equipment name
-    for item, serial_number in enumerate(equipment['serial_number'], start=1):
-        print(
-            f'{equipment_detail[2]} {str(item).ljust((max_length + 3) - len(equipment_detail[2]))}: {serial_number}')  # serial number
-    print(f'{equipment_detail[3].ljust(max_length + 4)}: {equipment["manufacturer"].title()}')  # manufacturer
-    print(f'{equipment_detail[4].ljust(max_length + 4)}: {equipment["model_number"]}')  # model number
-    print(f'{equipment_detail[5].ljust(max_length + 4)}: {equipment["purchase_date"]}')  # purchase date
-    print(f'{equipment_detail[6].ljust(max_length + 4)}: {equipment["purchase_quantity"]}')  # purchase quantity
-    print(
-        f'{equipment_detail[7].ljust(max_length + 4)}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
-    print(f'{equipment_detail[8].ljust(max_length + 4)}: {equipment["manufacturer_email"]}')  # manufacturer email
-    print(f'{equipment_detail[9].ljust(max_length + 4)}: {equipment["warranty"]}')  # warranty
+    print(f'{'Category':<28}: {category.title()}')  # category
+    print(f'{'Equipment Name':<28}: {equipment["equipment_name"].title()}')  # equipment name
+    index = 1
+    for serial_number in equipment['serial_number']:
+        print(f'Serial Number {str(index).ljust((max_length + 1) - len('Serial Number'))}: {serial_number}')
+        index += 1
+    print(f'{'Manufacturer':<28}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{'Model Number':<28}: {equipment["model_number"]}')  # model number
+    print(f'{'Purchase Date':<28}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{'Purchase Quantity':<28}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(f'{'Next Scheduled Maintenance':<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(f'{'Manufacturer Email':<28}: {equipment["manufacturer_email"]}')  # manufacturer email
+    print(f'{'Warranty':<28}: {equipment["warranty"]}')  # warranty
 
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
-    print(f'1. {equipment_detail[10].ljust(max_length + 2)}: {time.strftime("%d-%m-%Y")}')  # report date
-    print(f'2. {equipment_detail[11].ljust(max_length + 2)}: Maintenance Needed\n')  # current condition
+    print(f'1. {'Date of Report':<20}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {'Current Condition':<20}: Maintenance Needed')  # current condition
+    print('')
 
     while True:
         serial_number = input('Enter the serial number: ')
         if validation_empty_entries(serial_number):
-            if validation_alphanum_only(serial_number):
+            if serial_number.isalnum():
                 if serial_number in equipment['serial_number']:
                     break
                 else:
-                    print('Please enter a valid serial number based on the list given. (Case sensitive)\n')
+                    print('\n+--------------------------------------------------------------------------------+')
+                    print("|⚠️ Please enter a valid serial number based on the list given. (Case sensitive) |")
+                    print('+--------------------------------------------------------------------------------+\n')
             else:
-                print('Please enter a valid serial number. (Cannot contain any spacing and special characters.)\n')
+                print(
+                    '\n+--------------------------------------------------------------------------------------------+')
+                print("|⚠️ Please enter a valid serial number. (Cannot contain any spacing and special characters.) |")
+                print(
+                    '+--------------------------------------------------------------------------------------------+\n')
 
     while True:
         maintenance_needed_date = input('Enter the date of incident (DD-MM-YYYY): ')
         if validation_empty_entries(maintenance_needed_date):
-            # maintenance_needed_date_new = datetime.strptime(maintenance_needed_date, '%d-%m-%Y')
-            if validation_date(maintenance_needed_date):
-                # if maintenance_needed_date_new < systemdate
+            maintenance_needed_date = datetime.strptime(maintenance_needed_date, '%d-%m-%Y')
+            if maintenance_needed_date <= datetime.now():
                 break
             else:
-                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+                print('\n+--------------------------------------------------------------------------------------+')
+                print(f'|⚠️ Please enter a valid maintenance needed date. Cannot greater than date of report. |')
+                print('+--------------------------------------------------------------------------------------+\n')
+        else:
+            print('\n+---------------------------------------------------------------------+')
+            print(f'|⚠️ Invalid date format. Please enter the date in DD-MM-YYYY format. |')
+            print('+---------------------------------------------------------------------+\n')
 
     while True:
         last_maintenance_date_str = input('Enter the last maintenance date (DD-MM-YYYY): ')
@@ -395,24 +415,32 @@ def equipment_maintenance():
                 # convert last_maintenance_date_str from string to datetime format
                 last_maintenance_date = datetime.strptime(last_maintenance_date_str, '%d-%m-%Y')
                 # convert malfunction_date from string to datetime format
-                maintenance_needed_date_new = datetime.strptime(maintenance_needed_date, '%d-%m-%Y')
-                if last_maintenance_date <= maintenance_needed_date_new:
+                if last_maintenance_date <= maintenance_needed_date:
                     break
                 else:
-                    print('Please enter a valid last maintenance date. Cannot greater than malfunction date.')
+                    print('\n+--------------------------------------------------------------------------------------+')
+                    print(f'|⚠️ Please enter a valid last maintenance date. Cannot greater than malfunction date. |')
+                    print('+--------------------------------------------------------------------------------------+\n')
             else:
-                print('Invalid date format. Please enter the date in DD-MM-YYYY format.\n')
+                print('\n+---------------------------------------------------------------------+')
+                print(f'|⚠️ Invalid date format. Please enter the date in DD-MM-YYYY format. |')
+                print('+---------------------------------------------------------------------+\n')
 
     while True:
-        severity = input('Enter the severity of the issue (Choose between: urgent, high, medium, low): ').lower().strip()
+        severity = input(
+            'Enter the severity of the issue (Choose between: urgent, high, medium, low): ').lower().strip()
         if validation_empty_entries(severity):
             if severity.isalpha():
                 if severity in ['urgent', 'high', 'medium', 'low']:
                     break
                 else:
-                    print('Please input the severity level based on the given options.\n')
+                    print('\n+----------------------------------------------------------------+')
+                    print(f'|⚠️ Please input the severity level based on the given options. |')
+                    print('+----------------------------------------------------------------+\n')
             else:
-                print('Invalid input. (Cannot contain any spacings, digits and special characters.)\n')
+                print('\n+---------------------------------------------------------------------------------+')
+                print(f'|⚠️ Invalid input. (Cannot contain any spacings, digits and special characters.) |')
+                print('+---------------------------------------------------------------------------------+\n')
 
     while True:
         description = input('Enter a clear description of the maintenance issue: ')
@@ -443,7 +471,7 @@ def equipment_maintenance():
                         break  # Exit loop since we don't need to check for duplicates in this case
 
                 maintenance_data[serial_number] = {
-                    'report_number': previous_number,
+                    'report_number': f'REPORT-{previous_number}',
                     'category': category,
                     'equipment_name': equipment['equipment_name'],
                     'serial_number': serial_number,
@@ -466,7 +494,9 @@ def equipment_maintenance():
                 print('Report submission has been canceled.\n')
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+----------------------------+')
+                print("|⚠️ Please enter 'y' or 'n'. |")
+                print('+----------------------------+\n')
 
     while True:
         report_more = input('Continue reporting? (y=yes, n=no)\n'
@@ -480,7 +510,9 @@ def equipment_maintenance():
                 equipment_management()
                 break
             else:
-                print("Please enter 'y' or 'n'.\n")
+                print('\n+----------------------------+')
+                print("|⚠️ Please enter 'y' or 'n'. |")
+                print('+----------------------------+\n')
 
 
-#equipment_management()
+equipment_management()

@@ -20,6 +20,23 @@ def load_data_from_sales_report():
         return {}  # return empty dictionary if the file does not exist
 
 
+def load_data_from_customer_review():
+    try:
+        file = open('customer_reviews.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
+
+
 def load_data_from_cashier_transaction_keeping():
     try:
         file = open('cashier_transaction_keeping.txt', 'r')  # open the file and read
@@ -54,6 +71,7 @@ def validation_empty_entries(info):
 
 cashier_transaction_keeping = load_data_from_cashier_transaction_keeping()
 sales_report_file = load_data_from_sales_report()
+customer_review = load_data_from_customer_review()
 
 
 def generate_sales_report():
@@ -119,19 +137,40 @@ def yearly_sales_performance():
         report_year = input('Please enter the year you want to generate report: ')
         if validation_empty_entries(report_year):
             if report_year in allowable_years:
+
                 total_sales = 0
                 total_orders = 0
+                previous_total_sales = 0
+                previous_total_orders = 0
+                previous_year = int(report_year) - 1
+
                 for key, item in cashier_transaction_keeping.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
                     if order_year == int(report_year):
                         total_sales += float(item['total_spend(RM)'])
                         total_orders += 1
+                    if order_year == previous_year:
+                        previous_total_sales += float(item['total_spend(RM)'])
+                        previous_total_orders += 1
+
+                if total_sales and previous_total_sales != 0:
+                    sales_ratio = (total_sales / previous_total_sales) * 100
+                    percentage_difference = ((total_sales - previous_total_sales) / previous_total_sales) * 100
+                    formatted_sales_ratio = f"{sales_ratio:.2f}%"
+                    formatted_percentage_difference = f"{percentage_difference:.2f}%"
+                else:
+                    formatted_sales_ratio = 'No previous sales'
+                    formatted_percentage_difference = 'No previous sales'
+
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_year}'S YEARLY PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
-                print(f'Total sales: {total_sales}')
-                print(f'Total orders: {total_orders}')
+                print(f'{'Total Sales':<13}: {total_sales:.2f}')
+                print(f'{'Total Orders':<13}: {total_orders}')
+                print('')
+                print(f'Sales Growth(%) for {report_year} Compared to {previous_year:<5}: {formatted_sales_ratio}')
+                print(f'{'Actual Percentage Growth':<42}: {formatted_percentage_difference}')
                 break
             else:
                 print('\n+-------------------------------------+')
@@ -218,8 +257,16 @@ def monthly_sales_performance():
         report_month = input('Please enter the month you want to generate report: ')
         if validation_empty_entries(report_month):
             if report_month in allowable_months:
+
                 total_sales = 0
                 total_orders = 0
+                previous_total_sales = 0
+                previous_total_orders = 0
+                if int(report_month) != 1:
+                    previous_month = int(report_month) - 1
+                else:
+                    previous_month = int(report_month)
+
                 for key, item in cashier_transaction_keeping.items():
                     order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                     order_year = order_date.year
@@ -229,11 +276,28 @@ def monthly_sales_performance():
                         if order_month == int(report_month):
                             total_sales += float(item['total_spend(RM)'])
                             total_orders += 1
+                        if order_month == previous_month:
+                            previous_total_sales += float(item['total_spend(RM)'])
+                            previous_total_orders += 1
+
+                if total_sales and previous_total_sales != 0:
+                    sales_ratio = (total_sales / previous_total_sales) * 100
+                    percentage_difference = ((total_sales - previous_total_sales) / previous_total_sales) * 100
+                    formatted_sales_ratio = f"{sales_ratio:.2f}%"
+                    formatted_percentage_difference = f"{percentage_difference:.2f}%"
+                else:
+                    formatted_sales_ratio = 'No previous sales'
+                    formatted_percentage_difference = 'No previous sales'
+
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_month}/{report_year} SALES PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
-                print(f'total sales: {total_sales}')
-                print(f'total orders: {total_orders}')
+                print(f'{'Total Sales':<15}: {total_sales:.2f}')
+                print(f'{'Total Orders':<15}: {total_orders}')
+                print('')
+                print(
+                    f'Sales Growth for {report_month}/{report_year} Compared to {previous_month}/{report_year:<5}: {formatted_sales_ratio}')
+                print(f'{'Actual Percentage Growth':<44}: {formatted_percentage_difference}')
                 break
             else:
                 print('\n+--------------------------------------+')
@@ -350,8 +414,8 @@ def product_popularity():
                             print('\n----------------------------------------------------------')
                             print(f"\t\t\t{report_year}'S PRODUCT POPULARITY SUMMARY")
                             print('----------------------------------------------------------')
-                            print(f'\nTop-selling product: {best_seller}, Total quantity sold: {max_quantity}')
-                            print(f'Least-selling product: {least_seller}, Total quantity sold: {min_quantity}\n')
+                            print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
+                            print(f'{"Top-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
                             break
                         else:
                             print('\n+-------------------------------------------------+')
@@ -419,8 +483,10 @@ def product_popularity():
                                 print('\n----------------------------------------------------------')
                                 print(f"\t\t\t{report_month}/{report_year} PRODUCT POPULARITY SUMMARY")
                                 print('----------------------------------------------------------')
-                                print(f'\n{"Top-selling product":<25}: {best_seller}, Total quantity sold: {max_quantity}')
-                                print(f'{"Least-selling product":<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                                print(
+                                    f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
+                                print(
+                                    f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
                                 break
                             else:
                                 print('\n+--------------------------------------+')
@@ -461,8 +527,8 @@ def product_popularity():
                     print('\n----------------------------------------------------------')
                     print(f"\t\t\tOVERALL PRODUCT POPULARITY SUMMARY")
                     print('----------------------------------------------------------')
-                    print(f'\n{"Top-selling product":<25}: {best_seller}, Total quantity sold: {max_quantity}')
-                    print(f'{"Least-selling product":<25}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                    print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
+                    print(f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
                     break
                     break
                 elif report_service == '4':
@@ -474,5 +540,5 @@ def product_popularity():
                     print('+-------------------------------------+')
 
 
-generate_sales_report()
-#product_popularity()
+#generate_sales_report()
+product_popularity()

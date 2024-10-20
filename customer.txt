@@ -163,5 +163,16 @@
         "address": "2",
         "account_status": "active",
         "loyalty_points": 1235
+    },
+    "lum": {
+        "customer_username": "lum",
+        "customer_password": "12345678",
+        "age": 14,
+        "gender": "prefer not to say",
+        "contact_no": "019-8972345",
+        "email": "xx@gg.com",
+        "address": "dd",
+        "account_status": "active",
+        "loyalty_points": 0
     }
 }
