@@ -4,6 +4,7 @@ from datetime import datetime  # %I = 01-12, %H = 00-23
 from system_administration_cashier import load_data_from_cashier
 from manager_order_management import load_data_from_customer_order_list
 from manager_inventory_control import load_data_from_manager_product_inventory
+from cashier_discount_management import discount_management
 
 
 def load_data_from_cashier_transaction_keeping():
@@ -32,6 +33,7 @@ overall_width = 100  # initiate the width of display panel
 cashier = load_data_from_cashier()  # store the data that retrieved from file into cashier
 inventory = load_data_from_manager_product_inventory()  # store the data that retrieved from file into inventory
 transaction_keeping = load_data_from_cashier_transaction_keeping()  # store the data that retrieved from file into transaction_keeping
+discount = discount_management()
 
 
 # define a function to arrange the content in the center
@@ -54,6 +56,8 @@ def receipt(customer):
               'Tel: 04-5678951',
               'Email: morningglorybakery@gmail.com',
               'Business hours: 9.00AM - 6.00PM']
+    print('')
+    print('-' * overall_width)
     for i in header:
         centered(i, overall_width)  # call the function to print the header in the middle
 
@@ -85,13 +89,18 @@ def receipt(customer):
             for item in customer_details['items_ordered']:
                 item_name, quantity = item.split('x')  # split the item into 2 parts by the separator 'x', store the splitted values in item_name and quantity
 
-                for product_details in inventory.values():
+                item_price = customer_details['total_price (RM)']
+                amount = int(quantity) * float(item_price)  # calculate the amount of each item by multiplying the quantity and the price
+                print(f'{item_name.title():<40}{quantity:<25}{item_price:<25}{amount:.2f}')  # print the details in a custom format
+                total_amount.append(amount)  # append the amount of each item into the list "total_amount"
+
+                '''for product_details in inventory.values():
                     if product_details['product_name'] in item_name:
                         item_price = product_details['price'].replace('RM ', '')  # 'RM' is replaced with empty since it is mentioned in the table header
                         amount = int(quantity) * float(item_price)  # calculate the amount of each item by multiplying the quantity and the price
                         print(f'{item_name.title():<40}{quantity:<25}{item_price:<25}{amount:.2f}')  # print the details in a custom format
                         total_amount.append(amount)  # append the amount of each item into the list "total_amount"
-
+'''
     print('')
     print('-' * overall_width)
 
@@ -102,11 +111,10 @@ def receipt(customer):
 
     print(f'{"Points earned: "}{subtotal * 10:<50}{"Subtotal: ":<25}{subtotal:.2f}')
 
-    discounted_price = 0  # initiate the discounted_price to 0
-    print(f'{"Discount: ".rjust(75)}{"".ljust(15)}{discounted_price}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
+    #print(f'{"Discount: ".rjust(75)}{"".ljust(15)}{discounted_price}')  # assign the corresponding new value to discounted_price if customers want to redeem their price
     service_tax = subtotal * 0.06  # calculate the service tax
     print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
-    total = subtotal + service_tax - discounted_price  # calculate the final amount that need to be paid by customers
+    total = subtotal + service_tax  # calculate the final amount that need to be paid by customers
     print(f'\n{"TOTAL: ".rjust(75)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
@@ -114,6 +122,8 @@ def receipt(customer):
     centered(warning, overall_width)  # print the warning message in the center according to the customize display panel's width
     appreciation = '***** Thank You Please Come Again *****'  # express the appreciation to customers
     centered(appreciation, overall_width)  # print the appreciation in the center according to the customize display panel's width
+    print('-' * overall_width)
+    print('')
 
     # determine the format of data as dictionary format to be saved to the file
     for cart_id, customer_details in customer_info.items():
@@ -122,9 +132,9 @@ def receipt(customer):
                 "order_id": customer_details['order_id'],
                 "items": customer_details['items_ordered'],
                 "order_date": current_date,
-                "total_spend(RM)": total
+                "total_spend(RM)": f'{total:.2f}'
             }
     save_info(transaction_keeping)  # save the data
 
-#receipt(str(1346578392))
+#receipt(str(5319258866))
 

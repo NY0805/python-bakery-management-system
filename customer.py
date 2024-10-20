@@ -38,6 +38,7 @@ customer_info = load_data_from_customer()
 
 def sign_up():
 
+    customer_name = input("Name: ")
     customer_username = input("Username: ")
     if customer_username in customer_info:
         print('\n+--------------------------------------------------+')
@@ -102,7 +103,7 @@ def sign_up():
 
         address = input('Address: ')
 
-        customer_info[customer_username] = {
+        customer_info[customer_name] = {
             'customer_username': customer_username,
             'customer_password': customer_password,
             'age': age,
@@ -116,28 +117,35 @@ def sign_up():
 
         save_info(customer_info)
         print('\nInformation saved.')
-        print(f'Welcome, {customer_username}! Your account has been created successfully!\n')
+        print(f'Welcome, {customer_name}! Your account has been created successfully!\n')
 
 
 def login():
-    customer_username = input("Username: ")
-    while customer_username not in customer_info:
+    customer_name = input('\nName: ')
+    if customer_name in customer_info:
+        customer_username = input("Username: ")
+        while customer_username not in customer_info[customer_name][customer_username]:
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Incorrect username. Please enter again. |')
+            print('+-------------------------------------------+\n')
+
+        customer_password = input("Password: ")
+        while customer_password != customer_info[customer_username]['customer_password']:
+            print('\n+-------------------------------------------+')
+            print('|⚠️ Incorrect password. Please enter again. |')
+            print('+-------------------------------------------+\n')
+            customer_password = input("Password: ")
+
+        print(f'\nWelcome back, {customer_info[customer_name]}!\n')
+        return customer_username  # Return the username after successful login
+
+    else:
         print('\n+------------------------------------------------------------+')
         print('|⚠️ This is your FIRST TIME login, please create an account. |')
         print('+------------------------------------------------------------+')
         print('Directing to sign up page......\n')
         sign_up()
-
-    customer_password = input("Password: ")
-    while customer_password != customer_info[customer_username]['customer_password']:
-        print('\n+-------------------------------------------+')
-        print('|⚠️ Incorrect password. Please enter again. |')
-        print('+-------------------------------------------+\n')
-        customer_password = input("Password: ")
-
-    print(f'\nWelcome back, {customer_username}!\n')
-    return customer_username  # Return the username after successful login
-
+        return None  # Return None if sign-up is initiated
 
 def customer():
     #customer_info = load_data_from_customer()

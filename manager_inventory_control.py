@@ -149,6 +149,7 @@ def inventory_control_product():
                                     else:
                                         product_description = product_inventory[batch_number]['description']  # the existing descripiton will not be updated if the products are already in the inventory
 
+
                                     # update the dictionary with user input
                                     product_inventory[batch_number] = {
                                         'product_name': chosen_product,
@@ -329,6 +330,7 @@ def inventory_control_product():
                                             # update the information
                                             product_inventory[selected_product][attribute_of_product_inventory] = new_value
                                             print(f'\n{attribute_of_product_inventory.title().replace("_", " ")} is updated.')
+
                                             save_info_product_inventory(product_inventory)
                                             break
 
@@ -362,7 +364,7 @@ def inventory_control_product():
                 print('+--------------------------------------+')
                 break
 
-inventory_control_product()
+
 # main inventory control for products and ingredients
 def inventory_control():
     while True:

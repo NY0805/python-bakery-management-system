@@ -149,7 +149,7 @@
         ],
         "total_price (RM)": 24.0,
         "order_date": "15-09-2004",
-        "status": "canceled"
+        "status": "Canceled"
     },
     "1234567890": {
         "order_id": "ORD015",
@@ -191,6 +191,16 @@
         ],
         "total_price (RM)": 35.0,
         "order_date": "16-09-2004",
+        "status": "Order Placed"
+    },
+    "2425382743": {
+        "order_id": "ORD019",
+        "username": "anna",
+        "items_ordered": [
+            "gingerbread x 2"
+        ],
+        "total_price (RM)": "4.50",
+        "order_date": "20-10-2024",
         "status": "Order Placed"
     }
 }

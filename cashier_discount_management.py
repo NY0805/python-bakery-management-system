@@ -182,4 +182,4 @@ def manage_discounts():
 
 
 # Start the discount management system
-manage_discounts()
+#manage_discounts()

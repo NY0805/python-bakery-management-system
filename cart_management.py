@@ -273,7 +273,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     print(f"Current cart ID: {cart_id}")
 
     print("\nWould you like to:")
-    print("1. Proceed with your payment")
+    print("1. Place order")
     print("2. Cancel your order")
 
     choice = input("Please select your option (1 or 2): ").strip()
@@ -290,13 +290,13 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
     if choice == '1':
         print(f"\nTotal price to pay: RM {total_price:.2f}")
-        print("\nPayment completed. Thank you for your purchase!")
+        print("\nOrder placed. Please proceed to payment to view the receipt.")
 
         # Save the updated order to the file
         save_order_to_file(cart, customer_name, cart_id, order_id, "Order Placed")
         # Generate receipt
-        print(f"Generating receipt for Cart ID: {cart_id}...")
-        cashier_transaction_completion.receipt(str(cart_id))
+        '''print(f"Generating receipt for Cart ID: {cart_id}...")
+        cashier_transaction_completion.receipt(str(cart_id))'''
 
         # Load loyalty rewards data to update points
         loyalty_data = customer_loyalty_rewards.load_loyalty_rewards()
@@ -339,7 +339,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
                     break  # Exit loop after finding the customer
 
             if not customer_found:
-                print(f"Customer {customer_name} does not exist in customer.txt.")
+                print(f"Customer {customer_name} does not exist in our system.")
 
         else:
             print(f"Cannot update points: {customer_name} does not exist in loyalty rewards.")
@@ -352,12 +352,19 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         cart.clear()
     else:
         print("Invalid choice. Please select 1 or 2.")
-
+def view_payment_receipt(cart_id):
+    with open('customer_order_list.txt', 'r') as file:
+        order_list = json.load(file)
+        order = order_list.get(str(cart_id))
+        if order and order['status'] == 'Payment Completed':
+            cashier_transaction_completion.receipt(str(cart_id))
+        else:
+            print('\nThe receipt will only be generated after payment has completed. Please proceed to payment.')
 
 # Main shopping cart function
 def shopping_cart():
     cart = {}  # Initialize cart as a regular dictionary
-    customer_name = input("Please enter your username: ")
+    customer_name = input("Please enter your name: ")
     cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
     print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
 
@@ -373,7 +380,8 @@ def shopping_cart():
         print("3. Modify item quantity in cart")
         print("4. View cart")
         print("5. Checkout or cancel")
-        print("6. Exit to main menu")
+        print("6. View payment receipt")
+        print("7. Exit to main menu")
 
         option = input("Select your option: ").strip()
 
@@ -388,10 +396,12 @@ def shopping_cart():
         elif option == '5':
             checkout_or_cancel(cart, customer_name, cart_id)
         elif option == '6':
+            view_payment_receipt(cart_id)
+        elif option == '7':
             print("Exiting to main menu...Goodbye!")
             break
         else:
             print("⚠️ Invalid option! Please try again.")
 
 # Start the shopping cart process
-#shopping_cart()
+shopping_cart()
