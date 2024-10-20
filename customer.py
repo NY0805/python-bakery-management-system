@@ -370,7 +370,7 @@ def customer_menu():
         print("1. Sign Up")
         print("2. Login")
         print("3. Browse Products")
-        print("4. View Cart")
+        print("4. Shopping Cart")
         print("5. Order Tracking")
         print("6. Submit Review")
         print("7. View Loyalty Rewards")

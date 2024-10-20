@@ -8,7 +8,7 @@
         "email": "mark0825@gmail.com",
         "address": "123 Mark Street, Cityville",
         "account_status": "active",
-        "loyalty_points": 4377
+        "loyalty_points": 3977
     },
     "customer2": {
         "customer_username": "03jane_",
@@ -108,5 +108,60 @@
         "address": "321 Violet Lane, Riverside",
         "account_status": "active",
         "loyalty_points": 850
+    },
+    "Haechan": {
+        "customer_username": "haechanlee",
+        "customer_password": "12345678",
+        "age": 23,
+        "gender": "male",
+        "contact_no": "018-1234567",
+        "email": "hae@gmail.com",
+        "address": "777dreamstreet",
+        "account_status": "active",
+        "loyalty_points": 0
+    },
+    "jen": {
+        "customer_username": "jeno",
+        "customer_password": "12345678",
+        "age": 22,
+        "gender": "male",
+        "contact_no": "012-1234567",
+        "email": "sd@gmail.com",
+        "address": "12",
+        "account_status": "active",
+        "loyalty_points": 0
+    },
+    "SOS": {
+        "customer_username": "SOS",
+        "customer_password": "12345678",
+        "age": 18,
+        "gender": "prefer not to say",
+        "contact_no": "019-1234567",
+        "email": "SS@gmail.com",
+        "address": "as",
+        "account_status": "active",
+        "loyalty_points": 332
+    },
+    "abc": {
+        "customer_username": "abc",
+        "customer_password": "12345678",
+        "age": 22,
+        "gender": "prefer not to say",
+        "contact_no": "012-3456789",
+        "email": "ss@gmail.com",
+        "address": "1",
+        "account_status": "active",
+        "loyalty_points": 2802
+    },
+    "nct": {
+        "customer_username": "nct",
+        "customer_password": "12345678",
+        "age": 44,
+        "gender": "male",
+        "contact_no": "012-9999999",
+        "email": "s@gmail.com",
+        "address": "2",
+        "account_status": "active",
+        "loyalty_points": 1235
     }
 }
