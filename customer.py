@@ -305,18 +305,20 @@ def account_management():
             print(f"Email: {customer['email']}")
             print(f"Address: {customer['address']}")
             print(f"Account status: {customer['account_status']}")
-            print(f"loyalty_points:{customer['loyalty_points']}")
+            print(f"Loyalty points: {customer['loyalty_points']}")
             print("+---------------------------+\n")
 
         elif choice == "2":
             # Confirm account deletion
-            confirm = input("Are you sure you want to delete your account? (y/n): ")
-            if confirm.lower() == 'y':
+            confirm = input("Are you sure you want to delete your account? (y/n): ").lower()
+            if confirm == 'y':
                 del customer_info[customer_name]  # Remove the customer from the dictionary
                 save_info(customer_info)  # Save the updated data back to the file
                 print(f"Account '{customer_name}' has been deleted.")
+            elif confirm == 'n':
+                print("Account deletion canceled.")
             else:
-                print("Account deletion cancelled.")
+                print("Invalid input. Please enter 'y' or 'n'.")
 
         elif choice == "3":
             return
@@ -324,6 +326,7 @@ def account_management():
             print("Invalid choice.")
     else:
         print(f"Account with the name '{customer_name}' not found.")
+
 
 
 # Function to load customer data
@@ -410,7 +413,7 @@ def customer_menu():
             print("Thank you for visiting our bakery. Goodbye!")
             break
         else:
-            print("Invalid option, please try again.")
+            print("|⚠️Invalid option, please try again.|")
 
 
 customer_menu()

@@ -4,29 +4,37 @@ import json
 # Load product categories and names from baker_product_keeping.txt
 def load_categories():
     try:
-        with open('baker_product_keeping.txt', 'r') as file:
-            categories = json.load(file)  # Assuming this is structured as a JSON object
-            return categories  # Return full category data
+        file = open('baker_product_keeping.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        print("Categories file not found!")
-        return {}
-    except json.JSONDecodeError:
-        print("Error decoding JSON from categories file.")
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 # Load product details from manager_product_inventory.txt
 def load_product_details():
     try:
-        with open('manager_product_inventory.txt', 'r') as file:
-            content = file.read().strip()
-            return json.loads(content)
+        file = open('manager_product_inventory.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        print("Products file not found!")
-        return {}
-    except json.JSONDecodeError:
-        print("Error decoding JSON from products file.")
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 def browse_products():
@@ -38,18 +46,19 @@ def browse_products():
     print('\t\t\tPRODUCT BROWSING')
     print('-----------------------------------------------')
 
-    # Introduce categories to customers
+    # Check if categories are available and display them to the user
     if categories:
         print("\n✨ Welcome to our bakery! We have a variety of product categories for you to explore:")
-        available_categories = set([item["category"] for item in categories.values()])
-        for category in available_categories:
+        product_categories = set([item["category"] for item in categories.values()])
+        for category in product_categories:
             print(f"- {category}")
         print("\nFeel free to choose a category to browse the products or view the full menu!\n")
     else:
         print("No categories available at the moment.\n")
 
-    # Menu options for the customer
+    # Provide customers with choices
     while True:
+        print()
         print("Please choose an option:")
         print("1. Search for products by category")
         print("2. View full menu")
@@ -60,8 +69,9 @@ def browse_products():
         if choice == '1':
             category_input = input("Please enter the product category you want to search for: ")
 
-            # Check if the category exists in the baker's product list
+            # Check if the category exists
             if any(item["category"].lower() == category_input.lower() for item in categories.values()):
+                print()
                 print(f"Products in category '{category_input}':")
                 print('===============================================')
 
@@ -75,18 +85,19 @@ def browse_products():
                         print(f'Description: {product["description"]}')
                         print('-----------------------------------------------')
             else:
-                print(f"The category '{category_input}' does not exist.")
+                print(f"The category '{category_input}' does not exist.")  # Show the message if the category does not exist
+                print()
 
         elif choice == '2':
-            import product_menu
+            import product_menu  # Load and display the full menu from product_menu.py
             product_menu.menu()
         elif choice == '3':
             print("Thank you for visiting our system. Goodbye!")
             break
 
         else:
-            print("Invalid choice, please try again.")
+            print("|⚠️Invalid choice, please try again.|")
 
 
-#browse_products()
+browse_products()
 
