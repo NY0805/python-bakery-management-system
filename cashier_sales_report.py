@@ -166,11 +166,11 @@ def yearly_sales_performance():
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_year}'S YEARLY PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
-                print(f'{'Total Sales':<13}: {total_sales:.2f}')
-                print(f'{'Total Orders':<13}: {total_orders}')
+                print(f'{"Total Sales":<13}: {total_sales:.2f}')
+                print(f'{"Total Orders":<13}: {total_orders}')
                 print('')
                 print(f'Sales Growth(%) for {report_year} Compared to {previous_year:<5}: {formatted_sales_ratio}')
-                print(f'{'Actual Percentage Growth':<42}: {formatted_percentage_difference}')
+                print(f'{"Actual Percentage Growth":<42}: {formatted_percentage_difference}')
                 break
             else:
                 print('\n+-------------------------------------+')
@@ -292,12 +292,12 @@ def monthly_sales_performance():
                 print('\n----------------------------------------------------------')
                 print(f"\t\t\t{report_month}/{report_year} SALES PERFORMANCE SUMMARY")
                 print('----------------------------------------------------------')
-                print(f'{'Total Sales':<15}: {total_sales:.2f}')
-                print(f'{'Total Orders':<15}: {total_orders}')
+                print(f'{"Total Sales":<15}: {total_sales:.2f}')
+                print(f'{"Total Orders":<15}: {total_orders}')
                 print('')
                 print(
                     f'Sales Growth for {report_month}/{report_year} Compared to {previous_month}/{report_year:<5}: {formatted_sales_ratio}')
-                print(f'{'Actual Percentage Growth':<44}: {formatted_percentage_difference}')
+                print(f'{"Actual Percentage Growth":<44}: {formatted_percentage_difference}')
                 break
             else:
                 print('\n+--------------------------------------+')
@@ -541,4 +541,4 @@ def product_popularity():
 
 
 #generate_sales_report()
-product_popularity()
+#product_popularity()

@@ -58,13 +58,13 @@ def financial_management():
 
     for receipt_details in transaction_keeping.values():
         order_date = datetime.strptime(receipt_details['order_date'], '%d-%m-%Y')  # retrieve all date from order_list
-        total_income_so_far += receipt_details['total_spend(RM)']
+        total_income_so_far += float(receipt_details['total_spend(RM)'])
 
         if order_date.strftime('%d-%m-%Y') == datetime.now().strftime('%d-%m-%Y'):
-            today_income += receipt_details['total_spend(RM)']
+            today_income += float(receipt_details['total_spend(RM)'])
 
         if order_date.month == datetime.now().month:
-            this_month_income += receipt_details['total_spend(RM)']
+            this_month_income += float(receipt_details['total_spend(RM)'])
 
     for equipment_details in equipment_report_keeping.values():
         repair_date = equipment_details['report_date']
@@ -120,9 +120,9 @@ def financial_management():
                                     if chosen_date.strftime(
                                             "%B") == custom_month_for_income and chosen_date.year == int(
                                             custom_year_for_income):
-                                        income_of_that_month += receipt_details['total_spend(RM)']
+                                        income_of_that_month += float(receipt_details['total_spend(RM)'])
                                 print(
-                                    f'\n💲 {custom_year_for_income} {custom_month_for_income.title()} Income: RM {income_of_that_month:.2f}')
+                                    f'\n💲 {custom_year_for_income} {custom_month_for_income} Income: RM {income_of_that_month:.2f}')
 
                                 headers = ['Date', 'Description', 'Income(RM)']
                                 print('=' * 95)
@@ -132,9 +132,13 @@ def financial_management():
                                 for receipt_details in transaction_keeping.values():
                                     receipt_converted_date = datetime.strptime(receipt_details['order_date'],
                                                                                '%d-%m-%Y')
-                                    if receipt_converted_date.strftime(
-                                            "%B") == custom_month_for_income and receipt_converted_date.year == int(
-                                            custom_year_for_income):
+
+                                    if custom_month_for_income not in receipt_converted_date.strftime("%B") or custom_year_for_income not in receipt_converted_date.strftime("%Y"):
+                                        print('\n❗No record found. Please select another year.')
+                                        break
+
+                                    elif receipt_converted_date.strftime(
+                                            "%B") == custom_month_for_income and receipt_converted_date.year == int(custom_year_for_income):
                                         if len(receipt_details['items']) == 1:
                                             print(
                                                 f'{receipt_details["order_date"]:<35}{receipt_details["items"][0]:<40}{receipt_details["total_spend(RM)"]:.2f}')
@@ -145,11 +149,6 @@ def financial_management():
                                             for item in receipt_details['items'][1:]:
                                                 print(f'{"":<35}{item:<40}{receipt_details["total_spend(RM)"]:.2f}')
                                         print('-' * 95)
-
-
-                                    else:
-                                        print('\n❗No record found. Please select another year.')
-                                        break
 
                 except ValueError:
                     print('\n+-------------------------------------+')
@@ -225,6 +224,8 @@ def financial_management():
                                     print(
                                         f'{ingredient_details["purchase_date"]:<35}{ingredient_details["ingredient_name"]:<40}{ingredient_cost:.2f}')
                                     print('\n')
+                            if expenses_of_that_month == 0:
+                                print('\n❗No record found. Please select another year.')
 
                 except ValueError:
                     print('\n+-------------------------------------+')
