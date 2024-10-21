@@ -414,7 +414,7 @@ def view_payment_receipt(cart_id):
         if order and order['status'] == 'Payment Completed':
             cashier_transaction_completion.receipt(str(cart_id))
         else:
-            print('\nThe receipt will only be generated after payment has completed. Please proceed to payment.')
+            print('\nThe receipt will only be generated after payment has completed. Please proceed to payment at the counter or via online.')
 
 
 # Main shopping cart function

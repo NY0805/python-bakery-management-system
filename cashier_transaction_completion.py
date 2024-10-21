@@ -129,7 +129,7 @@ def receipt(customer):
 
     print(f'{"Service tax @ 6%: ".rjust(75)}{"".ljust(15)}{service_tax:.2f}')
     total = non_discount_price + total_discount_price + service_tax  # calculate the final amount that need to be paid by customers
-    print(f'\n{"Points earned: "}{int(total * 10)}{"TOTAL: ".rjust(57)}{"".ljust(15)}{total:.2f}')
+    print(f'\n{"Points earned: "}{int((non_discount_price + total_discount_price) * 10)}{"TOTAL: ".rjust(57)}{"".ljust(15)}{total:.2f}')
 
     print('\n' * 3)
     warning = 'Goods sold are not returnable and refundable !'  # message that warning customers the items are not returnable and refundable

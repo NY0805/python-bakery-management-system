@@ -446,5 +446,27 @@
         "total_price (RM)": "11.25",
         "order_date": "21-10-2024",
         "status": "Order Placed"
+    },
+    "4992374927": {
+        "order_id": "ORD044",
+        "username": "chew",
+        "items_ordered": [
+            "cheezy bun x 2",
+            "gingerbread x 2"
+        ],
+        "total_price (RM)": "14.00",
+        "order_date": "22-10-2024",
+        "status": "Payment Completed"
+    },
+    "6685353618": {
+        "order_id": "ORD045",
+        "username": "yeti",
+        "items_ordered": [
+            "cheezy bun x 2",
+            "red velvet x 3"
+        ],
+        "total_price (RM)": "41.00",
+        "order_date": "22-10-2024",
+        "status": "Payment Completed"
     }
 }

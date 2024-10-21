@@ -174,5 +174,27 @@
         "address": "2",
         "account_status": "active",
         "loyalty_points": 3947
+    },
+    "chew": {
+        "customer_username": "chewinggum",
+        "customer_password": "12345678",
+        "age": 78,
+        "gender": "prefer not to say",
+        "contact_no": "123-4566783",
+        "email": "dd@dmcl.cc",
+        "address": "234dvc bcv",
+        "account_status": "active",
+        "loyalty_points": 280
+    },
+    "yeti": {
+        "customer_username": "hamburger",
+        "customer_password": "12345678",
+        "age": 34,
+        "gender": "male",
+        "contact_no": "123-3456372",
+        "email": "gg@ff.ff",
+        "address": "12djijrkgm34t",
+        "account_status": "active",
+        "loyalty_points": 1550
     }
 }
