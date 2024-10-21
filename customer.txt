@@ -173,6 +173,6 @@
         "email": "s@gmail.com",
         "address": "2",
         "account_status": "active",
-        "loyalty_points": 3249
+        "loyalty_points": 3947
     }
 }

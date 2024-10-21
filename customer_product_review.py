@@ -59,7 +59,7 @@ def submit_review(logged_in_username):
     # Check if the user has completed any purchases
     for order_id, order_data in order_list.items():  # Use .items() method to iterate through the dictionary
         if order_data["username"] == logged_in_username:  # Match the current order with the logged-in user's username
-            if order_data["status"] == "Payment Completed":
+            if order_data["status"] == "Order Placed":
                 valid_purchase_found = True
                 order_date = order_data['order_date']
                 product_name = order_data['items_ordered'][0]  # Get the first product name
@@ -90,13 +90,6 @@ def submit_review(logged_in_username):
     print('Your review has been successfully received.')
 
     reviews = load_review()
-
-    # Update the review for the user
-    reviews[logged_in_username] = {
-        'product_name': product_name,
-        'review': review_text,
-        'rating': int(rating),
-    }
 
     # Save the updated reviews
     save_reviews(reviews)

@@ -400,10 +400,11 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         return
 
     elif choice == '2':
-        print("Order canceled. Your cart has been cleared.")
+        print("Order canceled. Your cart has been cleared!")
         cart.clear()
     else:
         print("|⚠️Invalid choice. Please select 1 or 2.|")
+    return
 
 
 def view_payment_receipt(cart_id):
