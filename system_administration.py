@@ -1,8 +1,7 @@
-import json
-
 import system_administration_baker
 import system_administration_cashier
 import system_administration_customer
+
 
 def printed_centered(info):
     print('-' * 47)
@@ -38,9 +37,9 @@ def system_administration():
         elif role == '4':  # return to the previous page
             print('\nExiting to Manager Privilege......')
             break
-        return False
+        return False  # stop the execution within the function
 
-
+#system_administration()
 
 
 

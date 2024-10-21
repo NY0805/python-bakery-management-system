@@ -1,18 +1,18 @@
 {
-    "baker1": {
-        "baker_username": "baker1",
-        "baker_password": "b@k3rm4st3r!",
-        "age": 34,
+    "christine": {
+        "baker_username": "christine",
+        "baker_password": "12345678",
+        "age": 23,
         "gender": "female",
-        "contact_no": "123-3456732",
-        "email": "dd@dd.dd"
+        "contact_no": "345-3039225",
+        "email": "christine@gmail.com"
     },
-    "baker2": {
-        "baker_username": "baker2",
+    "crustking": {
+        "baker_username": "crustking",
         "baker_password": "b@k3rm4st3r!",
-        "age": "34",
+        "age": 45,
         "gender": "male",
-        "contact_no": "123-4567832",
-        "email": "ff@ff.ff"
+        "contact_no": "345-0965783",
+        "email": "crustking@gmail.com"
     }
 }

@@ -1,10 +1,10 @@
 {
     "tsuki": {
-        "manager_username": "manager1",
+        "manager_username": "tsukiyaki",
         "manager_password": "d0ugh8o5s",
         "age": 45,
         "gender": "female",
         "contact_no": "123-3452621",
-        "email": "ee@ee.ee"
+        "email": "tsuki857@gmail.com"
     }
 }
