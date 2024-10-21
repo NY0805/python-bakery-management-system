@@ -7,7 +7,7 @@
         "quantity_produced": "2",
         "batch_number": "001",
         "date_of_production": "09-08-2004",
-        "shelf_life": "5 days",
+        "shelf_life": "5",
         "expiry_date": "17-08-2004",
         "recipe": "smile 2",
         "baker_name": "r",
@@ -25,7 +25,7 @@
         "quantity_produced": "1",
         "batch_number": "002",
         "date_of_production": "09-09-2004",
-        "shelf_life": "7 days",
+        "shelf_life": "7",
         "expiry_date": "18-09-2004",
         "recipe": "r",
         "baker_name": "r",
@@ -43,7 +43,7 @@
         "quantity_produced": "1",
         "batch_number": "003",
         "date_of_production": "27-08-2004",
-        "shelf_life": "7 days",
+        "shelf_life": "7",
         "expiry_date": "06-09-2004",
         "recipe": "r",
         "baker_name": "r",
@@ -62,7 +62,7 @@
         "quantity_produced": "3",
         "batch_number": "006",
         "date_of_production": "09-08-2004",
-        "shelf_life": "14 days",
+        "shelf_life": "14",
         "expiry_date": "26-08-2004",
         "recipe": "r",
         "baker_name": "r",
@@ -81,7 +81,7 @@
         "quantity_produced": "2",
         "batch_number": "004",
         "date_of_production": "23-09-2024",
-        "shelf_life": "3days",
+        "shelf_life": "3",
         "expiry_date": "27-09-2024",
         "recipe": "r",
         "baker_name": "baker4",
@@ -95,19 +95,39 @@
         "product_name": "tiramisu",
         "product_code": "CK858",
         "serial_number": [
-            "29393",
-            "45322",
-            "34121"
+            "12345",
+            "34523",
+            "67348",
+            "97633"
         ],
         "quantity_produced": "4",
-        "batch_number": "009",
+        "batch_number": "010",
         "date_of_production": "24-09-2024",
-        "shelf_life": "2days",
-        "expiry_date": "26-09-2024",
+        "shelf_life": "2",
+        "expiry_date": "25-09-2024",
         "recipe": "coffee soaked lady fingers",
         "baker_name": "baker6",
         "allergens": [
-            "coffee"
+            "coffee",
+            "biscuit",
+            "hi",
+            "djdl",
+            "gxfc"
+        ]
+    },
+    "C001": {
+        "category": "Cakes",
+        "product_name": "apple cake",
+        "product_code": "cake1",
+        "serial_number": "2345",
+        "quantity_produced": "1",
+        "batch_number": "C001",
+        "date_of_production": "10-10-2024",
+        "shelf_life": "6",
+        "expiry_date": "17-10-2024",
+        "baker_name": "baker2",
+        "allergens": [
+            "apple"
         ]
     }
 }

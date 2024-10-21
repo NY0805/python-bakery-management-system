@@ -61,6 +61,7 @@ def submit_review(logged_in_username):
         if order_data["username"] == logged_in_username:  # Match the current order with the logged-in user's username
             if order_data["status"] == "Payment Completed":
                 valid_purchase_found = True
+                order_date = order_data['order_date']
                 product_name = order_data['items_ordered'][0]  # Get the first product name
                 review_text = input('Enter your review: ')
                 rating = input('Rate your product (1-5): ')
@@ -78,7 +79,8 @@ def submit_review(logged_in_username):
     reviews[logged_in_username] = {
         'product_name': product_name,
         'review': review_text,
-        'rating': int(rating)  # Convert rating to an integer
+        'rating': int(rating),  # Convert rating to an integer
+        'order_date': order_date
     }
 
     # Save the updated reviews
@@ -93,7 +95,7 @@ def submit_review(logged_in_username):
     reviews[logged_in_username] = {
         'product_name': product_name,
         'review': review_text,
-        'rating': int(rating)
+        'rating': int(rating),
     }
 
     # Save the updated reviews

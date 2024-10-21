@@ -121,5 +121,14 @@
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,
         "redeem_history": []
+    },
+    "15": {
+        "username": "violet",
+        "total_spending (RM)": 95.0,
+        "loyalty_points": 1520,
+        "status": "MORNING GLORY'S SILVER",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
     }
 }

@@ -172,7 +172,7 @@ def recipe_lists():
             print(f'\n{"Instructions"}:')
             instruction_index = 1
             for instruction in values['instructions']:
-                print(f'{instruction_index}. {instruction.upper()}')
+                print(f'{instruction_index}. {instruction.title()}')
                 instruction_index += 1
             print('')
 

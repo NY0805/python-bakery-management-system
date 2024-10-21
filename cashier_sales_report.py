@@ -390,6 +390,19 @@ def product_popularity():
                                             product_ordered[total_product[0]] = int(total_product[1])
                                     print(product_ordered)
 
+                            customer_rating = {}
+                            for key, item in customer_rating.items():
+                                order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
+                                order_year = order_date.year
+                                if order_year == int(report_year):
+                                    for product in item['items']:
+                                        total_product = product.split(' x ')
+                                        if total_product[0] in product_ordered:
+                                            product_ordered[total_product[0]] += int(total_product[1])
+                                        else:
+                                            product_ordered[total_product[0]] = int(total_product[1])
+                                    print(product_ordered)
+
                             best_seller = None
                             least_seller = None
                             max_quantity = -1
@@ -415,7 +428,7 @@ def product_popularity():
                             print(f"\t\t\t{report_year}'S PRODUCT POPULARITY SUMMARY")
                             print('----------------------------------------------------------')
                             print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
-                            print(f'{"Top-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                            print(f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
                             break
                         else:
                             print('\n+-------------------------------------------------+')

@@ -12,16 +12,23 @@
                 "brown sugar",
                 20.0,
                 "ml"
+            ],
+            [
+                "whipping cream",
+                30.0,
+                "g"
             ]
         ],
         "ingredient_notes": "nct dream no1",
-        "equipment_used": [],
+        "equipment_used": [
+            "toaster oven"
+        ],
         "baking_temperature": 90,
-        "baking_time": 50,
+        "baking_time": 80,
         "instructions": [
-            "g",
-            "g",
-            "g"
+            "fff",
+            "ffe",
+            "fee"
         ]
     },
     "banana bread": {

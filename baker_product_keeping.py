@@ -1,5 +1,4 @@
 import json  # import json text file to record data
-import re  # import regex to validate data match the specific patterns
 from datetime import datetime, timedelta
 
 
@@ -56,9 +55,16 @@ def load_data_from_baker_file():
 
 
 # Define the function that saves information to the file
-def save_info(product_data):
+def save_info(product_info):
     file = open('baker_product_keeping.txt', 'w')  # open the file to write
-    json.dump(product_data, file,
+    json.dump(product_info, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    file.close()  # close the file after writing
+
+
+def save_info_recorded_product(inventory_check):
+    file = open('baker_inventory_check.txt', 'w')  # open the file to write
+    json.dump(inventory_check, file,
               indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
@@ -96,6 +102,7 @@ def printed_centered(info):
 
 unsaved_product_list = load_data_from_inventory_check()
 baker_list = load_data_from_baker_file()
+product_data = load_data_from_inventory_product()
 
 
 def product_management():
@@ -140,7 +147,7 @@ def product_management():
                     update_product()
                     break
                 elif option_product_management == '3':
-                    pass
+                    delete_product()
                 elif option_product_management == '4':
                     print('\nExiting to the previous page......')
                     break
@@ -172,7 +179,8 @@ def product_categories():
                     selected_unsaved_product = list(unsaved_product_list.keys())[
                         index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
                     print('')
-                    print(f'❗You are now recording {unsaved_product_list[selected_unsaved_product]["recipe_name"].title()}\'s data.')
+                    print(
+                        f'❗You are now recording {unsaved_product_list[selected_unsaved_product]["recipe_name"].title()}\'s data.')
                     break
             break
 
@@ -234,9 +242,6 @@ def product_categories():
 
 def product_details():
     category, index_of_product_to_edit = product_categories()
-
-    product_data = load_data_from_inventory_product()
-
     selected_unsaved_product = list(unsaved_product_list.keys())[index_of_product_to_edit - 1]
 
     product_info = ['Product Name', 'Product Code', 'Batch Number', 'Date of Production', 'Shelf Life (__ days)',
@@ -273,7 +278,7 @@ def product_details():
     while True:
         product_name = input(f'2. {product_info[0].ljust(max_length + 2)}: ').lower().strip()
         if validation_empty_entries(product_name):
-            if product_name.isalpha():
+            if product_name.replace(" ", "").isalpha():
                 break
             else:
                 print('\n+------------------------------------------------------------------------------------------+')
@@ -456,7 +461,7 @@ def product_details():
     save_info(product_data)
 
     del unsaved_product_list[selected_unsaved_product]  # delete the selected product
-    save_info(unsaved_product_list)
+    save_info_recorded_product(unsaved_product_list)
 
     while True:
         try:
@@ -481,7 +486,6 @@ def product_details():
 
 # function to update product information
 def update_product():
-    product_data = load_data_from_inventory_product()
     while True:
         index = 1
         print('')
@@ -492,211 +496,379 @@ def update_product():
         print(f'{len(product_data) + 1}. Cancel')
 
         try:
-            index_of_product_to_edit = int(
-                input(
-                    f'\nEnter index number to update the information of the product (or enter {len(product_data) + 1} to cancel):\n>>> '))
+            index_of_product_to_edit = int(input(
+                f'\nEnter index number to update the information of the product (or enter {len(product_data) + 1} to cancel):\n>>> '))
+
             if index_of_product_to_edit == len(product_data) + 1:  # if "Cancel" is selected
                 print('\nCancelling. Exiting to Product Management page......')  # return to the previous page
                 product_management()
                 break
 
             elif 1 <= index_of_product_to_edit <= len(product_data):
+                for batch_number, product in product_data.items():
+                    # append all the keys into a list and identify the selected ingredient by indexing
+                    selected_product_key = list(product_data.keys())[index_of_product_to_edit - 1]
 
+                    print('')
+                    printed_centered(f'{product_data[selected_product_key]["product_name"].upper()}\'S DATA')
+
+                    for key, value in product_data[selected_product_key].items():
+                        print(f'{key}: {value}')  # list down the attributes of the selected product
+                    break
+            else:
+                print('\n❗Product not found.')  # error displayed if selected product not found
+                continue
+
+        except ValueError:
+            print('\n+-----------------------------------------+')
+            print('|⚠️ Invalid input. Please enter a number. |')
+            print('+-----------------------------------------+')
+            continue
+
+        while True:
+            selected_product_key = list(product_data.keys())[index_of_product_to_edit - 1]
+
+            print('\nTo change the information, please enter the exact matching name. Example: product_name.')
+            print('* Note: category, date of production, and quantity produced cannot be changed.\n')
+
+            attribute_of_product_data = input('Which information do you want to update? (or enter \"cancel\")\n>>> ')
+
+            if attribute_of_product_data == 'cancel':
+                print('\nCancelling. Exiting to the Product List......')
+                update_product()
+                break
+            elif attribute_of_product_data == 'serial_number':
                 while True:
-                    for batch_number, product in product_data.items():
-                        selected_product_key = list(product_data.keys())[
-                            index_of_product_to_edit - 1]  # append all the keys into a list and identify the selected ingredient by indexing
+                    index = 1
+                    print('')
+                    for number in product_data[selected_product_key]['serial_number']:
+                        print(f'Serial number {index:<2}: {number}')
+                        index += 1
+                    print('')
 
-                        print('')
-                        printed_centered(f'{product_data[selected_product_key]["product_name"].upper()}\'S DATA')
-
-                        for key, value in product_data[selected_product_key].items():
-                            print(f'{key}: {value}')  # list down the attributes of the selected product
-
-                        print(
-                            '\nTo change the information, please enter the exact matching name. Example: product_name.')
-                        attribute_of_product_data = input(
-                            'Which information do you want to update? (or enter \"cancel\")\n>>> ')
-                        if attribute_of_product_data == 'cancel':
-                            print('\nCancelling. Exiting to the Product List......')
-                            update_product()
-                            break
-
-                        if attribute_of_product_data in product:
-                            while True:
-                                new_value = input(f'\nEnter new {attribute_of_product_data}: ')
-                                # continue to validate the value entered for each attribute
-                                if attribute_of_product_data == 'category':
-
-                                    # if change category, need to change shelf life and expiry date too if needed
-
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if new_value not in ['Breads', 'Cakes', 'Pastries', 'Biscuits', 'Muffins',
-                                                         'Others']:
-                                        print(
-                                            '\n+-------------------------------------------------------------------------------------+')
-                                        print(
-                                            '|⚠️ Invalid input. Please enter Breads, Cakes, Pastries, Biscuits, Muffins or Others. |')
-                                        print(
-                                            '+-------------------------------------------------------------------------------------+')
-                                        continue
-
-                                elif attribute_of_product_data == 'product_name':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_alphabet_only(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
-
-                                elif attribute_of_product_data == 'serial_number':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-
-                                    if new_value in (product_data[batch_number]['serial_number'] for batch_number in
-                                                     product_data):
+                    edit_serial_number = input(
+                        "Please enter the serial number you want to edit (or enter 'cancel')\n>>> ")
+                    if edit_serial_number == 'cancel':
+                        break
+                    elif edit_serial_number not in product_data[selected_product_key]['serial_number']:
+                        print('\n+---------------------------------------+')
+                        print('|⚠️ Please enter a valid serial number. |')
+                        print('+---------------------------------------+')
+                        continue
+                    else:
+                        while True:
+                            new_serial_number = input('\nEnter the new serial number: ').strip()
+                            if validation_empty_entries(new_serial_number):
+                                if new_serial_number.isalnum():
+                                    if new_serial_number not in product_data[selected_product_key]['serial_number']:
+                                        index_to_update = product_data[selected_product_key]['serial_number'].index(
+                                            edit_serial_number)
+                                        product_data[selected_product_key]['serial_number'][
+                                            index_to_update] = new_serial_number
+                                        save_info(product_data)
+                                        print('\nInformation saved.')
+                                        update_product()
+                                        break
+                                    else:
                                         print('\n+----------------------------------------------------+')
                                         print('|⚠️ Duplication of serial number. Please enter again. |')
                                         print('+----------------------------------------------------+')
                                         continue
+                                else:
+                                    print(
+                                        '\n+---------------------------------------------------------------------------------------------+')
+                                    print(
+                                        '|⚠️ Please enter a valid serial number. (Cannot contain any spacings and special characters.) |')
+                                    print(
+                                        '+---------------------------------------------------------------------------------------------+')
+                                    continue
 
-                                elif attribute_of_product_data == 'product_code':
-                                    if not validation_empty_entries(new_value):
-                                        continue
+            elif attribute_of_product_data == 'allergens':
+                while True:
+                    index = 1
+                    print('')
+                    for allergen in product_data[selected_product_key]['allergens']:
+                        print(f'{index}. {allergen}')
+                        index += 1
+                    print('')
 
-                                    if new_value in (product_data[batch_number]['product_code'] for batch_number in
-                                                     product_data):
-                                        print('\n+----------------------------------------------------+')
-                                        print('|⚠️ Duplication of product code. Please enter again. |')
-                                        print('+----------------------------------------------------+')
-                                        continue
+                    edit_choice = input("Add, edit or delete allergens? \nPlease enter 'add', 'edit' or 'delete' (or enter 'cancel' to stop): ")
 
-                                # add enter serial no based on quantity produced
-                                elif attribute_of_product_data == 'quantity_produced':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_digit_only(new_value):
-                                        print('\n+---------------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter numbers only. |')
-                                        print('+---------------------------------------------+')
-                                        continue
-
-                                elif attribute_of_product_data == 'batch_number':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_alphanum_only(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
-                                    if new_value in product_data:
-                                        print('\n+--------------------------------------------------------+')
-                                        print('|⚠️ Duplicate batch number detected. Please enter again. |')
-                                        print('+--------------------------------------------------------+')
-                                        continue
-
-                                elif attribute_of_product_data == 'date_of_production':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_date(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
-
-                                elif attribute_of_product_data == 'shelf_life':
-                                    if validation_empty_entries(attribute_of_product_data):
-                                        match = re.match(r'^(\d+)\s*days$', attribute_of_product_data.strip())
-
-                                        if match:
-                                            number = int(match.group(1))
-                                            if product_data[selected_product_key]['category'] in ['Breads', 'Muffins']:
-                                                if number <= 5:
-                                                    break
-                                                else:
-                                                    print(
-                                                        'Please enter a valid shelf life. (Cannot be more than 5 days.)\n')
-                                            elif product_data[selected_product_key]['category'] in ['Cakes',
-                                                                                                    'Pastries']:
-                                                if number <= 7:
-                                                    break
-                                                else:
-                                                    print(
-                                                        'Please enter a valid shelf life. (Cannot be more than 7 days.)\n')
-                                            elif product_data[selected_product_key]['category'] in ['Biscuits',
-                                                                                                    'Others']:
-                                                if number <= 14:
-                                                    break
-                                                else:
-                                                    print(
-                                                        'Please enter a valid shelf life. (Cannot be more than 14 days.)\n')
-                                        else:
-                                            print(
-                                                "Please enter a number followed by 'days'. (Case sensitive & no special characters.)\n")
-
+                    if edit_choice == 'add':
+                        new_allergen_list = []
+                        while True:
+                            new_allergen = input("\nEnter the new allergen (enter 'done' to stop): ").strip()
+                            if validation_empty_entries(new_allergen):
+                                if new_allergen == 'done':
+                                    if new_allergen_list:
+                                        product_data[selected_product_key]['allergens'].extend(new_allergen_list)
+                                        save_info(product_data)
+                                        print('\nInformation saved.')
+                                        break
                                     else:
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
+                                        print('\nNo new allergens added.')
+                                        break
+                                elif new_allergen.replace(" ", "").isalpha():
+                                    new_allergen_list.append(new_allergen)
+                                else:
+                                    print(
+                                        '\n+--------------------------------------------------------------------------------------+')
+                                    print(
+                                        '|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
+                                    print(
+                                        '+--------------------------------------------------------------------------------------+')
+                                    continue
 
-                                elif attribute_of_product_data == 'expiry_date':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_date(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
-                                    # convert new value from string to datetime format
-                                    expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
-                                    # convert date_of _production from string to datetime format
-                                    date_of_production_new = datetime.strptime(
-                                        product_data[selected_product_key]['date_of_production'], '%d-%m-%Y')
+                    elif edit_choice == 'edit':
+                        while True:
+                            try:
+                                edit_allergen = input(
+                                    "\nPlease enter the index number of allergen you want to edit (or enter 'cancel')\n>>> ")
 
-                                    max_expiry = date_of_production_new + timedelta(
-                                        days=product_data[selected_product_key]['shelf_life'] + 1)
+                                if not validation_empty_entries(edit_allergen):
+                                    continue
 
-                                    if not max_expiry >= expiry_date >= date_of_production_new:
-                                        print(
-                                            '\n+------------------------------------------------------------------------------------------------------------------------------------+')
-                                        print(
-                                            f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product_key]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
-                                        print(
-                                            '+------------------------------------------------------------------------------------------------------------------------------------+')
-                                        continue
+                                if edit_allergen == 'cancel':
+                                    break
 
-                                elif attribute_of_product_data == 'baker_name':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_alphabet_only(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
+                                edit_allergen = int(edit_allergen)
 
-                                elif attribute_of_product_data == 'allergens':
-                                    if not validation_empty_entries(new_value):
-                                        continue
-                                    if not validation_list_alphabet_only(new_value):
-                                        print('\n+--------------------------------------+')
-                                        print('|⚠️ Invalid input. Please enter again. |')
-                                        print('+--------------------------------------+')
-                                        continue
+                                if 1 <= edit_allergen <= len(product_data[selected_product_key]['allergens']):
+                                    while True:
+                                        new_allergen = input("\nEnter the new allergen: ").strip()
+                                        if validation_empty_entries(new_allergen):
+                                            if new_allergen.replace(" ", "").isalpha():
+                                                product_data[selected_product_key]['allergens'][edit_allergen - 1] = new_allergen
+                                                save_info(product_data)
+                                                print('\nInformation saved.')
+                                                break
+                                            else:
+                                                print(
+                                                    '\n+--------------------------------------------------------------------------------------+')
+                                                print(
+                                                    '|⚠️ Please enter a valid allergen. (Cannot contain any digits and special characters.) |')
+                                                print(
+                                                    '+--------------------------------------------------------------------------------------+')
+                                                continue
+                                    break
+                                else:
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Please enter a valid index number. |')
+                                    print('+--------------------------------------+')
+                                    continue
+                            except ValueError:
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Please enter a valid index number. |')
+                                print('+--------------------------------------+')
+                                continue
 
+                    elif edit_choice == 'delete':
+                        while True:
+                            try:
+                                delete_allergen = input(
+                                    "\nPlease enter the index number of allergen you want to delete (or enter 'cancel')\n>>> ").lower().strip()
+                                if not validation_empty_entries(delete_allergen):
+                                    continue
+
+                                if delete_allergen == 'cancel':
+                                    break
+
+                                delete_allergen = int(delete_allergen)
+
+                                if 1 <= delete_allergen <= len(product_data[selected_product_key]['allergens']):
+                                    del product_data[selected_product_key]['allergens'][delete_allergen - 1]
+                                    save_info(product_data)
+                                    print('\nAllergen deleted.')
+                                    break
+                                else:
+                                    print('\n+--------------------------------------+')
+                                    print('|⚠️ Please enter a valid index number. |')
+                                    print('+--------------------------------------+')
+                                    continue
+                            except ValueError:
+                                print('\n+--------------------------------------+')
+                                print('|⚠️ Please enter a valid index number. |')
+                                print('+--------------------------------------+')
+                                continue
+                    elif edit_choice == 'cancel':
+                        break
+
+                    else:
+                        print('\n+-----------------------------------------------------+')
+                        print('|⚠️ Please enter "add", "edit", "delete" or "cancel". |')
+                        print('+-----------------------------------------------------+')
+                        continue
+
+            elif attribute_of_product_data in product and attribute_of_product_data not in ['date_of_production', 'quantity_produced', 'category']:
+                while True:
+                    new_value = input(f'\nEnter new {attribute_of_product_data}: ').strip()
+                    # continue to validate the value entered for each attribute
+
+                    if attribute_of_product_data == 'product_name':
+                        if not validation_empty_entries(new_value):
+                            continue
+                        if not new_value.replace(" ", "").isalpha():
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
+                            continue
+
+                    elif attribute_of_product_data == 'product_code':
+                        if not validation_empty_entries(new_value):
+                            continue
+                        if new_value in (product_data[batch_number]['product_code'] for batch_number in
+                                         product_data):
+                            print('\n+----------------------------------------------------+')
+                            print('|⚠️ Duplication of product code. Please enter again. |')
+                            print('+----------------------------------------------------+')
+                            continue
+
+                    elif attribute_of_product_data == 'batch_number':
+                        if not validation_empty_entries(new_value):
+                            continue
+                        if not new_value.isalnum():
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
+                            continue
+                        if new_value in product_data:
+                            print('\n+--------------------------------------------------------+')
+                            print('|⚠️ Duplicate batch number detected. Please enter again. |')
+                            print('+--------------------------------------------------------+')
+                            continue
+
+                    elif attribute_of_product_data == 'shelf_life':
+                        if validation_empty_entries(new_value):
+                            if new_value.isdigit():
+                                number = int(new_value)
+                                if product_data[selected_product_key]['category'] in ['Breads', 'Muffins']:
+                                    if number <= 5:
+                                        break
+                                    else:
+                                        print('\n+------------------------------------------------------------------+')
+                                        print('|⚠️ Please enter a valid shelf life. (Cannot be more than 5 days.) |')
+                                        print('+------------------------------------------------------------------+')
+                                        continue
+                                elif product_data[selected_product_key]['category'] in ['Cakes', 'Pastries']:
+                                    if number <= 7:
+                                        break
+                                    else:
+                                        print('\n+------------------------------------------------------------------+')
+                                        print('|⚠️ Please enter a valid shelf life. (Cannot be more than 7 days.) |')
+                                        print('+------------------------------------------------------------------+')
+                                        continue
+                                elif product_data[selected_product_key]['category'] in ['Biscuits', 'Others']:
+                                    if number <= 14:
+                                        break
+                                    else:
+                                        print('\n+-------------------------------------------------------------------+')
+                                        print('|⚠️ Please enter a valid shelf life. (Cannot be more than 14 days.) |')
+                                        print('+-------------------------------------------------------------------+')
+                                        continue
+                            else:
                                 print(
-                                    f'\n{attribute_of_product_data} of {selected_product_key} is updated.')  # inform user about the data is updated
-                                product_data[selected_product_key].update({
-                                                                              attribute_of_product_data: new_value})  # assign the new value entered to the attributes
-                                save_info(product_data)  # save the data
-                                break
-                        else:
-                            print('\n❗Data not found.')  # error displayed if attribute entered not found
+                                    '\n+---------------------------------------------------------------------------------+')
+                                print(
+                                    '|⚠️ Please enter a number. (Cannot contain any alphabets and special characters.) |')
+                                print(
+                                    '+----------------------------------------------------------------------------------+')
+                                continue
+
+                    elif attribute_of_product_data == 'expiry_date':
+                        if not validation_empty_entries(new_value):
+                            continue
+                        if not validation_date(new_value):
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
+                            continue
+                        # convert new value from string to datetime format
+                        expiry_date = datetime.strptime(new_value, '%d-%m-%Y')
+                        # convert date_of _production from string to datetime format
+                        date_of_production_new = datetime.strptime(
+                            product_data[selected_product_key]['date_of_production'],
+                            '%d-%m-%Y')
+
+                        max_expiry = date_of_production_new + timedelta(days=int(product_data[selected_product_key]['shelf_life']) + 1)
+
+                        if not (max_expiry >= expiry_date >= date_of_production_new):
+                            print(
+                                '\n+----------------------------------------------------------------+')
+                            print(
+                                f'|⚠️ Invalid input. * Allowable period: {product_data[selected_product_key]["date_of_production"]} to {max_expiry.strftime("%d-%m-%Y")}. |')
+                            print(
+                                '+----------------------------------------------------------------+')
+                            continue
+
+                    elif attribute_of_product_data == 'baker_name':
+                        if not validation_empty_entries(new_value):
+                            continue
+                        if not new_value.isalnum():
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
+                            continue
+                        if new_value not in baker_list.keys():
+                            print('\n+--------------------------------------+')
+                            print('|⚠️ Invalid input. Please enter again. |')
+                            print('+--------------------------------------+')
+                            continue
+
+                    print(
+                        f'\n{attribute_of_product_data} of {selected_product_key} is updated.')  # inform user about the data is updated
+                    product_data[selected_product_key].update(
+                        {attribute_of_product_data: new_value})  # assign the new value entered to the attributes
+                    save_info(product_data)  # save the data
+                    break
 
             else:
-                print('\n❗Product not found.')  # error displayed if selected product not found
+                print('\n❗Data not found.')
+
+
+def delete_product():
+    while True:
+        index = 1
+        print('\n-----------------------------------------------')
+        print('\t\t\t\t', '', 'PRODUCT LIST')
+        print('-----------------------------------------------')
+        for name, info in product_data.items():
+            print(f'{index}. {name.title()}')
+            index += 1
+        print(f'{len(product_data) + 1}. cancel')
+
+        try:
+            index_remove_product = int(
+                input(f'\nWhich product do you want to remove? (or enter {len(product_data) + 1} to cancel)\n>>> '))
+            if index_remove_product == len(product_data) + 1:  # cancel the process
+                print('\nCancelling. Exiting to Services page......')
+                product_management()
+                break
+
+            elif 1 <= index_remove_product <= len(product_data):
+                product_to_remove = list(product_data.keys())[index_remove_product - 1]  # identify baker to remove by accesing the index of key of baker
+                del product_data[product_to_remove]  # delete the selected baker
+                save_info(product_data)
+                print(
+                    f'\n{product_to_remove.title()} is removed.\n')  # inform user that the selected baker is removed successfully
+
+                while True:
+                    remove_more = input(
+                        'Continue to remove? (y=yes, n=no)\n>>> ')  # ask user if they want to continue removing
+                    if remove_more == 'y':
+                        break
+                    elif remove_more == 'n':
+                        print('\nStop removing. Exiting to Services page......')
+                        product_management()
+                        break
+                    else:
+                        print('\n+--------------------------------------+')
+                        print('|⚠️ Invalid input. Please enter again. |')
+                        print('+--------------------------------------+')
+                    break
+            else:
+                print('\n+--------------------------------------+')
+                print('|⚠️ Invalid input. Please enter again. |')
+                print('+--------------------------------------+')
 
         except ValueError:
             print('\n+-----------------------------------------+')
@@ -704,5 +876,5 @@ def update_product():
             print('+-----------------------------------------+')
 
 
-#update_product()
-product_management()
+update_product()
+#product_management()

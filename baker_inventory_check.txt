@@ -1,16 +1,4 @@
 {
-    "9579": {
-        "recipe_category": "Pastries",
-        "recipe_name": "applepie",
-        "production_quantity": 2,
-        "date_of_production": "20-10-2024"
-    },
-    "9986": {
-        "recipe_category": "Cakes",
-        "recipe_name": "applecake",
-        "production_quantity": 1,
-        "date_of_production": "date"
-    },
     "2673": {
         "recipe_category": "Pastries",
         "recipe_name": "applepie",
