@@ -76,79 +76,102 @@ def load_discount_data():
 
 # Function to enable customers to add items to the cart (with discount check)
 def add_item_to_cart(cart):
-    product_menu.menu()
-    baker_data = load_baker_data()  # Load baker product data
-    manager_data = load_manager_data()  # Load manager product data
-    discount_data = load_discount_data()  # Load discount data
+    while True:  # Loop to allow re-entering product code if the user chooses 'no'
+        product_menu.menu()
+        baker_data = load_baker_data()  # Load baker product data
+        manager_data = load_manager_data()  # Load manager product data
+        discount_data = load_discount_data()  # Load discount data
 
-    product_code_input = input("\nEnter the product code: ").strip()
+        product_code_input = input("\nEnter the product code: ").strip()
 
-    # Directly search for the product in baker_data
-    for item in baker_data.values():
-        if item['product_code'] == product_code_input:
-            product_name = item["product_name"]  # Retrieve product name
+        # Directly search for the product in baker_data
+        for item in baker_data.values():
+            if item['product_code'] == product_code_input:
+                product_name = item["product_name"]  # Retrieve product name
 
-            # Get the price from manager_data
-            for key, value in manager_data.items():
-                if value['product_name'] == product_name:
-                    product_price = float(value.get("price", 0).replace('RM ', ''))  # Convert price to float
-                    break  # Exit loop once the product is found
+                # Get the price from manager_data
+                for key, value in manager_data.items():
+                    if value['product_name'] == product_name:
+                        product_price = float(value.get("price", 0).replace('RM ', ''))  # Convert price to float
+                        break  # Exit loop once the product is found
 
-            # Check if the product has a discount in discount_data
-            discount_percentage = 0  # Default to 0% discount if no discount found
-            for discount_item in discount_data.values():
-                if discount_item['product_code'] == product_code_input:
-                    discount_percentage = float(discount_item['Discount'].replace('%', '')) / 100
-                    break
+                # Check if the product has a discount in discount_data
+                discount_percentage = 0  # Default to 0% discount if no discount found
+                for discount_item in discount_data.values():
+                    if discount_item['product_code'] == product_code_input:
+                        discount_percentage = float(discount_item['Discount'].replace('%', '')) / 100
+                        break
 
-            # Calculate the discounted price if applicable
-            discounted_price = product_price * (1 - discount_percentage)
+                # Calculate the discounted price if applicable
+                discounted_price = product_price * (1 - discount_percentage)
 
-            # Get the quantity to add to the cart
-            while True:  # Loop until a valid quantity is entered
-                quantity = input(f"How many {product_name} would you like to add? ")
+                # Get the quantity to add to the cart
+                while True:  # Loop until a valid quantity is entered
+                    quantity = input(f"How many {product_name} would you like to add? ")
 
-                # Validate the quantity input
-                if quantity.isdigit() and int(quantity) > 0:
-                    quantity = int(quantity)
-                    break  # Exit loop if valid input
+                    # Validate the quantity input
+                    if quantity.isdigit() and int(quantity) > 0:
+                        quantity = int(quantity)
+                        break  # Exit loop if valid input
+                    else:
+                        print("Invalid quantity. Please enter a valid number greater than 0.")
+
+                # Inform customer about the discount and price details
+                if discount_percentage > 0:
+                    print(f"\nThe product '{product_name}' has a discount of {discount_percentage * 100}%.")
+                    print(f"Original price: RM {product_price} per unit.")
+                    print(f"Discounted price: RM {discounted_price} per unit.")
+
+                # Calculate the total price with discount
+                total_price = discounted_price * quantity  # Calculate total price as float
+
+                # Add to cart or update existing quantity
+                if product_code_input not in cart:
+                    cart[product_code_input] = {
+                        'product_name': product_name,
+                        'price': discounted_price,  # Store discounted price as float
+                        'quantity': quantity  # Initialize quantity
+                    }
                 else:
-                    print("Invalid quantity. Please enter a valid number greater than 0.")
+                    cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
 
-            # Inform customer about the discount and price details
-            if discount_percentage > 0:
-                print(f"\nThe product '{product_name}' has a discount of {discount_percentage * 100}%.")
-                print(f"Original price: RM {product_price} per unit.")
-                print(f"Discounted price: RM {discounted_price} per unit.")
+                print(f"\n{product_name} x{quantity} has been added to your cart.")
+                print(f"Total price: RM {discounted_price} x {quantity} = RM {total_price}")
 
-            # Calculate the total price with discount
-            total_price = discounted_price * quantity  # Calculate total price as float
+                # Prompt the user if they want to return to the main menu
+                while True:
+                    choice = input("\nDo you want to return to the main menu? (y/n): ").lower()
 
-            # Add to cart or update existing quantity
-            if product_code_input not in cart:
-                cart[product_code_input] = {
-                    'product_name': product_name,
-                    'price': discounted_price,  # Store discounted price as float
-                    'quantity': quantity  # Initialize quantity
-                }
-            else:
-                cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
+                    if choice == 'y':
+                        print("Returning to the main menu...")
+                        return  # Exit the function, returning to the main menu
+                    elif choice == 'n':
+                        print("\nYou can add more items. Showing the menu again...\n")
+                        break  # Exit the inner loop and show the product menu again
+                    else:
+                        print("\n+--------------------------------------+")
+                        print("|⚠️ Invalid input. Please enter 'y' or 'n'. |")
+                        print("+--------------------------------------+\n")
+                break  # Exit the outer loop if product is added successfully
 
-            print(f"\n{product_name} x{quantity} has been added to your cart.")
-            print(f"Total price: RM {discounted_price} x {quantity} = RM {total_price}")
-            return  # Exit the function after processing
-
-    # Print the message if product cannot be found
-    print(" |⚠️ Invalid product code! Please ensure you entered it correctly.|")
+        else:
+            # Print the message if product cannot be found
+            print(" |⚠️ Invalid product code! Please ensure you entered it correctly.|")
 
 
 # Function to remove an item from the cart
 def remove_item_from_cart(cart):
+    # Check if the cart is empty
+    if not cart:
+        print("⚠️ Your cart is empty. There are no items to remove.")
+        return  # Exit the function if the cart is empty
+
     while True:
         product_code = input("\nPlease enter the product code of the item you wish to remove: ").strip()
 
+        # Check if the product exists in the cart
         if product_code in cart:
-            del cart[product_code]
+            del cart[product_code]  # Remove the item from the cart
             print(f"Product {product_code} has been removed from the cart successfully!")
         else:
             print("⚠️ Product cannot be found in the cart.")
@@ -164,7 +187,7 @@ def remove_item_from_cart(cart):
             print("Exiting item removal process.")
             break  # Exit the removal process
         else:
-            print("Invalid input! Please enter 'y' for yes or 'n' for no.")
+            print("|⚠️Invalid input! Please enter 'y' for yes or 'n' for no.|")
 
 
 # Function to modify the quantity of an item in the cart
@@ -191,10 +214,10 @@ def modify_item_quantity(cart):
                     break  # Exit the quantity loop after a successful update
 
                 except ValueError:
-                    print("Invalid input! Please enter a valid number.")
+                    print("|⚠️Invalid input! Please enter a valid number.|")
 
         else:
-            print("⚠️ Product cannot be found in the cart!")
+            print("|⚠️ Product cannot be found in the cart!|")
 
         while True:
             continue_modifying = input(
@@ -205,25 +228,39 @@ def modify_item_quantity(cart):
                 print("Exiting item quantity modification process.")
                 return  # Or use break to exit the loop
             else:
-                print("Invalid input! Please enter 'y' for yes or 'n' for no.")
+                print("|⚠️Invalid input! Please enter 'y' for yes or 'n' for no.|")
 
 
 # Function to view the cart
 def view_cart(cart):
-    if not cart:
-        print("Your cart is empty.") # Print this message if cart is empty
-        return
+    while True:  # Loop to allow re-viewing the cart if 'no' is selected
+        if not cart:
+            print("Your cart is empty.")  # Print this message if the cart is empty
+            return
 
-    print("\nYour Cart:")
-    print()
-    print(f"{'Product':<20} | {'Quantity':<8} | Price (RM)")
-    print("-" * 40)
+        print("\nYour Cart:")
+        print()
+        print(f"{'Product':<20} | {'Quantity':<8} | Price (RM)")
+        print("-" * 40)
 
-    for item in cart.values():
-        item_total = item['quantity'] * item['price']
-        print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
+        for item in cart.values():
+            item_total = item['quantity'] * item['price']
+            print(f"{item['product_name']:<20} | {item['quantity']:<8} | RM{item_total:.2f}")
 
-    print("-" * 40)
+        print("-" * 40)
+
+        # Prompt the user if they want to return to the main menu
+        choice = input("\nDo you want to return to the main menu? (y/n): ").lower()
+
+        if choice == 'y':
+            print("Returning to the main menu...")
+            return  # Exit the function and return to the main menu
+        elif choice == 'n':
+            print("Here is your cart again.\n")  # Reloop to show the cart again
+        else:
+            print("\n+--------------------------------------+")
+            print("|⚠️ Invalid input. Please enter 'y' or 'n'. |")
+            print("+--------------------------------------+\n")
 
 
 # Function to save the order to a JSON file with cart_id as key
@@ -300,11 +337,15 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         loyalty_data = customer_loyalty_rewards.load_loyalty_rewards()
 
         # Check if the customer exists in loyalty rewards
-        order_info = next((info for info in loyalty_data.values() if info['username'] == customer_name), None)
+        order_info = None  # Initialize variable
+        for info in loyalty_data.values():
+            if info['username'] == customer_name:
+                order_info = info
+                break  # Exit loop once the customer is found
+
+        points_change = customer_loyalty_rewards.determine_loyalty_points(total_price)
 
         if order_info:  # If customer exists, update points
-            # Calculate points change
-            points_change = customer_loyalty_rewards.determine_loyalty_points(total_price)[0]
             order_info['loyalty_points'] += points_change  # Add points
             print(f"{customer_name}'s loyalty points updated to: {order_info['loyalty_points']}")
 
@@ -316,7 +357,6 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         else:  # New user, initialize their data in loyalty rewards
             new_order_id = str(len(loyalty_data) + 1)  # Generate new order ID
-            points_change = customer_loyalty_rewards.determine_loyalty_points(total_price)[0]
             loyalty_data[new_order_id] = {
                 "username": customer_name,
                 "total_spending (RM)": total_price,
@@ -344,12 +384,11 @@ def checkout_or_cancel(cart, customer_name, cart_id):
             if customer_info['customer_username'] == customer_name:
                 customer_info['loyalty_points'] += points_change  # Add points
                 customer_found = True
-                break  # Exit loop after finding the customer
+                break
 
         if customer_found:
             with open("customer.txt", "w") as file:
                 json.dump(customer_data, file, indent=4)
-            print(f"{customer_name}'s loyalty points updated in customer.txt to: {customer_info['loyalty_points']}")
         else:
             print(f"Customer {customer_name} does not exist in our system.")
 
@@ -358,13 +397,13 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         # Clear cart after receipt generation
         cart.clear()
+        return
 
     elif choice == '2':
         print("Order canceled. Your cart has been cleared.")
         cart.clear()
     else:
-        print("Invalid choice. Please select 1 or 2.")
-
+        print("|⚠️Invalid choice. Please select 1 or 2.|")
 
 
 def view_payment_receipt(cart_id):
@@ -375,6 +414,7 @@ def view_payment_receipt(cart_id):
             cashier_transaction_completion.receipt(str(cart_id))
         else:
             print('\nThe receipt will only be generated after payment has completed. Please proceed to payment.')
+
 
 # Main shopping cart function
 def shopping_cart():

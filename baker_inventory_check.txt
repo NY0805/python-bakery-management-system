@@ -22,5 +22,11 @@
         "recipe_name": "bello",
         "production_quantity": 20,
         "date_of_production": "date"
+    },
+    "5896": {
+        "recipe_category": "Pastries",
+        "recipe_name": "applepie",
+        "production_quantity": 3,
+        "date_of_production": "date"
     }
 }

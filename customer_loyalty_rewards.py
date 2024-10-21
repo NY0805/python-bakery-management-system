@@ -12,18 +12,18 @@ REDEEM_RATES = {
     "Standard": None
 }
 
-def determine_loyalty_points(total_price):
-    """Calculate loyalty points based on the total price spent."""
-    # Check if total_price is a number
+
+def determine_loyalty_points(total_price):  # Calculate loyalty points based on customer's total spending
+    # Ensure total_price is a number
     if not isinstance(total_price, (int, float)):
         raise ValueError(f"Invalid total price: {total_price} (must be a number)")
 
     # Calculate loyalty points
     points = int(total_price * BASE_POINTS_PER_RM)
-    return points,
+    return points  # Directly return points
 
-def update_customer_status(points):
-    """Determine customer status based on their loyalty points."""
+
+def update_customer_status(points): # Determine customer status based on their loyalty points
     if points >= GOLD_REQUIREMENT:
         return "MORNING GLORY'S GOLD"
     elif points >= SILVER_REQUIREMENT:
@@ -33,21 +33,21 @@ def update_customer_status(points):
     else:
         return "Standard"
 
-def load_customer_data():
-    """Load customer data from the customer.txt file."""
+
+def load_customer_data(): # Load customer data from the customer.txt file
     try:
         with open("customer.txt", "r") as file:
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
 
-def save_customer_data(data):
-    """Save customer data to the customer.txt file."""
+
+def save_customer_data(data): # Save customer data to the customer.txt file
     with open("customer.txt", "w") as file:
         json.dump(data, file, indent=4)
 
-def load_loyalty_rewards():
-    """Load customer loyalty rewards data from the customer_loyalty_rewards.txt file."""
+
+def load_loyalty_rewards(): # Load customer loyalty rewards data from the customer_loyalty_rewards.txt file
     try:
         with open('customer_loyalty_rewards.txt', 'r') as file:
             content = file.read().strip()
@@ -58,22 +58,21 @@ def load_loyalty_rewards():
     except FileNotFoundError:
         return {}
 
-def save_loyalty_rewards(rewards):
-    """Save customer loyalty rewards data to the customer_loyalty_rewards.txt file."""
+
+def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the customer_loyalty_rewards.txt file
     with open('customer_loyalty_rewards.txt', 'w') as file:
         json.dump(rewards, file, indent=4)
 
 
-def process_payment(username, total_price):
-    """Process payment and update the user's loyalty points and status."""
+def process_payment(username, total_price):  # Process payment and update the user's loyalty points and status
     rewards = load_loyalty_rewards()  # Load loyalty rewards data
     customers = load_customer_data()  # Load customer data
 
     # Ensure total_price is a valid number
     try:
-        total_price = float(total_price)  # Convert total_price to float
+        total_price = float(total_price)
     except ValueError:
-        print(f"Error: total_price must be a valid number, got {total_price}")
+        print(f"|⚠️Error: total_price must be a valid number, got {total_price}|")
         return
 
     # Check if user exists in customer_loyalty_rewards.txt
@@ -85,7 +84,7 @@ def process_payment(username, total_price):
         rewards[new_order_id] = {
             "username": username,
             "total_spending (RM)": total_price,
-            "loyalty_points": determine_loyalty_points(total_price)[0],
+            "loyalty_points": determine_loyalty_points(total_price),  # Directly use the return value
             "status": "MORNING GLORY'S STANDARD",
             "redeem_rate (RM)": 0,
             "voucher_redeem": 0,
@@ -103,9 +102,9 @@ def process_payment(username, total_price):
         # Existing user, update their spending and loyalty points
         for order_id in user_rewards:  # Only iterate over user's orders
             history = rewards[order_id]
+            points_change = determine_loyalty_points(total_price)  # Get points change directly
             history['total_spending (RM)'] += total_price
-            history['loyalty_points'] += determine_loyalty_points(total_price)[0]
-            print(f"Loyalty points updated for {username}.")
+            history['loyalty_points'] += points_change  # Correctly update points
 
             # Update customer.txt with the new points
             if username in customers:
@@ -121,9 +120,7 @@ def process_payment(username, total_price):
     print("Order placed. Please proceed to payment for the receipt.")
 
 
-
-def update_customer_loyalty_points(customer_name, points_change):
-    """Update loyalty points for a specific customer."""
+def update_customer_loyalty_points(customer_name, points_change): # Update loyalty points for a specific customer
     try:
         with open("customer.txt", "r") as file:
             customer_data = json.load(file)
@@ -143,8 +140,8 @@ def update_customer_loyalty_points(customer_name, points_change):
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error: {e}")
 
-def update_loyalty_rewards(username, points_change, new_status):
-    """Update loyalty rewards for a user."""
+
+def update_loyalty_rewards(username, points_change, new_status): # Update loyalty rewards for a user
     rewards = load_loyalty_rewards()
 
     for order_id, history in rewards.items():
@@ -156,8 +153,8 @@ def update_loyalty_rewards(username, points_change, new_status):
     save_loyalty_rewards(rewards)
     print("Loyalty rewards updated.")
 
-def redeem_cash_voucher(username):
-    """Allow customers to redeem cash vouchers using loyalty points."""
+
+def redeem_cash_voucher(username): # Allow customers to redeem cash vouchers using loyalty points
     rewards = load_loyalty_rewards()
 
     for order_id, history in rewards.items():
@@ -213,13 +210,13 @@ def redeem_cash_voucher(username):
                 else:
                     print("No vouchers redeemed.")
             else:
-                print(f"Not enough points. You need {points_per_voucher} points per voucher.")
+                print(f"|⚠️Not enough points. You need {points_per_voucher} points per voucher.|")
             return
 
     print(f"User {username} does not exist in the loyalty rewards system.")
 
-def log_redeem_history(username, total_spend, points_earned, status):
-    """Log the redeem history for a customer."""
+
+def log_redeem_history(username, total_spend, points_earned, status): # Log the redeem history for a customer
     rewards = load_loyalty_rewards()
     order_id = f"ORD{len(rewards) + 1:03d}"  # Generate a new order ID
     rewards[order_id] = {
@@ -232,8 +229,8 @@ def log_redeem_history(username, total_spend, points_earned, status):
     }
     save_loyalty_rewards(rewards)
 
-def view_loyalty_rewards(username):
-    """Display loyalty rewards information for a specific user."""
+
+def view_loyalty_rewards(username): #Display loyalty rewards information for a specific user
     rewards = load_loyalty_rewards()  # Load from customer_loyalty_rewards.txt
 
     # Check if the username exists in the rewards data
@@ -256,7 +253,6 @@ def view_loyalty_rewards(username):
                 redeem_rate = r.get('redeem_rate (RM)', '-')  # Get redeem rate to avoid KeyError
                 print(
                     f"{order_id:<10} | {r['total_spending (RM)']:<20} | {points_earned:<15} | {status:<20} | {redeem_rate:<15} | {voucher_redeemed:<15}")
-
                 # Display redemption history
 
     else:
