@@ -273,7 +273,6 @@ def update_personal_information():
             print("Customer not found. Please enter a valid username.\n")
 
 
-
 # Function to manage customer account (view or delete)
 def account_management():
     customer_info = load_data_from_customer()

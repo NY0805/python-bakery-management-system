@@ -397,6 +397,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         # Clear cart after receipt generation
         cart.clear()
+        return
 
     elif choice == '2':
         print("Order canceled. Your cart has been cleared.")
