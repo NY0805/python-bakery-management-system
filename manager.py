@@ -1,4 +1,5 @@
-import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
+import \
+    re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 
 import manager_customer_feedback
@@ -17,7 +18,8 @@ def load_data_from_manager():
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -29,7 +31,8 @@ def load_data_from_manager():
 # Define the function that saves information to the file
 def save_info(manager_info):
     file = open('manager.txt', 'w')  # open the file to write
-    json.dump(manager_info, file,indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
+    json.dump(manager_info, file,
+              indent=4)  # convert the dictionary into JSON format, 4 spaces indentation make it clearer for visualization
     file.close()  # close the file after writing
 
 
@@ -45,15 +48,15 @@ manager_info = load_data_from_manager()  # store the data that retrieved from fi
 
 # manager account sign up page
 def manager_accounts():
-
     print('\n+----------------------------------------------------------------+')
-    print('|⚠️ This is your FIRST TIME login, kindly complete your profile. |')
+    print('|💡 This is your FIRST TIME login, kindly complete your profile. |')
     print('+----------------------------------------------------------------+\n')
 
     manager_name = input('Name: ')  # ask for manager name
 
     manager_username = input('Username: ')  # ask for manager username
-    while manager_username in (manager_info[manager_name]['manager_username'] for manager_name in manager_info):  # continue looping if username not match with the name
+    while manager_username in (manager_info[manager_name]['manager_username'] for manager_name in
+                               manager_info):  # continue looping if username not match with the name
         print('\n+----------------------------------------------------------+')
         print('|⚠️ Username has been used. Please enter another username. |')
         print('+----------------------------------------------------------+\n')
@@ -123,7 +126,6 @@ def manager_accounts():
 
 # create a function for manager
 def manager():
-
     print('')
     printed_centered('MANAGER')
     manager_name = input('Name: ')
@@ -148,24 +150,26 @@ def manager():
         print('\n+--------------------------------------------------------------+')
         print('|⚠️ You are not a manager, cannot access to manager privilege. |')
         print('+--------------------------------------------------------------+\n')
-        while True:
-            become_manager = input('Do you want to be a manager (y=yes, n=no)?\n>>> ')  # ask user if they want to be a manager
-            if become_manager == 'y':
-                if len(manager_info) == 1:
-                    print('\n💡Sorry, the manager position is not vacant.')  # the request fallback to users when manager position is full
-                    print('Exiting to Main page......')
-                    return False
-                else:
-                    manager_accounts()  # the request succeed and call the first time login function when the manager position is empty
-                    break
+        print('If you are a manager but does not have an account, please proceed to sign up.')
 
-            elif become_manager == 'n':
-                print('\nExiting to Main page......')
-                return False
-            else:
+        while True:
+            become_manager = input('Are you a manager? (y=yes, n=no)\n>>> ')
+            if become_manager not in ['y', 'n']:
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
-                print('+--------------------------------------+\n')
+                print('+--------------------------------------+')
+            elif become_manager == 'y':
+                if len(manager_info) == 1:
+                    print('💡 Sorry, the manager position is full.')
+                    print('\nExiting to Main page......')
+                    return False
+                else:
+                    print('\nDirecting to manager sign up page......')
+                    manager_accounts()
+                    break
+            else:
+                print('\nExiting to Main page......')
+                return False
 
     print('\nLogin successfully!')  # login successfully if all the requirements in sign up and login page are fulfilled
     print('Welcome, manager', manager_name, '!')
@@ -212,5 +216,3 @@ def manager():
 
 
 #manager()
-
-

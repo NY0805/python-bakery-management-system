@@ -58,7 +58,7 @@ def baker_accounts():
             print('+---------------------------------------------------------------------------+\n')
             baker_password = input('Password: ')
 
-        while baker_password != 'b@k3rm4st3r!':  # continue to validate the password of baker after the password length is correct
+        while baker_password != baker_info[baker_username]['baker_password']:  # continue to validate the password of baker after the password length is correct
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect password. Please enter again. |')
             print('+-------------------------------------------+\n')
@@ -102,6 +102,6 @@ def baker_accounts():
                 print('+--------------------------------------+')
 
 
-
+baker_accounts()
 
 

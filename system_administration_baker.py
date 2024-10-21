@@ -37,7 +37,7 @@ def printed_centered(info):
 
 # define the function to register bakers
 def baker_accounts():
-    baker = load_data_from_baker()  # store the data that retrieved from file into baker
+    baker = load_data_from_baker()  # store the data that retrieved from file into baker variable
 
     baker_username = input('Username: ')  # ask for baker's username
     while baker_username in (baker[baker_name]['baker_username'] for baker_name in baker):  # continue looping if there is a duplication of username
@@ -47,76 +47,75 @@ def baker_accounts():
         baker_username = input('\nUsername: ')
 
     while True:
-        baker_password = input('Password: ')  # set the password for baker
-        if baker_password == 'b@k3rm4st3r!':
-            while True:
-                try:
-                    age = int(input('Age: '))  # ask for baker's age
-                    if age < 18 or age > 60:  # check if the age is between 18 - 60
-                        print('\n+--------------------------------------------------------------------+')
-                        print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
-                        print('+--------------------------------------------------------------------+\n')
-                    else:
-                        break  # exit the loop if age is valid
-                except ValueError:
-                    print('\n+-----------------------------+')
-                    print('|⚠️ Please enter a valid age. |')
-                    print('+-----------------------------+\n')
+        baker_password = 'b@k3rm4st3r!'  # set the password for cashier
+        print('\n+---------------------------------------------------------------------------------+')
+        print('|💡 The default password for cashier is "b@k3rm4st3r!". You can change it later. |')
+        print('+---------------------------------------------------------------------------------+\n')
+        break
 
-            while True:
-                gender = input('Gender(m=male, f=female): ')  # ask for baker's gender
-                if gender not in ['f', 'm']:
-                    print('\n+--------------------------------------+')
-                    print('|⚠️ Invalid input. Please enter again. |')
-                    print('+--------------------------------------+\n')
-                elif gender == 'f':
-                    gender = 'female'
-                    break
-                else:
-                    gender = 'male'
-                    break
+    while True:
+        try:
+            age = int(input('Age: '))  # ask for baker's age
+            if age < 18 or age > 60:  # check if the age is between 18 - 60
+                print('\n+--------------------------------------------------------------------+')
+                print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
+                print('+--------------------------------------------------------------------+\n')
+            else:
+                break  # exit the loop if age is valid
+        except ValueError:
+            print('\n+-----------------------------+')
+            print('|⚠️ Please enter a valid age. |')
+            print('+-----------------------------+\n')
 
-            while True:
-                contact_no = input('Contact number(xxx-xxxxxxx): ')  # ask for baker's contact number
-                if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):  # check if the contact number match the specific pattern
-                    print('\n+-----------------------------------------------+')
-                    print('|⚠️ Invalid contact number. Please enter again. |')
-                    print('+-----------------------------------------------+\n')
-                else:
-                    break
-
-            while True:
-                email = input('Email: ') # ask for baker's email
-                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):  # check if the email match the specific pattern
-                    print('\n+--------------------------------------+')
-                    print('|⚠️ Invalid email. Please enter again. |')
-                    print('+--------------------------------------+\n')
-                else:
-                    break
-
-            # update the dictionary with user input
-            baker[baker_username] = {
-                'baker_username': baker_username,
-                'baker_password': baker_password,
-                'age': age,
-                'gender': gender,
-                'contact_no': contact_no,
-                'email': email
-            }
-            save_info(baker)
-
-            print(f'\n{baker_username} is added.\n')  # inform user that the information is saved
-            return False
-
+    while True:
+        gender = input('Gender(m=male, f=female): ')  # ask for baker's gender
+        if gender not in ['f', 'm']:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+\n')
+        elif gender == 'f':
+            gender = 'female'
+            break
         else:
-            print('\n+-------------------------------------------+')
-            print('|⚠️ Incorrect password. Please enter again. |')
-            print('+-------------------------------------------+\n')
+            gender = 'male'
+            break
+
+    while True:
+        contact_no = input('Contact number(xxx-xxxxxxx): ')  # ask for baker's contact number
+        if not re.fullmatch(r'^\d{3}-\d{7}$', contact_no):  # check if the contact number match the specific pattern
+            print('\n+-----------------------------------------------+')
+            print('|⚠️ Invalid contact number. Please enter again. |')
+            print('+-----------------------------------------------+\n')
+        else:
+            break
+
+    while True:
+        email = input('Email: ') # ask for baker's email
+        if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):  # check if the email match the specific pattern
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid email. Please enter again. |')
+            print('+--------------------------------------+\n')
+        else:
+            break
+
+    # update the dictionary with user input
+    baker[baker_username] = {
+        'baker_username': baker_username,
+        'baker_password': baker_password,
+        'age': age,
+        'gender': gender,
+        'contact_no': contact_no,
+        'email': email
+    }
+    save_info(baker)
+
+    print(f'\n{baker_username} is added.\n')  # inform user that the information is saved
+    return False
 
 
 # define the function to manage baker
 def system_administration_baker():
-    baker = load_data_from_baker()  # store the data that retrieved from file into baker
+    baker = load_data_from_baker()  # store the data that retrieved from file into baker variable
 
     while True:
         print('')
@@ -133,7 +132,7 @@ def system_administration_baker():
                     print('')
                     printed_centered('NEW BAKER ENTRY FORM')
                     baker_accounts()  # fill up the details of baker to complete the registration
-                    baker = load_data_from_baker()  # read the information of baker again from file (if don't put, the data will not save into dictionary)
+                    baker = load_data_from_baker()  # read the information of baker again from file (the data will not be updated if lack of this line.)
 
                     while True:
                         add_more = input('Continue to add? (y=yes, n=no)\n>>> ')  # after one baker has been added, ask user if they want continue adding
@@ -235,64 +234,64 @@ def system_administration_baker():
                             if attribute_of_baker_data in baker[selected_baker]:  # check if the attribute inputted found in baker's data
 
                                 while True:
-                                    if attribute_of_baker_data == 'baker_password':
-                                        print('\n+------------------------------------------------------------------------+')
-                                        print('|⚠️ This password is created by manager. You are not allow to change it. |')
-                                        print('+------------------------------------------------------------------------+')
+                                    new_value = input(f'\nEnter new {attribute_of_baker_data}: ')
+                                    try:
+                                        if attribute_of_baker_data == 'baker_password':
+                                            if len(new_value) < 8 or len(new_value) > 12:
+                                                print('\n+-------------------------------------------------------------------+')
+                                                print('|⚠️ Not enough password length. It must contains 8-12 characters. |')
+                                                print('+-------------------------------------------------------------------+')
+                                                continue
+
+                                        if attribute_of_baker_data == 'baker_username':
+                                            if new_value in (baker[baker_name]['baker_username'] for baker_name in baker):  # if new value same with the current username in file, duplication occurs
+                                                print('\n+----------------------------------------------------------+')
+                                                print('|⚠️ Username has been used. Please enter another username. |')
+                                                print('+----------------------------------------------------------+')
+                                                continue
+
+                                        elif attribute_of_baker_data == 'age':
+                                            if int(new_value) < 18 or int(new_value) > 60:  # check if the age is between 18 - 60
+                                                print('\n+--------------------------------------------------------------------+')
+                                                print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
+                                                print('+--------------------------------------------------------------------+')
+                                                continue
+
+                                        elif attribute_of_baker_data == 'gender':
+                                            if new_value not in ['f', 'm']:
+                                                print('\n+--------------------------------------+')
+                                                print('|⚠️ Invalid input. Please enter again. |')
+                                                print('+--------------------------------------+')
+                                                continue
+                                            elif new_value == 'f':
+                                                new_value = 'female'
+
+                                            else:
+                                                new_value = 'male'
+
+                                        elif attribute_of_baker_data == 'contact_no':
+                                            if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # check if the contact number match the specific pattern
+                                                print('\n+-----------------------------------------------+')
+                                                print('|⚠️ Invalid contact number. Please enter again. |')
+                                                print('+-----------------------------------------------+')
+                                                continue
+
+                                        elif attribute_of_baker_data == 'email':
+                                            if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):  # check if the email match the specific pattern
+                                                print('\n+--------------------------------------+')
+                                                print('|⚠️ Invalid email. Please enter again. |')
+                                                print('+--------------------------------------+')
+                                                continue
+
+                                        baker[selected_baker][attribute_of_baker_data] = new_value  # update the value of attributes
+                                        print(f'\n{attribute_of_baker_data} of {selected_baker} is updated.')  # inform user that the information is updated
+                                        save_info(baker)
                                         break
-                                    else:
-                                        try:
-                                            new_value = input(f'\nEnter new {attribute_of_baker_data}: ')
 
-                                            if attribute_of_baker_data == 'baker_username':
-                                                if new_value in (baker[baker_name]['baker_username'] for baker_name in baker):  # if new value same with the current username in file, duplication occurs
-                                                    print('\n+----------------------------------------------------------+')
-                                                    print('|⚠️ Username has been used. Please enter another username. |')
-                                                    print('+----------------------------------------------------------+')
-                                                    continue
-
-                                            elif attribute_of_baker_data == 'age':
-                                                if int(new_value) < 18 or int(new_value) > 60:  # check if the age is between 18 - 60
-                                                    print('\n+--------------------------------------------------------------------+')
-                                                    print('|⚠️ The required age is between 18 and 60. Please enter a valid age. |')
-                                                    print('+--------------------------------------------------------------------+')
-                                                    continue
-
-                                            elif attribute_of_baker_data == 'gender':
-                                                if new_value not in ['f', 'm']:
-                                                    print('\n+--------------------------------------+')
-                                                    print('|⚠️ Invalid input. Please enter again. |')
-                                                    print('+--------------------------------------+')
-                                                    continue
-                                                elif new_value == 'f':
-                                                    new_value = 'female'
-
-                                                else:
-                                                    new_value = 'male'
-
-                                            elif attribute_of_baker_data == 'contact_no':
-                                                if not re.fullmatch(r'^\d{3}-\d{7}$', new_value):  # check if the contact number match the specific pattern
-                                                    print('\n+-----------------------------------------------+')
-                                                    print('|⚠️ Invalid contact number. Please enter again. |')
-                                                    print('+-----------------------------------------------+')
-                                                    continue
-
-                                            elif attribute_of_baker_data == 'email':
-                                                if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', new_value):  # check if the email match the specific pattern
-                                                    print('\n+--------------------------------------+')
-                                                    print('|⚠️ Invalid email. Please enter again. |')
-                                                    print('+--------------------------------------+')
-                                                    continue
-
-                                            baker[selected_baker][attribute_of_baker_data] = new_value  # update the value of attributes
-                                            print(f'\n{attribute_of_baker_data} of {selected_baker} is updated.')  # inform user that the information is updated
-                                            save_info(baker)
-                                            break
-
-                                        except ValueError:
-                                            print('\n+-----------------------------+')
-                                            print('|⚠️ Please enter a valid age. |')
-                                            print('+-----------------------------+')
+                                    except ValueError:
+                                        print('\n+-----------------------------+')
+                                        print('|⚠️ Please enter a valid age. |')
+                                        print('+-----------------------------+')
 
                             elif attribute_of_baker_data == 'cancel':
                                 print('\nCancelling. Exiting to Baker List......')
