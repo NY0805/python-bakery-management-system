@@ -192,6 +192,10 @@ def remove_item_from_cart(cart):
 
 # Function to modify the quantity of an item in the cart
 def modify_item_quantity(cart):
+    if not cart:  # Check if the cart is empty
+        print("|⚠️ Your cart is empty. You cannot modify item quantities.|")
+        return  # Exit the function if the cart is empty
+
     while True:
         product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
 
@@ -214,7 +218,7 @@ def modify_item_quantity(cart):
                     break  # Exit the quantity loop after a successful update
 
                 except ValueError:
-                    print("|⚠️Invalid input! Please enter a valid number.|")
+                    print("|⚠️ Invalid input! Please enter a valid number.|")
 
         else:
             print("|⚠️ Product cannot be found in the cart!|")
@@ -228,7 +232,7 @@ def modify_item_quantity(cart):
                 print("Exiting item quantity modification process.")
                 return  # Or use break to exit the loop
             else:
-                print("|⚠️Invalid input! Please enter 'y' for yes or 'n' for no.|")
+                print("|⚠️ Invalid input! Please enter 'y' for yes or 'n' for no.|")
 
 
 # Function to view the cart
