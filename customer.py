@@ -111,13 +111,15 @@ def login():
     customer_name = input('\nName: ')
 
     if customer_name in customer_info:
-        customer_username = input("Username: ")
-        # Check if the username matches the one in customer_info for the given customer_name
-        if customer_info[customer_name]['customer_username'] != customer_username:
-            print('\n+-------------------------------------------+')
-            print('|⚠️ Incorrect username. Please enter again. |')
-            print('+-------------------------------------------+\n')
-            return None
+        while True:  # Loop until the correct username is entered
+            customer_username = input("Username: ")
+            # Check if the username matches the one in customer_info for the given customer_name
+            if customer_info[customer_name]['customer_username'] == customer_username:
+                break  # Exit the loop if the username is correct
+            else:
+                print('\n+-------------------------------------------+')
+                print('|⚠️ Incorrect username. Please enter again. |')
+                print('+-------------------------------------------+\n')
 
         customer_password = input("Password: ")
         while customer_password != customer_info[customer_name]['customer_password']:
@@ -135,7 +137,6 @@ def login():
         print('Directing to sign-up page......\n')
         sign_up()
         return None  # Return None if sign-up is initiated
-
 
 def customer():
     print('\n----------------------------------------------------')
