@@ -488,5 +488,35 @@
         "total_price (RM)": "4.50",
         "order_date": "22-10-2024",
         "status": "Order Placed"
+    },
+    "6583265832": {
+        "order_id": "ORD048",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 4"
+        ],
+        "total_price (RM)": "19.00",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "9149754275": {
+        "order_id": "ORD049",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 5"
+        ],
+        "total_price (RM)": "23.75",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "7498717867": {
+        "order_id": "ORD050",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 5"
+        ],
+        "total_price (RM)": "11.25",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
     }
 }

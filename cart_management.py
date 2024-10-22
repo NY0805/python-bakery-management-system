@@ -422,11 +422,10 @@ def view_payment_receipt(cart_id):
 
 
 # Main shopping cart function
-def shopping_cart():
+def shopping_cart(logged_in_username):  # Accept the logged-in username as an argument
     cart = {}  # Initialize cart as a regular dictionary
-    customer_name = input("Please enter your name: ")
     cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
-    print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
+    print(f"Hello, {logged_in_username}! Your cart ID is: {cart_id}\n")  # Use logged_in_username
 
     print('\n-----------------------------------------------')
     print('\t\t\t', '', 'CART MANAGEMENT')
@@ -454,14 +453,13 @@ def shopping_cart():
         elif option == '4':
             view_cart(cart)
         elif option == '5':
-            checkout_or_cancel(cart, customer_name, cart_id)
+            checkout_or_cancel(cart, logged_in_username, cart_id)  # Use the logged-in username
         elif option == '6':
             view_payment_receipt(cart_id)
         elif option == '7':
-            print("Exiting to main menu...Goodbye!")
+            print("Exiting to main menu... Goodbye!")
             break
         else:
             print("⚠️ Invalid option! Please try again.")
-
 
 #shopping_cart()

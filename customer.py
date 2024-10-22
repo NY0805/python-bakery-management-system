@@ -394,7 +394,7 @@ def customer_menu():
             product_browsing.browse_products()
         elif option == "4":
             if logged_in_username:
-                cart_management.shopping_cart()
+                cart_management.shopping_cart(logged_in_username)  # Pass the logged-in username to the shopping cart
             else:
                 print("You need to log in first.")
         elif option == "5":
@@ -414,7 +414,8 @@ def customer_menu():
             print("Thank you for visiting our bakery. Goodbye!")
             break
         else:
-            print("|⚠️Invalid option, please try again.|")
+            print("|⚠️ Invalid option, please try again.|")
+
 
 
 customer_menu()
