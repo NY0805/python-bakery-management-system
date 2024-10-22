@@ -185,8 +185,8 @@ def system_administration_cashier():
 
             while True:
                 print('')
-                printed_centered('CASHIER LIST')
                 index = 1
+                printed_centered('CASHIER LIST')
                 for key in cashier:
                     print(f'{index}. {key}')
                     index += 1
@@ -214,8 +214,8 @@ def system_administration_cashier():
         elif manage_cashier == '3':  # update cashier
             while True:
                 print('')
-                printed_centered('CASHIER LIST')
                 index = 1
+                printed_centered('CASHIER LIST')
                 for cashier_list_key in cashier:
                     print(f'{index}. {cashier_list_key}')
                     index += 1
