@@ -115,8 +115,6 @@ def process_payment(username, total_price):  # Process payment and update the us
 
     # Save updated loyalty rewards
     save_loyalty_rewards(rewards)
-
-    print(f"Total price to pay: RM {total_price:.2f}")
     print("Order placed. Please proceed to payment for the receipt.")
 
 

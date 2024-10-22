@@ -13,7 +13,7 @@ def generate_cart_id():
     return ''.join([str(random.randint(1, 9)) for _ in range(10)])
 
 
-# Function to generate a new order ID based on existing orders
+# Function to generate a new order ID
 def generate_order_id(order_data):
     existing_order_ids = [int(order['order_id'][3:]) for order in order_data.values()]
     new_order_num = max(existing_order_ids) + 1 if existing_order_ids else 1

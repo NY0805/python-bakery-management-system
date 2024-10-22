@@ -468,5 +468,25 @@
         "total_price (RM)": "41.00",
         "order_date": "22-10-2024",
         "status": "Payment Completed"
+    },
+    "6975692887": {
+        "order_id": "ORD046",
+        "username": "nct",
+        "items_ordered": [
+            "apple pie x 3"
+        ],
+        "total_price (RM)": "15.00",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "4291632822": {
+        "order_id": "ORD047",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 2"
+        ],
+        "total_price (RM)": "4.50",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
     }
 }

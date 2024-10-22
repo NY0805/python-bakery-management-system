@@ -173,7 +173,7 @@
         "email": "s@gmail.com",
         "address": "2",
         "account_status": "active",
-        "loyalty_points": 3947
+        "loyalty_points": 4337
     },
     "chew": {
         "customer_username": "chewinggum",
