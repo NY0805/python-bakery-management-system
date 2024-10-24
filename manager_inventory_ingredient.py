@@ -204,14 +204,14 @@ def add_ingredient():
 
     while True:
         ingredient_form_list = {
-            'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+            'Flours and Grains': 'powdered, granules, rolled',
             'Sweeteners': 'granulated, liquid, powdered',
             'Fats and Oils': 'solid, liquid',
-            'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+            'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
             'Leavening Agents': 'powdered, granules, liquid',
-            'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-            'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-            'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+            'Spices and Flavourings': 'powdered, liquid, whole',
+            'Fillings and Toppings': 'solid, liquid, semi-solid',
+            'Fruits and Vegetables': 'fresh, dried, puree',
             'Preservatives and Stabilizers': 'powdered, liquid, crystals'
         }
 
@@ -567,14 +567,14 @@ def update_ingredient():
                             elif attribute_of_ingredient_data == 'ingredient_form':
                                 # determine the form of each ingredient
                                 ingredient_form_list = {
-                                    'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+                                    'Flours and Grains': 'powdered, granules, rolled',
                                     'Sweeteners': 'granulated, liquid, powdered',
                                     'Fats and Oils': 'solid, liquid',
-                                    'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+                                    'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
                                     'Leavening Agents': 'powdered, granules, liquid',
-                                    'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-                                    'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-                                    'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+                                    'Spices and Flavourings': 'powdered, liquid, whole',
+                                    'Fillings and Toppings': 'solid, liquid, semi-solid',
+                                    'Fruits and Vegetables': 'fresh, dried, puree',
                                     'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                 }
 
@@ -653,14 +653,14 @@ def update_ingredient():
                                     if validation_empty_entries(new_value):
                                         if validation_list_alphabet_only(new_value):
                                             ingredient_form_list = {
-                                                'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+                                                'Flours and Grains': 'powdered, granules, rolled',
                                                 'Sweeteners': 'granulated, liquid, powdered',
                                                 'Fats and Oils': 'solid, liquid',
-                                                'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+                                                'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
                                                 'Leavening Agents': 'powdered, granules, liquid',
-                                                'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-                                                'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-                                                'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+                                                'Spices and Flavourings': 'powdered, liquid, whole',
+                                                'Fillings and Toppings': 'solid, liquid, semi-solid',
+                                                'Fruits and Vegetables': 'fresh, dried, puree',
                                                 'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                             }
 
@@ -888,5 +888,5 @@ def update_ingredient():
 
 
 #update_ingredient()
-ingredient_management()
+#ingredient_management()
 
