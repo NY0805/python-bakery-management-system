@@ -138,7 +138,7 @@ def ingredient_categories():
                 print('+--------------------------------+')
                 continue
             else:
-                if option_product_categories == '10':
+                if option_product_categories == '11':
                     print('\nGoing back to Ingredient Management page......')
                     ingredient_management()
                 elif option_product_categories == '1':

@@ -144,7 +144,8 @@ def inventory_control_product():
                                     else:
                                         price = product_inventory[batch_number]['price']  # the original price will not be updated if the products is already in the inventory
 
-                                    if 'description' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that no description yet, and return empty value instead of errors vice versa
+                                    #if 'description' not in product_inventory.get(batch_number, {}):  # check if the products are newly added into the inventory that no description yet, and return empty value instead of errors vice versa
+                                    if 'description' not in product_inventory[batch_number] or batch_number not in product_inventory:
                                         product_description = input('Add product description for menu display:\n>>> ')  # add the product description
                                     else:
                                         product_description = product_inventory[batch_number]['description']  # the existing descripiton will not be updated if the products are already in the inventory
@@ -363,7 +364,6 @@ def inventory_control_product():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
                 break
-
 
 # main inventory control for products and ingredients
 def inventory_control():
