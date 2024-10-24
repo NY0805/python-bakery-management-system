@@ -162,8 +162,8 @@ def system_administration_baker():
 
                 else:  # if baker more than 1
                     print('')
-                    printed_centered('BAKER LIST')
                     index = 1
+                    printed_centered('BAKER LIST')
                     for key in baker:
                         print(f'{index}. {key}')
                         index += 1
@@ -209,8 +209,8 @@ def system_administration_baker():
         elif manage_baker == '3':  # update baker
             while True:
                 print('')
-                printed_centered('BAKER LIST')
                 index = 1
+                printed_centered('BAKER LIST')
                 for baker_list_key in baker:
                     print(f'{index}. {baker_list_key}')
                     index += 1

@@ -13,7 +13,7 @@ def generate_cart_id():
     return ''.join([str(random.randint(1, 9)) for _ in range(10)])
 
 
-# Function to generate a new order ID based on existing orders
+# Function to generate a new order ID
 def generate_order_id(order_data):
     existing_order_ids = [int(order['order_id'][3:]) for order in order_data.values()]
     new_order_num = max(existing_order_ids) + 1 if existing_order_ids else 1
@@ -192,6 +192,10 @@ def remove_item_from_cart(cart):
 
 # Function to modify the quantity of an item in the cart
 def modify_item_quantity(cart):
+    if not cart:  # Check if the cart is empty
+        print("|⚠️ Your cart is empty. You cannot modify item quantities.|")
+        return  # Exit the function if the cart is empty
+
     while True:
         product_code = input("\nPlease enter the product code of the item you wish to modify: ").strip()
 
@@ -214,7 +218,7 @@ def modify_item_quantity(cart):
                     break  # Exit the quantity loop after a successful update
 
                 except ValueError:
-                    print("|⚠️Invalid input! Please enter a valid number.|")
+                    print("|⚠️ Invalid input! Please enter a valid number.|")
 
         else:
             print("|⚠️ Product cannot be found in the cart!|")
@@ -228,7 +232,7 @@ def modify_item_quantity(cart):
                 print("Exiting item quantity modification process.")
                 return  # Or use break to exit the loop
             else:
-                print("|⚠️Invalid input! Please enter 'y' for yes or 'n' for no.|")
+                print("|⚠️ Invalid input! Please enter 'y' for yes or 'n' for no.|")
 
 
 # Function to view the cart
@@ -400,10 +404,11 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         return
 
     elif choice == '2':
-        print("Order canceled. Your cart has been cleared.")
+        print("Order canceled. Your cart has been cleared!")
         cart.clear()
     else:
         print("|⚠️Invalid choice. Please select 1 or 2.|")
+    return
 
 
 def view_payment_receipt(cart_id):
@@ -413,15 +418,14 @@ def view_payment_receipt(cart_id):
         if order and order['status'] == 'Payment Completed':
             cashier_transaction_completion.receipt(str(cart_id))
         else:
-            print('\nThe receipt will only be generated after payment has completed. Please proceed to payment.')
+            print('\nThe receipt will only be generated after payment has completed. Please proceed to payment at the counter or via online.')
 
 
 # Main shopping cart function
-def shopping_cart():
+def shopping_cart(logged_in_username):  # Accept the logged-in username as an argument
     cart = {}  # Initialize cart as a regular dictionary
-    customer_name = input("Please enter your name: ")
     cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
-    print(f"Hello, {customer_name}! Your cart ID is: {cart_id}\n")
+    print(f"Hello, {logged_in_username}! Your cart ID is: {cart_id}\n")  # Use logged_in_username
 
     print('\n-----------------------------------------------')
     print('\t\t\t', '', 'CART MANAGEMENT')
@@ -449,14 +453,13 @@ def shopping_cart():
         elif option == '4':
             view_cart(cart)
         elif option == '5':
-            checkout_or_cancel(cart, customer_name, cart_id)
+            checkout_or_cancel(cart, logged_in_username, cart_id)  # Use the logged-in username
         elif option == '6':
             view_payment_receipt(cart_id)
         elif option == '7':
-            print("Exiting to main menu...Goodbye!")
+            print("Exiting to main menu... Goodbye!")
             break
         else:
             print("⚠️ Invalid option! Please try again.")
-
 
 #shopping_cart()

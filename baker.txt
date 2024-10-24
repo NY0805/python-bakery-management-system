@@ -12,7 +12,7 @@
         "baker_password": "b@k3rm4st3r!",
         "age": 45,
         "gender": "male",
-        "contact_no": "345-0965783",
+        "contact_no": "874-8977921",
         "email": "crustking@gmail.com"
     }
 }

@@ -426,5 +426,97 @@
         "total_price (RM)": "19.00",
         "order_date": "21-10-2024",
         "status": "Order Placed"
+    },
+    "7666475517": {
+        "order_id": "ORD042",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 5"
+        ],
+        "total_price (RM)": "23.75",
+        "order_date": "21-10-2024",
+        "status": "Order Placed"
+    },
+    "8427356271": {
+        "order_id": "ORD043",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 5"
+        ],
+        "total_price (RM)": "11.25",
+        "order_date": "21-10-2024",
+        "status": "Order Placed"
+    },
+    "4992374927": {
+        "order_id": "ORD044",
+        "username": "chew",
+        "items_ordered": [
+            "cheezy bun x 2",
+            "gingerbread x 2"
+        ],
+        "total_price (RM)": "14.00",
+        "order_date": "22-10-2024",
+        "status": "Payment Completed"
+    },
+    "6685353618": {
+        "order_id": "ORD045",
+        "username": "yeti",
+        "items_ordered": [
+            "cheezy bun x 2",
+            "red velvet x 3"
+        ],
+        "total_price (RM)": "41.00",
+        "order_date": "22-10-2024",
+        "status": "Payment Completed"
+    },
+    "6975692887": {
+        "order_id": "ORD046",
+        "username": "nct",
+        "items_ordered": [
+            "apple pie x 3"
+        ],
+        "total_price (RM)": "15.00",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "4291632822": {
+        "order_id": "ORD047",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 2"
+        ],
+        "total_price (RM)": "4.50",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "6583265832": {
+        "order_id": "ORD048",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 4"
+        ],
+        "total_price (RM)": "19.00",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "9149754275": {
+        "order_id": "ORD049",
+        "username": "nct",
+        "items_ordered": [
+            "cheezy bun x 5"
+        ],
+        "total_price (RM)": "23.75",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
+    },
+    "7498717867": {
+        "order_id": "ORD050",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 5"
+        ],
+        "total_price (RM)": "11.25",
+        "order_date": "22-10-2024",
+        "status": "Order Placed"
     }
 }

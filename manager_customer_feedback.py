@@ -140,7 +140,7 @@ def customer_feedback():
                     if continue_reply == 'y':
                         continue
                     else:
-                        print('\nExiting to customer ratings overview......')
+                        print('\nExiting to Customer Ratings Overview......')
                         break
 
         elif choice == 'n':

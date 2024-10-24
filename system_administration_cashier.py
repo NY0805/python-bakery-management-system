@@ -163,10 +163,10 @@ def system_administration_cashier():
                 print('\n❗ There is no cashier in the bakery.')
                 continue
             else:
-                print('\n+---------------------------------------------------------------------------------------+')
-                print('|💡 To ensure the daily normal operation, you cannot remove the last cashier in the list|\n'
-                      '|   unless you want to replace with another cashier.                                    |')
-                print('+---------------------------------------------------------------------------------------+\n')
+                print('\n+----------------------------------------------------------------------------------------+')
+                print('|💡 To ensure the daily normal operation, you cannot remove the last cashier in the list |\n'
+                      '|   unless you want to replace with another cashier.                                     |')
+                print('+----------------------------------------------------------------------------------------+\n')
 
                 while True:
                     remove_more = input('Continue to remove? (y=yes, n=no)\n>>> ')  # after one cashier has been added, ask user if they want continue adding
@@ -176,45 +176,46 @@ def system_administration_cashier():
                     elif remove_more == 'n':
                         print('\nStop removing. Exiting to Services page......')
                         break
-
                     else:
                         print('\n+--------------------------------------+')
                         print('|⚠️ Invalid input. Please enter again. |')
                         print('+--------------------------------------+\n')
                 if remove_more == 'n':
-                    break
+                    continue
 
-            print('')
-            printed_centered('CASHIER LIST')
-            index = 1
-            for key in cashier:
-                print(f'{index}. {key}')
-                index += 1
-            print(f'{len(cashier) + 1}. cancel')
+            while True:
+                print('')
+                index = 1
+                printed_centered('CASHIER LIST')
+                for key in cashier:
+                    print(f'{index}. {key}')
+                    index += 1
+                print(f'{len(cashier) + 1}. cancel')
 
-            try:
-                index_of_cashier_to_remove = int(
-                    input(f'\nWhich cashier do you want to remove? (or enter {len(cashier) + 1} to cancel)\n>>> '))
-                if index_of_cashier_to_remove == len(cashier) + 1:  # cancel the process
-                    print('\nCancelling. Exiting to Services page......')
+                try:
+                    index_of_cashier_to_remove = int(
+                        input(f'\nWhich cashier do you want to remove? (or enter {len(cashier) + 1} to cancel)\n>>> '))
+                    if index_of_cashier_to_remove == len(cashier) + 1:  # cancel the process
+                        print('\nCancelling. Exiting to Services page......')
+                        break
 
-                elif 1 <= index_of_cashier_to_remove <= len(cashier):
-                    cashier_to_remove = list(cashier.keys())[
-                        index_of_cashier_to_remove - 1]  # identify cashier to remove by accesing the index of key of cashier
-                    del cashier[cashier_to_remove]  # delete the selected cashier
-                    save_info(cashier)
-                    print(f'\n{cashier_to_remove} removed.')  # inform user that the selected cashier is removed successfully
+                    elif 1 <= index_of_cashier_to_remove <= len(cashier):
+                        cashier_to_remove = list(cashier.keys())[
+                            index_of_cashier_to_remove - 1]  # identify cashier to remove by accesing the index of key of cashier
+                        del cashier[cashier_to_remove]  # delete the selected cashier
+                        save_info(cashier)
+                        print(f'\n{cashier_to_remove} removed.')  # inform user that the selected cashier is removed successfully
 
-            except ValueError:
-                print('\n+-----------------------------------------+')
-                print('|⚠️ Invalid input. Please enter a number. |')
-                print('+-----------------------------------------+\n')
+                except ValueError:
+                    print('\n+-----------------------------------------+')
+                    print('|⚠️ Invalid input. Please enter a number. |')
+                    print('+-----------------------------------------+')
 
         elif manage_cashier == '3':  # update cashier
             while True:
                 print('')
-                printed_centered('CASHIER LIST')
                 index = 1
+                printed_centered('CASHIER LIST')
                 for cashier_list_key in cashier:
                     print(f'{index}. {cashier_list_key}')
                     index += 1

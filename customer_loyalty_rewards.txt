@@ -106,8 +106,8 @@
     },
     "13": {
         "username": "nct",
-        "total_spending (RM)": 161.25,
-        "loyalty_points": 3249,
+        "total_spending (RM)": 269.75,
+        "loyalty_points": 5415,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,
@@ -127,6 +127,33 @@
         "total_spending (RM)": 95.0,
         "loyalty_points": 1520,
         "status": "MORNING GLORY'S SILVER",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "16": {
+        "username": "chew",
+        "total_spending (RM)": 28.0,
+        "loyalty_points": 280,
+        "status": "MORNING GLORY'S STANDARD",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "17": {
+        "username": "yeti",
+        "total_spending (RM)": 114.0,
+        "loyalty_points": 1550,
+        "status": "MORNING GLORY'S SILVER",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "18": {
+        "username": "chicken little",
+        "total_spending (RM)": 95.0,
+        "loyalty_points": 950,
+        "status": "MORNING GLORY'S STANDARD",
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,
         "redeem_history": []

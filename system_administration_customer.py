@@ -252,8 +252,8 @@ def terminate_customer():
 
     while True:
         print('')
-        printed_centered('CUSTOMER LIST')
         index = 1
+        printed_centered('CUSTOMER LIST')
         for key in customer:
             print(f'{index}. {key}')
             index += 1

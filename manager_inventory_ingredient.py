@@ -113,6 +113,7 @@ def ingredient_management():
 
 
 def ingredient_categories():
+    category = None
     while True:
         print('\n-----------------------------------------------')
         print('\t\tMAIN CATEGORIES OF INGREDIENTS')
@@ -138,7 +139,7 @@ def ingredient_categories():
                 print('+--------------------------------+')
                 continue
             else:
-                if option_product_categories == '10':
+                if option_product_categories == '11':
                     print('\nGoing back to Ingredient Management page......')
                     ingredient_management()
                 elif option_product_categories == '1':
@@ -203,14 +204,14 @@ def add_ingredient():
 
     while True:
         ingredient_form_list = {
-            'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+            'Flours and Grains': 'powdered, granules, rolled',
             'Sweeteners': 'granulated, liquid, powdered',
             'Fats and Oils': 'solid, liquid',
-            'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+            'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
             'Leavening Agents': 'powdered, granules, liquid',
-            'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-            'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-            'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+            'Spices and Flavourings': 'powdered, liquid, whole',
+            'Fillings and Toppings': 'solid, liquid, semi-solid',
+            'Fruits and Vegetables': 'fresh, dried, puree',
             'Preservatives and Stabilizers': 'powdered, liquid, crystals'
         }
 
@@ -566,14 +567,14 @@ def update_ingredient():
                             elif attribute_of_ingredient_data == 'ingredient_form':
                                 # determine the form of each ingredient
                                 ingredient_form_list = {
-                                    'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+                                    'Flours and Grains': 'powdered, granules, rolled',
                                     'Sweeteners': 'granulated, liquid, powdered',
                                     'Fats and Oils': 'solid, liquid',
-                                    'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+                                    'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
                                     'Leavening Agents': 'powdered, granules, liquid',
-                                    'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-                                    'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-                                    'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+                                    'Spices and Flavourings': 'powdered, liquid, whole',
+                                    'Fillings and Toppings': 'solid, liquid, semi-solid',
+                                    'Fruits and Vegetables': 'fresh, dried, puree',
                                     'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                 }
 
@@ -603,13 +604,15 @@ def update_ingredient():
 
                             elif attribute_of_ingredient_data == 'allergen_info':
                                 print(
-                                    '\n+---------------------------------------------------------------------------------------------------------+')
+                                    '\n+--------------------------------------------------------------------------------------------------------------+')
                                 print(
-                                    '|💡 If there is more than one data item, separate them with a space.                                      |')
+                                    '|💡 If there is more than one allergen, separate them with a space.                                            |')
                                 print(
-                                    '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
+                                    '|💡 If an allergen consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
                                 print(
-                                    '+---------------------------------------------------------------------------------------------------------+')
+                                    '|💡 Enter "no" if no allergens.                                                                                |')
+                                print(
+                                    '+--------------------------------------------------------------------------------------------------------------+')
 
                             while True:
 
@@ -650,14 +653,14 @@ def update_ingredient():
                                     if validation_empty_entries(new_value):
                                         if validation_list_alphabet_only(new_value):
                                             ingredient_form_list = {
-                                                'Flours and Grains': 'powdered, granules, rolled (eg: oats, barley)',
+                                                'Flours and Grains': 'powdered, granules, rolled',
                                                 'Sweeteners': 'granulated, liquid, powdered',
                                                 'Fats and Oils': 'solid, liquid',
-                                                'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid (eg: yogurt, cream cheese)',
+                                                'Dairy and Non-Dairy Products': 'liquid, cream, semi-solid',
                                                 'Leavening Agents': 'powdered, granules, liquid',
-                                                'Spices and Flavourings': 'powdered, liquid, whole (eg: cloves)',
-                                                'Fillings and Toppings': 'solid, liquid, semi-solid (eg: pastry cream)',
-                                                'Fruits and Vegetables': 'fresh, dried, puree (eg: applesauce, mango puree)',
+                                                'Spices and Flavourings': 'powdered, liquid, whole',
+                                                'Fillings and Toppings': 'solid, liquid, semi-solid',
+                                                'Fruits and Vegetables': 'fresh, dried, puree',
                                                 'Preservatives and Stabilizers': 'powdered, liquid, crystals'
                                             }
 

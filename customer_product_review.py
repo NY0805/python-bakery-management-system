@@ -49,60 +49,64 @@ def submit_review(logged_in_username):
     print('\t\t\tPRODUCT REVIEW')
     print('-----------------------------------------------')
 
-    # Initialize variables to check for valid purchase and product name
-    valid_purchase_found = False
-    product_name = None
-
-    # Load the order list from 'customer_order_list.txt' to check the user's purchase history
     order_list = load_order_list()
+    recent_purchases = []
+    order_date = None
 
-    # Check if the user has completed any purchases
-    for order_id, order_data in order_list.items():  # Use .items() method to iterate through the dictionary
-        if order_data["username"] == logged_in_username:  # Match the current order with the logged-in user's username
-            if order_data["status"] == "Payment Completed":
-                valid_purchase_found = True
-                order_date = order_data['order_date']
-                product_name = order_data['items_ordered'][0]  # Get the first product name
-                review_text = input('Enter your review: ')
-                rating = input('Rate your product (1-5): ')
-                break  # Exit the loop after finding a valid order
+    # Check the user's purchase history
+    for order_data in order_list.values():
+        if order_data["username"] == logged_in_username and order_data["status"] == "Order Placed":
+            recent_purchases.extend(order_data['items_ordered'])
+            order_date = order_data['order_date']
 
-    # Check if no valid purchase was found
-    if not valid_purchase_found:  # Use if instead of else if
+    if not recent_purchases:
         print('|⚠️ You have not completed any purchases. Please buy something before writing a review!|')
         return
 
-    # Load existing reviews
+    # Display recent purchases
+    print("Your recent purchases:")
+    print(f"{'No.':<5} {'Product Name':<30} {'Quantity':<10}")
+    print('-' * 60)
+
+    for i, product in enumerate(recent_purchases, start=1):
+        product_name, quantity = product.split(' x ')
+        print(f"{i:<5} {product_name:<30} {quantity:<10}")
+
+    try:
+        product_choice = int(input('Select a product to review (enter the number): '))
+        if not (1 <= product_choice <= len(recent_purchases)):
+            print("Invalid selection. Please select a valid product number.")
+            return
+        product_name = recent_purchases[product_choice - 1].split(' x ')[0]
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    review_text = input('Enter your review: ')
+    rating = input('Rate your product (1-5): ')
+
+    # Validate rating and prompt until valid input is received
+    while not validation_rating(rating):
+        print("Invalid rating. Please provide a rating between 1 and 5.")
+        rating = input('Rate your product (1-5): ')
+
     reviews = load_review()
 
-    # Update the review for the user
-    reviews[logged_in_username] = {
-        'product_name': product_name,
-        'review': review_text,
-        'rating': int(rating),  # Convert rating to an integer
-        'order_date': order_date
-    }
+    # Ensure the user's reviews are a list
+    if logged_in_username not in reviews:
+        reviews[logged_in_username] = []  # Initialize as an empty list if the user does not exist
+    elif not isinstance(reviews[logged_in_username], list):
+        reviews[logged_in_username] = []  # Ensure it's a list, in case it was saved incorrectly
 
-    # Save the updated reviews
-    save_reviews(reviews)
-    print()
-    print('***** Thank you for your feedback! *****')
-    print('Your review has been successfully received.')
-
-    reviews = load_review()
-
-    # Update the review for the user
-    reviews[logged_in_username] = {
+    # Append the new review
+    reviews[logged_in_username].append({
         'product_name': product_name,
         'review': review_text,
         'rating': int(rating),
-    }
+        'order_date': order_date
+    })
 
-    # Save the updated reviews
     save_reviews(reviews)
-    print()
-    print('***** Thank you for your feedback! *****')
-    print('Your review has been successfully received.')  # Display the message after the review has been saved
-
-
+    print('\n***** Thank you for your feedback! *****')
+    print('Your review has been successfully received.')
 #submit_review

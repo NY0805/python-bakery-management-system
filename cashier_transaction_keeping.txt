@@ -240,5 +240,23 @@
         ],
         "order_date": "21-10-2024",
         "total_spend(RM)": "20.14"
+    },
+    "MGB-7956184": {
+        "order_id": "ORD044",
+        "items": [
+            "cheezy bun x 2",
+            "gingerbread x 2"
+        ],
+        "order_date": "22-10-2024",
+        "total_spend(RM)": "14.84"
+    },
+    "MGB-9665245": {
+        "order_id": "ORD045",
+        "items": [
+            "cheezy bun x 2",
+            "red velvet x 3"
+        ],
+        "order_date": "22-10-2024",
+        "total_spend(RM)": "43.46"
     }
 }

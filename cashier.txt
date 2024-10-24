@@ -4,7 +4,7 @@
         "cashier_password": "securec@sh123",
         "age": 34,
         "gender": "female",
-        "contact_no": "123-4677532",
+        "contact_no": "123-4567382",
         "email": "verticca@gmail.com"
     }
 }
