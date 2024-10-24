@@ -117,23 +117,26 @@ def recipe_lists():
                 print(f"{index}. {ingredient.title()}")
             print('')
 
-        recipe_choose = input('What recipe you would like to work on today? Please enter the recipe name.\n'
+        recipe_choose = input('What recipe you would like to work on today? Please enter the recipe name. (or enter "cancel" to back to previous page.)\n'
                               '>>> ').lower().strip()
         found_recipe = None
 
         if validation_empty_entries(recipe_choose):
             if recipe_choose.replace(" ", '').isalpha():
-                for category, items in recipe_category_groups.items():
-                    for item in items:
-                        if recipe_choose.lower() == item.lower():
-                            found_recipe = True
-                            break
-                    if found_recipe:
-                        break
+                if recipe_choose == 'cancel':
+                    return False
                 else:
-                    print('\n+--------------------------------------------------------------------------+')
-                    print('|⚠️ Invalid recipe name. Please enter recipe name based on the list given. |')
-                    print('+--------------------------------------------------------------------------+')
+                    for category, items in recipe_category_groups.items():
+                        for item in items:
+                            if recipe_choose.lower() == item.lower():
+                                found_recipe = True
+                                break
+                        if found_recipe:
+                            break
+                    else:
+                        print('\n+--------------------------------------------------------------------------+')
+                        print('|⚠️ Invalid recipe name. Please enter recipe name based on the list given. |')
+                        print('+--------------------------------------------------------------------------+')
             else:
                 print('\n+-----------------------------------------------------------------------------------------+')
                 print('|⚠️ Please enter a valid recipe name. (Cannot contain any digits and special characters.) |')
@@ -317,4 +320,4 @@ def recipe_lists():
             print('\nPlease enter a whole number.')
 
 
-recipe_lists()
+#recipe_lists()

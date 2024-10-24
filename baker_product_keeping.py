@@ -876,5 +876,5 @@ def delete_product():
             print('+-----------------------------------------+')
 
 
-update_product()
+#update_product()
 #product_management()

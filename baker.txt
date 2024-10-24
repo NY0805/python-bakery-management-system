@@ -1,7 +1,7 @@
 {
     "christine": {
         "baker_username": "christine",
-        "baker_password": "12345678",
+        "baker_password": "23456789",
         "age": 23,
         "gender": "female",
         "contact_no": "345-3039225",

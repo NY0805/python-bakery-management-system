@@ -1,5 +1,11 @@
 import json  # import json text file to record data
+import main
+import baker_recipe
+import baker_inventory_check
+import baker_product_keeping
+import baker_equipment_management
 from manager import load_data_from_manager
+
 
 # Define the function that loads baker data from the file
 def load_data_from_file():
@@ -65,34 +71,34 @@ def baker_accounts():
             baker_password = input('Password: ')
 
         print('\nLogin successfully!')  # login successfully if the password meet the 2 requirements above
-        print('Welcome, baker', baker_username, '!')
-        #  display baker privilege
+        print(f"Welcome, baker {baker_username}!")
+
         while True:
             print('')
             printed_centered('BAKER PRIVILEGE')
 
-            print('a. Recipe management\n'
-                  'b. Inventory check\n'
-                  'c. Product record-keeping\n'
-                  'd. Equipment management\n'
-                  'e. Back to Main page')
+            print('1. Recipe management\n'
+                  '2. Inventory check\n'
+                  '3. Product record-keeping\n'
+                  '4. Equipment management\n'
+                  '5. Back to Main page')
 
             #  collect the choice of user and execute corresponding functions
-            choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
+            choice = input('\nSelect a choice (1, 2, 3, 4, 5): \n>>> ')
 
-            if choice == 'a':
-                print('in progress a')
+            if choice == '1':
+                baker_recipe.recipe_management()
 
-            elif choice == 'b':
-                print('in progress b')
+            elif choice == '2':
+                baker_inventory_check.recipe_lists()
 
-            elif choice == 'c':
-                print('in progress c')
+            elif choice == '3':
+                baker_product_keeping.product_management()
 
-            elif choice == 'd':
-                print('in progress d')
+            elif choice == '4':
+                baker_equipment_management.equipment_management()
 
-            elif choice == 'e':
+            elif choice == '5':
                 print('\nExiting to main page......')
                 return False
 
@@ -100,8 +106,46 @@ def baker_accounts():
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
+        #  display baker privilege
+
+
+def baker_privilege():
+    while True:
+        print('')
+        printed_centered('BAKER PRIVILEGE')
+
+        print('1. Recipe management\n'
+              '2. Inventory check\n'
+              '3. Product record-keeping\n'
+              '4. Equipment management\n'
+              '5. Back to Main page')
+
+        #  collect the choice of user and execute corresponding functions
+        choice = input('\nSelect a choice (1, 2, 3, 4, 5): \n>>> ')
+
+        if choice == '1':
+            baker_recipe.recipe_management()
+
+        elif choice == '2':
+            baker_inventory_check.recipe_lists()
+
+        elif choice == '3':
+            baker_product_keeping.product_management()
+
+        elif choice == '4':
+            baker_equipment_management.equipment_management()
+
+        elif choice == '5':
+            print('\nExiting to main page......')
+            return False
+
+        else:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
 
 
 baker_accounts()
+#baker_privilege()
 
 

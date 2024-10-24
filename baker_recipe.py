@@ -119,9 +119,8 @@ for value in ingredient_list.values():
 
     ingredient_category_groups[ingredient_category].append(format_ingredient_data(value))
 
-
 def recipe_management():
-    printed_centered('PRODUCT MANAGEMENT')
+    printed_centered('RECIPE MANAGEMENT')
     print('\n1. Add Recipe')
     print('2. Update Recipe')
     print('3. Remove Recipe')
@@ -1050,4 +1049,4 @@ def delete_recipe():
 
 
 #update_recipe()
-recipe_management()
+#recipe_management()
