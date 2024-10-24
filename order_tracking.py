@@ -43,7 +43,7 @@ def order_tracking():
                 break  # Exit the loop when a matching order is found
 
         if order_found:
-            break  # Exit the outer loop after displaying the order details
+            break  # Exit the loop after displaying the order details
 
         # Display this message if Order ID cannot be found
         print('|⚠️ Order ID cannot be found. Please check and try again!|')
