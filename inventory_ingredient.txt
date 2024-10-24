@@ -117,5 +117,22 @@
         "allergen_info": [
             "bjbj"
         ]
+    },
+    "B00": {
+        "category": "Leavening Agents",
+        "ingredient_name": "baking powder",
+        "ingredient_form": "powdered",
+        "batch_number": "B00",
+        "unit_measurement": "kg",
+        "quantity_purchased": 2.0,
+        "purchase_date": "03-04-2024",
+        "expiry_date": "03-04-2025",
+        "supplier_name": "garfield",
+        "supplier_contact": "432-8930482",
+        "cost_per_unit": "RM 1.00",
+        "storage_requirement": "dry storage",
+        "allergen_info": [
+            "no"
+        ]
     }
 }

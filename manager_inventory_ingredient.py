@@ -113,6 +113,7 @@ def ingredient_management():
 
 
 def ingredient_categories():
+    category = None
     while True:
         print('\n-----------------------------------------------')
         print('\t\tMAIN CATEGORIES OF INGREDIENTS')
@@ -603,13 +604,15 @@ def update_ingredient():
 
                             elif attribute_of_ingredient_data == 'allergen_info':
                                 print(
-                                    '\n+---------------------------------------------------------------------------------------------------------+')
+                                    '\n+--------------------------------------------------------------------------------------------------------------+')
                                 print(
-                                    '|💡 If there is more than one data item, separate them with a space.                                      |')
+                                    '|💡 If there is more than one allergen, separate them with a space.                                            |')
                                 print(
-                                    '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
+                                    '|💡 If an allergen consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
                                 print(
-                                    '+---------------------------------------------------------------------------------------------------------+')
+                                    '|💡 Enter "no" if no allergens.                                                                                |')
+                                print(
+                                    '+--------------------------------------------------------------------------------------------------------------+')
 
                             while True:
 
@@ -885,5 +888,5 @@ def update_ingredient():
 
 
 #update_ingredient()
-#ingredient_management()
+ingredient_management()
 
