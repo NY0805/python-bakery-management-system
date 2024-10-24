@@ -45,7 +45,7 @@ def activate_customer():
                 inactive_acc.append(customer_name)  # append inactive customers into the list
 
         if len(inactive_acc) == 0:  # if the inactive_acc list is empty
-            print('\n💡No account to activate.')
+            print('\n💡 No account to activate.')
             print('Back to Services page......')
             break
         else:
@@ -64,7 +64,7 @@ def activate_customer():
             activate = int(input('\nWhich account do you want to activate?\n>>> '))  # choose which customer to activate
 
             if activate == index_cancel:  # cancel the process
-                print('Exiting to Services page......')
+                print('\nExiting to Services page......')
                 break
 
             elif 1 <= activate <= len(inactive_acc):
@@ -112,7 +112,7 @@ def deactivate_customer():
             deactivate = int(input('\nWhich account do you want to deactivate?\n>>> '))  # choose which customer to deactivate
 
             if deactivate == index_cancel:
-                print('Exiting to Services page......')
+                print('\nExiting to Services page......')
                 break
 
             elif 1 <= deactivate <= len(active_acc):
@@ -137,7 +137,7 @@ def update_customer():
 
     while True:
         print('')
-        print('CUSTOMER LIST')
+        printed_centered('CUSTOMER LIST')
         index = 1
         for customer_list in customer:
             print(f'{index}. {customer_list}')
@@ -160,12 +160,12 @@ def update_customer():
 
                     for customer_data_key, customer_data_value in (customer[selected_customer].items()):
                         # display all the details of customers except their account status
-                        if customer_data_key != 'account_status':
-                            print(f'{customer_data_key.replace("_", " ").title()}: {customer_data_value}')
+                        if customer_data_key != 'account_status' and customer_data_key != 'loyalty_points':
+                            print(f'{customer_data_key}: {customer_data_value}')
 
                     attribute_of_customer_data = input('\nWhich information do you want to update? (or enter \"cancel\")\n>>> ')
                     if attribute_of_customer_data in customer[selected_customer]:
-                        if attribute_of_customer_data != 'account_status':
+                        if attribute_of_customer_data != 'account_status' and attribute_of_customer_data != 'loyalty_points':
 
                             while True:
                                 try:
@@ -331,4 +331,4 @@ def system_administration_customer():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#system_administration_customer()
+system_administration_customer()

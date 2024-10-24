@@ -10,7 +10,7 @@
         "account_status": "active",
         "loyalty_points": 4262
     },
-    "customer2": {
+    "Jane": {
         "customer_username": "03jane_",
         "customer_password": "123234568",
         "age": 28,
@@ -103,7 +103,7 @@
         "customer_password": "Violet23pass",
         "age": 26,
         "gender": "female",
-        "contact_no": "012-2233445",
+        "contact_no": "018-4254302",
         "email": "violet23@gmail.com",
         "address": "321 Violet Lane, Riverside",
         "account_status": "active",
