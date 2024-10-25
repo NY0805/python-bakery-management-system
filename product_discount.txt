@@ -11,7 +11,7 @@
         "product_code": "CH123",
         "Stock": 2,
         "Price": "RM 5.00",
-        "Discount": "5.0%"
+        "Discount": "10.0%"
     },
     "001": {
         "Product Name": "banana bread",

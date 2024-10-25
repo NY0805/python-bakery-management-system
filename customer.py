@@ -110,7 +110,15 @@ def sign_up():
 def login():
     customer_name = input('\nName: ')
 
+    # Assume customer_info is loaded from customer.txt and contains details for each customer
     if customer_name in customer_info:
+        # Check the account status of the customer
+        if customer_info[customer_name]['account_status'] == 'inactive':
+            print('\n+---------------------------------------------------------+')
+            print('|⚠️ Your account is INACTIVE. Please contact the manager. |')
+            print('+---------------------------------------------------------+\n')
+            return None  # Exit the login process if the account status is inactive
+
         while True:  # Loop until the correct username is entered
             customer_username = input("Username: ")
             # Check if the username matches the one in customer_info for the given customer_name
@@ -137,6 +145,7 @@ def login():
         print('Directing to sign-up page......\n')
         sign_up()
         return None  # Return None if sign-up is initiated
+
 
 def customer():
     print('\n----------------------------------------------------')
