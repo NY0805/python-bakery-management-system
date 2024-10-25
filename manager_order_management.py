@@ -52,8 +52,8 @@ def order_management():
             print('')
         print('-'*125, '\n')
 
-        order_id_to_update = input('Enter Order ID to update order status (or enter "cancel" to exit):\n>>> ')  # identify the order id to update
-        if order_id_to_update == 'cancel':
+        order_id_to_update = input('Enter Order ID to update order status (or enter "back" to exit):\n>>> ')  # identify the order id to update
+        if order_id_to_update == 'back':
             print('\nExiting to Manager Privilege...')
             break  # exit the entire loop
 
@@ -94,6 +94,6 @@ def order_management():
 
 
 
-#order_management()
+order_management()
 
 

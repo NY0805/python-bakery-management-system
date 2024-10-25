@@ -279,7 +279,7 @@ def terminate_customer():
                         print('+--------------------------------------+\n')
 
                     else:
-                        if terminate_more == 'y':
+                        if terminate_more == 'y':  # exit the inner loop to access the outer loop and repeat the termination process
                             break
 
                         else:
@@ -331,4 +331,4 @@ def system_administration_customer():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-system_administration_customer()
+#system_administration_customer()
