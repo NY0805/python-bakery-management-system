@@ -111,8 +111,8 @@
     },
     "13": {
         "username": "nct",
-        "total_spending (RM)": 269.75,
-        "loyalty_points": 5415,
+        "total_spending (RM)": 292.25,
+        "loyalty_points": 5865,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,

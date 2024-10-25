@@ -103,7 +103,7 @@ def add_item_to_cart(cart):
                         break
 
                 # Calculate the discounted price if applicable
-
+                discounted_price = product_price * (1 - discount_percentage)
 
                 # Get the quantity to add to the cart
                 while True:  # Loop until a valid quantity is entered
