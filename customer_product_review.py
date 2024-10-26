@@ -4,24 +4,19 @@ import json
 def load_review():
     # Load the reviews from 'customer_reviews.txt'
     try:
-        file = open('customer_reviews.txt', 'r')  # open the file and read
-        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
-        file.close()  # close the file after reading
-        if content:  # start to check if the file is not empty
-            try:
-                return json.loads(content)  # parse the content as json format into python dictionary
-            except json.JSONDecodeError:
-                return {}  # return empty dictionary if the content does not parse successfully
-        else:
-            return {}  # return empty dictionary if the file is empty
-    except FileNotFoundError:
-        return {}  # return empty dictionary if the file does not exist
+        with open('customer_reviews.txt', 'r') as file:
+            content = file.read().strip()
+        if content:
+            return json.loads(content)
+        return {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 
-def save_reviews(new_review):
+def save_reviews(new_reviews):
     # Save the updated reviews back to 'customer_reviews.txt'
     with open('customer_reviews.txt', 'w') as file:
-        json.dump(new_review, file, indent=4)
+        json.dump(new_reviews, file, indent=4)
 
 
 def load_order_list():
@@ -94,15 +89,12 @@ def submit_review(logged_in_username):
 
     reviews = load_review()
 
-    # Ensure reviews for the user are stored as a dictionary with unique IDs
-    if logged_in_username not in reviews:
-        reviews[logged_in_username] = {}
-
     # Generate a unique review ID (incremental)
-    next_review_id = str(len(reviews[logged_in_username]) + 1).zfill(3)
+    next_review_id = str(len(reviews) + 1).zfill(3)
 
     # Add the new review entry under the generated review ID
-    reviews[logged_in_username][next_review_id] = {
+    reviews[next_review_id] = {
+        'username': logged_in_username,
         'product_name': product_name,
         'review': review_text,
         'rating': int(rating),

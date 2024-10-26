@@ -1,80 +1,72 @@
 {
-    "anna328_": {
-        "001": {
-            "product_name": "gingerbread x 1",
-            "review": "I love the flavor and the taste is excellent. Will definitely buy it again.",
-            "rating": 5,
-            "order_date": "24-09-2024"
-        }
+    "001": {
+        "username": "anna328_",
+        "product_name": "gingerbread x 1",
+        "review": "I love the flavor and the taste is excellent. Will definitely buy it again.",
+        "rating": 5,
+        "order_date": "24-09-2024"
     },
-    "rechel_lee": {
-        "002": {
-            "product_name": "banana bread x 1",
-            "review": "The banana bread was fresh and delicious.",
-            "rating": 4,
-            "order_date": "24-09-2024"
-        }
+    "002": {
+        "username": "rechel_lee",
+        "product_name": "banana bread x 1",
+        "review": "The banana bread was fresh and delicious.",
+        "rating": 4,
+        "order_date": "24-09-2024"
     },
-    "mary_jane": {
-        "003": {
-            "product_name": "gingerbread x 1, banana bread x 1",
-            "review": "Both the gingerbread and banana bread were wonderful! The flavors were spot on.",
-            "rating": 5,
-            "order_date": "26-09-2024"
-        }
+    "003": {
+        "username": "mary_jane",
+        "product_name": "gingerbread x 1, banana bread x 1",
+        "review": "Both the gingerbread and banana bread were wonderful! The flavors were spot on.",
+        "rating": 5,
+        "order_date": "26-09-2024"
     },
-    "jessica_k": {
-        "004": {
-            "product_name": "red velvet x 1, gingerbread x 1",
-            "review": "The red velvet was moist and tasty, but the gingerbread tasted a little bit weird.",
-            "rating": 3,
-            "order_date": "26-09-2024"
-        }
+    "004": {
+        "username": "jessica_k",
+        "product_name": "red velvet x 1, gingerbread x 1",
+        "review": "The red velvet was moist and tasty, but the gingerbread tasted a little bit weird.",
+        "rating": 3,
+        "order_date": "26-09-2024"
     },
-    "john_smith": {
-        "005": {
-            "product_name": "banana bread x 1, apple pie x 1",
-            "review": "The banana bread was delicious, but the apple pie was a bit too sweet.",
-            "rating": 4,
-            "order_date": "27-09-2024"
-        }
+    "005": {
+        "username": "john_smith",
+        "product_name": "banana bread x 1, apple pie x 1",
+        "review": "The banana bread was delicious, but the apple pie was a bit too sweet.",
+        "rating": 4,
+        "order_date": "27-09-2024"
     },
-    "chris_d": {
-        "006": {
-            "product_name": "apple pie x 1, gingerbread x 1",
-            "review": "The apple pie was sweet and the gingerbread was nicely spiced. Great experience!",
-            "rating": 5,
-            "order_date": "27-09-2024"
-        }
+    "006": {
+        "username": "chris_d",
+        "product_name": "apple pie x 1, gingerbread x 1",
+        "review": "The apple pie was sweet and the gingerbread was nicely spiced. Great experience!",
+        "rating": 5,
+        "order_date": "27-09-2024"
     },
-    "mike_h": {
-        "007": {
-            "product_name": "gingerbread x 1, banana bread x 1",
-            "review": "Loved the gingerbread and banana bread! Very nice texture and tasty.",
-            "rating": 4,
-            "order_date": "20-10-2024"
-        }
+    "007": {
+        "username": "mike_h",
+        "product_name": "gingerbread x 1, banana bread x 1",
+        "review": "Loved the gingerbread and banana bread! Very nice texture and tasty.",
+        "rating": 4,
+        "order_date": "20-10-2024"
     },
-    "nct": {
-        "008": {
-            "product_name": "cheezy bun",
-            "review": "nice",
-            "rating": 4,
-            "order_date": "25-10-2024"
-        },
-        "002": {
-            "product_name": "cheezy bun",
-            "review": "I like it",
-            "rating": 5,
-            "order_date": "25-10-2024"
-        }
+    "008": {
+        "username": "nct",
+        "product_name": "cheezy bun",
+        "review": "nice",
+        "rating": 4,
+        "order_date": "25-10-2024"
     },
-    "Mark0825": {
-        "009": {
-            "product_name": "red velvet",
-            "review": "good",
-            "rating": 5,
-            "order_date": "20-10-2024"
-        }
+    "009": {
+        "username": "Mark0825",
+        "product_name": "red velvet",
+        "review": "good",
+        "rating": 5,
+        "order_date": "20-10-2024"
+    },
+    "010": {
+        "username": "nct",
+        "product_name": "apple pie",
+        "review": "good",
+        "rating": 5,
+        "order_date": "25-10-2024"
     }
 }
