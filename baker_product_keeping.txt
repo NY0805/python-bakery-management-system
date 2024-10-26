@@ -1,9 +1,11 @@
 {
     "001": {
-        "category": "Cakes",
+        "category": "Breads",
         "product_name": "banana bread",
         "product_code": "BR890",
-        "serial_number": "bread2",
+        "serial_number": [
+            "bread3"
+        ],
         "quantity_produced": "2",
         "batch_number": "001",
         "date_of_production": "09-08-2004",
@@ -13,24 +15,6 @@
         "baker_name": "r",
         "allergens": [
             "r"
-        ]
-    },
-    "002": {
-        "category": "Cakes",
-        "product_name": "red velvet",
-        "product_code": "CK857",
-        "serial_number": [
-            "cake1"
-        ],
-        "quantity_produced": "1",
-        "batch_number": "002",
-        "date_of_production": "09-09-2004",
-        "shelf_life": "7",
-        "expiry_date": "18-09-2004",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "dairy_product"
         ]
     },
     "003": {
@@ -101,7 +85,7 @@
             "97633"
         ],
         "quantity_produced": "4",
-        "batch_number": "010",
+        "batch_number": "009",
         "date_of_production": "24-09-2024",
         "shelf_life": "2",
         "expiry_date": "25-09-2024",

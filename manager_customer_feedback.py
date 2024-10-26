@@ -152,4 +152,4 @@ def customer_feedback():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#customer_feedback()
+customer_feedback()

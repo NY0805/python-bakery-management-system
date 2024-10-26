@@ -133,7 +133,7 @@ def financial_management():
                                     receipt_converted_date = datetime.strptime(receipt_details['order_date'],
                                                                                '%d-%m-%Y')
 
-                                    if custom_month_for_income not in receipt_converted_date.strftime("%B") or custom_year_for_income not in receipt_converted_date.strftime("%Y"):
+                                    if custom_month_for_income not in receipt_converted_date.strftime("%B") and custom_year_for_income not in receipt_converted_date.strftime("%Y"):
                                         print('\n❗No record found. Please select another year.')
                                         break
 
@@ -148,7 +148,7 @@ def financial_management():
                                                 f'{receipt_details["order_date"]:<35}{receipt_details["items"][0]:<40}{""}')
                                             for item in receipt_details['items'][1:]:
                                                 print(f'{"":<35}{item:<40}{receipt_details["total_spend(RM)"]:.2f}')
-                                        print('-' * 95)
+                                        print('\n')
 
                 except ValueError:
                     print('\n+-------------------------------------+')
@@ -320,7 +320,7 @@ def financial_management():
                             if int(chosen_year) == 0:
                                 break
                             elif validate_year(chosen_year):
-                                custom_month_for_profit = input('Insert the name of a month:\n>>> ').title()
+                                custom_month_for_profit = input('\nInsert the name of a month:\n>>> ').title()
 
                                 if custom_month_for_profit in months:
                                     print('')

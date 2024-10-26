@@ -97,7 +97,7 @@ def inventory_control_product():
                     break
 
                 product_found = False
-                for batch_number, value in product.items():
+                for batch_number, value in list(product.items()):  # create a temporary list of product dictionary to prevent dictionary change size error during iteration
                     if chosen_product == value['product_name']:  # check if the chosen product is in the list of product name
                         product_found = True
                         while True:
@@ -390,4 +390,4 @@ def inventory_control():
             print('+--------------------------------------+')
 
 
-#inventory_control()
+inventory_control()

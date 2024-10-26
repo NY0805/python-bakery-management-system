@@ -497,7 +497,7 @@
         ],
         "total_price (RM)": "19.00",
         "order_date": "22-10-2024",
-        "status": "Order Placed"
+        "status": "Payment Completed"
     },
     "9149754275": {
         "order_id": "ORD049",

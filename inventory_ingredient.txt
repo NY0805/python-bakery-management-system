@@ -74,7 +74,7 @@
         "batch_number": "B005",
         "unit_measurement": "g",
         "quantity_purchased": 200.0,
-        "purchase_date": "01-10-2024",
+        "purchase_date": "25-10-2024",
         "expiry_date": "08-08-2025",
         "supplier_name": "charplin",
         "supplier_contact": "234-3478532",
@@ -107,7 +107,7 @@
         "ingredient_form": "liquid",
         "batch_number": "B007",
         "unit_measurement": "kg",
-        "quantity_purchased": 2.0,
+        "quantity_purchased": 1.5,
         "purchase_date": "13-06-2008",
         "expiry_date": "13-07-2008",
         "supplier_name": "abc",
@@ -118,11 +118,11 @@
             "bjbj"
         ]
     },
-    "B00": {
+    "B008": {
         "category": "Leavening Agents",
         "ingredient_name": "baking powder",
         "ingredient_form": "powdered",
-        "batch_number": "B00",
+        "batch_number": "B008",
         "unit_measurement": "kg",
         "quantity_purchased": 2.0,
         "purchase_date": "03-04-2024",
@@ -133,6 +133,23 @@
         "storage_requirement": "dry storage",
         "allergen_info": [
             "no"
+        ]
+    },
+    "B009": {
+        "category": "Flours and Grains",
+        "ingredient_name": "almond flour",
+        "ingredient_form": "powdered",
+        "batch_number": "B009",
+        "unit_measurement": "kg",
+        "quantity_purchased": 10.0,
+        "purchase_date": "23-08-2024",
+        "expiry_date": "23-08-2025",
+        "supplier_name": "Bob",
+        "supplier_contact": "018-5730283",
+        "cost_per_unit": "RM 2.00",
+        "storage_requirement": "dry storage",
+        "allergen_info": [
+            "almond"
         ]
     }
 }
