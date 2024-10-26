@@ -181,7 +181,7 @@ def add_ingredient():
     ingredient_info = ['Ingredient Name', 'Ingredient Form', 'Batch Number', 'Unit Measurement', 'Total Quantity Purchased',
                        'Purchase Date (DD-MM-YYYY)', 'Expiry Date (DD-MM-YYYY)', 'Supplier Name',
                        'Supplier Contact Number (xxx-xxxxxxx)', 'Cost Per Unit', 'Storage Requirements',
-                       'Allergen Information', 'Quantity Per Unit']
+                       'Allergen Information']
 
     max_length = 0
     for item in ingredient_info:

@@ -59,42 +59,42 @@ def customer_feedback():
 
         print('')
         printed_centered('CUSTOMER RATINGS OVERVIEW')
-        print(f'⭐⭐⭐⭐⭐{"5-star rating:".rjust(15)} {rating_five}')
-        print(f'⭐⭐⭐⭐{"4-star rating:".rjust(17)} {rating_four}')
-        print(f'⭐⭐⭐{"3-star rating:".rjust(19)} {rating_three}')
-        print(f'⭐⭐{"2-star rating:".rjust(21)} {rating_two}')
-        print(f'⭐{"1-star rating:".rjust(23)} {rating_one}')
+        print(f'{"⭐⭐⭐⭐⭐":<9}{"5-star rating:"} {rating_five}')
+        print(f'{"⭐⭐⭐⭐":<10}{"4-star rating:"} {rating_four}')
+        print(f'{"⭐⭐⭐":<11}{"3-star rating:"} {rating_three}')
+        print(f'{"⭐⭐":<12}{"2-star rating:"} {rating_two}')
+        print(f'{"⭐":<13}{"1-star rating:"} {rating_one}')
 
         choice = input('\nDo you want to view and reply to customer feedback? (y=yes, n=no)\n>>> ')
         if choice == 'y':
             while True:
-                print('\n\n', '\t'*15, 'CUSTOMER FEEDBACK')
-                print('-' * 140)
-                header = ['Username']  # create a list for headers and append the first item in the list
+                print('\n\n', '\t'*17, 'CUSTOMER FEEDBACK')
+                print('-' * 160)
+                header = ['Review ID']  # create a list for headers and append the first item in the list
                 for review_details in review.values():  # access the values of order_list
                     for sub_key, sub_value in review_details.items():  # access the subkey and sub value in the value of order_list
                         header.append(sub_key.title().replace('_', ' '))  # append other details of orders into the header list and replace all underscore with space to enhance readability
                     break
 
-                print(f'{header[0]:<19}{header[1]:<24}{header[2]:<90}{header[3]}')  # display the headers
-                print('-' * 140)
+                print(f'{header[0]:<18}{header[1]:<19}{header[2]:<28}{header[3]:<88}{header[4]}')  # display the headers
+                print('-' * 160)
 
                 for user, review_details in review.items():
                     products = review_details['product_name'].split(', ')
-                    print(f'{user:<19}{products[0]:<24}{review_details["review"]:<90}{review_details["rating"]}')
+                    print(f'{user:<18}{review_details["username"]:<19}{products[0]:<28}{review_details["review"]:<88}{review_details["rating"]}')
                     for product in products[1:]:
-                        print(f'{"":<19}{product:<24}{"":<90}{""}')
+                        print(f'{"":<18}{"":<19}{product:<28}{"":<88}{""}')
                     print('')
-                print('-' * 140)
+                print('-' * 160)
 
-                response = input('\nEnter customer\'s username to respond to their reviews (or enter "cancel" to return back):\n>>> ')
+                response = input('\nEnter the review id to respond the feedback (or enter "cancel" to return back):\n>>> ')
                 if response == 'cancel':
                     print('\nExiting to customer ratings overview......')
                     break
 
                 elif response not in review.keys():
                     print('\n+------------------------------------------------------+')
-                    print('|⚠️ Customer doesn\'t exist. Please choose another one. |')
+                    print('|⚠️ Feedback doesn\'t exist. Please choose another one. |')
                     print('+------------------------------------------------------+')
                 else:
                     respond_text = input('\nEnter response text:\n>>> ')

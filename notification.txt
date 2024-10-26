@@ -7,11 +7,11 @@
         "model_number": "TSTROVN563",
         "manufacturer_email": "nctdream@no1.com",
         "warranty": "2 years",
-        "report_date": "15-10-2024",
+        "report_date": "15-09-2024",
         "current_condition": "malfunction",
-        "malfunction_date": "12-12-1212",
-        "last_maintenance_date": "12-12-1212",
-        "description": "dfdgvbtrbv"
+        "malfunction_date": "14-09-2024",
+        "last_maintenance_date": "12-12-2023",
+        "description": "Heating element burnt out."
     },
     "mixer1": {
         "report_number": 3579,
@@ -24,10 +24,10 @@
         "report_date": "15-10-2024",
         "current_condition": "maintenance needed",
         "severity": "high",
-        "maintenance_needed_date": "12-12-1212",
-        "last_maintenance_date": "12-12-1212",
-        "next_scheduled_maintenance": "17-09-2004",
-        "description": "dfvdvcf"
+        "maintenance_needed_date": "15-10-2024",
+        "last_maintenance_date": "26-12-2023",
+        "next_scheduled_maintenance": "26-12-2024",
+        "description": "The speed settings are unresponsive."
     },
     "toasteroven2": {
         "report_number": 5875,
@@ -40,9 +40,9 @@
         "report_date": "15-10-2024",
         "current_condition": "maintenance needed",
         "severity": "high",
-        "maintenance_needed_date": "12-12-1212",
-        "last_maintenance_date": "12-12-1212",
-        "next_scheduled_maintenance": "24-09-2004",
-        "description": "dfvcfdvf"
+        "maintenance_needed_date": "15-10-2024",
+        "last_maintenance_date": "11-11-2023",
+        "next_scheduled_maintenance": "11-11-2024",
+        "description": "The motor is making loud noise."
     }
 }
