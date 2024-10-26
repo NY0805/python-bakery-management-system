@@ -1,5 +1,4 @@
-import \
-    re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
+import re  # import the regular expressions(regex), a type of text pattern matching tool to check if a string contains the specified search pattern
 import json  # import json text file to record data
 
 import manager_customer_feedback
