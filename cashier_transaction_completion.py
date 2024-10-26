@@ -66,8 +66,8 @@ def receipt(customer):
     current_date = datetime.now().strftime("%d-%m-%Y")  # convert the date into string for self-formatting and store it into "current_date" variable
     print(current_time + current_date.rjust(terminal_width-len(current_date)-1))  # specify the format of printing date and time
     print(' ')  # blank a line
-    invoice_no = random.randint(1000001, 10000000)  # determine the invoice number in random in a range from 1000001 to 10000000
-    print(f'{"Invoice no":<11}: MGB-{str(invoice_no)}')
+    receipt_no = random.randint(1000001, 10000000)  # determine the invoice number in random in a range from 1000001 to 10000000
+    print(f'{"Receipt no":<11}: MGB-{str(receipt_no)}')
 
     for cart_id, customer_details in customer_info.items():
         if customer in cart_id:
@@ -142,7 +142,7 @@ def receipt(customer):
     # determine the format of data as dictionary format to be saved to the file
     for cart_id, customer_details in customer_info.items():
         if customer == cart_id:
-            transaction_keeping[f'MGB-{invoice_no}'] = {
+            transaction_keeping[f'MGB-{receipt_no}'] = {
                 "order_id": customer_details['order_id'],
                 "items": customer_details['items_ordered'],
                 "order_date": current_date,
@@ -150,5 +150,5 @@ def receipt(customer):
             }
     save_info(transaction_keeping)  # save the data
 
-#receipt(str(9257521182))
+#receipt(str(4992374927))
 
