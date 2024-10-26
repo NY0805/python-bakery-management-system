@@ -2,14 +2,14 @@ import json
 
 
 def load_review():
+    # Load the reviews from 'customer_reviews.txt'
     try:
         file = open('customer_reviews.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(content)  # parse the content as json format into python dictionary
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -19,19 +19,20 @@ def load_review():
 
 
 def save_reviews(new_review):
+    # Save the updated reviews back to 'customer_reviews.txt'
     with open('customer_reviews.txt', 'w') as file:
         json.dump(new_review, file, indent=4)
 
 
 def load_order_list():
+    # Load the order list from 'customer_order_list.txt'
     try:
         file = open('customer_order_list.txt', 'r')  # open the file and read
         content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
         file.close()  # close the file after reading
         if content:  # start to check if the file is not empty
             try:
-                return json.loads(
-                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+                return json.loads(content)  # parse the content as json format into python dictionary
             except json.JSONDecodeError:
                 return {}  # return empty dictionary if the content does not parse successfully
         else:
@@ -41,6 +42,7 @@ def load_order_list():
 
 
 def validation_rating(rating):
+    # Check if the rating is a valid integer between 1 and 5
     return rating.isdigit() and int(rating) in range(1, 6)
 
 
@@ -92,21 +94,24 @@ def submit_review(logged_in_username):
 
     reviews = load_review()
 
-    # Ensure the user's reviews are a list
+    # Ensure reviews for the user are stored as a dictionary with unique IDs
     if logged_in_username not in reviews:
-        reviews[logged_in_username] = []  # Initialize as an empty list if the user does not exist
-    elif not isinstance(reviews[logged_in_username], list):
-        reviews[logged_in_username] = []  # Ensure it's a list, in case it was saved incorrectly
+        reviews[logged_in_username] = {}
 
-    # Append the new review
-    reviews[logged_in_username].append({
+    # Generate a unique review ID (incremental)
+    next_review_id = str(len(reviews[logged_in_username]) + 1).zfill(3)
+
+    # Add the new review entry under the generated review ID
+    reviews[logged_in_username][next_review_id] = {
         'product_name': product_name,
         'review': review_text,
         'rating': int(rating),
         'order_date': order_date
-    })
+    }
 
     save_reviews(reviews)
     print('\n***** Thank you for your feedback! *****')
     print('Your review has been successfully received.')
+
+
 #submit_review
