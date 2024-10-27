@@ -334,7 +334,7 @@ def equipment_malfunction():
                 equipment_malfunction()
                 break
             elif report_more == 'n':
-                print('\nExit the maintenance needs report page. Proceeding to equipment management menu......')
+                print('\nExit the malfunction report page. Proceeding to equipment management menu......')
                 equipment_management()
                 break
             else:
@@ -448,7 +448,7 @@ def equipment_maintenance():
             break
 
     while True:
-        confirmation = input('\nConfirm submission of malfunction report to manager? (y=yes, n=no)\n'
+        confirmation = input('\nConfirm submission of maintenance report to manager? (y=yes, n=no)\n'
                              '>>> ').lower().strip()
         if validation_empty_entries(confirmation):
             if confirmation == 'y':
@@ -506,7 +506,7 @@ def equipment_maintenance():
                 equipment_maintenance()
                 break
             elif report_more == 'n':
-                print('\nExit the malfunction report page. Proceeding to equipment management menu......')
+                print('\nExit the maintenance report page. Proceeding to equipment management menu......')
                 equipment_management()
                 break
             else:
