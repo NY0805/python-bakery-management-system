@@ -120,7 +120,7 @@ def customer_feedback():
                     for user, review_details in review.items():
                         if response == user:
                             manager_response[f'REPLY-{previous_number}'] = {
-                                "username": user,
+                                "username": review_details['username'],
                                 "products": review_details['product_name'],
                                 "review": review_details['review'],
                                 "rating": review_details['rating'],

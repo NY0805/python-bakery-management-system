@@ -200,25 +200,25 @@ def equipment_malfunction():
     max_length = len('Next Scheduled Maintenance')
 
     print('\nBasic details of selected equipment:\n')
-    print(f'{'Category':<28}: {category.title()}')  # category
-    print(f'{'Equipment Name':<28}: {equipment["equipment_name"].title()}')  # equipment name
+    print(f'{"Category":<28}: {category.title()}')  # category
+    print(f'{"Equipment Name":<28}: {equipment["equipment_name"].title()}')  # equipment name
     index = 1
     for serial_number in equipment['serial_number']:
-        print(f'Serial Number {str(index).ljust((max_length + 1) - len('Serial Number'))}: {serial_number}')
+        print(f'Serial Number {str(index).ljust((max_length + 1) - len("Serial Number"))}: {serial_number}')
         index += 1
-    print(f'{'Manufacturer':<28}: {equipment["manufacturer"].title()}')  # manufacturer
-    print(f'{'Model Number':<28}: {equipment["model_number"]}')  # model number
-    print(f'{'Purchase Date':<28}: {equipment["purchase_date"]}')  # purchase date
-    print(f'{'Purchase Quantity':<28}: {equipment["purchase_quantity"]}')  # purchase quantity
-    print(f'{'Next Scheduled Maintenance':<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
-    print(f'{'Manufacturer Email':<28}: {equipment["manufacturer_email"]}')  # manufacturer email
-    print(f'{'Warranty':<28}: {equipment["warranty"]}')  # warranty
+    print(f'{"Manufacturer":<28}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{"Model Number":<28}: {equipment["model_number"]}')  # model number
+    print(f'{"Purchase Date":<28}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{"Purchase Quantity":<28}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(f'{"Next Scheduled Maintenance":<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(f'{"Manufacturer Email":<28}: {equipment["manufacturer_email"]}')  # manufacturer email
+    print(f'{"Warranty":<28}: {equipment["warranty"]}')  # warranty
 
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
-    print(f'1. {'Date of Report':<20}: {time.strftime("%d-%m-%Y")}')  # report date
-    print(f'2. {'Current Condition':<20}: Malfunction')  # current condition
+    print(f'1. {"Date of Report":<20}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {"Current Condition":<20}: Malfunction')  # current condition
     print('')
 
     while True:
@@ -310,7 +310,7 @@ def equipment_malfunction():
                     'warranty': equipment['warranty'],
                     'report_date': time.strftime("%d-%m-%Y"),
                     'current_condition': 'malfunction',
-                    'malfunction_date': malfunction_date,
+                    'malfunction_date': malfunction_date.strftime("%d-%m-%Y"),
                     'last_maintenance_date': last_maintenance_date_str,
                     'description': description
                 }
@@ -355,25 +355,25 @@ def equipment_maintenance():
     max_length = len('Next Scheduled Maintenance')
 
     print('\nBasic details of selected equipment:\n')
-    print(f'{'Category':<28}: {category.title()}')  # category
-    print(f'{'Equipment Name':<28}: {equipment["equipment_name"].title()}')  # equipment name
+    print(f'{"Category":<28}: {category.title()}')  # category
+    print(f'{"Equipment Name":<28}: {equipment["equipment_name"].title()}')  # equipment name
     index = 1
     for serial_number in equipment['serial_number']:
-        print(f'Serial Number {str(index).ljust((max_length + 1) - len('Serial Number'))}: {serial_number}')
+        print(f'Serial Number {str(index).ljust((max_length + 1) - len("Serial Number"))}: {serial_number}')
         index += 1
-    print(f'{'Manufacturer':<28}: {equipment["manufacturer"].title()}')  # manufacturer
-    print(f'{'Model Number':<28}: {equipment["model_number"]}')  # model number
-    print(f'{'Purchase Date':<28}: {equipment["purchase_date"]}')  # purchase date
-    print(f'{'Purchase Quantity':<28}: {equipment["purchase_quantity"]}')  # purchase quantity
-    print(f'{'Next Scheduled Maintenance':<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
-    print(f'{'Manufacturer Email':<28}: {equipment["manufacturer_email"]}')  # manufacturer email
-    print(f'{'Warranty':<28}: {equipment["warranty"]}')  # warranty
+    print(f'{"Manufacturer":<28}: {equipment["manufacturer"].title()}')  # manufacturer
+    print(f'{"Model Number":<28}: {equipment["model_number"]}')  # model number
+    print(f'{"Purchase Date":<28}: {equipment["purchase_date"]}')  # purchase date
+    print(f'{"Purchase Quantity":<28}: {equipment["purchase_quantity"]}')  # purchase quantity
+    print(f'{"Next Scheduled Maintenance":<28}: {equipment["next_scheduled_maintenance"]}')  # next schedule maintenance
+    print(f'{"Manufacturer Email":<28}: {equipment["manufacturer_email"]}')  # manufacturer email
+    print(f'{"Warranty":<28}: {equipment["warranty"]}')  # warranty
 
     print('')
     print('-' * 140)
     print('\nKindly complete the necessary details to submit a report to manager:\n')
-    print(f'1. {'Date of Report':<20}: {time.strftime("%d-%m-%Y")}')  # report date
-    print(f'2. {'Current Condition':<20}: Maintenance Needed')  # current condition
+    print(f'1. {"Date of Report":<20}: {time.strftime("%d-%m-%Y")}')  # report date
+    print(f'2. {"Current Condition":<20}: Maintenance Needed')  # current condition
     print('')
 
     while True:
@@ -481,7 +481,7 @@ def equipment_maintenance():
                     'report_date': time.strftime("%d-%m-%Y"),
                     'current_condition': 'maintenance needed',
                     'severity': severity,
-                    'maintenance_needed_date': maintenance_needed_date,
+                    'maintenance_needed_date': maintenance_needed_date.strftime("%d-%m-%Y"),
                     'last_maintenance_date': last_maintenance_date_str,
                     'next_scheduled_maintenance': equipment['next_scheduled_maintenance'],
                     'description': description

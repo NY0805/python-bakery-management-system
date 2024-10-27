@@ -121,8 +121,8 @@
         "warranty": "2 years",
         "report_date": "09-08-2023",
         "current_condition": "function well",
-        "malfunction_date": "11-11-1111",
-        "last_maintenance_date": "11-11-1111",
+        "malfunction_date": "09-08-2023",
+        "last_maintenance_date": "11-01-2023",
         "description": "dfbvfb"
     },
     "8604": {
@@ -135,8 +135,8 @@
         "warranty": "1 year",
         "report_date": "09-08-2023",
         "current_condition": "waiting to replace with a new one",
-        "malfunction_date": "12-12-1212",
-        "last_maintenance_date": "12-12-1212",
+        "malfunction_date": "09-08-2023",
+        "last_maintenance_date": "26-04-2023",
         "description": "dfvev"
     },
     "9383": {
