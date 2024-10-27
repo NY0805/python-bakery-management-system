@@ -1,5 +1,4 @@
 import json  # import json text file to record data
-import main
 import baker_recipe
 import baker_inventory_check
 import baker_product_keeping
@@ -40,7 +39,6 @@ def printed_centered(info):
 
 
 baker_info = load_data_from_file()  # store the data that retrieved from file into baker_info
-manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
 
 # baker account login function
@@ -109,43 +107,6 @@ def baker_accounts():
         #  display baker privilege
 
 
-def baker_privilege():
-    while True:
-        print('')
-        printed_centered('BAKER PRIVILEGE')
-
-        print('1. Recipe management\n'
-              '2. Inventory check\n'
-              '3. Product record-keeping\n'
-              '4. Equipment management\n'
-              '5. Back to Main page')
-
-        #  collect the choice of user and execute corresponding functions
-        choice = input('\nSelect a choice (1, 2, 3, 4, 5): \n>>> ')
-
-        if choice == '1':
-            baker_recipe.recipe_management()
-
-        elif choice == '2':
-            baker_inventory_check.recipe_lists()
-
-        elif choice == '3':
-            baker_product_keeping.product_management()
-
-        elif choice == '4':
-            baker_equipment_management.equipment_management()
-
-        elif choice == '5':
-            print('\nExiting to main page......')
-            return False
-
-        else:
-            print('\n+--------------------------------------+')
-            print('|⚠️ Invalid input. Please enter again. |')
-            print('+--------------------------------------+')
-
-
-baker_accounts()
+#baker_accounts()
 #baker_privilege()
 
-hhh

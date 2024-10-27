@@ -106,7 +106,21 @@ def maintenance_data_group(maintenance_data):
 def wrap_data(data_set, width=60):
     wrapped_lines = []
     for data in data_set:
-        wrapped_lines.extend(textwrap.wrap(data, width=width))
+        info_line = []
+        info = data.split()
+        length = 0
+
+        for word in info:
+            if length + len(word) + len(info_line) <= width:
+                info_line.append(word)
+                length += len(word)
+            else:
+                wrapped_lines.append(' '.join(info_line))
+                info_line = [word]
+                length = len(word)
+        if info_line:
+            wrapped_lines.append(' '.join(info_line))
+
     return wrapped_lines
 
 

@@ -1,7 +1,7 @@
 {
     "verticca": {
         "cashier_username": "verticca",
-        "cashier_password": "securec@sh123",
+        "cashier_password": "securec@sh$",
         "age": 34,
         "gender": "female",
         "contact_no": "123-4567382",
