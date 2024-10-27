@@ -9,22 +9,19 @@
                 "g"
             ],
             [
-                "brown sugar",
-                20.0,
-                "ml"
-            ],
-            [
-                "whipping cream",
+                "chilly",
                 30.0,
                 "g"
             ]
         ],
         "ingredient_notes": "nct dream no1",
         "equipment_used": [
-            "toaster oven"
+            "toaster oven",
+            "stand mixer"
         ],
         "baking_temperature": 90,
-        "baking_time": 80,
+        "baking_time": 50,
+        "cost_per_unit": 6.0,
         "instructions": [
             "fff",
             "ffe",
@@ -45,6 +42,7 @@
         "equipment_used": [],
         "baking_temperature": 200,
         "baking_time": 3,
+        "cost_per_unit": 15.5,
         "instructions": [
             "a",
             "a"
@@ -69,6 +67,7 @@
         "equipment_used": [],
         "baking_temperature": 300,
         "baking_time": 60,
+        "cost_per_unit": 6.0,
         "instructions": [
             "hh",
             "hh",
@@ -98,6 +97,7 @@
         ],
         "baking_temperature": 130,
         "baking_time": 20,
+        "cost_per_unit": 8.4,
         "instructions": [
             "jj",
             "hh",
@@ -121,6 +121,7 @@
         ],
         "baking_temperature": 30,
         "baking_time": 30,
+        "cost_per_unit": 15.5,
         "instructions": [
             "djfoj",
             "fjdf"
@@ -147,6 +148,7 @@
         ],
         "baking_temperature": 30,
         "baking_time": 30,
+        "cost_per_unit": 15.5,
         "instructions": [
             "no"
         ]

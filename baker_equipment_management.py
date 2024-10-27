@@ -515,4 +515,4 @@ def equipment_maintenance():
                 print('+----------------------------+\n')
 
 
-#equipment_management()
+equipment_management()

@@ -508,13 +508,8 @@ def update_product():
                 for batch_number, product in product_data.items():
                     # append all the keys into a list and identify the selected ingredient by indexing
                     selected_product_key = list(product_data.keys())[index_of_product_to_edit - 1]
-
-                    print('')
-                    printed_centered(f'{product_data[selected_product_key]["product_name"].upper()}\'S DATA')
-
-                    for key, value in product_data[selected_product_key].items():
-                        print(f'{key}: {value}')  # list down the attributes of the selected product
                     break
+
             else:
                 print('\n❗Product not found.')  # error displayed if selected product not found
                 continue
@@ -527,6 +522,11 @@ def update_product():
 
         while True:
             selected_product_key = list(product_data.keys())[index_of_product_to_edit - 1]
+
+            printed_centered(f'{product_data[selected_product_key]["product_name"].upper()}\'S DATA')
+
+            for key, value in product_data[selected_product_key].items():
+                print(f'{key}: {value}')  # list down the attributes of the selected product
 
             print('\nTo change the information, please enter the exact matching name. Example: product_name.')
             print('* Note: category, date of production, and quantity produced cannot be changed.\n')
