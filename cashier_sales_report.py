@@ -354,6 +354,77 @@ def monthly_sales_performance():
                 print('+-----------------------+')
 
 
+def product_popularity_customer_review(report_year, report_month, best_seller, least_seller, max_quantity, min_quantity,
+                                       all):
+    best_rating = 0
+    best_count = 0
+    best_review = {}
+    least_rating = 0
+    least_count = 0
+    least_review = {}
+
+    for key, item in customer_review.items():
+        order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
+        order_year = order_date.year
+        order_month = order_date.month
+
+        if all:
+            if best_seller in item['product_name']:
+                best_rating += item['rating']
+                best_count += 1
+                best_review[item['username']] = item['review']
+            if least_seller in item['product_name']:
+                least_rating += item['rating']
+                least_count += 1
+                least_review[item['username']] = item['review']
+
+        elif best_seller in item['product_name'] and order_year == int(report_year):
+            if report_month is None:
+                best_rating += item['rating']
+                best_count += 1
+                best_review[item['username']] = item['review']
+            else:
+                if order_month == int(report_month):
+                    best_rating += item['rating']
+                    best_count += 1
+                    best_review[item['username']] = item['review']
+        elif least_seller in item['product_name'] and order_year == int(report_year):
+            if report_month is None:
+                best_rating += item['rating']
+                best_count += 1
+                best_review[item['username']] = item['review']
+            else:
+                if order_month == int(report_month):
+                    least_rating += item['rating']
+                    least_count += 1
+                    least_review[item['username']] = item['review']
+
+    if best_seller == least_seller:
+        least_rating = best_rating
+        least_count = best_count
+        least_review = best_review
+
+    if best_count > 0:
+        best_average_rating = best_rating / best_count
+        best_random_customer = random.choice(list(best_review.keys()))
+        best_random_review = best_review[best_random_customer]
+    else:
+        best_random_customer = None
+        best_average_rating = 'No rating detected.'
+        best_random_review = 'No review detected.'
+
+    if least_count > 0:
+        least_average_rating = least_rating / least_count
+        least_random_customer = random.choice(list(least_review.keys()))
+        least_random_review = least_review[least_random_customer]
+    else:
+        least_random_customer = None
+        least_average_rating = 'No rating detected.'
+        least_random_review = 'No review detected.'
+
+    return best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count
+
+
 def product_popularity():
     while True:
         while True:
@@ -362,7 +433,7 @@ def product_popularity():
                 break
 
         while True:
-            print('Welcome to product popularity page!')
+            print('\nWelcome to product popularity page!')
             print('1. Yearly report')
             print('2. Monthly report')
             print('3. Overall product popularity summary')
@@ -388,20 +459,6 @@ def product_popularity():
                                             product_ordered[total_product[0]] += int(total_product[1])
                                         else:
                                             product_ordered[total_product[0]] = int(total_product[1])
-                                    print(product_ordered)
-
-                            customer_rating = {}
-                            for key, item in customer_review.items():
-                                order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
-                                order_year = order_date.year
-                                if
-                                if order_year == int(report_year):
-                                    for rating in str(item['rating']):
-                                        rating = int(rating)
-                                        rating += rating
-                                    average_rating = rating / len(str(rating))
-                                    print(rating)
-                                    print(average_rating)
 
                             best_seller = None
                             least_seller = None
@@ -424,13 +481,28 @@ def product_popularity():
                                 least_seller = 'No products sold'
                                 min_quantity = 0
 
+                            best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(report_year, None, best_seller, least_seller, max_quantity, min_quantity, all=False)
+
                             print('\n----------------------------------------------------------')
                             print(f"\t\t\t{report_year}'S PRODUCT POPULARITY SUMMARY")
                             print('----------------------------------------------------------')
-                            print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
-                            print(f'\n{"Average customer rating":<23}: {average_rating}, Total quantity sold: {max_quantity}')
+                            print(f'\n{"1️⃣ Top-selling product":<31}: {best_seller.title()}')
+                            print(f'{"📌 Total quantity sold":<29}: {max_quantity}')
+                            print(f'{"⭐ Average customer rating":<29}: {best_average_rating}')
+                            if best_count > 0:
+                                print(
+                                    f'{"🎉 Customer review spotlight":<29}: "{best_random_review}" ----- {best_random_customer}')
+                            else:
+                                print(f'{"🎉 Customer review spotlight":<29}: {best_random_review}')
 
-                            print(f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                            print(f'\n{"↘️ Least-selling product":<30}: {least_seller.title()}')
+                            print(f'{"📌 Total quantity sold":<29}: {min_quantity}')
+                            print(f'{"⭐ Average customer rating":<29}: {least_average_rating}')
+                            if least_count > 0:
+                                print(
+                                    f'{"🎉 Customer review spotlight":<29}: "{least_random_review}" ----- {least_random_customer}')
+                            else:
+                                print(f'{"🎉 Customer review spotlight":<29}: {least_random_review}')
                             break
                         else:
                             print('\n+-------------------------------------------------+')
@@ -473,7 +545,6 @@ def product_popularity():
                                                 product_ordered[total_product[0]] += int(total_product[1])
                                             else:
                                                 product_ordered[total_product[0]] = int(total_product[1])
-                                        print(product_ordered)
 
                                 best_seller = None
                                 least_seller = None
@@ -495,19 +566,36 @@ def product_popularity():
                                     least_seller = 'No products sold'
                                     min_quantity = 0
 
+                                best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(
+                                    report_year, report_month, best_seller, least_seller, max_quantity, min_quantity, all=False)
+
                                 print('\n----------------------------------------------------------')
                                 print(f"\t\t\t{report_month}/{report_year} PRODUCT POPULARITY SUMMARY")
                                 print('----------------------------------------------------------')
-                                print(
-                                    f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
-                                print(
-                                    f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                                print(f'\n{"1️⃣ Top-selling product":<31}: {best_seller.title()}')
+                                print(f'{"📌 Total quantity sold":<29}: {max_quantity}')
+                                print(f'{"⭐ Average customer rating":<29}: {best_average_rating}')
+                                if best_count > 0:
+                                    print(
+                                        f'{"🎉 Customer review spotlight":<29}: "{best_random_review}" ----- {best_random_customer}')
+                                else:
+                                    print(f'{"🎉 Customer review spotlight":<29}: {best_random_review}')
+
+                                print(f'\n{"↘️ Least-selling product":<30}: {least_seller.title()}')
+                                print(f'{"📌 Total quantity sold":<29}: {min_quantity}')
+                                print(f'{"⭐ Average customer rating":<29}: {least_average_rating}')
+                                if least_count > 0:
+                                    print(
+                                        f'{"🎉 Customer review spotlight":<29}: "{least_random_review}" ----- {least_random_customer}')
+                                else:
+                                    print(f'{"🎉 Customer review spotlight":<29}: {least_random_review}')
                                 break
                             else:
                                 print('\n+--------------------------------------+')
                                 print('|⚠️ Please enter based on given month. |')
                                 print('+--------------------------------------+')
                                 break
+
                 elif report_service == '3':
                     product_ordered = {}
                     for key, item in cashier_transaction_keeping.items():
@@ -539,13 +627,31 @@ def product_popularity():
                         least_seller = 'No products sold'
                         min_quantity = 0
 
+                    best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(
+                        None, None, best_seller, least_seller, max_quantity, min_quantity, all=True)
+
                     print('\n----------------------------------------------------------')
                     print(f"\t\t\tOVERALL PRODUCT POPULARITY SUMMARY")
                     print('----------------------------------------------------------')
-                    print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
-                    print(f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
+                    print(f'\n{"1️⃣ Top-selling product":<31}: {best_seller.title()}')
+                    print(f'{"📌 Total quantity sold":<29}: {max_quantity}')
+                    print(f'{"⭐ Average customer rating":<29}: {best_average_rating}')
+                    if best_count > 0:
+                        print(
+                            f'{"🎉 Customer review spotlight":<29}: "{best_random_review}" ----- {best_random_customer}')
+                    else:
+                        print(f'{"🎉 Customer review spotlight":<29}: {best_random_review}')
+
+                    print(f'\n{"↘️ Least-selling product":<30}: {least_seller.title()}')
+                    print(f'{"📌 Total quantity sold":<29}: {min_quantity}')
+                    print(f'{"⭐ Average customer rating":<29}: {least_average_rating}')
+                    if least_count > 0:
+                        print(
+                            f'{"🎉 Customer review spotlight":<29}: "{least_random_review}" ----- {least_random_customer}')
+                    else:
+                        print(f'{"🎉 Customer review spotlight":<29}: {least_random_review}')
                     break
-                    break
+
                 elif report_service == '4':
                     generate_sales_report()
                     break
