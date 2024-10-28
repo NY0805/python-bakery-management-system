@@ -107,7 +107,7 @@
         "email": "violet23@gmail.com",
         "address": "321 Violet Lane, Riverside",
         "account_status": "active",
-        "loyalty_points": 1520
+        "loyalty_points": 1860
     },
     "Haechan": {
         "customer_username": "haechanlee",

@@ -150,8 +150,7 @@ def recipe_management():
 
 
 def create_recipe():
-    recipe_info = ['Recipe Name', 'Recipe\'s Category', 'Recipe Code', 'Ingredient Name', 'Ingredient_Per_Unit',
-                   'Variation', 'Notes']
+    recipe_info = ['Recipe Name', 'Recipe\'s Category']
 
     max_length = 0
     for item in recipe_info:
@@ -334,6 +333,7 @@ def recipe_ingredient(adding_ingredient, update_ingredient):
                 add_more = input('\nContinue adding ingredients? (y=yes, n=no)'
                                  '\n>>> ').lower().strip()
                 if add_more == 'y':
+                    add_notes = True
                     break
                 elif add_more == 'n':
                     if update_ingredient:
@@ -350,16 +350,17 @@ def recipe_ingredient(adding_ingredient, update_ingredient):
                                     print('\nStop adding. Proceeding to select the necessary equipment 😊')
                                     add_notes = False
                                     break
-                    add_notes = False
+                    else:
+                        add_notes = False
                     break
                 else:
                     print('\n+-------------------------------------------+')
                     print('|⚠️ Invalid input. Please enter "y" or "n". |')
                     print('+-------------------------------------------+')
-                if not add_notes:
-                    break
-        add_notes = False
-        break
+        else:
+            break
+        if not add_notes:
+            break
 
     return ingredients, ingredient_notes
 
@@ -435,7 +436,10 @@ def recipe_equipment(update_equipment):
             equipment_name = input(
                 f'\n✏️ Enter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
 
-            if validation_empty_entries(equipment_name):
+            if equipment_name == 'done':
+                break
+
+            elif validation_empty_entries(equipment_name):
                 if equipment_name.replace(" ", "").isalpha():
                     if is_equipment_duplicate(equipment_name, equipments):
                         found_category = None
@@ -461,6 +465,7 @@ def recipe_equipment(update_equipment):
                         print('|⚠️ Duplicate equipment name. You\'ve already added this equipment. |')
                         print('+-------------------------------------------------------------------+')
                         continue
+
                 else:
                     print(
                         '\n+--------------------------------------------------------------------------------------------+')
@@ -469,6 +474,7 @@ def recipe_equipment(update_equipment):
                     print(
                         '+--------------------------------------------------------------------------------------------+')
                     continue
+
             return equipments
     return equipments
 
@@ -806,7 +812,7 @@ def update_recipe():
                     "Add, edit or delete ingredient? \nPlease enter 'add', 'edit' or 'delete' (or enter 'cancel' to stop): ")
 
                 if edit_equipment == 'add':
-                    new_equipment = recipe_equipment(update_equipment=True)
+                    new_equipment = recipe_equipment(update_equipment=False)
                     if new_equipment:
                         recipe_data[selected_recipe_key]['equipment_used'].extend(new_equipment)
                         save_info(recipe_data)
@@ -840,7 +846,7 @@ def update_recipe():
                                     print('\nInformation saved.')
                                     break
                                 else:
-                                    print('\nNo new equipment added.')
+                                    print('\nNo equipment edited.')
                                     break
                             else:
                                 print('\n+--------------------------------------+')

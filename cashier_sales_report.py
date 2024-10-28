@@ -391,17 +391,17 @@ def product_popularity():
                                     print(product_ordered)
 
                             customer_rating = {}
-                            for key, item in customer_rating.items():
+                            for key, item in customer_review.items():
                                 order_date = datetime.strptime(item['order_date'], '%d-%m-%Y')
                                 order_year = order_date.year
+                                if
                                 if order_year == int(report_year):
-                                    for product in item['items']:
-                                        total_product = product.split(' x ')
-                                        if total_product[0] in product_ordered:
-                                            product_ordered[total_product[0]] += int(total_product[1])
-                                        else:
-                                            product_ordered[total_product[0]] = int(total_product[1])
-                                    print(product_ordered)
+                                    for rating in str(item['rating']):
+                                        rating = int(rating)
+                                        rating += rating
+                                    average_rating = rating / len(str(rating))
+                                    print(rating)
+                                    print(average_rating)
 
                             best_seller = None
                             least_seller = None
@@ -428,6 +428,8 @@ def product_popularity():
                             print(f"\t\t\t{report_year}'S PRODUCT POPULARITY SUMMARY")
                             print('----------------------------------------------------------')
                             print(f'\n{"Top-selling product":<23}: {best_seller}, Total quantity sold: {max_quantity}')
+                            print(f'\n{"Average customer rating":<23}: {average_rating}, Total quantity sold: {max_quantity}')
+
                             print(f'{"Least-selling product":<23}: {least_seller}, Total quantity sold: {min_quantity}\n')
                             break
                         else:
@@ -554,4 +556,4 @@ def product_popularity():
 
 
 #generate_sales_report()
-#product_popularity()
+product_popularity()

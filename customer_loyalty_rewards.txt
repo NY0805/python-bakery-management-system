@@ -85,9 +85,9 @@
     },
     "10": {
         "username": "violet23",
-        "total_spending (RM)": 85.0,
-        "loyalty_points": 850,
-        "status": "MORNING GLORY'S BRONZE",
+        "total_spending (RM)": 119.0,
+        "loyalty_points": 1530,
+        "status": "MORNING GLORY'S SILVER",
         "redeem_rate (RM)": 120,
         "voucher_redeem": 0
     },

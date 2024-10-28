@@ -20,6 +20,12 @@ def generate_order_id(order_data):
     return f"ORD{new_order_num:03}"
 
 
+    while True:
+        report_num = random.randint(1000, 9999)
+        if report_num not in sales_report_file.keys():
+            break
+
+
 # Function to load baker data from a JSON file
 def load_baker_data():
     try:

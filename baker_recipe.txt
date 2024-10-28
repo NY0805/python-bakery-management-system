@@ -10,22 +10,37 @@
             ],
             [
                 "chilly",
+                40.0,
+                "g"
+            ],
+            [
+                "baking powder",
                 30.0,
                 "g"
+            ],
+            [
+                "baking powder",
+                40.0,
+                "g"
+            ],
+            [
+                "candy",
+                30.0,
+                "ml"
             ]
         ],
         "ingredient_notes": "nct dream no1",
         "equipment_used": [
-            "toaster oven",
+            "stand mixer",
+            "stand mixer",
             "stand mixer"
         ],
         "baking_temperature": 90,
         "baking_time": 50,
         "cost_per_unit": 6.0,
         "instructions": [
-            "fff",
-            "ffe",
-            "fee"
+            "fgghh",
+            "dffd"
         ]
     },
     "banana bread": {

@@ -68,6 +68,7 @@ def submit_review(logged_in_username):
     for i, product in enumerate(recent_purchases, start=1):
         product_name, quantity = product.split(' x ')
         print(f"{i:<5} {product_name:<30} {quantity:<10}")
+    print('')
 
     try:
         product_choice = int(input('Select a product to review (enter the number): '))

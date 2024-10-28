@@ -112,9 +112,11 @@ def recipe_lists():
         print('')
         printed_centered('RECIPE LIST')
         for category, items in recipe_category_groups.items():
+            index = 1
             print(f'📍 {category} 📍')
-            for index, ingredient in enumerate(items, start=1):
+            for ingredient in items:
                 print(f"{index}. {ingredient.title()}")
+                index += 1
             print('')
 
         recipe_choose = input('What recipe you would like to work on today? Please enter the recipe name. (or enter "cancel" to back to previous page.)\n'
@@ -177,17 +179,15 @@ def recipe_lists():
             for instruction in values['instructions']:
                 print(f'{instruction_index}. {instruction.title()}')
                 instruction_index += 1
-            print('')
 
     while True:
         try:
-            quantity = int(input('Please enter the quantity you want to produce: '))
+            quantity = int(input('\nPlease enter the quantity you want to produce: '))
 
             print('\nChecking the availability of required ingredient......')
 
             selected_recipe = recipe_list[recipe_choose]
             selected_category = recipe_list[recipe_choose]['recipe_category']
-            print(selected_category)
 
             availability = True
             max_possible_quantity = float('inf')
@@ -197,8 +197,6 @@ def recipe_lists():
                 ingredient_name = item[0]
                 quantity_needed = float(quantity) * item[1]
                 unit_measurement = item[2].lower()
-                print(unit_measurement)
-                print(quantity_needed)
 
                 current_quantity = None
 
@@ -206,21 +204,18 @@ def recipe_lists():
                     if items['ingredient_name'].lower() == ingredient_name.lower():
                         if items['unit_measurement'] == unit_measurement:
                             current_quantity = items['quantity_purchased']
-                            print(current_quantity)
                             break
                         elif ((items['unit_measurement'] == 'kg' and unit_measurement == 'g') or
                               (items['unit_measurement'] == 'l' and unit_measurement == 'ml') or
                               (items['unit_measurement'] == 'l' and unit_measurement == 'g') or
                               (items['unit_measurement'] == 'kg' and unit_measurement == 'ml')):
                             current_quantity = items['quantity_purchased'] * 1000
-                            print(current_quantity)
                             break
                         elif ((items['unit_measurement'] == 'g' and unit_measurement == 'kg') or
                               (items['unit_measurement'] == 'ml' and unit_measurement == 'l') or
                               (items['unit_measurement'] == 'ml' and unit_measurement == 'kg') or
                               (items['unit_measurement'] == 'g' and unit_measurement == 'l')):
                             current_quantity = items['quantity_purchased'] / 1000
-                            print(current_quantity)
                             break
 
                 if current_quantity is not None:
@@ -240,8 +235,9 @@ def recipe_lists():
                     break
 
             if availability:
+                print('All ingredients needed available!')
                 while True:
-                    production_confirmation = (input(f'Are you sure you want to produce {quantity} units of '
+                    production_confirmation = (input(f'\nAre you sure you want to produce {quantity} units of '
                                                      f'{selected_recipe["recipe_name"]}? Enter y for yes or n for no: '))
                     if validation_empty_entries(production_confirmation):
                         if production_confirmation == 'y':
@@ -255,8 +251,7 @@ def recipe_lists():
                                         selected_ingredient = key
                                         if items['unit_measurement'] == unit_measurement:
                                             remain_ingredient = items['quantity_purchased'] - quantity_needed
-                                            ingredient_list[selected_ingredient][
-                                                'quantity_purchased'] = remain_ingredient
+                                            ingredient_list[selected_ingredient]['quantity_purchased'] = remain_ingredient
                                             save_info_inventory_ingredient(ingredient_list)
                                             break
                                         elif ((items['unit_measurement'] == 'kg' and unit_measurement == 'g') or
@@ -304,9 +299,8 @@ def recipe_lists():
                             recipe_lists()
                             break
                         elif produce_more == 'n':
-                            print('\nStop adding. Exiting to Recipe Management page......')
-                            pass
-                            break
+                            print('\nStop adding. Exiting to Recipe page......')
+                            return False
                         else:
                             print('\n+-------------------------------------------+')
                             print('|⚠️ Invalid input. Please enter "y" or "n". |')
@@ -314,10 +308,12 @@ def recipe_lists():
 
             else:
                 print(f'Not enough {", ".join(unavailable_ingredients)} in stock. You can produce a maximum of '
-                      f'{max_possible_quantity} units of {selected_recipe["recipe_name"]}.')
+                      f'{max_possible_quantity:.2f} units of {selected_recipe["recipe_name"]}.')
 
         except ValueError:
-            print('\nPlease enter a whole number.')
+            print('\n+--------------------------------+')
+            print('|⚠️ Please enter a whole number. |')
+            print('+--------------------------------+')
 
 
-#recipe_lists()
+recipe_lists()
