@@ -25,12 +25,12 @@ def order_tracking():
     print('-----------------------------------------------')
 
     while True:
-        order_id = input('Enter your Order ID: ')  # Prompt the customer to enter their order ID
+        order_id = input('Enter your Order ID: ')  # Let customer enter their order ID
 
         # Search for the order by order_id
         order_found = False
         for order_key, order in orders.items():
-            if order['order_id'] == order_id:  # Compare the input with the order_id in the order details
+            if order['order_id'] == order_id:
                 print(f'\n{"Order Details":^30}')
                 print('-' * 55)
                 print(f'{"Order ID:":<20} {order_id}')
