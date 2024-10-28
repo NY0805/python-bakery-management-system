@@ -409,7 +409,7 @@ def customer_menu():
             order_tracking.order_tracking()
         elif option == "6":
             if logged_in_username:  # Check if the user is logged in
-                customer_product_review.submit_review(logged_in_username)  # Pass the logged-in username
+                customer_product_review.submitted_review(logged_in_username)
             else:
                 print("You need to log in first to submit a review.")
         elif option == "7":

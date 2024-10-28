@@ -41,7 +41,7 @@ def validation_rating(rating):
     return rating.isdigit() and int(rating) in range(1, 6)
 
 
-def submit_review(logged_in_username):
+def submitted_review(logged_in_username):
     print('\n-----------------------------------------------')
     print('\t\t\tPRODUCT REVIEW')
     print('-----------------------------------------------')
@@ -107,4 +107,4 @@ def submit_review(logged_in_username):
     print('Your review has been successfully received.')
 
 
-#submit_review
+#submitted_review

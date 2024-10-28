@@ -6,11 +6,12 @@ GOLD_REQUIREMENT = 2000
 SILVER_REQUIREMENT = 1000
 BRONZE_REQUIREMENT = 500
 REDEEM_RATES = {
-    "MORNING GLORY'S GOLD": 100,
-    "MORNING GLORY'S SILVER": 90,
-    "MORNING GLORY'S BRONZE": 80,
-    "Standard": None
+    "MORNING GLORY'S GOLD": 1000,
+    "MORNING GLORY'S SILVER": 900,
+    "MORNING GLORY'S BRONZE": 800,
+    "Standard": None               # Standard customers cannot redeem points
 }
+# Each cash voucher is worth RM10 in the loyalty program
 
 
 def determine_loyalty_points(total_price):  # Calculate loyalty points based on customer's total spending
@@ -165,7 +166,7 @@ def redeem_cash_voucher(username): # Allow customers to redeem cash vouchers usi
                 print("Standard users cannot redeem cash vouchers.")
                 return
 
-            max_vouchers = points // points_per_voucher
+            max_vouchers = points // points_per_voucher # Each cash voucher is worth RM10 in the loyalty program
             if max_vouchers > 0:
                 print(f"You have {points} loyalty points.")
                 print(f"As a {status} member, you can redeem up to {max_vouchers} vouchers (Each RM10).")
