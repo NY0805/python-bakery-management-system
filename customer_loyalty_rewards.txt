@@ -162,5 +162,23 @@
         "redeem_rate (RM)": 0,
         "voucher_redeem": 0,
         "redeem_history": []
+    },
+    "19": {
+        "username": "lucy",
+        "total_spending (RM)": 34.0,
+        "loyalty_points": 340,
+        "status": "MORNING GLORY'S STANDARD",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "20": {
+        "username": "macccc",
+        "total_spending (RM)": 17.0,
+        "loyalty_points": 170,
+        "status": "MORNING GLORY'S STANDARD",
+        "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
     }
 }

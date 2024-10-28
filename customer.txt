@@ -206,6 +206,17 @@
         "email": "se@gmail.com",
         "address": "12233",
         "account_status": "active",
-        "loyalty_points": 0
+        "loyalty_points": 340
+    },
+    "mac": {
+        "customer_username": "macccc",
+        "customer_password": "12345678",
+        "age": 34,
+        "gender": "male",
+        "contact_no": "123-4677392",
+        "email": "mac@gmail.com",
+        "address": "ssdf",
+        "account_status": "active",
+        "loyalty_points": 85
     }
 }

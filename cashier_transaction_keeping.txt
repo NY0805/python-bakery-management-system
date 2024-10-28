@@ -258,5 +258,21 @@
         ],
         "order_date": "22-10-2024",
         "total_spend(RM)": "43.46"
+    },
+    "MGB-2579788": {
+        "order_id": "ORD052",
+        "items": [
+            "tiramisu x 2"
+        ],
+        "order_date": "28-10-2024",
+        "total_spend(RM)": "18.02"
+    },
+    "MGB-8010778": {
+        "order_id": "ORD053",
+        "items": [
+            "tiramisu x 1"
+        ],
+        "order_date": "28-10-2024",
+        "total_spend(RM)": "9.01"
     }
 }

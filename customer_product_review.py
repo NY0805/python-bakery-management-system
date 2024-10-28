@@ -52,7 +52,7 @@ def submit_review(logged_in_username):
 
     # Check the user's purchase history
     for order_data in order_list.values():
-        if order_data["username"] == logged_in_username and order_data["status"] == "Order Placed":
+        if order_data["username"] == logged_in_username and order_data["status"] == "Payment Completed":
             recent_purchases.extend(order_data['items_ordered'])
             order_date = order_data['order_date']
 
