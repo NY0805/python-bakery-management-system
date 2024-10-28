@@ -15,15 +15,12 @@ def generate_cart_id():
 
 # Function to generate a new order ID
 def generate_order_id(order_data):
-    existing_order_ids = [int(order['order_id'][3:]) for order in order_data.values()]
-    new_order_num = max(existing_order_ids) + 1 if existing_order_ids else 1
-    return f"ORD{new_order_num:03}"
-
-
     while True:
-        report_num = random.randint(1000, 9999)
-        if report_num not in sales_report_file.keys():
+        order_num = random.randint(1000, 9999)
+        order_id = f"ORD{order_num}"
+        if order_id not in order_data.keys():
             break
+    return order_id
 
 
 # Function to load baker data from a JSON file

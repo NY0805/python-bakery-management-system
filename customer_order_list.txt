@@ -558,5 +558,15 @@
         "total_price (RM)": "34.00",
         "order_date": "28-10-2024",
         "status": "Payment Completed"
+    },
+    "9369255222": {
+        "order_id": "ORD9004",
+        "username": "nct",
+        "items_ordered": [
+            "tiramisu x 3"
+        ],
+        "total_price (RM)": "25.50",
+        "order_date": "28-10-2024",
+        "status": "Order Placed"
     }
 }
