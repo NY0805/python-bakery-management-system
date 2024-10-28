@@ -15,9 +15,10 @@ REDEEM_RATES = {
 
 
 def determine_loyalty_points(total_price):  # Calculate loyalty points based on customer's total spending
-    # Ensure total_price is a number
+    # Check if total_price is a number
     if not isinstance(total_price, (int, float)):
-        raise ValueError(f"Invalid total price: {total_price} (must be a number)")
+        print(f"Invalid total price: {total_price} (must be a number)")
+        return 0  # Return 0 for invalid input
 
     # Calculate loyalty points
     points = int(total_price * BASE_POINTS_PER_RM)
@@ -35,12 +36,21 @@ def update_customer_status(points): # Determine customer status based on their l
         return "Standard"
 
 
-def load_customer_data(): # Load customer data from the customer.txt file
+def load_customer_data():
     try:
-        with open("customer.txt", "r") as file:
-            return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+        file = open('customer.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
 
 def save_customer_data(data): # Save customer data to the customer.txt file

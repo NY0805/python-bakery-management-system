@@ -146,36 +146,6 @@ def login():
         return None  # Return None if sign-up is initiated
 
 
-def customer():
-    print('\n----------------------------------------------------')
-    print('\t\t\t\t\t', '', 'CUSTOMER')
-    print('----------------------------------------------------')
-    print('\n+---------------------------------------------------------+')
-    print('|💡 Please "sign up" if you\'re logging in the first time. |')
-    print('|   Please "log in" if you already have an account.       |')
-    print('+---------------------------------------------------------+\n')
-
-    choice = input('1. Sign up\n'
-                   '2. Log in\n'
-                   'Enter your choice(1, 2):\n>>> ')
-
-    while choice not in ['1', '2']:
-        print('\n+--------------------------------------+')
-        print('|⚠️ Invalid input. Please enter again. |')
-        print('+--------------------------------------+\n')
-        choice = input('1. Sign up\n'
-                       '2. Log in\n'
-                       'Enter your choice(1, 2):\n>>> ')
-
-    if choice == '1':
-        sign_up()
-        customer_menu()
-
-    else:
-        login()
-        customer_menu()
-
-
 # Function to update customer information
 def update_personal_information():
     if not customer_info:
@@ -378,6 +348,14 @@ def customer_menu():
     logged_in_username = None  # Initialize as None, means that no user is logged in yet
 
     while True:
+        print('\n----------------------------------------------------')
+        print('\t\t\t\t\t', '', 'CUSTOMER')
+        print('----------------------------------------------------')
+        print('\n+---------------------------------------------------------+')
+        print('|💡 Please "Sign Up" if you\'re logging in the first time. |')
+        print('|   Please "Login" if you already have an account.       |')
+        print('+---------------------------------------------------------+\n')
+
         print('\n-----------------------------------------------')
         print("WELCOME TO MORNING GLORY BAKERY!")
         print('-----------------------------------------------')
@@ -417,7 +395,10 @@ def customer_menu():
         elif option == "8":
             update_personal_information()
         elif option == "9":
-            account_management()
+            if logged_in_username:
+                account_management()
+            else:
+                print("You need to log in first to manage your account.")
         elif option == "0":
             print("Thank you for visiting our bakery. Goodbye!")
             break
