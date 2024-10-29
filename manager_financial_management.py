@@ -31,6 +31,7 @@ def printed_centered(info, width):
     print('-' * width)
 
 
+# define a function to validate the year in 4 digits
 def validate_year(year):
     if year.isdigit():
         if len(year) == 4:
@@ -49,8 +50,11 @@ sales_report = load_data_from_sales_report()
 
 
 def financial_management():
+    # create a list to store the months
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
               'November', 'December']
+
+    # initialize the variables to 0 for calculation later
     today_income = 0
     today_expenses = 0
     this_month_income = 0
@@ -58,30 +62,31 @@ def financial_management():
 
     for receipt_details in transaction_keeping.values():
         order_date = datetime.strptime(receipt_details['order_date'], '%d-%m-%Y')  # retrieve all date from order_list
-        total_income_so_far += float(receipt_details['total_spend(RM)'])
+        total_income_so_far += float(receipt_details['total_spend(RM)'])  # add all value of 'total_spend' to the variable
 
         if order_date.strftime('%d-%m-%Y') == datetime.now().strftime('%d-%m-%Y'):
-            today_income += float(receipt_details['total_spend(RM)'])
+            today_income += float(receipt_details['total_spend(RM)'])  # add the value to today_income if the order_date is current date
 
         if order_date.month == datetime.now().month:
-            this_month_income += float(receipt_details['total_spend(RM)'])
+            this_month_income += float(receipt_details['total_spend(RM)'])  # add the value to this_month_income if the month of order_date is current month
 
     for equipment_details in equipment_report_keeping.values():
         repair_date = equipment_details['report_date']
-        unit, repair_cost = equipment_details['repair_cost'].split(' ')
+        unit, repair_cost = equipment_details['repair_cost'].split(' ')  # split the cost into unit and value
 
         if repair_date == datetime.now().strftime('%d-%m-%Y'):
-            today_expenses += float(repair_cost)
+            today_expenses += float(repair_cost)  # add the value to today_expenses if repair_date is current date
 
     for ingredient_details in ingredient_keeping.values():
         purchase_date = ingredient_details['purchase_date']
         unit, ingredient_cost = ingredient_details['cost_per_unit'].split(' ')
-        cost = float(ingredient_cost) * ingredient_details['quantity_purchased']
+        cost = float(ingredient_cost) * ingredient_details['quantity_purchased']  # calculate the cost for every ingredient purchased
 
         if purchase_date == datetime.now().strftime('%d-%m-%Y'):
-            today_expenses += cost
+            today_expenses += cost  # add the calculated cost to today_expenses if the purchase_date is current date
 
     while True:
+        # display the result of the calculation
         print('')
         print(f'\n💰 Today\'s {"Income":<9}: RM {today_income:.2f}'.ljust(56) +
               f'💰 {datetime.strftime(datetime.now(), "%B")}\'s Income So Far : RM {this_month_income:.2f}')
@@ -91,11 +96,11 @@ def financial_management():
         printed_centered('Financial Management', 95)
         print('1. Track Income\n2. Track Expenses\n3. Track Profitability\n4. Back to Manager Privilege')
         track_choice = input('\nWhich financial data do you want to track:\n>>> ')
-        if track_choice == '1':
+        if track_choice == '1':  # track income is chosen
             while True:
                 try:
                     custom_year_for_income = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
-                    if int(custom_year_for_income) == 0:
+                    if int(custom_year_for_income) == 0:  # cancel to track income
                         break
 
                     elif validate_year(custom_year_for_income):
@@ -113,6 +118,7 @@ def financial_management():
                                 break
 
                         else:
+                            # process to calculate the income of the requested year and month
                             if custom_month_for_income in months:
                                 income_of_that_month = 0
                                 for receipt_details in transaction_keeping.values():
@@ -121,6 +127,8 @@ def financial_management():
                                             "%B") == custom_month_for_income and chosen_date.year == int(
                                             custom_year_for_income):
                                         income_of_that_month += float(receipt_details['total_spend(RM)'])
+
+                                # display the result of the income
                                 print(
                                     f'\n💲 {custom_year_for_income} {custom_month_for_income} Income: RM {income_of_that_month:.2f}')
 
@@ -133,10 +141,12 @@ def financial_management():
                                     receipt_converted_date = datetime.strptime(receipt_details['order_date'],
                                                                                '%d-%m-%Y')
 
+                                    # no record found if the requested year and month not in file
                                     if custom_month_for_income not in receipt_converted_date.strftime("%B") and custom_year_for_income not in receipt_converted_date.strftime("%Y"):
                                         print('\n❗No record found. Please select another year.')
                                         break
 
+                                    # otherwise, display the income record in table form
                                     elif receipt_converted_date.strftime(
                                             "%B") == custom_month_for_income and receipt_converted_date.year == int(custom_year_for_income):
                                         if len(receipt_details['items']) == 1:
@@ -155,7 +165,7 @@ def financial_management():
                     print('|⚠️ Invalid year. Please enter again. |')
                     print('+-------------------------------------+')
 
-        elif track_choice == '2':
+        elif track_choice == '2':  # track expenses is chosen
             while True:
                 try:
                     custom_year_for_expenses = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
@@ -176,6 +186,7 @@ def financial_management():
                             if custom_month_for_expenses.lower() == 'cancel':
                                 break
 
+                        # process to calculate the expenses on ingredients and equipment of the requested year and month
                         if custom_month_for_expenses in months:
                             expenses_of_that_month = 0
                             for equipment_details in equipment_report_keeping.values():
@@ -194,6 +205,7 @@ def financial_management():
                                         custom_year_for_expenses):
                                     expenses_of_that_month += float(cost)
 
+                            # display the result of the expenses
                             print(
                                 f'\n💲 {custom_year_for_expenses} {custom_month_for_expenses.title()} Expenses: RM {expenses_of_that_month:.2f}')
 
@@ -202,6 +214,7 @@ def financial_management():
                             print(f'{headers[0]:<35}{headers[1]:<40}{headers[2]}')
                             print('=' * 95)
 
+                            # display the expenses record in table form
                             for equipment_details in equipment_report_keeping.values():
                                 equipment_converted_date = datetime.strptime(equipment_details['report_date'],
                                                                              '%d-%m-%Y')
@@ -224,6 +237,7 @@ def financial_management():
                                     print(
                                         f'{ingredient_details["purchase_date"]:<35}{ingredient_details["ingredient_name"]:<40}{ingredient_cost:.2f}')
                                     print('\n')
+                            # no record found if the requested year and month not in file
                             if expenses_of_that_month == 0:
                                 print('\n❗No record found. Please select another year.')
 
@@ -232,7 +246,7 @@ def financial_management():
                     print('|⚠️ Invalid year. Please enter again. |')
                     print('+-------------------------------------+')
 
-        elif track_choice == '3':
+        elif track_choice == '3':  # track profitability is chosen
             while True:
                 print('\nProfit Tracking:\n'
                       '1. Annual Profit Summary\n'
@@ -245,7 +259,7 @@ def financial_management():
                     print('+--------------------------------------+')
                     continue
 
-                if profit_type == '1':
+                if profit_type == '1':  # track annual profit
                     while True:
                         custom_year_for_profit = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
                         try:
@@ -257,13 +271,15 @@ def financial_management():
                                 printed_centered(f'📊 {custom_year_for_profit} PROFIT SUMMARY 📊', 85)
                                 total_sales = 0
                                 total_orders = 0
+                                # calculate the total sales snd total order for the year requested
                                 for sales in sales_report.values():
                                     if sales['report_type'] == 'yearly sales report' and sales['selected_year'] == custom_year_for_profit:
                                         total_sales += sales['total_sales']
                                         total_orders += sales['total_order']
 
-                                print(f'Total sales: RM {total_sales:.2f} ({total_orders} orders)')
+                                print(f'Total sales: RM {total_sales:.2f} ({total_orders} orders)')  # display the result
 
+                                # process to calculate the expenses on ingredients and equipment repair for the requested year
                                 total_repair_cost = 0
                                 total_ingredient_cost = 0
                                 for equipment_details in equipment_report_keeping.values():
@@ -278,34 +294,39 @@ def financial_management():
                                             custom_year_for_profit)):
                                         total_ingredient_cost += float(cost)
 
+                                # display the calculated result
                                 print(f'Total expenses: RM {total_repair_cost + total_ingredient_cost:.2f}\n')
                                 print('-' * 85)
 
+                                # inform how net profit is calculated
                                 net_profit = total_sales - (total_repair_cost + total_ingredient_cost)
-                                if net_profit < 0:
+                                if net_profit < 0:  # net profit results in negative
                                     print(f'Net profit: RM {net_profit:.2f} (deficit)')
-                                elif net_profit > 0:
+                                elif net_profit > 0:  # net profit results in positive
                                     print(f'Net profit: RM {net_profit:.2f} (surplus)')
                                 else:
+                                    # net profit results in 0
                                     print(f'Net profit: RM {net_profit:.2f} (break-even point)')
 
                                 try:
+                                    # inform how profit margin is calculated
                                     profit_margin = (net_profit/total_sales) * 100
-                                    print(f'Profit margin: {profit_margin:.2f}%\n')
+                                    print(f'Profit margin: {profit_margin:.2f}%\n')  # display the result of profit margin
 
-                                    if profit_margin < 0:
+                                    if profit_margin < 0:  # profit margin is negative
                                         print(f'The bakery lost approximately RM {profit_margin/100:.2f} for every RM earned.')
                                         print('❗ It is a significant loss. Please pay immediate attention to this financial issues.')
-                                    elif profit_margin > 0:
+                                    elif profit_margin > 0:  # profit margin is positive
                                         print(f'The bakery make RM {profit_margin/100:.2f} for every RM earned.')
                                         print('🎊 Congrats! The business is healthy and sustainable.')
                                     else:
+                                        # profit margin is 0
                                         print(f'The bakery is not making any profit.')
                                         print('A robust business strategy is needed to enhance the profitability in the future.')
 
                                     print('\n' + '-' * 85)
 
-                                except ZeroDivisionError:
+                                except ZeroDivisionError:  # handle the error if a value is divided by 0
                                     print('\n⚠️ The profit margin cannot be calculated as it has no income.')
 
                         except ValueError:
@@ -313,7 +334,7 @@ def financial_management():
                             print('|⚠️ Invalid input. Please enter again. |')
                             print('+--------------------------------------+')
 
-                elif profit_type == '2':
+                elif profit_type == '2':  # track monthly profit
                     while True:
                         try:
                             chosen_year = input('\nInsert a year (or enter "0" to cancel):\n>>> ')
@@ -325,6 +346,7 @@ def financial_management():
                                 if custom_month_for_profit in months:
                                     print('')
                                     printed_centered(f'📆 {chosen_year} {custom_month_for_profit} PROFIT SUMMARY 📆', 85)
+                                    # calculate the total sales snd total order for the year and month requested
                                     monthly_sales = 0
                                     monthly_orders = 0
                                     for sales in sales_report.values():
@@ -333,8 +355,9 @@ def financial_management():
                                             monthly_sales += sales['total_sales']
                                             monthly_orders += sales['total_order']
 
-                                    print(f'Total monthly sales: RM {monthly_sales:.2f} ({monthly_orders} orders)')
+                                    print(f'Total monthly sales: RM {monthly_sales:.2f} ({monthly_orders} orders)')  # display the result
 
+                                    # process to calculate the expenses on ingredients and equipment repair for the requested year and month
                                     monthly_repair_cost = 0
                                     monthly_ingredient_cost = 0
                                     for equipment_details in equipment_report_keeping.values():
@@ -399,5 +422,3 @@ def financial_management():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-
-#financial_management()

@@ -172,7 +172,7 @@ def system_administration_baker():
                     try:
                         index_of_baker_to_remove = int(
                             input(f'\nWhich baker do you want to remove? (or enter {len(baker) + 1} to cancel)\n>>> '))
-                        if index_of_baker_to_remove == len(baker) + 1:  # cancel the process
+                        if index_of_baker_to_remove == len(baker) + 1:  # cancel  remove process
                             print('\nCancelling. Exiting to Services page......')
                             break
 
@@ -208,6 +208,7 @@ def system_administration_baker():
 
         elif manage_baker == '3':  # update baker
             while True:
+                # display the list of bakers
                 print('')
                 index = 1
                 printed_centered('BAKER LIST')
@@ -237,7 +238,7 @@ def system_administration_baker():
                                     new_value = input(f'\nEnter new {attribute_of_baker_data}: ')
                                     try:
                                         if attribute_of_baker_data == 'baker_password':
-                                            if len(new_value) < 8 or len(new_value) > 12:
+                                            if len(new_value) < 8 or len(new_value) > 12:  # check if the password is not within 8 to 12 characters
                                                 print('\n+-------------------------------------------------------------------+')
                                                 print('|⚠️ Not enough password length. It must contains 8-12 characters. |')
                                                 print('+-------------------------------------------------------------------+')
@@ -318,4 +319,3 @@ def system_administration_baker():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#system_administration_baker()

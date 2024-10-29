@@ -31,6 +31,7 @@ review = load_review()
 manager_response = load_data_from_manager_customer_feedback()
 
 
+# define the function to print content in the center within the width of 47 characters
 def printed_centered(info):
     print('-' * 47)
     side_space = (47 - len(info)) // 2  # determine how much blank space to leave
@@ -38,13 +39,17 @@ def printed_centered(info):
     print('-' * 47)
 
 
+# define the function to view customer feedback and reply to them
 def customer_feedback():
     while True:
+        # initialize the variables to 0, ready for the calculation later
         rating_five = 0
         rating_four = 0
         rating_three = 0
         rating_two = 0
         rating_one = 0
+
+        # iterate through customer review, increase 1 to the respective variable
         for review_details in review.values():
             if review_details['rating'] == 5:
                 rating_five += 1
@@ -66,8 +71,9 @@ def customer_feedback():
         print(f'{"⭐":<13}{"1-star rating:"} {rating_one}')
 
         choice = input('\nDo you want to view and reply to customer feedback? (y=yes, n=no)\n>>> ')
-        if choice == 'y':
+        if choice == 'y':  # if manager choose to view and reply to the feedback
             while True:
+                # customer feedback will be display in table form
                 print('\n\n', '\t'*17, 'CUSTOMER FEEDBACK')
                 print('-' * 160)
                 header = ['Review ID']  # create a list for headers and append the first item in the list
@@ -87,19 +93,19 @@ def customer_feedback():
                     print('')
                 print('-' * 160)
 
-                response = input('\nEnter the review id to respond the feedback (or enter "cancel" to return back):\n>>> ')
+                response = input('\nEnter the review id to respond the feedback (or enter "cancel" to return back):\n>>> ')  # prompt the manager to enter review id to reply
                 if response == 'cancel':
                     print('\nExiting to customer ratings overview......')
                     break
 
-                elif response not in review.keys():
+                elif response not in review.keys():  # if review id not found in the file
                     print('\n+------------------------------------------------------+')
                     print('|⚠️ Feedback doesn\'t exist. Please choose another one. |')
                     print('+------------------------------------------------------+')
                 else:
-                    respond_text = input('\nEnter response text:\n>>> ')
+                    respond_text = input('\nEnter response text:\n>>> ')  # prompt the manager to enter response text if the review id found in the file
 
-                    previous_number = None
+                    previous_number = None  # create a flag that initialize to None
                     while True:
                         try:
                             # Generate a random number between 1000 and 9999
@@ -108,14 +114,14 @@ def customer_feedback():
                             if reply_number in manager_response['reply_number']:
                                 continue  # If duplicate found, generate again
                             else:
-                                previous_number = reply_number
-                                break  # Exit the loop when a unique number is found
+                                previous_number = reply_number  # if not duplicate, assign the value to the flag
+                                break  # Exit the loop
                         except KeyError:
                             # Handle the case where 'report_number' key does not exist
                             print('\nGenerating reply number...')
                             reply_number = random.randint(1000, 9999)
                             previous_number = reply_number  # Assign the generated number
-                            break  # Exit loop since we don't need to check for duplicates in this case
+                            break
 
                     for user, review_details in review.items():
                         if response == user:
@@ -129,7 +135,7 @@ def customer_feedback():
 
                     save_info(manager_response)
 
-                    print('\nReply has been sent!')
+                    print('\nReply has been sent!')  # notify the manager that the reply has been sent
                     continue_reply = input('Continue to reply customers? (y=yes, n=no)\n>>> ')
                     while continue_reply not in ['y', 'n']:
                         print('\n+------------------------------------+')
@@ -152,4 +158,3 @@ def customer_feedback():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-customer_feedback()

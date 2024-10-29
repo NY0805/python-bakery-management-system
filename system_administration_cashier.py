@@ -49,9 +49,9 @@ def cashier_accounts():
         cashier_username = input('\nUsername: ')
 
     while True:
-        cashier_password = 'securec@sh123'  # set the password for cashier
+        cashier_password = 'securec@sh$'  # set the password for cashier
         print('\n+---------------------------------------------------------------------------------+')
-        print('|💡 The default password for cashier is "securec@sh123". You can change it later. |')
+        print('|💡 The default password for cashier is "securec@sh$". You can change it later. |')
         print('+---------------------------------------------------------------------------------+\n')
         break
 
@@ -213,6 +213,7 @@ def system_administration_cashier():
 
         elif manage_cashier == '3':  # update cashier
             while True:
+                # display the list of cashier
                 print('')
                 index = 1
                 printed_centered('CASHIER LIST')
@@ -248,7 +249,7 @@ def system_administration_cashier():
                                     new_value = input(f'\nEnter new {attribute_of_cashier_data}: ')
                                     try:
                                         if attribute_of_cashier_data == 'cashier_password':
-                                            if len(new_value) < 8 or len(new_value) > 12:
+                                            if len(new_value) < 8 or len(new_value) > 12:  # check if the password is not within 8 to 12 characters
                                                 print('\n+-------------------------------------------------------------------+')
                                                 print('|⚠️ Not enough password length. It must contains 8-12 characters. |')
                                                 print('+-------------------------------------------------------------------+')
@@ -337,4 +338,3 @@ def system_administration_cashier():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#system_administration_cashier()

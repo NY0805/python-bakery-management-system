@@ -270,7 +270,7 @@ def notification():
                                                 "last_maintenance_date": equipment['last_maintenance_date'],
                                                 "description": equipment['description']
                                             }
-                                    del notice[equipment_number_to_repair]
+                                    del notice[equipment_number_to_repair]  # delete the notification upon settle
                                     save_info(notice)
                                     save_info_report(equipment_report_keeping)
                                     break
@@ -308,7 +308,7 @@ def notification():
                                         "last_maintenance_date": equipment['last_maintenance_date'],
                                         "description": equipment['description']
                                     }
-                            del notice[equipment_number_to_repair]
+                            del notice[equipment_number_to_repair]  # delete the notification upon settle
                             save_info(notice)
                             save_info_report(equipment_report_keeping)
                             malfunction_equipment.remove(equipment_number_to_repair)  # remove the name from the malfunction list upon read
@@ -346,7 +346,7 @@ def notification():
                                                 "last_maintenance_date": equipment['last_maintenance_date'],
                                                 "description": equipment['description']
                                             }
-                                    del notice[equipment_number_to_repair]
+                                    del notice[equipment_number_to_repair] # delete the notification upon settle
                                     save_info(notice)
                                     save_info_report(equipment_report_keeping)
                                     break
@@ -380,6 +380,7 @@ def notification():
                     if equipment['current_condition'] == 'maintenance needed':
                         notifications.append(maintenance_data_group(equipment).split('\n'))  # append the details of equipments that need maintenance into the maintenance group
 
+                # display the equipment details that need maintenance in 2 columns for easy reading
                 for i in range(0, len(notifications), 2):
                     width = 55
 
@@ -450,7 +451,7 @@ def notification():
                                                 "last_maintenance_date": equipment['last_maintenance_date'],
                                                 "description": equipment['description']
                                             }
-                                    del notice[equipment_number_for_maintenance]
+                                    del notice[equipment_number_for_maintenance]  # delete the notification upon settle
                                     save_info(notice)
                                     save_info_report(equipment_report_keeping)
                                     break
@@ -499,7 +500,7 @@ def notification():
                                                 "last_maintenance_date": equipment['last_maintenance_date'],
                                                 "description": equipment['description']
                                             }
-                                    del notice[equipment_number_for_maintenance]
+                                    del notice[equipment_number_for_maintenance]  # delete the notification upon settle
                                     save_info(notice)
                                     save_info_report(equipment_report_keeping)
                                     break
@@ -523,5 +524,3 @@ def notification():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-
-notification()

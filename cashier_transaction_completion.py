@@ -48,6 +48,7 @@ def centered(word, width):
 # define the format of displaying the receipt
 def receipt(customer):
     customer_info = load_data_from_customer_order_list()  # store the data that retrieved from file into customer_info
+
     print(' ')
     # header of the receipt
     header = ['MORNING GLORY BAKERY',
@@ -119,7 +120,7 @@ def receipt(customer):
                 if item_name.strip() == discounts['Product Name'].strip():
 
                     if float(discount_value) != 0:
-                        discounted_price = (float(price) - (float(price) * float(discount_value))/100) * int(quantity)
+                        discounted_price = (float(price) - (float(price) * float(discount_value))/100) * int(quantity)  # calculate the discount price if the item has a discount
                         total_discount_price += discounted_price
                     else:
                         non_discount_price += (float(price) * int(quantity))
@@ -150,5 +151,42 @@ def receipt(customer):
             }
     save_info(transaction_keeping)  # save the data
 
-#receipt(str(4992374927))
+
+# define a function that allow the cashier to generate receipt manually
+def manual_generate_receipt():
+
+    while True:
+        customer_info = load_data_from_customer_order_list()  # read data from customer order list
+        # display some reminders for cashier
+        print('\n💡 The receipt will be generate automatically after the customers complete their purchase.')
+        print('💡 The receipt can also be manually generated if the customers request it for their previous order.')
+        manual_generate = input('\nDo you want to generate the receipt manually? (y=yes, n=no)\n>>> ')  # ask the cashier whether to generate receipt manually or not
+        if manual_generate not in ['y', 'n']:
+            print('\n+--------------------------------------+')
+            print('|⚠️ Invalid input. Please enter again. |')
+            print('+--------------------------------------+')
+
+        elif manual_generate == 'y':
+            while True:
+                # display a list including cart id and order id
+                index = 1
+                print('\n', '-' * 47)
+                centered('ORDER LIST', 47)
+                print('-' * 47)
+                for cart_id, value in customer_info.items():
+                    print(f'{index}. {cart_id} - {value["order_id"]}')
+                    index += 1
+
+                order_receipt = input('\nPlease enter the cart ID: ')  # prompt the cashier to enter a cart id to generate the receipt
+                if order_receipt not in customer_info.keys():
+                    print('\n+------------------------------------------+')
+                    print('|⚠️ Cart ID not found. Please enter again. |')
+                    print('+------------------------------------------+')
+                    continue
+                else:
+                    receipt(order_receipt)  # if cart id found in the file, this function will be called to generate the receipt correspond to the cart id entered
+                    break
+        else:
+            return False  # return to the cashier privilege if the cashier don't want to generate receipt manually
+
 

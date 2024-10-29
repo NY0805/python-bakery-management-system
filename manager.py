@@ -131,7 +131,7 @@ def manager():
     if manager_name in manager_info:
 
         manager_username = input('Username: ')
-        while manager_username != (manager_info[manager_name]['manager_username']):
+        while manager_username != (manager_info[manager_name]['manager_username']):  # to check if the username match with the name entered before
             print('\n+-----------------------------------------------+')
             print('|⚠️ Username doesn\'t match. Please enter again. |')
             print('+-----------------------------------------------+\n')
@@ -214,4 +214,3 @@ def manager():
             print('+--------------------------------------+')
 
 
-#manager()

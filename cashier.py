@@ -60,7 +60,7 @@ def cashier_accounts():
             print('+---------------------------------------------------------------------------+\n')
             cashier_password = input('Password: ')
 
-        while cashier_password != 'securec@sh$':  # continue to validate the password of cashier after the password length is correct
+        while cashier_password != cashier_info[cashier_username]['cashier_password']:  # continue to validate the password of baker after the password length is correct
             print('\n+-------------------------------------------+')
             print('|⚠️ Incorrect password. Please enter again. |')
             print('+-------------------------------------------+\n')
@@ -88,7 +88,7 @@ def cashier_accounts():
                 print('in progress b')
 
             elif choice == 'c':
-                print('in progress c')
+                cashier_transaction_completion.manual_generate_receipt()
 
             elif choice == 'd':
                 print('in progress d')
@@ -102,4 +102,3 @@ def cashier_accounts():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
 
-#cashier_accounts()

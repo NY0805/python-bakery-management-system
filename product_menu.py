@@ -100,6 +100,7 @@ def menu():
 
         print(f'\n📍 {category} 📍\n')
 
+        # display the product details in 2 columns for easy reading
         for i in range(0, len(products), 2):
             product1 = wrap_data(products[i], width=65)
             if i + 1 < len(products):
@@ -122,4 +123,3 @@ def format_product_data_new(product):
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
     )
 
-#menu()

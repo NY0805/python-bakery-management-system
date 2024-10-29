@@ -251,6 +251,7 @@ def update_customer():
 def terminate_customer():
 
     while True:
+        # display the list of customers
         print('')
         index = 1
         printed_centered('CUSTOMER LIST')
@@ -298,7 +299,7 @@ def terminate_customer():
             print('+-----------------------------------------+\n')
 
 
-#define the function to manage customer
+# define the function to manage customer
 def system_administration_customer():
 
     while True:
@@ -330,5 +331,3 @@ def system_administration_customer():
             print('\n+--------------------------------------+')
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
-
-#system_administration_customer()

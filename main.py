@@ -53,7 +53,7 @@ while True:
             cashier.cashier_accounts()
 
         elif role == 4:
-            customer.customer()
+            customer.customer_menu()
 
         elif role == 5:
             print('\n--------------------YOU ARE EXIT--------------------')
@@ -65,7 +65,7 @@ while True:
             print('|⚠️ Invalid input. |')
             print('+------------------+')
 
-    except ValueError:
+    except ValueError:  # handle the error when input is not an integer
         print('\n+------------------+')
         print('|⚠️ Invalid input. |')
         print('+------------------+')

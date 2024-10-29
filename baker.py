@@ -107,6 +107,4 @@ def baker_accounts():
         #  display baker privilege
 
 
-#baker_accounts()
-#baker_privilege()
 

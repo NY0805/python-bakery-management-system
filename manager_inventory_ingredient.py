@@ -37,6 +37,7 @@ def printed_centered(info):
     print('-' * 47)
 
 
+# function to validate empty entries
 def validation_empty_entries(info):
     if info:
         return True
@@ -45,6 +46,7 @@ def validation_empty_entries(info):
         return False
 
 
+# function to validate a content only contains alphabets and numbers
 def validation_alphanum_only(info):
     if info.isalnum():
         return True
@@ -52,6 +54,7 @@ def validation_alphanum_only(info):
         return False
 
 
+# function to validate a content only contains alphabets
 def validation_alphabet_only(info):
     if re.fullmatch(r'[A-Za-z ]+', info):
         return True
@@ -67,13 +70,14 @@ def validation_list_alphabet_only(info):
             return False
 
 
+# function to validate a content only contains numbers
 def validation_digit_only(info):
     if info.isdigit():
         return True
     else:
         return False
 
-
+# function to validate the correct format of date
 def validation_date(info, date_format='%d-%m-%Y'):
     try:
         datetime.strptime(info, date_format)
@@ -112,6 +116,7 @@ def ingredient_management():
                     break
 
 
+# function to collect the categories of ingredients
 def ingredient_categories():
     category = None
     while True:
@@ -175,6 +180,7 @@ def ingredient_categories():
     return category
 
 
+# function to add ingredients
 def add_ingredient():
     category = ingredient_categories()
 
@@ -193,7 +199,7 @@ def add_ingredient():
     print('+---------------------------------------------------------------------------+')
 
     while True:
-        ingredient_name = input(f'1. {ingredient_info[0].ljust(max_length + 2)}: ')
+        ingredient_name = input(f'1. {ingredient_info[0].ljust(max_length + 2)}: ')  # collect the ingredient name
         if validation_empty_entries(ingredient_name):
             if validation_alphabet_only(ingredient_name):
                 break
@@ -218,7 +224,7 @@ def add_ingredient():
         form = ingredient_form_list.get(category, '')
 
         print(f'\n💡 Allowable ingredient form: {form}.💡')
-        ingredient_form = input(f'2. {ingredient_info[1].ljust(max_length + 2)}: ').strip()
+        ingredient_form = input(f'2. {ingredient_info[1].ljust(max_length + 2)}: ').strip()  # collect ingredient form according to the category selected
 
         allowable_form = []
         for item in form.split(','):
@@ -239,7 +245,7 @@ def add_ingredient():
                 print('+--------------------------------------------------------------------------------------------+')
 
     while True:
-        batch_number = input(f'3. {ingredient_info[2].ljust(max_length + 2)}: ')
+        batch_number = input(f'3. {ingredient_info[2].ljust(max_length + 2)}: ')  # collect the batch number
         if validation_empty_entries(batch_number):
             if validation_alphanum_only(batch_number):
                 if batch_number in ingredient_data:
@@ -269,7 +275,7 @@ def add_ingredient():
         unit = category_units.get(category, '')
 
         print(f'\n💡 Allowable unit measurement: {unit} 💡')
-        unit_measurement = input(f'4. {ingredient_info[3].ljust(max_length + 2)}: ').strip()
+        unit_measurement = input(f'4. {ingredient_info[3].ljust(max_length + 2)}: ').strip()  # collect the unit measurement of ingredients according to the category selected
 
         allowable_unit = []
         for item in unit.split(','):
@@ -290,7 +296,7 @@ def add_ingredient():
                 print('+--------------------------------------------------------------------------------------------+')
 
     while True:
-        cost_per_unit = input(f'5. {ingredient_info[9].ljust(max_length + 2)}: ').strip()
+        cost_per_unit = input(f'5. {ingredient_info[9].ljust(max_length + 2)}: ').strip()  # collect the cost per unit of ingredients
         if validation_empty_entries(cost_per_unit):
             try:
                 cost_per_unit = float(cost_per_unit)
@@ -307,7 +313,7 @@ def add_ingredient():
                 print('+-------------------------------------------------------------------------------------+\n')
 
     while True:
-        quantity_purchased = input(f'5. {ingredient_info[4].ljust(max_length + 2)}: ').strip()
+        quantity_purchased = input(f'5. {ingredient_info[4].ljust(max_length + 2)}: ').strip()  # collect the quantity purchased
         if validation_empty_entries(quantity_purchased):
             try:
                 quantity_purchased = float(quantity_purchased)
@@ -324,10 +330,10 @@ def add_ingredient():
                 print('+-----------------------------------------------------------------------------------------+\n')
 
     while True:
-        purchased_date = input(f'6. {ingredient_info[5].ljust(max_length + 2)}: ')
+        purchased_date = input(f'6. {ingredient_info[5].ljust(max_length + 2)}: ')  # collect the purchase date of ingredients
         if validation_empty_entries(purchased_date):
             if validation_date(purchased_date):
-                if purchased_date <= datetime.now().strftime("%d-%m-%Y"):
+                if purchased_date <= datetime.now().strftime("%d-%m-%Y"):  # to check if the purchase date is not after current date
                     break
                 else:
                     print('\n+-------------------------------------------------------+')
@@ -339,14 +345,14 @@ def add_ingredient():
                 print('+----------------------------------------------------------------------------------------+\n')
 
     while True:
-        expiry_date_str = input(f'7. {ingredient_info[6].ljust(max_length + 2)}: ')
+        expiry_date_str = input(f'7. {ingredient_info[6].ljust(max_length + 2)}: ')  # collect the expiry date
         if validation_empty_entries(expiry_date_str):
             if validation_date(expiry_date_str):
                 # convert expiry_date_str from string to datetime format
                 expiry_date = datetime.strptime(expiry_date_str, '%d-%m-%Y')
                 # convert purchase_date from string to datetime format
                 purchased_date_new = datetime.strptime(purchased_date, '%d-%m-%Y')
-                if expiry_date >= purchased_date_new:
+                if expiry_date >= purchased_date_new:  # check if the expiry date is larger or equal than the purchase date
                     break
                 else:
                     print('\n+---------------------------------------------------------------+')
@@ -360,7 +366,7 @@ def add_ingredient():
                 print('+----------------------------------------------------------------------------------------+\n')
 
     while True:
-        supplier_name = input(f'8. {ingredient_info[7].ljust(max_length + 2)}: ')
+        supplier_name = input(f'8. {ingredient_info[7].ljust(max_length + 2)}: ')  # collect the supplier name
         if validation_empty_entries(supplier_name):
             if re.match(r'^[a-zA-Z0-9 ]+$', supplier_name):
                 break
@@ -370,9 +376,9 @@ def add_ingredient():
                 print('+--------------------------------------------------------------------------------+\n')
 
     while True:
-        supplier_contact = input(f'9. {ingredient_info[8].ljust(max_length + 2)}: ')
+        supplier_contact = input(f'9. {ingredient_info[8].ljust(max_length + 2)}: ')  # collect the supplier contact number
         if validation_empty_entries(supplier_contact):
-            if re.fullmatch(r'^\d{3}-\d{7}$', supplier_contact):
+            if re.fullmatch(r'^\d{3}-\d{7}$', supplier_contact):  # check if the contact number is in the correct format
                 break
             else:
                 print('\n+-----------------------------------------------+')
@@ -381,7 +387,7 @@ def add_ingredient():
 
     while True:
         print(f'\n💡 Allowable storage requirement: dry storage, refrigerated, freezer 💡')
-        storage_requirement = input(f'11. {ingredient_info[10].ljust(max_length + 1)}: ')
+        storage_requirement = input(f'11. {ingredient_info[10].ljust(max_length + 1)}: ')  # collect the storage requiremnet
         if validation_empty_entries(storage_requirement):
             if validation_alphabet_only(storage_requirement):
                 if storage_requirement in ['dry storage', 'refrigerated', 'freezer']:
@@ -407,7 +413,7 @@ def add_ingredient():
             '|💡 If a name consists of more than one words, use underscore (_) to represent the space, e.g. tree_nuts. |')
         print(
             '+---------------------------------------------------------------------------------------------------------+')
-        allergens = input(f'12. {ingredient_info[11].ljust(max_length + 1)}: ').split()
+        allergens = input(f'12. {ingredient_info[11].ljust(max_length + 1)}: ').split()  # collect allergen info of the ingredients
         if validation_empty_entries(allergens):
             if validation_list_alphabet_only(allergens):
                 break
@@ -435,9 +441,10 @@ def add_ingredient():
 
     save_info(ingredient_data)
 
-    continue_adding()
+    continue_adding()  # ask to continue adding ingredients into the inventory after the previous ingredient information is saved
 
 
+# function of continue adding ingredients
 def continue_adding():
     while True:
         try:
@@ -460,8 +467,10 @@ def continue_adding():
             print('+--------------------------------------+')
 
 
+# function of removing ingredients
 def remove_ingredient():
     while True:
+        # display the ingredient list
         print('')
         printed_centered('INGREDIENT LIST')
         index = 1
@@ -471,6 +480,7 @@ def remove_ingredient():
         print(f'{len(ingredient_data) + 1}. cancel')
 
         try:
+            # select which ingredient to remove
             index_of_ingredient_to_remove = int(input(f'\nWhich ingredient do you want to remove? (or enter {len(ingredient_data) + 1} to cancel)\n>>> '))
             if index_of_ingredient_to_remove == len(ingredient_data) + 1:  # cancel the process
                 print('\nCancelling. Exiting to Ingredient Management page......')
@@ -481,7 +491,7 @@ def remove_ingredient():
                 while True:
                     print(f'\n💡 Current quantity of {ingredient_data[ingredient_to_remove]["ingredient_name"].title()}: {ingredient_data[ingredient_to_remove]["quantity_purchased"]} {ingredient_data[ingredient_to_remove]["unit_measurement"]}')
                     try:
-                        quantity_remove = float(input('Enter the quantity to remove: '))
+                        quantity_remove = float(input('Enter the quantity to remove: '))  # collect the quantity of ingredients to remove
 
                         ingredient_data[ingredient_to_remove]['quantity_purchased'] -= quantity_remove  # delete the selected baker
                         print(f'\n{quantity_remove} {ingredient_data[ingredient_to_remove]["unit_measurement"]} of {ingredient_data[ingredient_to_remove]["ingredient_name"].title()} is removed.\n')  # inform user that the selected baker is removed successfully
@@ -522,6 +532,7 @@ def remove_ingredient():
 # function to update ingredient details in the inventory
 def update_ingredient():
     while True:
+        # display the ingredient list
         index = 1
         print('\n-----------------------------------------------')
         print('\t\t\t\tINGREDIENT LIST')
@@ -887,6 +898,3 @@ def update_ingredient():
             print('+--------------------------+')
 
 
-#update_ingredient()
-#ingredient_management()
-#remove_ingredient()

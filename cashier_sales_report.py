@@ -662,4 +662,4 @@ def product_popularity():
 
 
 #generate_sales_report()
-product_popularity()
+#product_popularity()
