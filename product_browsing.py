@@ -37,6 +37,7 @@ def load_product_details():
         return {}  # return empty dictionary if the file does not exist
 
 
+# Function to enable customer browse product
 def browse_products():
     # Load data
     categories = load_categories()
@@ -52,11 +53,11 @@ def browse_products():
         product_categories = set([item["category"] for item in categories.values()])
         for category in product_categories:
             print(f"- {category}")
-        print("\nFeel free to choose a category to browse the products or view the full menu!\n")
+        print("\nFeel free to browse the products by selecting a categoryor view the full menu!\n")
     else:
         print("No categories available at the moment.\n")
 
-    # Provide customers with choices
+    # Provide customers with options
     while True:
         print()
         print("Please choose an option:")
@@ -64,9 +65,9 @@ def browse_products():
         print("2. View full menu")
         print("3. Exit")
 
-        choice = input("Enter your choice (1/2/3): ")
+        options = input("Enter your choice (1/2/3): ")
 
-        if choice == '1':
+        if options == '1':
             category_input = input("Please enter the product category you want to search for: ")
 
             # Check if the category exists
@@ -88,10 +89,10 @@ def browse_products():
                 print(f"The category '{category_input}' does not exist.")  # Show the message if the category does not exist
                 print()
 
-        elif choice == '2':
+        elif options == '2':
             import product_menu  # Load and display the full menu from product_menu.py
             product_menu.menu()
-        elif choice == '3':
+        elif options == '3':
             print("Thank you for visiting our system. Goodbye!")
             break
 

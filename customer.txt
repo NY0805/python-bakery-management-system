@@ -129,7 +129,7 @@
         "email": "sd@gmail.com",
         "address": "12",
         "account_status": "active",
-        "loyalty_points": 560
+        "loyalty_points": 2350
     },
     "SOS": {
         "customer_username": "SOS",
@@ -173,7 +173,7 @@
         "email": "s@gmail.com",
         "address": "2",
         "account_status": "active",
-        "loyalty_points": 6075
+        "loyalty_points": 5075
     },
     "chew": {
         "customer_username": "chewinggum",
@@ -206,7 +206,7 @@
         "email": "se@gmail.com",
         "address": "12233",
         "account_status": "active",
-        "loyalty_points": 340
+        "loyalty_points": 2040
     },
     "mac": {
         "customer_username": "macccc",
@@ -217,6 +217,50 @@
         "email": "mac@gmail.com",
         "address": "ssdf",
         "account_status": "active",
-        "loyalty_points": 85
+        "loyalty_points": 1942
+    },
+    "emo123": {
+        "customer_username": "emo123",
+        "customer_password": "12345678",
+        "age": 22,
+        "gender": "prefer not to say",
+        "contact_no": "012-1234567",
+        "email": "sd@gmail.com",
+        "address": "1234",
+        "account_status": "active",
+        "loyalty_points": 5394
+    },
+    "hi": {
+        "customer_username": "hi",
+        "customer_password": "12345678",
+        "age": 22,
+        "gender": "male",
+        "contact_no": "012-1234567",
+        "email": "dd@gmail.com",
+        "address": "1234",
+        "account_status": "active",
+        "loyalty_points": 7480
+    },
+    "bye": {
+        "customer_username": "bye",
+        "customer_password": "12345678",
+        "age": 22,
+        "gender": "male",
+        "contact_no": "012-1234567",
+        "email": "dff@gmail.com",
+        "address": "123",
+        "account_status": "active",
+        "loyalty_points": 5610
+    },
+    "no": {
+        "customer_username": "no",
+        "customer_password": "12345678",
+        "age": 34,
+        "gender": "prefer not to say",
+        "contact_no": "012-1234567",
+        "email": "sd@gmail.com",
+        "address": "123",
+        "account_status": "active",
+        "loyalty_points": 4080
     }
 }

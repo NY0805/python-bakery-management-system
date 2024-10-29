@@ -4,7 +4,7 @@
         "total_spending (RM)": 83.5,
         "loyalty_points": 4247,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 120,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 5,
         "redeem_history": [
             {
@@ -24,7 +24,7 @@
         "total_spending (RM)": 150.0,
         "loyalty_points": 2355,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 90,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0
     },
     "3": {
@@ -32,7 +32,7 @@
         "total_spending (RM)": 25.0,
         "loyalty_points": 250,
         "status": "Standard",
-        "redeem_rate (RM)": null,
+        "redeem_rate (RM)": 0,
         "voucher_redeem": 0
     },
     "4": {
@@ -40,7 +40,7 @@
         "total_spending (RM)": 45.0,
         "loyalty_points": 450,
         "status": "Standard",
-        "redeem_rate (RM)": null,
+        "redeem_rate (RM)": 0,
         "voucher_redeem": 0
     },
     "5": {
@@ -48,7 +48,7 @@
         "total_spending (RM)": 205.0,
         "loyalty_points": 2050,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 70,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0
     },
     "6": {
@@ -56,7 +56,7 @@
         "total_spending (RM)": 95.0,
         "loyalty_points": 950,
         "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120,
+        "redeem_rate (RM)": 800,
         "voucher_redeem": 0
     },
     "7": {
@@ -64,7 +64,7 @@
         "total_spending (RM)": 110.0,
         "loyalty_points": 1100,
         "status": "MORNING GLORY'S SILVER",
-        "redeem_rate (RM)": 90,
+        "redeem_rate (RM)": 900,
         "voucher_redeem": 0
     },
     "8": {
@@ -72,7 +72,7 @@
         "total_spending (RM)": 210.0,
         "loyalty_points": 2100,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 70,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0
     },
     "9": {
@@ -80,7 +80,7 @@
         "total_spending (RM)": 65.0,
         "loyalty_points": 650,
         "status": "MORNING GLORY'S BRONZE",
-        "redeem_rate (RM)": 120,
+        "redeem_rate (RM)": 800,
         "voucher_redeem": 0
     },
     "10": {
@@ -88,7 +88,7 @@
         "total_spending (RM)": 119.0,
         "loyalty_points": 1530,
         "status": "MORNING GLORY'S SILVER",
-        "redeem_rate (RM)": 120,
+        "redeem_rate (RM)": 900,
         "voucher_redeem": 0
     },
     "11": {
@@ -96,7 +96,7 @@
         "total_spending (RM)": 223.25,
         "loyalty_points": 4132,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 0,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0,
         "redeem_history": []
     },
@@ -105,22 +105,27 @@
         "total_spending (RM)": 38.0,
         "loyalty_points": 2802,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 0,
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0,
         "redeem_history": []
     },
     "13": {
         "username": "nct",
         "total_spending (RM)": 317.75,
-        "loyalty_points": 6075,
+        "loyalty_points": 5075,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 0,
-        "voucher_redeem": 3,
+        "redeem_rate (RM)": 1000,
+        "voucher_redeem": 4,
         "redeem_history": [
             {
                 "redeem_count": 3,
                 "points_used": 300,
                 "remaining_points": 6075
+            },
+            {
+                "redeem_count": 1,
+                "points_used": 1000,
+                "remaining_points": 5075
             }
         ]
     },
@@ -138,7 +143,7 @@
         "total_spending (RM)": 95.0,
         "loyalty_points": 1520,
         "status": "MORNING GLORY'S SILVER",
-        "redeem_rate (RM)": 0,
+        "redeem_rate (RM)": 900,
         "voucher_redeem": 0,
         "redeem_history": []
     },
@@ -171,19 +176,64 @@
     },
     "19": {
         "username": "lucy",
-        "total_spending (RM)": 34.0,
-        "loyalty_points": 340,
-        "status": "MORNING GLORY'S STANDARD",
-        "redeem_rate (RM)": 0,
+        "total_spending (RM)": 119.0,
+        "loyalty_points": 2040,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0,
         "redeem_history": []
     },
     "20": {
         "username": "macccc",
-        "total_spending (RM)": 17.0,
-        "loyalty_points": 170,
-        "status": "MORNING GLORY'S STANDARD",
+        "total_spending (RM)": 202.75,
+        "loyalty_points": 3884,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 900,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "21": {
+        "username": "emo123",
+        "total_spending (RM)": 303.75,
+        "loyalty_points": 5394,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 1000,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "22": {
+        "username": "hi",
+        "total_spending (RM)": 748.0,
+        "loyalty_points": 7480,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 1000,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "23": {
+        "username": "bye",
+        "total_spending (RM)": 476.0,
+        "loyalty_points": 5610,
+        "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 0,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "24": {
+        "username": "jeno",
+        "total_spending (RM)": 349.0,
+        "loyalty_points": 3580,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 1000,
+        "voucher_redeem": 0,
+        "redeem_history": []
+    },
+    "25": {
+        "username": "no",
+        "total_spending (RM)": 306.0,
+        "loyalty_points": 4080,
+        "status": "MORNING GLORY'S GOLD",
+        "redeem_rate (RM)": 1000,
         "voucher_redeem": 0,
         "redeem_history": []
     }

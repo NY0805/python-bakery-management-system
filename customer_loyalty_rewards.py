@@ -9,7 +9,7 @@ REDEEM_RATES = {
     "MORNING GLORY'S GOLD": 1000,
     "MORNING GLORY'S SILVER": 900,
     "MORNING GLORY'S BRONZE": 800,
-    "Standard": None               # Standard customers cannot redeem points
+    "MORNING GLORY'S STANDARD": 0
 }
 # Each cash voucher is worth RM10 in the loyalty program
 
@@ -33,7 +33,7 @@ def update_customer_status(points): # Determine customer status based on their l
     elif points >= BRONZE_REQUIREMENT:
         return "MORNING GLORY'S BRONZE"
     else:
-        return "Standard"
+        return "MORNING GLORY'S STANDARD"
 
 
 def load_customer_data():
@@ -89,15 +89,18 @@ def process_payment(username, total_price):  # Process payment and update the us
     # Check if user exists in customer_loyalty_rewards.txt
     user_rewards = [order_id for order_id, data in rewards.items() if data['username'] == username]
 
+    # Determine new loyalty points
+    points_change = determine_loyalty_points(total_price)
+
     if not user_rewards:
         # New user, initialize their data in customer_loyalty_rewards.txt
         new_order_id = str(len(rewards) + 1)  # Generate a new order ID
         rewards[new_order_id] = {
             "username": username,
             "total_spending (RM)": total_price,
-            "loyalty_points": determine_loyalty_points(total_price),  # Directly use the return value
+            "loyalty_points": points_change,
             "status": "MORNING GLORY'S STANDARD",
-            "redeem_rate (RM)": 0,
+            "redeem_rate (RM)": REDEEM_RATES["MORNING GLORY'S STANDARD"],  # Set initial redeem rate
             "voucher_redeem": 0,
             "redeem_history": []
         }
@@ -113,9 +116,13 @@ def process_payment(username, total_price):  # Process payment and update the us
         # Existing user, update their spending and loyalty points
         for order_id in user_rewards:  # Only iterate over user's orders
             history = rewards[order_id]
-            points_change = determine_loyalty_points(total_price)  # Get points change directly
             history['total_spending (RM)'] += total_price
             history['loyalty_points'] += points_change  # Correctly update points
+
+            # Update customer status and redeem rate
+            new_status = update_customer_status(history['loyalty_points'])
+            history['status'] = new_status
+            history['redeem_rate (RM)'] = REDEEM_RATES.get(new_status, 0)
 
             # Update customer.txt with the new points
             if username in customers:
@@ -157,6 +164,9 @@ def update_loyalty_rewards(username, points_change, new_status): # Update loyalt
         if history['username'] == username:
             history['loyalty_points'] += points_change
             history['status'] = new_status
+            # Keep the redeem rate fixed as initially set, regardless of status upgrade
+            if 'redeem_rate (RM)' not in history or history['redeem_rate (RM)'] == 0:
+                history['redeem_rate (RM)'] = REDEEM_RATES.get(new_status, 0)
             break
 
     save_loyalty_rewards(rewards)
@@ -225,7 +235,7 @@ def redeem_cash_voucher(username): # Allow customers to redeem cash vouchers usi
     print(f"User {username} does not exist in the loyalty rewards system.")
 
 
-def log_redeem_history(username, total_spend, points_earned, status): # Log the redeem history for a customer
+def redeem_history(username, total_spend, points_earned, status): # Log the redeem history for a customer
     rewards = load_loyalty_rewards()
     order_id = f"ORD{len(rewards) + 1:03d}"  # Generate a new order ID
     rewards[order_id] = {

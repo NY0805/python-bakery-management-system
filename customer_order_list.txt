@@ -568,5 +568,247 @@
         "total_price (RM)": "25.50",
         "order_date": "28-10-2024",
         "status": "Order Placed"
+    },
+    "9753729142": {
+        "order_id": "ORD1798",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 4"
+        ],
+        "total_price (RM)": "34.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "5589721968": {
+        "order_id": "ORD2415",
+        "username": "emo123",
+        "items_ordered": [
+            "gingerbread x 6",
+            "banana bread x 6"
+        ],
+        "total_price (RM)": "40.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "7863915428": {
+        "order_id": "ORD8491",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 3"
+        ],
+        "total_price (RM)": "25.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "1817433841": {
+        "order_id": "ORD8243",
+        "username": "macccc",
+        "items_ordered": [
+            "gingerbread x 7"
+        ],
+        "total_price (RM)": "15.75",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "8112484523": {
+        "order_id": "ORD4327",
+        "username": "macccc",
+        "items_ordered": [
+            "tiramisu x 10"
+        ],
+        "total_price (RM)": "85.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "4865894786": {
+        "order_id": "ORD3267",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 7"
+        ],
+        "total_price (RM)": "59.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "6542479446": {
+        "order_id": "ORD2717",
+        "username": "emo123",
+        "items_ordered": [
+            "gingerbread x 10"
+        ],
+        "total_price (RM)": "22.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "9818141573": {
+        "order_id": "ORD2355",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 3"
+        ],
+        "total_price (RM)": "25.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "6594372162": {
+        "order_id": "ORD9872",
+        "username": "hi",
+        "items_ordered": [
+            "tiramisu x 44"
+        ],
+        "total_price (RM)": "374.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "8481686727": {
+        "order_id": "ORD2075",
+        "username": "bye",
+        "items_ordered": [
+            "tiramisu x 23"
+        ],
+        "total_price (RM)": "195.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "8949388134": {
+        "order_id": "ORD4205",
+        "username": "bye",
+        "items_ordered": [
+            "tiramisu x 10"
+        ],
+        "total_price (RM)": "85.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "8366241213": {
+        "order_id": "ORD8151",
+        "username": "macccc",
+        "items_ordered": [
+            "tiramisu x 10"
+        ],
+        "total_price (RM)": "85.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "3837473495": {
+        "order_id": "ORD1636",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 3"
+        ],
+        "total_price (RM)": "25.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "1533482985": {
+        "order_id": "ORD1038",
+        "username": "emo123",
+        "items_ordered": [
+            "tiramisu x 3"
+        ],
+        "total_price (RM)": "25.50",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "3467272619": {
+        "order_id": "ORD4646",
+        "username": "emo123",
+        "items_ordered": [
+            "gingerbread x 5"
+        ],
+        "total_price (RM)": "11.25",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "2824385784": {
+        "order_id": "ORD5361",
+        "username": "jeno",
+        "items_ordered": [
+            "tiramisu x 20"
+        ],
+        "total_price (RM)": "170.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "6734919824": {
+        "order_id": "ORD5935",
+        "username": "jeno",
+        "items_ordered": [
+            "gingerbread x 4"
+        ],
+        "total_price (RM)": "9.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "3338426357": {
+        "order_id": "ORD2833",
+        "username": "no",
+        "items_ordered": [
+            "gingerbread x 9",
+            "tiramisu x 6"
+        ],
+        "total_price (RM)": "71.25",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "3625792839": {
+        "order_id": "ORD1744",
+        "username": "no",
+        "items_ordered": [
+            "tiramisu x 12"
+        ],
+        "total_price (RM)": "102.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "9586423128": {
+        "order_id": "ORD4536",
+        "username": "no",
+        "items_ordered": [
+            "tiramisu x 12"
+        ],
+        "total_price (RM)": "102.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "9277744486": {
+        "order_id": "ORD5141",
+        "username": "no",
+        "items_ordered": [
+            "tiramisu x 12"
+        ],
+        "total_price (RM)": "102.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "2251985215": {
+        "order_id": "ORD2081",
+        "username": "no",
+        "items_ordered": [
+            "tiramisu x 12"
+        ],
+        "total_price (RM)": "102.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "8725629597": {
+        "order_id": "ORD5881",
+        "username": "no",
+        "items_ordered": [
+            "tiramisu x 12"
+        ],
+        "total_price (RM)": "102.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
+    },
+    "3827113173": {
+        "order_id": "ORD7727",
+        "username": "lucy",
+        "items_ordered": [
+            "tiramisu x 10"
+        ],
+        "total_price (RM)": "85.00",
+        "order_date": "29-10-2024",
+        "status": "Order Placed"
     }
 }
