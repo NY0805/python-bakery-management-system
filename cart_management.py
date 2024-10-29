@@ -373,7 +373,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
                 "voucher_redeem": 0,
                 "redeem_history": []
             }
-            print(f"New user {customer_name} added to loyalty rewards with points: {points_change}")
+            print(f" User {customer_name} added to loyalty rewards with points: {points_change}")
 
         # Update loyalty rewards in file
         customer_loyalty_rewards.save_loyalty_rewards(loyalty_data)

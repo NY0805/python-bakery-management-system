@@ -76,9 +76,9 @@ def browse_products():
                 print(f"Products in category '{category_input}':")
                 print('===============================================')
 
-                # Loop through categories and match products from the product details
+                # Loop through categories find matching products from the product details
                 for product_code, product in products.items():
-                    # Get the corresponding category from baker_product_keeping
+                    # Get the matching category from baker_product_keeping
                     if product_code in categories and categories[product_code]["category"].lower() == category_input.lower():
                         print(f'Product Code: {product_code}')
                         print(f'Product Name: {product["product_name"]}')
@@ -86,11 +86,11 @@ def browse_products():
                         print(f'Description: {product["description"]}')
                         print('-----------------------------------------------')
             else:
-                print(f"The category '{category_input}' does not exist.")  # Show the message if the category does not exist
+                print(f"The category '{category_input}' does not exist.")
                 print()
 
         elif options == '2':
-            import product_menu  # Load and display the full menu from product_menu.py
+            import product_menu  # Display the full menu from product_menu.py
             product_menu.menu()
         elif options == '3':
             print("Thank you for visiting our system. Goodbye!")

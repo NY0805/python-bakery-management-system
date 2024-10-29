@@ -23,6 +23,7 @@ def load_data_from_customer():
         return {}  # return empty dictionary if the file does not exist
 
 
+# Function to save customer information to the customer.txt file
 def save_info(customer_info):
     with open('customer.txt', 'w') as file:  # use with statement to open the file
         json.dump(customer_info, file, indent=4)  # convert the dictionary into JSON format
@@ -260,8 +261,8 @@ def account_management():
         print("No customer data available.")
         return
 
-    # Prompt for username input
-    customer_name = input("Please enter your name: ")  # Convert to lowercase
+    # Let customer to enter their username
+    customer_name = input("Please enter your name: ")
 
     # Check if the customer_name exists in the loaded customer data
     if customer_name in customer_info:
