@@ -113,5 +113,25 @@
         "allergens": [
             "apple"
         ]
+    },
+    "f": {
+        "category": "Pastries",
+        "product_name": "bello minion biscuit",
+        "product_code": "f",
+        "serial_number": [
+            "f",
+            "003",
+            "001"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "f",
+        "date_of_production": "09-04-2024",
+        "shelf_life": "7",
+        "expiry_date": "09-04-2024",
+        "baker_name": "crustking",
+        "allergens": [
+            "coffee",
+            "minion"
+        ]
     }
 }

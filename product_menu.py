@@ -42,7 +42,6 @@ def format_product_data(product, details):
     )
 
 
-
 # Wrap the formatted data if it exceeds the space of 60 characters
 def wrap_data(formatted_product_data, width=65):
     wrapped_lines = []
@@ -85,22 +84,26 @@ def menu():
     print(
         "✨ Explore our menu, and don't forget to check out our unique creations in the 'Others' category for something special!\n")
 
+    # group the product by their category for organized display
     category_groups = {}
     product_details = 'manager_product_inventory.txt'
 
     for value in product_data.values():
         category = value['category']
 
+        # if the category does not exist in the dictionary, create a new list foe that category
         if category not in category_groups:
             category_groups[category] = []
 
+        # if category exist, append the product after format data
         category_groups[category].append(format_product_data(value, product_details).split('\n'))
 
+    # loop through each category to print its product
     for category, products in category_groups.items():
 
         print(f'\n📍 {category} 📍\n')
 
-        # display the product details in 2 columns for easy reading
+        # display the product in pairs of two
         for i in range(0, len(products), 2):
             product1 = wrap_data(products[i], width=65)
             if i + 1 < len(products):
@@ -108,8 +111,10 @@ def menu():
             else:
                 product2 = []
 
+            # print the two products in column
             print_in_column(product1, product2)
 
+            # add a separator line after the last product in each category
             if i == len(products) - 1:
                 print('\n' + '-' * 139)
             else:
@@ -123,3 +128,4 @@ def format_product_data_new(product):
         f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
     )
 
+#menu()

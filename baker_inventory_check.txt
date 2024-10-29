@@ -1,20 +1,8 @@
 {
-    "2673": {
-        "recipe_category": "Pastries",
-        "recipe_name": "applepie",
-        "production_quantity": 2,
-        "date_of_production": "date"
-    },
     "7368": {
         "recipe_category": "Biscuits",
         "recipe_name": "bello",
         "production_quantity": 20,
-        "date_of_production": "date"
-    },
-    "5896": {
-        "recipe_category": "Pastries",
-        "recipe_name": "applepie",
-        "production_quantity": 3,
-        "date_of_production": "date"
+        "date_of_production": "09-04-2024"
     }
 }
