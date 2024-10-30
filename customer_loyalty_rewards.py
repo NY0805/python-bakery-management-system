@@ -14,11 +14,12 @@ REDEEM_RATES = {
 # Each cash voucher is worth RM10 in the loyalty program
 
 
-def determine_loyalty_points(total_price):  # Calculate loyalty points based on customer's total spending
+# Function to calculate loyalty points based on customer's total spending
+def determine_loyalty_points(total_price):
     # Check if total_price is a number
     if not isinstance(total_price, (int, float)):
         print(f"Invalid total price: {total_price} (must be a number)")
-        return 0  # Return 0 for invalid input
+        return None
 
     # Calculate loyalty points
     points = int(total_price * BASE_POINTS_PER_RM)
@@ -58,16 +59,22 @@ def save_customer_data(data): # Save customer data to the customer.txt file
         json.dump(data, file, indent=4)
 
 
-def load_loyalty_rewards(): # Load customer loyalty rewards data from the customer_loyalty_rewards.txt file
+# Load customer loyalty rewards data from the file
+def load_loyalty_rewards():
     try:
-        with open('customer_loyalty_rewards.txt', 'r') as file:
-            content = file.read().strip()
-            if content:
-                return json.loads(content)
-            else:
-                return {}
+        file = open('customer_loyalty_rewards.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}
+        return {}  # return empty dictionary if the file does not exist
 
 
 def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the customer_loyalty_rewards.txt file
@@ -76,8 +83,8 @@ def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the c
 
 
 def process_payment(username, total_price):  # Process payment and update the user's loyalty points and status
-    rewards = load_loyalty_rewards()  # Load loyalty rewards data
-    customers = load_customer_data()  # Load customer data
+    rewards = load_loyalty_rewards()
+    customers = load_customer_data()
 
     # Ensure total_price is a valid number
     try:

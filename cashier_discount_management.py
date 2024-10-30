@@ -1,20 +1,22 @@
 import json
 
 
-# Function to load product data and discounts from the file
+# Function to load product discount information from file
 def discount_management():
     try:
-        with open('product_discount.txt', 'r') as file:
-            content = file.read().strip()  # Strip unnecessary whitespaces
-            if content:  # Check if the file is not empty
-                try:
-                    return json.loads(content)  # Parse the content as JSON format into a Python dictionary
-                except json.JSONDecodeError:
-                    return {}  # Return an empty dictionary if parsing fails
-            else:
-                return {}  # Return an empty dictionary if the file is empty
+        file = open('product_discount.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
     except FileNotFoundError:
-        return {}  # Return an empty dictionary if the file does not exist
+        return {}  # return empty dictionary if the file does not exist
 
 
 # Function to save product data and discounts to the file
@@ -72,7 +74,7 @@ def add_discount():
             else:
                 print("Please enter a valid positive number for price.")
         except ValueError:
-            print("Invalid input. Please enter a numeric value for price.")
+            print("Invalid input! Please enter numbers only.")
 
     # Validate discount input
     discount = validate_discount_input()  # Get a valid discount percentage
@@ -137,7 +139,7 @@ def modify_discount():
 
 def display_discounts():
     print('\n -- Current Discounts and Product Details -- ')
-    print('─' * 47)
+    print('─' * 70)
     for product_number, product_info in discounts.items():
         product_name = product_info.get('Product Name', '').ljust(20)
         product_code_display = product_info.get('product_code', '').ljust(15)
@@ -146,7 +148,7 @@ def display_discounts():
         discount = product_info.get('Discount', '0%').ljust(15)
         print(f"{product_name}{product_code_display}{stock}{price}{discount}")
 
-    print('-' * 80)
+    print('-' * 70)
 
 
 def manage_discounts():
@@ -181,5 +183,4 @@ def manage_discounts():
             print("|⚠️ Invalid option. Please try again.|")
 
 
-# Start the discount management system
 #manage_discounts()
