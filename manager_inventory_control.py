@@ -363,7 +363,7 @@ def inventory_control_product():
                 print('+--------------------------------------+')
                 break
 
-inventory_control_product()
+
 # main inventory control for products and ingredients
 def inventory_control():
     while True:

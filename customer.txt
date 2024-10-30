@@ -128,7 +128,7 @@
         "contact_no": "012-1234567",
         "email": "sd@gmail.com",
         "address": "12",
-        "account_status": "active",
+        "account_status": "inactive",
         "loyalty_points": 2350
     },
     "SOS": {
@@ -183,7 +183,7 @@
         "contact_no": "123-4566783",
         "email": "dd@dmcl.cc",
         "address": "234dvc bcv",
-        "account_status": "active",
+        "account_status": "inactive",
         "loyalty_points": 280
     },
     "yeti": {
@@ -238,7 +238,7 @@
         "contact_no": "012-1234567",
         "email": "dd@gmail.com",
         "address": "1234",
-        "account_status": "active",
+        "account_status": "inactive",
         "loyalty_points": 7480
     },
     "bye": {

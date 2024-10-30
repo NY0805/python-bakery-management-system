@@ -189,4 +189,3 @@ def manual_generate_receipt():
         else:
             return False  # return to the cashier privilege if the cashier don't want to generate receipt manually
 
-
