@@ -143,7 +143,7 @@ def allowable_month(report_year):
     return allowable_month_unpack
 
 
-# define the function to generate yearly sles report
+# define the function to generate yearly sales report
 def yearly_sales_performance():
     while True:
         while True:
