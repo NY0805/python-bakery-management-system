@@ -12,7 +12,7 @@
         "severity": "high",
         "maintenance_needed_date": "15-10-2024",
         "last_maintenance_date": "26-12-2023",
-        "next_scheduled_maintenance": "17-09-2004",
+        "next_scheduled_maintenance": "17-09-2024",
         "description": "The speed settings are unresponsive."
     },
     "toasteroven2": {
@@ -28,17 +28,6 @@
         "severity": "high",
         "maintenance_needed_date": "15-10-2024",
         "last_maintenance_date": "11-11-2023",
-        "next_scheduled_maintenance": "24-09-2004",
+        "next_scheduled_maintenance": "24-09-2024",
         "description": "The motor is making loud noise."
-    },
-    "oven1": {
-        "report_number": "REPORT-1622",
-        "category": "Ovens and Baking Appliances",
-        "equipment_name": "Convection oven",
-        "serial_number": "oven1",
-        "model_number": "CVTOVN001",
-        "manufacturer_email": "gg@gg.com",
-        "warranty": "1 year",
-        "report_date": "27-10-2024",
-        "current_condition": "malfunction",
-        "malfunction_date":
+    }

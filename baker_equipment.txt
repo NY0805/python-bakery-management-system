@@ -8,8 +8,8 @@
         ],
         "manufacturer": "minionnn",
         "model_number": "CVTOVN001",
-        "purchase_date": "03-04-2004",
-        "next_scheduled_maintenance": "15-11-2004",
+        "purchase_date": "03-04-2023",
+        "next_scheduled_maintenance": "15-11-2024",
         "manufacturer_email": "gg@gg.com",
         "warranty": "1 year"
     },
@@ -23,8 +23,8 @@
         ],
         "manufacturer": "nctdream",
         "model_number": "TSTROVN563",
-        "purchase_date": "06-07-2004",
-        "next_scheduled_maintenance": "24-09-2004",
+        "purchase_date": "06-07-2023",
+        "next_scheduled_maintenance": "24-09-2024",
         "manufacturer_email": "nctdream@no1.com",
         "warranty": "2 years"
     },
@@ -37,8 +37,8 @@
         ],
         "manufacturer": "cheflum",
         "model_number": "STDMXR034",
-        "purchase_date": "05-06-2004",
-        "next_scheduled_maintenance": "17-09-2004",
+        "purchase_date": "05-06-2023",
+        "next_scheduled_maintenance": "17-09-2024",
         "manufacturer_email": "cheflum@super.com",
         "warranty": "1 year"
     }

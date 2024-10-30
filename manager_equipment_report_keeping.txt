@@ -7,11 +7,11 @@
         "repair_cost": "RM 120.00",
         "manufacturer_email": "gg@gg.com",
         "warranty": "1 year",
-        "report_date": "15-10-2024",
+        "report_date": "04-10-2024",
         "current_condition": "function well",
-        "malfunction_date": "12-12-1212",
-        "last_maintenance_date": "12-12-1212",
-        "description": "sdfdfcd"
+        "malfunction_date": "04-10-2024",
+        "last_maintenance_date": "12-07-2024",
+        "description": "Uneven heating."
     },
     "REPORT-5617": {
         "category": "Ovens and Baking Appliances",
@@ -24,7 +24,7 @@
         "report_date": "27-10-2024",
         "current_condition": "function well",
         "malfunction_date": "14-09-2024",
-        "last_maintenance_date": "12-12-2023",
+        "last_maintenance_date": "04-10-2024",
         "description": "Heating element burnt out."
     }
 }
