@@ -34,5 +34,17 @@
         "stock": 3,
         "price": "RM 4.50",
         "description": "Rich in vitamin A and perfect for healthy treat"
+    },
+    "005": {
+        "product_name": "bello minion biscuit",
+        "stock": 1,
+        "price": "RM 3.00",
+        "description": "Cute and attractive appearance with mango filling"
+    },
+    "C001": {
+        "product_name": "apple cake",
+        "stock": 1,
+        "price": "RM 7.00",
+        "description": "Tender chunks of apple and a hint of cinnamon is perfect for autumn"
     }
 }

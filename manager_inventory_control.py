@@ -88,7 +88,7 @@ def inventory_control_product():
                     product_name = value['product_name']
                     quantity = len(value['serial_number'])  # determine how many serial number for each product to represent the quantity of the product
 
-                    print(f'Product name: {product_name:<15} quantity: {quantity}')
+                    print(f'Product name: {product_name:<23} quantity: {quantity}')
 
                 chosen_product = input('\nPlease enter product name to restock (or enter "cancel" to cancel)\n>>> ')  # collect user's chosen product
 
@@ -125,7 +125,7 @@ def inventory_control_product():
                                     else:
                                         stock = add_stock  # directly assign the quantity products if the products haven't in the inventory
 
-                                    if 'price' not in product_inventory[batch_number] or batch_number not in product_inventory:
+                                    if 'price' not in product_inventory.get(batch_number, {}):
                                         while True:
                                             try:
                                                 price = float(input('Price per unit: RM '))  # determine the price per unit for each newly added products
@@ -143,7 +143,7 @@ def inventory_control_product():
                                     else:
                                         price = product_inventory[batch_number]['price']  # the original price will not be updated if the products is already in the inventory
 
-                                    if 'description' not in product_inventory[batch_number] or batch_number not in product_inventory:
+                                    if 'description' not in product_inventory.get(batch_number, {}):
                                         product_description = input('Add product description for menu display:\n>>> ')  # add the product description
                                     else:
                                         product_description = product_inventory[batch_number]['description']  # the existing descripiton will not be updated if the products are already in the inventory
@@ -363,7 +363,7 @@ def inventory_control_product():
                 print('+--------------------------------------+')
                 break
 
-
+inventory_control_product()
 # main inventory control for products and ingredients
 def inventory_control():
     while True:

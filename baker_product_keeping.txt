@@ -103,7 +103,9 @@
         "category": "Cakes",
         "product_name": "apple cake",
         "product_code": "cake1",
-        "serial_number": "2345",
+        "serial_number": [
+            "2345"
+        ],
         "quantity_produced": "1",
         "batch_number": "C001",
         "date_of_production": "10-10-2024",
@@ -114,12 +116,11 @@
             "apple"
         ]
     },
-    "f": {
+    "005": {
         "category": "Pastries",
         "product_name": "bello minion biscuit",
         "product_code": "f",
         "serial_number": [
-            "f",
             "003",
             "001"
         ],
@@ -131,7 +132,7 @@
         "baker_name": "crustking",
         "allergens": [
             "coffee",
-            "minion"
+            "mango"
         ]
     }
 }
