@@ -43,82 +43,6 @@
             "dffd"
         ]
     },
-    "banana bread": {
-        "recipe_category": "Breads",
-        "recipe_name": "banana bread",
-        "ingredient_used": [
-            [
-                "wheat flour",
-                900.0,
-                "g"
-            ]
-        ],
-        "ingredient_notes": "no",
-        "equipment_used": [],
-        "baking_temperature": 200,
-        "baking_time": 3,
-        "cost_per_unit": 15.5,
-        "instructions": [
-            "a",
-            "a"
-        ]
-    },
-    "white choco macadamia": {
-        "recipe_category": "Cakes",
-        "recipe_name": "white choco macadamia",
-        "ingredient_used": [
-            [
-                "wheat flour",
-                900.0,
-                "g"
-            ],
-            [
-                "brown sugar",
-                20.0,
-                "ml"
-            ]
-        ],
-        "ingredient_notes": "im beautiful",
-        "equipment_used": [],
-        "baking_temperature": 300,
-        "baking_time": 60,
-        "cost_per_unit": 6.0,
-        "instructions": [
-            "hh",
-            "hh",
-            "hh",
-            "hh",
-            "hh"
-        ]
-    },
-    "applepie": {
-        "recipe_category": "Pastries",
-        "recipe_name": "applepie",
-        "ingredient_used": [
-            [
-                "whole wheat flour",
-                200.0,
-                "g"
-            ],
-            [
-                "maple syrup",
-                20.0,
-                "ml"
-            ]
-        ],
-        "ingredient_notes": "ffff",
-        "equipment_used": [
-            "convection ovens"
-        ],
-        "baking_temperature": 130,
-        "baking_time": 20,
-        "cost_per_unit": 8.4,
-        "instructions": [
-            "jj",
-            "hh",
-            "jj"
-        ]
-    },
     "bello": {
         "recipe_category": "Biscuits",
         "recipe_name": "bello",
@@ -142,30 +66,43 @@
             "fjdf"
         ]
     },
-    "applecake": {
+    "matcha layer cake": {
         "recipe_category": "Cakes",
-        "recipe_name": "applecake",
+        "recipe_name": "matcha layer cake",
         "ingredient_used": [
             [
-                "apple",
-                600.0,
+                "baking powder",
+                300.0,
+                "g"
+            ],
+            [
+                "whipping cream",
+                30.0,
+                "g"
+            ],
+            [
+                "almond flour",
+                40.0,
                 "g"
             ],
             [
                 "maple syrup",
-                900.0,
-                "g"
+                25.0,
+                "ml"
             ]
         ],
-        "ingredient_notes": "no",
+        "ingredient_notes": "layer cake yyds",
         "equipment_used": [
-            "stand mixer"
+            "stand mixer",
+            "convection oven"
         ],
-        "baking_temperature": 30,
-        "baking_time": 30,
-        "cost_per_unit": 15.5,
+        "baking_temperature": 90,
+        "baking_time": 50,
+        "cost_per_unit": 5.5,
         "instructions": [
-            "no"
+            "mix the baking powder with almond flour",
+            "bake it",
+            "add almond flour, whipping cream and maple syrup on the baked cake"
         ]
     }
 }

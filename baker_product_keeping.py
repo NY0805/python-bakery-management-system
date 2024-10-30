@@ -78,7 +78,7 @@ def validation_empty_entries(info):
         return False
 
 
-# validate input that in a list
+# validate input that store a list is alphabet only
 def validation_list_alphabet_only(info):
     for item in info:
         if item.replace(" ", "").isalpha():
