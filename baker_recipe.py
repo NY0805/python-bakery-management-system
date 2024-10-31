@@ -660,9 +660,9 @@ def continue_adding_recipe():
 # define the function to display the details of selected recipe
 def display_recipe(recipe):
     # print the details of selected recipe with formatting
-    print(f'{'recipe_category':<20}: {recipe['recipe_category']}')
-    print(f'{'recipe_name':<20}: {recipe['recipe_name']}')
-    print(f'{'\n🥗 ingredient_used'}:')
+    print(f'{"recipe_category":<20}: {recipe["recipe_category"]}')
+    print(f'{"recipe_name":<20}: {recipe["recipe_name"]}')
+    print(f'\n{"🥗 ingredient_used"}:')
     ingredient_index = 1
     max_length = 0
     for item in recipe['ingredient_used']:
@@ -677,16 +677,16 @@ def display_recipe(recipe):
         print(
             f'{ingredient_index}. {item[0].ljust(max_length + 2).title()}x  {str(item[1]).ljust(max_length_unit + 1)} {item[2]}')
         ingredient_index += 1
-    print(f'{'\ningredient_notes':<20}: {recipe['ingredient_notes']}')
-    print(f'{'\n🛠️ equipment_used'}:')
+    print(f'\n{"ingredient_notes":<20}: {recipe["ingredient_notes"]}')
+    print(f'\n{"🛠️ equipment_used"}:')
     equipment_index = 1
     for item in recipe['equipment_used']:
         print(f'{equipment_index}. {item.title()}')
         equipment_index += 1
-    print(f'{'\nbaking_temperature (°C)':<26}: {recipe['baking_temperature']}')
-    print(f'{'baking_time (min)':<25}: {recipe['baking_time']}')
-    print(f'{'cost_per_unit (RM)':<25}: {recipe['cost_per_unit']}')
-    print(f'{'\ninstructions'}:')
+    print(f'\n{"baking_temperature (°C)":<26}: {recipe["baking_temperature"]}')
+    print(f'{"baking_time (min)":<25}: {recipe["baking_time"]}')
+    print(f'{"cost_per_unit (RM)":<25}: {recipe["cost_per_unit"]}')
+    print(f'\n{"instructions"}:')
     instruction_index = 1
     for instruction in recipe['instructions']:
         print(f'{instruction_index}. {instruction.capitalize()}')

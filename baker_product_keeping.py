@@ -170,7 +170,7 @@ def product_categories():
         for key, value in unsaved_product_list.items():
             print(f'\n{index}.')
             for title, details in value.items():
-                print(f'{title.replace("_", ' '):<20}: {details}')
+                print(f'{title.replace("_", " "):<20}: {details}')
             index += 1
 
         try:

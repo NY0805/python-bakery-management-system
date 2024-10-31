@@ -104,5 +104,37 @@
             "bake it",
             "add almond flour, whipping cream and maple syrup on the baked cake"
         ]
+    },
+    "vanilla muffin": {
+        "recipe_category": "Muffins",
+        "recipe_name": "Vanilla muffin",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                10.0,
+                "g"
+            ],
+            [
+                "whipping cream",
+                20.0,
+                "ml"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "toaster oven",
+            "stand mixer"
+        ],
+        "baking_temperature": 250,
+        "baking_time": 30,
+        "cost_per_unit": 20.0,
+        "instructions": [
+            "Preheat the oven to 400 degrees F (200 degrees C). Grease a 12-cup muffin tin or line cups with paper liners.",
+            "Stir flour, baking powder, salt, and sugar together in a large bowl; make a well in the center.",
+            "Beat egg with a fork in a small bowl or 2-cup measuring cup; whisk in milk and oil.",
+            "Pour egg mixture all at once into flour mixture; mix quickly and lightly with a fork until just moistened.",
+            "Spoon batter into the prepared muffin cups, filling each 3/4 full.",
+            "Bake in the preheated oven until tops spring back when lightly pressed, about 25 minutes."
+        ]
     }
 }

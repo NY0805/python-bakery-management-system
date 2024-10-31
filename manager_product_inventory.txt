@@ -41,10 +41,16 @@
         "price": "RM 3.00",
         "description": "Cute and attractive appearance with mango filling"
     },
-    "C001": {
+    "007": {
         "product_name": "apple cake",
         "stock": 1,
         "price": "RM 7.00",
         "description": "Tender chunks of apple and a hint of cinnamon is perfect for autumn"
+    },
+    "008": {
+        "product_name": "vanilla muffin",
+        "stock": 12,
+        "price": "RM 5.50",
+        "description": "Soft, golden delight with rich vanilla aroma"
     }
 }

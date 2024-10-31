@@ -9,7 +9,7 @@
         "recipe_category": "Biscuits",
         "recipe_name": "bello",
         "production_quantity": 40,
-        "date_of_production": "date"
+        "date_of_production": "07-07-2024"
     },
     "4970": {
         "recipe_category": "Biscuits",
