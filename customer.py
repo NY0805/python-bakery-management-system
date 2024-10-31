@@ -261,7 +261,7 @@ def account_management():
         print("No customer data available.")
         return
 
-    # Let customer to enter their username
+    # Let customer enter their username
     customer_name = input("Please enter your name: ")
 
     # Check if the customer_name exists in the loaded customer data

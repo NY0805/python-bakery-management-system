@@ -800,5 +800,26 @@
         "total_price (RM)": "85.00",
         "order_date": "03-11-2024",
         "status": "Order Placed"
+    },
+    "9721793267": {
+        "order_id": "ORD6918",
+        "username": "nct",
+        "items_ordered": [
+            "gingerbread x 2",
+            "tiramisu x 2"
+        ],
+        "total_price (RM)": "21.50",
+        "order_date": "30-10-2024",
+        "status": "Order Placed"
+    },
+    "4664798155": {
+        "order_id": "ORD5860",
+        "username": "nct",
+        "items_ordered": [
+            "tiramisu x 4"
+        ],
+        "total_price (RM)": "34.00",
+        "order_date": "31-10-2024",
+        "status": "Order Placed"
     }
 }

@@ -1,16 +1,22 @@
 import json
 
 
+# Load the reviews from 'customer_reviews.txt'
 def load_review():
-    # Load the reviews from 'customer_reviews.txt'
     try:
-        with open('customer_reviews.txt', 'r') as file:
-            content = file.read().strip()
-        if content:
-            return json.loads(content)
-        return {}
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+        file = open('customer_reviews.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
 
 def save_reviews(new_reviews):

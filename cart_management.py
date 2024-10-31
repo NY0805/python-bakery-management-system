@@ -335,7 +335,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
     if choice == '1':
         print(f"\nTotal price to pay: RM {total_price:.2f}")
-        print("\nOrder placed. Please proceed to payment to view the receipt.")
+        print("\nOrder placed.The receipt will be generated after payment is completed. Please pay at the counter or online.")
 
         # Save the updated order to the file
         save_order_to_file(cart, customer_name, cart_id, order_id, "Order Placed")
@@ -407,7 +407,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         return
 
     elif choice == '2':
-        print("Order canceled. Your cart has been cleared!")
+        print("Order has been successfully canceled!")
         cart.clear()
     else:
         print("|⚠️Invalid choice. Please select 1 or 2.|")

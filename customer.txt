@@ -166,14 +166,14 @@
     },
     "nct": {
         "customer_username": "nct",
-        "customer_password": "12345678",
+        "customer_password": "123456789",
         "age": 44,
         "gender": "male",
         "contact_no": "012-9999999",
         "email": "s@gmail.com",
         "address": "2",
         "account_status": "active",
-        "loyalty_points": 5075
+        "loyalty_points": 6185
     },
     "chew": {
         "customer_username": "chewinggum",
@@ -262,5 +262,16 @@
         "address": "123",
         "account_status": "active",
         "loyalty_points": 4080
+    },
+    "Luna": {
+        "customer_username": "Luna",
+        "customer_password": "12345678",
+        "age": 20,
+        "gender": "female",
+        "contact_no": "012-1234567",
+        "email": "luna04@gmail.com",
+        "address": "12,Maple street",
+        "account_status": "active",
+        "loyalty_points": 0
     }
 }
