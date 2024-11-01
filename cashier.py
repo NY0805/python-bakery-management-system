@@ -1,4 +1,6 @@
 import json  # import json text file to record data
+import product_menu
+import cashier_sales_report
 
 import cashier_transaction_completion
 from manager import load_data_from_manager
@@ -82,7 +84,7 @@ def cashier_accounts():
             choice = input('\nSelect a choice (a, b, c, d, e): \n>>> ')
 
             if choice == 'a':
-                print('in progress a')
+                product_menu.menu()
 
             elif choice == 'b':
                 print('in progress b')
@@ -91,7 +93,7 @@ def cashier_accounts():
                 cashier_transaction_completion.manual_generate_receipt()
 
             elif choice == 'd':
-                print('in progress d')
+                cashier_sales_report.generate_sales_report()
 
             elif choice == 'e':
                 print('\nExiting to main page......')
@@ -102,3 +104,4 @@ def cashier_accounts():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
 
+cashier_accounts()

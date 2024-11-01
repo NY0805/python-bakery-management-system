@@ -51,7 +51,7 @@
     "008": {
         "username": "nct",
         "product_name": "cheezy bun",
-        "review": "nice",
+        "review": "A soft, fluffy bun filled with a rich, melted cheese, nice!",
         "rating": 4,
         "order_date": "25-10-2024"
     },

@@ -448,9 +448,9 @@ def product_popularity_customer_review(report_year, report_month, best_seller, l
         # same as the bestseller product
         elif least_seller in item['product_name'] and order_year == int(report_year):
             if report_month is None:
-                best_rating += item['rating']
-                best_count += 1
-                best_review[item['username']] = item['review']
+                least_rating += item['rating']
+                least_count += 1
+                least_review[item['username']] = item['review']
             else:
                 if order_month == int(report_month):
                     least_rating += item['rating']
@@ -753,5 +753,5 @@ def product_popularity():
                     print('+-------------------------------------+')
 
 
-generate_sales_report()
+#generate_sales_report()
 #product_popularity()

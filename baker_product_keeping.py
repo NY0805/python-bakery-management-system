@@ -964,4 +964,4 @@ def delete_product():
 
 
 #update_product()
-product_management()
+#product_management()
