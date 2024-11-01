@@ -1,4 +1,6 @@
 import json  # import json text file to record data
+
+import cashier_discount_management
 import product_menu
 import cashier_sales_report
 
@@ -87,7 +89,7 @@ def cashier_accounts():
                 product_menu.menu()
 
             elif choice == 'b':
-                print('in progress b')
+                cashier_discount_management.manage_discounts()
 
             elif choice == 'c':
                 cashier_transaction_completion.manual_generate_receipt()

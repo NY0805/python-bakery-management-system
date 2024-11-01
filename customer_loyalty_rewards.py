@@ -135,7 +135,6 @@ def process_payment(username, total_price):  # Process payment and update the us
             if username in customers:
                 customers[username]['loyalty_points'] = history['loyalty_points']
                 save_customer_data(customers)
-                print("Customer loyalty points updated in customer.txt.")
             break  # No need to continue once we've updated
 
     # Save updated loyalty rewards

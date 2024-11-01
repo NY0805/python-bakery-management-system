@@ -1,10 +1,10 @@
 {
     "1": {
         "username": "Mark0825",
-        "total_spending (RM)": 83.5,
-        "loyalty_points": 4247,
+        "total_spending (RM)": 88.0,
+        "loyalty_points": 4337,
         "status": "MORNING GLORY'S GOLD",
-        "redeem_rate (RM)": 1000,
+        "redeem_rate (RM)": 800,
         "voucher_redeem": 5,
         "redeem_history": [
             {
@@ -111,8 +111,8 @@
     },
     "13": {
         "username": "nct",
-        "total_spending (RM)": 373.25,
-        "loyalty_points": 6185,
+        "total_spending (RM)": 398.75,
+        "loyalty_points": 6695,
         "status": "MORNING GLORY'S GOLD",
         "redeem_rate (RM)": 800,
         "voucher_redeem": 4,
