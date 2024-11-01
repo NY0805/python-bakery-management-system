@@ -1,33 +1,32 @@
 {
-    "mixer1": {
-        "report_number": "REPORT-3435",
-        "category": "Mixing Equipment",
-        "equipment_name": "stand mixer",
-        "serial_number": "mixer1",
-        "model_number": "STDMXR034",
-        "manufacturer_email": "cheflum@super.com",
-        "warranty": "1 year",
-        "report_date": "27-10-2024",
-        "current_condition": "maintenance needed",
-        "severity": "high",
-        "maintenance_needed_date": "15-10-2024",
-        "last_maintenance_date": "26-12-2023",
-        "next_scheduled_maintenance": "17-09-2024",
-        "description": "The speed settings are unresponsive."
-    },
-    "toasteroven2": {
-        "report_number": "REPORT-9569",
+    "toasteroven1": {
+        "report_number": "REPORT-3573",
         "category": "Ovens and Baking Appliances",
         "equipment_name": "Toaster oven",
-        "serial_number": "toasteroven2",
+        "serial_number": "toasteroven1",
         "model_number": "TSTROVN563",
         "manufacturer_email": "nctdream@no1.com",
         "warranty": "2 years",
-        "report_date": "27-10-2024",
+        "report_date": "30-10-2024",
+        "current_condition": "malfunction",
+        "malfunction_date": "29-10-2024",
+        "last_maintenance_date": "07-05-2024",
+        "description": "The toaster oven overheats during use, causing uneven toasting and occasional burning of food."
+    },
+    "oven1": {
+        "report_number": "REPORT-6459",
+        "category": "Ovens and Baking Appliances",
+        "equipment_name": "Convection oven",
+        "serial_number": "oven1",
+        "model_number": "CVTOVN001",
+        "manufacturer_email": "gg@gg.com",
+        "warranty": "1 year",
+        "report_date": "30-10-2024",
         "current_condition": "maintenance needed",
-        "severity": "high",
-        "maintenance_needed_date": "15-10-2024",
-        "last_maintenance_date": "11-11-2023",
-        "next_scheduled_maintenance": "24-09-2024",
-        "description": "The motor is making loud noise."
+        "severity": "urgent",
+        "maintenance_needed_date": "29-10-2024",
+        "last_maintenance_date": "05-07-2024",
+        "next_scheduled_maintenance": "15-11-2024",
+        "description": "The convection oven needs maintenance for temperature inconsistency and slow preheating"
     }
+}

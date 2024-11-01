@@ -76,11 +76,6 @@
                 "g"
             ],
             [
-                "whipping cream",
-                30.0,
-                "g"
-            ],
-            [
                 "almond flour",
                 40.0,
                 "g"
@@ -135,6 +130,133 @@
             "Pour egg mixture all at once into flour mixture; mix quickly and lightly with a fork until just moistened.",
             "Spoon batter into the prepared muffin cups, filling each 3/4 full.",
             "Bake in the preheated oven until tops spring back when lightly pressed, about 25 minutes."
+        ]
+    },
+    "applepie": {
+        "recipe_category": "Pastries",
+        "recipe_name": "Applepie",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                200.0,
+                "g"
+            ],
+            [
+                "apple",
+                70.0,
+                "g"
+            ],
+            [
+                "maple syrup",
+                100.0,
+                "ml"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer",
+            "convection oven"
+        ],
+        "baking_temperature": 90,
+        "baking_time": 30,
+        "cost_per_unit": 6.0,
+        "instructions": [
+            "f",
+            "f",
+            "f"
+        ]
+    },
+    "red velvet": {
+        "recipe_category": "Cakes",
+        "recipe_name": "red velvet",
+        "ingredient_used": [
+            [
+                "baking powder",
+                400.0,
+                "g"
+            ],
+            [
+                "almond flour",
+                100.0,
+                "g"
+            ],
+            [
+                "whipping cream",
+                70.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "convection oven"
+        ],
+        "baking_temperature": 70,
+        "baking_time": 20,
+        "cost_per_unit": 10.0,
+        "instructions": [
+            "f",
+            "f",
+            "f"
+        ]
+    },
+    "garlic bun": {
+        "recipe_category": "Breads",
+        "recipe_name": "Garlic Bun",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                100.0,
+                "g"
+            ],
+            [
+                "chilly",
+                20.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer",
+            "convection oven"
+        ],
+        "baking_temperature": 90,
+        "baking_time": 20,
+        "cost_per_unit": 3.5,
+        "instructions": [
+            "f",
+            "f"
+        ]
+    },
+    "swiss roll": {
+        "recipe_category": "Cakes",
+        "recipe_name": "swiss roll",
+        "ingredient_used": [
+            [
+                "baking powder",
+                350.0,
+                "g"
+            ],
+            [
+                "candy",
+                30.0,
+                "ml"
+            ],
+            [
+                "whipping cream",
+                40.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "convection oven"
+        ],
+        "baking_temperature": 40,
+        "baking_time": 20,
+        "cost_per_unit": 4.5,
+        "instructions": [
+            "ddd",
+            "ddd"
         ]
     }
 }

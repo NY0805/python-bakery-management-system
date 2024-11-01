@@ -25,7 +25,7 @@
     },
     "006": {
         "product_name": "gingerbread",
-        "stock": 3,
+        "stock": 5,
         "price": "RM 2.50",
         "description": "Old-fashioned cookies with cute and creative appearance"
     },
@@ -52,5 +52,17 @@
         "stock": 12,
         "price": "RM 5.50",
         "description": "Soft, golden delight with rich vanilla aroma"
+    },
+    "011": {
+        "product_name": "garlic bun",
+        "stock": 2,
+        "price": "RM 5.60",
+        "description": "A soft, fluffy bun infused with rich garlic butter for a savory, aromatic bite."
+    },
+    "012": {
+        "product_name": "matcha layer cake",
+        "stock": 2,
+        "price": "RM 12.00",
+        "description": "A delicate, multi-layered cake with earthy matcha flavor and a creamy, smooth finish."
     }
 }

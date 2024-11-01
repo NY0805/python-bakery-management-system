@@ -116,17 +116,10 @@ def menu():
             print_in_column(product1, product2)
 
             # add a separator line after the last product in each category
-            if i == len(products) - 1:
-                print('\n' + '-' * 139)
+            if i + 2 < len(products):
+                print('\n')
             else:
                 print('\n' + '-' * 139)
 
 
-def format_product_data_new(product):
-    return (
-        f"{product['product_code']} - {product['product_name'].title()}\n"
-        f"{'Best Before':<12}: {product['expiry_date']}\n"
-        f"{'Allergen':<12}: {', '.join(allergen.replace('_', ' ').title() for allergen in product['allergens'])}\n"
-    )
-
-#menu()
+menu()

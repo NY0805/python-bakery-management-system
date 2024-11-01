@@ -572,7 +572,6 @@ def recipe_instruction():
             baking_time = int(input('\nPlease provide the baking time (in minutes): '))
             if validation_empty_entries(baking_time):
                 if 0 < baking_time <= 90:
-                    print('\n📝 Instructions (type "done" to finish)')
                     break
                 else:
                     print('\n+-------------------------------------------------------------------------------------+')
@@ -619,9 +618,9 @@ def recipe_instruction():
             continue
 
     # save the recipe data to baker recipe file
-    recipe_data[recipe_name] = {
+    recipe_data[recipe_name.lower()] = {
         'recipe_category': category,
-        'recipe_name': recipe_name,
+        'recipe_name': recipe_name.lower(),
         'ingredient_used': ingredients,
         'ingredient_notes': ingredient_notes,
         'equipment_used': equipments,
@@ -1195,4 +1194,4 @@ def delete_recipe():
 
 
 #update_recipe()
-#recipe_management()
+recipe_management()

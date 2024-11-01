@@ -8,9 +8,9 @@
         ],
         "quantity_produced": "2",
         "batch_number": "001",
-        "date_of_production": "09-08-2004",
+        "date_of_production": "09-08-2024",
         "shelf_life": "5",
-        "expiry_date": "17-08-2004",
+        "expiry_date": "17-08-2024",
         "recipe": "smile 2",
         "baker_name": "r",
         "allergens": [
@@ -26,32 +26,13 @@
         ],
         "quantity_produced": "1",
         "batch_number": "003",
-        "date_of_production": "27-08-2004",
+        "date_of_production": "27-08-2024",
         "shelf_life": "7",
-        "expiry_date": "06-09-2004",
+        "expiry_date": "06-09-2024",
         "recipe": "r",
         "baker_name": "r",
         "allergens": [
             "apple"
-        ]
-    },
-    "006": {
-        "category": "Biscuits",
-        "product_name": "gingerbread",
-        "product_code": "BS678",
-        "serial_number": [
-            "biscuit2",
-            "biscuit3"
-        ],
-        "quantity_produced": "3",
-        "batch_number": "006",
-        "date_of_production": "09-08-2004",
-        "shelf_life": "14",
-        "expiry_date": "26-08-2004",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "ginger"
         ]
     },
     "004": {
@@ -172,6 +153,40 @@
         "baker_name": "christine",
         "allergens": [
             "milk"
+        ]
+    },
+    "011": {
+        "category": "Breads",
+        "product_name": "garlic bun",
+        "product_code": "GR013",
+        "serial_number": [
+            "bun3"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "011",
+        "date_of_production": "01-11-2024",
+        "shelf_life": "5",
+        "expiry_date": "06-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "garlic"
+        ]
+    },
+    "012": {
+        "category": "Cakes",
+        "product_name": "matcha layer cake",
+        "product_code": "MAT030",
+        "serial_number": [
+            "cake4"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "012",
+        "date_of_production": "01-11-2024",
+        "shelf_life": "6",
+        "expiry_date": "08-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "no"
         ]
     }
 }
