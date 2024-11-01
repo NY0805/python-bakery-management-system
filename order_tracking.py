@@ -18,6 +18,7 @@ def load_data_from_tracking():
         return {}  # return empty dictionary if the file does not exist
 
 
+# Function to enable customer to track their order by entering order ID
 def order_tracking():
     orders = load_data_from_tracking()
     print('\n-----------------------------------------------')
@@ -25,7 +26,7 @@ def order_tracking():
     print('-----------------------------------------------')
 
     while True:
-        order_id = input('Enter your Order ID: ')  # Let customer enter their order ID
+        order_id = input('Enter your Order ID: ')
 
         # Search for the order by order_id
         order_found = False
