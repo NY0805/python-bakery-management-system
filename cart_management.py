@@ -23,7 +23,7 @@ def generate_order_id(order_data):
     return order_id
 
 
-# Function to load baker data from a JSON file
+# Function to load baker data from file
 def load_baker_data():
     try:
         file = open('baker_product_keeping.txt', 'r')  # open the file and read
@@ -41,7 +41,7 @@ def load_baker_data():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Function to load manager data from a JSON file
+# Function to load manager data from file
 def load_manager_data():
     try:
         file = open('manager_product_inventory.txt', 'r')  # open the file and read
@@ -59,7 +59,7 @@ def load_manager_data():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Function to load discount data from a JSON file
+# Function to load discount data from file
 def load_discount_data():
     try:
         file = open('product_discount.txt', 'r')  # open the file and read
@@ -77,7 +77,7 @@ def load_discount_data():
         return {}  # return empty dictionary if the file does not exist
 
 
-# Function to enable customers to add items to the cart (with discount check)
+# Function to enable customers to add items to the cart
 def add_item_to_cart(cart):
     while True:  # Loop to allow re-entering product code if the user chooses 'no'
         product_menu.menu()
@@ -90,7 +90,7 @@ def add_item_to_cart(cart):
         # Directly search for the product in baker_data
         for item in baker_data.values():
             if item['product_code'] == product_code_input:
-                product_name = item["product_name"]  # Retrieve product name
+                product_name = item["product_name"]
 
                 # Get the price from manager_data
                 for key, value in manager_data.items():
@@ -218,7 +218,7 @@ def modify_item_quantity(cart):
                     # Display updated information and new total price
                     print(f"Updated {cart[product_code]['product_name']} quantity to {new_quantity}.")
                     print(f"New total price for {cart[product_code]['product_name']}: RM {new_total_price:.2f}")
-                    break  # Exit the quantity loop after a successful update
+                    break
 
                 except ValueError:
                     print("|⚠️ Invalid input! Please enter a valid number.|")
@@ -263,17 +263,17 @@ def view_cart(cart):
             print("Returning to the main menu...")
             return  # Exit the function and return to the main menu
         elif choice == 'n':
-            print("Here is your cart again.\n")  # Reloop to show the cart again
+            return
         else:
             print("\n+--------------------------------------+")
             print("|⚠️ Invalid input. Please enter 'y' or 'n'. |")
             print("+--------------------------------------+\n")
 
 
-# Function to save the order to a JSON file with cart_id as key
+# Function to save the order to file with cart_id as key
 def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     # Get the current date in 'DD-MM-YYYY' format
-    order_date = datetime.now().strftime("%d-%m-%Y")  # Date in 'DD-MM-YYYY' format
+    order_date = datetime.now().strftime("%d-%m-%Y")
 
     try:
         with open("customer_order_list.txt", "r") as file:
@@ -322,8 +322,6 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     print("2. Cancel your order")
 
     choice = input("Please select your option (1 or 2): ").strip()
-    print(f"User choice: {choice}")  # Debugging choice
-
     # Load existing order data
     try:
         with open("customer_order_list.txt", "r") as file:
@@ -331,7 +329,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     except FileNotFoundError:
         order_data = {}
 
-    order_id = generate_order_id(order_data)  # Generate order ID
+    order_id = generate_order_id(order_data)
 
     if choice == '1':
         print(f"\nTotal price to pay: RM {total_price:.2f}")
@@ -358,12 +356,12 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
             # Check if status needs to be updated
             new_status = customer_loyalty_rewards.update_customer_status(order_info['loyalty_points'])
-            if new_status != order_info['status']:  # Update status if it changes
+            if new_status != order_info['status']:
                 order_info['status'] = new_status
                 print(f"{customer_name}'s loyalty status updated to: {new_status}")
 
-        else:  # New user, initialize their data in loyalty rewards
-            new_order_id = str(len(loyalty_data) + 1)  # Generate new order ID
+        else:  # Initialize loyalty rewards data for new users
+            new_order_id = str(len(loyalty_data) + 1)
             loyalty_data[new_order_id] = {
                 "username": customer_name,
                 "total_spending (RM)": total_price,
@@ -399,10 +397,8 @@ def checkout_or_cancel(cart, customer_name, cart_id):
         else:
             print(f"Customer {customer_name} does not exist in our system.")
 
-        # Process payment
-        process_payment(customer_name, total_price)  # Corrected argument order
+        process_payment(customer_name, total_price)
 
-        # Clear cart after receipt generation
         cart.clear()
         return
 
@@ -425,10 +421,10 @@ def view_payment_receipt(cart_id):
 
 
 # Main shopping cart function
-def shopping_cart(logged_in_username):  # Accept the logged-in username as an argument
-    cart = {}  # Initialize cart as a regular dictionary
-    cart_id = generate_cart_id()  # Generate a 10-digit numeric cart ID
-    print(f"Hello, {logged_in_username}! Your cart ID is: {cart_id}\n")  # Use logged_in_username
+def shopping_cart(logged_in_username):
+    cart = {} # Create an empty dictionary to store cart items
+    cart_id = generate_cart_id()
+    print(f"Hello, {logged_in_username}! Your cart ID is: {cart_id}\n")
 
     print('\n-----------------------------------------------')
     print('\t\t\t', '', 'CART MANAGEMENT')
@@ -456,7 +452,7 @@ def shopping_cart(logged_in_username):  # Accept the logged-in username as an ar
         elif option == '4':
             view_cart(cart)
         elif option == '5':
-            checkout_or_cancel(cart, logged_in_username, cart_id)  # Use the logged-in username
+            checkout_or_cancel(cart, logged_in_username, cart_id)
         elif option == '6':
             view_payment_receipt(cart_id)
         elif option == '7':
