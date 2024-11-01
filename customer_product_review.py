@@ -89,14 +89,14 @@ def submitted_review(logged_in_username):
     review_text = input('Enter your review: ')
     rating = input('Rate your product (1-5): ')
 
-    # Validate rating and prompt until valid input is received
+    # Validate the rating input to ensure it is between 1 and 5
     while not validation_rating(rating):
         print("Invalid rating. Please provide a rating between 1 and 5.")
         rating = input('Rate your product (1-5): ')
 
     reviews = load_review()
 
-    # Generate a unique review ID (incremental)
+    # Generate a unique review ID
     next_review_id = str(len(reviews) + 1).zfill(3)
 
     # Add the new review entry under the generated review ID
