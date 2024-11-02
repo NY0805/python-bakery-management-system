@@ -77,7 +77,7 @@ def load_loyalty_rewards():
         return {}  # return empty dictionary if the file does not exist
 
 
-def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the customer_loyalty_rewards.txt file
+def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the file
     with open('customer_loyalty_rewards.txt', 'w') as file:
         json.dump(rewards, file, indent=4)
 
@@ -93,7 +93,7 @@ def process_payment(username, total_price):  # Process payment and update the us
         print(f"|⚠️Error: total_price must be a valid number, got {total_price}|")
         return
 
-    # Check if user exists in customer_loyalty_rewards.txt
+    # Check if user exists in customer_loyalty_rewards.txt file
     user_rewards = [order_id for order_id, data in rewards.items() if data['username'] == username]
 
     # Determine new loyalty points
@@ -107,24 +107,24 @@ def process_payment(username, total_price):  # Process payment and update the us
             "total_spending (RM)": total_price,
             "loyalty_points": points_change,
             "status": "MORNING GLORY'S STANDARD",
-            "redeem_rate (RM)": REDEEM_RATES["MORNING GLORY'S STANDARD"],  # Set initial redeem rate
+            "redeem_rate (RM)": REDEEM_RATES["MORNING GLORY'S STANDARD"],
             "voucher_redeem": 0,
             "redeem_history": []
         }
         print(f"New user {username} added to loyalty rewards.")
 
-        # Also update customer.txt with new loyalty points
+        # Also update customer.txt file with new loyalty points
         if username in customers:
             customers[username]['loyalty_points'] = rewards[new_order_id]['loyalty_points']
             save_customer_data(customers)
             print("Customer loyalty points updated in customer.txt.")
 
     else:
-        # Existing user, update their spending and loyalty points
+        # Update the total spending and loyalty points for existing customer
         for order_id in user_rewards:
             history = rewards[order_id]
             history['total_spending (RM)'] += total_price
-            history['loyalty_points'] += points_change  # Correctly update points
+            history['loyalty_points'] += points_change
 
             # Update customer status and redeem rate
             new_status = update_customer_status(history['loyalty_points'])
@@ -135,7 +135,7 @@ def process_payment(username, total_price):  # Process payment and update the us
             if username in customers:
                 customers[username]['loyalty_points'] = history['loyalty_points']
                 save_customer_data(customers)
-            break  # No need to continue once we've updated
+            break
 
     # Save updated loyalty rewards
     save_loyalty_rewards(rewards)
@@ -166,7 +166,6 @@ def update_loyalty_rewards(username, points_change, new_status): # Update loyalt
         if history['username'] == username:
             history['loyalty_points'] += points_change
             history['status'] = new_status
-            # Keep the redeem rate fixed as initially set, regardless of status upgrade
             if 'redeem_rate (RM)' not in history or history['redeem_rate (RM)'] == 0:
                 history['redeem_rate (RM)'] = REDEEM_RATES.get(new_status, 0)
             break
@@ -265,13 +264,12 @@ def view_loyalty_rewards(username): # Display loyalty rewards information for cu
         header = f"{'Order ID':<10} | {'Total Spending (RM)':<20} | {'Points Earned':<15} | {'Status':<20} | {'Redeem Rate (RM)':<15} | {'Vouchers Redeemed':<15}"
         print(header)
         print('-' * 150)
-        # Display the values in aligned format
         for order_id, r in rewards.items():
             if r['username'] == username:
                 points_earned = r.get('loyalty_points', '-')
                 voucher_redeemed = r.get('voucher_redeem', '-')
-                status = r.get('status', '-')  # Get status to avoid KeyError
-                redeem_rate = r.get('redeem_rate (RM)', '-')  # Get redeem rate to avoid KeyError
+                status = r.get('status', '-')
+                redeem_rate = r.get('redeem_rate (RM)', '-')
                 print(
                     f"{order_id:<10} | {r['total_spending (RM)']:<20} | {points_earned:<15} | {status:<20} | {redeem_rate:<15} | {voucher_redeemed:<15}")
                 # Display redemption history
