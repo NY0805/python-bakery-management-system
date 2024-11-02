@@ -22,10 +22,9 @@ def discount_management():
 # Function to save product data and discounts to the file
 def save_discounts(discounts):
     with open('product_discount.txt', 'w') as file:
-        json.dump(discounts, file, indent=4)  # Write the dictionary as JSON with indentation
+        json.dump(discounts, file, indent=4)
 
 
-# Load the initial product data from the file
 discounts = discount_management()
 
 
@@ -33,7 +32,7 @@ def validate_discount_input():
     while True:
         try:
             discount = float(input("Enter discount percentage (0-100): "))
-            if 0 <= discount <= 100:  # Ensure discount is within valid range
+            if 0 <= discount <= 100:  # Ensure discount input is within valid range
                 return discount
             else:
                 print("⚠️ Invalid input. Discount must be between 0 and 100.")
@@ -58,7 +57,7 @@ def add_discount():
     # Validate stock input
     while True:
         stock_input = input("Enter product stock: ")
-        if stock_input.isdigit():  # Check if the input is a digit
+        if stock_input.isdigit():  # Check if the input to see is a digit or not
             stock = int(stock_input)
             break  # Break the loop if valid input
         else:
@@ -77,7 +76,7 @@ def add_discount():
             print("Invalid input! Please enter numbers only.")
 
     # Validate discount input
-    discount = validate_discount_input()  # Get a valid discount percentage
+    discount = validate_discount_input()
 
     # Create a new product entry
     new_entry_number = str(len(products) + 1)  # Increment the count for the new entry
@@ -93,7 +92,6 @@ def add_discount():
     # Add the new entry to the products dictionary
     products[new_entry_number] = new_entry
 
-    # Write back to the file, retaining existing products
     save_discounts(products)
 
     print(f"New product {product_name} added with a discount of {discount} %.")
@@ -108,7 +106,7 @@ def delete_discount():
         if details['product_code'] == product_code:
             found = True
             if details['Discount'] != "0%":
-                details['Discount'] = "0%"  # Set the discount to 0%
+                details['Discount'] = "0%"
                 save_discounts(discounts)
                 print(f"Product {product_code}'s discount has been deleted and set to 0%.")
             else:
@@ -128,7 +126,7 @@ def modify_discount():
         if details['product_code'] == product_code:
             found = True
             new_discount = validate_discount_input()  # Use the validated input
-            details['Discount'] = f"{new_discount}%"  # Update the discount field
+            details['Discount'] = f"{new_discount}%"
             save_discounts(discounts)  # Save the updated discounts to the file
             print(f"Discount for product {product_code} updated to {new_discount}%.")
             break
@@ -137,6 +135,7 @@ def modify_discount():
         print(f"|⚠️No discount found for product {product_code}. Use 'Add Discount' to create a new discount.|")
 
 
+# Function to print current product discount details
 def display_discounts():
     print('\n -- Current Discounts and Product Details -- ')
     print('─' * 70)
