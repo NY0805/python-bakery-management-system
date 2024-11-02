@@ -110,7 +110,7 @@ def sign_up():
 def login():
     customer_name = input('\nName: ')
 
-    # Assume customer_info is loaded from customer.txt and contains details for each customer
+    # Load customer_info to check customer’s details and account status
     if customer_name in customer_info:
         # Check the account status of the customer
         if customer_info[customer_name]['account_status'] == 'inactive':
@@ -144,7 +144,7 @@ def login():
         print('+------------------------------------------------------------+')
         print('Directing to sign-up page......\n')
         sign_up()
-        return None  # Return None if sign-up is initiated
+        return None
 
 
 # Function to update customer information
@@ -158,7 +158,7 @@ def update_personal_information():
 
         # Check if the username exists in customer_info
         if customer_username in customer_info:
-            customers = customer_info[customer_username]  # Access the user's info dictionary
+            customers = customer_info[customer_username]
             print("What do you want to update?")
             print("1. Password")
             print("2. Age")
@@ -186,7 +186,7 @@ def update_personal_information():
                         new_age = int(input("Enter new age: "))
                         if new_age >= 12:
                             customers["age"] = new_age
-                            break  # Exit the loop on success
+                            break
                         else:
                             print('\n+----------------------+')
                             print('|⚠️ You are under age. |')
@@ -243,9 +243,9 @@ def update_personal_information():
                 print("|⚠️ Invalid choice selected.  |")
                 print("|   Please choose a valid option (1-6). |")
                 print("+----------------------------+\n")
-                continue  # Re-prompt for valid choice
+                continue # Loop back to prompt the user for a valid option
 
-            save_info(customer_info)  # Save the entire customer_info dictionary
+            save_info(customer_info)  # Save updated customer information to file
             print("Your information has been updated.")
             break  # Exit after successful update
 
@@ -253,7 +253,7 @@ def update_personal_information():
             print("Customer not found. Please enter a valid username.\n")
 
 
-# Function to manage customer account (view or delete)
+# Function to enable customer to manage their account
 def account_management():
     customer_info = load_data_from_customer()
 
@@ -376,12 +376,12 @@ def customer_menu():
         if option == "1":
             sign_up()
         elif option == "2":
-            logged_in_username = login()  # Update the logged-in username
+            logged_in_username = login()
         elif option == "3":
             product_browsing.browse_products()
         elif option == "4":
             if logged_in_username:
-                cart_management.shopping_cart(logged_in_username)  # Pass the logged-in username to the shopping cart
+                cart_management.shopping_cart(logged_in_username)
             else:
                 print("You need to log in first.")
         elif option == "5":
