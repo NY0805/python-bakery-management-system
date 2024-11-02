@@ -108,16 +108,13 @@ def wrap_data(data_set, width=60):
     for data in data_set:
         info_line = []
         info = data.split()
-        length = 0
 
         for word in info:
-            if length + len(word) + len(info_line) <= width:
+            if len(' '.join(info_line + [word])) <= width:
                 info_line.append(word)
-                length += len(word)
             else:
                 wrapped_lines.append(' '.join(info_line))
                 info_line = [word]
-                length = len(word)
         if info_line:
             wrapped_lines.append(' '.join(info_line))
 

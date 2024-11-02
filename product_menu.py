@@ -49,16 +49,13 @@ def wrap_data(formatted_product_data, width=65):
     for data in formatted_product_data:
         info_line = []
         info = data.split()
-        length = 0
 
         for word in info:
-            if length + len(word) + len(info_line) <= width:
+            if len(' '.join(info_line + [word])) <= width:
                 info_line.append(word)
-                length += len(word)
             else:
                 wrapped_lines.append(' '.join(info_line))
                 info_line = [word]
-                length = len(word)
         if info_line:
             wrapped_lines.append(' '.join(info_line))
 
@@ -122,4 +119,4 @@ def menu():
                 print('\n' + '-' * 139)
 
 
-#menu()
+menu()

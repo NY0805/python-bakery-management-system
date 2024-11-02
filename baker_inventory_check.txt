@@ -1,19 +1,13 @@
 {
-    "7368": {
-        "recipe_category": "Biscuits",
-        "recipe_name": "bello",
-        "production_quantity": 20,
-        "date_of_production": "09-04-2024"
-    },
     "2792": {
         "recipe_category": "Biscuits",
-        "recipe_name": "bello",
+        "recipe_name": "santa gingerbread",
         "production_quantity": 40,
         "date_of_production": "07-07-2024"
     },
     "4970": {
         "recipe_category": "Biscuits",
-        "recipe_name": "bello",
+        "recipe_name": "choco cookies",
         "production_quantity": 30,
         "date_of_production": "30-10-2024"
     }

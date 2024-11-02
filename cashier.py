@@ -1,9 +1,7 @@
 import json  # import json text file to record data
-
 import cashier_discount_management
 import product_menu
 import cashier_sales_report
-
 import cashier_transaction_completion
 from manager import load_data_from_manager
 
@@ -40,7 +38,6 @@ def printed_centered(info):
 
 
 cashier_info = load_data_from_file()  # store the data that retrieved from file into cashier_info
-manager = load_data_from_manager()  # store the data that retrieved from file into manager
 
 
 # cashier account login function
@@ -71,7 +68,7 @@ def cashier_accounts():
             cashier_password = input('Password: ')
 
         print('\nLogin successfully!')  # login successfully if the password meet the 2 requirements above
-        print('Welcome, cashier', cashier_username, '!')
+        print(f'Welcome, cashier {cashier_username}!')
         #  display cashier privilege
         while True:
             print('')
@@ -106,4 +103,4 @@ def cashier_accounts():
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
 
-cashier_accounts()
+#cashier_accounts()

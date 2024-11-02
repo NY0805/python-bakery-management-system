@@ -402,8 +402,7 @@ def monthly_sales_performance():
 
 
 # define the function to calculate the product popularity based on users option
-def product_popularity_customer_review(report_year, report_month, best_seller, least_seller, max_quantity, min_quantity,
-                                       all):
+def product_popularity_customer_review(report_year, report_month, best_seller, least_seller, all):
     # initialize variables to store ratings and reviews for best and least seller product
     best_rating = 0
     best_count = 0
@@ -552,7 +551,7 @@ def product_popularity():
 
                             # get customer rating and review
                             best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(
-                                report_year, None, best_seller, least_seller, max_quantity, min_quantity, all=False)
+                                report_year, None, best_seller, least_seller, all=False)
 
                             # print the summary for yearly report
                             print('\n----------------------------------------------------------')
@@ -648,8 +647,7 @@ def product_popularity():
 
                                 # get the customer average ratings and review
                                 best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(
-                                    report_year, report_month, best_seller, least_seller, max_quantity, min_quantity,
-                                    all=False)
+                                    report_year, report_month, best_seller, least_seller, all=False)
 
                                 # print the summary of monthly report
                                 print('\n----------------------------------------------------------')
@@ -717,7 +715,7 @@ def product_popularity():
 
                     # get customer average rating and review
                     best_average_rating, best_random_customer, best_random_review, least_average_rating, least_random_customer, least_random_review, best_count, least_count = product_popularity_customer_review(
-                        None, None, best_seller, least_seller, max_quantity, min_quantity, all=True)
+                        None, None, best_seller, least_seller, all=True)
 
                     # print the summary of overall product popularity report
                     print('\n----------------------------------------------------------')

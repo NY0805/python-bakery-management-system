@@ -155,9 +155,10 @@ def product_management():
                     break
                 elif option_product_management == '3':
                     delete_product()
+                    break
                 elif option_product_management == '4':
                     print('\nExiting to the previous page......')
-                    break
+                    return False
 
 
 # define the function to let user select which unsaved product to record and record its category
@@ -466,21 +467,23 @@ def product_details():
                     duplicate_found = False
                     for key, value in product_data.items():
                         # if serial number duplicate, prompt user to enter again
-                        if serial_number in value['serial_number'] or serial_number in serial_numbers:
+                        if serial_number in value['serial_number']:
                             duplicate_found = True
-                            print(
-                                '\n+-------------------------------------+')
-                            print(
-                                '|⚠️ Duplicate serial number detected. |')
-                            print(
-                                '+-------------------------------------+\n')
                             break
 
-                    if not duplicate_found:
-                        serial_numbers.append(serial_number)  # if the serial number does not duplicate, append it
-                        i += 1
-                        break
+                    if serial_number in serial_numbers:
+                        duplicate_found = True
 
+                    if duplicate_found:
+                        print(
+                            '\n+-------------------------------------+')
+                        print(
+                            '|⚠️ Duplicate serial number detected. |')
+                        print(
+                            '+-------------------------------------+\n')
+                    else:
+                        serial_numbers.append(serial_number)  # if the serial number does not duplicate, append it
+                        break
                 else:
                     print(
                         '\n+---------------------------------------------------------------------------------------------+')
@@ -908,6 +911,7 @@ def update_product():
                 print('\n❗Data not found.')
 
 
+# define function to delete selected product
 def delete_product():
     while True:
         # display product list with index number
@@ -916,7 +920,7 @@ def delete_product():
         print('\t\t\t\t', '', 'PRODUCT LIST')
         print('-----------------------------------------------')
         for name, info in product_data.items():
-            print(f'{index}. {name.title()}')
+            print(f'{index}. {name} - {info['product_name'].title()}')
             index += 1
         print(f'{len(product_data) + 1}. cancel')  # option to cancel the process
 
@@ -964,4 +968,4 @@ def delete_product():
 
 
 #update_product()
-#product_management()
+product_management()

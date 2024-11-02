@@ -1,22 +1,4 @@
 {
-    "001": {
-        "category": "Breads",
-        "product_name": "banana bread",
-        "product_code": "BR890",
-        "serial_number": [
-            "bread1"
-        ],
-        "quantity_produced": "2",
-        "batch_number": "001",
-        "date_of_production": "09-08-2024",
-        "shelf_life": "5",
-        "expiry_date": "17-08-2024",
-        "recipe": "smile 2",
-        "baker_name": "r",
-        "allergens": [
-            "r"
-        ]
-    },
     "003": {
         "category": "Pastries",
         "product_name": "apple pie",
@@ -74,10 +56,7 @@
         "baker_name": "baker6",
         "allergens": [
             "coffee",
-            "biscuit",
-            "hi",
-            "djdl",
-            "gxfc"
+            "biscuit"
         ]
     },
     "007": {
@@ -95,25 +74,6 @@
         "baker_name": "baker2",
         "allergens": [
             "apple"
-        ]
-    },
-    "005": {
-        "category": "Pastries",
-        "product_name": "bello minion biscuit",
-        "product_code": "PA325",
-        "serial_number": [
-            "003",
-            "001"
-        ],
-        "quantity_produced": "3",
-        "batch_number": "005",
-        "date_of_production": "09-04-2024",
-        "shelf_life": "7",
-        "expiry_date": "09-04-2024",
-        "baker_name": "crustking",
-        "allergens": [
-            "coffee",
-            "mango"
         ]
     },
     "008": {
@@ -160,6 +120,8 @@
         "product_name": "garlic bun",
         "product_code": "GR013",
         "serial_number": [
+            "bun1",
+            "bun2",
             "bun3"
         ],
         "quantity_produced": "3",
@@ -177,7 +139,9 @@
         "product_name": "matcha layer cake",
         "product_code": "MAT030",
         "serial_number": [
-            "cake4"
+            "cake1",
+            "cake2",
+            "cake3"
         ],
         "quantity_produced": "3",
         "batch_number": "012",
@@ -187,6 +151,26 @@
         "baker_name": "christine",
         "allergens": [
             "no"
+        ]
+    },
+    "B001": {
+        "category": "Biscuits",
+        "product_name": "minion biscuit",
+        "product_code": "MIN030",
+        "serial_number": [
+            "biscuit1",
+            "biscuit2"
+        ],
+        "quantity_produced": "2",
+        "batch_number": "B001",
+        "date_of_production": "09-04-2024",
+        "shelf_life": "8",
+        "expiry_date": "17-04-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "gluten",
+            "egg",
+            "milk"
         ]
     }
 }
