@@ -107,10 +107,11 @@ def menu():
     for value in product_data.values():
         category = value['category']
 
+        # ensure the function only retrieve the product data existed in both file
         for name in product_inventory.values():
             if name['product_name'] == value['product_name']:
 
-                # if the category does not exist in the dictionary, create a new list foe that category
+                # if the category does not exist in the dictionary, create a new list for that category
                 if category not in category_groups:
                     category_groups[category] = []
 
