@@ -35,12 +35,6 @@
         "price": "RM 4.50",
         "description": "Rich in vitamin A and perfect for healthy treat"
     },
-    "005": {
-        "product_name": "bello minion biscuit",
-        "stock": 1,
-        "price": "RM 3.00",
-        "description": "Cute and attractive appearance with mango filling"
-    },
     "007": {
         "product_name": "apple cake",
         "stock": 1,
@@ -64,5 +58,11 @@
         "stock": 2,
         "price": "RM 12.00",
         "description": "A delicate, multi-layered cake with earthy matcha flavor and a creamy, smooth finish."
+    },
+    "B001": {
+        "product_name": "minion biscuit",
+        "stock": 1,
+        "price": "RM 3.00",
+        "description": "Cute and attractive appearance with mango filling"
     }
 }

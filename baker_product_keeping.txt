@@ -158,7 +158,6 @@
         "product_name": "minion biscuit",
         "product_code": "MIN030",
         "serial_number": [
-            "biscuit1",
             "biscuit2"
         ],
         "quantity_produced": "2",
@@ -170,7 +169,8 @@
         "allergens": [
             "gluten",
             "egg",
-            "milk"
+            "milk",
+            "mango"
         ]
     }
 }
