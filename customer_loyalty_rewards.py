@@ -141,7 +141,7 @@ def process_payment(username, total_price):  # Process payment and update the us
     save_loyalty_rewards(rewards)
 
 
-def update_customer_loyalty_points(customer_name, points_change): # Update loyalty points for a specific customer
+def update_customer_loyalty_points(customer_name, points_change): # Update loyalty points for customer
     try:
         with open("customer.txt", "r") as file:
             customer_data = json.load(file)
@@ -251,7 +251,7 @@ def redeem_history(username, total_spend, points_earned, status): # Log the rede
     save_loyalty_rewards(rewards)
 
 
-def view_loyalty_rewards(username): #Display loyalty rewards information for a specific user
+def view_loyalty_rewards(username): # Display loyalty rewards information for customer
     rewards = load_loyalty_rewards()  # Load from customer_loyalty_rewards.txt
 
     # Check if the username exists in the rewards data
