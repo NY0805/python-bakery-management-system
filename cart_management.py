@@ -352,7 +352,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
 
         if order_info:  # If customer exists, update points
             order_info['loyalty_points'] += points_change  # Add points
-            print(f"{customer_name}'s loyalty points updated to: {order_info['loyalty_points']}")
+            print(f"{customer_name}'s loyalty points has been updated. ")
 
             # Check if status needs to be updated
             new_status = customer_loyalty_rewards.update_customer_status(order_info['loyalty_points'])

@@ -841,5 +841,36 @@
         "total_price (RM)": "4.50",
         "order_date": "31-10-2024",
         "status": "Order Placed"
+    },
+    "7585133752": {
+        "order_id": "ORD4137",
+        "username": "nct",
+        "items_ordered": [
+            "vanilla muffin x 2"
+        ],
+        "total_price (RM)": "11.00",
+        "order_date": "02-11-2024",
+        "status": "Order Placed"
+    },
+    "7129236863": {
+        "order_id": "ORD1264",
+        "username": "nct",
+        "items_ordered": [
+            "matcha layer cake x 3"
+        ],
+        "total_price (RM)": "36.00",
+        "order_date": "02-11-2024",
+        "status": "Order Placed"
+    },
+    "6525411532": {
+        "order_id": "ORD3523",
+        "username": "nct",
+        "items_ordered": [
+            "vanilla muffin x 2",
+            "matcha layer cake x 2"
+        ],
+        "total_price (RM)": "35.00",
+        "order_date": "02-11-2024",
+        "status": "Order Placed"
     }
 }

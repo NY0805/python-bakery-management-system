@@ -121,7 +121,7 @@ def process_payment(username, total_price):  # Process payment and update the us
 
     else:
         # Existing user, update their spending and loyalty points
-        for order_id in user_rewards:  # Only iterate over user's orders
+        for order_id in user_rewards:
             history = rewards[order_id]
             history['total_spending (RM)'] += total_price
             history['loyalty_points'] += points_change  # Correctly update points
@@ -139,7 +139,6 @@ def process_payment(username, total_price):  # Process payment and update the us
 
     # Save updated loyalty rewards
     save_loyalty_rewards(rewards)
-    print("Order placed. Please proceed to payment for the receipt.")
 
 
 def update_customer_loyalty_points(customer_name, points_change): # Update loyalty points for a specific customer
@@ -151,9 +150,6 @@ def update_customer_loyalty_points(customer_name, points_change): # Update loyal
             if customer['customer_username'] == customer_name:
                 customer['loyalty_points'] += points_change
                 new_status = update_customer_status(customer['loyalty_points'])
-                if new_status != customer['status']:
-                    print(f"Updating status from {customer['status']} to {new_status}")
-                    customer['status'] = new_status
                 break
 
         save_customer_data(customer_data)
