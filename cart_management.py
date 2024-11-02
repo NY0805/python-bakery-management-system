@@ -185,7 +185,7 @@ def remove_item_from_cart(cart):
 
         # Check user input
         if continue_removing in ['y', 'yes']:
-            continue  # Continue the loop to remove more items
+            continue
         elif continue_removing in ['n', 'no']:
             print("Exiting item removal process.")
             break  # Exit the removal process
