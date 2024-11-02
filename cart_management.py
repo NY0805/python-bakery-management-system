@@ -79,7 +79,7 @@ def load_discount_data():
 
 # Function to enable customers to add items to the cart
 def add_item_to_cart(cart):
-    while True:  # Loop to allow re-entering product code if the user chooses 'no'
+    while True:
         product_menu.menu()
         baker_data = load_baker_data()  # Load baker product data
         manager_data = load_manager_data()  # Load manager product data
@@ -95,7 +95,7 @@ def add_item_to_cart(cart):
                 # Get the price from manager_data
                 for key, value in manager_data.items():
                     if value['product_name'] == product_name:
-                        product_price = float(value.get("price", 0).replace('RM ', ''))  # Convert price to float
+                        product_price = float(value.get("price", 0).replace('RM ', ''))
                         break  # Exit loop once the product is found
 
                 # Check if the product has a discount in discount_data
@@ -132,8 +132,8 @@ def add_item_to_cart(cart):
                 if product_code_input not in cart:
                     cart[product_code_input] = {
                         'product_name': product_name,
-                        'price': discounted_price,  # Store discounted price as float
-                        'quantity': quantity  # Initialize quantity
+                        'price': discounted_price,
+                        'quantity': quantity
                     }
                 else:
                     cart[product_code_input]['quantity'] += quantity  # Update quantity in the cart
@@ -141,7 +141,7 @@ def add_item_to_cart(cart):
                 print(f"\n{product_name} x{quantity} has been added to your cart.")
                 print(f"Total price: RM {discounted_price} x {quantity} = RM {total_price}")
 
-                # Prompt the user if they want to return to the main menu
+                # Ask user if they want to return to the main menu
                 while True:
                     choice = input("\nDo you want to return to the main menu? (y/n): ").lower()
 
@@ -155,7 +155,7 @@ def add_item_to_cart(cart):
                         print("\n+--------------------------------------+")
                         print("|⚠️ Invalid input. Please enter 'y' or 'n'. |")
                         print("+--------------------------------------+\n")
-                break  # Exit the outer loop if product is added successfully
+                break  # Exit the loop
 
         else:
             # Print the message if product cannot be found
@@ -183,7 +183,7 @@ def remove_item_from_cart(cart):
         continue_removing = input(
             "\nDo you want to continue removing from the cart? (yes = y / no = n): ").lower().strip()
 
-        # Check user input for continuation or exit
+        # Check user input
         if continue_removing in ['y', 'yes']:
             continue  # Continue the loop to remove more items
         elif continue_removing in ['n', 'no']:
@@ -227,8 +227,7 @@ def modify_item_quantity(cart):
             print("|⚠️ Product cannot be found in the cart!|")
 
         while True:
-            continue_modifying = input(
-                "\nDo you want to continue modifying item quantities? (yes = y / no = n): ").lower().strip()
+            continue_modifying = input("\nDo you want to continue modifying item quantities? (yes = y / no = n): ").lower().strip()
             if continue_modifying == 'y':
                 break  # Continue modifying
             elif continue_modifying == 'n':
@@ -240,7 +239,7 @@ def modify_item_quantity(cart):
 
 # Function to view the cart
 def view_cart(cart):
-    while True:  # Loop to allow re-viewing the cart if 'no' is selected
+    while True:
         if not cart:
             print("Your cart is empty.")  # Print this message if the cart is empty
             return
@@ -256,7 +255,7 @@ def view_cart(cart):
 
         print("-" * 40)
 
-        # Prompt the user if they want to return to the main menu
+        # Ask customer if they want to return to the main menu
         choice = input("\nDo you want to return to the main menu? (y/n): ").lower()
 
         if choice == 'y':
@@ -270,7 +269,7 @@ def view_cart(cart):
             print("+--------------------------------------+\n")
 
 
-# Function to save the order to file with cart_id as key
+# Function to save the order to file
 def save_order_to_file(cart, customer_name, cart_id, order_id, status):
     # Get the current date in 'DD-MM-YYYY' format
     order_date = datetime.now().strftime("%d-%m-%Y")
@@ -286,12 +285,11 @@ def save_order_to_file(cart, customer_name, cart_id, order_id, status):
         "order_id": order_id,
         "username": customer_name,
         "items_ordered": [f"{item['product_name']} x {item['quantity']}" for item in cart.values()],
-        "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.2f}",  # Format total price
-        "order_date": order_date,  # Add the order date in 'DD-MM-YYYY' format
+        "total_price (RM)": f"{sum(item['quantity'] * item['price'] for item in cart.values()):.2f}",
+        "order_date": order_date,
         "status": status
     }
 
-    # Write back to the file without overwriting existing orders
     with open("customer_order_list.txt", "w") as file:
         json.dump(order_data, file, indent=4)
 
