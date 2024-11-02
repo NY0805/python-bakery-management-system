@@ -23,10 +23,11 @@ def determine_loyalty_points(total_price):
 
     # Calculate loyalty points
     points = int(total_price * BASE_POINTS_PER_RM)
-    return points  # Directly return points
+    return points
 
 
-def update_customer_status(points): # Determine customer status based on their loyalty points
+# Determine customer status based on their loyalty points
+def update_customer_status(points):
     if points >= GOLD_REQUIREMENT:
         return "MORNING GLORY'S GOLD"
     elif points >= SILVER_REQUIREMENT:
@@ -82,7 +83,8 @@ def save_loyalty_rewards(rewards): # Save customer loyalty rewards data to the f
         json.dump(rewards, file, indent=4)
 
 
-def process_payment(username, total_price):  # Process payment and update the user's loyalty points and status
+# Function to update customer loyalty points and status during the payment process based on total spending
+def process_payment(username, total_price):
     rewards = load_loyalty_rewards()
     customers = load_customer_data()
 
@@ -100,7 +102,7 @@ def process_payment(username, total_price):  # Process payment and update the us
     points_change = determine_loyalty_points(total_price)
 
     if not user_rewards:
-        # New user, initialize their data in customer_loyalty_rewards.txt
+        # Initialize new customer data in customer_loyalty_rewards.txt`file
         new_order_id = str(len(rewards) + 1)  # Generate a new order ID
         rewards[new_order_id] = {
             "username": username,
@@ -113,7 +115,7 @@ def process_payment(username, total_price):  # Process payment and update the us
         }
         print(f"New user {username} added to loyalty rewards.")
 
-        # Also update customer.txt file with new loyalty points
+        # Update customer.txt file with new loyalty points
         if username in customers:
             customers[username]['loyalty_points'] = rewards[new_order_id]['loyalty_points']
             save_customer_data(customers)
@@ -131,7 +133,7 @@ def process_payment(username, total_price):  # Process payment and update the us
             history['status'] = new_status
             history['redeem_rate (RM)'] = REDEEM_RATES.get(new_status, 0)
 
-            # Update customer.txt with the new points
+            # Update customer.txt file with the new points
             if username in customers:
                 customers[username]['loyalty_points'] = history['loyalty_points']
                 save_customer_data(customers)
