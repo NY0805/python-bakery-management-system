@@ -19,8 +19,26 @@ def load_data_from_product():
         return {}  # return empty dictionary if the file does not exist
 
 
-product_data = load_data_from_product()  # store the data that retrieved from file into product_data
+# # define the function that loads product inventory data from file
+def load_data_from_product_inventory():
+    try:
+        file = open('manager_product_inventory.txt', 'r')  # open the file and read
+        content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
+        file.close()  # close the file after reading
+        if content:  # start to check if the file is not empty
+            try:
+                return json.loads(
+                    content)  # parse the content as json format into python dictionary and return the content if successfully parsed
+            except json.JSONDecodeError:
+                return {}  # return empty dictionary if the content does not parse successfully
+        else:
+            return {}  # return empty dictionary if the file is empty
+    except FileNotFoundError:
+        return {}  # return empty dictionary if the file does not exist
 
+
+product_data = load_data_from_product()  # store the data that retrieved from file into product_data
+product_inventory = load_data_from_product_inventory()  # store the data that retrieved from file into product_inventory
 
 # Format the data retrieve from inventory product.txt
 def format_product_data(product, details):
@@ -89,12 +107,15 @@ def menu():
     for value in product_data.values():
         category = value['category']
 
-        # if the category does not exist in the dictionary, create a new list foe that category
-        if category not in category_groups:
-            category_groups[category] = []
+        for name in product_inventory.values():
+            if name['product_name'] == value['product_name']:
 
-        # if category exist, append the product after format data
-        category_groups[category].append(format_product_data(value, product_details).split('\n'))
+                # if the category does not exist in the dictionary, create a new list foe that category
+                if category not in category_groups:
+                    category_groups[category] = []
+
+                # if category exist, append the product after format data
+                category_groups[category].append(format_product_data(value, product_details).split('\n'))
 
     # loop through each category to print its product
     for category, products in category_groups.items():
