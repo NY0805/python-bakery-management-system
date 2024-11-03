@@ -50,6 +50,4 @@ def order_tracking():
         print('|⚠️ Order ID cannot be found. Please check and try again!|')
 
 
-#order_tracking()
-
 

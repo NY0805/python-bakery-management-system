@@ -751,5 +751,4 @@ def product_popularity():
                     print('+-------------------------------------+')
 
 
-#generate_sales_report()
-#product_popularity()
+

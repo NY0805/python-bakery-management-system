@@ -388,4 +388,3 @@ def inventory_control():
             print('|⚠️ Invalid input. Please enter again. |')
             print('+--------------------------------------+')
 
-#inventory_control()

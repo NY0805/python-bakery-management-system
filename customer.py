@@ -406,5 +406,3 @@ def customer_menu():
             print("|⚠️ Invalid option, please try again.|")
 
 
-
-customer_menu()

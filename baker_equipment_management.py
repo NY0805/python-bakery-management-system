@@ -506,4 +506,4 @@ def equipment_maintenance():
                 print("|⚠️ Please enter 'y' or 'n'. |")
                 print('+----------------------------+\n')
 
-#equipment_management()
+

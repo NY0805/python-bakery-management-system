@@ -104,7 +104,5 @@ def baker_accounts():
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
-        #  display baker privilege
 
 
-#baker_accounts()

@@ -1194,5 +1194,3 @@ def delete_recipe():
             print('+-----------------------------------------+')
 
 
-#update_recipe()
-#recipe_management()

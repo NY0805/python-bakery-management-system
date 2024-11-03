@@ -113,4 +113,3 @@ def submitted_review(logged_in_username):
     print('Your review has been successfully received.')
 
 
-#submitted_review

@@ -102,5 +102,3 @@ def cashier_accounts():
                 print('\n+--------------------------------------+')
                 print('|⚠️ Invalid input. Please enter again. |')
                 print('+--------------------------------------+')
-
-#cashier_accounts()
