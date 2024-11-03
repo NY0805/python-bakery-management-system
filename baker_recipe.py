@@ -406,7 +406,7 @@ def is_equipment_duplicate(equipment_name, equipments):
 
 
 # define the function that let user add equipment for recipe
-def recipe_equipment(update_equipment):
+def recipe_equipment(add_equipment):
     equipments = []  # initialize an empty list to store selected equipment
     printed_centered('EQUIPMENT LIST')
     for category, items in equipment_category_groups.items():
@@ -419,7 +419,7 @@ def recipe_equipment(update_equipment):
     print('💡 Please enter the name of selected equipment (or type "done" to finish)')
 
     # if update_equipment equals to True, prompt user to enter equipment
-    if update_equipment:
+    if add_equipment:
         while True:
             equipment_name = input(f'\n✏️ Enter the name of selected equipment {len(equipments) + 1}: ').lower().strip()
 
@@ -524,7 +524,7 @@ def recipe_instruction():
 
     category, recipe_name = create_recipe()  # get category and recipe name
     ingredients, ingredient_notes = recipe_ingredient(adding_ingredient=True, update_ingredient=True)  # get selected ingredient list and ingredient notes
-    equipments = recipe_equipment(update_equipment=True)  # get selected equipment list
+    equipments = recipe_equipment(add_equipment=True)  # get selected equipment list
 
     # print the selected equipments and ingredients
     print('')
@@ -682,7 +682,7 @@ def display_recipe(recipe):
     for item in recipe['equipment_used']:
         print(f'{equipment_index}. {item.title()}')
         equipment_index += 1
-    print(f'\n{"baking_temperature (°C)":<26}: {recipe["baking_temperature"]}')
+    print(f'\n{"baking_temperature (°C)":<25}: {recipe["baking_temperature"]}')
     print(f'{"baking_time (min)":<25}: {recipe["baking_time"]}')
     print(f'{"cost_per_unit (RM)":<25}: {recipe["cost_per_unit"]}')
     print(f'\n{"instructions"}:')
@@ -886,12 +886,12 @@ def update_recipe():
 
                 # prompt user to add, edit or delete ingredient
                 edit_equipment = input(
-                    "Add, edit or delete ingredient? \nPlease enter 'add', 'edit' or 'delete' (or enter 'cancel' to stop): ")
+                    "Add, edit or delete equipment? \nPlease enter 'add', 'edit' or 'delete' (or enter 'cancel' to stop): ")
 
                 # if user choose to add
                 if edit_equipment == 'add':
                     # call the recipe_equipment function with the update_ingredient parameter = False
-                    new_equipment = recipe_equipment(update_equipment=False)
+                    new_equipment = recipe_equipment(add_equipment=True)
                     if new_equipment:
                         recipe_data[selected_recipe_key]['equipment_used'].extend(new_equipment)
                         save_info(recipe_data)  # get the new equipment and save to baker recipe file
@@ -907,7 +907,7 @@ def update_recipe():
                         try:
                             # get the selected equipment
                             new_edit_equipment = input(
-                                "\nPlease enter the index number of ingredient you want to edit (or enter 'cancel')\n>>> ")
+                                "\nPlease enter the index number of equipment you want to edit (or enter 'cancel')\n>>> ")
 
                             if not validation_empty_entries(new_edit_equipment):
                                 continue
@@ -920,7 +920,7 @@ def update_recipe():
 
                             # if selected index falls within valid range
                             if 1 <= new_edit_equipment <= len(recipe_data[selected_recipe_key]['equipment_used']):
-                                new_equipment = recipe_equipment(update_equipment=False)
+                                new_equipment = recipe_equipment(add_equipment=False)
 
                                 if new_equipment:  # get the new value of updated equipment
                                     recipe_data[selected_recipe_key]['equipment_used'][new_edit_equipment - 1] = \
@@ -949,7 +949,7 @@ def update_recipe():
                         try:
                             # get the selected equipment
                             delete_equipment = input(
-                                "\nPlease enter the index number of ingredient you want to delete (or enter 'cancel')\n>>> ").lower().strip()
+                                "\nPlease enter the index number of equipment you want to delete (or enter 'cancel')\n>>> ").lower().strip()
                             if not validation_empty_entries(delete_equipment):
                                 continue
 
@@ -991,6 +991,7 @@ def update_recipe():
                 instructions = []  # initialize an empty list to store new instructions
 
                 instruction_index = 1
+                print('')
                 for instruction in recipe_data[selected_recipe_key]['instructions']:
                     print(f'{instruction_index}. {instruction.title()}')  # print current instructions
                     instruction_index += 1

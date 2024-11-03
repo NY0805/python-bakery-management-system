@@ -1,81 +1,4 @@
 {
-    "003": {
-        "category": "Pastries",
-        "product_name": "apple pie",
-        "product_code": "PA932",
-        "serial_number": [
-            "pie1"
-        ],
-        "quantity_produced": "1",
-        "batch_number": "003",
-        "date_of_production": "27-08-2024",
-        "shelf_life": "7",
-        "expiry_date": "06-09-2024",
-        "recipe": "r",
-        "baker_name": "r",
-        "allergens": [
-            "apple"
-        ]
-    },
-    "004": {
-        "category": "Breads",
-        "product_name": "cheezy bun",
-        "product_code": "CH123",
-        "serial_number": [
-            "12345",
-            "87654"
-        ],
-        "quantity_produced": "2",
-        "batch_number": "004",
-        "date_of_production": "23-09-2024",
-        "shelf_life": "3",
-        "expiry_date": "27-09-2024",
-        "recipe": "r",
-        "baker_name": "baker4",
-        "allergens": [
-            "cheese",
-            "milk"
-        ]
-    },
-    "009": {
-        "category": "Cakes",
-        "product_name": "tiramisu",
-        "product_code": "CK858",
-        "serial_number": [
-            "12345",
-            "34523",
-            "67348",
-            "97633"
-        ],
-        "quantity_produced": "4",
-        "batch_number": "009",
-        "date_of_production": "24-09-2024",
-        "shelf_life": "2",
-        "expiry_date": "25-09-2024",
-        "recipe": "coffee soaked lady fingers",
-        "baker_name": "baker6",
-        "allergens": [
-            "coffee",
-            "biscuit"
-        ]
-    },
-    "007": {
-        "category": "Cakes",
-        "product_name": "apple cake",
-        "product_code": "CK001",
-        "serial_number": [
-            "2345"
-        ],
-        "quantity_produced": "1",
-        "batch_number": "007",
-        "date_of_production": "10-10-2024",
-        "shelf_life": "6",
-        "expiry_date": "17-10-2024",
-        "baker_name": "baker2",
-        "allergens": [
-            "apple"
-        ]
-    },
     "008": {
         "category": "Muffins",
         "product_name": "vanilla muffin",
@@ -115,25 +38,6 @@
             "milk"
         ]
     },
-    "011": {
-        "category": "Breads",
-        "product_name": "garlic bun",
-        "product_code": "GR013",
-        "serial_number": [
-            "bun1",
-            "bun2",
-            "bun3"
-        ],
-        "quantity_produced": "3",
-        "batch_number": "011",
-        "date_of_production": "01-11-2024",
-        "shelf_life": "5",
-        "expiry_date": "06-11-2024",
-        "baker_name": "christine",
-        "allergens": [
-            "garlic"
-        ]
-    },
     "012": {
         "category": "Cakes",
         "product_name": "matcha layer cake",
@@ -153,24 +57,137 @@
             "no"
         ]
     },
-    "B001": {
+    "001": {
+        "category": "Cakes",
+        "product_name": "tiramisu",
+        "product_code": "TR001",
+        "serial_number": [
+            "tir1",
+            "tir2",
+            "tir3"
+        ],
+        "quantity_produced": "3",
+        "batch_number": "001",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "7",
+        "expiry_date": "10-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "coffee"
+        ]
+    },
+    "002": {
+        "category": "Cakes",
+        "product_name": "red velvet",
+        "product_code": "RED001",
+        "serial_number": [
+            "red1"
+        ],
+        "quantity_produced": "1",
+        "batch_number": "002",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "5",
+        "expiry_date": "07-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "no"
+        ]
+    },
+    "003": {
         "category": "Biscuits",
         "product_name": "minion biscuit",
         "product_code": "MIN030",
         "serial_number": [
-            "biscuit2"
+            "biscuit1",
+            "biscuit2",
+            "biscuit3",
+            "biscuit4",
+            "biscuit5",
+            "biscuit6",
+            "biscuit7",
+            "biscuit8",
+            "biscuit9",
+            "biscuit10"
         ],
-        "quantity_produced": "2",
-        "batch_number": "B001",
-        "date_of_production": "09-04-2024",
-        "shelf_life": "8",
-        "expiry_date": "17-04-2024",
+        "quantity_produced": "10",
+        "batch_number": "003",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "13",
+        "expiry_date": "16-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "almond",
+            "gluten",
+            "milk"
+        ]
+    },
+    "004": {
+        "category": "Breads",
+        "product_name": "cheezy bun",
+        "product_code": "CHZ012",
+        "serial_number": [
+            "bun1",
+            "bun2",
+            "bun3",
+            "bun4",
+            "bun5"
+        ],
+        "quantity_produced": "5",
+        "batch_number": "004",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "4",
+        "expiry_date": "07-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "gluten"
+        ]
+    },
+    "005": {
+        "category": "Breads",
+        "product_name": "garlic bun",
+        "product_code": "GAR010",
+        "serial_number": [
+            "gar1",
+            "gar2",
+            "gar3",
+            "gar4",
+            "gar5",
+            "gar6",
+            "gar7",
+            "gar8",
+            "gar9",
+            "gar10"
+        ],
+        "quantity_produced": "10",
+        "batch_number": "005",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "5",
+        "expiry_date": "08-11-2024",
         "baker_name": "christine",
         "allergens": [
             "gluten",
-            "egg",
-            "milk",
-            "mango"
+            "garlic"
+        ]
+    },
+    "006": {
+        "category": "Pastries",
+        "product_name": "applepie",
+        "product_code": "APP091",
+        "serial_number": [
+            "pie1",
+            "pie2",
+            "pie3",
+            "pie4",
+            "pie5"
+        ],
+        "quantity_produced": "5",
+        "batch_number": "006",
+        "date_of_production": "03-11-2024",
+        "shelf_life": "7",
+        "expiry_date": "09-11-2024",
+        "baker_name": "christine",
+        "allergens": [
+            "no"
         ]
     }
 }

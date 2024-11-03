@@ -1,71 +1,4 @@
 {
-    "tiramisu": {
-        "recipe_category": "Cakes",
-        "recipe_name": "tiramisu",
-        "ingredient_used": [
-            [
-                "wheat flour",
-                900.0,
-                "g"
-            ],
-            [
-                "chilly",
-                40.0,
-                "g"
-            ],
-            [
-                "baking powder",
-                30.0,
-                "g"
-            ],
-            [
-                "baking powder",
-                40.0,
-                "g"
-            ],
-            [
-                "candy",
-                30.0,
-                "ml"
-            ]
-        ],
-        "ingredient_notes": "nct dream no1",
-        "equipment_used": [
-            "stand mixer",
-            "stand mixer",
-            "stand mixer"
-        ],
-        "baking_temperature": 90,
-        "baking_time": 50,
-        "cost_per_unit": 6.0,
-        "instructions": [
-            "fgghh",
-            "dffd"
-        ]
-    },
-    "bello": {
-        "recipe_category": "Biscuits",
-        "recipe_name": "bello",
-        "ingredient_used": [
-            [
-                "maple syrup",
-                30.0,
-                "g"
-            ]
-        ],
-        "ingredient_notes": "i love cat",
-        "equipment_used": [
-            "convection oven",
-            "stand mixer"
-        ],
-        "baking_temperature": 30,
-        "baking_time": 30,
-        "cost_per_unit": 15.5,
-        "instructions": [
-            "djfoj",
-            "fjdf"
-        ]
-    },
     "matcha layer cake": {
         "recipe_category": "Cakes",
         "recipe_name": "matcha layer cake",
@@ -88,8 +21,8 @@
         ],
         "ingredient_notes": "layer cake yyds",
         "equipment_used": [
-            "stand mixer",
-            "convection oven"
+            "convection oven",
+            "stand mixer"
         ],
         "baking_temperature": 90,
         "baking_time": 50,
@@ -132,38 +65,33 @@
             "Bake in the preheated oven until tops spring back when lightly pressed, about 25 minutes."
         ]
     },
-    "applepie": {
-        "recipe_category": "Pastries",
-        "recipe_name": "Applepie",
+    "tiramisu": {
+        "recipe_category": "Cakes",
+        "recipe_name": "tiramisu",
         "ingredient_used": [
             [
-                "whole wheat flour",
-                200.0,
-                "g"
-            ],
-            [
-                "apple",
-                70.0,
+                "baking powder",
+                300.0,
                 "g"
             ],
             [
                 "maple syrup",
-                100.0,
+                20.0,
                 "ml"
             ]
         ],
         "ingredient_notes": "no",
         "equipment_used": [
-            "stand mixer",
-            "convection oven"
+            "stand mixer"
         ],
-        "baking_temperature": 90,
-        "baking_time": 30,
-        "cost_per_unit": 6.0,
+        "baking_temperature": 130,
+        "baking_time": 20,
+        "cost_per_unit": 10.0,
         "instructions": [
-            "f",
-            "f",
-            "f"
+            "Mix coffee, maple syrup.",
+            "Blend mascarpone, sugar, baking powder, cream.",
+            "Layer with soaked ladyfingers.",
+            "Chill. Dust with cocoa."
         ]
     },
     "red velvet": {
@@ -172,44 +100,16 @@
         "ingredient_used": [
             [
                 "baking powder",
-                400.0,
+                150.0,
+                "g"
+            ],
+            [
+                "maple syrup",
+                30.0,
                 "g"
             ],
             [
                 "almond flour",
-                100.0,
-                "g"
-            ],
-            [
-                "whipping cream",
-                70.0,
-                "g"
-            ]
-        ],
-        "ingredient_notes": "no",
-        "equipment_used": [
-            "convection oven"
-        ],
-        "baking_temperature": 70,
-        "baking_time": 20,
-        "cost_per_unit": 10.0,
-        "instructions": [
-            "f",
-            "f",
-            "f"
-        ]
-    },
-    "garlic bun": {
-        "recipe_category": "Breads",
-        "recipe_name": "Garlic Bun",
-        "ingredient_used": [
-            [
-                "whole wheat flour",
-                100.0,
-                "g"
-            ],
-            [
-                "chilly",
                 20.0,
                 "g"
             ]
@@ -219,31 +119,68 @@
             "stand mixer",
             "convection oven"
         ],
-        "baking_temperature": 90,
+        "baking_temperature": 80,
         "baking_time": 20,
-        "cost_per_unit": 3.5,
+        "cost_per_unit": 8.7,
         "instructions": [
-            "f",
-            "f"
+            "Mix almond flour, baking powder, cocoa.",
+            "Blend butter, maple syrup, red food color.",
+            "Combine mixtures; bake.",
+            "Frost and enjoy!"
         ]
     },
-    "swiss roll": {
-        "recipe_category": "Cakes",
-        "recipe_name": "swiss roll",
+    "cheezy bun": {
+        "recipe_category": "Breads",
+        "recipe_name": "cheezy bun",
         "ingredient_used": [
             [
-                "baking powder",
-                350.0,
+                "whole wheat flour",
+                200.0,
                 "g"
             ],
             [
-                "candy",
-                30.0,
-                "ml"
+                "baking powder",
+                5.0,
+                "g"
             ],
             [
-                "whipping cream",
-                40.0,
+                "cornmeal",
+                30.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer",
+            "convection oven"
+        ],
+        "baking_temperature": 150,
+        "baking_time": 20,
+        "cost_per_unit": 3.2,
+        "instructions": [
+            "Mix whole wheat flour, baking powder, and cornmeal.",
+            "Add garlic, salt, and warm water; knead into dough.",
+            "Shape into buns, let rest.",
+            "Bake until golden."
+        ]
+    },
+    "garlic bun": {
+        "recipe_category": "Breads",
+        "recipe_name": "garlic bun",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                200.0,
+                "g"
+            ],
+            [
+                "baking powder",
+                10.0,
+                "g"
+            ],
+            [
+                "almond flour",
+                30.0,
                 "g"
             ]
         ],
@@ -251,12 +188,94 @@
         "equipment_used": [
             "convection oven"
         ],
-        "baking_temperature": 40,
+        "baking_temperature": 180,
+        "baking_time": 15,
+        "cost_per_unit": 3.2,
+        "instructions": [
+            "Mix whole wheat flour, almond flour, baking powder, and a pinch of salt.",
+            "Add minced garlic, olive oil, and warm water; knead into a soft dough.",
+            "Shape into buns, let rest briefly.",
+            "Bake until golden brown and fragrant."
+        ]
+    },
+    "applepie": {
+        "recipe_category": "Pastries",
+        "recipe_name": "applepie",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                200.0,
+                "g"
+            ],
+            [
+                "cornmeal",
+                90.0,
+                "g"
+            ],
+            [
+                "maple syrup",
+                30.0,
+                "ml"
+            ],
+            [
+                "apple",
+                80.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer",
+            "convection oven"
+        ],
+        "baking_temperature": 250,
         "baking_time": 20,
         "cost_per_unit": 4.5,
         "instructions": [
-            "ddd",
-            "ddd"
+            "Combine whole wheat flour, cornmeal, and a pinch of salt.",
+            "Mix in maple syrup and chilled butter to form a crumbly dough; press into a pie dish.",
+            "Fill with sliced apples and a drizzle of maple syrup.",
+            "Bake until the crust is golden and apples are tender."
+        ]
+    },
+    "minion biscuit": {
+        "recipe_category": "Biscuits",
+        "recipe_name": "minion biscuit",
+        "ingredient_used": [
+            [
+                "whole wheat flour",
+                90.0,
+                "g"
+            ],
+            [
+                "candy",
+                20.0,
+                "g"
+            ],
+            [
+                "baking powder",
+                5.0,
+                "g"
+            ],
+            [
+                "almond flour",
+                20.0,
+                "g"
+            ]
+        ],
+        "ingredient_notes": "no",
+        "equipment_used": [
+            "stand mixer",
+            "toaster oven"
+        ],
+        "baking_temperature": 130,
+        "baking_time": 15,
+        "cost_per_unit": 2.0,
+        "instructions": [
+            "Mix whole wheat flour, almond flour, baking powder, and a pinch of salt.",
+            "Stir in melted butter and your favorite candy pieces until combined.",
+            "Mix until a dough forms, then shape into mini minion figures.",
+            "Bake until golden brown and fluffy. Enjoy your sweet biscuits!"
         ]
     }
 }

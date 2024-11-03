@@ -1,14 +1,14 @@
 {
-    "2792": {
-        "recipe_category": "Biscuits",
-        "recipe_name": "santa gingerbread",
-        "production_quantity": 40,
-        "date_of_production": "07-07-2024"
+    "1475": {
+        "recipe_category": "Cakes",
+        "recipe_name": "red velvet",
+        "production_quantity": 5,
+        "date_of_production": "03-11-2024"
     },
-    "4970": {
-        "recipe_category": "Biscuits",
-        "recipe_name": "choco cookies",
-        "production_quantity": 30,
-        "date_of_production": "30-10-2024"
+    "1725": {
+        "recipe_category": "Breads",
+        "recipe_name": "cheezy bun",
+        "production_quantity": 20,
+        "date_of_production": "03-11-2024"
     }
 }
