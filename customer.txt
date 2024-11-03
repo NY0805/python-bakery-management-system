@@ -168,7 +168,7 @@
         "customer_username": "nct",
         "customer_password": "123456789",
         "age": 44,
-        "gender": "male",
+        "gender": "prefer not to say",
         "contact_no": "012-9999999",
         "email": "s@gmail.com",
         "address": "2",

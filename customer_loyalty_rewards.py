@@ -238,13 +238,13 @@ def redeem_cash_voucher(username): # Allow customers to redeem cash vouchers usi
     print(f"User {username} does not exist in the loyalty rewards system.")
 
 
-def redeem_history(username, total_spend, points_earned, status): # Log the redeem history for a customer
+def redeem_history(username, total_spend, points_earned, status):
     rewards = load_loyalty_rewards()
     order_id = f"ORD{len(rewards) + 1:03d}"  # Generate a new order ID
     rewards[order_id] = {
         'username': username,
         'total_spending (RM)': total_spend,
-        'loyalty_points': points_earned,  # Ensure this key is always set
+        'loyalty_points': points_earned,
         'status': status,
         'redeem_rate (RM)': REDEEM_RATES.get(status, 'N/A'),
         'voucher_redeem': total_spend // 10  # Assuming each RM10 gives 1 voucher

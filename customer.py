@@ -14,7 +14,7 @@ def load_data_from_customer():
             content = file.read().strip()  # strip() function is used to strip any unnecessary whitespaces
             if content:  # check if the file is not empty
                 try:
-                    return json.loads(content)  # parse the content as json format into python dictionary
+                    return json.loads(content)  # parse the content as json format into python dictionary and return the content if successfully parsed
                 except json.JSONDecodeError:
                     return {}  # return empty dictionary if the content does not parse successfully
             else:
@@ -121,7 +121,6 @@ def login():
 
         while True:  # Loop until the correct username is entered
             customer_username = input("Username: ")
-            # Check if the username matches the one in customer_info for the given customer_name
             if customer_info[customer_name]['customer_username'] == customer_username:
                 break  # Exit the loop if the username is correct
             else:

@@ -232,7 +232,7 @@ def modify_item_quantity(cart):
                 break  # Continue modifying
             elif continue_modifying == 'n':
                 print("Exiting item quantity modification process.")
-                return  # Or use break to exit the loop
+                return
             else:
                 print("|⚠️ Invalid input! Please enter 'y' for yes or 'n' for no.|")
 
@@ -408,6 +408,7 @@ def checkout_or_cancel(cart, customer_name, cart_id):
     return
 
 
+# Function to enable customer to view receipt
 def view_payment_receipt(cart_id):
     with open('customer_order_list.txt', 'r') as file:
         order_list = json.load(file)
