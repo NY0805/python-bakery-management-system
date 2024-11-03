@@ -96,37 +96,6 @@ for value in equipment_list.values():  # loop through equipment data and get the
     equipment_category_groups[equipment_category].append(value)
 
 
-def enter_equipment():
-    category = input('enter category: ')
-    equipment_name = input('enter name: ')
-    purchase_quantity = int(input('enter purchase quantity: '))
-    serial_numbers = []
-    for i in range(purchase_quantity):
-        equipment_serial_number = input(f'enter serial number {i + 1}: ')  # enter based on purchase quantity
-        serial_numbers.append(equipment_serial_number)
-    manufacturer = input('enter manufacturer: ')
-    model_number = input('enter model number: ')
-    purchase_date = input('enter purchase date: ')
-    next_scheduled_maintenance = input('enter next scheduled maintenance: ')
-    manufacturer_email = input('enter manufacturer email: ')
-    warranty = input('enter warranty: ')
-
-    equipment_list[equipment_name] = {
-        'category': category,
-        'equipment_name': equipment_name,
-        'purchase_quantity': purchase_quantity,
-        'serial_number': serial_numbers,
-        'manufacturer': manufacturer,
-        'model_number': model_number,
-        'purchase_date': purchase_date,
-        'next_scheduled_maintenance': next_scheduled_maintenance,
-        'manufacturer_email': manufacturer_email,
-        'warranty': warranty
-    }
-
-    save_info_equipment_details(equipment_list)
-
-
 # define function that let user to select equipment management option
 def equipment_management():
     # display the equipment management option
